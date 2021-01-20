@@ -18,8 +18,9 @@
             {% include('_elements/navbar.html.twig') %}
         {% endblock %}
 
-        {% block body %}
-        {% endblock %}
+        <main role="main" class="container content pb-2">
+            {% block body %}{% endblock %}
+        </main>
 
         {% include('_elements/footer.html.twig') %}
     </body>

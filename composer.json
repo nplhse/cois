@@ -1,6 +1,21 @@
 {
+    "name": "nplhse/cois",
+    "description": "A tool for collaborative IVENA statistics",
+    "version": "0.1.0-alpha",
     "type": "project",
-    "license": "proprietary",
+    "homepage": "https://github.com/nplhse/cois/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christoph Steltner",
+            "email": "mail@nplhse.com",
+            "homepage": "http://nplhse.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/nplhse/cois/issues"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
@@ -44,11 +59,14 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.18",
+        "phpstan/phpstan": "^0.12.68",
         "symfony/browser-kit": "^5.2",
         "symfony/css-selector": "^5.2",
         "symfony/debug-bundle": "^5.2",
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^5.2",
+        "symfony/requirements-checker": "^2.0",
         "symfony/stopwatch": "^5.2",
         "symfony/var-dumper": "^5.2",
         "symfony/web-profiler-bundle": "^5.2"
@@ -78,13 +96,29 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "requirements-checker": "script"
         },
         "post-install-cmd": [
             "@auto-scripts"
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "run-checks": [
+            "vendor/bin/php-cs-fixer fix",
+            "vendor/bin/phpstan analyse"
+        ],
+        "run-tests": [
+            "vendor/bin/simple-phpunit"
+        ],
+        "setup": [
+            "@composer install",
+            "@setup-frontend"
+        ],
+        "setup-frontend": [
+            "yarn install",
+            "yarn encore dev"
         ]
     },
     "conflict": {
@@ -92,7 +126,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "5.2.*"
         }
     }
