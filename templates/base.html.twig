@@ -2,12 +2,25 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
 
-        {% block javascripts %}{% endblock %}
+        <title>{% block title %}Collaborative IVENA statistics{% endblock %}</title>
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="d-flex flex-column h-100">
+        {% block header %}
+            {% include('_elements/navbar.html.twig') %}
+        {% endblock %}
+
+        {% block body %}
+        {% endblock %}
+
+        {% include('_elements/footer.html.twig') %}
     </body>
 </html>
