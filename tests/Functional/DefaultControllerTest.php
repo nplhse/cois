@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
-    public function testSomething()
+    public function testSomething(): void
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
