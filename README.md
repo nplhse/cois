@@ -18,6 +18,7 @@ COIS - Collaborative IVENA statistics
 
     ```
     $ cd ~/webroot/cois
+    $ composer install
     $ composer setup
     ```
 
