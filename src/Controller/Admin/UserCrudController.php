@@ -10,9 +10,21 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserCrudController extends AbstractCrudController
 {
+    /** @var UserPasswordEncoderInterface */
+    private $passwordEncoder;
+
+    /**
+     * UserCrudController constructor.
+     */
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
     public static function getEntityFqcn(): string
     {
         return User::class;
@@ -31,20 +43,21 @@ class UserCrudController extends AbstractCrudController
         $panel1 = FormField::addPanel('Basics');
         $username = TextField::new('username', 'Username');
         $email = EmailField::new('email', 'Email');
-        $password = TextField::new('password', 'Password')->setFormTypeOptions(['empty_data' => '']);
+        $plainPassword = TextField::new('plainPassword', 'Password')->setFormTypeOptions(['empty_data' => '']);
         $panel2 = FormField::addPanel('Properties');
         $roles = ArrayField::new('roles');
+        $panel3 = FormField::addPanel('Set new password');
 
         $fields = [];
 
         if (Crud::PAGE_INDEX === $pageName) {
             $fields = [$id, $username, $email];
         } elseif (Crud::PAGE_DETAIL === $pageName) {
-            $fields = [$panel1, $id, $username, $password, $email, $panel2, $roles];
+            $fields = [$panel1, $id, $username, $email, $panel2, $roles];
         } elseif (Crud::PAGE_NEW === $pageName) {
-            $fields = [$panel1, $id, $username, $password, $email, $panel2, $roles];
+            $fields = [$panel1, $username, $plainPassword, $email, $panel2, $roles];
         } elseif (Crud::PAGE_EDIT === $pageName) {
-            $fields = [$panel1, $id, $username, $password, $email, $panel2, $roles];
+            $fields = [$panel1, $id, $username, $email, $panel2, $roles, $panel3, $plainPassword];
         }
 
         return $fields;

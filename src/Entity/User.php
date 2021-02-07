@@ -16,7 +16,7 @@ class User implements UserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -35,6 +35,8 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private string $password;
+
+    private ?string $plainPassword = null;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -102,6 +104,19 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getPlainPassword(): string
+    {
+        return (string) $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+        $this->password = '';
+
+        return $this;
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;
@@ -130,7 +145,6 @@ class User implements UserInterface
      */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 }
