@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <h1>Login</h1>
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are already logged in as: {{ app.user.username }}.<br />
+            Do you want to logout? <a href="{{ path('app_logout') }}">Click here.</a>
+        </div>
+
+        {% for label, messages in app.flashes(['warning', 'error', 'success', 'notice']) %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% else %}
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+        <p>Please sign in</p>
+
+        {{ form_start(form) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.password) }}
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        <div class="row">
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Login <span class="fa fa-lock"></span></button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    {% endif %}
+{% endblock %}
