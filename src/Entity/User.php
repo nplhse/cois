@@ -43,6 +43,11 @@ class User implements UserInterface
      */
     private string $email;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Hospital::class, mappedBy="owner", cascade={"persist", "remove"})
+     */
+    private Hospital $hospital;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -146,5 +151,22 @@ class User implements UserInterface
     public function eraseCredentials(): void
     {
         $this->plainPassword = null;
+    }
+
+    public function getHospital(): ?Hospital
+    {
+        return $this->hospital;
+    }
+
+    public function setHospital(Hospital $hospital): self
+    {
+        // set the owning side of the relation if necessary
+        if ($hospital->getOwner() !== $this) {
+            $hospital->setOwner($this);
+        }
+
+        $this->hospital = $hospital;
+
+        return $this;
     }
 }
