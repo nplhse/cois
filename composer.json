@@ -131,7 +131,7 @@
         ],
         "setup-db": [
             "bin/console doctrine:migrations:migrate --no-interaction",
-            "bin/console doctrine:fixtures:load --no-interaction"
+            "bin/console hautelook:fixtures:load --no-interaction"
         ],
         "setup-frontend": [
             "yarn install",
