@@ -2,12 +2,20 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ *
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"},
+ *     normalizationContext={"groups"={"user:read"}}
+ * )
  */
 class User implements UserInterface
 {
@@ -15,23 +23,26 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     *
+     * @Groups({"user:read"})
      */
     private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     *
+     * @Groups({"user:read"})
      */
     private string $username;
 
     /**
-     * @var array<string>
-     *
      * @ORM\Column(type="json")
+     *
+     * @var array<string>
      */
     private array $roles = [];
 
     /**
-     * @var string The hashed password
      * @ORM\Column(type="string")
      */
     private string $password;
@@ -40,6 +51,8 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"user:read"})
      */
     private string $email;
 

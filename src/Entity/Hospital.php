@@ -2,13 +2,19 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\HospitalRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=HospitalRepository::class)
+ *
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"},
+ *     normalizationContext={"groups"={"hospital:read"}}
+ * )
  */
 class Hospital
 {
@@ -16,51 +22,53 @@ class Hospital
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     *
+     * @Groups({"hospital:read"})
      */
     private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"hospital:read"})
      */
     private string $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     *
+     * @Groups({"hospital:read"})
      */
     private ?string $address = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Groups({"hospital:read"})
      */
     private ?string $supplyArea = null;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="hospital", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
+     *
+     * @Groups({"hospital:read"})
      */
     private User $owner;
 
     /**
      * @ORM\Column(type="datetime")
+     *
+     * @Groups({"hospital:read"})
      */
     private \DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
+     *
+     * @Groups({"hospital:read"})
      */
     private \DateTimeInterface $updatedAt;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Allocation::class, mappedBy="hospital")
-     *
-     * @var ArrayCollection<int, Hospital>|Collection
-     */
-    private $allocations;
-
-    public function __construct()
-    {
-        $this->allocations = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -142,35 +150,5 @@ class Hospital
     public function __toString(): string
     {
         return (string) $this->getName();
-    }
-
-    /**
-     * @return Collection|Allocation[]
-     */
-    public function getAllocations(): Collection
-    {
-        return $this->allocations;
-    }
-
-    public function addAllocation(Allocation $allocation): self
-    {
-        if (!$this->allocations->contains($allocation)) {
-            $this->allocations[] = $allocation;
-            $allocation->setHospital($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAllocation(Allocation $allocation): self
-    {
-        if ($this->allocations->removeElement($allocation)) {
-            // set the owning side to null (unless already changed)
-            if ($allocation->getHospital() === $this) {
-                $allocation->setHospital(null);
-            }
-        }
-
-        return $this;
     }
 }

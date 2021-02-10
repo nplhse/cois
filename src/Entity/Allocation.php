@@ -2,11 +2,17 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\AllocationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=AllocationRepository::class)
+ *
+ * @ApiResource(
+ *     collectionOperations={"get"},
+ *     itemOperations={"get"}
+ * )
  */
 class Allocation
 {
@@ -18,8 +24,7 @@ class Allocation
     private ?int $id = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Hospital::class, inversedBy="allocations")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=Hospital::class)
      */
     private Hospital $hospital;
 
