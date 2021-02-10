@@ -1,0 +1,14 @@
+App\Entity\User:
+  user_1:
+    username: admin
+    email: admin@admin.com
+    password: <hashPassword('admin')>
+    roles: ['ROLE_ADMIN']
+  user_2:
+    username: foo
+    email: foo@bar.com
+    password: <hashPassword('bar')>
+  user_{3..5}:
+    username: <username()>
+    email: <email()>
+    password: <hashPassword('ivena')>
