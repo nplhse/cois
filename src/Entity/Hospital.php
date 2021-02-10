@@ -52,8 +52,10 @@ class Hospital
 
     /**
      * @ORM\OneToMany(targetEntity=Allocation::class, mappedBy="hospital")
+     *
+     * @var ArrayCollection<int, Hospital>|Collection
      */
-    private ArrayCollection $allocations;
+    private $allocations;
 
     public function __construct()
     {
