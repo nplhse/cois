@@ -12,3 +12,12 @@ App\Entity\User:
     username: <username()>
     email: <email()>
     password: <hashPassword('ivena')>
+
+App\Entity\Hospital:
+  hospital_{1..5}:
+    name: <company()>
+    address: <address()>
+    supplyArea: Test Area
+    owner: '@user_<current()>'
+    createdAt: <dateTimeThisYear()>
+    updatedAt: <dateTimeThisYear()>

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Hospital;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -31,5 +32,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoRoute('Back to frontend', 'fas fa-power-off', 'default');
         yield MenuItem::section('Users');
         yield MenuItem::linkToCrud('Users', 'fas fa-users', User::class);
+        yield MenuItem::section('Hospitals');
+        yield MenuItem::linkToCrud('Hospitals', 'fas fa-hospital', Hospital::class);
     }
 }

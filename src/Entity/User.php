@@ -134,6 +134,23 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getHospital(): ?Hospital
+    {
+        return $this->hospital;
+    }
+
+    public function setHospital(Hospital $hospital): self
+    {
+        // set the owning side of the relation if necessary
+        if ($hospital->getOwner() !== $this) {
+            $hospital->setOwner($this);
+        }
+
+        $this->hospital = $hospital;
+
+        return $this;
+    }
+
     /**
      * Returning a salt is only needed, if you are not using a modern
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
@@ -153,20 +170,8 @@ class User implements UserInterface
         $this->plainPassword = null;
     }
 
-    public function getHospital(): ?Hospital
+    public function __toString(): string
     {
-        return $this->hospital;
-    }
-
-    public function setHospital(Hospital $hospital): self
-    {
-        // set the owning side of the relation if necessary
-        if ($hospital->getOwner() !== $this) {
-            $hospital->setOwner($this);
-        }
-
-        $this->hospital = $hospital;
-
-        return $this;
+        return (string) $this->getUsername();
     }
 }
