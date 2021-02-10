@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\HospitalRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,6 +49,16 @@ class Hospital
      * @ORM\Column(type="datetime")
      */
     private \DateTimeInterface $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Allocation::class, mappedBy="hospital")
+     */
+    private ArrayCollection $allocations;
+
+    public function __construct()
+    {
+        $this->allocations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -128,5 +140,35 @@ class Hospital
     public function __toString(): string
     {
         return (string) $this->getName();
+    }
+
+    /**
+     * @return Collection|Allocation[]
+     */
+    public function getAllocations(): Collection
+    {
+        return $this->allocations;
+    }
+
+    public function addAllocation(Allocation $allocation): self
+    {
+        if (!$this->allocations->contains($allocation)) {
+            $this->allocations[] = $allocation;
+            $allocation->setHospital($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAllocation(Allocation $allocation): self
+    {
+        if ($this->allocations->removeElement($allocation)) {
+            // set the owning side to null (unless already changed)
+            if ($allocation->getHospital() === $this) {
+                $allocation->setHospital(null);
+            }
+        }
+
+        return $this;
     }
 }
