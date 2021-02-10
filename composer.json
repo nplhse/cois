@@ -62,6 +62,7 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friendsofphp/php-cs-fixer": "^2.18",
+        "hautelook/alice-bundle": "^2.8",
         "phpstan/phpstan": "^0.12.68",
         "symfony/browser-kit": "^5.2",
         "symfony/css-selector": "^5.2",
