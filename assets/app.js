@@ -9,11 +9,12 @@
 import './bootstrap';
 
 import 'bootstrap';
-import { createApp } from 'vue';
+import Vue from 'vue';
 
 // any CSS you import will output into a single css file (app.scss in this case)
 import './styles/app.scss';
 
-const app = createApp({
+const app = new Vue({
+    el: '#app',
     template: '<p>If you can read this, Vue is working properly.</p>',
-}).mount('#app');
+});
