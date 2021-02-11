@@ -567,7 +567,7 @@ class Allocation
         return $this;
     }
 
-    public function getIsVentilated(): ?bool
+    public function getIsVentilated(): bool
     {
         return $this->isVentilated;
     }
@@ -579,7 +579,7 @@ class Allocation
         return $this;
     }
 
-    public function getIsShock(): ?bool
+    public function getIsShock(): bool
     {
         return $this->isShock;
     }
@@ -603,7 +603,7 @@ class Allocation
         return $this;
     }
 
-    public function getIsPregnant(): ?bool
+    public function getIsPregnant(): bool
     {
         return $this->isPregnant;
     }

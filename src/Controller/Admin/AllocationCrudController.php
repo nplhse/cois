@@ -39,8 +39,8 @@ class AllocationCrudController extends AbstractCrudController
 
         $panel2 = FormField::addPanel('Creation');
         $createdAt = DateTimeField::new('createdAt', 'Created At');
-        $creationDate = DateField::new('creationDate', 'Creation Date');
-        $creationTime = TimeField::new('creationTime', 'Creation Time');
+        $creationDate = TextField::new('creationDate', 'Creation Date');
+        $creationTime = TextField::new('creationTime', 'Creation Time');
         $creationDay = IntegerField::new('creationDay', 'Creation Day');
         $creationWeekday = TextField::new('creationWeekday', 'Creation Weekday');
         $creationYear = IntegerField::new('creationYear', 'Creation Year');
@@ -51,8 +51,8 @@ class AllocationCrudController extends AbstractCrudController
 
         $panel3 = FormField::addPanel('Arrival');
         $arrivalAt = DateTimeField::new('arrivalAt', 'Arrival At');
-        $arrivalDate = DateField::new('arrivalDate', 'Creation Date');
-        $arrivalTime = TimeField::new('arrivalTime', 'Creation Time');
+        $arrivalDate = TextField::new('arrivalDate', 'Creation Date');
+        $arrivalTime = TextField::new('arrivalTime', 'Creation Time');
         $arrivalDay = IntegerField::new('arrivalDay', 'Creation Day');
         $arrivalWeekday = TextField::new('arrivalWeekday', 'Creation Weekday');
         $arrivalYear = IntegerField::new('arrivalYear', 'Creation Year');
@@ -68,7 +68,7 @@ class AllocationCrudController extends AbstractCrudController
         $age = IntegerField::new('age');
         $isCPR = BooleanField::new('isCPR');
         $isVentilated = BooleanField::new('isVentilated');
-        $isShock = BooleanField::new('isSchock');
+        $isShock = BooleanField::new('isShock');
         $isInfectious = TextField::new('isInfectious');
         $isPregnant = BooleanField::new('isPregnant');
         $patient = [$panel4, $reqResus, $reqCathlab, $gender, $age, $isCPR, $isVentilated, $isShock, $isInfectious, $isPregnant];
