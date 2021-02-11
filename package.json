@@ -1,7 +1,7 @@
 {
     "devDependencies": {
         "@babel/core": "^7.12.10",
-        "@babel/preset-env": "^7.12.11",
+        "@babel/preset-env": "^7.12.13",
         "@popperjs/core": "^2.6.0",
         "@symfony/stimulus-bridge": "^2.0.0",
         "@symfony/webpack-encore": "^1.0.0",
