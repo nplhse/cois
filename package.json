@@ -3,7 +3,7 @@
         "@babel/core": "^7.12.10",
         "@babel/preset-env": "^7.12.11",
         "@popperjs/core": "^2.6.0",
-        "@symfony/stimulus-bridge": "^2.0.0",
+        "@symfony/stimulus-bridge": "^2.0.2",
         "@symfony/webpack-encore": "^1.0.0",
         "@vue/compiler-sfc": "^3.0.5",
         "autoprefixer": "^10.2.3",
