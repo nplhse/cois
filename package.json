@@ -22,7 +22,7 @@
     "babel-loader": "^8.2.2",
     "bootstrap": "^5.0.0-beta1",
     "core-js": "^3.0.0",
-    "eslint": "^7.18.0",
+    "eslint": "^7.19.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-vue": "^7.4.1",
