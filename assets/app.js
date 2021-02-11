@@ -8,13 +8,19 @@
 // start the Stimulus application
 import './bootstrap';
 
+// Basic stuff
 import 'bootstrap';
-import Vue from 'vue';
 
 // any CSS you import will output into a single css file (app.scss in this case)
 import './styles/app.scss';
 
-const app = new Vue({
-    el: '#app',
-    template: '<p>If you can read this, Vue is working properly.</p>',
-});
+import Vue from 'vue';
+import App from './App.vue';
+import vuetify from './plugins/vuetify';
+
+Vue.config.productionTip = false;
+
+new Vue({
+    vuetify,
+    render: (h) => h(App),
+}).$mount('#app');
