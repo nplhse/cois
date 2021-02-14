@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Allocation;
 use App\Entity\Hospital;
+use App\Entity\Import;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -35,6 +36,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Users', 'fas fa-users', User::class);
         yield MenuItem::section('Hospitals');
         yield MenuItem::linkToCrud('Hospitals', 'fas fa-hospital', Hospital::class);
+        yield MenuItem::linkToCrud('Import', 'fas fa-upload', Import::class);
         yield MenuItem::section('Data');
         yield MenuItem::linkToCrud('Allocations', 'fas fa-list', Allocation::class);
     }

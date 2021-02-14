@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Import Data{% endblock %}
+
+{% block body %}
+    <h1>Import Data</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <h2>Upload new data</h2>
+
+                {{ form(form) }}
+            </div>
+            <div class="col-sm">
+                <h2>Your uploads</h2>
+                {% for import in imports %}
+                    <li class="list-group-item">{{ import.createdAt|date("d.m.Y H:i") }}</a></li>
+                {% else %}
+                    <li class="list-group-item disabled" aria-disabled="true">No uploads found.</li>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

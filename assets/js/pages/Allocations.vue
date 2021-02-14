@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h1>Allocations</h1>
-
     <AllocationList />
   </div>
 </template>

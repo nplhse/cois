@@ -12,6 +12,9 @@
                         <li class="nav-item">
                             <a class="nav-link {% if app.request.attributes.get( '_route' ) starts with 'allocation' %} active{% endif %}" aria-current="page" href="{{ path("allocation") }}">Allocations</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if app.request.attributes.get( '_route' ) starts with 'import' %} active{% endif %}" aria-current="page" href="{{ path("import") }}">Import Data</a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}

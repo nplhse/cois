@@ -4,6 +4,7 @@
         "@babel/preset-env": "^7.12.13",
         "@popperjs/core": "^2.6.0",
         "@symfony/stimulus-bridge": "^2.0.2",
+        "@symfony/ux-dropzone": "file:vendor/symfony/ux-dropzone/Resources/assets",
         "@symfony/webpack-encore": "^1.0.0",
         "@vue/compiler-sfc": "^3.0.5",
         "autoprefixer": "^10.2.4",
@@ -40,7 +41,5 @@
         "vue": "^2.6.12",
         "vue-axios": "^3.2.4"
     },
-    "browserslist": [
-        "defaults"
-    ]
+    "browserslist": ["defaults"]
 }
