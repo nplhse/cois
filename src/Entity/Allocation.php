@@ -11,7 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ApiResource(
  *     collectionOperations={"get"},
- *     itemOperations={"get"}
+ *     itemOperations={"get"},
+ *     attributes={"pagination_items_per_page"=10}
  * )
  */
 class Allocation
