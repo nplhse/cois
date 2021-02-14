@@ -1,36 +1,30 @@
 <template>
   <div>
-    <div class="col-12">
-      <div class="mt-4">
-        <Loading v-show="loading" />
-
-        <h5
-            v-show="!loading && items.length === 0"
-            class="ml-4"
-        >
-          Sorry, no allocations found!
-        </h5>
-      </div>
-    </div>
-
     <b-table
         id="allocation-table"
-        v-show="!loading"
         striped
         hover
-        responsive="true"
-        sticky-header="true"
+        :sticky-header="btableMaxHeight"
         no-border-collapse
+        :busy="loading"
         :items="items"
         :fields="fields"
         :loading="loading"
     >
+      <template #table-busy>
+        <div class="text-center my-2">
+          <b-spinner class="align-middle"></b-spinner>
+          <strong>Loading...</strong>
+        </div>
+      </template>
     </b-table>
 
     <b-row>
       <b-col>
-        <label class="mr-sm-2" for="pagination-selector">Items per Page</label>
-        <b-form-select id="pagination-selector" v-model="perPage" :options="pageOptions"></b-form-select>
+        <b-form-group>
+          <label class="mr-sm-2" for="pagination-selector">Items per Page</label>
+          <b-form-select id="pagination-selector" v-model="perPage" :options="pageOptions" size="sm"></b-form-select>
+        </b-form-group>
       </b-col>
       <b-col>
         <b-pagination
@@ -49,17 +43,13 @@
 </template>
 
 <script>
-import axios from 'axios';
-import Loading from "./Loading";
 import { fetchAllocations } from '../service/allocation-service';
 
 export default {
   name: "AllocationList",
-  components: {
-    Loading
-  },
   data() {
     return {
+      btableMaxHeight: '500px',
       totalItems: 0,
       perPage: 10,
       currentPage: 1,
@@ -99,6 +89,20 @@ export default {
       this.totalItems = response.data['hydra:totalItems'];
       // this.$refs.table.refresh();
     },
+  },
+  mounted () {
+    var self = this
+    // to update b-table max-height to have a freeze header (sticky-header makes fixed max-height only regardless the screen height)
+    // placed a new issue in Git, see if we get any response.
+    self.$nextTick(() => {
+      window.addEventListener('resize', () => {
+        // debugger
+        self.btableMaxHeight = (window.innerHeight - 150).toString() + 'px' // where offset is some kind of constant margin you need from the top
+      })
+    })
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', () => {})
   }
 }
 </script>

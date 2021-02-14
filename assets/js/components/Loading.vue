@@ -1,7 +1,7 @@
 <template>
-  <h4 :class="$style.component">
-    Loading...
-  </h4>
+  <div class="d-flex justify-content-center mb-3">
+    <b-spinner label="Loading..."></b-spinner>
+  </div>
 </template>
 
 <script>
