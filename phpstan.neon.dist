@@ -9,3 +9,4 @@ parameters:
     excludes_analyse:
         - %currentWorkingDirectory%/migrations/*
     checkGenericClassInNonGenericObjectType: false
+    checkMissingIterableValueType: false

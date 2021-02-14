@@ -12,7 +12,7 @@ use Symfony\UX\Dropzone\Form\DropzoneType;
 
 class ImportType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('file', DropzoneType::class, [
@@ -37,7 +37,7 @@ class ImportType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Import::class,

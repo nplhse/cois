@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Import;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,7 +21,7 @@ class ImportRepository extends ServiceEntityRepository
         parent::__construct($registry, Import::class);
     }
 
-    public function findByUser($user)
+    public function findByUser(User $user): Query
     {
         return $this->createQueryBuilder('i')
             ->andWhere('i.user = :val')
