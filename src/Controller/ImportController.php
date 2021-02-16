@@ -48,7 +48,7 @@ class ImportController extends AbstractController
             $entityManager->flush();
         }
 
-        $imports = $importRepository->findByUser($this->getUser()->getId());
+        $imports = $importRepository->findByUser($this->getUser());
 
         return $this->render('import/form.html.twig', [
             'form' => $form->createView(),
