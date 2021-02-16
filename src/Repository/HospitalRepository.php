@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Hospital;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,32 +20,13 @@ class HospitalRepository extends ServiceEntityRepository
         parent::__construct($registry, Hospital::class);
     }
 
-    // /**
-    //  * @return Hospital[] Returns an array of Hospital objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findOneByUser(User $user): ?Hospital
     {
         return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('h.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Hospital
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('h.owner = :user')
+            ->setParameter('user', $user)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
 }
