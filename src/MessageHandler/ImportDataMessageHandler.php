@@ -2,13 +2,12 @@
 
 namespace App\MessageHandler;
 
+use App\Entity\Allocation;
 use App\Message\ImportDataMessage;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use League\Csv\CharsetConverter;
-use League\Csv\Reader;
+use ForceUTF8\Encoding;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use \ForceUTF8\Encoding;
 
 final class ImportDataMessageHandler implements MessageHandlerInterface
 {
@@ -25,27 +24,63 @@ final class ImportDataMessageHandler implements MessageHandlerInterface
         $path = '../var/storage/import/'.$import->getPath();
         $hospital = $message->getHospital();
 
-        $str = $this->arrayFromCSV($path, true);
+        $result = $this->arrayFromCSV($path, true);
 
-        /*
-        //$csv = Reader::createFromFileObject(new \SplFileObject($path));
-        $csv = Reader::createFromPath('../var/storage/import/'.$import->getPath(), 'r');
-        $csv->setHeaderOffset(0);
-        $csv->setDelimiter(';');
-        $csv->setEnclosure('"');
-        $csv->includeEmptyRecords();
+        foreach ($result as $row) {
+            $allocation = new Allocation();
+            $allocation->setHospital($hospital);
+            $allocation->setDispatchArea($row['Versorgungsbereich']);
+            $allocation->setSupplyArea($row['KHS-Versorgungsgebiet']);
+            $allocation->setCreatedAt(new \DateTime($row['Erstellungsdatum']));
+            $allocation->setCreationDate($row['Datum (Erstellungsdatum)']);
+            $allocation->setCreationTime($row['Uhrzeit (Erstellungsdatum)']);
+            $allocation->setCreationDay($row['Tag (Erstellungsdatum)']);
+            $allocation->setCreationWeekday($row['Wochentag (Erstellungsdatum)']);
+            $allocation->setCreationMonth($row['Monat (Erstellungsdatum)']);
+            $allocation->setCreationYear($row['Jahr (Erstellungsdatum)']);
+            $allocation->setCreationHour($row['Stunde (Erstellungsdatum)']);
+            $allocation->setCreationMinute($row['Minute (Erstellungsdatum)']);
+            $allocation->setArrivalAt(new \DateTime($row['Datum (Eintreffzeit)'].' '.$row['Uhrzeit (Eintreffzeit)']));
+            $allocation->setArrivalDate($row['Datum (Eintreffzeit)']);
+            $allocation->setArrivalTime($row['Uhrzeit (Eintreffzeit)']);
+            $allocation->setArrivalDay($row['Tag (Eintreffzeit)']);
+            $allocation->setArrivalWeekday($row['Wochentag (Eintreffzeit)']);
+            $allocation->setArrivalMonth($row['Monat (Eintreffzeit)']);
+            $allocation->setArrivalYear($row['Jahr (Eintreffzeit)']);
+            $allocation->setArrivalHour($row['Stunde (Eintreffzeit)']);
+            $allocation->setArrivalMinute($row['Minute (Eintreffzeit)']);
+            $allocation->setRequiresResus($row['Schockraum']);
+            $allocation->setRequiresCathlab($row['Herzkatheter']);
+            $allocation->setOccasion($row['Anlass']);
+            $allocation->setGender($row['Geschlecht']);
+            $allocation->setAge($row['Alter']);
+            $allocation->setIsCPR($row['Reanimation']);
+            $allocation->setIsVentilated($row['Beatmet']);
+            $allocation->setIsShock($row['Schock']);
+            $allocation->setIsInfectious($row['Ansteckungsf?hig']);
+            $allocation->setIsPregnant($row['Schwanger']);
+            $allocation->setIsWithPhysician($row['Arztbegleitet']);
+            $allocation->setAssignment($row['Grund']);
+            $allocation->setModeOfTransport($row['Transportmittel']);
+            $allocation->setComment($row['Freitext']);
+            $allocation->setSpeciality($row['Fachgebiet']);
+            $allocation->setSpecialityDetail($row['Fachbereich']);
+            $allocation->setHandoverPoint($row['Patienten-?bergabepunkt (P?P)']);
+            $allocation->setSpecialityWasClosed($row['Fachbereich war abgemeldet?']);
+            $allocation->setPZC($row['PZC']);
+            $allocation->setPZCText($row['PZC-Text']);
+            $allocation->setSecondaryPZC(null);
+            $allocation->setSecondaryPZCText($row['Neben-PZC-Text']);
 
-        $encoder = (new CharsetConverter())->inputEncoding('iso-8859-15');
-        $records = $encoder->convert($csv);
-        dump($records);
+            dump($allocation);
 
-        $header = $csv->getHeader();
+            $this->em->persist($allocation);
+        }
 
-        $results = $csv->getRecords($utfEncoded);
-        dump($results);*/
+        $this->em->flush();
     }
 
-    private function arrayFromCSV($file, $hasFieldNames = false, $delimiter = ';', $enclosure = '"')
+    private function arrayFromCSV($file, $hasFieldNames = false, $delimiter = ';', $enclosure = '"'): array
     {
         $result = [];
         $size = filesize($file) + 1;
@@ -61,8 +96,9 @@ final class ImportDataMessageHandler implements MessageHandlerInterface
             $res = [];
             for ($i = 0; $i < $n; ++$i) {
                 $idx = ($hasFieldNames) ? $keys[$i] : $i;
-                dump($keys[$i]);
-                $res[$idx] = $row[$i];
+                $id8 = Encoding::fixUTF8($idx);
+                $val = Encoding::fixUTF8($row[$i]);
+                $res[$id8] = $val;
             }
             $result[] = $res;
         }

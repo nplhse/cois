@@ -232,7 +232,7 @@ class Allocation
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private int $SecondaryPZC;
+    private ?int $SecondaryPZC;
 
     /**
      * @ORM\Column(type="string", length=255)
