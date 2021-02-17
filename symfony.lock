@@ -200,6 +200,9 @@
     "myclabs/deep-copy": {
         "version": "1.10.2"
     },
+    "neitanod/forceutf8": {
+        "version": "v2.0.4"
+    },
     "nelmio/alice": {
         "version": "3.2",
         "recipe": {
