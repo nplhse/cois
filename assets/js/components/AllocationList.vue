@@ -17,6 +17,20 @@
           <strong>Loading...</strong>
         </div>
       </template>
+
+      <template #cell(actions)="row">
+        <b-button size="sm" @click="row.toggleDetails">
+          {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
+        </b-button>
+      </template>
+
+      <template #row-details="row">
+        <b-card>
+          <ul>
+            <li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>
+          </ul>
+        </b-card>
+      </template>
     </b-table>
 
     <b-row>
@@ -55,7 +69,7 @@ export default {
       currentPage: 1,
       pageOptions: [10, 25, 50, 100],
       loading: true,
-      fields: ['id', 'dispatchArea', 'supplyArea', 'hospital', 'createdAt'],
+      fields: ['id', 'dispatchArea', 'supplyArea', 'hospital', 'createdAt', 'actions'],
       items: []
     }
   },
