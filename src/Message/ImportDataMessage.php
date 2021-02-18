@@ -4,9 +4,6 @@ namespace App\Message;
 
 use App\Entity\Hospital;
 use App\Entity\Import;
-use App\Entity\User;
-use App\Repository\HospitalRepository;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 final class ImportDataMessage
 {

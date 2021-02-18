@@ -4,14 +4,13 @@ namespace App\MessageHandler;
 
 use App\Entity\Allocation;
 use App\Message\ImportDataMessage;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use ForceUTF8\Encoding;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class ImportDataMessageHandler implements MessageHandlerInterface
 {
-    private EntityManager $em;
+    private EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
@@ -72,7 +71,7 @@ final class ImportDataMessageHandler implements MessageHandlerInterface
             if (isset($row['Patienten-?bergabepunkt (P?P)'])) {
                 $allocation->setHandoverPoint($row['Patienten-?bergabepunkt (P?P)']);
             } else {
-                $allocation->setHandoverPoint("");
+                $allocation->setHandoverPoint('');
             }
             $allocation->setSpecialityWasClosed($row['Fachbereich war abgemeldet?']);
             $allocation->setPZC((int) $row['PZC']);
@@ -88,7 +87,7 @@ final class ImportDataMessageHandler implements MessageHandlerInterface
         $this->em->flush();
     }
 
-    private function arrayFromCSV($file, $hasFieldNames = false, $delimiter = ';', $enclosure = '"'): array
+    private function arrayFromCSV(string $file, bool $hasFieldNames = false, string $delimiter = ';', string $enclosure = '"'): array
     {
         $result = [];
         $size = filesize($file) + 1;
