@@ -57,7 +57,11 @@ final class ImportDataMessageHandler implements MessageHandlerInterface
             $allocation->setIsCPR($row['Reanimation']);
             $allocation->setIsVentilated($row['Beatmet']);
             $allocation->setIsShock($row['Schock']);
-            $allocation->setIsInfectious($row['Ansteckungsf?hig']);
+            if (isset($row['Ansteckungsf?hig'])) {
+                $allocation->setIsInfectious($row['Ansteckungsf?hig']);
+            } else {
+                $allocation->setIsInfectious($row['Ansteckungsfähig']);
+            }
             $allocation->setIsPregnant($row['Schwanger']);
             $allocation->setIsWithPhysician($row['Arztbegleitet']);
             $allocation->setAssignment($row['Grund']);
@@ -65,9 +69,13 @@ final class ImportDataMessageHandler implements MessageHandlerInterface
             $allocation->setComment($row['Freitext']);
             $allocation->setSpeciality($row['Fachgebiet']);
             $allocation->setSpecialityDetail($row['Fachbereich']);
-            $allocation->setHandoverPoint($row['Patienten-?bergabepunkt (P?P)']);
+            if (isset($row['Patienten-?bergabepunkt (P?P)'])) {
+                $allocation->setHandoverPoint($row['Patienten-?bergabepunkt (P?P)']);
+            } else {
+                $allocation->setHandoverPoint("");
+            }
             $allocation->setSpecialityWasClosed($row['Fachbereich war abgemeldet?']);
-            $allocation->setPZC($row['PZC']);
+            $allocation->setPZC((int) $row['PZC']);
             $allocation->setPZCText($row['PZC-Text']);
             $allocation->setSecondaryPZC(null);
             $allocation->setSecondaryPZCText($row['Neben-PZC-Text']);
