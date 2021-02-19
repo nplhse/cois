@@ -3,7 +3,53 @@
 {% block title %}{{ parent() }} - Welcome{% endblock %}
 
 {% block body %}
-    <h1>Hello, world!</h1>
+    <div class="row">
+        <h1>Welcome to COIS - Collaborative IVENA statistics</h1>
 
-    <div id="app"></div>
+        <div class="col">
+            <p>Want to know where to get started? Here are some ideas.</p>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h2 class="card-title">Allocations</h2>
+                    <p class="card-text">Browse trough all the data, filter it and explore what IVENA got for us.</p>
+                    <a href="{{ path("allocation") }}" class="btn btn-primary">View Allocations</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Import data</h2>
+                    <p class="card-text">Add some of your data to the database.</p>
+                    <a href="{{ path("import") }}" class="btn btn-primary">Import data</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Statistics
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>There are currently <strong>{{ allocations }}</strong> Allocations, from <strong>{{ hospitals }}</strong> hospitals.</p>
+                        <footer class="blockquote-footer">With <strong>{{ hospital_allocations }}</strong> Allocations from your hospital</footer>
+                    </blockquote>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header">
+                    Changelog
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">19.02.2021</h5>
+                    <ul>
+                        <li>First release.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

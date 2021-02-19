@@ -3,7 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Allocation;
+use App\Entity\Hospital;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,32 +22,22 @@ class AllocationRepository extends ServiceEntityRepository
         parent::__construct($registry, Allocation::class);
     }
 
-    // /**
-    //  * @return Allocation[] Returns an array of Allocation objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function countAllocations(Hospital $hospital = null): string
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        if ($hospital) {
+            $qb = $this->createQueryBuilder('a')
+                ->select('COUNT(a.id)')
+                ->andWhere('a.hospital = :hospital')
+                ->setparameter('hospital', $hospital->getId())
+                ->getQuery()
+                ->getSingleScalarResult();
+        } else {
+            $qb = $this->createQueryBuilder('a')
+                ->select('COUNT(a.id)')
+                ->getQuery()
+                ->getSingleScalarResult();
+        }
 
-    /*
-    public function findOneBySomeField($value): ?Allocation
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $qb;
     }
-    */
 }

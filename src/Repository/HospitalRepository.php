@@ -29,4 +29,14 @@ class HospitalRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    public function countHospitals(): string
+    {
+        $qb = $this->createQueryBuilder('h')
+            ->select('COUNT(h.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return $qb;
+    }
 }
