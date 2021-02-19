@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ImportController extends AbstractController
 {
     /**
-     * @Route("/import", name="import")
+     * @Route("/import/", name="import")
      */
     public function index(Request $request, FileUploader $fileUploader, ImportRepository $importRepository, HospitalRepository $hospitalRepository): Response
     {

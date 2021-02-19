@@ -13,12 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class AllocationController extends AbstractController
 {
     /**
-     * @Route("/allocation", name="allocation")
+     * @Route("/allocations/", name="allocation")
      */
     public function index(): Response
     {
-        return $this->render('allocation/index.html.twig', [
-            'controller_name' => 'AllocationConstroller',
-        ]);
+        return $this->render('allocation/index.html.twig');
     }
 }

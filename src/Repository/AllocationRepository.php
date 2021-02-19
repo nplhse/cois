@@ -5,8 +5,6 @@ namespace App\Repository;
 use App\Entity\Allocation;
 use App\Entity\Hospital;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**

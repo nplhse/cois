@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hospital index{% endblock %}
+{% block title %}Hospitals - {{ parent() }}{% endblock %}
 
 {% block body %}
-    <h1>Hospital index</h1>
+    <h1>Hospitals</h1>
 
     <table class="table table-striped table-hover">
         <thead>
@@ -38,6 +38,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('hospital_new') }}">Create new</a>
 {% endblock %}

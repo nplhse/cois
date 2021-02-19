@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/hospital")
+ * @Route("/hospitals")
  * @IsGranted("ROLE_USER")
  */
 class HospitalController extends AbstractController
@@ -24,29 +24,6 @@ class HospitalController extends AbstractController
     {
         return $this->render('hospital/index.html.twig', [
             'hospitals' => $hospitalRepository->findAll(),
-        ]);
-    }
-
-    /**
-     * @Route("/new", name="hospital_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $hospital = new Hospital();
-        $form = $this->createForm(HospitalType::class, $hospital);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($hospital);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('hospital_index');
-        }
-
-        return $this->render('hospital/new.html.twig', [
-            'hospital' => $hospital,
-            'form' => $form->createView(),
         ]);
     }
 
