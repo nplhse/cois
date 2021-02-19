@@ -9,7 +9,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 
-import App from './pages/Allocations';
+import App from './pages/Hospitals';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
