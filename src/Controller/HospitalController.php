@@ -24,28 +24,24 @@ class HospitalController extends AbstractController
     {
         return $this->render('hospital/index.html.twig', [
             'hospitals' => $hospitalRepository->findAll(),
+            'user_hospital' => $hospitalRepository->findOneBy(['owner' => $this->getUser()->getId()]),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="hospital_show", methods={"GET"})
+     * @Route("/edit", name="hospital_edit", methods={"GET","POST"})
      */
-    public function show(Hospital $hospital): Response
+    public function edit(Request $request, HospitalRepository $hospitalRepository): Response
     {
-        return $this->render('hospital/show.html.twig', [
-            'hospital' => $hospital,
-        ]);
-    }
+        $user = $this->getUser();
+        $hospital = $hospitalRepository->findOneBy(['owner' => $user->getId()]);
 
-    /**
-     * @Route("/{id}/edit", name="hospital_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Hospital $hospital): Response
-    {
         $form = $this->createForm(HospitalType::class, $hospital);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $hospital->setUpdatedAt(new \DateTime('NOW'));
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('hospital_index');
@@ -58,16 +54,12 @@ class HospitalController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="hospital_delete", methods={"DELETE"})
+     * @Route("/{id}", name="hospital_show", methods={"GET"})
      */
-    public function delete(Request $request, Hospital $hospital): Response
+    public function show(Hospital $hospital): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$hospital->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($hospital);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('hospital_index');
+        return $this->render('hospital/show.html.twig', [
+            'hospital' => $hospital,
+        ]);
     }
 }
