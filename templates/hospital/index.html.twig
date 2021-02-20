@@ -17,7 +17,7 @@
 {% block body %}
     <h1>Hospitals</h1>
 
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end mb-2">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
             <a class="btn btn-outline-primary" href="{{ path("hospital_show", {'id': user_hospital.id}) }}" role="button">View your hospital</a>
             <a class="btn btn-outline-primary" href="{{ path("hospital_edit") }}" role="button">Edit your hospital</a>

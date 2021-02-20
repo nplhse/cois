@@ -70,6 +70,27 @@ class Hospital
      */
     private \DateTimeInterface $updatedAt;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"hospital:read"})
+     */
+    private string $size;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     *
+     * @Groups({"hospital:read"})
+     */
+    private ?int $beds = null;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"hospital:read"})
+     */
+    private string $dispatchArea;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -150,5 +171,49 @@ class Hospital
     public function __toString(): string
     {
         return (string) $this->getName();
+    }
+
+    public function getSize(): ?string
+    {
+        return $this->size;
+    }
+
+    public function setSize(string $size): self
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    public function getBeds(): ?int
+    {
+        return $this->beds;
+    }
+
+    public function setBeds(?int $beds): self
+    {
+        $this->beds = $beds;
+
+        if ($this->beds <= 200) {
+            $this->size = 'small';
+        } elseif ($this->beds > 201 && $this->beds <= 500) {
+            $this->size = 'medium';
+        } elseif ($this->beds > 501) {
+            $this->size = 'large';
+        }
+
+        return $this;
+    }
+
+    public function getDispatchArea(): ?string
+    {
+        return $this->dispatchArea;
+    }
+
+    public function setDispatchArea(string $dispatchArea): self
+    {
+        $this->dispatchArea = $dispatchArea;
+
+        return $this;
     }
 }

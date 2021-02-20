@@ -5,16 +5,50 @@
 {% block body %}
     <h1>Edit your Hospital</h1>
 
+    <div class="d-flex justify-content-end mb-2">
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <a class="btn btn-outline-primary" href="{{ path("hospital_show", {'id': user_hospital.id}) }}" role="button">View your hospital</a>
+            <a class="btn btn-outline-primary" href="{{ path("hospital_index") }}" role="button">Back to list</a>
+        </div>
+    </div>
+
     {{ form_start(form) }}
 
-    {{ form_row(form.name) }}
+    <h2>Basics</h2>
+    <div class="card mb-3">
+        <div class="card-body">
+            {{ form_row(form.name) }}
 
-    {{ form_row(form.supplyArea) }}
+            {{ form_row(form.address) }}
 
-    {{ form_row(form.address) }}
+            {{ form_row(form.dispatchArea) }}
 
+            {{ form_row(form.supplyArea) }}
+        </div>
+    </div>
 
+    <h2>Size</h2>
+    <div class="card mb-3">
+        <div class="card-body">
+            {{ form_row(form.size) }}
+
+            {{ form_row(form.beds) }}
+        </div>
+    </div>
+
+    <h2>Danger zone</h2>
+    <div class="card border-danger mb-3">
+        <div class="card-body text-danger">
+            {{ form_row(form.owner) }}
+        </div>
+    </div>
 
     {{ form_end(form) }}
-    <a href="{{ path('hospital_index') }}">back to list</a>
+
+    <div class="d-flex justify-content-end mb-2">
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+            <a class="btn btn-outline-primary" href="{{ path("hospital_show", {'id': user_hospital.id}) }}" role="button">View your hospital</a>
+            <a class="btn btn-outline-primary" href="{{ path("hospital_index") }}" role="button">Back to list</a>
+        </div>
+    </div>
 {% endblock %}

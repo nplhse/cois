@@ -18,7 +18,9 @@ App\Entity\Hospital:
     name: <company()>
     address: <address()>
     supplyArea: Test Area
+    dispatchArea: Test Area
     owner: '@user_<current()>'
+    beds: <numberBetween(1,800)>
     createdAt: <dateTimeThisYear()>
     updatedAt: <dateTimeThisYear()>
 

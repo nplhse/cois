@@ -1,5 +1,61 @@
 <template>
     <div>
+      <b-button v-b-toggle.collapse-1 variant="primary">Toogle filters</b-button>
+
+      <b-collapse id="collapse-1" class="mt-2">
+        <b-card>
+          <b-row>
+            <b-col lg="6" class="my-1">
+              <b-form-group
+                  label="Filter"
+                  label-for="filter-input"
+                  label-cols-sm="3"
+                  label-align-sm="right"
+                  label-size="sm"
+                  class="mb-0"
+              >
+                <b-input-group size="sm">
+                  <b-form-input
+                      id="filter-input"
+                      v-model="filter"
+                      type="search"
+                      placeholder="Type to Search"
+                  ></b-form-input>
+
+                  <b-input-group-append>
+                    <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+                  </b-input-group-append>
+                </b-input-group>
+              </b-form-group>
+            </b-col>
+
+            <b-col lg="6" class="my-1">
+              <b-form-group
+                  v-model="sortDesc"
+                  label="Filter On"
+                  description="Leave all unchecked to filter on all data"
+                  label-cols-sm="3"
+                  label-align-sm="right"
+                  label-size="sm"
+                  class="mb-0"
+                  v-slot="{ ariaDescribedby }"
+              >
+                <b-form-checkbox-group
+                    v-model="filterOn"
+                    :aria-describedby="ariaDescribedby"
+                    class="mt-1"
+                >
+                  <b-form-checkbox value="supplyArea"> Supply Area</b-form-checkbox>
+                  <b-form-checkbox value="dispatchArea"> Dispatch Area</b-form-checkbox>
+                  <b-form-checkbox value="name"> Name</b-form-checkbox>
+                  <b-form-checkbox value="size"> Size</b-form-checkbox>
+                </b-form-checkbox-group>
+              </b-form-group>
+            </b-col>
+          </b-row>
+        </b-card>
+      </b-collapse>
+
         <b-table
             id="hospital-table"
             striped
@@ -16,6 +72,9 @@
             :label-sort-asc=null
             :label-sort-desc=null
             sort-icon-right
+            :filter="filter"
+            :filter-included-fields="filterOn"
+            @filtered="onFiltered"
         >
             <template #table-busy>
                 <div class="text-center my-2">
@@ -26,6 +85,10 @@
 
             <template #cell(name)="data">
               <b><a v-bind:href="data.item.id">{{ data.value }}</a></b>
+            </template>
+
+            <template #cell(size)="data">
+              <b>{{ data.value }}</b> ({{ data.item.beds }} beds)
             </template>
         </b-table>
 
@@ -49,11 +112,14 @@ export default {
             sortBy: 'supplyArea',
             sortDesc: false,
             loading: true,
+            filter: null,
+            filterOn: [],
             fields: [
                 { key: 'id', label: 'ID', sortable: true },
+                { key: 'dispatchArea', label: 'Dispatch Area', sortable: true },
                 { key: 'supplyArea', label: 'Supply Area', sortable: true },
                 { key: 'name', label: 'Name', sortable: true },
-                { key: 'createdAt', label: 'Created at', sortable: true }
+                { key: 'size', label: 'Size', sortable: true }
                 ],
             items: [],
         };
@@ -98,6 +164,10 @@ export default {
             this.items = response.data['hydra:member'];
             this.totalItems = response.data['hydra:totalItems'];
         },
+        onFiltered(filteredItems) {
+          // Trigger pagination to update the number of buttons/pages due to filtering
+          this.totalRows = filteredItems.length
+        }
     },
 };
 </script>

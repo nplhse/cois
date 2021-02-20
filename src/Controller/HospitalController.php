@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Hospital;
 use App\Form\HospitalType;
+use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -50,16 +51,25 @@ class HospitalController extends AbstractController
         return $this->render('hospital/edit.html.twig', [
             'hospital' => $hospital,
             'form' => $form->createView(),
+            'user_hospital' => $hospitalRepository->findOneBy(['owner' => $this->getUser()->getId()]),
         ]);
     }
 
     /**
      * @Route("/{id}", name="hospital_show", methods={"GET"})
      */
-    public function show(Hospital $hospital): Response
+    public function show(Hospital $hospital, AllocationRepository $allocationRepository): Response
     {
+        if ($hospital->getOwner() == $this->getUser()) {
+            $userIsOwner = true;
+        } else {
+            $userIsOwner = false;
+        }
+
         return $this->render('hospital/show.html.twig', [
             'hospital' => $hospital,
+            'hospital_allocations' => $allocationRepository->countAllocations($hospital),
+            'user_is_owner' => $userIsOwner,
         ]);
     }
 }
