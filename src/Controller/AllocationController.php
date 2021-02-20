@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AllocationController extends AbstractController
 {
     /**
-     * @Route("/allocations/", name="allocation")
+     * @Route("/allocations/", name="allocation_index")
      */
     public function index(): Response
     {

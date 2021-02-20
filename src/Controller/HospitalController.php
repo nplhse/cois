@@ -23,9 +23,13 @@ class HospitalController extends AbstractController
      */
     public function index(HospitalRepository $hospitalRepository): Response
     {
+        $userHospital = $hospitalRepository->findOneBy(['owner' => $this->getUser()->getId()]);
+        $userIsOwner = $userHospital;
+
         return $this->render('hospital/index.html.twig', [
             'hospitals' => $hospitalRepository->findAll(),
-            'user_hospital' => $hospitalRepository->findOneBy(['owner' => $this->getUser()->getId()]),
+            'user_hospital' => $userHospital,
+            'user_is_owner' => $userIsOwner,
         ]);
     }
 
@@ -34,8 +38,13 @@ class HospitalController extends AbstractController
      */
     public function edit(Request $request, HospitalRepository $hospitalRepository): Response
     {
-        $user = $this->getUser();
-        $hospital = $hospitalRepository->findOneBy(['owner' => $user->getId()]);
+        $hospital = $hospitalRepository->findOneBy(['owner' => $this->getUser()->getId()]);
+
+        if (!$hospital) {
+            $this->addFlash('danger', 'You been redirected, because you have to be owner of a hospital in order to access this page.');
+
+            return $this->redirectToRoute('hospital_index');
+        }
 
         $form = $this->createForm(HospitalType::class, $hospital);
         $form->handleRequest($request);
@@ -45,12 +54,14 @@ class HospitalController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Hospital was successfully edited.');
+
             return $this->redirectToRoute('hospital_index');
         }
 
         return $this->render('hospital/edit.html.twig', [
-            'hospital' => $hospital,
             'form' => $form->createView(),
+            'hospital' => $hospital,
             'user_hospital' => $hospitalRepository->findOneBy(['owner' => $this->getUser()->getId()]),
         ]);
     }
@@ -60,11 +71,7 @@ class HospitalController extends AbstractController
      */
     public function show(Hospital $hospital, AllocationRepository $allocationRepository): Response
     {
-        if ($hospital->getOwner() == $this->getUser()) {
-            $userIsOwner = true;
-        } else {
-            $userIsOwner = false;
-        }
+        $userIsOwner = $hospital->getOwner() == $this->getUser();
 
         return $this->render('hospital/show.html.twig', [
             'hospital' => $hospital,
