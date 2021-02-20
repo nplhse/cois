@@ -4,7 +4,7 @@
             id="hospital-table"
             striped
             hover
-            responsive="true"
+            responsive
             :sticky-header="btableMaxHeight"
             no-border-collapse
             :busy="loading"
@@ -13,13 +13,19 @@
             :loading="loading"
             :sort-by.sync="sortBy"
             :sort-desc.sync="sortDesc"
-            sort-icon-left
+            :label-sort-asc=null
+            :label-sort-desc=null
+            sort-icon-right
         >
             <template #table-busy>
                 <div class="text-center my-2">
                     <b-spinner class="align-middle" />
                     <strong>Loading...</strong>
                 </div>
+            </template>
+
+            <template #cell(name)="data">
+              <b><a v-bind:href="data.item.id">{{ data.value }}</a></b>
             </template>
         </b-table>
 
@@ -44,10 +50,11 @@ export default {
             sortDesc: false,
             loading: true,
             fields: [
-                'id',
-                'supplyArea',
-                'name',
-                'createdAt'],
+                { key: 'id', label: 'ID', sortable: true },
+                { key: 'supplyArea', label: 'Supply Area', sortable: true },
+                { key: 'name', label: 'Name', sortable: true },
+                { key: 'createdAt', label: 'Created at', sortable: true }
+                ],
             items: [],
         };
     },
