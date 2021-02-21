@@ -99,6 +99,8 @@ class Hospital
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"hospital:read"})
      */
     private string $location;
 
