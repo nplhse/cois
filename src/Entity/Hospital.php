@@ -205,7 +205,7 @@ class Hospital
     {
         $this->beds = $beds;
 
-        if ($this->beds <= self::SMALL_HOSPITAL) {
+        if ($this->beds < self::SMALL_HOSPITAL) {
             $this->size = 'small';
         } elseif ($this->beds > self::SMALL_HOSPITAL && $this->beds <= self::MEDIUM_HOSPITAL) {
             $this->size = 'medium';
