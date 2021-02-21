@@ -18,6 +18,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class Hospital
 {
+    private const SMALL_HOSPITAL = 250;
+
+    private const MEDIUM_HOSPITAL = 500;
+
+    private const LARGE_HOSPITAL = 750;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -90,6 +96,11 @@ class Hospital
      * @Groups({"hospital:read"})
      */
     private string $dispatchArea;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $location;
 
     public function getId(): ?int
     {
@@ -194,11 +205,11 @@ class Hospital
     {
         $this->beds = $beds;
 
-        if ($this->beds <= 200) {
+        if ($this->beds <= self::SMALL_HOSPITAL) {
             $this->size = 'small';
-        } elseif ($this->beds > 201 && $this->beds <= 500) {
+        } elseif ($this->beds > self::SMALL_HOSPITAL && $this->beds <= self::MEDIUM_HOSPITAL) {
             $this->size = 'medium';
-        } elseif ($this->beds > 501) {
+        } elseif ($this->beds > self::LARGE_HOSPITAL) {
             $this->size = 'large';
         }
 
@@ -213,6 +224,18 @@ class Hospital
     public function setDispatchArea(string $dispatchArea): self
     {
         $this->dispatchArea = $dispatchArea;
+
+        return $this;
+    }
+
+    public function getLocation(): ?string
+    {
+        return $this->location;
+    }
+
+    public function setLocation(string $location): self
+    {
+        $this->location = $location;
 
         return $this;
     }

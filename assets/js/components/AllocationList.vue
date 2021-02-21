@@ -4,9 +4,9 @@
         id="allocation-table"
         striped
         hover
-        responsive="true"
         :sticky-header="btableMaxHeight"
-        no-border-collapse
+        :no-border-collapse="true"
+        responsive="true"
         :busy="loading"
         :items="items"
         :fields="fields"
@@ -71,17 +71,18 @@ export default {
       pageOptions: [10, 25, 50, 100],
       loading: true,
       fields: [
-        'id',
-        'supplyArea',
-        'dispatchArea',
-        'hospital',
-        'createdAt',
-        'age',
-        'speciality',
-        'PZCText',
-        'occasion',
-        'assignment',
-        'actions'],
+        { key: 'id', label: 'ID', tdClass: 'smallCol' },
+        { key: 'supplyArea', label: 'Supply Area', tdClass: 'smallCol' },
+        { key: 'dispatchArea', label: 'Dispatch Area', tdClass: 'mediumCol' },
+        { key: 'hospital', label: 'Hospital', tdClass: 'wideCol' },
+        { key: 'createdAt', label: 'Created At', tdClass: 'mediumCol' },
+        { key: 'age', label: 'Age', tdClass: 'smallCol' },
+        { key: 'speciality', label: 'Speciality', tdClass: 'mediumCol' },
+        { key: 'PCZText', label: 'PZC with Text', tdClass: 'wideCol' },
+        { key: 'occasion', label: 'Occasion', tdClass: 'mediumCol' },
+        { key: 'assignment', label: 'Assignment', tdClass: 'mediumCol' },
+        { key: 'actions', label: 'Actions', tdClass: 'mediumCol' },
+      ],
       items: []
     }
   },
@@ -134,5 +135,13 @@ export default {
 </script>
 
 <style scoped>
-
+  .smallCol {
+    width: 50px;
+  }
+  .mediumCol {
+    width: 100px;
+  }
+  .wideCol {
+    width: 250px;
+  }
 </style>

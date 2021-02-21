@@ -19,7 +19,9 @@ App\Entity\Hospital:
     address: <address()>
     supplyArea: Test Area
     dispatchArea: Test Area
+    location: <randomElement(['urban', 'rural'])>
     owner: '@user_<current()>'
+    size: <randomElement(['small', 'medium', 'large'])>
     beds: <numberBetween(1,800)>
     createdAt: <dateTimeThisYear()>
     updatedAt: <dateTimeThisYear()>

@@ -18,7 +18,7 @@
             {% include('_elements/navbar.html.twig') %}
         {% endblock %}
 
-        <main role="main" class="container content pb-2">
+        <main role="main" class="{% if container %}container{% endif %} content pb-2">
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
                     <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">

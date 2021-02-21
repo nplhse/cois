@@ -25,6 +25,12 @@ class HospitalType extends AbstractType
                     'small' => 'small',
                 ],
             ])
+            ->add('location', ChoiceType::class, [
+                'choices' => [
+                    'urban' => 'urban',
+                    'rural' => 'rural',
+                ],
+            ])
             ->add('beds')
             ->add('owner')
             ->add('submit', SubmitType::class)
