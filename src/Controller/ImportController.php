@@ -25,10 +25,15 @@ class ImportController extends AbstractController
      */
     public function index(Request $request, FileUploader $fileUploader, ImportRepository $importRepository, HospitalRepository $hospitalRepository): Response
     {
-        $import = new Import();
-        $user = $this->getUser();
+        $hospital = $hospitalRepository->findOneBy(['owner' => $this->getUser()->getId()]);
 
-        $hospital = $hospitalRepository->findOneByUser($user);
+        if (!$hospital) {
+            $this->addFlash('danger', 'You been redirected, because you have to be owner of a hospital in order to access this page.');
+
+            return $this->redirectToRoute('allocation_index');
+        }
+
+        $import = new Import();
 
         $form = $this->createForm(ImportType::class);
         $form->handleRequest($request);
@@ -46,7 +51,7 @@ class ImportController extends AbstractController
             $import->setSize($file->getSize());
             $import->setCreatedAt(new \DateTime('NOW'));
             $import->setIsFixture(false);
-            $import->setUser($user);
+            $import->setUser($this->getUser());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($import);
@@ -55,7 +60,7 @@ class ImportController extends AbstractController
             $this->dispatchMessage(new ImportDataMessage($import, $hospital));
         }
 
-        $imports = $importRepository->findByUser($user);
+        $imports = $importRepository->findByUser($this->getUser());
 
         return $this->render('import/form.html.twig', [
             'form' => $form->createView(),

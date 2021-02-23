@@ -57,8 +57,9 @@ App\Entity\Allocation:
     isVentilated: <randomElement([true,false])>
     isShock: <randomElement([true,false])>
     isInfectious: <randomElement(['Keine','MRSA','3MRGN','4MRGN/CRE','Sonstiges'])>
-    isPregnant: false
+    isPregnant: <randomElement([true,false])>
     isWithPhysician: <randomElement([true,false])>
+    isWorkAccident: <randomElement([true,false])>
     assignment: <randomElement(['RD','Arzt/Arzt','Patient'])>
     modeOfTransport: Boden
     speciality: <randomElement(['Innere Medizin','Chirurgie','Urologie'])>
@@ -70,3 +71,15 @@ App\Entity\Allocation:
     SecondaryPZC: 123456
     SecondaryPZCText: Kein Text
     hospital: '@hospital_<numberBetween(1,5)>'
+    import: '@import_<numberBetween(1,5)>'
+
+App\Entity\Import:
+  import_{1..5}:
+    name: RandomImportfile
+    extension: .csv
+    path: dummy
+    mimeType: CSV
+    size: 1234
+    createdAt: <dateTimeThisYear()>
+    user: '@user_<current()>'
+    isFixture: true

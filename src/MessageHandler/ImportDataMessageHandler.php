@@ -27,7 +27,9 @@ final class ImportDataMessageHandler implements MessageHandlerInterface
 
         foreach ($result as $row) {
             $allocation = new Allocation();
+            $allocation->setImport($import);
             $allocation->setHospital($hospital);
+
             $allocation->setDispatchArea($row['Versorgungsbereich']);
             $allocation->setSupplyArea($row['KHS-Versorgungsgebiet']);
             $allocation->setCreatedAt(new \DateTime($row['Erstellungsdatum']));
@@ -63,6 +65,11 @@ final class ImportDataMessageHandler implements MessageHandlerInterface
             }
             $allocation->setIsPregnant($row['Schwanger']);
             $allocation->setIsWithPhysician($row['Arztbegleitet']);
+            if ('BG+' == $row['Arbeits-/Wege-/Schulunfall']) {
+                $allocation->setIsWorkAccident(true);
+            } else {
+                $allocation->setIsWorkAccident(false);
+            }
             $allocation->setAssignment($row['Grund']);
             $allocation->setModeOfTransport($row['Transportmittel']);
             $allocation->setComment($row['Freitext']);
@@ -71,15 +78,20 @@ final class ImportDataMessageHandler implements MessageHandlerInterface
             if (isset($row['Patienten-?bergabepunkt (P?P)'])) {
                 $allocation->setHandoverPoint($row['Patienten-?bergabepunkt (P?P)']);
             } else {
+                if (isset($row['Patienten-Übergabepunkt (PÜP)'])) {
+                    $allocation->setHandoverPoint($row['Patienten-Übergabepunkt (PÜP)']);
+                }
                 $allocation->setHandoverPoint('');
             }
-            $allocation->setSpecialityWasClosed($row['Fachbereich war abgemeldet?']);
+            if ('Nein' == $row['Fachbereich war abgemeldet?']) {
+                $allocation->setSpecialityWasClosed(false);
+            } else {
+                $allocation->setSpecialityWasClosed(true);
+            }
             $allocation->setPZC((int) $row['PZC']);
             $allocation->setPZCText($row['PZC-Text']);
             $allocation->setSecondaryPZC(null);
             $allocation->setSecondaryPZCText($row['Neben-PZC-Text']);
-
-            dump($allocation);
 
             $this->em->persist($allocation);
         }

@@ -242,6 +242,16 @@ class Allocation
      */
     private string $SecondaryPZCText;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $isWorkAccident;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Import::class)
+     */
+    private Import $import;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -727,6 +737,16 @@ class Allocation
         return $this;
     }
 
+    public function getRMI(): ?string
+    {
+        return substr((string) $this->PZC, 0, 3);
+    }
+
+    public function getSK(): ?string
+    {
+        return substr((string) $this->PZC, 5, 1);
+    }
+
     public function getPZCText(): ?string
     {
         return $this->PZCText;
@@ -759,6 +779,30 @@ class Allocation
     public function setSecondaryPZCText(string $SecondaryPZCText): self
     {
         $this->SecondaryPZCText = $SecondaryPZCText;
+
+        return $this;
+    }
+
+    public function getIsWorkAccident(): ?bool
+    {
+        return $this->isWorkAccident;
+    }
+
+    public function setIsWorkAccident(bool $isWorkAccident): self
+    {
+        $this->isWorkAccident = $isWorkAccident;
+
+        return $this;
+    }
+
+    public function getImport(): ?Import
+    {
+        return $this->import;
+    }
+
+    public function setImport(?Import $import): self
+    {
+        $this->import = $import;
 
         return $this;
     }
