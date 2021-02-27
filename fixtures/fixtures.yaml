@@ -83,3 +83,6 @@ App\Entity\Import:
     createdAt: <dateTimeThisYear()>
     user: '@user_<current()>'
     isFixture: true
+    caption: RandomCaption
+    contents: Allocation
+    status: finished

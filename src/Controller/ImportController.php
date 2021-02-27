@@ -41,6 +41,7 @@ class ImportController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $file */
             $file = $form->get('file')->getData();
+            $import = $form->getData();
 
             $fileData = $fileUploader->uploadFile($file);
 
@@ -51,7 +52,9 @@ class ImportController extends AbstractController
             $import->setSize($file->getSize());
             $import->setCreatedAt(new \DateTime('NOW'));
             $import->setIsFixture(false);
+            $import->setFile(null);
             $import->setUser($this->getUser());
+            $import->setStatus('finished');
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($import);

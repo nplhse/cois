@@ -64,6 +64,21 @@ class Import
      */
     private bool $isFixture;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $caption;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $contents;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -173,6 +188,42 @@ class Import
     public function setIsFixture(bool $isFixture): self
     {
         $this->isFixture = $isFixture;
+
+        return $this;
+    }
+
+    public function getCaption(): ?string
+    {
+        return $this->caption;
+    }
+
+    public function setCaption(string $caption): self
+    {
+        $this->caption = $caption;
+
+        return $this;
+    }
+
+    public function getContents(): ?string
+    {
+        return $this->contents;
+    }
+
+    public function setContents(string $contents): self
+    {
+        $this->contents = $contents;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
