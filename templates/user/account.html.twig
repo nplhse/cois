@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Account - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <h1>My Account</h1>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}" role="alert">
+                {{ message|trans }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Account</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('account_security') }}">Security</a>
+        </li>
+    </ul>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                    Profile
+                </a>
+                <a href="{{ path('account_email') }}" class="list-group-item list-group-item-action">E-Mail</a>
+            </div>
+        </div>
+        <div class="col-md-9 order-first order-md-last my-auto">
+            <h2>Profile</h2>
+            <hr />
+
+            {{ form_start(form_profile) }}
+
+            {{ form_row(form_profile.username) }}
+
+            {{ form_row(form_profile.submit) }}
+
+            {{ form_end(form_profile) }}
+        </div>
+    </div>
+{% endblock %}

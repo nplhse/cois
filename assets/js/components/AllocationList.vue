@@ -24,7 +24,7 @@
             </template>
 
             <template #cell(hospital)="data">
-                <b><a :href="data.value">{{ data.value }}</a></b>
+                <a :href="data.value">{{ data.value }}</a>
             </template>
 
             <template #cell(times)="data">
@@ -38,7 +38,24 @@
             </template>
 
             <template #cell(urgency)="data">
-                SK{{ data.item.sK }}
+                <p
+                    v-if="data.item.sK === '1'"
+                    class="text-danger font-weight-bold"
+                >
+                    <b>SK1</b>
+                </p>
+                <p
+                    v-if="data.item.sK === '2'"
+                    class="text-warning font-weight-bold"
+                >
+                    <b>SK2</b>
+                </p>
+                <p
+                    v-if="data.item.sK === '3'"
+                    class="text-success font-weight-bold"
+                >
+                    <b>SK3</b>
+                </p>
             </template>
 
             <template #cell(dispatch)="data">
@@ -172,7 +189,7 @@ export default {
     name: 'AllocationList',
     data() {
         return {
-            btableMaxHeight: '500px',
+            btableMaxHeight: '600px',
             noBorderCollapse: true,
             totalItems: 0,
             perPage: 10,

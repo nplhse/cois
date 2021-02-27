@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Change your E-Mail - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <h1>My Account</h1>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}" role="alert">
+                {{ message|trans }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Account</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('account_security') }}">Security</a>
+        </li>
+    </ul>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="{{ path('account') }}" class="list-group-item list-group-item-action">Profile</a>
+                <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                    E-Mail
+                </a>
+            </div>
+        </div>
+        <div class="col-md-9 order-first order-md-last my-auto">
+            <h2>Change your E-Mail addess</h2>
+            <hr />
+
+            {{ form_start(form_email) }}
+
+            {{ form_row(form_email.new_email) }}
+
+            {{ form_row(form_email.submit) }}
+
+            {{ form_end(form_email) }}
+        </div>
+    </div>
+{% endblock %}
