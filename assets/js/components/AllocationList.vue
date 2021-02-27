@@ -6,7 +6,7 @@
             hover
             :sticky-header="btableMaxHeight"
             :no-border-collapse="noBorderCollapse"
-            responsive="true"
+            :responsive="true"
             :busy="loading"
             :items="items"
             :fields="fields"
@@ -27,29 +27,110 @@
                 <b><a :href="data.value">{{ data.value }}</a></b>
             </template>
 
+            <template #cell(times)="data">
+                {{ data.item.createdAt | formatDate }}<br>
+                {{ data.item.arrivalAt | formatDate }}
+            </template>
+
+            <template #cell(person)="data">
+                {{ data.item.gender }}<br>
+                {{ data.item.age }}
+            </template>
+
+            <template #cell(urgency)="data">
+                SK{{ data.item.sK }}
+            </template>
+
             <template #cell(dispatch)="data">
-                {{ data.item.speciality }} {{ data.item.pZCText }}
+                <b>{{ data.item.speciality }}</b><br>
+                {{ data.item.rMI }} {{ data.item.pZCText }}
+            </template>
+
+            <template #cell(properties)="data">
+                <b
+                    v-if="data.item.requiresResus"
+                    class="text-danger"
+                >S+</b>
+                <b
+                    v-if="data.item.requiresCathlab"
+                    class="text-danger"
+                >H+ </b>
+                <b
+                    v-if="data.item.isWithPhysician"
+                    class="text-danger"
+                >N+ </b>
+                <b
+                    v-if="data.item.isCPR"
+                    class="text-danger"
+                >R+ </b>
+                <b
+                    v-if="data.item.isVentilated"
+                    class="text-danger"
+                >B+ </b>
+                <b
+                    v-if="data.item.isPregnant"
+                    class="text-warning"
+                >P+ </b>
+                <b
+                    v-if="data.item.isWorkAccident"
+                    class="text-danger"
+                >BG+ </b>
             </template>
 
             <template #cell(actions)="row">
-                <b-button
-                    size="sm"
-                    @click="row.toggleDetails"
-                >
-                    {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
-                </b-button>
+                <b-button-group>
+                    <b-button
+                        size="sm"
+                        variant="secondary"
+                        @click="row.toggleDetails"
+                    >
+                        Details
+                    </b-button>
+                    <b-button
+                        size="sm"
+                        :href="row.item.id"
+                        variant="primary"
+                    >
+                        View
+                    </b-button>
+                </b-button-group>
             </template>
 
             <template #row-details="row">
                 <b-card>
-                    <ul>
-                        <li
-                            v-for="(value, key) in row.item"
-                            :key="key"
-                        >
-                            {{ key }}: {{ value }}
-                        </li>
-                    </ul>
+                    <b-row class="mb-3">
+                        <b-col><b>Secondary RMI</b><br>{{ row.item.secondaryPZC }}</b-col>
+                        <b-col><b>Secondary Diagnosis</b><br>{{ row.item.secondaryPZCText }}</b-col>
+                        <b-col><b>Speciality detail</b><br>{{ row.item.specialityDetail }}</b-col>
+                        <b-col>
+                            <b>Speciality was closed?</b><br>
+                            <template v-if="row.item.specialityWasClosed">
+                                <p class="text-warning font-weight-bold">
+                                    Yes (Closed)
+                                </p>
+                            </template>
+                            <template v-else>
+                                <p class="text-success">
+                                    No (Open)
+                                </p>
+                            </template>
+                        </b-col>
+                    </b-row>
+
+                    <b-row>
+                        <b-col>
+                            <b>Infectious</b><br>
+                            <template v-if="row.item.isInfectious !== 'Keine'">
+                                <b class="text-warning">{{ row.item.isInfectious }}</b>
+                            </template>
+                            <template v-else>
+                                {{ row.item.isInfectious }}
+                            </template>
+                        </b-col>
+                        <b-col><b>Handover point</b><br>{{ row.item.handoverPoint }}</b-col>
+                        <b-col><b>Mode of transport</b><br>{{ row.item.modeOfTransport }}</b-col>
+                        <b-col><b>Transport comment</b><br><i>{{ row.item.comment }}</i></b-col>
+                    </b-row>
                 </b-card>
             </template>
         </b-table>
@@ -99,17 +180,17 @@ export default {
             pageOptions: [10, 25, 50, 100],
             loading: true,
             fields: [
-                { key: 'id', label: 'ID', thClass: 'smallCol' },
-                { key: 'dispatchArea', label: 'Dispatch Area', thClass: 'mediumCol' },
-                { key: 'hospital', label: 'Hospital', thClass: 'wideCol' },
-                { key: 'createdAt', label: 'Created At', thClass: 'mediumCol' },
-                { key: 'dispatch', label: 'Dispatch', thClass: 'wideCol' },
-                { key: 'age', label: 'Age', thClass: 'smallCol' },
-                { key: 'speciality', label: 'Speciality', thClass: 'mediumCol' },
-                { key: 'PCZText', label: 'PZC with Text', thClass: 'wideCol' },
-                { key: 'occasion', label: 'Occasion', thClass: 'mediumCol' },
-                { key: 'assignment', label: 'Assignment', thClass: 'mediumCol' },
-                { key: 'actions', label: 'Actions', thClass: 'mediumCol' },
+                { key: 'id', label: 'ID', thStyle: 'width: 10em' },
+                { key: 'dispatchArea', label: 'Dispatch Area', thStyle: 'width: 25em' },
+                { key: 'hospital', label: 'Hospital', thStyle: 'width: 20em' },
+                { key: 'times', label: 'Times', thStyle: 'width: 20em' },
+                { key: 'person', label: 'Pat.', thStyle: 'width: 10em' },
+                { key: 'urgency', label: 'SK', thStyle: 'width: 10em' },
+                { key: 'dispatch', label: 'Dispatch', thStyle: 'width: 50em' },
+                { key: 'occasion', label: 'Occasion', thStyle: 'width: 25em' },
+                { key: 'assignment', label: 'Assignment', thStyle: 'width: 20em' },
+                { key: 'properties', label: 'Properties' },
+                { key: 'actions', label: 'Actions', thStyle: 'width: 20em' },
             ],
             items: [],
         };
