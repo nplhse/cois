@@ -24,9 +24,9 @@
             </template>
 
             <template #cell(hospital)="data">
-                <a :href="data.value">{{ data.value }}</a>
+                <a :href="hospitalLinks[data.item.hospital]">{{ hospitals[data.item.hospital] }}</a>
             </template>
-
+ d
             <template #cell(times)="data">
                 {{ data.item.createdAt | formatDate }}<br>
                 {{ data.item.arrivalAt | formatDate }}
@@ -211,6 +211,14 @@ export default {
             ],
             items: [],
         };
+    },
+    computed: {
+        hospitals() {
+            return window.hospitals;
+        },
+        hospitalLinks() {
+            return window.hospitalLinks;
+        },
     },
     watch: {
         currentPage() {

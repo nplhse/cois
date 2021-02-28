@@ -1,18 +1,18 @@
 <template>
-  <div>
-    <AllocationList />
-  </div>
+    <div>
+        <AllocationList />
+    </div>
 </template>
 
 <script>
-import AllocationList from "../components/AllocationList";
+import AllocationList from '../components/AllocationList';
 
 export default {
-  name: "Allocations",
-  components: {
-    AllocationList
-  }
-}
+    name: 'Allocations',
+    components: {
+        AllocationList,
+    },
+};
 </script>
 
 <style scoped>

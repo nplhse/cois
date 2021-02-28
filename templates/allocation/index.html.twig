@@ -12,6 +12,19 @@
     {{ parent() }}
 
     {{ encore_entry_script_tags('allocations') }}
+
+    <script>
+        {% if hospitals is defined %}
+        window.hospitals = {{ hospitals|raw }};
+        {% else %}
+        window.hospitals = null;
+        {% endif %}
+        {% if hospital_links is defined %}
+        window.hospitalLinks = {{ hospital_links|raw }};
+        {% else %}
+        window.hospitalLinks = null;
+        {% endif %}
+    </script>
 {% endblock %}
 
 {% block body %}

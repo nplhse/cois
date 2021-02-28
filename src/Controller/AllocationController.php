@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Allocation;
+use App\Repository\HospitalRepository;
 use App\Repository\ImportRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,9 +19,22 @@ class AllocationController extends AbstractController
     /**
      * @Route("/", name="allocation_index")
      */
-    public function index(): Response
+    public function index(HospitalRepository $hospitalRepository): Response
     {
-        return $this->render('allocation/index.html.twig');
+        $hospitals = $hospitalRepository->findAll();
+
+        $hospitalList = [];
+        $hospitalLink = [];
+
+        foreach ($hospitals as $hospital) {
+            $hospitalList['/api/hospitals/'.$hospital->getId()] = $hospital->getName();
+            $hospitalLink['/api/hospitals/'.$hospital->getId()] = $this->generateUrl('hospital_show', ['id' => $hospital->getId()]);
+        }
+
+        return $this->render('allocation/index.html.twig', [
+            'hospitals' => json_encode($hospitalList),
+            'hospital_links' => json_encode($hospitalLink),
+        ]);
     }
 
     /**
