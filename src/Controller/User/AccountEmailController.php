@@ -30,13 +30,14 @@ class AccountEmailController extends AbstractController
 
             if ($data['new_email']) {
                 $user->setEmail($data['new_email']);
+                $user->setIsVerified(false);
             }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Your profile has been updated.');
+            $this->addFlash('success', 'Your E-Mail address has been updated. Also a confirmation has been sent to your E-Mail address.');
 
             return $this->redirectToRoute('account_email');
         }

@@ -29,7 +29,7 @@
         <div class="col-md-3">
             <div class="list-group">
                 <a href="{{ path('account_profile') }}" class="list-group-item list-group-item-action">Profile</a>
-                <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                <a href="{{ path('account_email') }}" class="list-group-item list-group-item-action active" aria-current="true">
                     E-Mail
                 </a>
             </div>
@@ -38,7 +38,10 @@
             <h2>Change your E-Mail address</h2>
             <hr />
 
-            <p>Your current E-Mail address is: <mark>{{ user.email }}</mark></p>
+            <p>Your current E-Mail address is: <mark>{{ user.email }}</mark><br/>
+                Your E-Mail address is currently {% if user.isVerified %}<mark>verified</mark>.
+                {% else %}<mark>not verified</mark>. Click here to re-send verification E-Mail.{% endif %}
+            </p>
 
             {{ form_start(form_email) }}
 
