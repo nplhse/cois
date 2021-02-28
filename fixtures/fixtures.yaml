@@ -3,15 +3,21 @@ App\Entity\User:
     username: foo
     email: foo@bar.com
     password: <hashPassword('bar')>
+    isVerified: true
+    isCredentialsExpired: false
   user_{2..5}:
     username: <username()>
     email: <email()>
     password: <hashPassword('ivena')>
+    isVerified: true
+    isCredentialsExpired: false
   user_6:
     username: admin
     email: admin@admin.com
     password: <hashPassword('admin')>
     roles: [ 'ROLE_ADMIN' ]
+    isVerified: true
+    isCredentialsExpired: false
 
 App\Entity\Hospital:
   hospital_{1..5}:
