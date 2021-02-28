@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Change your E-Mail - {{ parent() }}{% endblock %}
+{% block title %}Account - {{ parent() }}{% endblock %}
 
 {% block body %}
     <h1>My Account</h1>
@@ -28,25 +28,23 @@
     <div class="row">
         <div class="col-md-3">
             <div class="list-group">
-                <a href="{{ path('account_profile') }}" class="list-group-item list-group-item-action">Profile</a>
-                <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                    E-Mail
+                <a href="{{ path('account_profile') }}" class="list-group-item list-group-item-action active" aria-current="true">
+                    Profile
                 </a>
+                <a href="{{ path('account_email') }}" class="list-group-item list-group-item-action">E-Mail</a>
             </div>
         </div>
         <div class="col-md-9 order-first order-md-last my-auto">
-            <h2>Change your E-Mail address</h2>
+            <h2>Profile</h2>
             <hr />
 
-            <p>Your current E-Mail address is: <mark>{{ user.email }}</mark></p>
+            {{ form_start(form_profile) }}
 
-            {{ form_start(form_email) }}
+            {{ form_row(form_profile.username) }}
 
-            {{ form_row(form_email.new_email) }}
+            {{ form_row(form_profile.submit) }}
 
-            {{ form_row(form_email.submit) }}
-
-            {{ form_end(form_email) }}
+            {{ form_end(form_profile) }}
         </div>
     </div>
 {% endblock %}

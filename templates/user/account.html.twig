@@ -15,7 +15,10 @@
 
     <ul class="nav nav-tabs mb-3">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Account</a>
+            <a class="nav-link active" aria-current="page" href="{{ path('account') }}">Overview</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('account_profile') }}">Account</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ path('account_security') }}">Security</a>
@@ -23,25 +26,26 @@
     </ul>
 
     <div class="row">
-        <div class="col-md-3">
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                    Profile
-                </a>
-                <a href="{{ path('account_email') }}" class="list-group-item list-group-item-action">E-Mail</a>
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Account</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Manage your account& profile</h6>
+                    <p class="card-text">Take care of your personal profile (e.g. your username) and your E-Mail settings.</p>
+                    <a href="{{ path('account_profile') }}" class="card-link">Edit profile</a>
+                    <a href="{{ path('account_email') }}" class="card-link">Manage E-Mail</a>
+                </div>
             </div>
         </div>
-        <div class="col-md-9 order-first order-md-last my-auto">
-            <h2>Profile</h2>
-            <hr />
-
-            {{ form_start(form_profile) }}
-
-            {{ form_row(form_profile.username) }}
-
-            {{ form_row(form_profile.submit) }}
-
-            {{ form_end(form_profile) }}
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Security</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Manage your password</h6>
+                    <p class="card-text">Update your password.</p>
+                    <a href="{{ path('account_change_password') }}" class="card-link">Change password</a>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

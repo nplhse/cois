@@ -38,10 +38,10 @@ class AccountProfileController extends AbstractController
 
             $this->addFlash('success', 'Your profile has been updated.');
 
-            return $this->redirectToRoute('account');
+            return $this->redirectToRoute('account_profile');
         }
 
-        return $this->render('user/account.html.twig', [
+        return $this->render('user/profile.html.twig', [
             'user' => $user,
             'form_profile' => $form->createView(),
             'errors' => $form->getErrors(true, false),

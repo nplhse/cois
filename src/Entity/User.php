@@ -61,6 +61,16 @@ class User implements UserInterface
      */
     private Hospital $hospital;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isCredentialsExpired;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -186,5 +196,29 @@ class User implements UserInterface
     public function __toString(): string
     {
         return (string) $this->getUsername();
+    }
+
+    public function getIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getIsCredentialsExpired(): ?bool
+    {
+        return $this->isCredentialsExpired;
+    }
+
+    public function setIsCredentialsExpired(bool $isCredentialsExpired): self
+    {
+        $this->isCredentialsExpired = $isCredentialsExpired;
+
+        return $this;
     }
 }
