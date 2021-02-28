@@ -64,12 +64,12 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isVerified;
+    private bool $isVerified = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isCredentialsExpired;
+    private bool $isCredentialsExpired = false;
 
     public function getId(): ?int
     {

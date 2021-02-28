@@ -44,7 +44,7 @@ class PasswordChangeType extends AbstractType
                 ],
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Change password'
+                'label' => 'Change password',
             ]);
     }
 
