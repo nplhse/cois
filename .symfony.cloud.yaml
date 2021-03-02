@@ -4,7 +4,6 @@ type: php:8.0
 
 runtime:
     extensions:
-        - apcu
         - mbstring
         - sodium
         - ctype
