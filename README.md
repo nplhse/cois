@@ -3,7 +3,7 @@ COIS - Collaborative IVENA statistics
 
 # Requirements
 
-- Webserver (Apache, Nginx, LiteSpeed, IIS, etc.) with PHP 7.4 or higher and mySQL 5.7 as database
+- Webserver (Apache, Nginx, LiteSpeed, IIS, etc.) with PHP 8.0 or higher and mySQL 5.7 as database
 
 # Installation
 ## From GitHub
