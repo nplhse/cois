@@ -50,21 +50,45 @@ final class ImportDataMessageHandler implements MessageHandlerInterface
             $allocation->setArrivalYear($row['Jahr (Eintreffzeit)']);
             $allocation->setArrivalHour($row['Stunde (Eintreffzeit)']);
             $allocation->setArrivalMinute($row['Minute (Eintreffzeit)']);
-            $allocation->setRequiresResus($row['Schockraum']);
-            $allocation->setRequiresCathlab($row['Herzkatheter']);
+            if ('S+' == $row['Schockraum']) {
+                $allocation->setRequiresResus(true);
+            } else {
+                $allocation->setRequiresResus(false);
+            }
+            if ('H+' == $row['Herzkatheter']) {
+                $allocation->setRequiresCathlab(true);
+            } else {
+                $allocation->setRequiresCathlab(false);
+            }
             $allocation->setOccasion($row['Anlass']);
             $allocation->setGender($row['Geschlecht']);
             $allocation->setAge($row['Alter']);
-            $allocation->setIsCPR($row['Reanimation']);
-            $allocation->setIsVentilated($row['Beatmet']);
+            if ('R+' == $row['Reanimation']) {
+                $allocation->setIsCPR(true);
+            } else {
+                $allocation->setIsCPR(false);
+            }
+            if ('B+' == $row['Beatmet']) {
+                $allocation->setIsVentilated(true);
+            } else {
+                $allocation->setIsVentilated(false);
+            }
             $allocation->setIsShock($row['Schock']);
             if (isset($row['Ansteckungsf?hig'])) {
                 $allocation->setIsInfectious($row['Ansteckungsf?hig']);
             } else {
                 $allocation->setIsInfectious($row['Ansteckungsfähig']);
             }
-            $allocation->setIsPregnant($row['Schwanger']);
-            $allocation->setIsWithPhysician($row['Arztbegleitet']);
+            if ('Schwanger' == $row['Schwanger']) {
+                $allocation->setIsPregnant(true);
+            } else {
+                $allocation->setIsPregnant(false);
+            }
+            if ('N+' == $row['Arztbegleitet']) {
+                $allocation->setIsWithPhysician(true);
+            } else {
+                $allocation->setIsWithPhysician(false);
+            }
             if ('BG+' == $row['Arbeits-/Wege-/Schulunfall']) {
                 $allocation->setIsWorkAccident(true);
             } else {
