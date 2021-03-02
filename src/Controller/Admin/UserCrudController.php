@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
@@ -35,7 +36,7 @@ class UserCrudController extends AbstractCrudController
     {
         return $crud
             ->setPageTitle(Crud::PAGE_INDEX, 'Users')
-            ->setSearchFields(['id', 'username', 'roles', 'email']);
+            ->setSearchFields(['id', 'username', 'roles', 'email', 'hospital.name']);
     }
 
     public function configureFields(string $pageName): iterable
@@ -47,6 +48,8 @@ class UserCrudController extends AbstractCrudController
         $plainPassword = TextField::new('plainPassword', 'Password')->setFormTypeOptions(['empty_data' => '']);
         $panel2 = FormField::addPanel('Properties');
         $roles = ArrayField::new('roles');
+        $isVerified = BooleanField::new('isVerified', 'Is verified?');
+        $isCredentialsExpired = BooleanField::new('isCredentialsExpired', 'Credentials are expired?');
         $panel3 = FormField::addPanel('Set new password');
         $panel4 = FormField::addPanel('Hospitals');
         $hospital = AssociationField::new('hospital', 'Hospital');
@@ -54,13 +57,13 @@ class UserCrudController extends AbstractCrudController
         $fields = [];
 
         if (Crud::PAGE_INDEX === $pageName) {
-            $fields = [$id, $username, $email];
+            $fields = [$id, $username, $email, $hospital];
         } elseif (Crud::PAGE_DETAIL === $pageName) {
-            $fields = [$panel1, $id, $username, $email, $panel2, $roles, $panel4, $hospital];
+            $fields = [$panel1, $id, $username, $email, $panel2, $roles, $isVerified, $isCredentialsExpired, $panel4, $hospital];
         } elseif (Crud::PAGE_NEW === $pageName) {
-            $fields = [$panel1, $username, $plainPassword, $email, $panel2, $roles];
+            $fields = [$panel1, $username, $plainPassword, $email, $panel2, $roles, $isVerified, $isCredentialsExpired];
         } elseif (Crud::PAGE_EDIT === $pageName) {
-            $fields = [$panel1, $id, $username, $email, $panel2, $roles, $panel3, $plainPassword, $panel4, $hospital];
+            $fields = [$panel1, $id, $username, $email, $panel2, $roles, $isVerified, $isCredentialsExpired, $panel3, $plainPassword, $panel4, $hospital];
         }
 
         return $fields;

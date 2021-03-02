@@ -90,5 +90,5 @@ App\Entity\Import:
     user: '@user_<current()>'
     isFixture: true
     caption: RandomCaption
-    contents: Allocation
+    contents: allocation
     status: finished

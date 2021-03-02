@@ -6,6 +6,8 @@ use App\Entity\Allocation;
 use App\Entity\Hospital;
 use App\Entity\Import;
 use App\Entity\User;
+use App\Repository\AllocationRepository;
+use App\Repository\HospitalRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -14,12 +16,24 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
+    private $allocationRepository;
+
+    private $hospitalRepository;
+
+    public function __construct(AllocationRepository $allocationRepository, HospitalRepository $hospitalRepository) {
+        $this->allocationRepository = $allocationRepository;
+        $this->hospitalRepository = $hospitalRepository;
+    }
+
     /**
      * @Route("/admin", name="admin")
      */
     public function index(): Response
     {
-        return parent::index();
+        return $this->render('admin/dashboard.html.twig', [
+            'allocations' => $this->allocationRepository->countAllocations(),
+            'hospitals' => $this->hospitalRepository->countHospitals(),
+        ]);
     }
 
     public function configureDashboard(): Dashboard

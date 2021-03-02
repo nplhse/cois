@@ -33,7 +33,8 @@ class AllocationCrudController extends AbstractCrudController
         $dispatchArea = TextField::new('dispatchArea', 'Dispatch Area');
         $supplyArea = TextField::new('supplyArea', 'Supply Area');
         $hospital = AssociationField::new('hospital', 'Hospital');
-        $basics = [$panel1, $dispatchArea, $supplyArea, $hospital];
+        $import = AssociationField::new('import', 'Import');
+        $basics = [$panel1, $dispatchArea, $supplyArea, $hospital, $import];
 
         $panel2 = FormField::addPanel('Creation');
         $createdAt = DateTimeField::new('createdAt', 'Created At');
@@ -69,7 +70,8 @@ class AllocationCrudController extends AbstractCrudController
         $isShock = BooleanField::new('isShock');
         $isInfectious = TextField::new('isInfectious');
         $isPregnant = BooleanField::new('isPregnant');
-        $patient = [$panel4, $reqResus, $reqCathlab, $gender, $age, $isCPR, $isVentilated, $isShock, $isInfectious, $isPregnant];
+        $isWorkAccident = BooleanField::new('isWorkAccident');
+        $patient = [$panel4, $reqResus, $reqCathlab, $gender, $age, $isCPR, $isVentilated, $isShock, $isInfectious, $isPregnant, $isWorkAccident];
 
         $panel5 = FormField::addPanel('Deployment data');
         $occasion = TextField::new('occasion');

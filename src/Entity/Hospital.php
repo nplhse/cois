@@ -18,11 +18,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class Hospital
 {
-    private const SMALL_HOSPITAL = 250;
+    public const SMALL_HOSPITAL = 250;
 
-    private const MEDIUM_HOSPITAL = 500;
+    public const MEDIUM_HOSPITAL = 500;
 
-    private const LARGE_HOSPITAL = 750;
+    public const LARGE_HOSPITAL = 750;
 
     /**
      * @ORM\Id
