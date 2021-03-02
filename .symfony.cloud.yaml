@@ -8,6 +8,7 @@ runtime:
         - sodium
         - ctype
         - iconv
+        - pdo_mysql
 
 relationships:
     database: "db:mysql"
