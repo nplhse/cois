@@ -16,9 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
-    private $allocationRepository;
+    private AllocationRepository $allocationRepository;
 
-    private $hospitalRepository;
+    private HospitalRepository $hospitalRepository;
 
     public function __construct(AllocationRepository $allocationRepository, HospitalRepository $hospitalRepository)
     {
