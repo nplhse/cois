@@ -40,7 +40,7 @@
 
             <p>Your current E-Mail address is: <mark>{{ user.email }}</mark><br/>
                 Your E-Mail address is currently {% if user.isVerified %}<mark>verified</mark>.
-                {% else %}<mark>not verified</mark>. Click here to re-send verification E-Mail.{% endif %}
+                {% else %}<mark>not verified</mark>. Click <a href="{{ path('account_email_verify') }}">this link</a> to re-send verification E-Mail.{% endif %}
             </p>
 
             {{ form_start(form_email) }}
