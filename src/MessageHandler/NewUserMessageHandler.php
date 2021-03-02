@@ -2,12 +2,7 @@
 
 namespace App\MessageHandler;
 
-use ApiPlatform\Core\Api\UrlGeneratorInterface;
-use App\Entity\Allocation;
-use App\Message\ImportDataMessage;
 use App\Message\NewUserMessage;
-use Doctrine\ORM\EntityManagerInterface;
-use ForceUTF8\Encoding;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;

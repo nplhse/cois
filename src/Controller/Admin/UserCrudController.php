@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
-use App\Message\ImportDataMessage;
 use App\Message\NewUserMessage;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -18,6 +17,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserCrudController extends AbstractCrudController
@@ -90,7 +90,7 @@ class UserCrudController extends AbstractCrudController
         return $fields;
     }
 
-    public function sendWelcomeEmail(AdminContext $context)
+    public function sendWelcomeEmail(AdminContext $context): Response
     {
         $id = $context->getRequest()->query->get('entityId');
         $entity = $this->getDoctrine()->getRepository(User::class)->findOneBy(['id' => $id]);

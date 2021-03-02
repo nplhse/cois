@@ -3,7 +3,6 @@
 namespace App\Message;
 
 use App\Entity\Hospital;
-use App\Entity\Import;
 use App\Entity\User;
 
 final class NewUserMessage
