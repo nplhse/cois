@@ -37,5 +37,9 @@
             </div>
         </div>
         {{ form_end(form) }}
+
+        <p>
+            Have you forgot your password? Click <a href="{{ path('app_forgot_password_request') }}">this link</a> to request a password reset.
+        </p>
     {% endif %}
 {% endblock %}
