@@ -2,16 +2,15 @@
 
 {% block page_title 'Welcome to the collaborative IVENA statistics backend' %}
 
-{% block page_content %}
+{% block content %}
     <style>
         p { max-width: 600px; }
+        content-panel { max-width: 600px }
     </style>
 
-    <div class="card mb-3">
-        <div class="card-header">
-            Statistics
-        </div>
-        <div class="card-body">
+    <div class="content-panel">
+        <div class="content-panel-header">Statistics</div>
+        <div class="content-panel-body with-background">
             <blockquote class="blockquote mb-0">
                 <p>There are currently <strong>{{ allocations }}</strong> Allocations, from <strong>{{ hospitals }}</strong> hospitals.</p>
             </blockquote>
