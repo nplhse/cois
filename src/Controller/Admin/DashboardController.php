@@ -20,7 +20,8 @@ class DashboardController extends AbstractDashboardController
 
     private $hospitalRepository;
 
-    public function __construct(AllocationRepository $allocationRepository, HospitalRepository $hospitalRepository) {
+    public function __construct(AllocationRepository $allocationRepository, HospitalRepository $hospitalRepository)
+    {
         $this->allocationRepository = $allocationRepository;
         $this->hospitalRepository = $hospitalRepository;
     }

@@ -32,3 +32,7 @@ services:
 
     App\DataFixtures\Provider\HashPasswordProvider:
         tags: [ { name: nelmio_alice.faker.provider } ]
+
+    App\EventListener\UserCredentialsListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }

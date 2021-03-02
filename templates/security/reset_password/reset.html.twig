@@ -5,8 +5,10 @@
 {% block body %}
     <h1>Reset your password</h1>
 
+    <p>{{ message }}</p>
+
     {{ form_start(resetForm) }}
         {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">Reset password</button>
+        <button class="btn btn-primary">{{ button }}</button>
     {{ form_end(resetForm) }}
 {% endblock %}
