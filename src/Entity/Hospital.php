@@ -209,9 +209,9 @@ class Hospital
 
         if ($this->beds < self::SMALL_HOSPITAL) {
             $this->size = 'small';
-        } elseif ($this->beds > self::SMALL_HOSPITAL && $this->beds <= self::MEDIUM_HOSPITAL) {
+        } elseif ($this->beds > self::SMALL_HOSPITAL && $this->beds < self::LARGE_HOSPITAL) {
             $this->size = 'medium';
-        } elseif ($this->beds > self::LARGE_HOSPITAL) {
+        } elseif ($this->beds >= self::LARGE_HOSPITAL) {
             $this->size = 'large';
         }
 
