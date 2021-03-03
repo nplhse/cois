@@ -27,7 +27,7 @@ class ImportType extends AbstractType
                 'required' => true,
             ])
             ->add('file', DropzoneType::class, [
-                'label' => 'Import data (.csv file)',
+                'label' => 'Import data (Must be a *.csv file!)',
                 'mapped' => true,
                 'required' => true,
 
