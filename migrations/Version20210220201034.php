@@ -28,4 +28,9 @@ final class Version20210220201034 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE hospital DROP size, DROP beds, DROP dispatch_area');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

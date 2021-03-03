@@ -28,4 +28,9 @@ final class Version20210210171029 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE allocation CHANGE hospital_id hospital_id INT NOT NULL');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

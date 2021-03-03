@@ -28,4 +28,9 @@ final class Version20210223215510 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE allocation CHANGE is_work_accident work_accident TINYINT(1) NOT NULL');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

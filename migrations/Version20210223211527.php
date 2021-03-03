@@ -32,4 +32,9 @@ final class Version20210223211527 extends AbstractMigration
         $this->addSql('DROP INDEX IDX_5C44232AB6A263D9 ON allocation');
         $this->addSql('ALTER TABLE allocation DROP import_id, DROP work_accident');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

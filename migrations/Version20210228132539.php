@@ -28,4 +28,9 @@ final class Version20210228132539 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE user DROP is_verified, DROP is_credentials_expired');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

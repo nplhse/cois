@@ -28,4 +28,9 @@ final class Version20210227155313 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE import DROP caption, DROP contents');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }
