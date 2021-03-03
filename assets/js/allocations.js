@@ -19,7 +19,7 @@ Vue.use(VueAxios, axios);
 
 Vue.filter('formatDate', function(value) {
     if (value) {
-        return moment(String(value)).format('YY.MM.DD hh:mm');
+        return moment(String(value)).format('DD.MM.YY hh:mm');
     }
 });
 

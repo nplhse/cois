@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     itemOperations={"get"},
  *     attributes={
  *      "pagination_items_per_page"=10,
- *      "order"={"creationDate": "DESC"}
+ *      "order"={"createdAt": "DESC"}
  *     }
  * )
  */
