@@ -13,7 +13,16 @@
                 <div class="card-body">
                     <h2 class="card-title">Allocations</h2>
                     <p class="card-text">Browse trough all the data, filter it and explore what IVENA got for us.</p>
-                    <a href="{{ path("allocation_index") }}" class="btn btn-primary">View Allocations</a>
+                    <a href="{{ path("allocation_index") }}" class="btn btn-primary">View all Allocations</a>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h2 class="card-title">Your Hospital</h2>
+                    <p class="card-text">Check if your hospital has been set up correctly and change data if necessary.</p>
+                    <a href="{{ path("hospital_edit") }}" class="btn btn-primary">Edit your hospital</a>
+                    <a href="{{ path("hospital_index") }}" class="btn btn-secondary">View all hospitals</a>
                 </div>
             </div>
 
