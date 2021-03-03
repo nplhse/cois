@@ -93,6 +93,7 @@ class AccountEmailController extends AbstractController
     public function sendVerification(Request $request): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $user = $this->getUser();
 
         if ($user->getIsVerified()) {

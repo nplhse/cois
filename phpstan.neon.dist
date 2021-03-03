@@ -8,5 +8,6 @@ parameters:
         - vendor/bin/.phpunit/phpunit/vendor/autoload.php
     excludes_analyse:
         - %currentWorkingDirectory%/migrations/*
+        - %currentWorkingDirectory%/vendor/*
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
