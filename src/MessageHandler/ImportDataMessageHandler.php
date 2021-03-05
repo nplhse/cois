@@ -25,6 +25,8 @@ final class ImportDataMessageHandler implements MessageHandlerInterface
         $import = $message->getImport();
         $hospital = $message->getHospital();
 
+        $import->setStatus('processing');
+
         if ($message->getCli()) {
             $path = 'var/storage/import/'.$import->getPath();
         } else {
@@ -33,7 +35,14 @@ final class ImportDataMessageHandler implements MessageHandlerInterface
 
         $result = $this->arrayFromCSV($path, true);
 
-        $this->processResult($result, $import, $hospital);
+        if ($this->processResult($result, $import, $hospital)) {
+            $import->setStatus('finished');
+        } else {
+            $import->setStatus('failed');
+        }
+
+        $this->em->persist($import);
+        $this->em->flush();
     }
 
     private function arrayFromCSV(string $file, bool $hasFieldNames = false, string $delimiter = ';', string $enclosure = '"'): array

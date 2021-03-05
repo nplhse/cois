@@ -54,7 +54,7 @@ class ImportController extends AbstractController
             $import->setIsFixture(false);
             $import->setFile(null);
             $import->setUser($this->getUser());
-            $import->setStatus('finished');
+            $import->setStatus('pending');
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($import);

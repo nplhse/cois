@@ -36,8 +36,16 @@
                                 <td scope="col">
                                     {% if import.status == 'finished' %}
                                         <i class="bi bi-check-circle-fill text-success"></i>
-                                    {% else %}
-                                        <i class="bi bi-check-circle-fill text-warning"></i>
+                                    {% elseif import.status == 'pending' %}
+                                        <div class="spinner-border text-secondary spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    {% elseif import.status == 'processing' %}
+                                        <div class="spinner-border text-primary spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    {% elseif import.status == 'failed' %}
+                                        <i class="bi bi-exclamation-circle-fill text-warning"></i>
                                     {% endif %}
                                 </td>
                             </tr>
