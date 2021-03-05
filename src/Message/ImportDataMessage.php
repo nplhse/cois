@@ -11,10 +11,13 @@ final class ImportDataMessage
 
     private Hospital $hospital;
 
-    public function __construct(Import $import, Hospital $hospital)
+    private bool $cli;
+
+    public function __construct(Import $import, Hospital $hospital, bool $cli = false)
     {
         $this->import = $import;
         $this->hospital = $hospital;
+        $this->cli = $cli;
     }
 
     public function getImport(): Import
@@ -25,5 +28,10 @@ final class ImportDataMessage
     public function getHospital(): Hospital
     {
         return $this->hospital;
+    }
+
+    public function getCli(): bool
+    {
+        return $this->cli;
     }
 }

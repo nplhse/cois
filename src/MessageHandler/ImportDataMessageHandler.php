@@ -3,9 +3,12 @@
 namespace App\MessageHandler;
 
 use App\Entity\Allocation;
+use App\Entity\Hospital;
+use App\Entity\Import;
 use App\Message\ImportDataMessage;
 use Doctrine\ORM\EntityManagerInterface;
 use ForceUTF8\Encoding;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class ImportDataMessageHandler implements MessageHandlerInterface
@@ -20,11 +23,53 @@ final class ImportDataMessageHandler implements MessageHandlerInterface
     public function __invoke(ImportDataMessage $message): void
     {
         $import = $message->getImport();
-        $path = '../var/storage/import/'.$import->getPath();
         $hospital = $message->getHospital();
+
+        if ($message->getCli()) {
+            $path = 'var/storage/import/'.$import->getPath();
+        } else {
+            $path = '../var/storage/import/'.$import->getPath();
+        }
 
         $result = $this->arrayFromCSV($path, true);
 
+        $this->processResult($result, $import, $hospital);
+    }
+
+    private function arrayFromCSV(string $file, bool $hasFieldNames = false, string $delimiter = ';', string $enclosure = '"'): array
+    {
+        $result = [];
+        //$size = filesize($file) + 1;
+
+        if (file_exists($file)) {
+            $file = fopen($file, 'r');
+        } else {
+            throw new FileNotFoundException($file);
+        }
+
+        //TO DO: There must be a better way of finding out the size of the longest row... until then
+        if ($hasFieldNames) {
+            $keys = fgetcsv($file, null, $delimiter, $enclosure);
+        }
+
+        while ($row = fgetcsv($file, null, $delimiter, $enclosure)) {
+            $n = count($row);
+            $res = [];
+            for ($i = 0; $i < $n; ++$i) {
+                $idx = ($hasFieldNames) ? $keys[$i] : $i;
+                $id8 = Encoding::fixUTF8($idx);
+                $val = Encoding::fixUTF8($row[$i]);
+                $res[$id8] = $val;
+            }
+            $result[] = $res;
+        }
+        fclose($file);
+
+        return $result;
+    }
+
+    private function processResult(array $result, Import $import, Hospital $hospital): bool
+    {
         foreach ($result as $row) {
             $allocation = new Allocation();
             $allocation->setImport($import);
@@ -121,32 +166,7 @@ final class ImportDataMessageHandler implements MessageHandlerInterface
         }
 
         $this->em->flush();
-    }
 
-    private function arrayFromCSV(string $file, bool $hasFieldNames = false, string $delimiter = ';', string $enclosure = '"'): array
-    {
-        $result = [];
-        $size = filesize($file) + 1;
-        $file = fopen($file, 'r');
-
-        //TO DO: There must be a better way of finding out the size of the longest row... until then
-        if ($hasFieldNames) {
-            $keys = fgetcsv($file, $size, $delimiter, $enclosure);
-        }
-
-        while ($row = fgetcsv($file, $size, $delimiter, $enclosure)) {
-            $n = count($row);
-            $res = [];
-            for ($i = 0; $i < $n; ++$i) {
-                $idx = ($hasFieldNames) ? $keys[$i] : $i;
-                $id8 = Encoding::fixUTF8($idx);
-                $val = Encoding::fixUTF8($row[$i]);
-                $res[$id8] = $val;
-            }
-            $result[] = $res;
-        }
-        fclose($file);
-
-        return $result;
+        return true;
     }
 }
