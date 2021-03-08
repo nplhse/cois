@@ -16,10 +16,10 @@
                             <a class="nav-link {% if app.request.attributes.get( '_route' ) starts with 'allocation' %} active{% endif %}" aria-current="page" href="{{ path("allocation_index") }}">Allocations</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% if app.request.attributes.get( '_route' ) starts with 'import' %} active{% endif %}" aria-current="page" href="{{ path("import_index") }}">Import Data</a>
+                            <a class="nav-link {% if app.request.attributes.get( '_route' ) starts with 'import' %} active{% endif %}" aria-current="page" href="{{ path("import_index") }}">Import</a>
                         </li>
                         <li class="">
-                            <a class="nav-link disabled">Export data</a>
+                            <a class="nav-link disabled">Export</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">

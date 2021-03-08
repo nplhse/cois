@@ -7,7 +7,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 
-import moment from 'moment'
+import moment from 'moment-timezone';
 
 import App from './pages/Allocations';
 
@@ -19,7 +19,7 @@ Vue.use(VueAxios, axios);
 
 Vue.filter('formatDate', function(value) {
     if (value) {
-        return moment(String(value)).format('DD.MM.YY HH:mm');
+        return moment(String(value)).tz('Europe/Berlin').format('DD.MM.YY HH:mm');
     }
 });
 

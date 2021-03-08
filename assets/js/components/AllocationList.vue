@@ -20,13 +20,13 @@
             </template>
 
             <template #cell(id)="data">
-                <b><a :href="data.item.id">{{ data.value }}</a></b>
+                <b><a :href="data.item.id.toString()">{{ data.value }}</a></b>
             </template>
 
             <template #cell(hospital)="data">
-                <a :href="hospitalLinks[data.item.hospital]">{{ hospitals[data.item.hospital] }}</a>
+                <a :href="hospitalLinks[data.item.hospital].toString()">{{ hospitals[data.item.hospital] }}</a>
             </template>
- d
+
             <template #cell(times)="data">
                 {{ data.item.createdAt | formatDate }}<br>
                 {{ data.item.arrivalAt | formatDate }}
@@ -87,7 +87,7 @@
                 <b
                     v-if="data.item.isPregnant"
                     class="text-warning"
-                >P+ </b>
+                >Pregnant</b>
                 <b
                     v-if="data.item.isWorkAccident"
                     class="text-danger"
@@ -105,7 +105,7 @@
                     </b-button>
                     <b-button
                         size="sm"
-                        :href="row.item.id"
+                        :href="row.item.id.toString()"
                         variant="primary"
                     >
                         View
