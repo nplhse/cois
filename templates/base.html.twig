@@ -2,6 +2,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
 
         <title>{% block title %}Collaborative IVENA statistics{% endblock %}</title>
 
@@ -13,7 +15,7 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body class="d-flex flex-column h-100">
+    <body>
         {% block header %}
             {% include('_elements/navbar.html.twig') %}
         {% endblock %}
