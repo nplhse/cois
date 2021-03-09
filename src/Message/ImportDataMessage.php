@@ -16,6 +16,8 @@ final class ImportDataMessage
     public function __construct(Import $import, Hospital $hospital, bool $cli = false)
     {
         $this->import = $import;
+        $this->import->setStatus('pending');
+
         $this->hospital = $hospital;
         $this->cli = $cli;
     }

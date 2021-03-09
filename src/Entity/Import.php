@@ -79,6 +79,36 @@ class Import
      */
     private string $status;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private ?float $duration;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private \DateTimeInterface $lastRun;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private ?int $timesRun;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private ?int $itemCount;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $lastError;
+
+    public function __construct()
+    {
+        $this->lastRun = new \DateTime('NOW');
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -231,5 +261,65 @@ class Import
     public function __toString(): string
     {
         return '('.$this->id.') '.$this->caption;
+    }
+
+    public function getDuration(): ?float
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(?float $duration): self
+    {
+        $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getLastRun(): ?\DateTimeInterface
+    {
+        return $this->lastRun;
+    }
+
+    public function setLastRun(?\DateTimeInterface $lastRun): self
+    {
+        $this->lastRun = $lastRun;
+
+        return $this;
+    }
+
+    public function getTimesRun(): ?int
+    {
+        return $this->timesRun;
+    }
+
+    public function setTimesRun(?int $timesRun): self
+    {
+        $this->timesRun = $timesRun;
+
+        return $this;
+    }
+
+    public function getItemCount(): ?int
+    {
+        return $this->itemCount;
+    }
+
+    public function setItemCount(?int $itemCount): self
+    {
+        $this->itemCount = $itemCount;
+
+        return $this;
+    }
+
+    public function getLastError(): ?string
+    {
+        return $this->lastError;
+    }
+
+    public function setLastError(?string $lastError): self
+    {
+        $this->lastError = $lastError;
+
+        return $this;
     }
 }
