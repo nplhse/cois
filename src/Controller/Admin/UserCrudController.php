@@ -50,10 +50,19 @@ class UserCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $sendWelcomeEmail = Action::new('sendWelcomeEmail', 'Send welcome Email', 'fa fa-send')
+        $sendWelcomeEmail = Action::new('sendWelcomeEmail', 'Send welcome Email ', 'fa fa-send')
             ->linkToCrudAction('sendWelcomeEmail');
 
+        $impersonate = Action::new('impersonate', 'Impersonate', 'fa fa-id-card')
+            ->linkToRoute('default', function (User $entity) {
+                return [
+                    '_switch_user' => $entity->getUsername(),
+                ];
+            })
+        ;
+
         $actions
+            ->add(Crud::PAGE_EDIT, $impersonate)
             ->add(Crud::PAGE_EDIT, $sendWelcomeEmail)
         ;
 
