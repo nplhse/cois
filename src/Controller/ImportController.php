@@ -16,12 +16,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
+ * @Route("/import")
  * @IsGranted("ROLE_USER")
  */
 class ImportController extends AbstractController
 {
     /**
-     * @Route("/import/", name="import_index")
+     * @Route("/", name="import_index")
      */
     public function index(Request $request, FileUploader $fileUploader, ImportRepository $importRepository, HospitalRepository $hospitalRepository): Response
     {
@@ -69,5 +70,28 @@ class ImportController extends AbstractController
             'form' => $form->createView(),
             'imports' => $imports,
         ]);
+    }
+
+    /**
+     * @Route("/{id}", name="import_show", methods={"GET"})
+     */
+    public function show(Import $import): Response
+    {
+        $userIsOwner = $import->getUser() == $this->getUser();
+
+        return $this->render('import/show.html.twig', [
+            'import' => $import,
+            'user_is_owner' => $userIsOwner,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/delete", name="import_delete", methods={"GET"})
+     */
+    public function delete(Import $import): Response
+    {
+        $userIsOwner = $import->getUser() == $this->getUser();
+
+        return $this->redirectToRoute('import_index');
     }
 }

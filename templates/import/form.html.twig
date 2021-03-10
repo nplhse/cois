@@ -16,8 +16,8 @@
                         <th scope="col">ID</th>
                         <th scope="col">Caption</th>
                         <th scope="col">Date</th>
-                        <th scope="col">Details</th>
                         <th scope="col">Status</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -26,7 +26,6 @@
                             <td scope="col">#{{ import.id }}</td>
                             <td scope="col">{{ import.createdAt|date("d.m.Y H:i") }}</td>
                             <td scope="col">{{ import.caption }}</td>
-                            <td scope="col">{{ import.itemCount }} rows in {{ import.duration|number_format(5, '.', ',') }}s</td>
                             <td scope="col">
                                 {% if import.status == 'finished' %}
                                     <i class="bi bi-check-circle-fill text-success"></i>
@@ -42,6 +41,7 @@
                                     <i class="bi bi-exclamation-circle-fill text-warning"></i>
                                 {% endif %}
                             </td>
+                            <td scope="col"><a class="btn btn-primary" href="{{ path("import_show", { 'id': import.id }) }}" role="button">View</a></td>
                         </tr>
                     {% else %}
                         <tr>

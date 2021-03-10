@@ -176,7 +176,6 @@ class ImportService
 
             $time_end = microtime(true);
             $time = $time_end - $time_start;
-            $import->setStatus('finished');
         } catch (\Exception $e) {
             $import->setStatus('failed');
             $import->setLastError($e->getMessage());
@@ -195,7 +194,10 @@ class ImportService
 
         $import->setDuration($time);
         $import->setItemCount($count);
+        $import->setTimesRun($import->getTimesRun() + 1);
         $import->setLastRun(new \DateTime('NOW'));
+        $import->setLastError(null);
+        $import->setStatus('finished');
 
         $this->em->persist($import);
         $this->em->flush();

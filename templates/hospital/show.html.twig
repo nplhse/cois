@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hospital{% endblock %}
+{% block title %}{{ hospital.name }} - {{ parent() }}{% endblock %}
 
 {% block body %}
     <h1>Hospital</h1>
