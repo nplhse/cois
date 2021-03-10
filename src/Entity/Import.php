@@ -107,6 +107,7 @@ class Import
     public function __construct()
     {
         $this->lastRun = new \DateTime('NOW');
+        $this->timesRun = 0;
     }
 
     public function getId(): ?int
