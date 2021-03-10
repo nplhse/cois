@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Allocation;
 use App\Entity\Hospital;
+use App\Entity\Import;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,5 +38,15 @@ class AllocationRepository extends ServiceEntityRepository
         }
 
         return $qb;
+    }
+
+    public function deleteByImport(Import $import = null)
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->delete('App:Allocation', 'a')
+            ->where('a.import = :import')
+            ->setParameter(':import', $import->getId());
+
+        return $qb->getQuery()->getResult();
     }
 }
