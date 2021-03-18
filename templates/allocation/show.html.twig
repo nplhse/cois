@@ -219,7 +219,7 @@
 
             <div class="card border-primary mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">Import <small>(#<i>{{ allocation.import.id }})</i></small></h5>
+                    <h5 class="card-title"><a href="{{ path('import_show', {'id': allocation.import.id}) }}">Import <small>(#<i>{{ allocation.import.id }})</i></small></a></h5>
                     <p>This allocation was imported by {{ importUser.username }} at {{ allocation.import.createdAt|date('d.m.Y H:i:s') }}</p>
                 </div>
             </div>
