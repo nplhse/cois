@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use App\Repository\AllocationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -17,6 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  *      "order"={"createdAt": "DESC"}
  *     }
  * )
+ * @ApiFilter(OrderFilter::class, properties={"id", "hospital.name", "dispatchArea", "createdAt"})
  */
 class Allocation
 {
@@ -251,6 +254,8 @@ class Allocation
      * @ORM\ManyToOne(targetEntity=Import::class)
      */
     private Import $import;
+
+    private ?string $sK = null;
 
     public function getId(): ?int
     {
@@ -744,7 +749,11 @@ class Allocation
 
     public function getSK(): ?string
     {
-        return substr((string) $this->PZC, 5, 1);
+        if (null === $this->sK) {
+            $this->sK = substr((string) $this->PZC, 5, 1);
+        }
+
+        return $this->sK;
     }
 
     public function getPZCText(): ?string

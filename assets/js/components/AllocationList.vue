@@ -11,6 +11,13 @@
             :items="items"
             :fields="fields"
             :loading="loading"
+            :no-local-sorting="true"
+            :label-sort-asc="null"
+            :label-sort-desc="null"
+            :label-sort-clear="null"
+            :sort-by.sync="sortBy"
+            :sort-desc.sync="sortDesc"
+            sort-icon-right
         >
             <template #table-busy>
                 <div class="text-center my-2">
@@ -153,6 +160,15 @@
         </b-table>
 
         <b-row>
+            <b-col class="pb-2">
+                <div>
+                    Showing <b>{{ perPage }}</b> of <b>{{ totalItems }}</b> allocations.
+                    Sorting By: <b>{{ sortBy }}</b>, Sort Direction:
+                    <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>
+                </div>
+            </b-col>
+        </b-row>
+        <b-row>
             <b-col>
                 <b-form-group>
                     <label
@@ -192,17 +208,29 @@ export default {
             btableMaxHeight: '600px',
             noBorderCollapse: true,
             totalItems: 0,
+            sortBy: 'times',
+            sortDesc: false,
             perPage: 10,
             currentPage: 1,
             pageOptions: [10, 25, 50, 100],
             loading: true,
             fields: [
-                { key: 'id', label: 'ID', thStyle: 'width: 10em' },
-                { key: 'dispatchArea', label: 'Dispatch Area', thStyle: 'width: 25em' },
-                { key: 'hospital', label: 'Hospital', thStyle: 'width: 20em' },
-                { key: 'times', label: 'Times', thStyle: 'width: 20em' },
+                {
+                    key: 'id', label: 'ID', thStyle: 'width: 10em', sortable: true,
+                },
+                {
+                    key: 'dispatchArea', label: 'Dispatch Area', thStyle: 'width: 25em', sortable: true,
+                },
+                {
+                    key: 'hospital', label: 'Hospital', thStyle: 'width: 20em', sortable: true,
+                },
+                {
+                    key: 'times', label: 'Times', thStyle: 'width: 20em', sortable: true,
+                },
                 { key: 'person', label: 'Pat.', thStyle: 'width: 10em' },
-                { key: 'urgency', label: 'SK', thStyle: 'width: 10em' },
+                {
+                    key: 'urgency', label: 'SK', thStyle: 'width: 10em', sortable: false,
+                },
                 { key: 'dispatch', label: 'Dispatch', thStyle: 'width: 50em' },
                 { key: 'occasion', label: 'Occasion', thStyle: 'width: 25em' },
                 { key: 'assignment', label: 'Assignment', thStyle: 'width: 20em' },
@@ -225,6 +253,12 @@ export default {
             this.loadAllocations();
         },
         perPage() {
+            this.loadAllocations();
+        },
+        sortBy() {
+            this.loadAllocations();
+        },
+        sortDesc() {
             this.loadAllocations();
         },
     },
@@ -251,7 +285,7 @@ export default {
 
             let response;
             try {
-                response = await fetchAllocations(this.currentPage, this.perPage);
+                response = await fetchAllocations(this.currentPage, this.perPage, this.sortBy, this.sortDesc);
 
                 this.loading = false;
             } catch (e) {
