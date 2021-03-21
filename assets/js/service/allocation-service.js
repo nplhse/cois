@@ -5,7 +5,7 @@ import axios from 'axios';
  * @param perPage
  * @returns {Promise<AxiosResponse<any>>}
  */
-export function fetchAllocations(currentPage, perPage, sortBy, sortDesc) {
+export function fetchAllocations(currentPage, perPage, sortBy, sortDesc, filter, filterOn) {
     const params = {};
 
     params.page = currentPage;
@@ -21,6 +21,12 @@ export function fetchAllocations(currentPage, perPage, sortBy, sortDesc) {
 
     if (sortBy === 'urgency') {
         sortBy = 'sK';
+    }
+
+    if (filter) {
+        for (target in filterOn) {
+            params[`filter[${target}]`] = params.filter;
+        }
     }
 
     params[`order[${sortBy}]`] = sortDesc ? 'asc' : 'desc';

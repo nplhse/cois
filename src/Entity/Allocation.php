@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\AllocationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,7 +21,14 @@ use Doctrine\ORM\Mapping as ORM;
  *      "order"={"createdAt": "DESC"}
  *     }
  * )
- * @ApiFilter(OrderFilter::class, properties={"id", "hospital.name", "dispatchArea", "createdAt"})
+ * @ApiFilter(OrderFilter::class, properties={"id", "dispatchArea", "hospital.name", "createdAt"})
+ * @ApiFilter(SearchFilter::class, properties={
+ *     "dispatchArea": "partial",
+ *     "supplyArea": "partial",
+ *     "hospital.name": "partial",
+ *     "PZCText": "partial"
+ * })
+ * @ApiFilter(DateFilter::class, properties={"createdAt"})
  */
 class Allocation
 {

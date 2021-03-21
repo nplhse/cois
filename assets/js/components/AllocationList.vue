@@ -1,5 +1,81 @@
 <template>
     <div>
+        <b-collapse
+            id="collapse-1"
+            class="mt-2"
+        >
+            <b-card>
+                <b-row>
+                    <b-col
+                        lg="6"
+                        class="my-1"
+                    >
+                        <b-form-group
+                            label="Filter"
+                            label-for="filter-input"
+                            label-cols-sm="3"
+                            label-align-sm="right"
+                            label-size="sm"
+                            class="mb-0"
+                        >
+                            <b-input-group size="sm">
+                                <b-form-input
+                                    id="filter-input"
+                                    v-model="filter"
+                                    type="search"
+                                    placeholder="Type to Search"
+                                />
+
+                                <b-input-group-append>
+                                    <b-button
+                                        :disabled="!filter"
+                                        @click="filter = ''"
+                                    >
+                                        Clear
+                                    </b-button>
+                                </b-input-group-append>
+                            </b-input-group>
+                        </b-form-group>
+                    </b-col>
+
+                    <b-col
+                        lg="6"
+                        class="my-1"
+                    >
+                        <b-form-group
+                            v-slot="{ ariaDescribedby }"
+                            v-model="sortDesc"
+                            label="Filter On"
+                            description="Leave all unchecked to filter on all data"
+                            label-cols-sm="3"
+                            label-align-sm="right"
+                            label-size="sm"
+                            class="mb-0"
+                        >
+                            <b-form-checkbox-group
+                                v-model="filterOn"
+                                :aria-describedby="ariaDescribedby"
+                                class="mt-1"
+                            >
+                                <b-form-checkbox value="supplyArea">
+                                    Supply Area
+                                </b-form-checkbox>
+                                <b-form-checkbox value="dispatchArea">
+                                    Dispatch Area
+                                </b-form-checkbox>
+                                <b-form-checkbox value="hospital.name">
+                                    Name
+                                </b-form-checkbox>
+                                <b-form-checkbox value="PZC">
+                                    PZC and Text
+                                </b-form-checkbox>
+                            </b-form-checkbox-group>
+                        </b-form-group>
+                    </b-col>
+                </b-row>
+            </b-card>
+        </b-collapse>
+
         <b-table
             id="allocation-table"
             striped
@@ -18,6 +94,7 @@
             :sort-by.sync="sortBy"
             :sort-desc.sync="sortDesc"
             sort-icon-right
+            :filter="null"
         >
             <template #table-busy>
                 <div class="text-center my-2">
@@ -213,6 +290,8 @@ export default {
             perPage: 10,
             currentPage: 1,
             pageOptions: [10, 25, 50, 100],
+            filter: null,
+            filterOn: null,
             loading: true,
             fields: [
                 {
@@ -261,6 +340,12 @@ export default {
         sortDesc() {
             this.loadAllocations();
         },
+        filter() {
+            this.loadAllocations();
+        },
+        filterOn() {
+            this.loadAllocations();
+        },
     },
     created() {
         this.loadAllocations();
@@ -285,7 +370,7 @@ export default {
 
             let response;
             try {
-                response = await fetchAllocations(this.currentPage, this.perPage, this.sortBy, this.sortDesc);
+                response = await fetchAllocations(this.currentPage, this.perPage, this.sortBy, this.sortDesc, this.filter, this.filterOn);
 
                 this.loading = false;
             } catch (e) {
@@ -297,6 +382,9 @@ export default {
             this.items = response.data['hydra:member'];
             this.totalItems = response.data['hydra:totalItems'];
             // this.$refs.table.refresh();
+        },
+        filterAllocations(row, filter) {
+            return true;
         },
     },
 };
