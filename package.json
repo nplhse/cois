@@ -1,7 +1,7 @@
 {
     "devDependencies": {
         "@babel/core": "^7.13.10",
-        "@babel/preset-env": "^7.13.10",
+        "@babel/preset-env": "^7.13.12",
         "@popperjs/core": "^2.9.1",
         "@symfony/stimulus-bridge": "^2.0.2",
         "@symfony/ux-dropzone": "file:vendor/symfony/ux-dropzone/Resources/assets",
