@@ -40,7 +40,7 @@ class AllocationRepository extends ServiceEntityRepository
         return $qb;
     }
 
-    public function deleteByImport(Import $import = null)
+    public function deleteByImport(Import $import = null): mixed
     {
         $qb = $this->createQueryBuilder('a')
             ->delete('App:Allocation', 'a')
