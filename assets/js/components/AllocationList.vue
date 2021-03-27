@@ -72,8 +72,11 @@
                                 <b-form-checkbox value="hospital.name">
                                     Hospital Name
                                 </b-form-checkbox>
-                                <b-form-checkbox value="PZC">
-                                    PZC and Text
+                                <b-form-checkbox value="RMI">
+                                    RMI
+                                </b-form-checkbox>
+                                <b-form-checkbox value="PZCText">
+                                    PZC Text
                                 </b-form-checkbox>
                             </b-form-checkbox-group>
                         </b-form-group>
@@ -129,19 +132,19 @@
 
             <template #cell(urgency)="data">
                 <p
-                    v-if="data.item.sK === '1'"
+                    v-if="data.item.SK === 'SK1'"
                     class="text-danger font-weight-bold"
                 >
                     <b>SK1</b>
                 </p>
                 <p
-                    v-if="data.item.sK === '2'"
+                    v-if="data.item.SK === 'SK2'"
                     class="text-warning font-weight-bold"
                 >
                     <b>SK2</b>
                 </p>
                 <p
-                    v-if="data.item.sK === '3'"
+                    v-if="data.item.SK === 'SK3'"
                     class="text-success font-weight-bold"
                 >
                     <b>SK3</b>

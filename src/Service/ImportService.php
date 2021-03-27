@@ -170,6 +170,8 @@ class ImportService
                 $allocation->setPZCText($row['PZC-Text']);
                 $allocation->setSecondaryPZC(null);
                 $allocation->setSecondaryPZCText($row['Neben-PZC-Text']);
+                $allocation->setRMI($allocation->getRMI());
+                $allocation->setSK($allocation->getSK());
 
                 $this->em->persist($allocation);
             }

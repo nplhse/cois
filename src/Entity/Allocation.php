@@ -26,7 +26,8 @@ use Doctrine\ORM\Mapping as ORM;
  *     "dispatchArea": "partial",
  *     "supplyArea": "partial",
  *     "hospital.name": "partial",
- *     "PZCText": "partial"
+ *     "RMI": "partial",
+ *     "PZCText": "partial",
  * })
  * @ApiFilter(DateFilter::class, properties={"createdAt"})
  */
@@ -264,7 +265,15 @@ class Allocation
      */
     private Import $import;
 
-    private ?string $sK = null;
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private ?string $SK = null;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private ?int $RMI = null;
 
     public function getId(): ?int
     {
@@ -751,18 +760,36 @@ class Allocation
         return $this;
     }
 
-    public function getRMI(): ?string
+    public function setRMI(int $RMI): self
     {
-        return substr((string) $this->PZC, 0, 3);
+        $this->RMI = $RMI;
+
+        return $this;
+    }
+
+    public function getRMI(): ?int
+    {
+        if (null === $this->RMI) {
+            $this->RMI = substr((string) $this->PZC, 0, 3);
+        }
+
+        return $this->RMI;
+    }
+
+    public function setSK(string $SK): self
+    {
+        $this->SK = $SK;
+
+        return $this;
     }
 
     public function getSK(): ?string
     {
-        if (null === $this->sK) {
-            $this->sK = substr((string) $this->PZC, 5, 1);
+        if (null === $this->SK) {
+            $this->SK = 'SK'.substr((string) $this->PZC, 5, 1);
         }
 
-        return $this->sK;
+        return $this->SK;
     }
 
     public function getPZCText(): ?string
