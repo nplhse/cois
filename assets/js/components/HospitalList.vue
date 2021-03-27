@@ -64,19 +64,19 @@
                                 class="mt-1"
                             >
                                 <b-form-checkbox value="supplyArea">
-                                    Supply Area
+                                    &nbsp;Supply Area
                                 </b-form-checkbox>
                                 <b-form-checkbox value="dispatchArea">
-                                    Dispatch Area
+                                    &nbsp;Dispatch Area
                                 </b-form-checkbox>
                                 <b-form-checkbox value="name">
-                                    Name
+                                    &nbsp;Name
                                 </b-form-checkbox>
                                 <b-form-checkbox value="size">
-                                    Size
+                                    &nbsp;Size
                                 </b-form-checkbox>
                                 <b-form-checkbox value="location">
-                                    Location
+                                    &nbsp;Location
                                 </b-form-checkbox>
                             </b-form-checkbox-group>
                         </b-form-group>

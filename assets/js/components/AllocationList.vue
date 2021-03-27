@@ -1,6 +1,10 @@
 <template>
     <div>
-      <b-button v-b-toggle.sidebar-1 variant="primary">Toggle Filters</b-button>
+      <div class="float-right">
+        <b-button-group>
+          <b-button v-b-toggle.sidebar-1 variant="primary">Toggle Filters</b-button>
+        </b-button-group>
+      </div>
 
       <b-sidebar id="sidebar-1" title="Filters" shadow>
         <template #footer="{ hide }">
