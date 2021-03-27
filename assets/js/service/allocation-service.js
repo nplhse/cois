@@ -23,9 +23,9 @@ export function fetchAllocations(currentPage, perPage, sortBy, sortDesc, filter,
         sortBy = 'sK';
     }
 
-    if (filter) {
-        for (target in filterOn) {
-            params[`filter[${target}]`] = params.filter;
+    if (filter && filter !== '') {
+        for (const target in filterOn) {
+            params[`${filterOn[target]}`] = filter;
         }
     }
 

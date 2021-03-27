@@ -51,9 +51,8 @@
                     >
                         <b-form-group
                             v-slot="{ ariaDescribedby }"
-                            v-model="sortDesc"
+                            v-model="filterOn"
                             label="Filter On"
-                            description="Leave all unchecked to filter on all data"
                             label-cols-sm="3"
                             label-align-sm="right"
                             label-size="sm"

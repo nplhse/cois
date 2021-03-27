@@ -1,5 +1,12 @@
 <template>
     <div>
+      <b-button
+          v-b-toggle.collapse-1
+          variant="primary"
+      >
+        Toogle filters
+      </b-button>
+
         <b-collapse
             id="collapse-1"
             class="mt-2"
@@ -11,7 +18,7 @@
                         class="my-1"
                     >
                         <b-form-group
-                            label="Filter"
+                            label="Search filter"
                             label-for="filter-input"
                             label-cols-sm="3"
                             label-align-sm="right"
@@ -44,9 +51,8 @@
                     >
                         <b-form-group
                             v-slot="{ ariaDescribedby }"
-                            v-model="sortDesc"
+                            v-model="filterOn"
                             label="Filter On"
-                            description="Leave all unchecked to filter on all data"
                             label-cols-sm="3"
                             label-align-sm="right"
                             label-size="sm"
@@ -64,7 +70,7 @@
                                     Dispatch Area
                                 </b-form-checkbox>
                                 <b-form-checkbox value="hospital.name">
-                                    Name
+                                    Hospital Name
                                 </b-form-checkbox>
                                 <b-form-checkbox value="PZC">
                                     PZC and Text
@@ -291,7 +297,8 @@ export default {
             currentPage: 1,
             pageOptions: [10, 25, 50, 100],
             filter: null,
-            filterOn: null,
+            filterOn: [],
+            filterTimeout: null,
             loading: true,
             fields: [
                 {
@@ -341,7 +348,14 @@ export default {
             this.loadAllocations();
         },
         filter() {
-            this.loadAllocations();
+            if (this.filterTimeout) {
+              clearTimeout(this.filterTimeout);
+            }
+
+            this.filterTimeout = setTimeout(() => {
+              this.loadAllocations();
+              this.filterTimeout = null;
+            }, 200);
         },
         filterOn() {
             this.loadAllocations();
