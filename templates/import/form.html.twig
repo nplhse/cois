@@ -41,7 +41,10 @@
                                     <i class="bi bi-exclamation-circle-fill text-warning"></i>
                                 {% endif %}
                             </td>
-                            <td scope="col"><a class="btn btn-primary" href="{{ path("import_show", { 'id': import.id }) }}" role="button">View</a></td>
+                            <td scope="col">
+                                <a class="btn btn-primary" href="{{ path("import_show", { 'id': import.id }) }}" role="button">View</a>
+                                <a class="btn btn-danger" href="{{ path("import_delete", { 'id': import.id }) }}" role="button">Delete</a>
+                            </td>
                         </tr>
                     {% else %}
                         <tr>
