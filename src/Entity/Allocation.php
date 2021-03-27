@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
@@ -21,6 +22,17 @@ use Doctrine\ORM\Mapping as ORM;
  *      "order"={"createdAt": "DESC"}
  *     }
  * )
+ * @ApiFilter(BooleanFilter::class, properties={
+ *     "requiresResus",
+ *     "requiresCathlab",
+ *     "isWithPhysician",
+ *     "isCPR",
+ *     "isVentilated",
+ *     "isShock",
+ *     "isPregnant",
+ *     "isWorkAccident"
+ * })
+ * @ApiFilter(DateFilter::class, properties={"createdAt"})
  * @ApiFilter(OrderFilter::class, properties={"id", "dispatchArea", "hospital.name", "createdAt"})
  * @ApiFilter(SearchFilter::class, properties={
  *     "dispatchArea": "partial",
@@ -28,8 +40,9 @@ use Doctrine\ORM\Mapping as ORM;
  *     "hospital.name": "partial",
  *     "RMI": "partial",
  *     "PZCText": "partial",
+ *     "assignment": "partial",
+ *     "occasion": "partial",
  * })
- * @ApiFilter(DateFilter::class, properties={"createdAt"})
  */
 class Allocation
 {

@@ -5,7 +5,7 @@ import axios from 'axios';
  * @param perPage
  * @returns {Promise<AxiosResponse<any>>}
  */
-export function fetchAllocations(currentPage, perPage, sortBy, sortDesc, filter, filterOn, filterAfter, filterBefore) {
+export function fetchAllocations(currentPage, perPage, sortBy, sortDesc, filters) {
     const params = {};
 
     params.page = currentPage;
@@ -20,24 +20,30 @@ export function fetchAllocations(currentPage, perPage, sortBy, sortDesc, filter,
     }
 
     if (sortBy === 'urgency') {
-        sortBy = 'sK';
-    }
-
-    if (filter && filter !== '') {
-        for (const target in filterOn) {
-            params[`${filterOn[target]}`] = filter;
-        }
-    }
-
-    if (filterAfter) {
-        params[`createdAt[after]`] = filterAfter;
-    }
-
-    if (filterBefore) {
-        params[`createdAt[before]`] = filterBefore;
+        sortBy = 'SK';
     }
 
     params[`order[${sortBy}]`] = sortDesc ? 'asc' : 'desc';
+
+    if (filters.search && filters.search !== '') {
+        for (const target in filters.fields) {
+            params[`${filters.fields[target]}`] = filters.search;
+        }
+    }
+
+    if (filters.dateAfter) {
+        params[`createdAt[after]`] = filters.dateAfter;
+    }
+
+    if (filters.dateBefore) {
+        params[`createdAt[before]`] = filters.dateBefore;
+    }
+
+    for (const key in filters.properties) {
+        if (filters.properties[key]) {
+            params[`${key}`]  = true;
+        }
+    }
 
     return axios.get('/api/allocations.jsonld', {
         params,

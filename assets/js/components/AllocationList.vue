@@ -24,15 +24,15 @@
                     <b-input-group size="sm">
                       <b-form-input
                           id="filter-input"
-                          v-model="filter"
+                          v-model="filters.search"
                           type="search"
                           placeholder="Type to Search"
                       />
 
                       <b-input-group-append>
                         <b-button
-                            :disabled="!filter"
-                            @click="filter = ''"
+                            :disabled="!filters.search"
+                            @click="filters.search = ''"
                         >
                           X
                         </b-button>
@@ -45,7 +45,7 @@
                 <b-col>
                   <b-form-group
                       v-slot="{ ariaDescribedby }"
-                      v-model="filterOn"
+                      v-model="filters.fields"
                       label="Filter On"
                       label-cols-sm="3"
                       label-align-sm="right"
@@ -53,24 +53,30 @@
                       class="mb-0"
                   >
                     <b-form-checkbox-group
-                        v-model="filterOn"
+                        v-model="filters.fields"
                         :aria-describedby="ariaDescribedby"
                         class="mt-1"
                     >
                       <b-form-checkbox value="supplyArea">
-                        Supply Area
+                        &nbsp;Supply Area
                       </b-form-checkbox>
                       <b-form-checkbox value="dispatchArea">
-                        Dispatch Area
+                        &nbsp;Dispatch Area
                       </b-form-checkbox>
                       <b-form-checkbox value="hospital.name">
-                        Hospital Name
+                        &nbsp;Hospital Name
                       </b-form-checkbox>
                       <b-form-checkbox value="RMI">
-                        RMI
+                        &nbsp;RMI
                       </b-form-checkbox>
                       <b-form-checkbox value="PZCText">
-                        PZC Text
+                        &nbsp;PZC Text
+                      </b-form-checkbox>
+                      <b-form-checkbox value="assignment">
+                        &nbsp;Assignment
+                      </b-form-checkbox>
+                      <b-form-checkbox value="occasion">
+                        &nbsp;Occasion
                       </b-form-checkbox>
                     </b-form-checkbox-group>
                   </b-form-group>
@@ -82,7 +88,7 @@
               <label for="after-datepicker">After</label>
               <b-form-datepicker
                   id="after-datepicker"
-                  v-model="filterAfter"
+                  v-model="filters.dateAfter"
                   class="mb-2"
                   reset-button
                   close-button
@@ -91,11 +97,38 @@
               <label for="before-datepicker">Before</label>
               <b-form-datepicker
                   id="before-datepicker"
-                  v-model="filterBefore"
+                  v-model="filters.dateBefore"
                   class="mb-2"
                   reset-button
                   close-button
               ></b-form-datepicker>
+          </b-card>
+
+          <b-card title="by Properties" class="mb-2">
+              <b-form-checkbox v-model="filters.properties.requiresResus" name="check-button" switch>
+                  &nbsp;Requires Resus (S+)
+              </b-form-checkbox>
+              <b-form-checkbox v-model="filters.properties.requiresCathlab" name="check-button" switch>
+                  &nbsp;Requires Cathlab (H+)
+              </b-form-checkbox>
+              <b-form-checkbox v-model="filters.properties.isWithPhysician" name="check-button" switch>
+                  &nbsp;Is with Physician (N+)
+              </b-form-checkbox>
+              <b-form-checkbox v-model="filters.properties.isCPR" name="check-button" switch>
+                  &nbsp;Is CPR (R+)
+              </b-form-checkbox>
+              <b-form-checkbox v-model="filters.properties.isVentilated" name="check-button" switch>
+                  &nbsp;Is Ventilated (B+)
+              </b-form-checkbox>
+              <b-form-checkbox v-model="filters.properties.isShock" name="check-button" switch>
+                  &nbsp;Is Shock
+              </b-form-checkbox>
+              <b-form-checkbox v-model="filters.properties.isPregnant" name="check-button" switch>
+                  &nbsp;Is Pregnant
+              </b-form-checkbox>
+              <b-form-checkbox v-model="filters.properties.isWorkAccident" name="check-button" switch>
+                  &nbsp;Is Work Accident (BG+)
+              </b-form-checkbox>
           </b-card>
         </div>
       </b-sidebar>
@@ -314,11 +347,23 @@ export default {
             perPage: 10,
             currentPage: 1,
             pageOptions: [10, 25, 50, 100],
-            filter: null,
-            filterOn: [],
-            filterTimeout: null,
-            filterAfter: null,
-            filterBefore: null,
+            filters: {
+                search: null,
+                fields: [],
+                timeout: null,
+                dateAfter: null,
+                dateBefore: null,
+                properties: {
+                    requiresResus: false,
+                    requiresCathlab: false,
+                    isWithPhysician: false,
+                    isCPR: false,
+                    isVentilated: false,
+                    isShock: false,
+                    isPregnant: false,
+                    isWorkAccident: false,
+                },
+            },
             loading: true,
             fields: [
                 {
@@ -367,24 +412,11 @@ export default {
         sortDesc() {
             this.loadAllocations();
         },
-        filter() {
-            if (this.filterTimeout) {
-              clearTimeout(this.filterTimeout);
-            }
-
-            this.filterTimeout = setTimeout(() => {
-              this.loadAllocations();
-              this.filterTimeout = null;
-            }, 200);
-        },
-        filterOn() {
-            this.loadAllocations();
-        },
-        filterAfter() {
-          this.loadAllocations();
-        },
-        filterBefore() {
-          this.loadAllocations();
+        'filters': {
+            handler(newValue, oldValue) {
+                this.loadAllocations();
+            },
+            deep: true
         },
     },
     created() {
@@ -410,7 +442,7 @@ export default {
 
             let response;
             try {
-                response = await fetchAllocations(this.currentPage, this.perPage, this.sortBy, this.sortDesc, this.filter, this.filterOn, this.filterAfter, this.filterBefore);
+                response = await fetchAllocations(this.currentPage, this.perPage, this.sortBy, this.sortDesc, this.filters);
 
                 this.loading = false;
             } catch (e) {
@@ -421,7 +453,6 @@ export default {
 
             this.items = response.data['hydra:member'];
             this.totalItems = response.data['hydra:totalItems'];
-            // this.$refs.table.refresh();
         },
         filterAllocations(row, filter) {
             return true;
