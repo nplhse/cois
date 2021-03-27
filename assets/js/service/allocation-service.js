@@ -5,7 +5,7 @@ import axios from 'axios';
  * @param perPage
  * @returns {Promise<AxiosResponse<any>>}
  */
-export function fetchAllocations(currentPage, perPage, sortBy, sortDesc, filter, filterOn) {
+export function fetchAllocations(currentPage, perPage, sortBy, sortDesc, filter, filterOn, filterAfter, filterBefore) {
     const params = {};
 
     params.page = currentPage;
@@ -27,6 +27,14 @@ export function fetchAllocations(currentPage, perPage, sortBy, sortDesc, filter,
         for (const target in filterOn) {
             params[`${filterOn[target]}`] = filter;
         }
+    }
+
+    if (filterAfter) {
+        params[`createdAt[after]`] = filterAfter;
+    }
+
+    if (filterBefore) {
+        params[`createdAt[before]`] = filterBefore;
     }
 
     params[`order[${sortBy}]`] = sortDesc ? 'asc' : 'desc';

@@ -1,89 +1,104 @@
 <template>
     <div>
-      <b-button
-          v-b-toggle.collapse-1
-          variant="primary"
-      >
-        Toogle filters
-      </b-button>
+      <b-button v-b-toggle.sidebar-1 variant="primary">Toggle Filters</b-button>
 
-        <b-collapse
-            id="collapse-1"
-            class="mt-2"
-        >
-            <b-card>
-                <b-row>
-                    <b-col
-                        lg="6"
-                        class="my-1"
-                    >
-                        <b-form-group
-                            label="Search filter"
-                            label-for="filter-input"
-                            label-cols-sm="3"
-                            label-align-sm="right"
-                            label-size="sm"
-                            class="mb-0"
+      <b-sidebar id="sidebar-1" title="Filters" shadow>
+        <template #footer="{ hide }">
+          <div class="d-flex bg-dark text-light align-items-right px-3 py-2">
+            <b-button size="sm" @click="hide">Close</b-button>
+          </div>
+        </template>
+
+        <div class="px-3 py-2">
+          <b-card title="by Keyword" class="mb-2">
+              <b-row>
+                <b-col>
+                  <b-form-group
+                      label="Search"
+                      label-for="filter-input"
+                      label-cols-sm="3"
+                      label-align-sm="right"
+                      label-size="sm"
+                      class="mb-0"
+                  >
+                    <b-input-group size="sm">
+                      <b-form-input
+                          id="filter-input"
+                          v-model="filter"
+                          type="search"
+                          placeholder="Type to Search"
+                      />
+
+                      <b-input-group-append>
+                        <b-button
+                            :disabled="!filter"
+                            @click="filter = ''"
                         >
-                            <b-input-group size="sm">
-                                <b-form-input
-                                    id="filter-input"
-                                    v-model="filter"
-                                    type="search"
-                                    placeholder="Type to Search"
-                                />
-
-                                <b-input-group-append>
-                                    <b-button
-                                        :disabled="!filter"
-                                        @click="filter = ''"
-                                    >
-                                        Clear
-                                    </b-button>
-                                </b-input-group-append>
-                            </b-input-group>
-                        </b-form-group>
-                    </b-col>
-
-                    <b-col
-                        lg="6"
-                        class="my-1"
+                          X
+                        </b-button>
+                      </b-input-group-append>
+                    </b-input-group>
+                  </b-form-group>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col>
+                  <b-form-group
+                      v-slot="{ ariaDescribedby }"
+                      v-model="filterOn"
+                      label="Filter On"
+                      label-cols-sm="3"
+                      label-align-sm="right"
+                      label-size="sm"
+                      class="mb-0"
+                  >
+                    <b-form-checkbox-group
+                        v-model="filterOn"
+                        :aria-describedby="ariaDescribedby"
+                        class="mt-1"
                     >
-                        <b-form-group
-                            v-slot="{ ariaDescribedby }"
-                            v-model="filterOn"
-                            label="Filter On"
-                            label-cols-sm="3"
-                            label-align-sm="right"
-                            label-size="sm"
-                            class="mb-0"
-                        >
-                            <b-form-checkbox-group
-                                v-model="filterOn"
-                                :aria-describedby="ariaDescribedby"
-                                class="mt-1"
-                            >
-                                <b-form-checkbox value="supplyArea">
-                                    Supply Area
-                                </b-form-checkbox>
-                                <b-form-checkbox value="dispatchArea">
-                                    Dispatch Area
-                                </b-form-checkbox>
-                                <b-form-checkbox value="hospital.name">
-                                    Hospital Name
-                                </b-form-checkbox>
-                                <b-form-checkbox value="RMI">
-                                    RMI
-                                </b-form-checkbox>
-                                <b-form-checkbox value="PZCText">
-                                    PZC Text
-                                </b-form-checkbox>
-                            </b-form-checkbox-group>
-                        </b-form-group>
-                    </b-col>
-                </b-row>
-            </b-card>
-        </b-collapse>
+                      <b-form-checkbox value="supplyArea">
+                        Supply Area
+                      </b-form-checkbox>
+                      <b-form-checkbox value="dispatchArea">
+                        Dispatch Area
+                      </b-form-checkbox>
+                      <b-form-checkbox value="hospital.name">
+                        Hospital Name
+                      </b-form-checkbox>
+                      <b-form-checkbox value="RMI">
+                        RMI
+                      </b-form-checkbox>
+                      <b-form-checkbox value="PZCText">
+                        PZC Text
+                      </b-form-checkbox>
+                    </b-form-checkbox-group>
+                  </b-form-group>
+                </b-col>
+              </b-row>
+          </b-card>
+
+          <b-card title="by Date" class="mb-2">
+              <label for="after-datepicker">After</label>
+              <b-form-datepicker
+                  id="after-datepicker"
+                  v-model="filterAfter"
+                  class="mb-2"
+                  reset-button
+                  close-button
+              ></b-form-datepicker>
+
+              <label for="before-datepicker">Before</label>
+              <b-form-datepicker
+                  id="before-datepicker"
+                  v-model="filterBefore"
+                  class="mb-2"
+                  reset-button
+                  close-button
+              ></b-form-datepicker>
+          </b-card>
+        </div>
+      </b-sidebar>
 
         <b-table
             id="allocation-table"
@@ -302,6 +317,8 @@ export default {
             filter: null,
             filterOn: [],
             filterTimeout: null,
+            filterAfter: null,
+            filterBefore: null,
             loading: true,
             fields: [
                 {
@@ -363,6 +380,12 @@ export default {
         filterOn() {
             this.loadAllocations();
         },
+        filterAfter() {
+          this.loadAllocations();
+        },
+        filterBefore() {
+          this.loadAllocations();
+        },
     },
     created() {
         this.loadAllocations();
@@ -387,7 +410,7 @@ export default {
 
             let response;
             try {
-                response = await fetchAllocations(this.currentPage, this.perPage, this.sortBy, this.sortDesc, this.filter, this.filterOn);
+                response = await fetchAllocations(this.currentPage, this.perPage, this.sortBy, this.sortDesc, this.filter, this.filterOn, this.filterAfter, this.filterBefore);
 
                 this.loading = false;
             } catch (e) {
