@@ -2,8 +2,8 @@
 
 namespace App\Command;
 
-use App\Entity\Allocation;
 use App\Entity\Import;
+use App\Repository\AllocationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -18,11 +18,14 @@ class DeleteAllocationsCommand extends Command
 
     private EntityManagerInterface $em;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    private AllocationRepository $allocationRepository;
+
+    public function __construct(EntityManagerInterface $entityManager, AllocationRepository $allocationRepository)
     {
         parent::__construct();
 
         $this->em = $entityManager;
+        $this->allocationRepository = $allocationRepository;
     }
 
     protected function configure(): void
@@ -41,8 +44,7 @@ class DeleteAllocationsCommand extends Command
 
         $import = $this->em->getRepository(Import::class)->findOneBy(['id' => $importId]);
 
-        $allocationRepository = $this->em->getRepository(Allocation::class);
-        $allocationRepository->deleteByImport($import);
+        $this->allocationRepository->deleteByImport($import);
 
         $io->success('Successfully deleted all data from this import.');
 

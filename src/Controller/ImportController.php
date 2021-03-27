@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Allocation;
 use App\Entity\Import;
 use App\Form\ImportType;
 use App\Message\ImportDataMessage;
@@ -10,7 +9,6 @@ use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
 use App\Repository\ImportRepository;
 use App\Service\FileUploader;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -783,7 +783,7 @@ class Allocation
     public function getRMI(): ?int
     {
         if (null === $this->RMI) {
-            $this->RMI = substr((string) $this->PZC, 0, 3);
+            $this->RMI = (int) substr((string) $this->PZC, 0, 3);
         }
 
         return $this->RMI;
