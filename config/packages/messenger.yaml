@@ -12,3 +12,4 @@ framework:
         routing:
             'App\Message\ImportDataMessage': sync
             'App\Message\NewUserMessage': sync
+            'Symfony\Component\Mailer\Messenger\SendEmailMessage': sync
