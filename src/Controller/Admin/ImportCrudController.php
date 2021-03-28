@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class ImportCrudController extends AbstractCrudController
@@ -42,16 +43,23 @@ class ImportCrudController extends AbstractCrudController
         $panel3 = FormField::addPanel('Timestamps');
         $createdAt = DateTimeField::new('createdAt', 'Created at');
 
+        $panel4 = FormField::addPanel('Status');
+        $duration = NumberField::new('duration', 'Duration');
+        $lastRun = DateTimeField::new('lastRun', 'Last run');
+        $timesRun = IntegerField::new('timesRun', 'Times run');
+        $itemCount = IntegerField::new('itemCount', 'Item count');
+        $lastError = TextField::new('lastError', 'Last error');
+
         $fields = [];
 
         if (Crud::PAGE_INDEX === $pageName) {
             $fields = [$id, $caption, $user, $status, $createdAt];
         } elseif (Crud::PAGE_DETAIL === $pageName) {
-            $fields = [$panel1, $id, $user, $caption, $contents, $panel2, $size, $name, $path, $extension, $mimeType, $status, $isFixture, $panel3, $createdAt];
+            $fields = [$panel1, $id, $user, $caption, $contents, $panel2, $size, $name, $path, $extension, $mimeType, $status, $isFixture, $panel3, $createdAt, $panel4, $duration, $lastRun, $timesRun, $itemCount, $lastError];
         } elseif (Crud::PAGE_NEW === $pageName) {
-            $fields = [$panel1, $id, $user, $caption, $contents, $panel2, $size, $name, $path, $extension, $mimeType, $status, $isFixture, $panel3, $createdAt];
+            $fields = [$panel1, $id, $user, $caption, $contents, $panel2, $size, $name, $path, $extension, $mimeType, $status, $isFixture, $panel3, $createdAt, $panel4, $duration, $lastRun, $timesRun, $itemCount, $lastError];
         } elseif (Crud::PAGE_EDIT === $pageName) {
-            $fields = [$panel1, $id, $user, $caption, $contents, $panel2, $size, $name, $path, $extension, $mimeType, $status, $isFixture, $panel3, $createdAt];
+            $fields = [$panel1, $id, $user, $caption, $contents, $panel2, $size, $name, $path, $extension, $mimeType, $status, $isFixture, $panel3, $createdAt, $panel4, $duration, $lastRun, $timesRun, $itemCount, $lastError];
         }
 
         return $fields;

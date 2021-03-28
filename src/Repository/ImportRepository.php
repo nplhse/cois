@@ -30,4 +30,23 @@ class ImportRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function countImports(User $user = null): mixed
+    {
+        if ($user) {
+            $qb = $this->createQueryBuilder('i')
+                ->select('COUNT(i.id)')
+                ->andWhere('i.user = :user')
+                ->setparameter('user', $user->getId())
+                ->getQuery()
+                ->getSingleScalarResult();
+        } else {
+            $qb = $this->createQueryBuilder('i')
+                ->select('COUNT(i.id)')
+                ->getQuery()
+                ->getSingleScalarResult();
+        }
+
+        return $qb;
+    }
 }
