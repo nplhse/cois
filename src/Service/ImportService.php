@@ -189,8 +189,6 @@ class ImportService
             $this->em->persist($import);
             $this->em->flush();
 
-            dump($import);
-
             return false;
         }
 
