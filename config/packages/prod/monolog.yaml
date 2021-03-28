@@ -8,7 +8,7 @@ monolog:
             handler: grouped
         grouped:
             type: group
-            members: [ nested, deduplicated ]
+            members: [ nested ]
         nested:
             type: stream
             path: php://stderr
