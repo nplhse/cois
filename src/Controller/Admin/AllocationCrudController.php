@@ -81,12 +81,14 @@ class AllocationCrudController extends AbstractCrudController
         $speciality = TextField::new('speciality');
         $specialityDetail = TextField::new('specialityDetail');
         $specialityWasClosed = BooleanField::new('specialityWasClosed');
+        $RMI = IntegerField::new('RMI');
+        $SK = TextField::new('SK');
         $PZC = IntegerField::new('PZC');
         $PZCText = TextField::new('PZCText');
         $SecondaryPZC = IntegerField::new('SecondaryPZC');
         $SecondaryPZCText = TextField::new('SecondaryPZCText');
         $comment = TextField::new('comment');
-        $deployment = [$panel5, $occasion, $assignment, $isWithPhysician, $modeOfTransport, $speciality, $specialityDetail, $specialityWasClosed, $PZC, $PZCText, $SecondaryPZC, $SecondaryPZCText, $comment];
+        $deployment = [$panel5, $occasion, $assignment, $isWithPhysician, $modeOfTransport, $speciality, $specialityDetail, $specialityWasClosed, $RMI, $SK, $PZC, $PZCText, $SecondaryPZC, $SecondaryPZCText, $comment];
 
         $info = [$createdAt, $arrivalAt, $PZC];
 
