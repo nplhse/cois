@@ -44,6 +44,17 @@ class FileUploader
         ];
     }
 
+    public function streamFile(string $path): mixed
+    {
+        $resource = $this->storage->readStream($path);
+
+        if (false === $resource) {
+            throw new \Exception(sprintf('Error opening stream for "%s"', $filename));
+        }
+
+        return $resource;
+    }
+
     private function generateRandomName(UploadedFile $file): string
     {
         return bin2hex(random_bytes(24));

@@ -93,6 +93,15 @@
                     <p>Last run: {{ import.lastRun ? import.lastRun|date('d.m.Y H:i:s') : '' }}</p>
                 </div>
             </div>
+
+            {% if is_granted("ROLE_ADMIN") %}
+                <div class="card border-warning mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Debugging</h5>
+                        <a href="{{ path('app_files_allocations', {'id': import.id}) }}">Download file</a>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 
