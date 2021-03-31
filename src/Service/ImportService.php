@@ -116,7 +116,7 @@ class ImportService
                 }
                 $allocation->setOccasion($row['Anlass']);
                 $allocation->setGender($row['Geschlecht']);
-                $allocation->setAge($row['Alter']);
+                $allocation->setAge((int) $row['Alter']);
                 if ('R+' == $row['Reanimation']) {
                     $allocation->setIsCPR(true);
                 } else {
