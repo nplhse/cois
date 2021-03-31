@@ -95,7 +95,7 @@
             </div>
 
             {% if is_granted("ROLE_ADMIN") %}
-                <div class="card border-warning mb-3">
+                <div class="card border-warning text-warning mb-3">
                     <div class="card-body">
                         <h5 class="card-title">Debugging</h5>
                         <a href="{{ path('app_files_allocations', {'id': import.id}) }}">Download file</a>
