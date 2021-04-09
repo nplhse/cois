@@ -15,7 +15,7 @@ class FileUploader
     }
 
     /**
-     * @return array<string>
+     * @return array<array-key, string>
      *
      * @throws \Exception
      */
@@ -38,7 +38,7 @@ class FileUploader
         }
 
         return [
-            'file' => $file,
+            'file' => (string) $file,
             'uniqueName' => $uniqueName,
             'path' => $path,
         ];
@@ -48,8 +48,8 @@ class FileUploader
     {
         $resource = $this->storage->readStream($path);
 
-        if (false === $resource) {
-            throw new \Exception(sprintf('Error opening stream for "%s"', $filename));
+        if (false == $resource) {
+            throw new \Exception(sprintf('Error opening stream for "%s"', $path));
         }
 
         return $resource;

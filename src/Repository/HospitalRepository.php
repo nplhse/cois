@@ -24,7 +24,7 @@ class HospitalRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('h')
             ->andWhere('h.owner = :user')
-            ->setParameter('user', $user)
+            ->setParameter('user', $user->getId())
             ->getQuery()
             ->getOneOrNullResult()
         ;
