@@ -15,7 +15,7 @@ class FileUploader
     }
 
     /**
-     * @return array<string>
+     * @return array<array-key, string>
      *
      * @throws \Exception
      */
@@ -38,7 +38,7 @@ class FileUploader
         }
 
         return [
-            'file' => $file,
+            'file' => (string) $file,
             'uniqueName' => $uniqueName,
             'path' => $path,
         ];

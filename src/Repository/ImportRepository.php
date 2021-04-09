@@ -24,7 +24,7 @@ class ImportRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('i')
             ->andWhere('i.user = :val')
-            ->setParameter('val', $user)
+            ->setParameter('val', $user->getId())
             ->orderBy('i.id', 'ASC')
             ->getQuery()
             ->getResult()

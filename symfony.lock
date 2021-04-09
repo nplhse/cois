@@ -797,6 +797,9 @@
     "webonyx/graphql-php": {
         "version": "v14.5.1"
     },
+    "weirdan/doctrine-psalm-plugin": {
+        "version": "1.0.0"
+    },
     "willdurand/negotiation": {
         "version": "3.0.0"
     }

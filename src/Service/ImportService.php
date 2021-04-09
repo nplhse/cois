@@ -10,8 +10,6 @@ use ForceUTF8\Encoding;
 
 class ImportService
 {
-    private string $path;
-
     private array $result = [];
 
     private EntityManagerInterface $em;
@@ -39,19 +37,18 @@ class ImportService
     public function importFromCSV(string $path): bool
     {
         if (file_exists($path)) {
-            $this->path = $path;
             $file = fopen($path, 'r');
         } else {
             throw new \Exception('Could not open file: '.$path);
         }
 
         if ($this->hasFieldNames) {
-            $keys = fgetcsv($file, null, $this->delimiter, $this->enclosure);
+            $keys = fgetcsv($file, 0, $this->delimiter, $this->enclosure);
         } else {
             $keys = [];
         }
 
-        while ($row = fgetcsv($file, null, $this->delimiter, $this->enclosure)) {
+        while ($row = fgetcsv($file, 0, $this->delimiter, $this->enclosure)) {
             $n = count($row);
             $res = [];
             for ($i = 0; $i < $n; ++$i) {

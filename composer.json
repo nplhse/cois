@@ -89,7 +89,8 @@
         "symfony/stopwatch": "^5.2",
         "symfony/var-dumper": "^5.2",
         "symfony/web-profiler-bundle": "^5.2",
-        "vimeo/psalm": "^4.7"
+        "vimeo/psalm": "^4.7",
+        "weirdan/doctrine-psalm-plugin": "^1.0"
     },
     "config": {
         "optimize-autoloader": true,
@@ -137,6 +138,7 @@
         ],
         "run-checks": [
             "vendor/bin/php-cs-fixer fix",
+            "vendor/bin/psalm",
             "vendor/bin/phpstan analyse"
         ],
         "run-tests": [
