@@ -179,11 +179,13 @@ class ImportService
             $time_end = microtime(true);
             $time = $time_end - $time_start;
         } catch (\Exception $e) {
+            $time_end = microtime(true);
+            $time = $time_end - $time_start;
+
             $import->setStatus('failed');
             $import->setLastError($e->getMessage());
             $import->setLastRun(new \DateTime('NOW'));
-
-            ($time) ? $import->setDuration($time) : null;
+            $import->setDuration($time);
             ($count) ? $import->setItemCount($count) : null;
 
             $this->em->persist($import);
