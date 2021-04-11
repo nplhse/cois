@@ -1,48 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="bin/.phpunit/phpunit.xsd"
-         backupGlobals="false"
-         colors="true"
-         bootstrap="tests/bootstrap.php"
->
-    <php>
-        <ini name="error_reporting" value="-1" />
-        <server name="APP_ENV" value="test" force="true" />
-        <server name="SHELL_VERBOSITY" value="-1" />
-        <server name="SYMFONY_PHPUNIT_REMOVE" value="" />
-        <server name="SYMFONY_PHPUNIT_VERSION" value="8.5" />
-
-        <!--
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" backupGlobals="false" colors="true" bootstrap="tests/bootstrap.php">
+  <coverage processUncoveredFiles="true">
+    <include>
+      <directory suffix=".php">src</directory>
+    </include>
+    <report>
+      <clover outputFile="build/coverage/logs/clover.xml"/>
+      <html outputDirectory="build/coverage/report" lowUpperBound="55" highLowerBound="90"/>
+      <text outputFile="php://stdout" showOnlySummary="true"/>
+    </report>
+  </coverage>
+  <php>
+    <ini name="error_reporting" value="-1"/>
+    <server name="APP_ENV" value="test" force="true"/>
+    <server name="SHELL_VERBOSITY" value="-1"/>
+    <server name="SYMFONY_PHPUNIT_REMOVE" value=""/>
+    <server name="SYMFONY_PHPUNIT_VERSION" value="9.5"/>
+    <!--
             To make sure that application has no "direct" deprecations we use `max[direct]=0` as a default one
             indirect deprecations are just shown on test output to help to track those.
             Note that you can change this behaviour if you want to, just see following documentation and see
             how you can configure that.
             https://symfony.com/doc/current/components/phpunit_bridge.html#direct-and-indirect-deprecations
         -->
-        <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[direct]=1" />
-    </php>
-
-    <testsuites>
-        <testsuite name="Project Test Suite">
-            <directory>tests</directory>
-        </testsuite>
-    </testsuites>
-
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
-        </whitelist>
-    </filter>
-
-    <listeners>
-        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
-    </listeners>
-
-    <logging>
-        <log type="coverage-html" target="build/coverage/report" lowUpperBound="55" highLowerBound="90" />
-        <log type="coverage-clover" target="build/coverage/logs/clover.xml" />
-        <log type="coverage-text" target="php://stdout" showOnlySummary="true" />
-    </logging>
+    <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[direct]=1"/>
+  </php>
+  <testsuites>
+    <testsuite name="Project Test Suite">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
+  <listeners>
+    <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener"/>
+  </listeners>
+  <logging/>
 </phpunit>
