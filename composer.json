@@ -137,12 +137,16 @@
             "@setup"
         ],
         "run-checks": [
+            "@run-checks-php"
+        ],
+        "run-checks-js": [
+            "yarn run eslint",
+            "yarn run prettier --check ."
+        ],
+        "run-checks-php": [
             "vendor/bin/php-cs-fixer fix",
             "vendor/bin/psalm",
             "vendor/bin/phpstan analyse"
-        ],
-        "run-tests": [
-            "vendor/bin/simple-phpunit"
         ],
         "setup": [
             "@setup-db",
