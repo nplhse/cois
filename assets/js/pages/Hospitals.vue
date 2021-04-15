@@ -5,16 +5,14 @@
 </template>
 
 <script>
-import HospitalList from '../components/HospitalList';
+import HospitalList from "../components/HospitalList";
 
 export default {
-    name: 'Hospitals',
+    name: "Hospitals",
     components: {
         HospitalList,
     },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

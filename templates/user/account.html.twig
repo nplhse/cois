@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Account - {{ parent() }}{% endblock %}
+{% block title %}
+    Account - {{ parent() }}
+{% endblock %}
 
 {% block body %}
-    <h1>My Account</h1>
+    <h1>
+        My Account
+    </h1>
 
     {% for label, messages in app.flashes %}
         {% for message in messages %}
@@ -15,13 +19,19 @@
 
     <ul class="nav nav-tabs mb-3">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ path('account') }}">Overview</a>
+            <a class="nav-link active"
+                aria-current="page"
+                href="{{ path('account') }}">
+                Overview
+            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ path('account_profile') }}">Account</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('account_security') }}">Security</a>
+            <a class="nav-link" href="{{ path('account_security') }}">
+                Security
+            </a>
         </li>
     </ul>
 
@@ -29,21 +39,41 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Account</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Manage your account& profile</h6>
-                    <p class="card-text">Take care of your personal profile (e.g. your username) and your E-Mail settings.</p>
-                    <a href="{{ path('account_profile') }}" class="card-link">Edit profile</a>
-                    <a href="{{ path('account_email') }}" class="card-link">Manage E-Mail</a>
+                    <h5 class="card-title">
+                        Account
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        Manage your account& profile
+                    </h6>
+                    <p class="card-text">
+                        Take care of your personal profile (e.g. your username)
+                        and your E-Mail settings.
+                    </p>
+                    <a href="{{ path('account_profile') }}" class="card-link">
+                        Edit profile
+                    </a>
+                    <a href="{{ path('account_email') }}" class="card-link">
+                        Manage E-Mail
+                    </a>
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="card border-danger">
                 <div class="card-body">
-                    <h5 class="card-title text-danger">Security</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Manage your password</h6>
-                    <p class="card-text">Update your password.</p>
-                    <a href="{{ path('account_change_password') }}" class="card-link">Change password</a>
+                    <h5 class="card-title text-danger">
+                        Security
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        Manage your password
+                    </h6>
+                    <p class="card-text">
+                        Update your password.
+                    </p>
+                    <a href="{{ path('account_change_password') }}"
+                        class="card-link">
+                        Change password
+                    </a>
                 </div>
             </div>
         </div>

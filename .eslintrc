@@ -1,10 +1,10 @@
 {
-  "extends": ["alloy", "alloy/vue"],
-  "parser": "@babel/eslint-parser",
-  "env": {
-    "browser": true
-  },
-  "rules": {
-    // Custom rules
-  }
+    "extends": ["alloy", "alloy/vue"],
+    "parser": "@babel/eslint-parser",
+    "env": {
+        "browser": true
+    },
+    "rules": {
+        // Custom rules
+    }
 }

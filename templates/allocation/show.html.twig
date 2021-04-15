@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Allocation (#{{ allocation.id }} - {{ parent() }}{% endblock %}
+{% block title %}
+    Allocation (#{{ allocation.id }} - {{ parent() }}
+{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -15,11 +17,17 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Allocation <small>(<i>#{{ allocation.id }}</i>)</small></h1>
+    <h1>
+        Allocation <small>(<i>#{{ allocation.id }}</i>)</small>
+    </h1>
 
     <div class="d-flex justify-content-end mb-2">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
-            <a class="btn btn-outline-primary" href="{{ path("allocation_index") }}" role="button">Back to list</a>
+            <a class="btn btn-outline-primary"
+                href="{{ path('allocation_index') }}"
+                role="button">
+                Back to list
+            </a>
         </div>
     </div>
 
@@ -30,42 +38,79 @@
                     Hospital
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Hospital</h5>
-                    <p>{{ allocation.hospital }}</p>
+                    <h5 class="card-title">
+                        Hospital
+                    </h5>
+                    <p>
+                        {{ allocation.hospital }}
+                    </p>
 
-                    <h5 class="card-title">Areas</h5>
+                    <h5 class="card-title">
+                        Areas
+                    </h5>
                     <div class="row">
                         <div class="col-6">
-                            <h6 class="card-subtitle text-muted">Supply Area</h6>
-                            <p>{{ allocation.supplyArea }}</p>
+                            <h6 class="card-subtitle text-muted">
+                                Supply Area
+                            </h6>
+                            <p>
+                                {{ allocation.supplyArea }}
+                            </p>
                         </div>
                         <div class="col-6">
-                            <h6 class="card-subtitle text-muted">Dispatch Area</h6>
-                            <p>{{ allocation.dispatchArea }}</p>
+                            <h6 class="card-subtitle text-muted">
+                                Dispatch Area
+                            </h6>
+                            <p>
+                                {{ allocation.dispatchArea }}
+                            </p>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-6">
-                            <h5 class="card-title">Speciality</h5>
-                            <p>{{ allocation.speciality }}</p>
+                            <h5 class="card-title">
+                                Speciality
+                            </h5>
+                            <p>
+                                {{ allocation.speciality }}
+                            </p>
                         </div>
-                        {% if allocation.speciality != allocation.specialityDetail %}
+                        {% if
+                            allocation.speciality
+                                != allocation.specialityDetail %}
                             <div class="col-6">
-                                <h5 class="card-title">Detail</h5>
-                                <p>{{ allocation.specialityDetail }}</p>
+                                <h5 class="card-title">
+                                    Detail
+                                </h5>
+                                <p>
+                                    {{ allocation.specialityDetail }}
+                                </p>
                             </div>
                         {% endif %}
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h6 class="card-title text-muted">Speciality was closed?</h6>
-                            <p {{ allocation.specialityWasClosed ? 'class="text-danger fw-bold"' : 'class="text-success"' }}>
-                                {{ allocation.specialityWasClosed ? 'Yes (Closed)' : 'No (Open)' }}</p>
+                            <h6 class="card-title text-muted">
+                                Speciality was closed?
+                            </h6>
+                            <p {{
+                                allocation.specialityWasClosed
+                                    ? 'class="text-danger fw-bold"'
+                                    : 'class="text-success"'
+                                }}>
+                                {{ allocation.specialityWasClosed
+                                    ? 'Yes (Closed)'
+                                    : 'No (Open)' }}
+                            </p>
                         </div>
                         <div class="col-6">
-                            <h6 class="card-title text-muted">Handover point</h6>
-                            <p>{{ allocation.handoverPoint }}</p>
+                            <h6 class="card-title text-muted">
+                                Handover point
+                            </h6>
+                            <p>
+                                {{ allocation.handoverPoint }}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -76,68 +121,135 @@
                     Deployment
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">PZC</h5>
+                    <h5 class="card-title">
+                        PZC
+                    </h5>
                     <div class="row">
                         <div class="col-2">
-                            <h6 class="card-subtitle text-muted">SK</h6>
-                            <p {% if allocation.SK == '1' %}
-                                    class="text-danger text-center fw-bold fs-1"
-                                {% elseif allocation.SK == '2' %}
-                                    class="text-warning text-center fw-bold fs-1"
-                                {% else %}
-                                    class="text-success text-center fw-bold fs-1"
-                                {% endif %}>
-                            {{ allocation.SK }}</p>
+                            <h6 class="card-subtitle text-muted">
+                                SK
+                            </h6>
+                            {% if allocation.SK == '1' %}
+                                <p class="text-danger text-center fw-bold fs-1">
+                                    {{ allocation.SK }}
+                                </p>
+                            {% elseif allocation.SK == '2' %}
+                                <p class="text-warning text-center fw-bold fs-1">
+                                    {{ allocation.SK }}
+                                </p>
+                            {% else %}
+                                <p class="text-success text-center fw-bold fs-1">
+                                    {{ allocation.SK }}
+                                </p>
+                            {% endif %}
                         </div>
                         <div class="col-10">
-                            <h6 class="card-subtitle text-muted">RMI with Text</h6>
-                            <p>{{ allocation.RMI }} {{ allocation.pZCText }}</p>
-                            <h6 class="card-subtitle text-muted">Secondary RMI with Text</h6>
-                            <p class="text-muted">{{ allocation.secondaryPZCText ? allocation.secondaryPZCText : 'None' }}</p>
+                            <h6 class="card-subtitle text-muted">
+                                RMI with Text
+                            </h6>
+                            <p>
+                                {{ allocation.RMI }} {{ allocation.pZCText }}
+                            </p>
+                            <h6 class="card-subtitle text-muted">
+                                Secondary RMI with Text
+                            </h6>
+                            <p class="text-muted">
+                                {{ allocation.secondaryPZCText
+                                    ? allocation.secondaryPZCText
+                                    : 'None' }}
+                            </p>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-6">
-                            <h6 class="card-subtitle text-muted">Occasion</h6>
-                            <p>{{ allocation.occasion }}</p>
+                            <h6 class="card-subtitle text-muted">
+                                Occasion
+                            </h6>
+                            <p>
+                                {{ allocation.occasion }}
+                            </p>
                         </div>
                         <div class="col-6">
-                            <h6 class="card-subtitle text-muted">Assignment</h6>
-                            <p>{{ allocation.assignment }}</p>
+                            <h6 class="card-subtitle text-muted">
+                                Assignment
+                            </h6>
+                            <p>
+                                {{ allocation.assignment }}
+                            </p>
                         </div>
                     </div>
 
-                    <h5 class="card-title">Transport</h5>
+                    <h5 class="card-title">
+                        Transport
+                    </h5>
                     <div class="row">
                         <div class="col-6">
-                            <h6 class="card-subtitle text-muted">Transport</h6>
-                            <p>{{ allocation.modeOfTransport }}</p>
+                            <h6 class="card-subtitle text-muted">
+                                Transport
+                            </h6>
+                            <p>
+                                {{ allocation.modeOfTransport }}
+                            </p>
                         </div>
                         <div class="col-6">
-                            <h6 class="card-subtitle text-muted">With physician?</h6>
-                            <p {{ allocation.isWithPhysician ? 'class="text-danger fw-bold"' : 'class="text-success"' }}>
-                                {{ allocation.isWithPhysician ? 'Yes (N+)' : 'No (N-)' }}</p>
+                            <h6 class="card-subtitle text-muted">
+                                With physician?
+                            </h6>
+                            <p {{
+                                allocation.isWithPhysician
+                                    ? 'class="text-danger fw-bold"'
+                                    : 'class="text-success"'
+                                }}>
+                                {{ allocation.isWithPhysician
+                                    ? 'Yes (N+)'
+                                    : 'No (N-)' }}
+                            </p>
                         </div>
                     </div>
 
                     <h5 class="card-title"></h5>
                     <div class="row">
                         <div class="col-6">
-                            <h6 class="card-subtitle text-muted">Requires Resus</h6>
-                            <p {{ allocation.requiresResus ? 'class="text-danger fw-bold"' : 'class="text-success"' }}>
-                                {{ allocation.requiresResus ? 'Yes (S+)' : 'No (S-)' }}</p>
+                            <h6 class="card-subtitle text-muted">
+                                Requires Resus
+                            </h6>
+                            <p {{
+                                allocation.requiresResus
+                                    ? 'class="text-danger fw-bold"'
+                                    : 'class="text-success"'
+                                }}>
+                                {{ allocation.requiresResus
+                                    ? 'Yes (S+)'
+                                    : 'No (S-)' }}
+                            </p>
                         </div>
                         <div class="col-6">
-                            <h6 class="card-subtitle text-muted">Requires Cathlab</h6>
-                            <p {{ allocation.requiresCathlab ? 'class="text-danger fw-bold"' : 'class="text-success"' }}>
-                                {{ allocation.requiresCathlab ? 'Yes (H+)' : 'No (H-)' }}</p>
+                            <h6 class="card-subtitle text-muted">
+                                Requires Cathlab
+                            </h6>
+                            <p {{
+                                allocation.requiresCathlab
+                                    ? 'class="text-danger fw-bold"'
+                                    : 'class="text-success"'
+                                }}>
+                                {{ allocation.requiresCathlab
+                                    ? 'Yes (H+)'
+                                    : 'No (H-)' }}
+                            </p>
                         </div>
                     </div>
 
-                    <h6 class="card-title text-muted">Commentary</h6>
-                    <p><i>{{ allocation.comment ? allocation.comment : 'None' }}</i></p>
-
+                    <h6 class="card-title text-muted">
+                        Commentary
+                    </h6>
+                    <p>
+                        <i>
+                            {{ allocation.comment
+                                ? allocation.comment
+                                : 'None' }}
+                        </i>
+                    </p>
                 </div>
             </div>
         </div>
@@ -148,11 +260,23 @@
                     Timestamps
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Created at</h5>
-                    <p>{{ allocation.creationWeekday }}, {{ allocation.createdAt|date('d.m.Y H:i:s') }}</p>
+                    <h5 class="card-title">
+                        Created at
+                    </h5>
+                    <p>
+                        {{ allocation.creationWeekday }}, {{
+                            allocation.createdAt|date('d.m.Y H:i:s')
+                        }}
+                    </p>
 
-                    <h5 class="card-title">Arrival at</h5>
-                    <p>{{ allocation.arrivalWeekday }}, {{ allocation.arrivalAt|date('d.m.Y H:i:s') }}</p>
+                    <h5 class="card-title">
+                        Arrival at
+                    </h5>
+                    <p>
+                        {{ allocation.arrivalWeekday }}, {{
+                            allocation.arrivalAt|date('d.m.Y H:i:s')
+                        }}
+                    </p>
                 </div>
             </div>
 
@@ -163,55 +287,108 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">
-                            <h5 class="card-title">Age</h5>
-                            <p>{{ allocation.age }}</p>
+                            <h5 class="card-title">
+                                Age
+                            </h5>
+                            <p>
+                                {{ allocation.age }}
+                            </p>
                         </div>
                         <div class="col-6">
-                            <h5 class="card-title">Gender</h5>
-                            <p>{% if allocation.gender == "M" %}
+                            <h5 class="card-title">
+                                Gender
+                            </h5>
+                            <p>
+                                {% if allocation.gender == 'M' %}
                                     Male
-                                {% elseif allocation.gender == "W" %}
+                                {% elseif allocation.gender == 'W' %}
                                     Female
                                 {% else %}
                                     Diverse
-                                {% endif %}</p>
+                                {% endif %}
+                            </p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h5 class="card-title">Resuscitated</h5>
-                            <p {{ allocation.isCPR ? 'class="text-danger fw-bold"' : 'class="text-success"' }}>
-                                {{ allocation.isCPR ? 'Yes (R+)' : 'No (R-)' }}</p>
+                            <h5 class="card-title">
+                                Resuscitated
+                            </h5>
+                            <p {{
+                                allocation.isCPR
+                                    ? 'class="text-danger fw-bold"'
+                                    : 'class="text-success"'
+                                }}>
+                                {{ allocation.isCPR ? 'Yes (R+)' : 'No (R-)' }}
+                            </p>
                         </div>
                         <div class="col-6">
-                            <h5 class="card-title">Infectious</h5>
-                            <p {{ allocation.isCPR == 'Keine' ? 'class="text-warning" fw-bold' : '' }}>
-                                {{ allocation.isInfectious ? allocation.isInfectious : 'No' }}</p>
+                            <h5 class="card-title">
+                                Infectious
+                            </h5>
+                            <p {{
+                                allocation.isCPR == 'Keine'
+                                    ? 'class="text-warning" fw-bold'
+                                    : ''
+                                }}>
+                                {{ allocation.isInfectious
+                                    ? allocation.isInfectious
+                                    : 'No' }}
+                            </p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h5 class="card-title">Ventilated</h5>
-                            <p {{ allocation.isVentilated ? 'class="text-danger fw-bold"' : 'class="text-success"' }}>
-                                {{ allocation.isVentilated ? 'Yes (B+)' : 'No (B-)' }}</p>
-
+                            <h5 class="card-title">
+                                Ventilated
+                            </h5>
+                            <p {{
+                                allocation.isVentilated
+                                    ? 'class="text-danger fw-bold"'
+                                    : 'class="text-success"'
+                                }}>
+                                {{ allocation.isVentilated
+                                    ? 'Yes (B+)'
+                                    : 'No (B-)' }}
+                            </p>
                         </div>
                         <div class="col-6">
-                            <h5 class="card-title">Pregnant</h5>
-                            <p {{ allocation.isPregnant ? 'class="text-warning fw-bold"' : '' }}>
-                                {{ allocation.isPregnant ? 'Yes' : 'No' }}</p>
+                            <h5 class="card-title">
+                                Pregnant
+                            </h5>
+                            <p {{
+                                allocation.isPregnant
+                                    ? 'class="text-warning fw-bold"'
+                                    : ''
+                                }}>
+                                {{ allocation.isPregnant ? 'Yes' : 'No' }}
+                            </p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <h5 class="card-title">Shock</h5>
-                            <p {{ allocation.isShock ? 'class="text-danger fw-bold"' : 'class="text-success"' }}>
-                                {{ allocation.isShock ? 'Yes' : 'No' }}</p>
+                            <h5 class="card-title">
+                                Shock
+                            </h5>
+                            <p {{
+                                allocation.isShock
+                                    ? 'class="text-danger fw-bold"'
+                                    : 'class="text-success"'
+                                }}>
+                                {{ allocation.isShock ? 'Yes' : 'No' }}
+                            </p>
                         </div>
                         <div class="col-6">
-                            <h5 class="card-title">Work/ School related accident</h5>
-                            <p {{ allocation.isWorkAccident ? 'class="text-warning fw-bold"' : '' }}>
-                                {{ allocation.isWorkAccident ? 'Yes' : 'No' }}</p>
+                            <h5 class="card-title">
+                                Work/ School related accident
+                            </h5>
+                            <p {{
+                                allocation.isWorkAccident
+                                    ? 'class="text-warning fw-bold"'
+                                    : ''
+                                }}>
+                                {{ allocation.isWorkAccident ? 'Yes' : 'No' }}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -219,8 +396,23 @@
 
             <div class="card border-primary mb-3">
                 <div class="card-body">
-                    <h5 class="card-title"><a href="{{ path('import_show', {'id': allocation.import.id}) }}">Import <small>(#<i>{{ allocation.import.id }})</i></small></a></h5>
-                    <p>This allocation was imported by {{ importUser.username }} at {{ allocation.import.createdAt|date('d.m.Y H:i:s') }}</p>
+                    <h5 class="card-title">
+                        <a href="{{
+                            path(
+                                'import_show',
+                                {
+                                    id: allocation.import.id
+                                }
+                            )
+                            }}">
+                            Import <small>(#<i>{{ allocation.import.id }})</i></small>
+                        </a>
+                    </h5>
+                    <p>
+                        This allocation was imported by {{
+                            importUser.username
+                        }} at {{ allocation.import.createdAt|date('d.m.Y H:i:s') }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -228,7 +420,11 @@
 
     <div class="d-flex justify-content-end mb-2">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
-            <a class="btn btn-outline-primary" href="{{ path("allocation_index") }}" role="button">Back to list</a>
+            <a class="btn btn-outline-primary"
+                href="{{ path('allocation_index') }}"
+                role="button">
+                Back to list
+            </a>
         </div>
     </div>
 {% endblock %}

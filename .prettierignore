@@ -1,4 +1,5 @@
 # Ignore artifacts& folders:
+build
 public
 node_modules
 var

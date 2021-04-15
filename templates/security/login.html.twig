@@ -1,17 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} - Log in{% endblock %}
+{% block title %}
+    {{ parent() }} - Log in
+{% endblock %}
 
 {% block body %}
-    <h1>Login</h1>
+    <h1>
+        Login
+    </h1>
 
     {% if app.user %}
         <div class="mb-3">
             You are already logged in as: {{ app.user.username }}.<br />
-            Do you want to logout? <a href="{{ path('app_logout') }}">Click here.</a>
+            Do you want to logout? <a href="{{ path('app_logout') }}">
+                Click here.
+            </a>
         </div>
 
-        {% for label, messages in app.flashes(['warning', 'error', 'success', 'notice']) %}
+        {% for label, messages in app.flashes(
+            ['warning', 'error', 'success', 'notice']
+        ) %}
             {% for message in messages %}
                 <div class="alert alert-{{ label }}">
                     {{ message }}
@@ -20,29 +28,46 @@
         {% endfor %}
     {% else %}
         {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <div class="alert alert-danger">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
         {% endif %}
 
-        <p>Please sign in</p>
+        <p>
+            Please sign in
+        </p>
 
         {{ form_start(form) }}
         {{ form_row(form.username) }}
         {{ form_row(form.password) }}
 
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <input type="hidden"
+            name="_csrf_token"
+            value="{{ csrf_token('authenticate') }}" />
 
         <div class="row">
             <div class="form-group">
-                <button type="submit" class="btn btn-success">Login <span class="fa fa-lock"></span></button>
+                <button type="submit" class="btn btn-success">
+                    Login <span class="fa fa-lock"></span>
+                </button>
 
-                &nbsp;<input type="checkbox" id="remember_me" name="_remember_me" checked/>
+                &nbsp;<input type="checkbox"
+                    id="remember_me"
+                    name="_remember_me"
+                    checked />
                 <label for="remember_me">Remember me</label>
             </div>
         </div>
         {{ form_end(form) }}
 
         <p>
-            Have you forgot your password? Click <a href="{{ path('app_forgot_password_request') }}">this link</a> to request a password reset.
+            Have you forgot your password? Click <a href="{{
+                path(
+                    'app_forgot_password_request'
+                )
+                }}">
+                this link
+            </a> to request a password reset.
         </p>
     {% endif %}
 {% endblock %}

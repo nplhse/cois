@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-
-        <title>{% block title %}Collaborative IVENA statistics{% endblock %}</title>
+        <title>
+            {% block title %}
+                Collaborative IVENA statistics
+            {% endblock %}
+        </title>
 
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
@@ -17,22 +20,32 @@
     </head>
     <body>
         {% block header %}
-            {% include('_elements/navbar.html.twig') %}
+            {% include '_elements/navbar.html.twig' %}
         {% endblock %}
 
         <main role="main" class="container content pb-2">
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
-                    <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                    <div class="alert alert-{{
+                        label
+                        }} alert-dismissible fade show"
+                        role="alert">
                         {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert"
+                            aria-label="Close">
+
+                        </button>
                     </div>
                 {% endfor %}
             {% endfor %}
 
-            {% block body %}{% endblock %}
+            {% block body %}
+
+            {% endblock %}
         </main>
 
-        {% include('_elements/footer.html.twig') %}
+        {% include '_elements/footer.html.twig' %}
     </body>
 </html>

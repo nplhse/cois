@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hospitals - {{ parent() }}{% endblock %}
+{% block title %}
+    Hospitals - {{ parent() }}
+{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -15,13 +17,30 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Hospitals</h1>
+    <h1>
+        Hospitals
+    </h1>
 
     <div class="d-flex justify-content-end mb-2">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
             {% if user_is_owner %}
-                <a class="btn btn-outline-primary" href="{{ path("hospital_show", {'id': user_hospital.id}) }}" role="button">View your hospital</a>
-                <a class="btn btn-outline-primary" href="{{ path("hospital_edit") }}" role="button">Edit your hospital</a>
+                <a class="btn btn-outline-primary"
+                    href="{{
+                    path(
+                        'hospital_show',
+                        {
+                            id: user_hospital.id
+                        }
+                    )
+                    }}"
+                    role="button">
+                    View your hospital
+                </a>
+                <a class="btn btn-outline-primary"
+                    href="{{ path('hospital_edit') }}"
+                    role="button">
+                    Edit your hospital
+                </a>
             {% endif %}
         </div>
     </div>

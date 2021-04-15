@@ -1,94 +1,94 @@
 App\Entity\User:
-  user_1:
-    username: foo
-    email: foo@bar.com
-    password: <hashPassword('bar')>
-    isVerified: true
-    isCredentialsExpired: false
-  user_{2..5}:
-    username: <username()>
-    email: <email()>
-    password: <hashPassword('ivena')>
-    isVerified: true
-    isCredentialsExpired: false
-  user_6:
-    username: admin
-    email: admin@admin.com
-    password: <hashPassword('admin')>
-    roles: [ 'ROLE_ADMIN' ]
-    isVerified: true
-    isCredentialsExpired: false
+    user_1:
+        username: foo
+        email: foo@bar.com
+        password: <hashPassword('bar')>
+        isVerified: true
+        isCredentialsExpired: false
+    user_{2..5}:
+        username: <username()>
+        email: <email()>
+        password: <hashPassword('ivena')>
+        isVerified: true
+        isCredentialsExpired: false
+    user_6:
+        username: admin
+        email: admin@admin.com
+        password: <hashPassword('admin')>
+        roles: ["ROLE_ADMIN"]
+        isVerified: true
+        isCredentialsExpired: false
 
 App\Entity\Hospital:
-  hospital_{1..5}:
-    name: <company()>
-    address: <address()>
-    supplyArea: Test Area
-    dispatchArea: Test Area
-    location: <randomElement(['urban', 'rural'])>
-    owner: '@user_<current()>'
-    size: <randomElement(['small', 'medium', 'large'])>
-    beds: <numberBetween(1,800)>
-    createdAt: <dateTimeThisYear()>
-    updatedAt: <dateTimeThisYear()>
+    hospital_{1..5}:
+        name: <company()>
+        address: <address()>
+        supplyArea: Test Area
+        dispatchArea: Test Area
+        location: <randomElement(['urban', 'rural'])>
+        owner: "@user_<current()>"
+        size: <randomElement(['small', 'medium', 'large'])>
+        beds: <numberBetween(1,800)>
+        createdAt: <dateTimeThisYear()>
+        updatedAt: <dateTimeThisYear()>
 
 App\Entity\Allocation:
-  allocation_{1..100}:
-    dispatchArea: Test Area
-    supplyArea: Test Area
-    createdAt: <dateTimeThisYear()>
-    creationDate: <date('D.M.Y')>
-    creationTime: <time()>
-    creationDay: <numberBetween(1,31)>
-    creationWeekday: <randomElement(['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag])>
-    creationYear: <numberBetween(2019,2021)>
-    creationMonth: <numberBetween(1,12)>
-    creationHour: <numberBetween(0,23)>
-    creationMinute: <numberBetween(0,59)>
-    arrivalAt: <dateTimeThisYear()>
-    arrivalDate: <date('D.M.Y')>
-    arrivalTime: <time()>
-    arrivalDay: <numberBetween(1,31)>
-    arrivalWeekday: <randomElement(['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag])>
-    arrivalYear: <numberBetween(2019,2021)>
-    arrivalMonth: <numberBetween(1,12)>
-    arrivalHour: <numberBetween(0,23)>
-    arrivalMinute: <numberBetween(0,59)>
-    requiresResus: <randomElement([true,false])>
-    requiresCathlab: <randomElement(['true','false'])>
-    occasion: <randomElement(['Häuslicher Einsatz','Verkehrsunfall','Sonstiger Einsatz','aus Arztpraxis','Öffentlicher Raum',''])>
-    gender: <randomElement(['M','W'])>
-    age: <numberBetween(1,110)>
-    isCPR: <randomElement([true,false])>
-    isVentilated: <randomElement([true,false])>
-    isShock: <randomElement([true,false])>
-    isInfectious: <randomElement(['Keine','MRSA','3MRGN','4MRGN/CRE','Sonstiges'])>
-    isPregnant: <randomElement([true,false])>
-    isWithPhysician: <randomElement([true,false])>
-    isWorkAccident: <randomElement([true,false])>
-    assignment: <randomElement(['RD','Arzt/Arzt','Patient'])>
-    modeOfTransport: Boden
-    speciality: <randomElement(['Innere Medizin','Chirurgie','Urologie'])>
-    specialityDetail: <randomElement(['Allgemein Innere Medizin','Gastroenterologie','Allgemein- und Viszeralchirurgie','Urologie'])>
-    handoverPoint: ZNA
-    specialityWasClosed: false
-    PZC: 123456
-    PZCText: Noch kein Text
-    SecondaryPZC: 123456
-    SecondaryPZCText: Kein Text
-    hospital: '@hospital_<numberBetween(1,5)>'
-    import: '@import_<numberBetween(1,5)>'
+    allocation_{1..100}:
+        dispatchArea: Test Area
+        supplyArea: Test Area
+        createdAt: <dateTimeThisYear()>
+        creationDate: <date('D.M.Y')>
+        creationTime: <time()>
+        creationDay: <numberBetween(1,31)>
+        creationWeekday: <randomElement(['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag])>
+        creationYear: <numberBetween(2019,2021)>
+        creationMonth: <numberBetween(1,12)>
+        creationHour: <numberBetween(0,23)>
+        creationMinute: <numberBetween(0,59)>
+        arrivalAt: <dateTimeThisYear()>
+        arrivalDate: <date('D.M.Y')>
+        arrivalTime: <time()>
+        arrivalDay: <numberBetween(1,31)>
+        arrivalWeekday: <randomElement(['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag])>
+        arrivalYear: <numberBetween(2019,2021)>
+        arrivalMonth: <numberBetween(1,12)>
+        arrivalHour: <numberBetween(0,23)>
+        arrivalMinute: <numberBetween(0,59)>
+        requiresResus: <randomElement([true,false])>
+        requiresCathlab: <randomElement(['true','false'])>
+        occasion: <randomElement(['Häuslicher Einsatz','Verkehrsunfall','Sonstiger Einsatz','aus Arztpraxis','Öffentlicher Raum',''])>
+        gender: <randomElement(['M','W'])>
+        age: <numberBetween(1,110)>
+        isCPR: <randomElement([true,false])>
+        isVentilated: <randomElement([true,false])>
+        isShock: <randomElement([true,false])>
+        isInfectious: <randomElement(['Keine','MRSA','3MRGN','4MRGN/CRE','Sonstiges'])>
+        isPregnant: <randomElement([true,false])>
+        isWithPhysician: <randomElement([true,false])>
+        isWorkAccident: <randomElement([true,false])>
+        assignment: <randomElement(['RD','Arzt/Arzt','Patient'])>
+        modeOfTransport: Boden
+        speciality: <randomElement(['Innere Medizin','Chirurgie','Urologie'])>
+        specialityDetail: <randomElement(['Allgemein Innere Medizin','Gastroenterologie','Allgemein- und Viszeralchirurgie','Urologie'])>
+        handoverPoint: ZNA
+        specialityWasClosed: false
+        PZC: 123456
+        PZCText: Noch kein Text
+        SecondaryPZC: 123456
+        SecondaryPZCText: Kein Text
+        hospital: "@hospital_<numberBetween(1,5)>"
+        import: "@import_<numberBetween(1,5)>"
 
 App\Entity\Import:
-  import_{1..5}:
-    name: RandomImportfile
-    extension: .csv
-    path: dummy
-    mimeType: CSV
-    size: 1234
-    createdAt: <dateTimeThisYear()>
-    user: '@user_<current()>'
-    isFixture: true
-    caption: RandomCaption
-    contents: allocation
-    status: finished
+    import_{1..5}:
+        name: RandomImportfile
+        extension: .csv
+        path: dummy
+        mimeType: CSV
+        size: 1234
+        createdAt: <dateTimeThisYear()>
+        user: "@user_<current()>"
+        isFixture: true
+        caption: RandomCaption
+        contents: allocation
+        status: finished

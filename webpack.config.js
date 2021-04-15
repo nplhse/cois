@@ -1,16 +1,16 @@
-var Encore = require('@symfony/webpack-encore');
+var Encore = require("@symfony/webpack-encore");
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
 if (!Encore.isRuntimeEnvironmentConfigured()) {
-    Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev');
+    Encore.configureRuntimeEnvironment(process.env.NODE_ENV || "dev");
 }
 
 Encore
     // directory where compiled assets will be stored
-    .setOutputPath('public/build/')
+    .setOutputPath("public/build/")
     // public path used by the web server to access the output path
-    .setPublicPath('/build')
+    .setPublicPath("/build")
     // only needed for CDN's or sub-directory deploy
     //.setManifestKeyPrefix('build/')
 
@@ -20,12 +20,12 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.scss) if your JavaScript imports CSS.
      */
-    .addEntry('app', './assets/js/app.js')
-    .addEntry('allocations', './assets/js/allocations.js')
-    .addEntry('hospitals', './assets/js/hospitals.js')
+    .addEntry("app", "./assets/js/app.js")
+    .addEntry("allocations", "./assets/js/allocations.js")
+    .addEntry("hospitals", "./assets/js/hospitals.js")
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
-    .enableStimulusBridge('./assets/controllers.json')
+    .enableStimulusBridge("./assets/controllers.json")
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -48,20 +48,20 @@ Encore
     .enableVersioning(Encore.isProduction())
 
     .configureBabel((config) => {
-        config.plugins.push('@babel/plugin-proposal-class-properties');
+        config.plugins.push("@babel/plugin-proposal-class-properties");
     })
 
     // enables @babel/preset-env polyfills
     .configureBabelPresetEnv((config) => {
-        config.useBuiltIns = 'usage';
+        config.useBuiltIns = "usage";
         config.corejs = 3;
     })
 
     .copyFiles({
-        from: './assets/images',
+        from: "./assets/images",
         to: Encore.isProduction()
-            ? 'images/[path][name].[hash:8].[ext]'
-            : 'images/[path][name].[ext]',
+            ? "images/[path][name].[hash:8].[ext]"
+            : "images/[path][name].[ext]",
     })
 
     // enables Vue
@@ -69,7 +69,6 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
-    .enablePostCssLoader()
-;
+    .enablePostCssLoader();
 
 module.exports = Encore.getWebpackConfig();

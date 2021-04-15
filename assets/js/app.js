@@ -6,8 +6,8 @@
  */
 
 // Start the Stimulus application
-import './bootstrap';
+import "./bootstrap";
 
 // Import bootstrap and stlyes
-import 'bootstrap';
-import '../styles/app.scss';
+import "bootstrap";
+import "../styles/app.scss";

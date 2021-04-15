@@ -1,56 +1,110 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Import Data - {{ parent() }}{% endblock %}
+{% block title %}
+    Import Data - {{ parent() }}
+{% endblock %}
 
 {% block body %}
-    <h1>Import Data</h1>
+    <h1>
+        Import Data
+    </h1>
 
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <h2>Your uploads</h2>
+                <h2>
+                    Your uploads
+                </h2>
 
                 <table class="table table-striped table-hover">
                     <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Caption</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Status</th>
-                        <th scope="col"></th>
-                    </tr>
+                        <tr>
+                            <th scope="col">
+                                ID
+                            </th>
+                            <th scope="col">
+                                Caption
+                            </th>
+                            <th scope="col">
+                                Date
+                            </th>
+                            <th scope="col">
+                                Status
+                            </th>
+                            <th scope="col"></th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {% for import in imports %}
-                        <tr>
-                            <td scope="col">#{{ import.id }}</td>
-                            <td scope="col">{{ import.createdAt|date("d.m.Y H:i") }}</td>
-                            <td scope="col">{{ import.caption }}</td>
-                            <td scope="col">
-                                {% if import.status == 'finished' %}
-                                    <i class="bi bi-check-circle-fill text-success"></i>
-                                {% elseif import.status == 'pending' %}
-                                    <div class="spinner-border text-secondary spinner-border-sm" role="status">
-                                        <span class="visually-hidden">Loading...</span>
-                                    </div>
-                                {% elseif import.status == 'processing' %}
-                                    <div class="spinner-border text-primary spinner-border-sm" role="status">
-                                        <span class="visually-hidden">Loading...</span>
-                                    </div>
-                                {% elseif import.status == 'failed' %}
-                                    <i class="bi bi-exclamation-circle-fill text-warning"></i>
-                                {% endif %}
-                            </td>
-                            <td scope="col">
-                                <a class="btn btn-primary" href="{{ path("import_show", { 'id': import.id }) }}" role="button">View</a>
-                                <a class="btn btn-danger" href="{{ path("import_delete", { 'id': import.id }) }}" role="button">Delete</a>
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td scope="col" colspan="3" class="text-muted">No uploads found.</td>
-                        </tr>
-                    {% endfor %}
+                        {% for import in imports %}
+                            <tr>
+                                <td scope="col">
+                                    #{{ import.id }}
+                                </td>
+                                <td scope="col">
+                                    {{ import.createdAt|date('d.m.Y H:i') }}
+                                </td>
+                                <td scope="col">
+                                    {{ import.caption }}
+                                </td>
+                                <td scope="col">
+                                    {% if import.status == 'finished' %}
+                                        <i class="bi bi-check-circle-fill text-success">
+
+                                        </i>
+                                    {% elseif import.status == 'pending' %}
+                                        <div class="spinner-border text-secondary spinner-border-sm"
+                                            role="status">
+                                            <span class="visually-hidden">
+                                                Loading...
+                                            </span>
+                                        </div>
+                                    {% elseif import.status == 'processing' %}
+                                        <div class="spinner-border text-primary spinner-border-sm"
+                                            role="status">
+                                            <span class="visually-hidden">
+                                                Loading...
+                                            </span>
+                                        </div>
+                                    {% elseif import.status == 'failed' %}
+                                        <i class="bi bi-exclamation-circle-fill text-warning">
+
+                                        </i>
+                                    {% endif %}
+                                </td>
+                                <td scope="col">
+                                    <a class="btn btn-primary"
+                                        href="{{
+                                        path(
+                                            'import_show',
+                                            {
+                                                id: import.id
+                                            }
+                                        )
+                                        }}"
+                                        role="button">
+                                        View
+                                    </a>
+                                    <a class="btn btn-danger"
+                                        href="{{
+                                        path(
+                                            'import_delete',
+                                            {
+                                                id: import.id
+                                            }
+                                        )
+                                        }}"
+                                        role="button">
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td scope="col" colspan="3" class="text-muted">
+                                    No uploads found.
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

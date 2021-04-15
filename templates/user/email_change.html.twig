@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Change your E-Mail - {{ parent() }}{% endblock %}
+{% block title %}
+    Change your E-Mail - {{ parent() }}
+{% endblock %}
 
 {% block body %}
-    <h1>My Account</h1>
+    <h1>
+        My Account
+    </h1>
 
     {% for label, messages in app.flashes %}
         {% for message in messages %}
@@ -18,29 +22,54 @@
             <a class="nav-link" href="{{ path('account') }}">Overview</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ path('account_profile') }}">Account</a>
+            <a class="nav-link active"
+                aria-current="page"
+                href="{{ path('account_profile') }}">
+                Account
+            </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('account_security') }}">Security</a>
+            <a class="nav-link" href="{{ path('account_security') }}">
+                Security
+            </a>
         </li>
     </ul>
 
     <div class="row">
         <div class="col-md-3">
             <div class="list-group">
-                <a href="{{ path('account_profile') }}" class="list-group-item list-group-item-action">Profile</a>
-                <a href="{{ path('account_email') }}" class="list-group-item list-group-item-action active" aria-current="true">
+                <a href="{{ path('account_profile') }}"
+                    class="list-group-item list-group-item-action">
+                    Profile
+                </a>
+                <a href="{{ path('account_email') }}"
+                    class="list-group-item list-group-item-action active"
+                    aria-current="true">
                     E-Mail
                 </a>
             </div>
         </div>
         <div class="col-md-9 order-first order-md-last my-auto">
-            <h2>Change your E-Mail address</h2>
+            <h2>
+                Change your E-Mail address
+            </h2>
             <hr />
 
-            <p>Your current E-Mail address is: <mark>{{ user.email }}</mark><br/>
-                Your E-Mail address is currently {% if user.isVerified %}<mark>verified</mark>.
-                {% else %}<mark>not verified</mark>. Click <a href="{{ path('account_email_verify') }}">this link</a> to re-send verification E-Mail.{% endif %}
+            <p>
+                Your current E-Mail address is: <mark>
+                    {{ user.email }}
+                </mark><br />
+                Your E-Mail address is currently{% if user.isVerified %}
+                    <mark>verified</mark>.
+                {% else %}
+                    <mark>not verified</mark>. Click <a href="{{
+                        path(
+                            'account_email_verify'
+                        )
+                        }}">
+                        this link
+                    </a> to re-send verification E-Mail.
+                {% endif %}
             </p>
 
             {{ form_start(form_email) }}

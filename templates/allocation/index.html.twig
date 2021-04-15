@@ -1,6 +1,8 @@
 {% extends 'base-wide.html.twig' %}
 
-{% block title %}Allocations - {{ parent() }}{% endblock %}
+{% block title %}
+    Allocations - {{ parent() }}
+{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -15,20 +17,22 @@
 
     <script>
         {% if hospitals is defined %}
-        window.hospitals = {{ hospitals|raw }};
+            window.hospitals = {{ hospitals|raw }};
         {% else %}
-        window.hospitals = null;
+            window.hospitals = null;
         {% endif %}
         {% if hospital_links is defined %}
-        window.hospitalLinks = {{ hospital_links|raw }};
+            window.hospitalLinks = {{ hospital_links|raw }};
         {% else %}
-        window.hospitalLinks = null;
+            window.hospitalLinks = null;
         {% endif %}
     </script>
 {% endblock %}
 
 {% block body %}
-    <h1>Allocations</h1>
+    <h1>
+        Allocations
+    </h1>
 
     <div id="app"></div>
 {% endblock %}

@@ -1,22 +1,13 @@
 <template>
     <div>
-        <b-button
-            v-b-toggle.collapse-1
-            variant="primary"
-        >
+        <b-button v-b-toggle.collapse-1 variant="primary">
             Toogle filters
         </b-button>
 
-        <b-collapse
-            id="collapse-1"
-            class="mt-2"
-        >
+        <b-collapse id="collapse-1" class="mt-2">
             <b-card>
                 <b-row>
-                    <b-col
-                        lg="6"
-                        class="my-1"
-                    >
+                    <b-col lg="6" class="my-1">
                         <b-form-group
                             label="Filter"
                             label-for="filter-input"
@@ -45,10 +36,7 @@
                         </b-form-group>
                     </b-col>
 
-                    <b-col
-                        lg="6"
-                        class="my-1"
-                    >
+                    <b-col lg="6" class="my-1">
                         <b-form-group
                             v-slot="{ ariaDescribedby }"
                             v-model="filterOn"
@@ -113,7 +101,9 @@
             </template>
 
             <template #cell(name)="data">
-                <b><a :href="data.item.id">{{ data.value }}</a></b>
+                <b
+                    ><a :href="data.item.id">{{ data.value }}</a></b
+                >
             </template>
 
             <template #cell(size)="data">
@@ -122,34 +112,35 @@
         </b-table>
 
         <div>
-            Showing <b>{{ totalItems }}</b> hospitals.
-            Sorting By: <b>{{ sortBy }}</b>, Sort Direction:
-            <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>
+            Showing <b>{{ totalItems }}</b> hospitals. Sorting By:
+            <b>{{ sortBy }}</b
+            >, Sort Direction:
+            <b>{{ sortDesc ? "Descending" : "Ascending" }}</b>
         </div>
     </div>
 </template>
 
 <script>
-import { fetchAllHospitals } from '../service/hospital-service';
+import { fetchAllHospitals } from "../service/hospital-service";
 
 export default {
-    name: 'HospitalList',
+    name: "HospitalList",
     data() {
         return {
-            btableMaxHeight: '500px',
+            btableMaxHeight: "500px",
             totalItems: 0,
-            sortBy: 'supplyArea',
+            sortBy: "supplyArea",
             sortDesc: false,
             loading: true,
             filter: null,
             filterOn: [],
             fields: [
-                { key: 'id', label: 'ID', sortable: true },
-                { key: 'dispatchArea', label: 'Dispatch Area', sortable: true },
-                { key: 'supplyArea', label: 'Supply Area', sortable: true },
-                { key: 'name', label: 'Name', sortable: true },
-                { key: 'size', label: 'Size', sortable: true },
-                { key: 'location', label: 'Location', sortable: true },
+                { key: "id", label: "ID", sortable: true },
+                { key: "dispatchArea", label: "Dispatch Area", sortable: true },
+                { key: "supplyArea", label: "Supply Area", sortable: true },
+                { key: "name", label: "Name", sortable: true },
+                { key: "size", label: "Size", sortable: true },
+                { key: "location", label: "Location", sortable: true },
             ],
             items: [],
         };
@@ -167,14 +158,16 @@ export default {
         // to update b-table max-height to have a freeze header (sticky-header makes fixed max-height only regardless the screen height)
         // placed a new issue in Git, see if we get any response.
         self.$nextTick(() => {
-            window.addEventListener('resize', () => {
+            window.addEventListener("resize", () => {
                 // debugger
-                self.btableMaxHeight = `${(window.innerHeight - 150).toString()}px`; // where offset is some kind of constant margin you need from the top
+                self.btableMaxHeight = `${(
+                    window.innerHeight - 150
+                ).toString()}px`; // where offset is some kind of constant margin you need from the top
             });
         });
     },
     beforeDestroy() {
-        window.removeEventListener('resize', () => {});
+        window.removeEventListener("resize", () => {});
     },
     methods: {
         async loadHospitals() {
@@ -191,8 +184,8 @@ export default {
                 return;
             }
 
-            this.items = response.data['hydra:member'];
-            this.totalItems = response.data['hydra:totalItems'];
+            this.items = response.data["hydra:member"];
+            this.totalItems = response.data["hydra:totalItems"];
         },
         onFiltered(filteredItems) {
             // Trigger pagination to update the number of buttons/pages due to filtering
@@ -202,6 +195,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

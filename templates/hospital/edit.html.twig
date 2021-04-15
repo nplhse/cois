@@ -1,20 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Hospital - {{ parent() }}{% endblock %}
+{% block title %}
+    Edit Hospital - {{ parent() }}
+{% endblock %}
 
 {% block body %}
-    <h1>Edit your Hospital</h1>
+    <h1>
+        Edit your Hospital
+    </h1>
 
     <div class="d-flex justify-content-end mb-2">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
-            <a class="btn btn-outline-primary" href="{{ path("hospital_show", {'id': user_hospital.id}) }}" role="button">View your hospital</a>
-            <a class="btn btn-outline-primary" href="{{ path("hospital_index") }}" role="button">Back to list</a>
+            <a class="btn btn-outline-primary"
+                href="{{
+                path(
+                    'hospital_show',
+                    {
+                        id: user_hospital.id
+                    }
+                )
+                }}"
+                role="button">
+                View your hospital
+            </a>
+            <a class="btn btn-outline-primary"
+                href="{{ path('hospital_index') }}"
+                role="button">
+                Back to list
+            </a>
         </div>
     </div>
 
     {{ form_start(form) }}
 
-    <h2>Basics</h2>
+    <h2>
+        Basics
+    </h2>
     <div class="card mb-3">
         <div class="card-body">
             {{ form_row(form.name) }}
@@ -29,7 +50,9 @@
         </div>
     </div>
 
-    <h2>Size</h2>
+    <h2>
+        Size
+    </h2>
     <div class="card mb-3">
         <div class="card-body">
             {{ form_row(form.size) }}
@@ -38,7 +61,9 @@
         </div>
     </div>
 
-    <h2>Danger zone</h2>
+    <h2>
+        Danger zone
+    </h2>
     <div class="card border-danger mb-3">
         <div class="card-body text-danger">
             {{ form_row(form.owner) }}
@@ -49,8 +74,23 @@
 
     <div class="d-flex justify-content-end mb-2">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
-            <a class="btn btn-outline-primary" href="{{ path("hospital_show", {'id': user_hospital.id}) }}" role="button">View your hospital</a>
-            <a class="btn btn-outline-primary" href="{{ path("hospital_index") }}" role="button">Back to list</a>
+            <a class="btn btn-outline-primary"
+                href="{{
+                path(
+                    'hospital_show',
+                    {
+                        id: user_hospital.id
+                    }
+                )
+                }}"
+                role="button">
+                View your hospital
+            </a>
+            <a class="btn btn-outline-primary"
+                href="{{ path('hospital_index') }}"
+                role="button">
+                Back to list
+            </a>
         </div>
     </div>
 {% endblock %}

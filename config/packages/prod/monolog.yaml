@@ -8,7 +8,7 @@ monolog:
             handler: grouped
         grouped:
             type: group
-            members: [ nested, deduplicated ]
+            members: [nested, deduplicated]
         nested:
             type: stream
             path: php://stderr
@@ -22,9 +22,9 @@ monolog:
             handler: symfony_mailer
         symfony_mailer:
             type: symfony_mailer
-            from_email: 'noreply@example.com'
-            to_email: 'christoph.steltner@gmail.com'
-            subject: 'COIS - An Error Occurred! %%message%%'
+            from_email: "noreply@example.com"
+            to_email: "christoph.steltner@gmail.com"
+            subject: "COIS - An Error Occurred! %%message%%"
             level: debug
             formatter: monolog.formatter.html
             content_type: text/html
