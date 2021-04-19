@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Statistics - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <h1>
+            Welcome to Collaborative IVENA statistics
+        </h1>
+
+        <div class="col-md">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        Gender
+                    </h2>
+                    <p class="card-text">
+                        Browse trough all the data, filter it and explore what
+                        IVENA got for us.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="card text-dark bg-light mb-2">
+                <div class="card-body">
+                    <p>
+                        Test
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -55,6 +55,23 @@
                         <li class="nav-item">
                             {% if
                                 app.request.attributes.get('_route')
+                                    starts with 'statistics' %}
+                                <a class="nav-link active"
+                                    aria-current="page"
+                                    href="{{ path('statistics_index') }}">
+                                    Statistics
+                                </a>
+                            {% else %}
+                                <a class="nav-link"
+                                    aria-current="page"
+                                    href="{{ path('statistics_index') }}">
+                                    Statistics
+                                </a>
+                            {% endif %}
+                        </li>
+                        <li class="nav-item">
+                            {% if
+                                app.request.attributes.get('_route')
                                     starts with 'import' %}
                                 <a class="nav-link active"
                                     aria-current="page"
