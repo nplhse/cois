@@ -27,7 +27,7 @@ class AllocationRepository extends ServiceEntityRepository
             $qb = $this->createQueryBuilder('a')
                 ->select('COUNT(a.id)')
                 ->andWhere('a.hospital = :hospital')
-                ->setparameter('hospital', $hospital->getId())
+                ->setParameter('hospital', $hospital->getId())
                 ->getQuery()
                 ->getSingleScalarResult();
         } else {
@@ -38,6 +38,56 @@ class AllocationRepository extends ServiceEntityRepository
         }
 
         return $qb;
+    }
+
+    public function countAllocationsByAge(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('COUNT(DISTINCT a.id)')
+            ->groupBy('a.age')
+            ->orderBy('a.age', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
+    public function countAllocationsByGender(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('COUNT(DISTINCT a.gender) AS counter')
+            ->groupBy('a.gender')
+            ->addOrderBy('counter', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
+    public function countAllocationsByParams(array $param): string
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('COUNT(a.id)');
+
+        if (isset($param['gender'])) {
+            if ('male' === $param['gender']) {
+                $gender = 'M';
+            } elseif ('female' === $param['gender']) {
+                $gender = 'W';
+            } else {
+                $gender = 'D';
+            }
+
+            $qb->andWhere('a.gender = :gender')
+                ->setParameter('gender', $gender);
+        }
+
+        if (isset($param['age'])) {
+            $qb->andWhere('a.age = :age')
+                ->setParameter('age', $param['age']);
+        }
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function deleteByImport(Import $import = null): mixed

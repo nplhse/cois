@@ -5,29 +5,48 @@
 {% endblock %}
 
 {% block body %}
-    <div class="row">
-        <h1>
-            Welcome to Collaborative IVENA statistics
-        </h1>
+    <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Demographics</a>
+        </li>
+    </ul>
 
-        <div class="col-md">
+    <div class="row">
+        <div class="col-8">
             <div class="card mb-3">
                 <div class="card-body">
-                    <h2 class="card-title">
-                        Gender
-                    </h2>
-                    <p class="card-text">
-                        Browse trough all the data, filter it and explore what
-                        IVENA got for us.
-                    </p>
+
                 </div>
             </div>
         </div>
-        <div class="col-md">
+        <div class="col-4">
             <div class="card text-dark bg-light mb-2">
                 <div class="card-body">
                     <p>
-                        Test
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th colspan="3">Gender</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Male</td>
+                                <td>{{ gender.male }}</td>
+                                <td>{{ gender.male_percent }}%</td>
+                            </tr>
+                            <tr>
+                                <td>Female</td>
+                                <td>{{ gender.female }}</td>
+                                <td>{{ gender.female_percent }}%</td>
+                            </tr>
+                            <tr>
+                                <td>Other</td>
+                                <td>{{ gender.other }}</td>
+                                <td>{{ gender.other_percent }}%</td>
+                            </tr>
+                        </tbody>
+                    </table>
                     </p>
                 </div>
             </div>

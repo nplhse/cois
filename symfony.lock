@@ -212,6 +212,9 @@
     "league/mime-type-detection": {
         "version": "1.7.0"
     },
+    "markrogoyski/math-php": {
+        "version": "v1.10.0"
+    },
     "monolog/monolog": {
         "version": "2.2.0"
     },
@@ -693,6 +696,9 @@
     },
     "symfony/uid": {
         "version": "v5.2.3"
+    },
+    "symfony/ux-chartjs": {
+        "version": "v1.2.0"
     },
     "symfony/ux-dropzone": {
         "version": "v1.2.0"
