@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\DataTransferObjects\AgeStatistics;
 use App\DataTransferObjects\GenderStatistics;
 use App\Repository\AllocationRepository;
 
@@ -42,5 +43,37 @@ class StatisticsService
         }
 
         return $genderStatistics;
+    }
+
+    public function generateAgeStats(): AgeStatistics
+    {
+        $ageStatistics = new AgeStatistics();
+
+        $stats = $this->allocationRepository->countAllocationsByAge();
+
+        $i = 0;
+        $length = count($stats) - 1;
+
+        foreach ($stats as $item) {
+            $ageStatistics->setAge($item['age'], $item['counter']);
+
+            if ($i === $length) {
+                $ageStatistics->setMaxAge($item['age']);
+            }
+
+            ++$i;
+        }
+
+        $i = 0;
+        $ages = [];
+
+        while ($i <= $ageStatistics->getMaxAge()) {
+            $ages[$i] = $ageStatistics->getAge($i);
+            ++$i;
+        }
+
+        $ageStatistics->setAges($ages);
+
+        return $ageStatistics;
     }
 }

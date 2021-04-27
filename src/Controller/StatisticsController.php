@@ -3,12 +3,16 @@
 namespace App\Controller;
 
 use App\Service\StatisticsService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
 
+/**
+ * @IsGranted("ROLE_USER")
+ */
 class StatisticsController extends AbstractController
 {
     private StatisticsService $statistics;
@@ -37,7 +41,27 @@ class StatisticsController extends AbstractController
             ],
         ]);
 
+        $age_stats = $this->statistics->generateAgeStats();
+
+        $age_chart = $chartBuilder->createChart(Chart::TYPE_LINE);
+        $age_chart->setData([
+            'datasets' => [
+                [
+                    'data' => $age_stats->getAges(),
+                ],
+            ],
+        ]);
+        $age_chart->setOptions([
+            'scales' => [
+                'x' => [
+                    ['ticks' => ['min' => 0, 'max' => $age_stats->getMaxAge()]],
+                ],
+            ],
+        ]);
+
         return $this->render('statistics/index.html.twig', [
+            'age' => $age_stats,
+            'age_chart' => $age_chart,
             'gender' => $gender_stats,
             'gender_chart' => $gender_chart,
         ]);

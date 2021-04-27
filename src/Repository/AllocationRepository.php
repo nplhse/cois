@@ -43,9 +43,9 @@ class AllocationRepository extends ServiceEntityRepository
     public function countAllocationsByAge(): array
     {
         $qb = $this->createQueryBuilder('a')
-            ->select('COUNT(DISTINCT a.id)')
+            ->select('a.age, COUNT(a.age) AS counter')
             ->groupBy('a.age')
-            ->orderBy('a.age', 'DESC')
+            ->orderBy('a.age', 'ASC')
             ->getQuery()
             ->getResult();
 
@@ -57,37 +57,11 @@ class AllocationRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('a')
             ->select('a.gender, COUNT(a.gender) AS counter')
             ->groupBy('a.gender')
-            ->addOrderBy('counter', 'DESC')
+            ->addOrderBy('a.gender', 'DESC')
             ->getQuery()
             ->getResult();
 
         return $qb;
-    }
-
-    public function countAllocationsByParams(array $param): string
-    {
-        $qb = $this->createQueryBuilder('a')
-            ->select('COUNT(a.id)');
-
-        if (isset($param['gender'])) {
-            if ('male' === $param['gender']) {
-                $gender = 'M';
-            } elseif ('female' === $param['gender']) {
-                $gender = 'W';
-            } else {
-                $gender = 'D';
-            }
-
-            $qb->andWhere('a.gender = :gender')
-                ->setParameter('gender', $gender);
-        }
-
-        if (isset($param['age'])) {
-            $qb->andWhere('a.age = :age')
-                ->setParameter('age', $param['age']);
-        }
-
-        return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function deleteByImport(Import $import = null): mixed
