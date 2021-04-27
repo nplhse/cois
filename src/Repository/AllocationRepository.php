@@ -55,7 +55,7 @@ class AllocationRepository extends ServiceEntityRepository
     public function countAllocationsByGender(): array
     {
         $qb = $this->createQueryBuilder('a')
-            ->select('COUNT(DISTINCT a.gender) AS counter')
+            ->select('a.gender, COUNT(a.gender) AS counter')
             ->groupBy('a.gender')
             ->addOrderBy('counter', 'DESC')
             ->getQuery()

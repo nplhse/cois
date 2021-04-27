@@ -21,13 +21,25 @@ class StatisticsController extends AbstractController
     #[Route('/statistics', name: 'statistics_index')]
     public function index(ChartBuilderInterface $chartBuilder): Response
     {
-        $gender = $this->statistics->generateGenderStats();
-
-        dump($gender);
+        $gender_stats = $this->statistics->generateGenderStats();
+        $gender_chart = $chartBuilder->createChart(Chart::TYPE_PIE);
+        $gender_chart->setData([
+            'labels' => ['Male', 'Female', 'Other'],
+            'datasets' => [
+                [
+                    'data' => [$gender_stats->getMaleCount(), $gender_stats->getFemaleCount(), $gender_stats->getOtherCount()],
+                    'backgroundColor' => [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                    ],
+                ],
+            ],
+        ]);
 
         return $this->render('statistics/index.html.twig', [
-            'gender' => $gender,
-            'age' => $this->statistics->generateAgeStats(),
+            'gender' => $gender_stats,
+            'gender_chart' => $gender_chart,
         ]);
     }
 }

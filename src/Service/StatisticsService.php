@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\DataTransferObjects\GenderStatistics;
 use App\Repository\AllocationRepository;
 
 class StatisticsService
@@ -14,16 +15,32 @@ class StatisticsService
     {
         $this->allocationRepository = $allocationRepository;
 
-        $this->total = $this->allocationRepository->countAllocations();
+        $this->total = (int) $this->allocationRepository->countAllocations();
     }
 
-    public function generateAgeStats(): array
+    public function generateGenderStats(): GenderStatistics
     {
-        return $this->allocationRepository->countAllocationsByAge();
-    }
+        $genderStatistics = new GenderStatistics();
 
-    public function generateGenderStats(): array
-    {
-        return $this->allocationRepository->countAllocationsByGender();
+        $stats = $this->allocationRepository->countAllocationsByGender();
+
+        foreach ($stats as $item) {
+            if ('M' === $item['gender']) {
+                $genderStatistics->setMaleCount($item['counter']);
+                $genderStatistics->setMalePercent(($item['counter'] / 100) * $this->total);
+            }
+
+            if ('W' === $item['gender']) {
+                $genderStatistics->setFemaleCount($item['counter']);
+                $genderStatistics->setFemalePercent(($item['counter'] / 100) * $this->total);
+            }
+
+            if ('D' === $item['gender']) {
+                $genderStatistics->setOtherCount($item['counter']);
+                $genderStatistics->setOtherPercent(($item['counter'] / 100) * $this->total);
+            }
+        }
+
+        return $genderStatistics;
     }
 }
