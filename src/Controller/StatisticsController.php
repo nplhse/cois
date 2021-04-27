@@ -53,8 +53,11 @@ class StatisticsController extends AbstractController
         ]);
         $age_chart->setOptions([
             'scales' => [
-                'x' => [
+                'xAxis' => [
                     ['ticks' => ['min' => 0, 'max' => $age_stats->getMaxAge()]],
+                ],
+                'yAxis' => [
+                    ['ticks' => ['beginAtZero' => true]],
                 ],
             ],
         ]);

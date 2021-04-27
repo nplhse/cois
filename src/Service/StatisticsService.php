@@ -28,17 +28,17 @@ class StatisticsService
         foreach ($stats as $item) {
             if ('M' === $item['gender']) {
                 $genderStatistics->setMaleCount($item['counter']);
-                $genderStatistics->setMalePercent(($item['counter'] / 100) * $this->total);
+                $genderStatistics->setMalePercent(($item['counter'] / $this->total) * 100);
             }
 
             if ('W' === $item['gender']) {
                 $genderStatistics->setFemaleCount($item['counter']);
-                $genderStatistics->setFemalePercent(($item['counter'] / 100) * $this->total);
+                $genderStatistics->setFemalePercent(($item['counter'] / $this->total) * 100);
             }
 
             if ('D' === $item['gender']) {
                 $genderStatistics->setOtherCount($item['counter']);
-                $genderStatistics->setOtherPercent(($item['counter'] / 100) * $this->total);
+                $genderStatistics->setOtherPercent(($item['counter'] / $this->total) * 100);
             }
         }
 
