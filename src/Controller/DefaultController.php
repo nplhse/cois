@@ -24,7 +24,7 @@ class DefaultController extends AbstractController
         $user = $this->getUser();
         $hospital = $hospitalRepository->findOneByUser($user);
 
-        return $this->render('default/index.html.twig', [
+        return $this->render('default/dashboard.html.twig', [
             'allocations' => $allocationRepository->countAllocations(),
             'hospitals' => $hospitalRepository->countHospitals(),
             'hospital_allocations' => $allocationRepository->countAllocations($hospital),

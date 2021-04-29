@@ -5,11 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1>
-        Hospital
-    </h1>
-
-    <div class="d-flex justify-content-end mb-2">
+    <div class="d-flex justify-content-end">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
             {% if user_is_owner %}
                 <a class="btn btn-outline-primary"
@@ -26,10 +22,9 @@
         </div>
     </div>
 
-    <h2>
+    <h1>
         {{ hospital.name }} <small>(<i>#{{ hospital.id }}</i>)</small>
-    </h2>
-    <hr />
+    </h1>
 
     <div class="row">
         <div class="col-md-8">

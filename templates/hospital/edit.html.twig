@@ -5,10 +5,6 @@
 {% endblock %}
 
 {% block body %}
-    <h1>
-        Edit your Hospital
-    </h1>
-
     <div class="d-flex justify-content-end mb-2">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
             <a class="btn btn-outline-primary"
@@ -31,42 +27,56 @@
         </div>
     </div>
 
+    <h1>
+        Edit your Hospital
+    </h1>
+
     {{ form_start(form) }}
 
-    <h2>
-        Basics
-    </h2>
-    <div class="card mb-3">
-        <div class="card-body">
-            {{ form_row(form.name) }}
+    <div class="row">
+        <div class="col-8">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Basics
+                </div>
+                <div class="card-body">
+                    {{ form_row(form.name) }}
 
-            {{ form_row(form.address) }}
+                    {{ form_row(form.address) }}
 
-            {{ form_row(form.dispatchArea) }}
+                    {{ form_row(form.dispatchArea) }}
 
-            {{ form_row(form.supplyArea) }}
+                    {{ form_row(form.supplyArea) }}
 
-            {{ form_row(form.location) }}
+                    {{ form_row(form.location) }}
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    Size
+                </div>
+                <div class="card-body">
+                    {{ form_row(form.size) }}
+
+                    {{ form_row(form.beds) }}
+                </div>
+            </div>
         </div>
-    </div>
+        <div class="col-4">
+            <div class="card border-danger mb-3">
+                <div class="card-header">
+                    Administration
+                </div>
+                <div class="card-body text-danger">
+                    <p>
+                        <strong>WARNING</strong> - Be very careful when changing
+                        something in this section.
+                    </p>
 
-    <h2>
-        Size
-    </h2>
-    <div class="card mb-3">
-        <div class="card-body">
-            {{ form_row(form.size) }}
-
-            {{ form_row(form.beds) }}
-        </div>
-    </div>
-
-    <h2>
-        Danger zone
-    </h2>
-    <div class="card border-danger mb-3">
-        <div class="card-body text-danger">
-            {{ form_row(form.owner) }}
+                    {{ form_row(form.owner) }}
+                </div>
+            </div>
         </div>
     </div>
 

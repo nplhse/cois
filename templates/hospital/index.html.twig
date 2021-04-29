@@ -1,4 +1,4 @@
-{% extends 'base-wide.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}
     Hospitals - {{ parent() }}
@@ -17,10 +17,6 @@
 {% endblock %}
 
 {% block body %}
-    <h1>
-        Hospitals
-    </h1>
-
     <div class="d-flex justify-content-end mb-2">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
             {% if user_is_owner %}

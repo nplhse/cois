@@ -117,6 +117,7 @@ class StatisticsController extends AbstractController
         ]);
 
         return $this->render('statistics/times.html.twig', [
+            'time_stats' => $time_stats,
             'time_of_day_chart' => $time_of_day_chart,
             'weekday_chart' => $weekday_chart,
         ]);

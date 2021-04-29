@@ -1,13 +1,25 @@
 <template>
     <div>
-        <b-button v-b-toggle.collapse-1 variant="primary">
-            Toogle filters
-        </b-button>
+        <div class="float-right">
+            <b-button-group>
+                <b-button v-b-toggle.sidebar-1 variant="primary"
+                    >Toggle Filters</b-button
+                >
+            </b-button-group>
+        </div>
 
-        <b-collapse id="collapse-1" class="mt-2">
-            <b-card>
-                <b-row>
-                    <b-col lg="6" class="my-1">
+        <b-sidebar id="sidebar-1" title="Filters" shadow>
+            <template #footer="{ hide }">
+                <div
+                    class="d-flex bg-dark text-light align-items-right px-3 py-2"
+                >
+                    <b-button size="sm" @click="hide">Close</b-button>
+                </div>
+            </template>
+
+            <div class="px-3 py-2">
+                <b-card title="by Searchterm" class="mb-2">
+                    <b-row>
                         <b-form-group
                             label="Filter"
                             label-for="filter-input"
@@ -34,9 +46,9 @@
                                 </b-input-group-append>
                             </b-input-group>
                         </b-form-group>
-                    </b-col>
+                    </b-row>
 
-                    <b-col lg="6" class="my-1">
+                    <b-row>
                         <b-form-group
                             v-slot="{ ariaDescribedby }"
                             v-model="filterOn"
@@ -68,10 +80,10 @@
                                 </b-form-checkbox>
                             </b-form-checkbox-group>
                         </b-form-group>
-                    </b-col>
-                </b-row>
-            </b-card>
-        </b-collapse>
+                    </b-row>
+                </b-card>
+            </div>
+        </b-sidebar>
 
         <b-table
             id="hospital-table"

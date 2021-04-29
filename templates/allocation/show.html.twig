@@ -17,11 +17,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1>
-        Allocation <small>(<i>#{{ allocation.id }}</i>)</small>
-    </h1>
-
-    <div class="d-flex justify-content-end mb-2">
+    <div class="d-flex justify-content-end">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
             <a class="btn btn-outline-primary"
                 href="{{ path('allocation_index') }}"
@@ -30,6 +26,10 @@
             </a>
         </div>
     </div>
+
+    <h1>
+        Allocation <small>(<i>#{{ allocation.id }}</i>)</small>
+    </h1>
 
     <div class="row">
         <div class="col-md-8">
@@ -42,7 +42,16 @@
                         Hospital
                     </h5>
                     <p>
-                        {{ allocation.hospital }}
+                        <a href="{{
+                            path(
+                                'hospital_show',
+                                {
+                                    id: allocation.hospital.id
+                                }
+                            )
+                            }}">
+                            {{ allocation.hospital }}
+                        </a>
                     </p>
 
                     <h5 class="card-title">
