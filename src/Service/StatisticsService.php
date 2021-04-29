@@ -10,6 +10,8 @@ class StatisticsService
 {
     private AllocationRepository $allocationRepository;
 
+    private const PRECISION = 2;
+
     private int $total;
 
     public function __construct(AllocationRepository $allocationRepository)
@@ -28,17 +30,17 @@ class StatisticsService
         foreach ($stats as $item) {
             if ('M' === $item['gender']) {
                 $genderStatistics->setMaleCount($item['counter']);
-                $genderStatistics->setMalePercent(($item['counter'] / $this->total) * 100);
+                $genderStatistics->setMalePercent($this->getValueInPercent($item['counter']));
             }
 
             if ('W' === $item['gender']) {
                 $genderStatistics->setFemaleCount($item['counter']);
-                $genderStatistics->setFemalePercent(($item['counter'] / $this->total) * 100);
+                $genderStatistics->setFemalePercent($this->getValueInPercent($item['counter']));
             }
 
             if ('D' === $item['gender']) {
                 $genderStatistics->setOtherCount($item['counter']);
-                $genderStatistics->setOtherPercent(($item['counter'] / $this->total) * 100);
+                $genderStatistics->setOtherPercent($this->getValueInPercent($item['counter']));
             }
         }
 
@@ -75,5 +77,26 @@ class StatisticsService
         $ageStatistics->setAges($ages);
 
         return $ageStatistics;
+    }
+
+    public function getScaleForXAxis(int $maxValue, int $n = 5): array
+    {
+        $scale = [];
+        $i = 0;
+
+        for ($i = 0; $i <= $maxValue; ++$i) {
+            if (0 === $i % $n) {
+                $scale[$i] = $i;
+            } else {
+                $scale[$i] = null;
+            }
+        }
+
+        return $scale;
+    }
+
+    private function getValueInPercent(int $value): float
+    {
+        return round(($value / $this->total) * 100, 2);
     }
 }

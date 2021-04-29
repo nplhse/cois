@@ -45,19 +45,11 @@ class StatisticsController extends AbstractController
 
         $age_chart = $chartBuilder->createChart(Chart::TYPE_LINE);
         $age_chart->setData([
+            'labels' => $this->statistics->getScaleForXAxis($age_stats->getMaxAge(), 1),
             'datasets' => [
                 [
+                    'label' => 'Total count by age',
                     'data' => $age_stats->getAges(),
-                ],
-            ],
-        ]);
-        $age_chart->setOptions([
-            'scales' => [
-                'xAxis' => [
-                    ['ticks' => ['min' => 0, 'max' => $age_stats->getMaxAge()]],
-                ],
-                'yAxis' => [
-                    ['ticks' => ['beginAtZero' => true]],
                 ],
             ],
         ]);

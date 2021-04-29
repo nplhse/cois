@@ -6,15 +6,15 @@ class GenderStatistics
 {
     private int $male_count = 0;
 
-    private int $male_percent = 0;
+    private float $male_percent = 0;
 
     private int $female_count = 0;
 
-    private int $female_percent = 0;
+    private float $female_percent = 0;
 
     private int $other_count = 0;
 
-    private int $other_percent = 0;
+    private float $other_percent = 0;
 
     public function getMaleCount(): int
     {
@@ -46,32 +46,32 @@ class GenderStatistics
         $this->other_count = $other_count;
     }
 
-    public function getMalePercent(): int
+    public function getMalePercent(): float
     {
         return $this->male_percent;
     }
 
-    public function setMalePercent(int $male_percent): void
+    public function setMalePercent(float $male_percent): void
     {
         $this->male_percent = $male_percent;
     }
 
-    public function getFemalePercent(): int
+    public function getFemalePercent(): float
     {
         return $this->female_percent;
     }
 
-    public function setFemalePercent(int $female_percent): void
+    public function setFemalePercent(float $female_percent): void
     {
         $this->female_percent = $female_percent;
     }
 
-    public function getOtherPercent(): int
+    public function getOtherPercent(): float
     {
         return $this->other_percent;
     }
 
-    public function setOtherPercent(int $other_percent): void
+    public function setOtherPercent(float $other_percent): void
     {
         $this->other_percent = $other_percent;
     }
