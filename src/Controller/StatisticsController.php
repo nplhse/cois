@@ -53,6 +53,15 @@ class StatisticsController extends AbstractController
                 ],
             ],
         ]);
+        $age_chart->setOptions([
+            'scales' => [
+                'yAxes' => [
+                    ['ticks' => [
+                        'beginAtZero' => true,
+                    ]],
+                ],
+            ],
+        ]);
 
         return $this->render('statistics/index.html.twig', [
             'age' => $age_stats,
@@ -77,6 +86,15 @@ class StatisticsController extends AbstractController
                 ],
             ],
         ]);
+        $time_of_day_chart->setOptions([
+            'scales' => [
+                'yAxes' => [
+                    ['ticks' => [
+                        'beginAtZero' => true,
+                    ]],
+                ],
+            ],
+        ]);
 
         $weekday_chart = $chartBuilder->createChart(Chart::TYPE_BAR);
         $weekday_chart->setData([
@@ -85,6 +103,15 @@ class StatisticsController extends AbstractController
                 [
                     'label' => 'Total count by weekdays',
                     'data' => $time_stats->getWeekdays(),
+                ],
+            ],
+        ]);
+        $weekday_chart->setOptions([
+            'scales' => [
+                'yAxes' => [
+                    ['ticks' => [
+                        'beginAtZero' => true,
+                    ]],
                 ],
             ],
         ]);
