@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\DataTransferObjects\AgeStatistics;
 use App\DataTransferObjects\GenderStatistics;
+use App\DataTransferObjects\TimeStatistics;
 use App\Repository\AllocationRepository;
 
 class StatisticsService
@@ -77,6 +78,48 @@ class StatisticsService
         $ageStatistics->setAges($ages);
 
         return $ageStatistics;
+    }
+
+    public function generateTimeStats(): TimeStatistics
+    {
+        $timeStatistics = new TimeStatistics();
+
+        $stats = $this->allocationRepository->countAllocationsByTime();
+
+        foreach ($stats as $item) {
+            $timeStatistics->setTimeOfDay($item['arrivalHour'], $item['counter']);
+        }
+
+        $i = 0;
+        $ages = [];
+
+        while ($i <= 23) {
+            $times[$i] = $timeStatistics->getTimeOfDay($i);
+            ++$i;
+        }
+
+        $timeStatistics->setTimesOfDay($times);
+
+        $stats = $this->allocationRepository->countAllocationsByWeekday();
+
+        $weekdays = [];
+
+        foreach ($stats as $item) {
+            $weekdays[$item['arrivalWeekday']] = $item['counter'];
+        }
+
+        $sorted_weekdays = [];
+        $sorted_weekdays[0] = $weekdays['Montag'];
+        $sorted_weekdays[1] = $weekdays['Dienstag'];
+        $sorted_weekdays[2] = $weekdays['Mittwoch'];
+        $sorted_weekdays[3] = $weekdays['Donnerstag'];
+        $sorted_weekdays[4] = $weekdays['Freitag'];
+        $sorted_weekdays[5] = $weekdays['Samstag'];
+        $sorted_weekdays[6] = $weekdays['Sonntag'];
+
+        $timeStatistics->setWeekdays($sorted_weekdays);
+
+        return $timeStatistics;
     }
 
     public function getScaleForXAxis(int $maxValue, int $n = 5): array

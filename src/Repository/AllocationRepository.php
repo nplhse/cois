@@ -64,6 +64,30 @@ class AllocationRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function countAllocationsByTime(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('a.arrivalHour, COUNT(a.arrivalHour) AS counter')
+            ->groupBy('a.arrivalHour')
+            ->addOrderBy('a.arrivalHour', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
+    public function countAllocationsByWeekday(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('a.arrivalWeekday, COUNT(a.arrivalWeekday) AS counter')
+            ->groupBy('a.arrivalWeekday')
+            ->addOrderBy('a.arrivalWeekday', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
     public function deleteByImport(Import $import = null): mixed
     {
         $qb = $this->createQueryBuilder('a')

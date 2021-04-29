@@ -61,4 +61,37 @@ class StatisticsController extends AbstractController
             'gender_chart' => $gender_chart,
         ]);
     }
+
+    #[Route('/statistics/times', name: 'statistics_times')]
+    public function times(ChartBuilderInterface $chartBuilder): Response
+    {
+        $time_stats = $this->statistics->generateTimeStats();
+
+        $time_of_day_chart = $chartBuilder->createChart(Chart::TYPE_LINE);
+        $time_of_day_chart->setData([
+            'labels' => $this->statistics->getScaleForXAxis(23, 1),
+            'datasets' => [
+                [
+                    'label' => 'Total count by hours of the day',
+                    'data' => $time_stats->getTimesOfDay(),
+                ],
+            ],
+        ]);
+
+        $weekday_chart = $chartBuilder->createChart(Chart::TYPE_BAR);
+        $weekday_chart->setData([
+            'labels' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            'datasets' => [
+                [
+                    'label' => 'Total count by weekdays',
+                    'data' => $time_stats->getWeekdays(),
+                ],
+            ],
+        ]);
+
+        return $this->render('statistics/times.html.twig', [
+            'time_of_day_chart' => $time_of_day_chart,
+            'weekday_chart' => $weekday_chart,
+        ]);
+    }
 }
