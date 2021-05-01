@@ -40,7 +40,7 @@ App\Entity\Allocation:
         creationDate: <date('D.M.Y')>
         creationTime: <time()>
         creationDay: <numberBetween(1,31)>
-        creationWeekday: <randomElement(['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag])>
+        creationWeekday: <randomElement(['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'])>
         creationYear: <numberBetween(2019,2021)>
         creationMonth: <numberBetween(1,12)>
         creationHour: <numberBetween(0,23)>
@@ -49,7 +49,7 @@ App\Entity\Allocation:
         arrivalDate: <date('D.M.Y')>
         arrivalTime: <time()>
         arrivalDay: <numberBetween(1,31)>
-        arrivalWeekday: <randomElement(['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag])>
+        arrivalWeekday: <randomElement(['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'])>
         arrivalYear: <numberBetween(2019,2021)>
         arrivalMonth: <numberBetween(1,12)>
         arrivalHour: <numberBetween(0,23)>

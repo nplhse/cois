@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Statistics - {{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {{ encore_entry_link_tags('statistics') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('statistics') }}
+{% endblock %}
+
+{% block body %}
+    <div id="app"></div>
+{% endblock %}
