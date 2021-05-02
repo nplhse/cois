@@ -40,16 +40,19 @@ class AllocationRepository extends ServiceEntityRepository
         return $qb;
     }
 
-    public function countAllocationsByAge(): array
+    public function countAllocationsByAge(array $param = null): array
     {
         $qb = $this->createQueryBuilder('a')
             ->select('a.age, COUNT(a.age) AS counter')
             ->groupBy('a.age')
-            ->orderBy('a.age', 'ASC')
-            ->getQuery()
-            ->getResult();
+            ->orderBy('a.age', 'ASC');
 
-        return $qb;
+        if (isset($param['gender'])) {
+            $qb->andWhere('a.gender = :gender')
+                ->setParameter(':gender', $param['gender']);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     public function countAllocationsByGender(): array

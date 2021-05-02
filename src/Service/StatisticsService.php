@@ -51,33 +51,51 @@ class StatisticsService
     public function generateAgeStats(): AgeStatistics
     {
         $ageStatistics = new AgeStatistics();
+        $ageStatistics->setAges($this->buildAgeStats($this->allocationRepository->countAllocationsByAge()));
 
-        $stats = $this->allocationRepository->countAllocationsByAge();
+        $params = [];
+        $params['gender'] = 'M';
+        $ageStatistics->setMaleAges($this->buildAgeStats($this->allocationRepository->countAllocationsByAge($params)));
 
+        $params['gender'] = 'W';
+        $ageStatistics->setFemaleAges($this->buildAgeStats($this->allocationRepository->countAllocationsByAge($params)));
+
+        $params['gender'] = 'D';
+        $ageStatistics->setOtherAges($this->buildAgeStats($this->allocationRepository->countAllocationsByAge($params)));
+
+        return $ageStatistics;
+    }
+
+    private function buildAgeStats(array $stats): array
+    {
         $i = 0;
+        $max = 0;
         $length = count($stats) - 1;
 
         foreach ($stats as $item) {
-            $ageStatistics->setAge($item['age'], $item['counter']);
+            $result[$item['age']] = $item['counter'];
 
             if ($i === $length) {
-                $ageStatistics->setMaxAge($item['age']);
+                $max = $item['age'];
             }
 
-            ++$i;
+            $i++;
         }
 
         $i = 0;
         $ages = [];
 
-        while ($i <= $ageStatistics->getMaxAge()) {
-            $ages[$i] = $ageStatistics->getAge($i);
-            ++$i;
+        while ($i <= $max) {
+            if (isset($result[$i])) {
+                $ages[$i] = $result[$i];
+            } else {
+                $ages[$i] = 0;
+            }
+
+            $i++;
         }
 
-        $ageStatistics->setAges($ages);
-
-        return $ageStatistics;
+        return $ages;
     }
 
     public function generateTimeStats(): TimeStatistics

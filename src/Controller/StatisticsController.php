@@ -50,6 +50,31 @@ class StatisticsController extends AbstractController
                 [
                     'label' => 'Total count by age',
                     'data' => $age_stats->getAges(),
+                    'stacked' => false,
+                ],
+                [
+                    'label' => 'Total male count by age',
+                    'data' => $age_stats->getMaleAges(),
+                    'borderColor' => 'rgba(54, 162, 235, 0.2)',
+                    'backgroundColor' => 'rgba(54, 162, 235, 0.2)',
+                    'stack' => 'one',
+                    'stacked' => true,
+                ],
+                [
+                    'label' => 'Total female count by age',
+                    'data' => $age_stats->getFemaleAges(),
+                    'borderColor' => 'rgba(255, 99, 132, 0.2)',
+                    'backgroundColor' => 'rgba(255, 99, 132, 0.2)',
+                    'stack' => 'one',
+                    'stacked' => true,
+                ],
+                [
+                    'label' => 'Total other count by age',
+                    'data' => $age_stats->getOtherAges(),
+                    'borderColor' => 'rgba(255, 206, 86, 0.2)',
+                    'backgroundColor' => 'rgba(255, 206, 86, 0.2)',
+                    'stack' => 'one',
+                    'stacked' => true,
                 ],
             ],
         ]);
@@ -89,6 +114,7 @@ class StatisticsController extends AbstractController
         $time_of_day_chart->setOptions([
             'scales' => [
                 'yAxes' => [
+                    ['stacked' => false],
                     ['ticks' => [
                         'beginAtZero' => true,
                     ]],
