@@ -2,9 +2,14 @@
     <div>
         <h1>Hello, world.</h1>
 
-        <PieChart :data="gender">
+        <b-row>
+          <b-col cols="8">
 
-        </PieChart>
+          </b-col>
+          <b-col cols="4">
+            <PieChart :data="this.columns" />
+          </b-col>
+        </b-row>
     </div>
 </template>
 
@@ -18,11 +23,11 @@ export default {
     },
     data() {
       return {
-        gender: [
-          { gender: "Male", value: 47 },
-          { gender: "Female", value: 53 },
-          { gender: "Other", value: 0 },
-        ]
+        data: [
+          {'gender': 'male', 'value': 47},
+          {'gender': 'female', 'value': 53},
+          {'gender': 'other', 'value': 0},
+        ],
       };
     },
 };
