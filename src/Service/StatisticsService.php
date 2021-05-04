@@ -184,6 +184,10 @@ class StatisticsService
             $result[$key] = $tmp;
         }
 
+        $counter = array_column($result, 'count');
+
+        array_multisort($counter, SORT_DESC, $counter);
+
         $allocationStatistics->setRMIs($result);
 
         $stats = $this->allocationRepository->countAllocationsBySpeciality();

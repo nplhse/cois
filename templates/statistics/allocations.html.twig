@@ -23,6 +23,15 @@
 
     <div class="row">
         <div class="col-8">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Specialities
+                </div>
+                <div class="card-body">
+                    {{ render_chart(speciality_chart) }}
+                </div>
+            </div>
+
             <div class="card">
                 <div class="card-header">
                     RMI
@@ -64,10 +73,9 @@
         <div class="col-4">
             <div class="card text-dark bg-light mb-2">
                 <div class="card-header">
-                    Specialities
+                    Features
                 </div>
                 <div class="card-body">
-                    {{ render_chart(speciality_chart) }}
                 </div>
             </div>
         </div>
