@@ -15,7 +15,8 @@
             <a class="nav-link" href="{{ path('statistics_times') }}">Times</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="{{ path('statistics_allocations') }}">
+            <a class="nav-link active"
+                href="{{ path('statistics_allocations') }}">
                 Allocations
             </a>
         </li>
@@ -35,31 +36,31 @@
                 <div class="card-body">
                     <table class="table hover">
                         <thead>
-                        <tr>
-                            <th>
-                                RMI ID
-                            </th>
-                            <th>
-                                PZC Text
-                            </th>
-                            <th>
-                                Count
-                            </th>
-                        </tr>
+                            <tr>
+                                <th>
+                                    RMI ID
+                                </th>
+                                <th>
+                                    PZC Text
+                                </th>
+                                <th>
+                                    Count
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>
                             {% for RMI in allocation_stats.RMIs %}
-                            <tr>
-                                <th>
-                                    {{ RMI.RMI }}
-                                </th>
-                                <th>
-                                    {{ RMI.PZCText }}
-                                </th>
-                                <th>
-                                    {{ RMI.count }}
-                                </th>
-                            </tr>
+                                <tr>
+                                    <th>
+                                        {{ RMI.RMI }}
+                                    </th>
+                                    <th>
+                                        {{ RMI.PZCText }}
+                                    </th>
+                                    <th>
+                                        {{ RMI.count }}
+                                    </th>
+                                </tr>
                             {% endfor %}
                         </tbody>
                     </table>

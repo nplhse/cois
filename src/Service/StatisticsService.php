@@ -80,7 +80,7 @@ class StatisticsService
                 $max = $item['age'];
             }
 
-            $i++;
+            ++$i;
         }
 
         $i = 0;
@@ -93,7 +93,7 @@ class StatisticsService
                 $ages[$i] = 0;
             }
 
-            $i++;
+            ++$i;
         }
 
         return $ages;
