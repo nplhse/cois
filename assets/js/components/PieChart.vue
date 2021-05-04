@@ -14,33 +14,22 @@ export default {
   props: {
     data: {
       required: true,
-      type: Object,
+      type: Array,
     },
-    width: {
-      default: 250,
-      type: Number,
-    },
-    height: {
-      default: 250,
-      type: Number,
-    }
   },
   data() {
     return {
       fields: ['gender', 'value'],
-      padding: 50,
     };
   },
   computed: {
-    viewBox() {
-      return `0 0 ${this.width} ${this.height}`;
-    },
     columns() {
       let columns = [];
 
-      columns =  Object.keys(this.data).map((key) => {
-        return columns[key]
-      })
+      this.data.forEach(function(item){
+        columns[item.gender] = item.value;
+        console.log(columns);
+      });
 
       return columns;
     }
@@ -50,8 +39,9 @@ export default {
       bindto: '#chart',
       data: {
         // iris data from R
-        columns: this.data,
-        type : 'pie',
+        url: '/vuestats/api/gender.json',
+        mimeType: 'json',
+        type: 'pie',
       }
     });
   }

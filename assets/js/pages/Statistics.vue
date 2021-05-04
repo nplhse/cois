@@ -7,7 +7,7 @@
 
           </b-col>
           <b-col cols="4">
-            <PieChart :data="this.columns" />
+            <PieChart :data="this.data" />
           </b-col>
         </b-row>
     </div>
