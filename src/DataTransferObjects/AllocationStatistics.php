@@ -12,6 +12,24 @@ class AllocationStatistics
 
     private $specialityDetails = [];
 
+    private $SK = [];
+
+    /**
+     * @return array
+     */
+    public function getSK(): array
+    {
+        return $this->SK;
+    }
+
+    /**
+     * @param array $SK
+     */
+    public function setSK(array $SK): void
+    {
+        $this->SK = $SK;
+    }
+
     public function setRMIs(array $RMIs): void
     {
         $this->RMIs = $RMIs;

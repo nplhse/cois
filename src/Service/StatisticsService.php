@@ -210,6 +210,16 @@ class StatisticsService
 
         $allocationStatistics->setSpecialityDetails($specialityDetails);
 
+        $stats = $this->allocationRepository->countAllocationsBySK();
+
+        $SK = [];
+
+        foreach ($stats as $item) {
+            $SK[$item['SK']] = $item['counter'];
+        }
+
+        $allocationStatistics->setSK($SK);
+
         return $allocationStatistics;
     }
 

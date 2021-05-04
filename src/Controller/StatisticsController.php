@@ -156,19 +156,19 @@ class StatisticsController extends AbstractController
             array_push($speciality_values, $value);
         }
 
-        $speciality_chart = $chartBuilder->createChart(Chart::TYPE_PIE);
-        $speciality_chart->setData([
-            'labels' => $speciality_labels,
+        $sk_chart = $chartBuilder->createChart(Chart::TYPE_PIE);
+        $sk_chart->setData([
+            'labels' => ['SK1', 'SK2', 'SK3'],
             'datasets' => [
                 [
-                    'data' => $speciality_values,
+                    'data' => $allocation_stats->getSK(),
                 ],
             ],
         ]);
 
         return $this->render('statistics/allocations.html.twig', [
             'allocation_stats' => $allocation_stats,
-            'speciality_chart' => $speciality_chart,
+            'sk_chart' => $sk_chart,
         ]);
     }
 
@@ -207,7 +207,7 @@ class StatisticsController extends AbstractController
             array_push($specialityDetail_values, $value);
         }
 
-        $specialityDetail_chart = $chartBuilder->createChart(Chart::TYPE_POLAR_AREA);
+        $specialityDetail_chart = $chartBuilder->createChart(Chart::TYPE_BAR);
         $specialityDetail_chart->setData([
             'labels' => $specialityDetail_labels,
             'datasets' => [

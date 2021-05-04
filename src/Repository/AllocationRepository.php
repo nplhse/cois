@@ -103,6 +103,18 @@ class AllocationRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function countAllocationsBySK(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('a.SK, COUNT(a.SK) AS counter')
+            ->groupBy('a.SK')
+            ->addOrderBy('counter', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
     public function getAllPCZTexts(): array
     {
         $qb = $this->createQueryBuilder('a')
