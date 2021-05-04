@@ -171,4 +171,59 @@ class StatisticsController extends AbstractController
             'speciality_chart' => $speciality_chart,
         ]);
     }
+
+    #[Route('/statistics/specialities', name: 'statistics_specialities')]
+    public function specialities(ChartBuilderInterface $chartBuilder): Response
+    {
+        $allocation_stats = $this->statistics->generateAllocationStats();
+
+        $speciality_labels = [];
+        $speciality_values = [];
+
+        $specialities = $allocation_stats->getSpecialities();
+
+        foreach ($specialities as $key => $value) {
+            array_push($speciality_labels, $key);
+            array_push($speciality_values, $value);
+        }
+
+        $speciality_chart = $chartBuilder->createChart(Chart::TYPE_PIE);
+        $speciality_chart->setData([
+            'labels' => $speciality_labels,
+            'datasets' => [
+                [
+                    'data' => $speciality_values,
+                ],
+            ],
+        ]);
+
+        $specialityDetail_labels = [];
+        $specialityDetail_values = [];
+
+        $specialityDetails = $allocation_stats->getSpecialityDetails();
+
+        foreach ($specialityDetails as $key => $value) {
+            array_push($specialityDetail_labels, $key);
+            array_push($specialityDetail_values, $value);
+        }
+
+        $specialityDetail_chart = $chartBuilder->createChart(Chart::TYPE_POLAR_AREA);
+        $specialityDetail_chart->setData([
+            'labels' => $specialityDetail_labels,
+            'datasets' => [
+                [
+                    'data' => $specialityDetail_values,
+                ],
+            ],
+        ]);
+
+        $specialityDetail_chart->setOptions([
+            'indexAxis' => 'yAxis',
+        ]);
+
+        return $this->render('statistics/specialities.html.twig', [
+            'speciality_chart' => $speciality_chart,
+            'specialityDetail_chart' => $specialityDetail_chart,
+        ]);
+    }
 }

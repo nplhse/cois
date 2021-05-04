@@ -12,40 +12,38 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="{{ path('statistics_times') }}">
-                Times
-            </a>
+            <a class="nav-link" href="{{ path('statistics_times') }}">Times</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('statistics_allocations') }}">
+            <a class="nav-link active" href="{{ path('statistics_allocations') }}">
                 Allocations
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('statistics_specialities') }}">
+            <a class="nav-link active" href="{{ path('statistics_specialities') }}">
                 Specialities
             </a>
         </li>
     </ul>
 
     <div class="row">
-        <div class="col-8">
-            <div class="card">
+        <div class="col-6">
+            <div class="card mb-3">
                 <div class="card-header">
-                    Time of day
+                    Specialities
                 </div>
                 <div class="card-body">
-                    {{ render_chart(time_of_day_chart) }}
+                    {{ render_chart(speciality_chart) }}
                 </div>
             </div>
         </div>
-        <div class="col-4">
-            <div class="card">
+        <div class="col-6">
+            <div class="card text-dark bg-light mb-2">
                 <div class="card-header">
-                    Weekdays
+                    Detailed Specialities
                 </div>
                 <div class="card-body">
-                    {{ render_chart(weekday_chart) }}
+                    {{ render_chart(specialityDetail_chart) }}
                 </div>
             </div>
         </div>
