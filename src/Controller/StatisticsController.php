@@ -150,10 +150,12 @@ class StatisticsController extends AbstractController
         $allocation_stats = $this->statistics->generateAllocationStats();
 
         $speciality_labels = [];
+        $speciality_values = [];
 
         $specialities = $allocation_stats->getSpecialities();
         foreach ($specialities as $key => $value) {
             array_push($speciality_labels, $key);
+            array_push($speciality_values, $value);
         }
 
         dump($specialities);
@@ -163,7 +165,7 @@ class StatisticsController extends AbstractController
             'labels' => $speciality_labels,
             'datasets' => [
                 [
-                    'data' => $specialities,
+                    'data' => $speciality_values,
                 ],
             ],
         ]);
