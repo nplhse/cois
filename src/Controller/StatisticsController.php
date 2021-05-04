@@ -52,7 +52,6 @@ class StatisticsController extends AbstractController
                     'data' => $age_stats->getMaleAges(),
                     'borderColor' => 'rgba(54, 162, 235, 0.2)',
                     'backgroundColor' => 'rgba(54, 162, 235, 0.2)',
-                    'stack' => 'one',
                     'stacked' => true,
                 ],
                 [
@@ -60,7 +59,6 @@ class StatisticsController extends AbstractController
                     'data' => $age_stats->getFemaleAges(),
                     'borderColor' => 'rgba(255, 99, 132, 0.2)',
                     'backgroundColor' => 'rgba(255, 99, 132, 0.2)',
-                    'stack' => 'one',
                     'stacked' => true,
                 ],
                 [
@@ -68,7 +66,6 @@ class StatisticsController extends AbstractController
                     'data' => $age_stats->getOtherAges(),
                     'borderColor' => 'rgba(255, 206, 86, 0.2)',
                     'backgroundColor' => 'rgba(255, 206, 86, 0.2)',
-                    'stack' => 'one',
                     'stacked' => true,
                 ],
             ],
@@ -76,6 +73,7 @@ class StatisticsController extends AbstractController
         $age_chart->setOptions([
             'scales' => [
                 'yAxes' => [
+                    ['stacked' => true],
                     ['ticks' => [
                         'beginAtZero' => true,
                     ]],
@@ -157,8 +155,6 @@ class StatisticsController extends AbstractController
             array_push($speciality_labels, $key);
             array_push($speciality_values, $value);
         }
-
-        dump($specialities);
 
         $speciality_chart = $chartBuilder->createChart(Chart::TYPE_PIE);
         $speciality_chart->setData([
