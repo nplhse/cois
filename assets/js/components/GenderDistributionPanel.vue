@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="chart"></div>
+    <div id="gender-pie"></div>
 
     <b-table striped hover :items="this.data"></b-table>
   </div>
@@ -10,7 +10,7 @@
 import * as c3 from "c3";
 
 export default {
-  name: "PieChart.vue",
+  name: "GenderDistributionPanel.vue",
   props: {
     data: {
       required: true,
@@ -22,23 +22,10 @@ export default {
       fields: ['gender', 'value'],
     };
   },
-  computed: {
-    columns() {
-      let columns = [];
-
-      this.data.forEach(function(item){
-        columns[item.gender] = item.value;
-        console.log(columns);
-      });
-
-      return columns;
-    }
-  },
   mounted() {
-    var chart = c3.generate({
-      bindto: '#chart',
+    var genderPie = c3.generate({
+      bindto: '#gender-pie',
       data: {
-        // iris data from R
         url: '/vuestats/api/gender.json',
         mimeType: 'json',
         type: 'pie',

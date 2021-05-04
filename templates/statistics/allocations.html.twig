@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Statistics - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('statistics_index') }}">
+                Demographics
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('statistics_times') }}">Times</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{{ path('statistics_allocations') }}">
+                Allocations
+            </a>
+        </li>
+    </ul>
+
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="card-header">
+                    RMI
+                </div>
+                <div class="card-body">
+                    <table class="table hover">
+                        <thead>
+                        <tr>
+                            <th>
+                                RMI ID
+                            </th>
+                            <th>
+                                PZC Text
+                            </th>
+                            <th>
+                                Count
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for RMI in allocation_stats.RMIs %}
+                            <tr>
+                                <th>
+                                    {{ RMI.RMI }}
+                                </th>
+                                <th>
+                                    {{ RMI.PZCText }}
+                                </th>
+                                <th>
+                                    {{ RMI.count }}
+                                </th>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card text-dark bg-light mb-2">
+                <div class="card-header">
+                    Specialities
+                </div>
+                <div class="card-body">
+                    {{ render_chart(speciality_chart) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

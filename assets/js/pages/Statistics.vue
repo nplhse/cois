@@ -4,22 +4,24 @@
 
         <b-row>
           <b-col cols="8">
-
+            <AgeDistributionPanel />
           </b-col>
           <b-col cols="4">
-            <PieChart :data="this.data" />
+            <GenderDistributionPanel :data="this.data" />
           </b-col>
         </b-row>
     </div>
 </template>
 
 <script>
-import PieChart from "../components/PieChart";
+import AgeDistributionPanel from '../components/AgeDistributionPanel';
+import GenderDistributionPanel from '../components/GenderDistributionPanel';
 
 export default {
     name: "Statistics",
     components: {
-      PieChart,
+      AgeDistributionPanel,
+      GenderDistributionPanel,
     },
     data() {
       return {

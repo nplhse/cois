@@ -48,11 +48,6 @@ class StatisticsController extends AbstractController
             'labels' => $this->statistics->getScaleForXAxis($age_stats->getMaxAge(), 1),
             'datasets' => [
                 [
-                    'label' => 'Total count by age',
-                    'data' => $age_stats->getAges(),
-                    'stacked' => false,
-                ],
-                [
                     'label' => 'Total male count by age',
                     'data' => $age_stats->getMaleAges(),
                     'borderColor' => 'rgba(54, 162, 235, 0.2)',
@@ -146,6 +141,36 @@ class StatisticsController extends AbstractController
             'time_stats' => $time_stats,
             'time_of_day_chart' => $time_of_day_chart,
             'weekday_chart' => $weekday_chart,
+        ]);
+    }
+
+    #[Route('/statistics/allocations', name: 'statistics_allocations')]
+    public function allocations(ChartBuilderInterface $chartBuilder): Response
+    {
+        $allocation_stats = $this->statistics->generateAllocationStats();
+
+        $speciality_labels = [];
+
+        $specialities = $allocation_stats->getSpecialities();
+        foreach ($specialities as $key => $value) {
+            array_push($speciality_labels, $key);
+        }
+
+        dump($specialities);
+
+        $speciality_chart = $chartBuilder->createChart(Chart::TYPE_PIE);
+        $speciality_chart->setData([
+            'labels' => $speciality_labels,
+            'datasets' => [
+                [
+                    'data' => $specialities,
+                ],
+            ],
+        ]);
+
+        return $this->render('statistics/allocations.html.twig', [
+            'allocation_stats' => $allocation_stats,
+            'speciality_chart' => $speciality_chart,
         ]);
     }
 }

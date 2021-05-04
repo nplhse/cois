@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\DataTransferObjects\AgeStatistics;
+use App\DataTransferObjects\AllocationStatistics;
 use App\DataTransferObjects\GenderStatistics;
 use App\DataTransferObjects\TimeStatistics;
 use App\Repository\AllocationRepository;
@@ -138,6 +139,74 @@ class StatisticsService
         $timeStatistics->setWeekdays($sorted_weekdays);
 
         return $timeStatistics;
+    }
+
+    public function generateAllocationStats(): AllocationStatistics
+    {
+        $allocationStatistics = new AllocationStatistics();
+
+        $stats = $this->allocationRepository->countAllocationsByRMI();
+
+        $counts = [];
+
+        foreach ($stats as $key => $value) {
+            $rmi = substr($value['PZC'], 0, 3);
+
+            if (isset($counts[$rmi])) {
+                $counts[$rmi] += $value['counter'];
+            } else {
+                $counts[$rmi] = $value['counter'];
+            }
+        }
+
+        $PZCTexts = $this->allocationRepository->getAllPCZTexts();
+
+        $RMI = [];
+
+        foreach ($PZCTexts as $key => $value) {
+            $rmi = substr($value['PZC'], 0, 3);
+
+            if (isset($RMI[$rmi])) {
+                $RMI[$rmi] = $value['PZCText'];
+            } else {
+                $RMI[$rmi] = $value['PZCText'];
+            }
+        }
+
+        $result = [];
+
+        foreach ($RMI as $key => $value) {
+            $tmp = [];
+            $tmp['RMI'] = $key;
+            $tmp['PZCText'] = $RMI[$key];
+            $tmp['count'] = $counts[$key];
+
+            $result[$key] = $tmp;
+        }
+
+        $allocationStatistics->setRMIs($result);
+
+        $stats = $this->allocationRepository->countAllocationsBySpeciality();
+
+        $specialities = [];
+
+        foreach ($stats as $item) {
+            $specialities[$item['speciality']] = $item['counter'];
+        }
+
+        $allocationStatistics->setSpecialities($specialities);
+
+        $stats = $this->allocationRepository->countAllocationsBySpeciality(true);
+
+        $specialityDetails = [];
+
+        foreach ($stats as $item) {
+            $specialityDetails[$item['specialityDetail']] = $item['counter'];
+        }
+
+        $allocationStatistics->setSpecialityDetails($specialityDetails);
+
+        return $allocationStatistics;
     }
 
     public function getScaleForXAxis(int $maxValue, int $n = 5): array

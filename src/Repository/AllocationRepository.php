@@ -91,6 +91,46 @@ class AllocationRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function countAllocationsByRMI(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('a.PZC, COUNT(a.PZC) AS counter')
+            ->groupBy('a.PZC')
+            ->addOrderBy('counter', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
+    public function getAllPCZTexts(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('DISTINCT a.PZCText, a.PZC')
+            ->addOrderBy('a.PZCText', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
+    public function countAllocationsBySpeciality(bool $detail = false): array
+    {
+        if ($detail) {
+            $qb = $this->createQueryBuilder('a')
+                ->select('a.specialityDetail, COUNT(a.specialityDetail) AS counter')
+                ->groupBy('a.specialityDetail')
+                ->orderBy('a.specialityDetail', 'ASC');
+        } else {
+            $qb = $this->createQueryBuilder('a')
+                ->select('a.speciality, COUNT(a.speciality) AS counter')
+                ->groupBy('a.speciality')
+                ->orderBy('a.speciality', 'ASC');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function deleteByImport(Import $import = null): mixed
     {
         $qb = $this->createQueryBuilder('a')

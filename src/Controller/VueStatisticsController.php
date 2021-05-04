@@ -34,7 +34,30 @@ class VueStatisticsController extends AbstractController
     {
         $age_stats = $this->statistics->generateAgeStats();
 
-        return $this->json($age_stats);
+        $return = [];
+        $male_ages = [];
+        $female_ages = [];
+        $other_ages = [];
+
+        foreach ($age_stats->getMaleAges() as $key => $value)
+        {
+            $male_ages[$key] = $value;
+        }
+        $return['Male'] = $male_ages;
+
+        foreach ($age_stats->getFemaleAges() as $key => $value)
+        {
+            $female_ages[$key] = $value;
+        }
+        $return['Female'] = $female_ages;
+
+        foreach ($age_stats->getOtherAges() as $key => $value)
+        {
+            $other_ages[$key] = $value;
+        }
+        $return['Other'] = $other_ages;
+
+        return $this->json($return);
     }
 
     #[Route('/vuestats/api/gender.json', name: 'vue_api_gender')]
