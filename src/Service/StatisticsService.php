@@ -290,7 +290,7 @@ class StatisticsService
             }
         }
 
-        return $result;
+        return array_reverse($result);
     }
 
     private function getValueInPercent(int $value): float
