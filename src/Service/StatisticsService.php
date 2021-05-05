@@ -226,6 +226,9 @@ class StatisticsService
         $allocationStatistics->setRequiresCathlab($this->buildResultArray($stats, 'requiresCathlab'));
 
         $stats = $this->allocationRepository->countAllocationsByDetail('isCPR');
+
+        dump($stats);
+
         $allocationStatistics->setIsCPR($this->buildResultArray($stats, 'isCPR'));
 
         $stats = $this->allocationRepository->countAllocationsByDetail('isVentilated');
@@ -235,7 +238,16 @@ class StatisticsService
         $allocationStatistics->setIsShock($this->buildResultArray($stats, 'isShock'));
 
         $stats = $this->allocationRepository->countAllocationsByDetail('isInfectious');
-        $allocationStatistics->setIsInfectious($this->buildResultArray($stats, 'isInfectious'));
+
+        $infections = [];
+
+        foreach ($stats as $item) {
+            if ($item['isInfectious']) {
+                $infections[$item['isInfectious']] = $item['counter'];
+            }
+        }
+
+        $allocationStatistics->setIsInfectious($infections);
 
         $stats = $this->allocationRepository->countAllocationsByDetail('isPregnant');
         $allocationStatistics->setIsPregnant($this->buildResultArray($stats, 'isPregnant'));
@@ -272,7 +284,8 @@ class StatisticsService
         foreach ($data as $item) {
             if (true === $item[$key]) {
                 $result[$key] = $item['counter'];
-                $result['allOthers'] = $this->total - $item['counter'];
+            } elseif (false === $item[$key]) {
+                $result['allOthers'] = $item['counter'];
             } else {
                 $result[$item[$key]] = $item['counter'];
             }
