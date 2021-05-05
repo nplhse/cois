@@ -160,10 +160,12 @@ class StatisticsService
                 $counts[$rmi] = $value['counter'];
             }
 
-            if (isset($SK[$sk])) {
-                $SK[$sk] += $value['counter'];
-            } else {
-                $SK[$sk] = $value['counter'];
+            if ($sk !== "") {
+                if (isset($SK[$sk])) {
+                    $SK[$sk] += $value['counter'];
+                } else {
+                    $SK[$sk] = $value['counter'];
+                }
             }
         }
 
