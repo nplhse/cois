@@ -320,6 +320,22 @@ class StatisticsController extends AbstractController
             'datasets' => [
                 [
                     'data' => $infections_values,
+                    'backgroundColor' => [
+                        '#4E79A7',
+                        '#F28E2B',
+                        '#E15759',
+                        '#BAB0AC',
+                        '#BAB0AC',
+                        '#59A14F',
+                        '#EDC948',
+                        '#B07AA1',
+                        '#FF9DA7',
+                        '#9C755F',
+                        '#76B7B2',
+                        '#7CD17D',
+                        '#D7B5A6',
+                        '#A0CBE8',
+                    ],
                 ],
             ],
         ]);
@@ -361,6 +377,21 @@ class StatisticsController extends AbstractController
             'datasets' => [
                 [
                     'data' => $speciality_values,
+                    'backgroundColor' => [
+                        '#4E79A7',
+                        '#F28E2B',
+                        '#E15759',
+                        '#BAB0AC',
+                        '#59A14F',
+                        '#EDC948',
+                        '#B07AA1',
+                        '#FF9DA7',
+                        '#9C755F',
+                        '#76B7B2',
+                        '#7CD17D',
+                        '#D7B5A6',
+                        '#A0CBE8',
+                    ],
                 ],
             ],
         ]);

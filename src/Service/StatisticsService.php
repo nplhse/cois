@@ -204,7 +204,9 @@ class StatisticsService
         $specialities = [];
 
         foreach ($stats as $item) {
-            $specialities[$item['speciality']] = $item['counter'];
+            if ($item['speciality'] !== '') {
+                $specialities[$item['speciality']] = $item['counter'];
+            }
         }
 
         $allocationStatistics->setSpecialities($specialities);
@@ -226,9 +228,6 @@ class StatisticsService
         $allocationStatistics->setRequiresCathlab($this->buildResultArray($stats, 'requiresCathlab'));
 
         $stats = $this->allocationRepository->countAllocationsByDetail('isCPR');
-
-        dump($stats);
-
         $allocationStatistics->setIsCPR($this->buildResultArray($stats, 'isCPR'));
 
         $stats = $this->allocationRepository->countAllocationsByDetail('isVentilated');
@@ -285,7 +284,7 @@ class StatisticsService
             if (true === $item[$key]) {
                 $result[$key] = $item['counter'];
             } elseif (false === $item[$key]) {
-                $result['allOthers'] = $item['counter'];
+                $result['Others'] = $item['counter'];
             } else {
                 $result[$item[$key]] = $item['counter'];
             }
