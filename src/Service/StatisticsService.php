@@ -204,7 +204,7 @@ class StatisticsService
         $specialities = [];
 
         foreach ($stats as $item) {
-            if ($item['speciality'] !== '') {
+            if ('' !== $item['speciality']) {
                 $specialities[$item['speciality']] = $item['counter'];
             }
         }
