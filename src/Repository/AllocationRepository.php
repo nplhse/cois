@@ -143,6 +143,62 @@ class AllocationRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function countAllocationsByDetail(string $detail): array
+    {
+        if ('requiresResus' == $detail) {
+            $qb = $this->createQueryBuilder('a')
+                ->select('a.requiresResus, COUNT(a.requiresResus) AS counter')
+                ->groupBy('a.requiresResus')
+                ->orderBy('a.requiresResus', 'ASC');
+        } elseif ('requiresCathlab' == $detail) {
+            $qb = $this->createQueryBuilder('a')
+                ->select('a.requiresCathlab, COUNT(a.requiresCathlab) AS counter')
+                ->groupBy('a.requiresCathlab')
+                ->orderBy('a.requiresCathlab', 'ASC');
+        } elseif ('isCPR' == $detail) {
+            $qb = $this->createQueryBuilder('a')
+                ->select('a.isCPR, COUNT(a.isCPR) AS counter')
+                ->groupBy('a.isCPR')
+                ->orderBy('a.isCPR', 'ASC');
+        } elseif ('isVentilated' == $detail) {
+            $qb = $this->createQueryBuilder('a')
+                ->select('a.isVentilated, COUNT(a.isVentilated) AS counter')
+                ->groupBy('a.isVentilated')
+                ->orderBy('a.isVentilated', 'ASC');
+        } elseif ('isShock' == $detail) {
+            $qb = $this->createQueryBuilder('a')
+                ->select('a.isShock, COUNT(a.isShock) AS counter')
+                ->groupBy('a.isShock')
+                ->orderBy('a.isShock', 'ASC');
+        } elseif ('isInfectious' == $detail) {
+            $qb = $this->createQueryBuilder('a')
+                ->select('a.isInfectious, COUNT(a.isInfectious) AS counter')
+                ->groupBy('a.isInfectious')
+                ->orderBy('a.isInfectious', 'ASC');
+        } elseif ('isPregnant' == $detail) {
+            $qb = $this->createQueryBuilder('a')
+                ->select('a.isPregnant, COUNT(a.isPregnant) AS counter')
+                ->groupBy('a.isPregnant')
+                ->orderBy('a.isPregnant', 'ASC');
+        } elseif ('isWithPhysician' == $detail) {
+            $qb = $this->createQueryBuilder('a')
+                ->select('a.isWithPhysician, COUNT(a.isWithPhysician) AS counter')
+                ->groupBy('a.isWithPhysician')
+                ->orderBy('a.isWithPhysician', 'ASC');
+        } elseif ('isWorkAccident' == $detail) {
+            $qb = $this->createQueryBuilder('a')
+                ->select('a.isWorkAccident, COUNT(a.isWorkAccident) AS counter')
+                ->groupBy('a.isWorkAccident')
+                ->orderBy('a.isWorkAccident', 'ASC');
+        }
+
+        if (!isset($qb)) {
+            return [];
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function deleteByImport(Import $import = null): mixed
     {
         $qb = $this->createQueryBuilder('a')

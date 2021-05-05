@@ -160,7 +160,7 @@ class StatisticsService
                 $counts[$rmi] = $value['counter'];
             }
 
-            if ($sk !== "") {
+            if ('' !== $sk) {
                 if (isset($SK[$sk])) {
                     $SK[$sk] += $value['counter'];
                 } else {
@@ -219,6 +219,33 @@ class StatisticsService
 
         $allocationStatistics->setSpecialityDetails($specialityDetails);
 
+        $stats = $this->allocationRepository->countAllocationsByDetail('requiresResus');
+        $allocationStatistics->setRequiresResus($this->buildResultArray($stats, 'requiresResus'));
+
+        $stats = $this->allocationRepository->countAllocationsByDetail('requiresCathlab');
+        $allocationStatistics->setRequiresCathlab($this->buildResultArray($stats, 'requiresCathlab'));
+
+        $stats = $this->allocationRepository->countAllocationsByDetail('isCPR');
+        $allocationStatistics->setIsCPR($this->buildResultArray($stats, 'isCPR'));
+
+        $stats = $this->allocationRepository->countAllocationsByDetail('isVentilated');
+        $allocationStatistics->setIsVentilated($this->buildResultArray($stats, 'isVentilated'));
+
+        $stats = $this->allocationRepository->countAllocationsByDetail('isShock');
+        $allocationStatistics->setIsShock($this->buildResultArray($stats, 'isShock'));
+
+        $stats = $this->allocationRepository->countAllocationsByDetail('isInfectious');
+        $allocationStatistics->setIsInfectious($this->buildResultArray($stats, 'isInfectious'));
+
+        $stats = $this->allocationRepository->countAllocationsByDetail('isPregnant');
+        $allocationStatistics->setIsPregnant($this->buildResultArray($stats, 'isPregnant'));
+
+        $stats = $this->allocationRepository->countAllocationsByDetail('isWithPhysician');
+        $allocationStatistics->setIsWithPhysician($this->buildResultArray($stats, 'isWithPhysician'));
+
+        $stats = $this->allocationRepository->countAllocationsByDetail('isWorkAccident');
+        $allocationStatistics->setIsWorkAccident($this->buildResultArray($stats, 'isWorkAccident'));
+
         return $allocationStatistics;
     }
 
@@ -236,6 +263,22 @@ class StatisticsService
         }
 
         return $scale;
+    }
+
+    private function buildResultArray(array $data, string $key): array
+    {
+        $result = [];
+
+        foreach ($data as $item) {
+            if (true === $item[$key]) {
+                $result[$key] = $item['counter'];
+                $result['allOthers'] = $this->total - $item['counter'];
+            } else {
+                $result[$item[$key]] = $item['counter'];
+            }
+        }
+
+        return $result;
     }
 
     private function getValueInPercent(int $value): float

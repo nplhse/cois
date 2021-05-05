@@ -54,7 +54,7 @@ App\Entity\Allocation:
         arrivalMonth: <numberBetween(1,12)>
         arrivalHour: <numberBetween(0,23)>
         arrivalMinute: <numberBetween(0,59)>
-        requiresResus: <randomElement([true,false])>
+        requiresResus: <randomElement(['true','false'])>
         requiresCathlab: <randomElement(['true','false'])>
         occasion: <randomElement(['Häuslicher Einsatz','Verkehrsunfall','Sonstiger Einsatz','aus Arztpraxis','Öffentlicher Raum',''])>
         gender: <randomElement(['M','W'])>

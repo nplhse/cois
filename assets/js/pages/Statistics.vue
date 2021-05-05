@@ -30,13 +30,8 @@
 </template>
 
 <script>
-import RMITable from "../components/RMITable";
-
 export default {
     name: "Statistics",
-    components: {
-        RMITable,
-    },
     data() {
         return {
             data: [],

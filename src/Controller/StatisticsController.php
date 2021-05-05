@@ -107,7 +107,6 @@ class StatisticsController extends AbstractController
         $time_of_day_chart->setOptions([
             'scales' => [
                 'yAxes' => [
-                    ['stacked' => false],
                     ['ticks' => [
                         'beginAtZero' => true,
                     ]],
@@ -147,15 +146,6 @@ class StatisticsController extends AbstractController
     {
         $allocation_stats = $this->statistics->generateAllocationStats();
 
-        $speciality_labels = [];
-        $speciality_values = [];
-
-        $specialities = $allocation_stats->getSpecialities();
-        foreach ($specialities as $key => $value) {
-            array_push($speciality_labels, $key);
-            array_push($speciality_values, $value);
-        }
-
         $sk_chart = $chartBuilder->createChart(Chart::TYPE_PIE);
         $sk_chart->setData([
             'labels' => ['SK1', 'SK2', 'SK3'],
@@ -171,10 +161,182 @@ class StatisticsController extends AbstractController
             ],
         ]);
 
+        $chart = $this->buildDoughnutArray($allocation_stats->getRequiresResus());
+
+        $resus_chart = $chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
+        $resus_chart->setData([
+            'labels' => $chart['labels'],
+            'datasets' => [
+                [
+                    'data' => $chart['values'],
+                    'backgroundColor' => [
+                        'rgba(0, 0, 255, 0.5)',
+                    ],
+                ],
+            ],
+        ]);
+        $resus_chart->setOptions([
+            'legend' => false,
+        ]);
+
+        $chart = $this->buildDoughnutArray($allocation_stats->getRequiresCathlab());
+
+        $cath_chart = $chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
+        $cath_chart->setData([
+            'labels' => $chart['labels'],
+            'datasets' => [
+                [
+                    'data' => $chart['values'],
+                    'backgroundColor' => [
+                        'rgba(0, 0, 255, 0.5)',
+                    ],
+                ],
+            ],
+        ]);
+        $cath_chart->setOptions([
+            'legend' => false,
+        ]);
+
+        $chart = $this->buildDoughnutArray($allocation_stats->getIsCPR());
+
+        $cpr_chart = $chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
+        $cpr_chart->setData([
+            'labels' => $chart['labels'],
+            'datasets' => [
+                [
+                    'data' => $chart['values'],
+                    'backgroundColor' => [
+                        'rgba(0, 0, 255, 0.2)',
+                    ],
+                ],
+            ],
+        ]);
+        $cpr_chart->setOptions([
+            'legend' => false,
+        ]);
+
+        $chart = $this->buildDoughnutArray($allocation_stats->getIsVentilated());
+
+        $vent_chart = $chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
+        $vent_chart->setData([
+            'labels' => $chart['labels'],
+            'datasets' => [
+                [
+                    'data' => $chart['values'],
+                    'backgroundColor' => [
+                        'rgba(0, 0, 255, 0.2)',
+                    ],
+                ],
+            ],
+        ]);
+        $vent_chart->setOptions([
+            'legend' => false,
+        ]);
+
+        $chart = $this->buildDoughnutArray($allocation_stats->getIsShock());
+
+        $shock_chart = $chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
+        $shock_chart->setData([
+            'labels' => $chart['labels'],
+            'datasets' => [
+                [
+                    'data' => $chart['values'],
+                    'backgroundColor' => [
+                        'rgba(0, 0, 255, 0.2)',
+                    ],
+                ],
+            ],
+        ]);
+        $shock_chart->setOptions([
+            'legend' => false,
+        ]);
+
+        $chart = $this->buildDoughnutArray($allocation_stats->getIsPregnant());
+
+        $preg_chart = $chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
+        $preg_chart->setData([
+            'labels' => $chart['labels'],
+            'datasets' => [
+                [
+                    'data' => $chart['values'],
+                    'backgroundColor' => [
+                        'rgba(0, 0, 255, 0.2)',
+                    ],
+                ],
+            ],
+        ]);
+        $preg_chart->setOptions([
+            'legend' => false,
+        ]);
+
+        $chart = $this->buildDoughnutArray($allocation_stats->getIsWithPhysician());
+
+        $phys_chart = $chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
+        $phys_chart->setData([
+            'labels' => $chart['labels'],
+            'datasets' => [
+                [
+                    'data' => $chart['values'],
+                    'backgroundColor' => [
+                        'rgba(0, 0, 255, 0.5)',
+                    ],
+                ],
+            ],
+        ]);
+        $phys_chart->setOptions([
+            'legend' => false,
+        ]);
+
+        $chart = $this->buildDoughnutArray($allocation_stats->getIsWorkAccident());
+
+        $work_chart = $chartBuilder->createChart(Chart::TYPE_DOUGHNUT);
+        $work_chart->setData([
+            'labels' => $chart['labels'],
+            'datasets' => [
+                [
+                    'data' => $chart['values'],
+                    'backgroundColor' => [
+                        'rgba(0, 0, 255, 0.2)',
+                    ],
+                ],
+            ],
+        ]);
+        $work_chart->setOptions([
+            'legend' => false,
+        ]);
+
+        $infections_labels = [];
+        $infections_values = [];
+
+        $infections = $allocation_stats->getIsInfectious();
+        foreach ($infections as $key => $value) {
+            array_push($infections_labels, $key);
+            array_push($infections_values, $value);
+        }
+
+        $inf_chart = $chartBuilder->createChart(Chart::TYPE_PIE);
+        $inf_chart->setData([
+            'labels' => $infections_labels,
+            'datasets' => [
+                [
+                    'data' => $infections_values,
+                ],
+            ],
+        ]);
+
         return $this->render('statistics/allocations.html.twig', [
             'allocation_stats' => $allocation_stats,
             'items' => json_encode($allocation_stats->getRMIs()),
             'sk_chart' => $sk_chart,
+            'resus_chart' => $resus_chart,
+            'cath_chart' => $cath_chart,
+            'cpr_chart' => $cpr_chart,
+            'vent_chart' => $vent_chart,
+            'shock_chart' => $shock_chart,
+            'preg_chart' => $preg_chart,
+            'phys_chart' => $phys_chart,
+            'work_chart' => $work_chart,
+            'inf_chart' => $inf_chart,
         ]);
     }
 
@@ -193,7 +355,7 @@ class StatisticsController extends AbstractController
             array_push($speciality_values, $value);
         }
 
-        $speciality_chart = $chartBuilder->createChart(Chart::TYPE_BAR);
+        $speciality_chart = $chartBuilder->createChart(Chart::TYPE_PIE);
         $speciality_chart->setData([
             'labels' => $speciality_labels,
             'datasets' => [
@@ -206,5 +368,19 @@ class StatisticsController extends AbstractController
         return $this->render('statistics/specialities.html.twig', [
             'speciality_chart' => $speciality_chart,
         ]);
+    }
+
+    private function buildDoughnutArray(array $input): array
+    {
+        $result = [];
+        $result['labels'] = [];
+        $result['values'] = [];
+
+        foreach ($input as $key => $value) {
+            array_push($result['labels'], $key);
+            array_push($result['values'], $value);
+        }
+
+        return $result;
     }
 }
