@@ -103,8 +103,12 @@ class ImportService
                 $allocation->setArrivalMinute($row['Minute (Eintreffzeit)']);
                 if ('S+' == $row['Schockraum']) {
                     $allocation->setRequiresResus(true);
-                } else {
+                } elseif ('S-' == $row['Schockraum']) {
                     $allocation->setRequiresResus(false);
+                } elseif ('' === $row['Schockraum']) {
+                    $allocation->setRequiresResus(false);
+                } else {
+                    $allocation->setRequiresResus(true);
                 }
                 if ('H+' == $row['Herzkatheter']) {
                     $allocation->setRequiresCathlab(true);
