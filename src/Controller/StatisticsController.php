@@ -325,6 +325,7 @@ class StatisticsController extends AbstractController
                         '#F28E2B',
                         '#E15759',
                         '#BAB0AC',
+                        '#BAB0AC',
                         '#59A14F',
                         '#EDC948',
                         '#B07AA1',
