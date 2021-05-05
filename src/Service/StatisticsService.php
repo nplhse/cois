@@ -148,16 +148,27 @@ class StatisticsService
         $stats = $this->allocationRepository->countAllocationsByRMI();
 
         $counts = [];
+        $SK = [];
 
         foreach ($stats as $key => $value) {
             $rmi = substr($value['PZC'], 0, 3);
+            $sk = substr($value['PZC'], 5, 1);
 
             if (isset($counts[$rmi])) {
                 $counts[$rmi] += $value['counter'];
             } else {
                 $counts[$rmi] = $value['counter'];
             }
+
+            if (isset($SK[$sk])) {
+                $SK[$sk] += $value['counter'];
+            } else {
+                $SK[$sk] = $value['counter'];
+            }
         }
+
+        $SK = array_reverse($SK);
+        $allocationStatistics->setSK($SK);
 
         $PZCTexts = $this->allocationRepository->getAllPCZTexts();
 
@@ -184,10 +195,6 @@ class StatisticsService
             $result[$key] = $tmp;
         }
 
-        $counter = array_column($result, 'count');
-
-        array_multisort($counter, SORT_DESC, $counter);
-
         $allocationStatistics->setRMIs($result);
 
         $stats = $this->allocationRepository->countAllocationsBySpeciality();
@@ -209,16 +216,6 @@ class StatisticsService
         }
 
         $allocationStatistics->setSpecialityDetails($specialityDetails);
-
-        $stats = $this->allocationRepository->countAllocationsBySK();
-
-        $SK = [];
-
-        foreach ($stats as $item) {
-            $SK[$item['SK']] = $item['counter'];
-        }
-
-        $allocationStatistics->setSK($SK);
 
         return $allocationStatistics;
     }

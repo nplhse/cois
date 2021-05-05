@@ -72,7 +72,7 @@ App\Entity\Allocation:
         specialityDetail: <randomElement(['Allgemein Innere Medizin','Gastroenterologie','Allgemein- und Viszeralchirurgie','Urologie'])>
         handoverPoint: ZNA
         specialityWasClosed: false
-        PZC: 123456
+        PZC: <randomElement(['211451','272562','323672','355723','718343','214883'])>
         PZCText: Noch kein Text
         SecondaryPZC: 123456
         SecondaryPZCText: Kein Text

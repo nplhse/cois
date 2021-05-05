@@ -4,6 +4,22 @@
     Statistics - {{ parent() }}
 {% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+
+    {{ encore_entry_link_tags('statistics') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script id="pageData" type="application/json">
+        {{ items|raw }}
+    </script>
+
+    {{ encore_entry_script_tags('statistics') }}
+{% endblock %}
+
 {% block body %}
     <ul class="nav nav-tabs mb-3">
         <li class="nav-item">
@@ -34,36 +50,7 @@
                     RMI
                 </div>
                 <div class="card-body">
-                    <table class="table hover">
-                        <thead>
-                            <tr>
-                                <th>
-                                    RMI ID
-                                </th>
-                                <th>
-                                    PZC Text
-                                </th>
-                                <th>
-                                    Count
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for RMI in allocation_stats.RMIs %}
-                                <tr>
-                                    <th>
-                                        {{ RMI.RMI }}
-                                    </th>
-                                    <th>
-                                        {{ RMI.PZCText }}
-                                    </th>
-                                    <th>
-                                        {{ RMI.count }}
-                                    </th>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                    <div id="app"></div>
                 </div>
             </div>
         </div>

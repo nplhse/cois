@@ -162,12 +162,18 @@ class StatisticsController extends AbstractController
             'datasets' => [
                 [
                     'data' => $allocation_stats->getSK(),
+                    'backgroundColor' => [
+                        'rgba(226, 54, 54, 0.5)',
+                        'rgba(226, 140, 54, 0.5)',
+                        'rgba(54, 226, 54, 0.5)',
+                    ],
                 ],
             ],
         ]);
 
         return $this->render('statistics/allocations.html.twig', [
             'allocation_stats' => $allocation_stats,
+            'items' => json_encode($allocation_stats->getRMIs()),
             'sk_chart' => $sk_chart,
         ]);
     }

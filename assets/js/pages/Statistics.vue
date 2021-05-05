@@ -1,36 +1,64 @@
 <template>
     <div>
-        <h1>Hello, world.</h1>
+        <b-table
+            id="rmi-table"
+            striped
+            hover
+            :items="this.items"
+            :fields="fields"
+            :loading="loading"
+            :sort-by.sync="sortBy"
+            :sort-desc.sync="sortDesc"
+            :label-sort-asc="null"
+            :label-sort-desc="null"
+            sort-icon-right
+        >
+            <template #table-busy>
+                <div class="text-center my-2">
+                    <b-spinner class="align-middle" />
+                    <strong>Loading...</strong>
+                </div>
+            </template>
+        </b-table>
 
-        <b-row>
-            <b-col cols="8">
-                <AgeDistributionPanel />
-            </b-col>
-            <b-col cols="4">
-                <GenderDistributionPanel :data="this.data" />
-            </b-col>
-        </b-row>
+        <div>
+            Sorting By: <b>{{ this.sortBy }}</b
+            >, Sort Direction:
+            <b>{{ this.sortDesc ? "Descending" : "Ascending" }}</b>
+        </div>
     </div>
 </template>
 
 <script>
-import AgeDistributionPanel from "../components/AgeDistributionPanel";
-import GenderDistributionPanel from "../components/GenderDistributionPanel";
+import RMITable from "../components/RMITable";
 
 export default {
     name: "Statistics",
     components: {
-        AgeDistributionPanel,
-        GenderDistributionPanel,
+        RMITable,
     },
     data() {
         return {
-            data: [
-                { gender: "male", value: 47 },
-                { gender: "female", value: 53 },
-                { gender: "other", value: 0 },
+            data: [],
+            items: [],
+            sortBy: "count",
+            sortDesc: true,
+            loading: true,
+            fields: [
+                { key: "RMI", label: "RMI", sortable: true },
+                { key: "PZCText", label: "Caption", sortable: true },
+                { key: "count", label: "Count", sortable: true },
             ],
         };
+    },
+    created() {
+        let items = JSON.parse(document.getElementById("pageData").innerHTML);
+
+        this.items = Object.keys(items).map((key) => {
+            return items[key];
+        });
+
+        this.totalItems;
     },
 };
 </script>
