@@ -193,7 +193,7 @@ class StatisticsController extends AbstractController
             array_push($speciality_values, $value);
         }
 
-        $speciality_chart = $chartBuilder->createChart(Chart::TYPE_PIE);
+        $speciality_chart = $chartBuilder->createChart(Chart::TYPE_BAR);
         $speciality_chart->setData([
             'labels' => $speciality_labels,
             'datasets' => [
@@ -203,33 +203,8 @@ class StatisticsController extends AbstractController
             ],
         ]);
 
-        $specialityDetail_labels = [];
-        $specialityDetail_values = [];
-
-        $specialityDetails = $allocation_stats->getSpecialityDetails();
-
-        foreach ($specialityDetails as $key => $value) {
-            array_push($specialityDetail_labels, $key);
-            array_push($specialityDetail_values, $value);
-        }
-
-        $specialityDetail_chart = $chartBuilder->createChart(Chart::TYPE_BAR);
-        $specialityDetail_chart->setData([
-            'labels' => $specialityDetail_labels,
-            'datasets' => [
-                [
-                    'data' => $specialityDetail_values,
-                ],
-            ],
-        ]);
-
-        $specialityDetail_chart->setOptions([
-            'indexAxis' => 'yAxis',
-        ]);
-
         return $this->render('statistics/specialities.html.twig', [
             'speciality_chart' => $speciality_chart,
-            'specialityDetail_chart' => $specialityDetail_chart,
         ]);
     }
 }
