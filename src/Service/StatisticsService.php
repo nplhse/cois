@@ -285,6 +285,10 @@ class StatisticsService
                 $result[$key] = $item['counter'];
             } elseif (false === $item[$key]) {
                 $result['Others'] = $item['counter'];
+
+                if (!isset($result[$key])) {
+                    $result[$key] = 0;
+                }
             } else {
                 $result[$item[$key]] = $item['counter'];
             }
