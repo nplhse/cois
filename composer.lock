@@ -1584,16 +1584,16 @@
         },
         {
             "name": "easycorp/easyadmin-bundle",
-            "version": "v3.2.9",
+            "version": "v3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EasyCorp/EasyAdminBundle.git",
-                "reference": "92175620303bec3374e9356e5018aa565269fd1f"
+                "reference": "650834fcdfcef4389894fd9b752b8e2c0c30534a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/92175620303bec3374e9356e5018aa565269fd1f",
-                "reference": "92175620303bec3374e9356e5018aa565269fd1f",
+                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/650834fcdfcef4389894fd9b752b8e2c0c30534a",
+                "reference": "650834fcdfcef4389894fd9b752b8e2c0c30534a",
                 "shasum": ""
             },
             "require": {
@@ -1667,7 +1667,7 @@
             ],
             "support": {
                 "issues": "https://github.com/EasyCorp/EasyAdminBundle/issues",
-                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v3.2.9"
+                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v3.3.0"
             },
             "funding": [
                 {
@@ -1675,7 +1675,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-24T17:01:55+00:00"
+            "time": "2021-05-08T07:55:57+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -3833,16 +3833,16 @@
         },
         {
             "name": "symfony/doctrine-bridge",
-            "version": "v5.2.6",
+            "version": "v5.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/doctrine-bridge.git",
-                "reference": "72b6d743c6108e2b8d15ab94e1a8a224c4d0d144"
+                "reference": "6c8318bb9b315d3d325e9904445e4c4514e3d8ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/72b6d743c6108e2b8d15ab94e1a8a224c4d0d144",
-                "reference": "72b6d743c6108e2b8d15ab94e1a8a224c4d0d144",
+                "url": "https://api.github.com/repos/symfony/doctrine-bridge/zipball/6c8318bb9b315d3d325e9904445e4c4514e3d8ed",
+                "reference": "6c8318bb9b315d3d325e9904445e4c4514e3d8ed",
                 "shasum": ""
             },
             "require": {
@@ -3927,7 +3927,7 @@
             "description": "Provides integration for Doctrine with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/doctrine-bridge/tree/v5.2.6"
+                "source": "https://github.com/symfony/doctrine-bridge/tree/v5.2.7"
             },
             "funding": [
                 {
@@ -3943,7 +3943,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-03-10T22:10:15+00:00"
+            "time": "2021-04-16T17:25:34+00:00"
         },
         {
             "name": "symfony/doctrine-messenger",
