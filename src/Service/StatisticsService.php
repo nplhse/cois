@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\DataTransferObjects\AgeStatistics;
+use App\DataTransferObjects\AllocationStatistics;
 use App\DataTransferObjects\GenderStatistics;
 use App\DataTransferObjects\TimeStatistics;
 use App\Repository\AllocationRepository;
@@ -79,7 +80,7 @@ class StatisticsService
                 $max = $item['age'];
             }
 
-            $i++;
+            ++$i;
         }
 
         $i = 0;
@@ -92,7 +93,7 @@ class StatisticsService
                 $ages[$i] = 0;
             }
 
-            $i++;
+            ++$i;
         }
 
         return $ages;
@@ -140,6 +141,125 @@ class StatisticsService
         return $timeStatistics;
     }
 
+    public function generateAllocationStats(): AllocationStatistics
+    {
+        $allocationStatistics = new AllocationStatistics();
+
+        $stats = $this->allocationRepository->countAllocationsByRMI();
+
+        $counts = [];
+        $SK = [];
+
+        foreach ($stats as $key => $value) {
+            $rmi = substr($value['PZC'], 0, 3);
+            $sk = substr($value['PZC'], 5, 1);
+
+            if (isset($counts[$rmi])) {
+                $counts[$rmi] += $value['counter'];
+            } else {
+                $counts[$rmi] = $value['counter'];
+            }
+
+            if ('' !== $sk) {
+                if (isset($SK[$sk])) {
+                    $SK[$sk] += $value['counter'];
+                } else {
+                    $SK[$sk] = $value['counter'];
+                }
+            }
+        }
+
+        $SK = array_reverse($SK);
+        $allocationStatistics->setSK($SK);
+
+        $PZCTexts = $this->allocationRepository->getAllPCZTexts();
+
+        $RMI = [];
+
+        foreach ($PZCTexts as $key => $value) {
+            $rmi = substr($value['PZC'], 0, 3);
+
+            if (isset($RMI[$rmi])) {
+                $RMI[$rmi] = $value['PZCText'];
+            } else {
+                $RMI[$rmi] = $value['PZCText'];
+            }
+        }
+
+        $result = [];
+
+        foreach ($RMI as $key => $value) {
+            $tmp = [];
+            $tmp['RMI'] = $key;
+            $tmp['PZCText'] = $RMI[$key];
+            $tmp['count'] = $counts[$key];
+
+            $result[$key] = $tmp;
+        }
+
+        $allocationStatistics->setRMIs($result);
+
+        $stats = $this->allocationRepository->countAllocationsBySpeciality();
+
+        $specialities = [];
+
+        foreach ($stats as $item) {
+            if ('' !== $item['speciality']) {
+                $specialities[$item['speciality']] = $item['counter'];
+            }
+        }
+
+        $allocationStatistics->setSpecialities($specialities);
+
+        $stats = $this->allocationRepository->countAllocationsBySpeciality(true);
+
+        $specialityDetails = [];
+
+        foreach ($stats as $item) {
+            $specialityDetails[$item['specialityDetail']] = $item['counter'];
+        }
+
+        $allocationStatistics->setSpecialityDetails($specialityDetails);
+
+        $stats = $this->allocationRepository->countAllocationsByDetail('requiresResus');
+        $allocationStatistics->setRequiresResus($this->buildResultArray($stats, 'requiresResus'));
+
+        $stats = $this->allocationRepository->countAllocationsByDetail('requiresCathlab');
+        $allocationStatistics->setRequiresCathlab($this->buildResultArray($stats, 'requiresCathlab'));
+
+        $stats = $this->allocationRepository->countAllocationsByDetail('isCPR');
+        $allocationStatistics->setIsCPR($this->buildResultArray($stats, 'isCPR'));
+
+        $stats = $this->allocationRepository->countAllocationsByDetail('isVentilated');
+        $allocationStatistics->setIsVentilated($this->buildResultArray($stats, 'isVentilated'));
+
+        $stats = $this->allocationRepository->countAllocationsByDetail('isShock');
+        $allocationStatistics->setIsShock($this->buildResultArray($stats, 'isShock'));
+
+        $stats = $this->allocationRepository->countAllocationsByDetail('isInfectious');
+
+        $infections = [];
+
+        foreach ($stats as $item) {
+            if ($item['isInfectious']) {
+                $infections[$item['isInfectious']] = $item['counter'];
+            }
+        }
+
+        $allocationStatistics->setIsInfectious($infections);
+
+        $stats = $this->allocationRepository->countAllocationsByDetail('isPregnant');
+        $allocationStatistics->setIsPregnant($this->buildResultArray($stats, 'isPregnant'));
+
+        $stats = $this->allocationRepository->countAllocationsByDetail('isWithPhysician');
+        $allocationStatistics->setIsWithPhysician($this->buildResultArray($stats, 'isWithPhysician'));
+
+        $stats = $this->allocationRepository->countAllocationsByDetail('isWorkAccident');
+        $allocationStatistics->setIsWorkAccident($this->buildResultArray($stats, 'isWorkAccident'));
+
+        return $allocationStatistics;
+    }
+
     public function getScaleForXAxis(int $maxValue, int $n = 5): array
     {
         $scale = [];
@@ -154,6 +274,27 @@ class StatisticsService
         }
 
         return $scale;
+    }
+
+    private function buildResultArray(array $data, string $key): array
+    {
+        $result = [];
+
+        foreach ($data as $item) {
+            if (true === $item[$key]) {
+                $result[$key] = $item['counter'];
+            } elseif (false === $item[$key]) {
+                $result['Others'] = $item['counter'];
+
+                if (!isset($result[$key])) {
+                    $result[$key] = 0;
+                }
+            } else {
+                $result[$item[$key]] = $item['counter'];
+            }
+        }
+
+        return array_reverse($result);
     }
 
     private function getValueInPercent(int $value): float

@@ -1,34 +1,59 @@
 <template>
     <div>
-        <h1>Hello, world.</h1>
+        <b-table
+            id="rmi-table"
+            striped
+            hover
+            :items="this.items"
+            :fields="fields"
+            :loading="loading"
+            :sort-by.sync="sortBy"
+            :sort-desc.sync="sortDesc"
+            :label-sort-asc="null"
+            :label-sort-desc="null"
+            sort-icon-right
+        >
+            <template #table-busy>
+                <div class="text-center my-2">
+                    <b-spinner class="align-middle" />
+                    <strong>Loading...</strong>
+                </div>
+            </template>
+        </b-table>
 
-        <b-row>
-          <b-col cols="8">
-
-          </b-col>
-          <b-col cols="4">
-            <PieChart :data="this.columns" />
-          </b-col>
-        </b-row>
+        <div>
+            Sorting By: <b>{{ this.sortBy }}</b
+            >, Sort Direction:
+            <b>{{ this.sortDesc ? "Descending" : "Ascending" }}</b>
+        </div>
     </div>
 </template>
 
 <script>
-import PieChart from "../components/PieChart";
-
 export default {
     name: "Statistics",
-    components: {
-      PieChart,
-    },
     data() {
-      return {
-        data: [
-          {'gender': 'male', 'value': 47},
-          {'gender': 'female', 'value': 53},
-          {'gender': 'other', 'value': 0},
-        ],
-      };
+        return {
+            data: [],
+            items: [],
+            sortBy: "count",
+            sortDesc: true,
+            loading: true,
+            fields: [
+                { key: "RMI", label: "RMI", sortable: true },
+                { key: "PZCText", label: "Caption", sortable: true },
+                { key: "count", label: "Count", sortable: true },
+            ],
+        };
+    },
+    created() {
+        let items = JSON.parse(document.getElementById("pageData").innerHTML);
+
+        this.items = Object.keys(items).map((key) => {
+            return items[key];
+        });
+
+        this.totalItems;
     },
 };
 </script>

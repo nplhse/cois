@@ -1,0 +1,137 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Statistics - {{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {{ encore_entry_link_tags('statistics') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script id="pageData" type="application/json">
+        {{ items|raw }}
+    </script>
+
+    {{ encore_entry_script_tags('statistics') }}
+{% endblock %}
+
+{% block body %}
+    <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('statistics_index') }}">
+                Demographics
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('statistics_times') }}">Times</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active"
+                href="{{ path('statistics_allocations') }}">
+                Allocations
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('statistics_specialities') }}">
+                Specialities
+            </a>
+        </li>
+    </ul>
+
+    <div class="row">
+        <div class="col-8">
+            <div class="card text-dark bg-light mb-2">
+                <div class="card-header">
+                    Features
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-4">
+                            <h5 class="card-title">
+                                Requires Resus
+                            </h5>
+                            {{ render_chart(resus_chart) }}
+                        </div>
+                        <div class="col-4">
+                            <h5 class="card-title">
+                                Requires Cathlab
+                            </h5>
+                            {{ render_chart(cath_chart) }}
+                        </div>
+                        <div class="col-4">
+                            <h5 class="card-title">
+                                Is with Physician
+                            </h5>
+                            {{ render_chart(phys_chart) }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-2">
+                            <h5 class="card-title">
+                                Is CPR
+                            </h5>
+                            {{ render_chart(cpr_chart) }}
+                        </div>
+                        <div class="col-2">
+                            <h5 class="card-title">
+                                Is Ventilated
+                            </h5>
+                            {{ render_chart(vent_chart) }}
+                        </div>
+                        <div class="col-2">
+                            <h5 class="card-title">
+                                Is Shock
+                            </h5>
+                            {{ render_chart(shock_chart) }}
+                        </div>
+                        <div class="col-2">
+                            <h5 class="card-title">
+                                Is Pregnant
+                            </h5>
+                            {{ render_chart(preg_chart) }}
+                        </div>
+                        <div class="col-2">
+                            <h5 class="card-title">
+                                Is Work Accident
+                            </h5>
+                            {{ render_chart(work_chart) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    RMI
+                </div>
+                <div class="card-body">
+                    <div id="app"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card text-dark bg-light mb-2">
+                <div class="card-header">
+                    Urgency
+                </div>
+                <div class="card-body">
+                    {{ render_chart(sk_chart) }}
+                </div>
+            </div>
+
+            <div class="card text-dark bg-light mb-2">
+                <div class="card-header">
+                    Infectiousness
+                </div>
+                <div class="card-body">
+                    {{ render_chart(inf_chart) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
