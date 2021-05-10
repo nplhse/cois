@@ -19,7 +19,7 @@
         "eslint-plugin-import": "^2.22.1",
         "eslint-plugin-vue": "^7.9.0",
         "file-loader": "^6.0.0",
-        "node-sass": "^5.0.0",
+        "node-sass": "^6.0.0",
         "postcss": "^8.2.13",
         "postcss-loader": "^5.0.0",
         "prettier": "^2.2.1",
