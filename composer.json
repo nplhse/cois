@@ -32,7 +32,7 @@
         "league/csv": "^9.6",
         "league/flysystem": "^2.0",
         "league/flysystem-bundle": "^2.0",
-        "markrogoyski/math-php": "^1.10",
+        "markrogoyski/math-php": "^2.0",
         "neitanod/forceutf8": "^2.0",
         "nelmio/cors-bundle": "^2.1",
         "phpdocumentor/reflection-docblock": "^5.2",
@@ -75,7 +75,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
-        "friendsofphp/php-cs-fixer": "^2.18",
+        "friendsofphp/php-cs-fixer": "^3.0",
         "hautelook/alice-bundle": "^2.8",
         "phpstan/phpstan": "^0.12.83",
         "phpstan/phpstan-doctrine": "^0.12.33",
