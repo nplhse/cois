@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Collaborative IVENA statistics</target>
+      </trans-unit>
+      <trans-unit id="nIjRrEk" resname="link.hospitals">
+        <source>link.hospitals</source>
+        <target>Hospitals</target>
+      </trans-unit>
+      <trans-unit id="RouxxR_" resname="link.allocations">
+        <source>link.allocations</source>
+        <target>Allocations</target>
+      </trans-unit>
+      <trans-unit id="Jl6nRRJ" resname="link.statistics">
+        <source>link.statistics</source>
+        <target>Statistics</target>
+      </trans-unit>
+      <trans-unit id="8S1cw8Z" resname="link.import">
+        <source>link.import</source>
+        <target>Import</target>
+      </trans-unit>
+      <trans-unit id="1484Pld" resname="link.export">
+        <source>link.export</source>
+        <target>Export</target>
+      </trans-unit>
+      <trans-unit id="jFBmGv6" resname="nav.logged_in_as">
+        <source>nav.logged_in_as</source>
+        <target>Logged in as: %name%</target>
+      </trans-unit>
+      <trans-unit id="ArfrD6N" resname="link.backend">
+        <source>link.backend</source>
+        <target>Administration</target>
+      </trans-unit>
+      <trans-unit id="ySPQKPx" resname="link.account">
+        <source>link.account</source>
+        <target>Your account</target>
+      </trans-unit>
+      <trans-unit id="K2SvlFI" resname="link.impersonation_exit">
+        <source>link.impersonation_exit</source>
+        <target>Exit impersonation</target>
+      </trans-unit>
+      <trans-unit id="FSyD6SO" resname="link.logout">
+        <source>link.logout</source>
+        <target>Logout</target>
+      </trans-unit>
+      <trans-unit id="Q5ha4LM" resname="link.login">
+        <source>link.login</source>
+        <target>Login</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
