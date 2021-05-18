@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/hospitals")
+ * @Route("/{_locale<%app.supported_locales%>}/hospitals")
  * @IsGranted("ROLE_USER")
  */
 class HospitalController extends AbstractController

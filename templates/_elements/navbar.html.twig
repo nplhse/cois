@@ -95,6 +95,49 @@
                     <ul class="navbar-nav ml-auto">
                         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                             <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle"
+                                    href="#"
+                                    id="transDropdown"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    {{
+                                        app.request.locale
+                                            |locale_name(app.request.locale)
+                                            |u.title
+                                    }}
+                                </a>
+                                <ul class="dropdown-menu"
+                                    aria-labelledby="transDropdown">
+                                    <li>
+                                        <a class="dropdown-item"
+                                            href="{{
+                                            path(
+                                                'default',
+                                                {
+                                                    _locale: 'en'
+                                                }
+                                            )
+                                            }}">
+                                            English
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                            href="{{
+                                            path(
+                                                'default',
+                                                {
+                                                    _locale: 'de'
+                                                }
+                                            )
+                                            }}">
+                                            Deutsch
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
                                 {% if is_granted('IS_IMPERSONATOR') %}
                                     <a class="nav-link dropdown-toggle text-warning"
                                         href="#"

@@ -53,6 +53,166 @@
         <source>link.login</source>
         <target>Anmelden</target>
       </trans-unit>
+      <trans-unit id="3bqLM8Q" resname="dashboard.title">
+        <source>dashboard.title</source>
+        <target>Startseite</target>
+      </trans-unit>
+      <trans-unit id="dEb6dNF" resname="changelog.title">
+        <source>changelog.title</source>
+        <target>Changelog</target>
+      </trans-unit>
+      <trans-unit id="tj.43TE" resname="dashboard.welcome">
+        <source>dashboard.welcome</source>
+        <target>Willkommen bei den kollaborativen IVENA Statistiken!</target>
+      </trans-unit>
+      <trans-unit id="V5sdz5Q" resname="dashboard.get_started">
+        <source>dashboard.get_started</source>
+        <target>Was gibt es hier zu entdecken? Hier sind ein paar Ideen zum ausprobieren.</target>
+      </trans-unit>
+      <trans-unit id="_XQ5Fak" resname="dashboard.allocation.title">
+        <source>dashboard.allocation.title</source>
+        <target>Einsätze</target>
+      </trans-unit>
+      <trans-unit id="fDkyjSH" resname="dashboard.allocation.text">
+        <source>dashboard.allocation.text</source>
+        <target>Durchsuche die Daten, filtere sie und entdecke, was IVENA für uns bereithält.</target>
+      </trans-unit>
+      <trans-unit id="Ehfkhx2" resname="dashboard.allocation.button">
+        <source>dashboard.allocation.button</source>
+        <target>Alle Einsätze ansehen</target>
+      </trans-unit>
+      <trans-unit id="J0CbtE_" resname="dashboard.hospital.title">
+        <source>dashboard.hospital.title</source>
+        <target>Deine Klinik</target>
+      </trans-unit>
+      <trans-unit id="elehn1v" resname="dashboard.hospital.text">
+        <source>dashboard.hospital.text</source>
+        <target>Sieh nach, ob die Angaben deiner Klinik vollständig und korrekt sind.</target>
+      </trans-unit>
+      <trans-unit id="PGbQUwe" resname="dashboard.hospital.button_edit">
+        <source>dashboard.hospital.button_edit</source>
+        <target>Deine Klinik bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="PNDybNP" resname="dashboard.hospital.button_view">
+        <source>dashboard.hospital.button_view</source>
+        <target>Alle Kliniken ansehen</target>
+      </trans-unit>
+      <trans-unit id="vStR0H9" resname="dashboard.import.title">
+        <source>dashboard.import.title</source>
+        <target>Importieren</target>
+      </trans-unit>
+      <trans-unit id="7mzdgx9" resname="dashboard.import.text">
+        <source>dashboard.import.text</source>
+        <target>Füge Daten zu unserer Datenbank hinzu.</target>
+      </trans-unit>
+      <trans-unit id="Dtm_yIw" resname="dashboard.import.button">
+        <source>dashboard.import.button</source>
+        <target>Daten importieren</target>
+      </trans-unit>
+      <trans-unit id="rJf3tq1" resname="dashboard.users">
+        <source>dashboard.users</source>
+        <target>Benutzer</target>
+      </trans-unit>
+      <trans-unit id="HKKcwgP" resname="dashboard.hospitals">
+        <source>dashboard.hospitals</source>
+        <target>Kliniken</target>
+      </trans-unit>
+      <trans-unit id="K1VbrbK" resname="dashboard.allocations">
+        <source>dashboard.allocations</source>
+        <target>Einsätze</target>
+      </trans-unit>
+      <trans-unit id="bFqhgee" resname="dashboard.allocations.by_your_hospital">
+        <source>dashboard.allocations.by_your_hospital</source>
+        <target>Mit %count% Einsätzen deiner Klinik.</target>
+      </trans-unit>
+      <trans-unit id="WIzt02l" resname="dashboard.imports">
+        <source>dashboard.imports</source>
+        <target>Importierte Daten</target>
+      </trans-unit>
+      <trans-unit id="fj.rWWU" resname="dashboard.imports.by_you">
+        <source>dashboard.imports.by_you</source>
+        <target>Mit %count% importierten Datensätzen von dir.</target>
+      </trans-unit>
+      <trans-unit id="jxa9tb_" resname="hospitals.edit.title">
+        <source>hospitals.edit.title</source>
+        <target>Klinik bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="OFscjRC" resname="hospitals.link_view">
+        <source>hospitals.link_view</source>
+        <target>Deine Klinik ansehen</target>
+      </trans-unit>
+      <trans-unit id="YomWZTl" resname="hospitals.link_back">
+        <source>hospitals.link_back</source>
+        <target>Zurück zur Liste</target>
+      </trans-unit>
+      <trans-unit id="ZyxrQD0" resname="hospitals.basics.title">
+        <source>hospitals.basics.title</source>
+        <target>Allgemeines</target>
+      </trans-unit>
+      <trans-unit id="2gu9EGM" resname="hospitals.size.title">
+        <source>hospitals.size.title</source>
+        <target>Größe</target>
+      </trans-unit>
+      <trans-unit id="y9JlMMS" resname="hospitals.admin.title">
+        <source>hospitals.admin.title</source>
+        <target>Administration</target>
+      </trans-unit>
+      <trans-unit id="sUYHsiK" resname="hospitals.title">
+        <source>hospitals.title</source>
+        <target>Kliniken</target>
+      </trans-unit>
+      <trans-unit id="tPfLU0Z" resname="hospitals.link_edit">
+        <source>hospitals.link_edit</source>
+        <target>Deine Klinik bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="s57Ff7b" resname="hospitals.address.field">
+        <source>hospitals.address.field</source>
+        <target>Adresse</target>
+      </trans-unit>
+      <trans-unit id="4wNdKb4" resname="hospitals.areas.title">
+        <source>hospitals.areas.title</source>
+        <target>Gebiete</target>
+      </trans-unit>
+      <trans-unit id="kayQMe8" resname="hospitals.supply_area.field">
+        <source>hospitals.supply_area.field</source>
+        <target>Versorungsgebiet</target>
+      </trans-unit>
+      <trans-unit id="7UhwATW" resname="hospitals.dispatch_area.field">
+        <source>hospitals.dispatch_area.field</source>
+        <target>Leitstelle</target>
+      </trans-unit>
+      <trans-unit id="Sz6mzPZ" resname="hospitals.location.field">
+        <source>hospitals.location.field</source>
+        <target>Lage</target>
+      </trans-unit>
+      <trans-unit id="22u_cEl" resname="hospitals.size.field">
+        <source>hospitals.size.field</source>
+        <target>Größe der Klinik</target>
+      </trans-unit>
+      <trans-unit id="AKLNaIZ" resname="hospitals.beds.field">
+        <source>hospitals.beds.field</source>
+        <target>Anzahl der Betten</target>
+      </trans-unit>
+      <trans-unit id="uwhMJa5" resname="hospitals.owner.field">
+        <source>hospitals.owner.field</source>
+        <target>Administrator der Klinik</target>
+      </trans-unit>
+      <trans-unit id="0C_h2L4" resname="hospitals.created_at.field">
+        <source>hospitals.created_at.field</source>
+        <target>Erstellt am:</target>
+      </trans-unit>
+      <trans-unit id="wPHYKdr" resname="hospitals.updated_at.field">
+        <source>hospitals.updated_at.field</source>
+        <target>Zuletzt aktualisiert am:</target>
+      </trans-unit>
+      <trans-unit id="iMlZg1s" resname="hospitals.statistics.title">
+        <source>hospitals.statistics.title</source>
+        <target>Statistiken</target>
+      </trans-unit>
+      <trans-unit id="y125qmS" resname="dashboard.allocations.by_hospital">
+        <source>dashboard.allocations.by_hospital</source>
+        <target>Insgesamt sind %count% Einsätze dieser Klinik importiert worden.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
