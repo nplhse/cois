@@ -213,6 +213,266 @@
         <source>dashboard.allocations.by_hospital</source>
         <target>There are %count% allocations from this hospital.</target>
       </trans-unit>
+      <trans-unit id="iPZX6a2" resname="hospitals.admin.warning">
+        <source>hospitals.admin.warning</source>
+        <target>WARNING - You should know what you are doing, when applying changes in this section.</target>
+      </trans-unit>
+      <trans-unit id="5stMlbn" resname="allocations.title">
+        <source>allocations.title</source>
+        <target>Allocations</target>
+      </trans-unit>
+      <trans-unit id="tbzR99_" resname="allocations.show.title">
+        <source>allocations.show.title</source>
+        <target>Show Allocation</target>
+      </trans-unit>
+      <trans-unit id="rU3KeY4" resname="allocations.link.back">
+        <source>allocations.link.back</source>
+        <target>Back to list</target>
+      </trans-unit>
+      <trans-unit id="NFcU2_5" resname="allocations.card.hospital">
+        <source>allocations.card.hospital</source>
+        <target>Hospital</target>
+      </trans-unit>
+      <trans-unit id="QK577QV" resname="allocations.field.hospital">
+        <source>allocations.field.hospital</source>
+        <target>Hospital</target>
+      </trans-unit>
+      <trans-unit id="jJ7giC." resname="allocations.fields.area">
+        <source>allocations.fields.area</source>
+        <target>Areas</target>
+      </trans-unit>
+      <trans-unit id="9QegSpP" resname="allocations.field.supplyArea">
+        <source>allocations.field.supplyArea</source>
+        <target>Supply Area</target>
+      </trans-unit>
+      <trans-unit id="d4aNrFI" resname="allocations.field.dispatchArea">
+        <source>allocations.field.dispatchArea</source>
+        <target>Dispatch Area</target>
+      </trans-unit>
+      <trans-unit id="PsmgUWc" resname="allocations.field.speciality">
+        <source>allocations.field.speciality</source>
+        <target>Speciality</target>
+      </trans-unit>
+      <trans-unit id="Xtmh5GH" resname="allocations.field.specialityDetail">
+        <source>allocations.field.specialityDetail</source>
+        <target>Speciality Details</target>
+      </trans-unit>
+      <trans-unit id="T391WpC" resname="allocations.field.specialityWasClosed">
+        <source>allocations.field.specialityWasClosed</source>
+        <target>Was this speciality closed?</target>
+      </trans-unit>
+      <trans-unit id="Bte0yLi" resname="allocations.field.specialityClosed">
+        <source>allocations.field.specialityClosed</source>
+        <target>Yes (Closed)</target>
+      </trans-unit>
+      <trans-unit id="C2cMZ.u" resname="allocations.field.specialityOpen">
+        <source>allocations.field.specialityOpen</source>
+        <target>No (Open)</target>
+      </trans-unit>
+      <trans-unit id="jxx_za8" resname="allocations.field.handoverPoint">
+        <source>allocations.field.handoverPoint</source>
+        <target>Handover Point</target>
+      </trans-unit>
+      <trans-unit id="jxXlE6S" resname="allocations.card.deployment">
+        <source>allocations.card.deployment</source>
+        <target>Deployment</target>
+      </trans-unit>
+      <trans-unit id="aSye1u3" resname="allocations.field.pzc">
+        <source>allocations.field.pzc</source>
+        <target>PZC</target>
+      </trans-unit>
+      <trans-unit id="wu4mAac" resname="allocations.field.SK">
+        <source>allocations.field.SK</source>
+        <target>SK</target>
+      </trans-unit>
+      <trans-unit id="VAvrtYV" resname="allocations.field.RMIText">
+        <source>allocations.field.RMIText</source>
+        <target>RMI with Text</target>
+      </trans-unit>
+      <trans-unit id="tQGAeXr" resname="allocations.field.secondaryRMIText">
+        <source>allocations.field.secondaryRMIText</source>
+        <target>Secondary RMI with Text</target>
+      </trans-unit>
+      <trans-unit id="luVm1wl" resname="allocations.field.noSecondaryRMI">
+        <source>allocations.field.noSecondaryRMI</source>
+        <target>No secondary RMI</target>
+      </trans-unit>
+      <trans-unit id="8LJczjD" resname="allocations.field.occasion">
+        <source>allocations.field.occasion</source>
+        <target>Occasion</target>
+      </trans-unit>
+      <trans-unit id="kSW7Gi2" resname="allocations.field.assignment">
+        <source>allocations.field.assignment</source>
+        <target>Assignment</target>
+      </trans-unit>
+      <trans-unit id="2oj8F3T" resname="allocations.field.transport">
+        <source>allocations.field.transport</source>
+        <target>Transport</target>
+      </trans-unit>
+      <trans-unit id="NgKRY09" resname="allocations.field.modeOfTransport">
+        <source>allocations.field.modeOfTransport</source>
+        <target>Mode of Transport</target>
+      </trans-unit>
+      <trans-unit id="t3mijg5" resname="allocations.field.isWithPhysician">
+        <source>allocations.field.isWithPhysician</source>
+        <target>Is with Physician</target>
+      </trans-unit>
+      <trans-unit id="1ZR7Ta7" resname="allocations.field.isWithPhysician.true">
+        <source>allocations.field.isWithPhysician.true</source>
+        <target>Yes (N+)</target>
+      </trans-unit>
+      <trans-unit id="GA5hkhg" resname="allocations.field.isWithPhysician.false">
+        <source>allocations.field.isWithPhysician.false</source>
+        <target>No (N-)</target>
+      </trans-unit>
+      <trans-unit id="zy3fCt." resname="allocations.field.requiresResus">
+        <source>allocations.field.requiresResus</source>
+        <target>Requires Resus</target>
+      </trans-unit>
+      <trans-unit id="syWT5x1" resname="allocations.field.requiresResus.true">
+        <source>allocations.field.requiresResus.true</source>
+        <target>Yes (S+)</target>
+      </trans-unit>
+      <trans-unit id="KUzA.je" resname="allocations.field.requiresResus.false">
+        <source>allocations.field.requiresResus.false</source>
+        <target>No (S-)</target>
+      </trans-unit>
+      <trans-unit id="0rLcw3T" resname="allocations.field.requiresCathlab">
+        <source>allocations.field.requiresCathlab</source>
+        <target>Requires Cathlab</target>
+      </trans-unit>
+      <trans-unit id="nolfr5J" resname="allocations.field.requiresCathlab.true">
+        <source>allocations.field.requiresCathlab.true</source>
+        <target>Yes (H+)</target>
+      </trans-unit>
+      <trans-unit id="c5ibvXn" resname="allocations.field.requiresCathlab.false">
+        <source>allocations.field.requiresCathlab.false</source>
+        <target>No (H-)</target>
+      </trans-unit>
+      <trans-unit id="Ke3gFse" resname="allocations.field.commentary">
+        <source>allocations.field.commentary</source>
+        <target>Commentary</target>
+      </trans-unit>
+      <trans-unit id="_2FZBQj" resname="allocations.field.noCommentary">
+        <source>allocations.field.noCommentary</source>
+        <target>No Comment.</target>
+      </trans-unit>
+      <trans-unit id="J7yQf2G" resname="allocations.card.timestamps">
+        <source>allocations.card.timestamps</source>
+        <target>Timestamps</target>
+      </trans-unit>
+      <trans-unit id="jr.GpSs" resname="allocations.field.createdAt">
+        <source>allocations.field.createdAt</source>
+        <target>Created at</target>
+      </trans-unit>
+      <trans-unit id="p86RFby" resname="allocations.field.arrivalAt">
+        <source>allocations.field.arrivalAt</source>
+        <target>Arrival at</target>
+      </trans-unit>
+      <trans-unit id="nWgxoDc" resname="allocations.card.patient">
+        <source>allocations.card.patient</source>
+        <target>Patient</target>
+      </trans-unit>
+      <trans-unit id="Kn.0XWU" resname="allocations.field.age">
+        <source>allocations.field.age</source>
+        <target>Age</target>
+      </trans-unit>
+      <trans-unit id="JsktL55" resname="allocations.field.gender">
+        <source>allocations.field.gender</source>
+        <target>Gender</target>
+      </trans-unit>
+      <trans-unit id="sSgj1Zy" resname="allocations.field.gender.male">
+        <source>allocations.field.gender.male</source>
+        <target>Male</target>
+      </trans-unit>
+      <trans-unit id="efW.JGO" resname="allocations.field.gender.female">
+        <source>allocations.field.gender.female</source>
+        <target>Female</target>
+      </trans-unit>
+      <trans-unit id="FLUwXcc" resname="allocations.field.gender.other">
+        <source>allocations.field.gender.other</source>
+        <target>Other</target>
+      </trans-unit>
+      <trans-unit id="Fcj4gtX" resname="allocations.field.isCPR">
+        <source>allocations.field.isCPR</source>
+        <target>Is CPR?</target>
+      </trans-unit>
+      <trans-unit id="ywS_Rrt" resname="allocations.field.isCPR.true">
+        <source>allocations.field.isCPR.true</source>
+        <target>Yes (R+)</target>
+      </trans-unit>
+      <trans-unit id="wXXlU4l" resname="allocations.field.isCPR.false">
+        <source>allocations.field.isCPR.false</source>
+        <target>No (R-)</target>
+      </trans-unit>
+      <trans-unit id="FKv91UW" resname="allocations.field.infectious">
+        <source>allocations.field.infectious</source>
+        <target>Is Infectious?</target>
+      </trans-unit>
+      <trans-unit id="b64slMh" resname="allocations.field.isInfectious.false">
+        <source>allocations.field.isInfectious.false</source>
+        <target>No.</target>
+      </trans-unit>
+      <trans-unit id="X96TrgJ" resname="allocations.field.isVentilated">
+        <source>allocations.field.isVentilated</source>
+        <target>Is ventilated?</target>
+      </trans-unit>
+      <trans-unit id="Fn40ZBK" resname="allocations.field.isVentilated.true">
+        <source>allocations.field.isVentilated.true</source>
+        <target>Yes (B+)</target>
+      </trans-unit>
+      <trans-unit id="A5TWQID" resname="allocations.field.isVentilated.false">
+        <source>allocations.field.isVentilated.false</source>
+        <target>No (B-)</target>
+      </trans-unit>
+      <trans-unit id="a2jd15L" resname="allocations.field.isPregnant">
+        <source>allocations.field.isPregnant</source>
+        <target>Is pregnant?</target>
+      </trans-unit>
+      <trans-unit id="O9wC7Sq" resname="allocations.field.isPregnant.true">
+        <source>allocations.field.isPregnant.true</source>
+        <target>Yes</target>
+      </trans-unit>
+      <trans-unit id="41AOj2I" resname="allocations.field.isPregnant.false">
+        <source>allocations.field.isPregnant.false</source>
+        <target>No</target>
+      </trans-unit>
+      <trans-unit id="pF54nx1" resname="allocations.field.isShock">
+        <source>allocations.field.isShock</source>
+        <target>Is schock?</target>
+      </trans-unit>
+      <trans-unit id="zI7O0yr" resname="allocations.field.isShock.true">
+        <source>allocations.field.isShock.true</source>
+        <target>Yes</target>
+      </trans-unit>
+      <trans-unit id="BpwrbAs" resname="allocations.field.isShock.false">
+        <source>allocations.field.isShock.false</source>
+        <target>No</target>
+      </trans-unit>
+      <trans-unit id="tWd9GRa" resname="allocations.field.isWorkAccident">
+        <source>allocations.field.isWorkAccident</source>
+        <target>Is work/ school accident?</target>
+      </trans-unit>
+      <trans-unit id="wf4hSE4" resname="allocations.field.isWorkAccident.true">
+        <source>allocations.field.isWorkAccident.true</source>
+        <target>Yes (BG+)</target>
+      </trans-unit>
+      <trans-unit id="yAtBjRQ" resname="allocations.field.isWorkAccident.false">
+        <source>allocations.field.isWorkAccident.false</source>
+        <target>No (BG-)</target>
+      </trans-unit>
+      <trans-unit id="uHbF2hZ" resname="allocations.field.import">
+        <source>allocations.field.import</source>
+        <target>Import</target>
+      </trans-unit>
+      <trans-unit id="ntInA7_" resname="allocations.field.importedBy">
+        <source>allocations.field.importedBy</source>
+        <target>Imported by %name%.</target>
+      </trans-unit>
+      <trans-unit id="xjESv_S" resname="allocations.field.importedAt">
+        <source>allocations.field.importedAt</source>
+        <target>Imported at %time%.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

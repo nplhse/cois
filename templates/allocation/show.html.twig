@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Allocation (#{{ allocation.id }} - {{ parent() }}
+    {{ 'allocations.show.title'|trans }} (#{{ allocation.id }}) - {{ parent() }}
 {% endblock %}
 
 {% block stylesheets %}
@@ -22,24 +22,25 @@
             <a class="btn btn-outline-primary"
                 href="{{ path('allocation_index') }}"
                 role="button">
-                Back to list
+                {{ 'allocations.link.back'|trans }}
             </a>
         </div>
     </div>
 
     <h1>
-        Allocation <small>(<i>#{{ allocation.id }}</i>)</small>
+        {{ 'allocations.show.title'|trans }}
+        <small>(<i>#{{ allocation.id }}</i>)</small>
     </h1>
 
     <div class="row">
         <div class="col-md-8">
             <div class="card mb-3">
                 <div class="card-header">
-                    Hospital
+                    {{ 'allocations.card.hospital'|trans }}
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
-                        Hospital
+                        {{ 'allocations.field.hospital'|trans }}
                     </h5>
                     <p>
                         <a href="{{
@@ -55,12 +56,12 @@
                     </p>
 
                     <h5 class="card-title">
-                        Areas
+                        {{ 'allocations.fields.area'|trans }}
                     </h5>
                     <div class="row">
                         <div class="col-6">
                             <h6 class="card-subtitle text-muted">
-                                Supply Area
+                                {{ 'allocations.field.supplyArea'|trans }}
                             </h6>
                             <p>
                                 {{ allocation.supplyArea }}
@@ -68,7 +69,7 @@
                         </div>
                         <div class="col-6">
                             <h6 class="card-subtitle text-muted">
-                                Dispatch Area
+                                {{ 'allocations.field.dispatchArea'|trans }}
                             </h6>
                             <p>
                                 {{ allocation.dispatchArea }}
@@ -79,7 +80,7 @@
                     <div class="row">
                         <div class="col-6">
                             <h5 class="card-title">
-                                Speciality
+                                {{ 'allocations.field.speciality'|trans }}
                             </h5>
                             <p>
                                 {{ allocation.speciality }}
@@ -90,7 +91,9 @@
                                 != allocation.specialityDetail %}
                             <div class="col-6">
                                 <h5 class="card-title">
-                                    Detail
+                                    {{
+                                        'allocations.field.specialityDetail'|trans
+                                    }}
                                 </h5>
                                 <p>
                                     {{ allocation.specialityDetail }}
@@ -101,21 +104,29 @@
                     <div class="row">
                         <div class="col-6">
                             <h6 class="card-title text-muted">
-                                Speciality was closed?
+                                {{
+                                    'allocations.field.specialityWasClosed'|trans
+                                }}
                             </h6>
                             <p {{
                                 allocation.specialityWasClosed
                                     ? 'class="text-danger fw-bold"'
                                     : 'class="text-success"'
                                 }}>
-                                {{ allocation.specialityWasClosed
-                                    ? 'Yes (Closed)'
-                                    : 'No (Open)' }}
+                                {% if allocation.specialityWasClosed %}
+                                    {{
+                                        'allocations.field.specialityClosed'|trans
+                                    }}
+                                {% else %}
+                                    {{
+                                        'allocations.field.specialityOpen'|trans
+                                    }}
+                                {% endif %}
                             </p>
                         </div>
                         <div class="col-6">
                             <h6 class="card-title text-muted">
-                                Handover point
+                                {{ 'allocations.field.handoverPoint'|trans }}
                             </h6>
                             <p>
                                 {{ allocation.handoverPoint }}
@@ -127,16 +138,16 @@
 
             <div class="card mb-3">
                 <div class="card-header">
-                    Deployment
+                    {{ 'allocations.card.deployment'|trans }}
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
-                        PZC
+                        {{ 'allocations.field.pzc'|trans }}
                     </h5>
                     <div class="row">
                         <div class="col-2">
                             <h6 class="card-subtitle text-muted">
-                                SK
+                                {{ 'allocations.field.SK'|trans }}
                             </h6>
                             {% if allocation.SK == '1' %}
                                 <p class="text-danger text-center fw-bold fs-1">
@@ -154,18 +165,22 @@
                         </div>
                         <div class="col-10">
                             <h6 class="card-subtitle text-muted">
-                                RMI with Text
+                                {{ 'allocations.field.RMIText'|trans }}
                             </h6>
                             <p>
                                 {{ allocation.RMI }} {{ allocation.pZCText }}
                             </p>
                             <h6 class="card-subtitle text-muted">
-                                Secondary RMI with Text
+                                {{ 'allocations.field.secondaryRMIText'|trans }}
                             </h6>
                             <p class="text-muted">
-                                {{ allocation.secondaryPZCText
-                                    ? allocation.secondaryPZCText
-                                    : 'None' }}
+                                {% if allocation.secondaryPZCText %}
+                                    {{ allocation.secondaryPZCText }}
+                                {% else %}
+                                    {{
+                                        'allocations.field.noSecondaryRMI'|trans
+                                    }} }}
+                                {% endif %}
                             </p>
                         </div>
                     </div>
@@ -173,7 +188,7 @@
                     <div class="row">
                         <div class="col-6">
                             <h6 class="card-subtitle text-muted">
-                                Occasion
+                                {{ 'allocations.field.occasion'|trans }}
                             </h6>
                             <p>
                                 {{ allocation.occasion }}
@@ -181,7 +196,7 @@
                         </div>
                         <div class="col-6">
                             <h6 class="card-subtitle text-muted">
-                                Assignment
+                                {{ 'allocations.field.assignment'|trans }}
                             </h6>
                             <p>
                                 {{ allocation.assignment }}
@@ -190,12 +205,12 @@
                     </div>
 
                     <h5 class="card-title">
-                        Transport
+                        {{ 'allocations.field.transport'|trans }}
                     </h5>
                     <div class="row">
                         <div class="col-6">
                             <h6 class="card-subtitle text-muted">
-                                Transport
+                                {{ 'allocations.field.modeOfTransport'|trans }}
                             </h6>
                             <p>
                                 {{ allocation.modeOfTransport }}
@@ -203,16 +218,22 @@
                         </div>
                         <div class="col-6">
                             <h6 class="card-subtitle text-muted">
-                                With physician?
+                                {{ 'allocations.field.isWithPhysician'|trans }}
                             </h6>
                             <p {{
                                 allocation.isWithPhysician
                                     ? 'class="text-danger fw-bold"'
                                     : 'class="text-success"'
                                 }}>
-                                {{ allocation.isWithPhysician
-                                    ? 'Yes (N+)'
-                                    : 'No (N-)' }}
+                                {% if allocation.isWithPhysician %}
+                                    {{
+                                        'allocations.field.isWithPhysician.true'|trans
+                                    }}
+                                {% else %}
+                                    {{
+                                        'allocations.field.isWithPhysician.false'|trans
+                                    }} }}
+                                {% endif %}
                             </p>
                         </div>
                     </div>
@@ -221,42 +242,56 @@
                     <div class="row">
                         <div class="col-6">
                             <h6 class="card-subtitle text-muted">
-                                Requires Resus
+                                {{ 'allocations.field.requiresResus'|trans }}
                             </h6>
                             <p {{
                                 allocation.requiresResus
                                     ? 'class="text-danger fw-bold"'
                                     : 'class="text-success"'
                                 }}>
-                                {{ allocation.requiresResus
-                                    ? 'Yes (S+)'
-                                    : 'No (S-)' }}
+                                {% if allocation.requiresResus %}
+                                    {{
+                                        'allocations.field.requiresResus.true'|trans
+                                    }}
+                                {% else %}
+                                    {{
+                                        'allocations.field.requiresResus.false'|trans
+                                    }} }}
+                                {% endif %}
                             </p>
                         </div>
                         <div class="col-6">
                             <h6 class="card-subtitle text-muted">
-                                Requires Cathlab
+                                {{ 'allocations.field.requiresCathlab'|trans }}
                             </h6>
                             <p {{
                                 allocation.requiresCathlab
                                     ? 'class="text-danger fw-bold"'
                                     : 'class="text-success"'
                                 }}>
-                                {{ allocation.requiresCathlab
-                                    ? 'Yes (H+)'
-                                    : 'No (H-)' }}
+                                {% if allocation.requiresCathlab %}
+                                    {{
+                                        'allocations.field.requiresCathlab.true'|trans
+                                    }}
+                                {% else %}
+                                    {{
+                                        'allocations.field.requiresCathlab.false'|trans
+                                    }} }}
+                                {% endif %}
                             </p>
                         </div>
                     </div>
 
                     <h6 class="card-title text-muted">
-                        Commentary
+                        {{ 'allocations.field.commentary'|trans }}
                     </h6>
                     <p>
                         <i>
-                            {{ allocation.comment
-                                ? allocation.comment
-                                : 'None' }}
+                            {% if allocation.comment %}
+                                {{ allocation.comment }}
+                            {% else %}
+                                {{ 'allocations.field.noCommentary'|trans }}
+                            {% endif %}
                         </i>
                     </p>
                 </div>
@@ -266,11 +301,11 @@
         <div class="col-md-4">
             <div class="card mb-3">
                 <div class="card-header">
-                    Timestamps
+                    {{ 'allocations.card.timestamps'|trans }}
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
-                        Created at
+                        {{ 'allocations.field.createdAt'|trans }}
                     </h5>
                     <p>
                         {{ allocation.creationWeekday }}, {{
@@ -279,7 +314,7 @@
                     </p>
 
                     <h5 class="card-title">
-                        Arrival at
+                        {{ 'allocations.field.arrivalAt'|trans }}
                     </h5>
                     <p>
                         {{ allocation.arrivalWeekday }}, {{
@@ -291,13 +326,13 @@
 
             <div class="card mb-3">
                 <div class="card-header">
-                    Patient information
+                    {{ 'allocations.card.patient'|trans }}
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">
                             <h5 class="card-title">
-                                Age
+                                {{ 'allocations.field.age'|trans }}
                             </h5>
                             <p>
                                 {{ allocation.age }}
@@ -305,15 +340,17 @@
                         </div>
                         <div class="col-6">
                             <h5 class="card-title">
-                                Gender
+                                {{ 'allocations.field.gender'|trans }}
                             </h5>
                             <p>
                                 {% if allocation.gender == 'M' %}
-                                    Male
+                                    {{ 'allocations.field.gender.male'|trans }}
                                 {% elseif allocation.gender == 'W' %}
-                                    Female
+                                    {{
+                                        'allocations.field.gender.female'|trans
+                                    }}
                                 {% else %}
-                                    Diverse
+                                    {{ 'allocations.field.gender.other'|trans }}
                                 {% endif %}
                             </p>
                         </div>
@@ -321,82 +358,118 @@
                     <div class="row">
                         <div class="col-6">
                             <h5 class="card-title">
-                                Resuscitated
+                                {{ 'allocations.field.isCPR'|trans }}
                             </h5>
                             <p {{
                                 allocation.isCPR
                                     ? 'class="text-danger fw-bold"'
                                     : 'class="text-success"'
                                 }}>
-                                {{ allocation.isCPR ? 'Yes (R+)' : 'No (R-)' }}
+                                {% if allocation.isCPR %}
+                                    {{ 'allocations.field.isCPR.true'|trans }}
+                                {% else %}
+                                    {{ 'allocations.field.isCPR.false'|trans }}
+                                {% endif %}
                             </p>
                         </div>
                         <div class="col-6">
                             <h5 class="card-title">
-                                Infectious
+                                {{ 'allocations.field.infectious'|trans }}
                             </h5>
                             <p {{
-                                allocation.isCPR == 'Keine'
+                                allocation.isInfectious == 'Keine'
                                     ? 'class="text-warning" fw-bold'
                                     : ''
                                 }}>
-                                {{ allocation.isInfectious
-                                    ? allocation.isInfectious
-                                    : 'No' }}
+                                {% if allocation.isInfectious %}
+                                    {{ allocation.isInfectious }}
+                                {% else %}
+                                    {{
+                                        'allocations.field.isInfectious.false'|trans
+                                    }} }}
+                                {% endif %}
                             </p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <h5 class="card-title">
-                                Ventilated
+                                {{ 'allocations.field.isVentilated'|trans }}
                             </h5>
                             <p {{
                                 allocation.isVentilated
                                     ? 'class="text-danger fw-bold"'
                                     : 'class="text-success"'
                                 }}>
-                                {{ allocation.isVentilated
-                                    ? 'Yes (B+)'
-                                    : 'No (B-)' }}
+                                {% if allocation.isVentilated %}
+                                    {{
+                                        'allocations.field.isVentilated.true'|trans
+                                    }}
+                                {% else %}
+                                    {{
+                                        'allocations.field.isVentilated.false'|trans
+                                    }}
+                                {% endif %}
                             </p>
                         </div>
                         <div class="col-6">
                             <h5 class="card-title">
-                                Pregnant
+                                {{ 'allocations.field.isPregnant'|trans }}
                             </h5>
                             <p {{
                                 allocation.isPregnant
                                     ? 'class="text-warning fw-bold"'
                                     : ''
                                 }}>
-                                {{ allocation.isPregnant ? 'Yes' : 'No' }}
+                                {% if allocation.isPregnant %}
+                                    {{
+                                        'allocations.field.isPregnant.true'|trans
+                                    }}
+                                {% else %}
+                                    {{
+                                        'allocations.field.isPregnant.false'|trans
+                                    }}
+                                {% endif %}
                             </p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <h5 class="card-title">
-                                Shock
+                                {{ 'allocations.field.isShock'|trans }}
                             </h5>
                             <p {{
                                 allocation.isShock
                                     ? 'class="text-danger fw-bold"'
                                     : 'class="text-success"'
                                 }}>
-                                {{ allocation.isShock ? 'Yes' : 'No' }}
+                                {% if allocation.isShock %}
+                                    {{ 'allocations.field.isShock.true'|trans }}
+                                {% else %}
+                                    {{
+                                        'allocations.field.isShock.false'|trans
+                                    }}
+                                {% endif %}
                             </p>
                         </div>
                         <div class="col-6">
                             <h5 class="card-title">
-                                Work/ School related accident
+                                {{ 'allocations.field.isWorkAccident'|trans }}
                             </h5>
                             <p {{
                                 allocation.isWorkAccident
                                     ? 'class="text-warning fw-bold"'
                                     : ''
                                 }}>
-                                {{ allocation.isWorkAccident ? 'Yes' : 'No' }}
+                                {% if allocation.isWorkAccident %}
+                                    {{
+                                        'allocations.field.isWorkAccident.true'|trans
+                                    }}
+                                {% else %}
+                                    {{
+                                        'allocations.field.isWorkAccident.false'|trans
+                                    }}
+                                {% endif %}
                             </p>
                         </div>
                     </div>
@@ -414,13 +487,23 @@
                                 }
                             )
                             }}">
-                            Import <small>(#<i>{{ allocation.import.id }})</i></small>
+                            {{ 'allocations.field.import'|trans }}
+                            <small>(#<i>{{ allocation.import.id }})</i></small>
                         </a>
                     </h5>
                     <p>
-                        This allocation was imported by {{
-                            importUser.username
-                        }} at {{ allocation.import.createdAt|date('d.m.Y H:i:s') }}
+                        {{
+                            'allocations.field.importedBy'|trans({
+                                '%name%': importUser.username
+                            })
+                        }}
+                        {{
+                            'allocations.field.importedAt'|trans({
+                                '%time%': allocation.import.createdAt|date(
+                                    'd.m.Y H:i:s'
+                                )
+                            })
+                        }}
                     </p>
                 </div>
             </div>
@@ -432,7 +515,7 @@
             <a class="btn btn-outline-primary"
                 href="{{ path('allocation_index') }}"
                 role="button">
-                Back to list
+                {{ 'allocations.link.back'|trans }}
             </a>
         </div>
     </div>

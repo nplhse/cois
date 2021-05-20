@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/allocations")
+ * @Route("/{_locale<%app.supported_locales%>}/allocations")
  * @IsGranted("ROLE_USER")
  */
 class AllocationController extends AbstractController
