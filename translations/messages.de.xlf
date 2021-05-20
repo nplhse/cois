@@ -631,7 +631,7 @@
       </trans-unit>
       <trans-unit id="h3LmmlH" resname="security.requestReset.message">
         <source>security.requestReset.message</source>
-        <target>Tragen Sie Ihre E-Mail Addresse ein, um eine E-Mail zum zürcksetzen des Passworts zu erhalten.</target>
+        <target>Tragen Sie Ihre E-Mail Addresse ein, um eine E-Mail zum zurücksetzen des Passworts zu erhalten.</target>
       </trans-unit>
       <trans-unit id="raAxerI" resname="security.requestReset.button">
         <source>security.requestReset.button</source>
