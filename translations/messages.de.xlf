@@ -75,7 +75,7 @@
       </trans-unit>
       <trans-unit id="fDkyjSH" resname="dashboard.allocation.text">
         <source>dashboard.allocation.text</source>
-        <target>Durchsuche die Daten, filtere sie und entdecke, was IVENA für uns bereithält.</target>
+        <target>Durchsuchen Sie die Daten, filteren und entdecken Sie, was IVENA enthält.</target>
       </trans-unit>
       <trans-unit id="Ehfkhx2" resname="dashboard.allocation.button">
         <source>dashboard.allocation.button</source>
@@ -83,15 +83,15 @@
       </trans-unit>
       <trans-unit id="J0CbtE_" resname="dashboard.hospital.title">
         <source>dashboard.hospital.title</source>
-        <target>Deine Klinik</target>
+        <target>Ihre Klinik</target>
       </trans-unit>
       <trans-unit id="elehn1v" resname="dashboard.hospital.text">
         <source>dashboard.hospital.text</source>
-        <target>Sieh nach, ob die Angaben deiner Klinik vollständig und korrekt sind.</target>
+        <target>Sehen Sie nach, ob die Angaben Ihrer Klinik vollständig und korrekt sind.</target>
       </trans-unit>
       <trans-unit id="PGbQUwe" resname="dashboard.hospital.button_edit">
         <source>dashboard.hospital.button_edit</source>
-        <target>Deine Klinik bearbeiten</target>
+        <target>Ihre Klinik bearbeiten</target>
       </trans-unit>
       <trans-unit id="PNDybNP" resname="dashboard.hospital.button_view">
         <source>dashboard.hospital.button_view</source>
@@ -103,7 +103,7 @@
       </trans-unit>
       <trans-unit id="7mzdgx9" resname="dashboard.import.text">
         <source>dashboard.import.text</source>
-        <target>Füge Daten zu unserer Datenbank hinzu.</target>
+        <target>Fügen Sie Daten zur Datenbank hinzu.</target>
       </trans-unit>
       <trans-unit id="Dtm_yIw" resname="dashboard.import.button">
         <source>dashboard.import.button</source>
@@ -123,7 +123,7 @@
       </trans-unit>
       <trans-unit id="bFqhgee" resname="dashboard.allocations.by_your_hospital">
         <source>dashboard.allocations.by_your_hospital</source>
-        <target>Mit %count% Einsätzen deiner Klinik.</target>
+        <target>Mit %count% Einsätzen Ihrer Klinik.</target>
       </trans-unit>
       <trans-unit id="WIzt02l" resname="dashboard.imports">
         <source>dashboard.imports</source>
@@ -131,7 +131,7 @@
       </trans-unit>
       <trans-unit id="fj.rWWU" resname="dashboard.imports.by_you">
         <source>dashboard.imports.by_you</source>
-        <target>Mit %count% importierten Datensätzen von dir.</target>
+        <target>Mit %count% importierten Datensätzen von Ihnen.</target>
       </trans-unit>
       <trans-unit id="jxa9tb_" resname="hospitals.edit.title">
         <source>hospitals.edit.title</source>
@@ -139,7 +139,7 @@
       </trans-unit>
       <trans-unit id="OFscjRC" resname="hospitals.link_view">
         <source>hospitals.link_view</source>
-        <target>Deine Klinik ansehen</target>
+        <target>Ihre Klinik ansehen</target>
       </trans-unit>
       <trans-unit id="YomWZTl" resname="hospitals.link_back">
         <source>hospitals.link_back</source>
@@ -163,7 +163,7 @@
       </trans-unit>
       <trans-unit id="tPfLU0Z" resname="hospitals.link_edit">
         <source>hospitals.link_edit</source>
-        <target>Deine Klinik bearbeiten</target>
+        <target>Ihre Klinik bearbeiten</target>
       </trans-unit>
       <trans-unit id="s57Ff7b" resname="hospitals.address.field">
         <source>hospitals.address.field</source>
