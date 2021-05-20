@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/import")
+ * @Route("/{_locale<%app.supported_locales%>}/import")
  * @IsGranted("ROLE_USER")
  */
 class ImportController extends AbstractController

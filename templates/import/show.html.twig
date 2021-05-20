@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Import - {{ parent() }}
+    {{ 'import.show.title'|trans }} (#{{ import.id }}) - {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -11,19 +11,20 @@
                 <a class="btn btn-outline-primary disabled"
                     href="#"
                     role="button">
-                    Delete import
+                    {{ 'import.button.delete'|trans }}
                 </a>
             {% endif %}
             <a class="btn btn-outline-primary"
                 href="{{ path('import_index') }}"
                 role="button">
-                Back to list
+                {{ 'import.link.back'|trans }}
             </a>
         </div>
     </div>
 
     <h2>
-        {{ import.caption }} <small>(<i>#{{ import.id }}</i>)</small>
+        {{ 'import.show.title'|trans }} - {{ import.caption }}
+        <small>(<i>#{{ import.id }}</i>)</small>
     </h2>
     <hr />
 
@@ -31,11 +32,11 @@
         <div class="col-md-8">
             <div class="card mb-3">
                 <div class="card-header">
-                    Basic information
+                    {{ 'import.card.basics'|trans }}
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
-                        Caption
+                        {{ 'import.field.caption'|trans }}
                     </h5>
                     <p>
                         {{ import.caption }}
@@ -44,7 +45,7 @@
                     <div class="row">
                         <div class="col-6">
                             <h5 class="card-title">
-                                Contents
+                                {{ 'import.field.contents'|trans }}
                             </h5>
                             <p>
                                 {{ import.contents }}
@@ -52,7 +53,7 @@
                         </div>
                         <div class="col-6">
                             <h5 class="card-title">
-                                Status
+                                {{ 'import.field.status'|trans }}
                             </h5>
                             <p>
                                 {% if import.status == 'finished' %}
@@ -63,14 +64,14 @@
                                     <div class="spinner-border text-secondary spinner-border-sm"
                                         role="status">
                                         <span class="visually-hidden">
-                                            Loading...
+                                            {{ 'import.field.loading'|trans }}
                                         </span>
                                     </div>
                                 {% elseif import.status == 'processing' %}
                                     <div class="spinner-border text-primary spinner-border-sm"
                                         role="status">
                                         <span class="visually-hidden">
-                                            Loading...
+                                            {{ 'import.field.loading'|trans }}
                                         </span>
                                     </div>
                                 {% elseif import.status == 'failed' %}
@@ -88,23 +89,27 @@
 
             <div class="card mb-3">
                 <div class="card-header">
-                    Details
+                    {{ 'import.card.details'|trans }}
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
-                        Error
+                        {{ 'import.field.error'|trans }}
                     </h5>
                     <p>
-                        {{ import.lastError ? import.lastError : 'None' }}
+                        {% if import.lastError %}
+                            {{ import.lastError }}
+                        {% else %}
+                            {{ 'import.field.noError'|trans }}
+                        {% endif %}
                     </p>
 
                     <h5 class="card-title">
-                        Statistics
+                        {{ 'import.field.statistics'|trans }}
                     </h5>
                     <div class="row">
                         <div class="col-6">
                             <h6 class="card-subtitle text-muted">
-                                Number of items
+                                {{ 'import.field.itemCount'|trans }}
                             </h6>
                             <p>
                                 {{ import.itemCount }}
@@ -112,7 +117,7 @@
                         </div>
                         <div class="col-6">
                             <h6 class="card-subtitle text-muted">
-                                Runtime
+                                {{ 'import.field.runtime'|trans }}
                             </h6>
                             <p>
                                 {{ import.duration|number_format(5, '.', ',') }}s
@@ -122,7 +127,7 @@
                     <div class="row">
                         <div class="col-6">
                             <h6 class="card-subtitle text-muted">
-                                Times run
+                                {{ 'import.field.timesRun'|trans }}
                             </h6>
                             <p>
                                 {{ import.timesRun }}
@@ -137,17 +142,31 @@
             <div class="card border-primary mb-3">
                 <div class="card-body">
                     <h5 class="card-title">
-                        Created by
+                        {{ 'import.field.createdBy'|trans }}
                     </h5>
                     <p>
                         {{ import.user }}
                     </p>
 
                     <p>
-                        Created at: {{ import.createdAt ? import.createdAt|date('d.m.Y H:i:s') : '' }}
+                        {% if import.createdAt %}
+                            {{
+                                'import.field.createdAt'|trans({
+                                    '%time%': import.createdAt|date(
+                                        'd.m.Y H:i:s'
+                                    )
+                                })
+                            }}
+                        {% endif %}
                     </p>
                     <p>
-                        Last run: {{ import.lastRun ? import.lastRun|date('d.m.Y H:i:s') : '' }}
+                        {% if import.lastRun %}
+                            {{
+                                'import.field.lastRun'|trans({
+                                    '%time%': import.lastRun|date('d.m.Y H:i:s')
+                                })
+                            }}
+                        {% endif %}
                     </p>
                 </div>
             </div>
@@ -156,7 +175,7 @@
                 <div class="card border-warning text-warning mb-3">
                     <div class="card-body">
                         <h5 class="card-title">
-                            Debugging
+                            {{ 'import.card.debugging'|trans }}
                         </h5>
                         <a href="{{
                             path(
@@ -166,7 +185,7 @@
                                 }
                             )
                             }}">
-                            Download file
+                            {{ 'import.field.download'|trans }}
                         </a>
                     </div>
                 </div>
@@ -180,13 +199,13 @@
                 <a class="btn btn-outline-primary disabled"
                     href="#"
                     role="button">
-                    Delete import
+                    {{ 'import.button.delete'|trans }}
                 </a>
             {% endif %}
             <a class="btn btn-outline-primary"
                 href="{{ path('import_index') }}"
                 role="button">
-                Back to list
+                {{ 'import.link.back'|trans }}
             </a>
         </div>
     </div>

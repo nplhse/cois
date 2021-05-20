@@ -473,6 +473,126 @@
         <source>allocations.field.importedAt</source>
         <target>Imported at %time%.</target>
       </trans-unit>
+      <trans-unit id="jPnL6cj" resname="import.title">
+        <source>import.title</source>
+        <target>Import</target>
+      </trans-unit>
+      <trans-unit id="oibupu6" resname="import.list.title">
+        <source>import.list.title</source>
+        <target>Your Imports</target>
+      </trans-unit>
+      <trans-unit id="kTAXuhX" resname="import.fields.id">
+        <source>import.fields.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="GGh7KIO" resname="import.fields.caption">
+        <source>import.fields.caption</source>
+        <target>Caption</target>
+      </trans-unit>
+      <trans-unit id="JBWEg_C" resname="import.fields.date">
+        <source>import.fields.date</source>
+        <target>Date</target>
+      </trans-unit>
+      <trans-unit id="OTIaXaM" resname="import.fields.status">
+        <source>import.fields.status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="1XYRCsh" resname="import.fields.loading">
+        <source>import.fields.loading</source>
+        <target>Loading</target>
+      </trans-unit>
+      <trans-unit id="JDWT.kr" resname="import.button.view">
+        <source>import.button.view</source>
+        <target>View</target>
+      </trans-unit>
+      <trans-unit id="8YeW.Bb" resname="import.button.delete">
+        <source>import.button.delete</source>
+        <target>Delete</target>
+      </trans-unit>
+      <trans-unit id="KjpGG6i" resname="import.noUploads">
+        <source>import.noUploads</source>
+        <target>No files have been uploaded.</target>
+      </trans-unit>
+      <trans-unit id="EDVOt5H" resname="import.new.title">
+        <source>import.new.title</source>
+        <target>Add a new import</target>
+      </trans-unit>
+      <trans-unit id="q9eJJHx" resname="import.show.title">
+        <source>import.show.title</source>
+        <target>Show import</target>
+      </trans-unit>
+      <trans-unit id="fZ2cYDa" resname="import.link.back">
+        <source>import.link.back</source>
+        <target>Back</target>
+      </trans-unit>
+      <trans-unit id="KWpJppl" resname="import.card.basics">
+        <source>import.card.basics</source>
+        <target>Basics</target>
+      </trans-unit>
+      <trans-unit id="G7iJ9C5" resname="import.field.caption">
+        <source>import.field.caption</source>
+        <target>Caption</target>
+      </trans-unit>
+      <trans-unit id="bB9W5Bd" resname="import.field.contents">
+        <source>import.field.contents</source>
+        <target>Contents</target>
+      </trans-unit>
+      <trans-unit id="ju62sly" resname="import.field.status">
+        <source>import.field.status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="PUXQElR" resname="import.field.loading">
+        <source>import.field.loading</source>
+        <target>Loading</target>
+      </trans-unit>
+      <trans-unit id="CGBHmDG" resname="import.card.details">
+        <source>import.card.details</source>
+        <target>Details</target>
+      </trans-unit>
+      <trans-unit id="FsGp6_I" resname="import.field.error">
+        <source>import.field.error</source>
+        <target>Error</target>
+      </trans-unit>
+      <trans-unit id="WyjOrQQ" resname="import.field.noError">
+        <source>import.field.noError</source>
+        <target>No errors.</target>
+      </trans-unit>
+      <trans-unit id=".IYiLDj" resname="import.field.statistics">
+        <source>import.field.statistics</source>
+        <target>Statistics</target>
+      </trans-unit>
+      <trans-unit id="t3EuDZr" resname="import.field.itemCount">
+        <source>import.field.itemCount</source>
+        <target>Item count</target>
+      </trans-unit>
+      <trans-unit id="ORl2mGO" resname="import.field.runtime">
+        <source>import.field.runtime</source>
+        <target>Runtime</target>
+      </trans-unit>
+      <trans-unit id="x8kpI2E" resname="import.field.timesRun">
+        <source>import.field.timesRun</source>
+        <target>Times run</target>
+      </trans-unit>
+      <trans-unit id="D_3EHYf" resname="import.field.createdBy">
+        <source>import.field.createdBy</source>
+        <target>Created by</target>
+      </trans-unit>
+      <trans-unit id="00V9HyA" resname="import.field.createdAt">
+        <source>import.field.createdAt</source>
+        <target>Created at: %time%</target>
+      </trans-unit>
+      <trans-unit id="qyVm9oB" resname="import.field.lastRun">
+        <source>import.field.lastRun</source>
+        <target>Last run at: %time%</target>
+      </trans-unit>
+      <trans-unit id="FRNSwCx" resname="import.card.debugging">
+        <source>import.card.debugging</source>
+        <target>Debugging</target>
+      </trans-unit>
+      <trans-unit id="C1f447." resname="import.field.download">
+        <source>import.field.download</source>
+        <target>Download file</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
