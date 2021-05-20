@@ -517,7 +517,7 @@
         <source>import.new.title</source>
         <target>Neue Daten importieren</target>
       </trans-unit>
-      <trans-unit id="q9eJJHx" resname="import.show.title">
+      <trans-unit id="5e9WaPb" resname="import.show.title">
         <source>import.show.title</source>
         <target>Import anzeigen</target>
       </trans-unit>
@@ -533,7 +533,7 @@
         <source>import.field.caption</source>
         <target>Titel</target>
       </trans-unit>
-      <trans-unit id="bB9W5Bd" resname="import.field.contents">
+      <trans-unit id="PkImvQb" resname="import.field.contents">
         <source>import.field.contents</source>
         <target>Inhalt</target>
       </trans-unit>
@@ -592,6 +592,90 @@
       <trans-unit id="C1f447." resname="import.field.download">
         <source>import.field.download</source>
         <target>Datei herunterladen</target>
+      </trans-unit>
+      <trans-unit id="_JrLEnp" resname="security.login.title">
+        <source>security.login.title</source>
+        <target>Anmelden</target>
+      </trans-unit>
+      <trans-unit id="ZvVqbii" resname="security.login.alreadyLoggedIn">
+        <source>security.login.alreadyLoggedIn</source>
+        <target>Sie sind bereits angemeldet als %name%. Wollen Sie sich abmelden?</target>
+      </trans-unit>
+      <trans-unit id="GeCNtXW" resname="security.login.message">
+        <source>security.login.message</source>
+        <target>Tragen Sie Ihre Zugangsdaten an ein klicken Sie auf anmelden.</target>
+      </trans-unit>
+      <trans-unit id="Lpa.VEy" resname="security.login.button">
+        <source>security.login.button</source>
+        <target>Anmelden</target>
+      </trans-unit>
+      <trans-unit id="x_PUEjD" resname="security.login.rememberMe">
+        <source>security.login.rememberMe</source>
+        <target>Anmeldung beibehalten</target>
+      </trans-unit>
+      <trans-unit id="jAyXqep" resname="security.login.forgotPassword">
+        <source>security.login.forgotPassword</source>
+        <target>Haben Sie Ihr Passwort vergessen?</target>
+      </trans-unit>
+      <trans-unit id="ZKZni.Y" resname="security.link.forgotPassword">
+        <source>security.link.forgotPassword</source>
+        <target>Hier klicken, um das Passwort zurück zusetzen.</target>
+      </trans-unit>
+      <trans-unit id="1MaDcUF" resname="security.link.logout">
+        <source>security.link.logout</source>
+        <target>Klicken Sie hier, um sich abzumelden.</target>
+      </trans-unit>
+      <trans-unit id="D7LhLIZ" resname="security.requestReset.title">
+        <source>security.requestReset.title</source>
+        <target>Passwort zurücksetzen</target>
+      </trans-unit>
+      <trans-unit id="h3LmmlH" resname="security.requestReset.message">
+        <source>security.requestReset.message</source>
+        <target>Tragen Sie Ihre E-Mail Addresse ein, um eine E-Mail zum zürcksetzen des Passworts zu erhalten.</target>
+      </trans-unit>
+      <trans-unit id="raAxerI" resname="security.requestReset.button">
+        <source>security.requestReset.button</source>
+        <target>Passwort zurücksetzen</target>
+      </trans-unit>
+      <trans-unit id="GaSM3XU" resname="security.reset.title">
+        <source>security.reset.title</source>
+        <target>Passwort zurücksetzen</target>
+      </trans-unit>
+      <trans-unit id="fNwvDHV" resname="security.reset.button">
+        <source>security.reset.button</source>
+        <target>Passwort zurücksetzen</target>
+      </trans-unit>
+      <trans-unit id="6Xc7I3F" resname="security.reset.message">
+        <source>security.reset.message</source>
+        <target>Um ein neues Passwort festzulegen, tragen Sie es unten ein und bestätigen Sie.</target>
+      </trans-unit>
+      <trans-unit id="B1dO0LR" resname="security.requestResetSend.title">
+        <source>security.requestResetSend.title</source>
+        <target>E-Mail zum zurücksetzen des Passworts verschickt</target>
+      </trans-unit>
+      <trans-unit id="ywixQwm" resname="security.requestResetSend.message">
+        <source>security.requestResetSend.message</source>
+        <target>Wir haben eine E-Mail verschickt, die einen Link zum zurücksetzen Ihres Passworts enthält. Sie bleibt gültig für:</target>
+      </trans-unit>
+      <trans-unit id="m229.Ug" resname="security.requestResetSend.failure">
+        <source>security.requestResetSend.failure</source>
+        <target>Falls Sie keine E-Mail erhalten haben, prüfen Sie Ihren SPAM-Ordner, oder</target>
+      </trans-unit>
+      <trans-unit id="RCgIeOi" resname="security.requestResetSend.tryAgain">
+        <source>security.requestResetSend.tryAgain</source>
+        <target>Klicken Sie hier, um es nochmals zu versuchen.</target>
+      </trans-unit>
+      <trans-unit id="SEv2eG_" resname="security.requestMail.title">
+        <source>security.requestMail.title</source>
+        <target>Passwort zurücksetzen</target>
+      </trans-unit>
+      <trans-unit id="ZZiGCyq" resname="security.requestMail.message">
+        <source>security.requestMail.message</source>
+        <target>Wir haben eine Anfrage zum Zurücksetzen Ihres Passworts erhalten. Um fortzufahren klicken Sie auf den unten stehenden Link, oder kopieren Sie diesen und fügen ihn in Ihren Browser ein. Falls Sie keine derartige Anfrage gestellt haben, ignorieren Sie diesen Link.</target>
+      </trans-unit>
+      <trans-unit id="zEOJTdO" resname="security.requestMail.expiration">
+        <source>security.requestMail.expiration</source>
+        <target>Der Link ist gültig für: </target>
       </trans-unit>
     </body>
   </file>

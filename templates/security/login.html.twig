@@ -1,19 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ parent() }} - Log in
+    {{ 'security.login.title'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
     <h1>
-        Login
+        {{ 'security.login.title'|trans }}
     </h1>
 
     {% if app.user %}
         <div class="mb-3">
-            You are already logged in as: {{ app.user.username }}.<br />
-            Do you want to logout? <a href="{{ path('app_logout') }}">
-                Click here.
+            {{
+                'security.login.alreadyLoggedIn'|trans({
+                    '%name%': app.user.username
+                })
+            }}
+            <a href="{{ path('app_logout') }}">
+                {{ 'security.link.logout'|trans }}
             </a>
         </div>
 
@@ -22,7 +26,7 @@
         ) %}
             {% for message in messages %}
                 <div class="alert alert-{{ label }}">
-                    {{ message }}
+                    {{ message|trans }}
                 </div>
             {% endfor %}
         {% endfor %}
@@ -34,7 +38,7 @@
         {% endif %}
 
         <p>
-            Please sign in
+            {{ 'security.login.message'|trans }}
         </p>
 
         {{ form_start(form) }}
@@ -48,26 +52,26 @@
         <div class="row">
             <div class="form-group">
                 <button type="submit" class="btn btn-success">
-                    Login <span class="fa fa-lock"></span>
+                    {{ 'security.login.button'|trans }}
+                    <span class="fa fa-lock"></span>
                 </button>
 
                 &nbsp;<input type="checkbox"
                     id="remember_me"
                     name="_remember_me"
                     checked />
-                <label for="remember_me">Remember me</label>
+                <label for="remember_me">
+                    {{ 'security.login.rememberMe'|trans }}
+                </label>
             </div>
         </div>
         {{ form_end(form) }}
 
         <p>
-            Have you forgot your password? Click <a href="{{
-                path(
-                    'app_forgot_password_request'
-                )
-                }}">
-                this link
-            </a> to request a password reset.
+            {{ 'security.login.forgotPassword'|trans }}
+            <a href="{{ path('app_forgot_password_request') }}">
+                {{ 'security.link.forgotPassword'|trans }}
+            </a>
         </p>
     {% endif %}
 {% endblock %}

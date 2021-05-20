@@ -517,7 +517,7 @@
         <source>import.new.title</source>
         <target>Add a new import</target>
       </trans-unit>
-      <trans-unit id="q9eJJHx" resname="import.show.title">
+      <trans-unit id="5e9WaPb" resname="import.show.title">
         <source>import.show.title</source>
         <target>Show import</target>
       </trans-unit>
@@ -533,7 +533,7 @@
         <source>import.field.caption</source>
         <target>Caption</target>
       </trans-unit>
-      <trans-unit id="bB9W5Bd" resname="import.field.contents">
+      <trans-unit id="PkImvQb" resname="import.field.contents">
         <source>import.field.contents</source>
         <target>Contents</target>
       </trans-unit>
@@ -592,6 +592,91 @@
       <trans-unit id="C1f447." resname="import.field.download">
         <source>import.field.download</source>
         <target>Download file</target>
+      </trans-unit>
+      <trans-unit id="_JrLEnp" resname="security.login.title">
+        <source>security.login.title</source>
+        <target>Login</target>
+      </trans-unit>
+      <trans-unit id="ZvVqbii" resname="security.login.alreadyLoggedIn">
+        <source>security.login.alreadyLoggedIn</source>
+        <target>You are already logged in as: %name%. Did you want to logout? </target>
+      </trans-unit>
+      <trans-unit id="GeCNtXW" resname="security.login.message">
+        <source>security.login.message</source>
+        <target>Enter your credentials and click on login.</target>
+      </trans-unit>
+      <trans-unit id="Lpa.VEy" resname="security.login.button">
+        <source>security.login.button</source>
+        <target>Login</target>
+      </trans-unit>
+      <trans-unit id="x_PUEjD" resname="security.login.rememberMe">
+        <source>security.login.rememberMe</source>
+        <target>Remember me</target>
+      </trans-unit>
+      <trans-unit id="jAyXqep" resname="security.login.forgotPassword">
+        <source>security.login.forgotPassword</source>
+        <target>Have you forgot your password?</target>
+      </trans-unit>
+      <trans-unit id="ZKZni.Y" resname="security.link.forgotPassword">
+        <source>security.link.forgotPassword</source>
+        <target>Click here to reset your password.</target>
+      </trans-unit>
+      <trans-unit id="1MaDcUF" resname="security.link.logout">
+        <source>security.link.logout</source>
+        <target>Click here to logout.</target>
+      </trans-unit>
+      <trans-unit id="D7LhLIZ" resname="security.requestReset.title">
+        <source>security.requestReset.title</source>
+        <target>Reset your password</target>
+      </trans-unit>
+      <trans-unit id="h3LmmlH" resname="security.requestReset.message">
+        <source>security.requestReset.message</source>
+        <target>Enter your email address and we we will send you a link to reset your password.</target>
+      </trans-unit>
+      <trans-unit id="raAxerI" resname="security.requestReset.button">
+        <source>security.requestReset.button</source>
+        <target>Reset password</target>
+      </trans-unit>
+      <trans-unit id="GaSM3XU" resname="security.reset.title">
+        <source>security.reset.title</source>
+        <target>Reset your password</target>
+      </trans-unit>
+      <trans-unit id="fNwvDHV" resname="security.reset.button">
+        <source>security.reset.button</source>
+        <target>Set new password</target>
+      </trans-unit>
+      <trans-unit id="6Xc7I3F" resname="security.reset.message">
+        <source>security.reset.message</source>
+        <target>To set a new password, enter it below and click on the button to confirm.</target>
+      </trans-unit>
+      <trans-unit id="B1dO0LR" resname="security.requestResetSend.title">
+        <source>security.requestResetSend.title</source>
+        <target>Password Reset Email Sent</target>
+      </trans-unit>
+      <trans-unit id="ywixQwm" resname="security.requestResetSend.message">
+        <source>security.requestResetSend.message</source>
+        <target>An email has been sent that contains a link that you can click to reset your
+          password. It will expire in: </target>
+      </trans-unit>
+      <trans-unit id="m229.Ug" resname="security.requestResetSend.failure">
+        <source>security.requestResetSend.failure</source>
+        <target>If you don't receive an email please check your spam folder or </target>
+      </trans-unit>
+      <trans-unit id="RCgIeOi" resname="security.requestResetSend.tryAgain">
+        <source>security.requestResetSend.tryAgain</source>
+        <target>Try again.</target>
+      </trans-unit>
+      <trans-unit id="SEv2eG_" resname="security.requestMail.title">
+        <source>security.requestMail.title</source>
+        <target>Reset your password</target>
+      </trans-unit>
+      <trans-unit id="ZZiGCyq" resname="security.requestMail.message">
+        <source>security.requestMail.message</source>
+        <target>A reset of your password has been requested. To proceed click on the link below, or copy and paste it to your browser. If you didn't request it by yourself, please ignore this e-mail.</target>
+      </trans-unit>
+      <trans-unit id="zEOJTdO" resname="security.requestMail.expiration">
+        <source>security.requestMail.expiration</source>
+        <target>The link above will expire in: </target>
       </trans-unit>
     </body>
   </file>
