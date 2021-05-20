@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/user")
+ * @Route("/{_locale<%app.supported_locales%>}/user")
  * @IsGranted("ROLE_USER")
  */
 class AccountController extends AbstractController

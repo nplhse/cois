@@ -95,50 +95,50 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle"
-                               href="#"
-                               id="transDropdown"
-                               role="button"
-                               data-bs-toggle="dropdown"
-                               aria-expanded="false">
+                                href="#"
+                                id="transDropdown"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
                                 {{
-                                app.request.locale
-                                |locale_name(app.request.locale)
-                                |u.title
+                                    app.request.locale
+                                        |locale_name(app.request.locale)
+                                        |u.title
                                 }}
                             </a>
                             <ul class="dropdown-menu"
                                 aria-labelledby="transDropdown">
                                 <li>
                                     <a class="dropdown-item"
-                                       href="{{
-                                       path(
-                                           app.request.attributes.get(
-                                               '_route'
-                                           ),
-                                           app.request.attributes.get(
-                                               '_route_params'
-                                           )|merge({
-                                           '_locale': 'en'
-                                       })
-                                       )
-                                       }}">
+                                        href="{{
+                                        path(
+                                            app.request.attributes.get(
+                                                '_route'
+                                            ),
+                                            app.request.attributes.get(
+                                                '_route_params'
+                                            )|merge({
+                                                '_locale': 'en'
+                                            })
+                                        )
+                                        }}">
                                         English
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item"
-                                       href="{{
-                                       path(
-                                           app.request.attributes.get(
-                                               '_route'
-                                           ),
-                                           app.request.attributes.get(
-                                               '_route_params'
-                                           )|merge({
-                                           '_locale': 'de'
-                                       })
-                                       )
-                                       }}">
+                                        href="{{
+                                        path(
+                                            app.request.attributes.get(
+                                                '_route'
+                                            ),
+                                            app.request.attributes.get(
+                                                '_route_params'
+                                            )|merge({
+                                                '_locale': 'de'
+                                            })
+                                        )
+                                        }}">
                                         Deutsch
                                     </a>
                                 </li>

@@ -677,6 +677,134 @@
         <source>security.requestMail.expiration</source>
         <target>Der Link ist gültig für: </target>
       </trans-unit>
+      <trans-unit id="9fewk_8" resname="msg.verify.email">
+        <source>msg.verify.email</source>
+        <target>Bestätigen Sie Ihre E-Mail Adresse</target>
+      </trans-unit>
+      <trans-unit id="WPwwSAW" resname="msg.verfiyEmail.failure">
+        <source>msg.verfiyEmail.failure</source>
+        <target>Ihre E-Mail Adresse wurde gerändert. Es konnte allerdings keine E-Mail zur Bestätigung verschickt werden.</target>
+      </trans-unit>
+      <trans-unit id="dyDvWmo" resname="msg.verfiyEmail.success">
+        <source>msg.verfiyEmail.success</source>
+        <target>Ihre E-Mail Adresse wurde geändert. Prüfen Sie ihr Postfach, wir haben Ihnen eine E-Mail zur Bestätigung geschickt.</target>
+      </trans-unit>
+      <trans-unit id="8oEprEf" resname="msg.email.alreadyVerified">
+        <source>msg.email.alreadyVerified</source>
+        <target>Ihre E-Mail Adresse ist bereist bestätigt.</target>
+      </trans-unit>
+      <trans-unit id="2_nVZMI" resname="msg.verify.email.failed">
+        <source>msg.verify.email.failed</source>
+        <target>Es konnte keine E-Mail zur Bestätigung verschickt werden.</target>
+      </trans-unit>
+      <trans-unit id="I.1GJ2Z" resname="msg.verify.email.success">
+        <source>msg.verify.email.success</source>
+        <target>Prüfen Sie ihr Postfach, wir haben Ihnen eine E-Mail zur Bestätigung geschickt.</target>
+      </trans-unit>
+      <trans-unit id="hJHmyxk" resname="user.account.title">
+        <source>user.account.title</source>
+        <target>Mein Konto</target>
+      </trans-unit>
+      <trans-unit id="uRecB8T" resname="user.link.overview">
+        <source>user.link.overview</source>
+        <target>Übersicht</target>
+      </trans-unit>
+      <trans-unit id="YuU7VD." resname="user.link.account">
+        <source>user.link.account</source>
+        <target>Mein Konto</target>
+      </trans-unit>
+      <trans-unit id="lqbveeX" resname="user.link.security">
+        <source>user.link.security</source>
+        <target>Sicherheit</target>
+      </trans-unit>
+      <trans-unit id="LZ0unkK" resname="user.card.account">
+        <source>user.card.account</source>
+        <target>Konto</target>
+      </trans-unit>
+      <trans-unit id="C699COU" resname="user.card.account.subtitle">
+        <source>user.card.account.subtitle</source>
+        <target>Verwalten Sie Ihr Konto und Ihr Profil</target>
+      </trans-unit>
+      <trans-unit id="SpqH2It" resname="user.card.account.text">
+        <source>user.card.account.text</source>
+        <target>Ändern Sie die Angaben in Ihrem Profil, wie z.B. ihren Benutzernamen, oder Ihr Passwort.</target>
+      </trans-unit>
+      <trans-unit id="s9uyfrH" resname="user.link.profile">
+        <source>user.link.profile</source>
+        <target>Profil</target>
+      </trans-unit>
+      <trans-unit id="sAQbiZ4" resname="user.link.email">
+        <source>user.link.email</source>
+        <target>E-Mail</target>
+      </trans-unit>
+      <trans-unit id="r6Y32Id" resname="user.account.password">
+        <source>user.account.password</source>
+        <target>Passwort</target>
+      </trans-unit>
+      <trans-unit id="xVPG6ab" resname="user.link.password">
+        <source>user.link.password</source>
+        <target>Passwort ändern</target>
+      </trans-unit>
+      <trans-unit id="ML7dRMH" resname="user.password.title">
+        <source>user.password.title</source>
+        <target>Ihr Passwort</target>
+      </trans-unit>
+      <trans-unit id="9nDHwyx" resname="user.account.email.title">
+        <source>user.account.email.title</source>
+        <target>Ihre E-Mail Adresse</target>
+      </trans-unit>
+      <trans-unit id="g1_yPM7" resname="user.email.title">
+        <source>user.email.title</source>
+        <target>Ihre E-Mail Adresse</target>
+      </trans-unit>
+      <trans-unit id="VObN5dM" resname="user.email.message">
+        <source>user.email.message</source>
+        <target>Ihre aktuelle E-Mail Adresse ist:</target>
+      </trans-unit>
+      <trans-unit id="bEaiRIQ" resname="user.email.verify">
+        <source>user.email.verify</source>
+        <target>Ihre E-Mail Adresse ist:</target>
+      </trans-unit>
+      <trans-unit id="hqhwjCA" resname="user.email.verified">
+        <source>user.email.verified</source>
+        <target>bestätigt</target>
+      </trans-unit>
+      <trans-unit id="V5VSe3i" resname="user.email.notVerified">
+        <source>user.email.notVerified</source>
+        <target>nicht bestätigt</target>
+      </trans-unit>
+      <trans-unit id="aigkpwT" resname="user.link.verifyEmail">
+        <source>user.link.verifyEmail</source>
+        <target>Klicken Sie hier, um Ihre E-Mail zu bestätigen.</target>
+      </trans-unit>
+      <trans-unit id="fAwwayc" resname="user.account.profile">
+        <source>user.account.profile</source>
+        <target>Ihr Profil</target>
+      </trans-unit>
+      <trans-unit id="HdsKVq_" resname="user.profile.title">
+        <source>user.profile.title</source>
+        <target>Ihr Profil</target>
+      </trans-unit>
+      <trans-unit id="fy3zeWd" resname="msg.user.profile.updated">
+        <source>msg.user.profile.updated</source>
+        <target>Ihr Profil wurde aktualisiert.</target>
+      </trans-unit>
+      <trans-unit id="YLXj6wf" resname="msg.user.password.changed">
+        <source>msg.user.password.changed</source>
+        <target>Ihr Passwort wurde aktualisiert.</target>
+      </trans-unit>
+      <trans-unit id="Zv2ErhC" resname="user.card.security">
+        <source>user.card.security</source>
+        <target>Sicherheit</target>
+      </trans-unit>
+      <trans-unit id="JntdPOF" resname="user.card.security.subtitle">
+        <source>user.card.security.subtitle</source>
+        <target>Ändern Sie Ihr Passwort</target>
+      </trans-unit>
+      <trans-unit id="iEm6f4O" resname="user.card.security.text">
+        <source>user.card.security.text</source>
+        <target>Verwalten oder ändern Sie Ihr Passwort.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

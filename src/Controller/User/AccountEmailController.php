@@ -12,10 +12,12 @@ use Symfony\Component\Mailer\Exception\ExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatorBagInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 /**
- * @Route("/user/email")
+ * @Route("/{_locale<%app.supported_locales%>}/user/email")
  * @IsGranted("ROLE_USER")
  */
 class AccountEmailController extends AbstractController
@@ -33,7 +35,7 @@ class AccountEmailController extends AbstractController
     /**
      * @Route("/", name="account_email")
      */
-    public function email(Request $request): Response
+    public function email(Request $request, TranslatorInterface $translator): Response
     {
         $user = $this->getUser();
 
@@ -61,7 +63,7 @@ class AccountEmailController extends AbstractController
             try {
                 $email = (new TemplatedEmail())
                     ->to(new Address($user->getEmail()))
-                    ->subject('Please verify your new E-Mail address')
+                    ->subject($translator->trans('msg.verify.email'))
                     ->htmlTemplate('user/emails/verify_email.html.twig')
                     ->context([
                         'signedUrl' => $signatureComponents->getSignedUrl(),
@@ -70,12 +72,12 @@ class AccountEmailController extends AbstractController
 
                 $this->mailer->send($email);
             } catch (ExceptionInterface $e) {
-                $this->addFlash('warning', 'Your E-Mail address has been updated. But the system failed to send you an confirmation message.');
+                $this->addFlash('warning', $translator->trans('msg.verfiyEmail.failure'));
 
                 return $this->redirectToRoute('account_email');
             }
 
-            $this->addFlash('success', 'Your E-Mail address has been updated. Also a confirmation has been sent to your E-Mail address.');
+            $this->addFlash('success', $translator->trans('msg.verfiyEmail.success'));
 
             return $this->redirectToRoute('account_email');
         }
@@ -90,14 +92,14 @@ class AccountEmailController extends AbstractController
     /**
      * @Route("/verify", name="account_email_verify")
      */
-    public function sendVerification(Request $request): Response
+    public function sendVerification(Request $request, TranslatorInterface $translator): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $user = $this->getUser();
 
         if ($user->getIsVerified()) {
-            $this->addFlash('warning', 'Your E-Mail address is already verified.');
+            $this->addFlash('warning', $translator->trans('msg.email.alreadyVerified'));
 
             return $this->redirectToRoute('account_email');
         }
@@ -111,7 +113,7 @@ class AccountEmailController extends AbstractController
         try {
             $email = (new TemplatedEmail())
                 ->to(new Address($user->getEmail()))
-                ->subject('Please verify your new E-Mail address')
+                ->subject($translator->trans('msg.verify.email'))
                 ->htmlTemplate('user/emails/verify_email.html.twig')
                 ->context([
                     'signedUrl' => $signatureComponents->getSignedUrl(),
@@ -120,12 +122,12 @@ class AccountEmailController extends AbstractController
 
             $this->mailer->send($email);
         } catch (ExceptionInterface $e) {
-            $this->addFlash('danger', 'Cannot send you an new confirmation E-Mail.');
+            $this->addFlash('danger', $translator->trans('msg.verify.email.failed'));
 
             return $this->redirectToRoute('account_email');
         }
 
-        $this->addFlash('success', 'A new confirmation has been sent to your E-Mail address.');
+        $this->addFlash('success', $translator->trans('msg.verify.email.success'));
 
         return $this->redirectToRoute('account_email');
     }

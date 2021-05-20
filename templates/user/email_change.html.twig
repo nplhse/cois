@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Change your E-Mail - {{ parent() }}
+    {{ 'user.account.email.title'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
     <h1>
-        My Account
+        {{ 'user.account.title'|trans }}
     </h1>
 
     {% for label, messages in app.flashes %}
@@ -19,18 +19,20 @@
 
     <ul class="nav nav-tabs mb-3">
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('account') }}">Overview</a>
+            <a class="nav-link" href="{{ path('account') }}">
+                {{ 'user.link.overview'|trans }}
+            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link active"
                 aria-current="page"
                 href="{{ path('account_profile') }}">
-                Account
+                {{ 'user.link.account'|trans }}
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ path('account_security') }}">
-                Security
+                {{ 'user.link.security'|trans }}
             </a>
         </li>
     </ul>
@@ -40,35 +42,33 @@
             <div class="list-group">
                 <a href="{{ path('account_profile') }}"
                     class="list-group-item list-group-item-action">
-                    Profile
+                    {{ 'user.link.profile'|trans }}
                 </a>
                 <a href="{{ path('account_email') }}"
                     class="list-group-item list-group-item-action active"
                     aria-current="true">
-                    E-Mail
+                    {{ 'user.link.email'|trans }}
                 </a>
             </div>
         </div>
         <div class="col-md-9 order-first order-md-last my-auto">
             <h2>
-                Change your E-Mail address
+                {{ 'user.email.title'|trans }}
             </h2>
             <hr />
 
             <p>
-                Your current E-Mail address is: <mark>
-                    {{ user.email }}
-                </mark><br />
-                Your E-Mail address is currently{% if user.isVerified %}
-                    <mark>verified</mark>.
+                {{ 'user.email.message'|trans }} <mark>{{ user.email }}</mark><br />
+                {{ 'user.email.verify'|trans }} {% if user.isVerified %}
+                    <mark>{{ 'user.email.verified'|trans }}</mark>.
                 {% else %}
-                    <mark>not verified</mark>. Click <a href="{{
+                    <mark>{{ 'user.email.notVerified'|trans }}</mark>. <a href="{{
                         path(
                             'account_email_verify'
                         )
                         }}">
-                        this link
-                    </a> to re-send verification E-Mail.
+                        {{ 'user.link.verifyEmail'|trans }}
+                    </a>
                 {% endif %}
             </p>
 
