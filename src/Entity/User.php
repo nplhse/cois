@@ -93,6 +93,11 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getUserIdentifier(): string
+    {
+        return $this->username;
+    }
+
     /**
      * @see UserInterface
      */
@@ -132,9 +137,9 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPlainPassword(): string
+    public function getPlainPassword(): ?string
     {
-        return (string) $this->plainPassword;
+        return $this->plainPassword;
     }
 
     public function setPlainPassword(?string $plainPassword): self
@@ -174,30 +179,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * Returning a salt is only needed, if you are not using a modern
-     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
-     *
-     * @see UserInterface
-     */
-    public function getSalt(): ?string
-    {
-        return null;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials(): void
-    {
-        $this->plainPassword = null;
-    }
-
-    public function __toString(): string
-    {
-        return $this->getUsername();
-    }
-
     public function getIsVerified(): ?bool
     {
         return $this->isVerified;
@@ -220,5 +201,29 @@ class User implements UserInterface
         $this->isCredentialsExpired = $isCredentialsExpired;
 
         return $this;
+    }
+
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        $this->plainPassword = null;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getUsername();
     }
 }
