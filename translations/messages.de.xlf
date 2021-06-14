@@ -819,7 +819,7 @@
       </trans-unit>
       <trans-unit id="iOSoddH" resname="link.faq">
         <source>link.faq</source>
-        <target>Mehr erfahren (FAQ)</target>
+        <target>Hilfe (FAQ)</target>
       </trans-unit>
       <trans-unit id="r8V9rio" resname="default.login.title">
         <source>default.login.title</source>
@@ -840,6 +840,18 @@
       <trans-unit id="oV8JwpT" resname="default.stats.text">
         <source>default.stats.text</source>
         <target>Wir haben derzeit %allocations% Einsätze von %hospitals% Krankenhäusern in unserer Datenbank und fügen regelmäßig neue Statistiken auf Basis dieser Daten hinzu. Und das Beste: Einige dieser Statistiken sind öffentlich verfügbar!</target>
+      </trans-unit>
+      <trans-unit id="WZCoVSI" resname="faq.title">
+        <source>faq.title</source>
+        <target>__faq.title</target>
+      </trans-unit>
+      <trans-unit id="9qDTsiM" resname="dashboard.verify.title">
+        <source>dashboard.verify.title</source>
+        <target>__dashboard.verify.title</target>
+      </trans-unit>
+      <trans-unit id="eRq1lRV" resname="dashboard.verify.text">
+        <source>dashboard.verify.text</source>
+        <target>__dashboard.verify.text</target>
       </trans-unit>
     </body>
   </file>

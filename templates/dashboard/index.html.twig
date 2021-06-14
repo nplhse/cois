@@ -11,58 +11,105 @@
         </h1>
 
         <div class="col-md">
-            <p>
-                {{ 'dashboard.get_started'|trans }}
-            </p>
+            {% if
+                app.user.isVerified == false
+                    or app.user.isParticipant == false %}
+                <div class="card mb-3 border-warning">
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            {{ 'dashboard.verify.title'|trans }}
+                        </h2>
+                        <p class="card-text">
+                            {{ 'dashboard.verify.text'|trans }}
+                        </p>
+                        <ul>
+                            <li>
+                                {% if app.user.isVerified %}
+                                    <i class="bi bi-check-circle-fill text-success">
 
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h2 class="card-title">
-                        {{ 'dashboard.allocation.title'|trans }}
-                    </h2>
-                    <p class="card-text">
-                        {{ 'dashboard.allocation.text'|trans }}
-                    </p>
-                    <a href="{{ path('allocation_index') }}"
-                       class="btn btn-primary">
-                        {{ 'dashboard.allocation.button'|trans }}
-                    </a>
-                </div>
-            </div>
+                                    </i>
+                                    Your E-Mail is verified
+                                {% else %}
+                                    <i class="bi bi-stop-circle-fill text-danger">
 
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h2 class="card-title">
-                        {{ 'dashboard.hospital.title'|trans }}
-                    </h2>
-                    <p class="card-text">
-                        {{ 'dashboard.hospital.text'|trans }}
-                    </p>
-                    <a href="{{ path('hospital_edit') }}"
-                       class="btn btn-primary">
-                        {{ 'dashboard.hospital.button_edit'|trans }}
-                    </a>
-                    <a href="{{ path('hospital_index') }}"
-                       class="btn btn-secondary">
-                        {{ 'dashboard.hospital.button_view'|trans }}
-                    </a>
-                </div>
-            </div>
+                                    </i>
+                                    Your E-Mail is <strong>not</strong> verified
+                                {% endif %}
+                            </li>
+                            <li>
+                                {% if app.user.isParticipant %}
+                                    <i class="bi bi-check-circle-fill text-success">
 
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h2 class="card-title">
-                        {{ 'dashboard.import.title'|trans }}
-                    </h2>
-                    <p class="card-text">
-                        {{ 'dashboard.import.text'|trans }}
-                    </p>
-                    <a href="{{ path('import_index') }}"
-                       class="btn btn-primary">
-                        {{ 'dashboard.import.button'|trans }}
-                    </a>
+                                    </i>
+                                    Account has been confirmed by admin.
+                                {% else %}
+                                    <i class="bi bi-stop-circle-fill text-danger">
+
+                                    </i>
+                                    Account has <strong>
+                                        not
+                                    </strong> been confirmed by admin.
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
+
+            {% if app.user.isVerified and app.user.isParticipant %}
+                <p>
+                    {{ 'dashboard.get_started'|trans }}
+                </p>
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            {{ 'dashboard.allocation.title'|trans }}
+                        </h2>
+                        <p class="card-text">
+                            {{ 'dashboard.allocation.text'|trans }}
+                        </p>
+                        <a href="{{ path('allocation_index') }}"
+                            class="btn btn-primary">
+                            {{ 'dashboard.allocation.button'|trans }}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            {{ 'dashboard.hospital.title'|trans }}
+                        </h2>
+                        <p class="card-text">
+                            {{ 'dashboard.hospital.text'|trans }}
+                        </p>
+                        <a href="{{ path('hospital_edit') }}"
+                            class="btn btn-primary">
+                            {{ 'dashboard.hospital.button_edit'|trans }}
+                        </a>
+                        <a href="{{ path('hospital_index') }}"
+                            class="btn btn-secondary">
+                            {{ 'dashboard.hospital.button_view'|trans }}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            {{ 'dashboard.import.title'|trans }}
+                        </h2>
+                        <p class="card-text">
+                            {{ 'dashboard.import.text'|trans }}
+                        </p>
+                        <a href="{{ path('import_index') }}"
+                            class="btn btn-primary">
+                            {{ 'dashboard.import.button'|trans }}
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
         </div>
         <div class="col-md">
             <div class="card text-dark bg-light mb-2">
@@ -96,13 +143,15 @@
                             {{ 'dashboard.allocations'|trans }}
                         </small>
                     </h3>
-                    <p>
-                        {{
-                        'dashboard.allocations.by_your_hospital'|trans({
-                            '%count%': hospital_allocations
-                        })
-                        }}
-                    </p>
+                    {% if app.user.isVerified and app.user.isParticipant %}
+                        <p>
+                            {{
+                                'dashboard.allocations.by_your_hospital'|trans({
+                                    '%count%': hospital_allocations
+                                })
+                            }}
+                        </p>
+                    {% endif %}
                 </div>
             </div>
 
@@ -115,13 +164,15 @@
                             {{ 'dashboard.imports'|trans }}
                         </small>
                     </h3>
-                    <p>
-                        {{
-                        'dashboard.imports.by_you'|trans({
-                            '%count%': user_imports
-                        })
-                        }}
-                    </p>
+                    {% if app.user.isVerified and app.user.isParticipant %}
+                        <p>
+                            {{
+                                'dashboard.imports.by_you'|trans({
+                                    '%count%': user_imports
+                                })
+                            }}
+                        </p>
+                    {% endif %}
                 </div>
             </div>
         </div>

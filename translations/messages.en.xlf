@@ -820,7 +820,7 @@
       </trans-unit>
       <trans-unit id="iOSoddH" resname="link.faq">
         <source>link.faq</source>
-        <target>Learn more (FAQ)</target>
+        <target>Help (FAQ)</target>
       </trans-unit>
       <trans-unit id="r8V9rio" resname="default.login.title">
         <source>default.login.title</source>
@@ -841,6 +841,18 @@
       <trans-unit id="oV8JwpT" resname="default.stats.text">
         <source>default.stats.text</source>
         <target>We currently have %allocations% allocations from %hospitals% hospitals in our database. We're constantly adding more and more statistics generated from this database. And the best: Some of your statistics are available without login!</target>
+      </trans-unit>
+      <trans-unit id="WZCoVSI" resname="faq.title">
+        <source>faq.title</source>
+        <target>Help (FAQ)</target>
+      </trans-unit>
+      <trans-unit id="9qDTsiM" resname="dashboard.verify.title">
+        <source>dashboard.verify.title</source>
+        <target>Waiting for your verification</target>
+      </trans-unit>
+      <trans-unit id="eRq1lRV" resname="dashboard.verify.text">
+        <source>dashboard.verify.text</source>
+        <target>We are currently waiting for your verification process to be completed before you can get started. In the meantime you can take a look at our statistics of the FAQ.</target>
       </trans-unit>
     </body>
   </file>

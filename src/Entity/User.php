@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -16,6 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     itemOperations={"get"},
  *     normalizationContext={"groups"={"user:read"}}
  * )
+ * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  */
 class User implements UserInterface
 {
@@ -70,6 +72,11 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private bool $isCredentialsExpired = false;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private ?bool $isParticipant = false;
 
     public function getId(): ?int
     {
@@ -225,5 +232,22 @@ class User implements UserInterface
     public function __toString(): string
     {
         return $this->getUsername();
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function getIsParticipant(): ?bool
+    {
+        return $this->isParticipant;
+    }
+
+    public function setIsParticipant(?bool $isParticipant): self
+    {
+        $this->isParticipant = $isParticipant;
+
+        return $this;
     }
 }
