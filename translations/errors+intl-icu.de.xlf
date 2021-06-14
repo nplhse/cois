@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="de" target-language="de" datatype="plaintext" original="file.ext">
+        <header>
+            <tool tool-id="symfony" tool-name="Symfony"/>
+        </header>
+        <body>
+            <trans-unit id="qvIyBkY" resname="title">
+                <source>title</source>
+                <target>Etwas ist schiefgelaufen!</target>
+            </trans-unit>
+            <trans-unit id="yQRveje" resname="description">
+                <source>description</source>
+                <target>Wenn Sie diese Seite sehen können, ist etwas schiefgelaufen. Eine Mitteilung an den Administrator ist erstellt worden und wir versuchen das Problem so schnell wie möglich zu beheben.</target>
+            </trans-unit>
+            <trans-unit id="8Vu_BOU" resname="messages.403.title">
+                <source>messages.403.title</source>
+                <target>Zugriff verweigert</target>
+            </trans-unit>
+            <trans-unit id="913sdS1" resname="messages.403.description">
+                <source>messages.403.description</source>
+                <target>Sie haben leider nicht das Recht, auf diese Seite zugreifen zu können.</target>
+            </trans-unit>
+            <trans-unit id="JXTFFpG" resname="messages.404.title">
+                <source>messages.404.title</source>
+                <target>Seite nicht gefunden</target>
+            </trans-unit>
+            <trans-unit id="6mzvrpY" resname="messages.404.description">
+                <source>messages.404.description</source>
+                <target>Unter dieser Adresse konnte kein Inhalt gefunden werden.
+                    Wahrscheinlich sind Sie einem falschen oder nicht mehr funktionierendem Link gefolgt.
+                    Falls Sie die Adresse manuell eingegeben haben, überprüfen Sie diese auf Tippfehler.</target>
+            </trans-unit>
+            <trans-unit id="dXp0Afq" resname="messages.405.title">
+                <source>messages.405.title</source>
+                <target>Anfrage nicht unterstützt</target>
+            </trans-unit>
+            <trans-unit id="iNVZuFU" resname="messages.405.description">
+                <source>messages.405.description</source>
+                <target>Die HTTP Anfrage welche Sie gentuzt haben wird auf dieser Seite leider nicht unterstützt.</target>
+            </trans-unit>
+            <trans-unit id="IavyfVV" resname="messages.500.title">
+                <source>messages.500.title</source>
+                <target>Interner Fehler</target>
+            </trans-unit>
+            <trans-unit id="ZK300Nf" resname="messages.500.description">
+                <source>messages.500.description</source>
+                <target>Bei der Erstellung dieser Seite ist leider ein Fehler aufgetreten.
+                    Eine Mitteilung an den Administrator ist erstellt worden und wir versuchen das Problem so schnell wie möglich zu beheben.</target>
+            </trans-unit>
+            <trans-unit id="ig_GfmI" resname="link.to.homepage">
+                <source>link.to.homepage</source>
+                <target>oder zurück zur Startseite</target>
+            </trans-unit>
+            <trans-unit id="VHSF3BW" resname="link.to.lastpage">
+                <source>link.to.lastpage</source>
+                <target>Zurück zur letzten Seite</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
