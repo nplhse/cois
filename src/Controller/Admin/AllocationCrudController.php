@@ -26,7 +26,7 @@ class AllocationCrudController extends AbstractCrudController
             ->setSearchFields(['id', 'dispatchArea', 'supplyArea', 'hospital.name', 'PZC']);
     }
 
-    public function configureFields(string $pageName): iterable
+    public function configureFields(string $pageName): array
     {
         $panel1 = FormField::addPanel('Basics');
         $id = IntegerField::new('id', 'Id');

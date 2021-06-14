@@ -6,10 +6,10 @@ $finder = PhpCsFixer\Finder::create()
     ->exclude('node_modules')
 ;
 
-return PhpCsFixer\Config::create()
-    ->setRules([
+$config = new PhpCsFixer\Config();
+
+return $config->setRules([
         '@Symfony' => true,
-        '@PSR2' => true,
         'array_syntax' => ['syntax' => 'short'],
     ])
     ->setFinder($finder)
