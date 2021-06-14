@@ -1,7 +1,7 @@
 {
     "devDependencies": {
-        "@babel/core": "^7.14.0",
-        "@babel/eslint-parser": "^7.13.14",
+        "@babel/core": "^7.14.5",
+        "@babel/eslint-parser": "^7.14.5",
         "@babel/preset-env": "^7.14.2",
         "@popperjs/core": "^2.9.2",
         "@symfony/stimulus-bridge": "^2.1.0",
@@ -13,7 +13,7 @@
         "babel-loader": "^8.2.2",
         "bootstrap": "^5.0.1",
         "core-js": "^3.12.1",
-        "eslint": "^7.25.0",
+        "eslint": "^7.28.0",
         "eslint-config-airbnb-base": "^14.2.1",
         "eslint-config-alloy": "^4.1.0",
         "eslint-plugin-import": "^2.23.2",
@@ -21,7 +21,7 @@
         "file-loader": "^6.0.0",
         "node-sass": "^6.0.0",
         "postcss": "^8.2.15",
-        "postcss-loader": "^5.0.0",
+        "postcss-loader": "^6.1.0",
         "prettier": "^2.3.0",
         "prettier-plugin-twig-melody": "^0.4.6",
         "regenerator-runtime": "^0.13.2",
