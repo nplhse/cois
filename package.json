@@ -13,7 +13,7 @@
         "babel-loader": "^8.2.2",
         "bootstrap": "^5.0.1",
         "core-js": "^3.12.1",
-        "eslint": "^7.25.0",
+        "eslint": "^7.28.0",
         "eslint-config-airbnb-base": "^14.2.1",
         "eslint-config-alloy": "^4.1.0",
         "eslint-plugin-import": "^2.23.2",
