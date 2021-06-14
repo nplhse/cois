@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f323ebd4ba28f71a9bfdf6ed3f3f7c2",
+    "content-hash": "0726bfd126a419841dfc3a09c34cad77",
     "packages": [
         {
             "name": "api-platform/core",
@@ -8393,16 +8393,16 @@
         },
         {
             "name": "symfony/validator",
-            "version": "v5.2.10",
+            "version": "v5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "8b882f5a50df87ee194ccd8d7e4ebf5cabebad5e"
+                "reference": "14337bdf9e2e0b2e3385c9e90f13325f0c95a4f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/8b882f5a50df87ee194ccd8d7e4ebf5cabebad5e",
-                "reference": "8b882f5a50df87ee194ccd8d7e4ebf5cabebad5e",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/14337bdf9e2e0b2e3385c9e90f13325f0c95a4f9",
+                "reference": "14337bdf9e2e0b2e3385c9e90f13325f0c95a4f9",
                 "shasum": ""
             },
             "require": {
@@ -8440,7 +8440,7 @@
                 "symfony/intl": "^4.4|^5.0",
                 "symfony/mime": "^4.4|^5.0",
                 "symfony/property-access": "^4.4|^5.0",
-                "symfony/property-info": "^4.4|^5.0",
+                "symfony/property-info": "^5.3",
                 "symfony/translation": "^4.4|^5.0",
                 "symfony/yaml": "^4.4|^5.0"
             },
@@ -8482,7 +8482,7 @@
             "description": "Provides tools to validate values",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/validator/tree/v5.2.10"
+                "source": "https://github.com/symfony/validator/tree/v5.3.0"
             },
             "funding": [
                 {
@@ -8498,7 +8498,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-26T17:40:38+00:00"
+            "time": "2021-05-26T17:43:10+00:00"
         },
         {
             "name": "symfony/var-dumper",
