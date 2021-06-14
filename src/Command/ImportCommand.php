@@ -15,7 +15,6 @@ use Symfony\Component\Messenger\MessageBusInterface;
 class ImportCommand extends Command
 {
     protected static $defaultName = 'app:import';
-    protected static string $defaultDescription = 'Manually import some data.';
 
     private EntityManagerInterface $em;
 

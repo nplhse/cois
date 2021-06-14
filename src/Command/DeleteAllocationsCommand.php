@@ -14,7 +14,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class DeleteAllocationsCommand extends Command
 {
     protected static $defaultName = 'app:import:delete';
-    protected static string $defaultDescription = 'Manually delete an import.';
 
     private EntityManagerInterface $em;
 
