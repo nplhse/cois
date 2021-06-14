@@ -11,13 +11,13 @@
                 <a class="btn btn-outline-primary"
                     href="{{ path('hospital_edit') }}"
                     role="button">
-                    Edit your hospital
+                    {{ 'hospitals.link_edit'|trans }}
                 </a>
             {% endif %}
             <a class="btn btn-outline-primary"
                 href="{{ path('hospital_index') }}"
                 role="button">
-                Back to list
+                {{ 'hospitals.link_back'|trans }}
             </a>
         </div>
     </div>
@@ -30,23 +30,23 @@
         <div class="col-md-8">
             <div class="card mb-3">
                 <div class="card-header">
-                    Basic information
+                    {{ 'hospitals.basics.title'|trans }}
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
-                        Address
+                        {{ 'hospitals.address.field'|trans }}
                     </h5>
                     <p>
                         {{ hospital.address|nl2br }}
                     </p>
 
                     <h5 class="card-title">
-                        Areas
+                        {{ 'hospitals.areas.title'|trans }}
                     </h5>
                     <div class="row">
                         <div class="col-6">
                             <h6 class="card-subtitle text-muted">
-                                Supply Area
+                                {{ 'hospitals.supply_area.field'|trans }}
                             </h6>
                             <p>
                                 {{ hospital.supplyArea }}
@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-6">
                             <h6 class="card-subtitle text-muted">
-                                Dispatch Area
+                                {{ 'hospitals.dispatch_area.field'|trans }}
                             </h6>
                             <p>
                                 {{ hospital.dispatchArea }}
@@ -63,16 +63,22 @@
                     </div>
 
                     <h5 class="card-title">
-                        Location
+                        {{ 'hospitals.location.field'|trans }}
                     </h5>
                     <p>
                         {{ hospital.location }}
                     </p>
-
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">
+                    {{ 'hospitals.size.title'|trans }}
+                </div>
+                <div class="card-body">
                     <div class="row">
                         <div class="col-6">
                             <h5 class="card-title">
-                                Size
+                                {{ 'hospitals.size.field'|trans }}
                             </h5>
                             <p>
                                 {{ hospital.size }}
@@ -80,7 +86,7 @@
                         </div>
                         <div class="col-6">
                             <h5 class="card-title">
-                                Beds
+                                {{ 'hospitals.beds.field'|trans }}
                             </h5>
                             <p>
                                 {{ hospital.beds }}
@@ -89,36 +95,44 @@
                     </div>
                 </div>
             </div>
-
-            <div class="card mb-3">
-                <div class="card-header">
-                    Statistics
-                </div>
-                <div class="card-body">
-                    <p>
-                        There are currently <strong>
-                            {{ hospital_allocations }}
-                        </strong> Allocations, from this hospital.
-                    </p>
-                </div>
-            </div>
         </div>
 
         <div class="col-md-4">
             <div class="card border-primary mb-3">
                 <div class="card-body">
                     <h5 class="card-title">
-                        Owner
+                        {{ 'hospitals.owner.field'|trans }}
                     </h5>
                     <p>
                         {{ hospital.owner }}
                     </p>
 
                     <p>
-                        Created at: {{ hospital.createdAt ? hospital.createdAt|date('d.m.Y H:i:s') : '' }}
+                        {{ 'hospitals.created_at.field'|trans }}
+                        {{ hospital.createdAt
+                            ? hospital.createdAt|date('d.m.Y H:i:s')
+                            : '' }}
                     </p>
                     <p>
-                        Updated at: {{ hospital.updatedAt ? hospital.updatedAt|date('d.m.Y H:i:s') : '' }}
+                        {{ 'hospitals.updated_at.field'|trans }}
+                        {{ hospital.updatedAt
+                            ? hospital.updatedAt|date('d.m.Y H:i:s')
+                            : '' }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    {{ 'hospitals.statistics.title'|trans }}
+                </div>
+                <div class="card-body">
+                    <p>
+                        {{
+                            'dashboard.allocations.by_hospital'|trans({
+                                '%count%': hospital_allocations
+                            })
+                        }}
                     </p>
                 </div>
             </div>
@@ -131,13 +145,13 @@
                 <a class="btn btn-outline-primary"
                     href="{{ path('hospital_edit') }}"
                     role="button">
-                    Edit your hospital
+                    {{ 'hospitals.link_edit'|trans }}
                 </a>
             {% endif %}
             <a class="btn btn-outline-primary"
                 href="{{ path('hospital_index') }}"
                 role="button">
-                Back to list
+                {{ 'hospitals.link_back'|trans }}
             </a>
         </div>
     </div>

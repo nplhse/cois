@@ -1,0 +1,810 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="de" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Kollaborative IVENA Statistiken</target>
+      </trans-unit>
+      <trans-unit id="yXUZGes" resname="link.hospitals">
+        <source>link.hospitals</source>
+        <target>Kliniken</target>
+      </trans-unit>
+      <trans-unit id="RouxxR_" resname="link.allocations">
+        <source>link.allocations</source>
+        <target>Einsätze</target>
+      </trans-unit>
+      <trans-unit id="Jl6nRRJ" resname="link.statistics">
+        <source>link.statistics</source>
+        <target>Statistiken</target>
+      </trans-unit>
+      <trans-unit id="8S1cw8Z" resname="link.import">
+        <source>link.import</source>
+        <target>Importieren</target>
+      </trans-unit>
+      <trans-unit id="1484Pld" resname="link.export">
+        <source>link.export</source>
+        <target>Exportieren</target>
+      </trans-unit>
+      <trans-unit id="jFBmGv6" resname="nav.logged_in_as">
+        <source>nav.logged_in_as</source>
+        <target>Angemeldet als: %name%</target>
+      </trans-unit>
+      <trans-unit id="ArfrD6N" resname="link.backend">
+        <source>link.backend</source>
+        <target>Administration</target>
+      </trans-unit>
+      <trans-unit id="ySPQKPx" resname="link.account">
+        <source>link.account</source>
+        <target>Mein Konto</target>
+      </trans-unit>
+      <trans-unit id="K2SvlFI" resname="link.impersonation_exit">
+        <source>link.impersonation_exit</source>
+        <target>Identitätswechsel beenden</target>
+      </trans-unit>
+      <trans-unit id="FSyD6SO" resname="link.logout">
+        <source>link.logout</source>
+        <target>Abmelden</target>
+      </trans-unit>
+      <trans-unit id="Q5ha4LM" resname="link.login">
+        <source>link.login</source>
+        <target>Anmelden</target>
+      </trans-unit>
+      <trans-unit id="3bqLM8Q" resname="dashboard.title">
+        <source>dashboard.title</source>
+        <target>Startseite</target>
+      </trans-unit>
+      <trans-unit id="dEb6dNF" resname="changelog.title">
+        <source>changelog.title</source>
+        <target>Changelog</target>
+      </trans-unit>
+      <trans-unit id="tj.43TE" resname="dashboard.welcome">
+        <source>dashboard.welcome</source>
+        <target>Willkommen bei den kollaborativen IVENA Statistiken!</target>
+      </trans-unit>
+      <trans-unit id="V5sdz5Q" resname="dashboard.get_started">
+        <source>dashboard.get_started</source>
+        <target>Was gibt es hier zu entdecken? Hier sind ein paar Ideen zum ausprobieren.</target>
+      </trans-unit>
+      <trans-unit id="_XQ5Fak" resname="dashboard.allocation.title">
+        <source>dashboard.allocation.title</source>
+        <target>Einsätze</target>
+      </trans-unit>
+      <trans-unit id="fDkyjSH" resname="dashboard.allocation.text">
+        <source>dashboard.allocation.text</source>
+        <target>Durchsuchen Sie die Daten, filteren und entdecken Sie, was IVENA enthält.</target>
+      </trans-unit>
+      <trans-unit id="Ehfkhx2" resname="dashboard.allocation.button">
+        <source>dashboard.allocation.button</source>
+        <target>Alle Einsätze ansehen</target>
+      </trans-unit>
+      <trans-unit id="J0CbtE_" resname="dashboard.hospital.title">
+        <source>dashboard.hospital.title</source>
+        <target>Ihre Klinik</target>
+      </trans-unit>
+      <trans-unit id="elehn1v" resname="dashboard.hospital.text">
+        <source>dashboard.hospital.text</source>
+        <target>Sehen Sie nach, ob die Angaben Ihrer Klinik vollständig und korrekt sind.</target>
+      </trans-unit>
+      <trans-unit id="PGbQUwe" resname="dashboard.hospital.button_edit">
+        <source>dashboard.hospital.button_edit</source>
+        <target>Ihre Klinik bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="PNDybNP" resname="dashboard.hospital.button_view">
+        <source>dashboard.hospital.button_view</source>
+        <target>Alle Kliniken ansehen</target>
+      </trans-unit>
+      <trans-unit id="vStR0H9" resname="dashboard.import.title">
+        <source>dashboard.import.title</source>
+        <target>Importieren</target>
+      </trans-unit>
+      <trans-unit id="7mzdgx9" resname="dashboard.import.text">
+        <source>dashboard.import.text</source>
+        <target>Fügen Sie Daten zur Datenbank hinzu.</target>
+      </trans-unit>
+      <trans-unit id="Dtm_yIw" resname="dashboard.import.button">
+        <source>dashboard.import.button</source>
+        <target>Daten importieren</target>
+      </trans-unit>
+      <trans-unit id="rJf3tq1" resname="dashboard.users">
+        <source>dashboard.users</source>
+        <target>Benutzer</target>
+      </trans-unit>
+      <trans-unit id="HKKcwgP" resname="dashboard.hospitals">
+        <source>dashboard.hospitals</source>
+        <target>Kliniken</target>
+      </trans-unit>
+      <trans-unit id="K1VbrbK" resname="dashboard.allocations">
+        <source>dashboard.allocations</source>
+        <target>Einsätze</target>
+      </trans-unit>
+      <trans-unit id="bFqhgee" resname="dashboard.allocations.by_your_hospital">
+        <source>dashboard.allocations.by_your_hospital</source>
+        <target>Mit %count% Einsätzen Ihrer Klinik.</target>
+      </trans-unit>
+      <trans-unit id="WIzt02l" resname="dashboard.imports">
+        <source>dashboard.imports</source>
+        <target>Importierte Daten</target>
+      </trans-unit>
+      <trans-unit id="fj.rWWU" resname="dashboard.imports.by_you">
+        <source>dashboard.imports.by_you</source>
+        <target>Mit %count% importierten Datensätzen von Ihnen.</target>
+      </trans-unit>
+      <trans-unit id="jxa9tb_" resname="hospitals.edit.title">
+        <source>hospitals.edit.title</source>
+        <target>Klinik bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="OFscjRC" resname="hospitals.link_view">
+        <source>hospitals.link_view</source>
+        <target>Ihre Klinik ansehen</target>
+      </trans-unit>
+      <trans-unit id="YomWZTl" resname="hospitals.link_back">
+        <source>hospitals.link_back</source>
+        <target>Zurück zur Liste</target>
+      </trans-unit>
+      <trans-unit id="ZyxrQD0" resname="hospitals.basics.title">
+        <source>hospitals.basics.title</source>
+        <target>Allgemeines</target>
+      </trans-unit>
+      <trans-unit id="2gu9EGM" resname="hospitals.size.title">
+        <source>hospitals.size.title</source>
+        <target>Größe</target>
+      </trans-unit>
+      <trans-unit id="y9JlMMS" resname="hospitals.admin.title">
+        <source>hospitals.admin.title</source>
+        <target>Administration</target>
+      </trans-unit>
+      <trans-unit id="sUYHsiK" resname="hospitals.title">
+        <source>hospitals.title</source>
+        <target>Kliniken</target>
+      </trans-unit>
+      <trans-unit id="tPfLU0Z" resname="hospitals.link_edit">
+        <source>hospitals.link_edit</source>
+        <target>Ihre Klinik bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="s57Ff7b" resname="hospitals.address.field">
+        <source>hospitals.address.field</source>
+        <target>Adresse</target>
+      </trans-unit>
+      <trans-unit id="4wNdKb4" resname="hospitals.areas.title">
+        <source>hospitals.areas.title</source>
+        <target>Gebiete</target>
+      </trans-unit>
+      <trans-unit id="kayQMe8" resname="hospitals.supply_area.field">
+        <source>hospitals.supply_area.field</source>
+        <target>Versorungsgebiet</target>
+      </trans-unit>
+      <trans-unit id="7UhwATW" resname="hospitals.dispatch_area.field">
+        <source>hospitals.dispatch_area.field</source>
+        <target>Leitstelle</target>
+      </trans-unit>
+      <trans-unit id="Sz6mzPZ" resname="hospitals.location.field">
+        <source>hospitals.location.field</source>
+        <target>Lage</target>
+      </trans-unit>
+      <trans-unit id="22u_cEl" resname="hospitals.size.field">
+        <source>hospitals.size.field</source>
+        <target>Größe der Klinik</target>
+      </trans-unit>
+      <trans-unit id="AKLNaIZ" resname="hospitals.beds.field">
+        <source>hospitals.beds.field</source>
+        <target>Anzahl der Betten</target>
+      </trans-unit>
+      <trans-unit id="uwhMJa5" resname="hospitals.owner.field">
+        <source>hospitals.owner.field</source>
+        <target>Administrator der Klinik</target>
+      </trans-unit>
+      <trans-unit id="0C_h2L4" resname="hospitals.created_at.field">
+        <source>hospitals.created_at.field</source>
+        <target>Erstellt am:</target>
+      </trans-unit>
+      <trans-unit id="wPHYKdr" resname="hospitals.updated_at.field">
+        <source>hospitals.updated_at.field</source>
+        <target>Zuletzt aktualisiert am:</target>
+      </trans-unit>
+      <trans-unit id="iMlZg1s" resname="hospitals.statistics.title">
+        <source>hospitals.statistics.title</source>
+        <target>Statistiken</target>
+      </trans-unit>
+      <trans-unit id="y125qmS" resname="dashboard.allocations.by_hospital">
+        <source>dashboard.allocations.by_hospital</source>
+        <target>Insgesamt sind %count% Einsätze dieser Klinik importiert worden.</target>
+      </trans-unit>
+      <trans-unit id="iPZX6a2" resname="hospitals.admin.warning">
+        <source>hospitals.admin.warning</source>
+        <target>WARNUNG - Im folgenden Abschnitt sollten nur Änderungen vorgenommen werden, deren Auswirkungen bekannt sind.</target>
+      </trans-unit>
+      <trans-unit id="5stMlbn" resname="allocations.title">
+        <source>allocations.title</source>
+        <target>Einsätze</target>
+      </trans-unit>
+      <trans-unit id="tbzR99_" resname="allocations.show.title">
+        <source>allocations.show.title</source>
+        <target>Einsatz</target>
+      </trans-unit>
+      <trans-unit id="rU3KeY4" resname="allocations.link.back">
+        <source>allocations.link.back</source>
+        <target>Zurück zur Tabelle</target>
+      </trans-unit>
+      <trans-unit id="NFcU2_5" resname="allocations.card.hospital">
+        <source>allocations.card.hospital</source>
+        <target>Zielklinik</target>
+      </trans-unit>
+      <trans-unit id="QK577QV" resname="allocations.field.hospital">
+        <source>allocations.field.hospital</source>
+        <target>Klinik</target>
+      </trans-unit>
+      <trans-unit id="jJ7giC." resname="allocations.fields.area">
+        <source>allocations.fields.area</source>
+        <target>Gebiete</target>
+      </trans-unit>
+      <trans-unit id="9QegSpP" resname="allocations.field.supplyArea">
+        <source>allocations.field.supplyArea</source>
+        <target>Versorgungsgebiet</target>
+      </trans-unit>
+      <trans-unit id="d4aNrFI" resname="allocations.field.dispatchArea">
+        <source>allocations.field.dispatchArea</source>
+        <target>Leitstelle</target>
+      </trans-unit>
+      <trans-unit id="PsmgUWc" resname="allocations.field.speciality">
+        <source>allocations.field.speciality</source>
+        <target>Fachabteilung</target>
+      </trans-unit>
+      <trans-unit id="Xtmh5GH" resname="allocations.field.specialityDetail">
+        <source>allocations.field.specialityDetail</source>
+        <target>Detail der Fachabteilung</target>
+      </trans-unit>
+      <trans-unit id="T391WpC" resname="allocations.field.specialityWasClosed">
+        <source>allocations.field.specialityWasClosed</source>
+        <target>Fachabteilung war abgemeldet?</target>
+      </trans-unit>
+      <trans-unit id="Bte0yLi" resname="allocations.field.specialityClosed">
+        <source>allocations.field.specialityClosed</source>
+        <target>Ja (Abgemeldet)</target>
+      </trans-unit>
+      <trans-unit id="C2cMZ.u" resname="allocations.field.specialityOpen">
+        <source>allocations.field.specialityOpen</source>
+        <target>Nein (Angemeldet)</target>
+      </trans-unit>
+      <trans-unit id="jxx_za8" resname="allocations.field.handoverPoint">
+        <source>allocations.field.handoverPoint</source>
+        <target>Übergabepunkt</target>
+      </trans-unit>
+      <trans-unit id="jxXlE6S" resname="allocations.card.deployment">
+        <source>allocations.card.deployment</source>
+        <target>Einsatz</target>
+      </trans-unit>
+      <trans-unit id="aSye1u3" resname="allocations.field.pzc">
+        <source>allocations.field.pzc</source>
+        <target>PZC</target>
+      </trans-unit>
+      <trans-unit id="wu4mAac" resname="allocations.field.SK">
+        <source>allocations.field.SK</source>
+        <target>SK</target>
+      </trans-unit>
+      <trans-unit id="VAvrtYV" resname="allocations.field.RMIText">
+        <source>allocations.field.RMIText</source>
+        <target>RMI mit Text</target>
+      </trans-unit>
+      <trans-unit id="tQGAeXr" resname="allocations.field.secondaryRMIText">
+        <source>allocations.field.secondaryRMIText</source>
+        <target>Sekundäre RMI mit Text</target>
+      </trans-unit>
+      <trans-unit id="luVm1wl" resname="allocations.field.noSecondaryRMI">
+        <source>allocations.field.noSecondaryRMI</source>
+        <target>Keine sekundäre RMI vorhanden.</target>
+      </trans-unit>
+      <trans-unit id="8LJczjD" resname="allocations.field.occasion">
+        <source>allocations.field.occasion</source>
+        <target>Anlass</target>
+      </trans-unit>
+      <trans-unit id="kSW7Gi2" resname="allocations.field.assignment">
+        <source>allocations.field.assignment</source>
+        <target>Zuweisung</target>
+      </trans-unit>
+      <trans-unit id="2oj8F3T" resname="allocations.field.transport">
+        <source>allocations.field.transport</source>
+        <target>Transport</target>
+      </trans-unit>
+      <trans-unit id="NgKRY09" resname="allocations.field.modeOfTransport">
+        <source>allocations.field.modeOfTransport</source>
+        <target>Transportmodus</target>
+      </trans-unit>
+      <trans-unit id="t3mijg5" resname="allocations.field.isWithPhysician">
+        <source>allocations.field.isWithPhysician</source>
+        <target>Arztbegleitet?</target>
+      </trans-unit>
+      <trans-unit id="1ZR7Ta7" resname="allocations.field.isWithPhysician.true">
+        <source>allocations.field.isWithPhysician.true</source>
+        <target>Ja (N+)</target>
+      </trans-unit>
+      <trans-unit id="GA5hkhg" resname="allocations.field.isWithPhysician.false">
+        <source>allocations.field.isWithPhysician.false</source>
+        <target>Nein (N-)</target>
+      </trans-unit>
+      <trans-unit id="zy3fCt." resname="allocations.field.requiresResus">
+        <source>allocations.field.requiresResus</source>
+        <target>Schockraum?</target>
+      </trans-unit>
+      <trans-unit id="syWT5x1" resname="allocations.field.requiresResus.true">
+        <source>allocations.field.requiresResus.true</source>
+        <target>Ja (S+)</target>
+      </trans-unit>
+      <trans-unit id="KUzA.je" resname="allocations.field.requiresResus.false">
+        <source>allocations.field.requiresResus.false</source>
+        <target>Nein (S-)</target>
+      </trans-unit>
+      <trans-unit id="0rLcw3T" resname="allocations.field.requiresCathlab">
+        <source>allocations.field.requiresCathlab</source>
+        <target>Herzkatheter?</target>
+      </trans-unit>
+      <trans-unit id="nolfr5J" resname="allocations.field.requiresCathlab.true">
+        <source>allocations.field.requiresCathlab.true</source>
+        <target>Ja (H+)</target>
+      </trans-unit>
+      <trans-unit id="c5ibvXn" resname="allocations.field.requiresCathlab.false">
+        <source>allocations.field.requiresCathlab.false</source>
+        <target>Nein (H-)</target>
+      </trans-unit>
+      <trans-unit id="Ke3gFse" resname="allocations.field.commentary">
+        <source>allocations.field.commentary</source>
+        <target>Kommentar</target>
+      </trans-unit>
+      <trans-unit id="_2FZBQj" resname="allocations.field.noCommentary">
+        <source>allocations.field.noCommentary</source>
+        <target>Kein Kommentar</target>
+      </trans-unit>
+      <trans-unit id="J7yQf2G" resname="allocations.card.timestamps">
+        <source>allocations.card.timestamps</source>
+        <target>Einsatzzeiten</target>
+      </trans-unit>
+      <trans-unit id="jr.GpSs" resname="allocations.field.createdAt">
+        <source>allocations.field.createdAt</source>
+        <target>Erstellt um</target>
+      </trans-unit>
+      <trans-unit id="p86RFby" resname="allocations.field.arrivalAt">
+        <source>allocations.field.arrivalAt</source>
+        <target>Ankunft um</target>
+      </trans-unit>
+      <trans-unit id="nWgxoDc" resname="allocations.card.patient">
+        <source>allocations.card.patient</source>
+        <target>Patient</target>
+      </trans-unit>
+      <trans-unit id="Kn.0XWU" resname="allocations.field.age">
+        <source>allocations.field.age</source>
+        <target>Alter</target>
+      </trans-unit>
+      <trans-unit id="JsktL55" resname="allocations.field.gender">
+        <source>allocations.field.gender</source>
+        <target>Geschlecht</target>
+      </trans-unit>
+      <trans-unit id="sSgj1Zy" resname="allocations.field.gender.male">
+        <source>allocations.field.gender.male</source>
+        <target>Männlich</target>
+      </trans-unit>
+      <trans-unit id="efW.JGO" resname="allocations.field.gender.female">
+        <source>allocations.field.gender.female</source>
+        <target>Weiblich</target>
+      </trans-unit>
+      <trans-unit id="FLUwXcc" resname="allocations.field.gender.other">
+        <source>allocations.field.gender.other</source>
+        <target>Divers</target>
+      </trans-unit>
+      <trans-unit id="Fcj4gtX" resname="allocations.field.isCPR">
+        <source>allocations.field.isCPR</source>
+        <target>Reanimiert?</target>
+      </trans-unit>
+      <trans-unit id="ywS_Rrt" resname="allocations.field.isCPR.true">
+        <source>allocations.field.isCPR.true</source>
+        <target>Ja (R+)</target>
+      </trans-unit>
+      <trans-unit id="wXXlU4l" resname="allocations.field.isCPR.false">
+        <source>allocations.field.isCPR.false</source>
+        <target>Nein (R-)</target>
+      </trans-unit>
+      <trans-unit id="FKv91UW" resname="allocations.field.infectious">
+        <source>allocations.field.infectious</source>
+        <target>Infektiosität?</target>
+      </trans-unit>
+      <trans-unit id="b64slMh" resname="allocations.field.isInfectious.false">
+        <source>allocations.field.isInfectious.false</source>
+        <target>Nein</target>
+      </trans-unit>
+      <trans-unit id="X96TrgJ" resname="allocations.field.isVentilated">
+        <source>allocations.field.isVentilated</source>
+        <target>Beatmet?</target>
+      </trans-unit>
+      <trans-unit id="Fn40ZBK" resname="allocations.field.isVentilated.true">
+        <source>allocations.field.isVentilated.true</source>
+        <target>Ja (B+)</target>
+      </trans-unit>
+      <trans-unit id="A5TWQID" resname="allocations.field.isVentilated.false">
+        <source>allocations.field.isVentilated.false</source>
+        <target>Nein (B-)</target>
+      </trans-unit>
+      <trans-unit id="a2jd15L" resname="allocations.field.isPregnant">
+        <source>allocations.field.isPregnant</source>
+        <target>Schwanger?</target>
+      </trans-unit>
+      <trans-unit id="O9wC7Sq" resname="allocations.field.isPregnant.true">
+        <source>allocations.field.isPregnant.true</source>
+        <target>Ja</target>
+      </trans-unit>
+      <trans-unit id="41AOj2I" resname="allocations.field.isPregnant.false">
+        <source>allocations.field.isPregnant.false</source>
+        <target>Nein</target>
+      </trans-unit>
+      <trans-unit id="pF54nx1" resname="allocations.field.isShock">
+        <source>allocations.field.isShock</source>
+        <target>Schock?</target>
+      </trans-unit>
+      <trans-unit id="zI7O0yr" resname="allocations.field.isShock.true">
+        <source>allocations.field.isShock.true</source>
+        <target>Ja</target>
+      </trans-unit>
+      <trans-unit id="BpwrbAs" resname="allocations.field.isShock.false">
+        <source>allocations.field.isShock.false</source>
+        <target>Nein</target>
+      </trans-unit>
+      <trans-unit id="tWd9GRa" resname="allocations.field.isWorkAccident">
+        <source>allocations.field.isWorkAccident</source>
+        <target>Arbeits-/ Schul-/ Wegeunfall?</target>
+      </trans-unit>
+      <trans-unit id="wf4hSE4" resname="allocations.field.isWorkAccident.true">
+        <source>allocations.field.isWorkAccident.true</source>
+        <target>Ja (BG+)</target>
+      </trans-unit>
+      <trans-unit id="yAtBjRQ" resname="allocations.field.isWorkAccident.false">
+        <source>allocations.field.isWorkAccident.false</source>
+        <target>Nein (BG-)</target>
+      </trans-unit>
+      <trans-unit id="uHbF2hZ" resname="allocations.field.import">
+        <source>allocations.field.import</source>
+        <target>Import</target>
+      </trans-unit>
+      <trans-unit id="ntInA7_" resname="allocations.field.importedBy">
+        <source>allocations.field.importedBy</source>
+        <target>Importiert von %name%.</target>
+      </trans-unit>
+      <trans-unit id="xjESv_S" resname="allocations.field.importedAt">
+        <source>allocations.field.importedAt</source>
+        <target>Importiert um %time%.</target>
+      </trans-unit>
+      <trans-unit id="jPnL6cj" resname="import.title">
+        <source>import.title</source>
+        <target>Importieren</target>
+      </trans-unit>
+      <trans-unit id="oibupu6" resname="import.list.title">
+        <source>import.list.title</source>
+        <target>Liste der Importe</target>
+      </trans-unit>
+      <trans-unit id="kTAXuhX" resname="import.fields.id">
+        <source>import.fields.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="GGh7KIO" resname="import.fields.caption">
+        <source>import.fields.caption</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="JBWEg_C" resname="import.fields.date">
+        <source>import.fields.date</source>
+        <target>Datum</target>
+      </trans-unit>
+      <trans-unit id="OTIaXaM" resname="import.fields.status">
+        <source>import.fields.status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="1XYRCsh" resname="import.fields.loading">
+        <source>import.fields.loading</source>
+        <target>Lade</target>
+      </trans-unit>
+      <trans-unit id="JDWT.kr" resname="import.button.view">
+        <source>import.button.view</source>
+        <target>Details</target>
+      </trans-unit>
+      <trans-unit id="8YeW.Bb" resname="import.button.delete">
+        <source>import.button.delete</source>
+        <target>Löschen</target>
+      </trans-unit>
+      <trans-unit id="KjpGG6i" resname="import.noUploads">
+        <source>import.noUploads</source>
+        <target>Noch keine Daten importiert.</target>
+      </trans-unit>
+      <trans-unit id="EDVOt5H" resname="import.new.title">
+        <source>import.new.title</source>
+        <target>Neue Daten importieren</target>
+      </trans-unit>
+      <trans-unit id="5e9WaPb" resname="import.show.title">
+        <source>import.show.title</source>
+        <target>Import anzeigen</target>
+      </trans-unit>
+      <trans-unit id="fZ2cYDa" resname="import.link.back">
+        <source>import.link.back</source>
+        <target>Zurück</target>
+      </trans-unit>
+      <trans-unit id="KWpJppl" resname="import.card.basics">
+        <source>import.card.basics</source>
+        <target>Allgemeines</target>
+      </trans-unit>
+      <trans-unit id="G7iJ9C5" resname="import.field.caption">
+        <source>import.field.caption</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="PkImvQb" resname="import.field.contents">
+        <source>import.field.contents</source>
+        <target>Inhalt</target>
+      </trans-unit>
+      <trans-unit id="ju62sly" resname="import.field.status">
+        <source>import.field.status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="PUXQElR" resname="import.field.loading">
+        <source>import.field.loading</source>
+        <target>Lade</target>
+      </trans-unit>
+      <trans-unit id="CGBHmDG" resname="import.card.details">
+        <source>import.card.details</source>
+        <target>Details</target>
+      </trans-unit>
+      <trans-unit id="FsGp6_I" resname="import.field.error">
+        <source>import.field.error</source>
+        <target>Fehler</target>
+      </trans-unit>
+      <trans-unit id="WyjOrQQ" resname="import.field.noError">
+        <source>import.field.noError</source>
+        <target>Kein Fehler.</target>
+      </trans-unit>
+      <trans-unit id=".IYiLDj" resname="import.field.statistics">
+        <source>import.field.statistics</source>
+        <target>Statistiken</target>
+      </trans-unit>
+      <trans-unit id="t3EuDZr" resname="import.field.itemCount">
+        <source>import.field.itemCount</source>
+        <target>Anzahl der Elemente</target>
+      </trans-unit>
+      <trans-unit id="ORl2mGO" resname="import.field.runtime">
+        <source>import.field.runtime</source>
+        <target>Laufzeit</target>
+      </trans-unit>
+      <trans-unit id="x8kpI2E" resname="import.field.timesRun">
+        <source>import.field.timesRun</source>
+        <target>Anzahl der Importe</target>
+      </trans-unit>
+      <trans-unit id="D_3EHYf" resname="import.field.createdBy">
+        <source>import.field.createdBy</source>
+        <target>Importiert von</target>
+      </trans-unit>
+      <trans-unit id="00V9HyA" resname="import.field.createdAt">
+        <source>import.field.createdAt</source>
+        <target>Erstellt am %time%.</target>
+      </trans-unit>
+      <trans-unit id="qyVm9oB" resname="import.field.lastRun">
+        <source>import.field.lastRun</source>
+        <target>Letzter Import am %time%.</target>
+      </trans-unit>
+      <trans-unit id="FRNSwCx" resname="import.card.debugging">
+        <source>import.card.debugging</source>
+        <target>Debugging</target>
+      </trans-unit>
+      <trans-unit id="C1f447." resname="import.field.download">
+        <source>import.field.download</source>
+        <target>Datei herunterladen</target>
+      </trans-unit>
+      <trans-unit id="_JrLEnp" resname="security.login.title">
+        <source>security.login.title</source>
+        <target>Anmelden</target>
+      </trans-unit>
+      <trans-unit id="ZvVqbii" resname="security.login.alreadyLoggedIn">
+        <source>security.login.alreadyLoggedIn</source>
+        <target>Sie sind bereits angemeldet als %name%. Wollen Sie sich abmelden?</target>
+      </trans-unit>
+      <trans-unit id="GeCNtXW" resname="security.login.message">
+        <source>security.login.message</source>
+        <target>Tragen Sie Ihre Zugangsdaten an ein klicken Sie auf anmelden.</target>
+      </trans-unit>
+      <trans-unit id="Lpa.VEy" resname="security.login.button">
+        <source>security.login.button</source>
+        <target>Anmelden</target>
+      </trans-unit>
+      <trans-unit id="x_PUEjD" resname="security.login.rememberMe">
+        <source>security.login.rememberMe</source>
+        <target>Anmeldung beibehalten</target>
+      </trans-unit>
+      <trans-unit id="jAyXqep" resname="security.login.forgotPassword">
+        <source>security.login.forgotPassword</source>
+        <target>Haben Sie Ihr Passwort vergessen?</target>
+      </trans-unit>
+      <trans-unit id="ZKZni.Y" resname="security.link.forgotPassword">
+        <source>security.link.forgotPassword</source>
+        <target>Hier klicken, um das Passwort zurück zusetzen.</target>
+      </trans-unit>
+      <trans-unit id="1MaDcUF" resname="security.link.logout">
+        <source>security.link.logout</source>
+        <target>Klicken Sie hier, um sich abzumelden.</target>
+      </trans-unit>
+      <trans-unit id="D7LhLIZ" resname="security.requestReset.title">
+        <source>security.requestReset.title</source>
+        <target>Passwort zurücksetzen</target>
+      </trans-unit>
+      <trans-unit id="h3LmmlH" resname="security.requestReset.message">
+        <source>security.requestReset.message</source>
+        <target>Tragen Sie Ihre E-Mail Addresse ein, um eine E-Mail zum zurücksetzen des Passworts zu erhalten.</target>
+      </trans-unit>
+      <trans-unit id="raAxerI" resname="security.requestReset.button">
+        <source>security.requestReset.button</source>
+        <target>Passwort zurücksetzen</target>
+      </trans-unit>
+      <trans-unit id="GaSM3XU" resname="security.reset.title">
+        <source>security.reset.title</source>
+        <target>Passwort zurücksetzen</target>
+      </trans-unit>
+      <trans-unit id="fNwvDHV" resname="security.reset.button">
+        <source>security.reset.button</source>
+        <target>Passwort zurücksetzen</target>
+      </trans-unit>
+      <trans-unit id="6Xc7I3F" resname="security.reset.message">
+        <source>security.reset.message</source>
+        <target>Um ein neues Passwort festzulegen, tragen Sie es unten ein und bestätigen Sie.</target>
+      </trans-unit>
+      <trans-unit id="B1dO0LR" resname="security.requestResetSend.title">
+        <source>security.requestResetSend.title</source>
+        <target>E-Mail zum zurücksetzen des Passworts verschickt</target>
+      </trans-unit>
+      <trans-unit id="ywixQwm" resname="security.requestResetSend.message">
+        <source>security.requestResetSend.message</source>
+        <target>Wir haben eine E-Mail verschickt, die einen Link zum zurücksetzen Ihres Passworts enthält. Sie bleibt gültig für:</target>
+      </trans-unit>
+      <trans-unit id="m229.Ug" resname="security.requestResetSend.failure">
+        <source>security.requestResetSend.failure</source>
+        <target>Falls Sie keine E-Mail erhalten haben, prüfen Sie Ihren SPAM-Ordner, oder</target>
+      </trans-unit>
+      <trans-unit id="RCgIeOi" resname="security.requestResetSend.tryAgain">
+        <source>security.requestResetSend.tryAgain</source>
+        <target>Klicken Sie hier, um es nochmals zu versuchen.</target>
+      </trans-unit>
+      <trans-unit id="SEv2eG_" resname="security.requestMail.title">
+        <source>security.requestMail.title</source>
+        <target>Passwort zurücksetzen</target>
+      </trans-unit>
+      <trans-unit id="ZZiGCyq" resname="security.requestMail.message">
+        <source>security.requestMail.message</source>
+        <target>Wir haben eine Anfrage zum Zurücksetzen Ihres Passworts erhalten. Um fortzufahren klicken Sie auf den unten stehenden Link, oder kopieren Sie diesen und fügen ihn in Ihren Browser ein. Falls Sie keine derartige Anfrage gestellt haben, ignorieren Sie diesen Link.</target>
+      </trans-unit>
+      <trans-unit id="zEOJTdO" resname="security.requestMail.expiration">
+        <source>security.requestMail.expiration</source>
+        <target>Der Link ist gültig für: </target>
+      </trans-unit>
+      <trans-unit id="9fewk_8" resname="msg.verify.email">
+        <source>msg.verify.email</source>
+        <target>Bestätigen Sie Ihre E-Mail Adresse</target>
+      </trans-unit>
+      <trans-unit id="WPwwSAW" resname="msg.verfiyEmail.failure">
+        <source>msg.verfiyEmail.failure</source>
+        <target>Ihre E-Mail Adresse wurde gerändert. Es konnte allerdings keine E-Mail zur Bestätigung verschickt werden.</target>
+      </trans-unit>
+      <trans-unit id="dyDvWmo" resname="msg.verfiyEmail.success">
+        <source>msg.verfiyEmail.success</source>
+        <target>Ihre E-Mail Adresse wurde geändert. Prüfen Sie ihr Postfach, wir haben Ihnen eine E-Mail zur Bestätigung geschickt.</target>
+      </trans-unit>
+      <trans-unit id="8oEprEf" resname="msg.email.alreadyVerified">
+        <source>msg.email.alreadyVerified</source>
+        <target>Ihre E-Mail Adresse ist bereist bestätigt.</target>
+      </trans-unit>
+      <trans-unit id="2_nVZMI" resname="msg.verify.email.failed">
+        <source>msg.verify.email.failed</source>
+        <target>Es konnte keine E-Mail zur Bestätigung verschickt werden.</target>
+      </trans-unit>
+      <trans-unit id="I.1GJ2Z" resname="msg.verify.email.success">
+        <source>msg.verify.email.success</source>
+        <target>Prüfen Sie ihr Postfach, wir haben Ihnen eine E-Mail zur Bestätigung geschickt.</target>
+      </trans-unit>
+      <trans-unit id="hJHmyxk" resname="user.account.title">
+        <source>user.account.title</source>
+        <target>Mein Konto</target>
+      </trans-unit>
+      <trans-unit id="uRecB8T" resname="user.link.overview">
+        <source>user.link.overview</source>
+        <target>Übersicht</target>
+      </trans-unit>
+      <trans-unit id="YuU7VD." resname="user.link.account">
+        <source>user.link.account</source>
+        <target>Mein Konto</target>
+      </trans-unit>
+      <trans-unit id="lqbveeX" resname="user.link.security">
+        <source>user.link.security</source>
+        <target>Sicherheit</target>
+      </trans-unit>
+      <trans-unit id="LZ0unkK" resname="user.card.account">
+        <source>user.card.account</source>
+        <target>Konto</target>
+      </trans-unit>
+      <trans-unit id="C699COU" resname="user.card.account.subtitle">
+        <source>user.card.account.subtitle</source>
+        <target>Verwalten Sie Ihr Konto und Ihr Profil</target>
+      </trans-unit>
+      <trans-unit id="SpqH2It" resname="user.card.account.text">
+        <source>user.card.account.text</source>
+        <target>Ändern Sie die Angaben in Ihrem Profil, wie z.B. ihren Benutzernamen, oder Ihr Passwort.</target>
+      </trans-unit>
+      <trans-unit id="s9uyfrH" resname="user.link.profile">
+        <source>user.link.profile</source>
+        <target>Profil</target>
+      </trans-unit>
+      <trans-unit id="sAQbiZ4" resname="user.link.email">
+        <source>user.link.email</source>
+        <target>E-Mail</target>
+      </trans-unit>
+      <trans-unit id="r6Y32Id" resname="user.account.password">
+        <source>user.account.password</source>
+        <target>Passwort</target>
+      </trans-unit>
+      <trans-unit id="xVPG6ab" resname="user.link.password">
+        <source>user.link.password</source>
+        <target>Passwort ändern</target>
+      </trans-unit>
+      <trans-unit id="ML7dRMH" resname="user.password.title">
+        <source>user.password.title</source>
+        <target>Ihr Passwort</target>
+      </trans-unit>
+      <trans-unit id="9nDHwyx" resname="user.account.email.title">
+        <source>user.account.email.title</source>
+        <target>Ihre E-Mail Adresse</target>
+      </trans-unit>
+      <trans-unit id="g1_yPM7" resname="user.email.title">
+        <source>user.email.title</source>
+        <target>Ihre E-Mail Adresse</target>
+      </trans-unit>
+      <trans-unit id="VObN5dM" resname="user.email.message">
+        <source>user.email.message</source>
+        <target>Ihre aktuelle E-Mail Adresse ist:</target>
+      </trans-unit>
+      <trans-unit id="bEaiRIQ" resname="user.email.verify">
+        <source>user.email.verify</source>
+        <target>Ihre E-Mail Adresse ist:</target>
+      </trans-unit>
+      <trans-unit id="hqhwjCA" resname="user.email.verified">
+        <source>user.email.verified</source>
+        <target>bestätigt</target>
+      </trans-unit>
+      <trans-unit id="V5VSe3i" resname="user.email.notVerified">
+        <source>user.email.notVerified</source>
+        <target>nicht bestätigt</target>
+      </trans-unit>
+      <trans-unit id="aigkpwT" resname="user.link.verifyEmail">
+        <source>user.link.verifyEmail</source>
+        <target>Klicken Sie hier, um Ihre E-Mail zu bestätigen.</target>
+      </trans-unit>
+      <trans-unit id="fAwwayc" resname="user.account.profile">
+        <source>user.account.profile</source>
+        <target>Ihr Profil</target>
+      </trans-unit>
+      <trans-unit id="HdsKVq_" resname="user.profile.title">
+        <source>user.profile.title</source>
+        <target>Ihr Profil</target>
+      </trans-unit>
+      <trans-unit id="fy3zeWd" resname="msg.user.profile.updated">
+        <source>msg.user.profile.updated</source>
+        <target>Ihr Profil wurde aktualisiert.</target>
+      </trans-unit>
+      <trans-unit id="YLXj6wf" resname="msg.user.password.changed">
+        <source>msg.user.password.changed</source>
+        <target>Ihr Passwort wurde aktualisiert.</target>
+      </trans-unit>
+      <trans-unit id="Zv2ErhC" resname="user.card.security">
+        <source>user.card.security</source>
+        <target>Sicherheit</target>
+      </trans-unit>
+      <trans-unit id="JntdPOF" resname="user.card.security.subtitle">
+        <source>user.card.security.subtitle</source>
+        <target>Ändern Sie Ihr Passwort</target>
+      </trans-unit>
+      <trans-unit id="iEm6f4O" resname="user.card.security.text">
+        <source>user.card.security.text</source>
+        <target>Verwalten oder ändern Sie Ihr Passwort.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

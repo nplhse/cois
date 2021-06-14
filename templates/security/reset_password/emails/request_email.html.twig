@@ -1,8 +1,9 @@
 <h1>
-    Reset your password
+    {{ 'security.requestMail.title'|trans }} - {{ parent() }}
 </h1>
 
 <p>
+    {{ 'security.requestMail.message'|trans }}
     To reset your password, please visit the following link
 </p>
 
@@ -25,14 +26,11 @@
 </a>
 
 <p>
-    This link will expire in {{
+    {{ 'security.requestMail.expiration'|trans }}
+    {{
         resetToken.expirationMessageKey|trans(
             resetToken.expirationMessageData,
             'ResetPasswordBundle'
         )
     }}.
-</p>
-
-<p>
-    Cheers!
 </p>

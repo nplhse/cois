@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Account - {{ parent() }}
+    {{ 'user.account.title'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
     <h1>
-        My Account
+        {{ 'user.account.title'|trans }}
     </h1>
 
     {% for label, messages in app.flashes %}
@@ -22,15 +22,17 @@
             <a class="nav-link active"
                 aria-current="page"
                 href="{{ path('account') }}">
-                Overview
+                {{ 'user.link.overview'|trans }}
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('account_profile') }}">Account</a>
+            <a class="nav-link" href="{{ path('account_profile') }}">
+                {{ 'user.link.account'|trans }}
+            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ path('account_security') }}">
-                Security
+                {{ 'user.link.security'|trans }}
             </a>
         </li>
     </ul>
@@ -40,20 +42,19 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">
-                        Account
+                        {{ 'user.card.account'|trans }}
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">
-                        Manage your account& profile
+                        {{ 'user.card.account.subtitle'|trans }}
                     </h6>
                     <p class="card-text">
-                        Take care of your personal profile (e.g. your username)
-                        and your E-Mail settings.
+                        {{ 'user.card.account.text'|trans }}
                     </p>
                     <a href="{{ path('account_profile') }}" class="card-link">
-                        Edit profile
+                        {{ 'user.link.profile'|trans }}
                     </a>
                     <a href="{{ path('account_email') }}" class="card-link">
-                        Manage E-Mail
+                        {{ 'user.link.email'|trans }}
                     </a>
                 </div>
             </div>
@@ -62,17 +63,17 @@
             <div class="card border-danger">
                 <div class="card-body">
                     <h5 class="card-title text-danger">
-                        Security
+                        {{ 'user.card.security'|trans }}
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">
-                        Manage your password
+                        {{ 'user.card.security.subtitle'|trans }}
                     </h6>
                     <p class="card-text">
-                        Update your password.
+                        {{ 'user.card.security.text'|trans }}
                     </p>
                     <a href="{{ path('account_change_password') }}"
                         class="card-link">
-                        Change password
+                        {{ 'user.link.password'|trans }}
                     </a>
                 </div>
             </div>

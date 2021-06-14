@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Edit Hospital - {{ parent() }}
+    {{ 'hospitals.edit.title'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -17,18 +17,18 @@
                 )
                 }}"
                 role="button">
-                View your hospital
+                {{ 'hospitals.link_view'|trans }}
             </a>
             <a class="btn btn-outline-primary"
                 href="{{ path('hospital_index') }}"
                 role="button">
-                Back to list
+                {{ 'hospitals.link_back'|trans }}
             </a>
         </div>
     </div>
 
     <h1>
-        Edit your Hospital
+        {{ 'hospitals.edit.title'|trans }}
     </h1>
 
     {{ form_start(form) }}
@@ -37,7 +37,7 @@
         <div class="col-8">
             <div class="card mb-3">
                 <div class="card-header">
-                    Basics
+                    {{ 'hospitals.basics.title'|trans }}
                 </div>
                 <div class="card-body">
                     {{ form_row(form.name) }}
@@ -54,7 +54,7 @@
 
             <div class="card mb-3">
                 <div class="card-header">
-                    Size
+                    {{ 'hospitals.size.title'|trans }}
                 </div>
                 <div class="card-body">
                     {{ form_row(form.size) }}
@@ -66,12 +66,11 @@
         <div class="col-4">
             <div class="card border-danger mb-3">
                 <div class="card-header">
-                    Administration
+                    {{ 'hospitals.admin.title'|trans }}
                 </div>
                 <div class="card-body text-danger">
                     <p>
-                        <strong>WARNING</strong> - Be very careful when changing
-                        something in this section.
+                        <strong>{{ 'hospitals.admin.warning'|trans }}</strong>
                     </p>
 
                     {{ form_row(form.owner) }}
@@ -94,12 +93,12 @@
                 )
                 }}"
                 role="button">
-                View your hospital
+                {{ 'hospitals.link_view'|trans }}
             </a>
             <a class="btn btn-outline-primary"
                 href="{{ path('hospital_index') }}"
                 role="button">
-                Back to list
+                {{ 'hospitals.link_back'|trans }}
             </a>
         </div>
     </div>

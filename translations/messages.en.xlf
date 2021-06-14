@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Collaborative IVENA statistics</target>
+      </trans-unit>
+      <trans-unit id="yXUZGes" resname="link.hospitals">
+        <source>link.hospitals</source>
+        <target>Hospitals</target>
+      </trans-unit>
+      <trans-unit id="RouxxR_" resname="link.allocations">
+        <source>link.allocations</source>
+        <target>Allocations</target>
+      </trans-unit>
+      <trans-unit id="Jl6nRRJ" resname="link.statistics">
+        <source>link.statistics</source>
+        <target>Statistics</target>
+      </trans-unit>
+      <trans-unit id="8S1cw8Z" resname="link.import">
+        <source>link.import</source>
+        <target>Import</target>
+      </trans-unit>
+      <trans-unit id="1484Pld" resname="link.export">
+        <source>link.export</source>
+        <target>Export</target>
+      </trans-unit>
+      <trans-unit id="jFBmGv6" resname="nav.logged_in_as">
+        <source>nav.logged_in_as</source>
+        <target>Logged in as: %name%</target>
+      </trans-unit>
+      <trans-unit id="ArfrD6N" resname="link.backend">
+        <source>link.backend</source>
+        <target>Administration</target>
+      </trans-unit>
+      <trans-unit id="ySPQKPx" resname="link.account">
+        <source>link.account</source>
+        <target>Your account</target>
+      </trans-unit>
+      <trans-unit id="K2SvlFI" resname="link.impersonation_exit">
+        <source>link.impersonation_exit</source>
+        <target>Exit impersonation</target>
+      </trans-unit>
+      <trans-unit id="FSyD6SO" resname="link.logout">
+        <source>link.logout</source>
+        <target>Logout</target>
+      </trans-unit>
+      <trans-unit id="Q5ha4LM" resname="link.login">
+        <source>link.login</source>
+        <target>Login</target>
+      </trans-unit>
+      <trans-unit id="3bqLM8Q" resname="dashboard.title">
+        <source>dashboard.title</source>
+        <target>Dashboard</target>
+      </trans-unit>
+      <trans-unit id="dEb6dNF" resname="changelog.title">
+        <source>changelog.title</source>
+        <target>Changelog</target>
+      </trans-unit>
+      <trans-unit id="tj.43TE" resname="dashboard.welcome">
+        <source>dashboard.welcome</source>
+        <target>Welcome to Collaborative IVENA statistics</target>
+      </trans-unit>
+      <trans-unit id="V5sdz5Q" resname="dashboard.get_started">
+        <source>dashboard.get_started</source>
+        <target>Want to know where to get started? Here are some ideas.</target>
+      </trans-unit>
+      <trans-unit id="_XQ5Fak" resname="dashboard.allocation.title">
+        <source>dashboard.allocation.title</source>
+        <target>Allocations</target>
+      </trans-unit>
+      <trans-unit id="fDkyjSH" resname="dashboard.allocation.text">
+        <source>dashboard.allocation.text</source>
+        <target>Browse trough all the data, filter it and explore what IVENA got for us.</target>
+      </trans-unit>
+      <trans-unit id="Ehfkhx2" resname="dashboard.allocation.button">
+        <source>dashboard.allocation.button</source>
+        <target>View all Allocations</target>
+      </trans-unit>
+      <trans-unit id="J0CbtE_" resname="dashboard.hospital.title">
+        <source>dashboard.hospital.title</source>
+        <target>Your Hospital</target>
+      </trans-unit>
+      <trans-unit id="elehn1v" resname="dashboard.hospital.text">
+        <source>dashboard.hospital.text</source>
+        <target>Check if your hospital has been set up correctly and change data if necessary.</target>
+      </trans-unit>
+      <trans-unit id="PGbQUwe" resname="dashboard.hospital.button_edit">
+        <source>dashboard.hospital.button_edit</source>
+        <target>Edit hospital</target>
+      </trans-unit>
+      <trans-unit id="PNDybNP" resname="dashboard.hospital.button_view">
+        <source>dashboard.hospital.button_view</source>
+        <target>View all hospitals</target>
+      </trans-unit>
+      <trans-unit id="vStR0H9" resname="dashboard.import.title">
+        <source>dashboard.import.title</source>
+        <target>Import data</target>
+      </trans-unit>
+      <trans-unit id="7mzdgx9" resname="dashboard.import.text">
+        <source>dashboard.import.text</source>
+        <target>Add some of your data to the database.</target>
+      </trans-unit>
+      <trans-unit id="Dtm_yIw" resname="dashboard.import.button">
+        <source>dashboard.import.button</source>
+        <target>Import data</target>
+      </trans-unit>
+      <trans-unit id="rJf3tq1" resname="dashboard.users">
+        <source>dashboard.users</source>
+        <target>Users</target>
+      </trans-unit>
+      <trans-unit id="HKKcwgP" resname="dashboard.hospitals">
+        <source>dashboard.hospitals</source>
+        <target>Hospitals</target>
+      </trans-unit>
+      <trans-unit id="K1VbrbK" resname="dashboard.allocations">
+        <source>dashboard.allocations</source>
+        <target>Allocations</target>
+      </trans-unit>
+      <trans-unit id="bFqhgee" resname="dashboard.allocations.by_your_hospital">
+        <source>dashboard.allocations.by_your_hospital</source>
+        <target>With %count% allocations from your hospital.</target>
+      </trans-unit>
+      <trans-unit id="WIzt02l" resname="dashboard.imports">
+        <source>dashboard.imports</source>
+        <target>Imports</target>
+      </trans-unit>
+      <trans-unit id="fj.rWWU" resname="dashboard.imports.by_you">
+        <source>dashboard.imports.by_you</source>
+        <target>With %count% imports from you.</target>
+      </trans-unit>
+      <trans-unit id="jxa9tb_" resname="hospitals.edit.title">
+        <source>hospitals.edit.title</source>
+        <target>Edit hospital</target>
+      </trans-unit>
+      <trans-unit id="OFscjRC" resname="hospitals.link_view">
+        <source>hospitals.link_view</source>
+        <target>View your hospital</target>
+      </trans-unit>
+      <trans-unit id="YomWZTl" resname="hospitals.link_back">
+        <source>hospitals.link_back</source>
+        <target>Back to hospitals</target>
+      </trans-unit>
+      <trans-unit id="ZyxrQD0" resname="hospitals.basics.title">
+        <source>hospitals.basics.title</source>
+        <target>Basics</target>
+      </trans-unit>
+      <trans-unit id="2gu9EGM" resname="hospitals.size.title">
+        <source>hospitals.size.title</source>
+        <target>Size</target>
+      </trans-unit>
+      <trans-unit id="y9JlMMS" resname="hospitals.admin.title">
+        <source>hospitals.admin.title</source>
+        <target>Administration</target>
+      </trans-unit>
+      <trans-unit id="sUYHsiK" resname="hospitals.title">
+        <source>hospitals.title</source>
+        <target>Hospitals</target>
+      </trans-unit>
+      <trans-unit id="tPfLU0Z" resname="hospitals.link_edit">
+        <source>hospitals.link_edit</source>
+        <target>Edit your hospital</target>
+      </trans-unit>
+      <trans-unit id="s57Ff7b" resname="hospitals.address.field">
+        <source>hospitals.address.field</source>
+        <target>Address</target>
+      </trans-unit>
+      <trans-unit id="4wNdKb4" resname="hospitals.areas.title">
+        <source>hospitals.areas.title</source>
+        <target>Areas</target>
+      </trans-unit>
+      <trans-unit id="kayQMe8" resname="hospitals.supply_area.field">
+        <source>hospitals.supply_area.field</source>
+        <target>Supply area</target>
+      </trans-unit>
+      <trans-unit id="7UhwATW" resname="hospitals.dispatch_area.field">
+        <source>hospitals.dispatch_area.field</source>
+        <target>Dispatch area</target>
+      </trans-unit>
+      <trans-unit id="Sz6mzPZ" resname="hospitals.location.field">
+        <source>hospitals.location.field</source>
+        <target>Location</target>
+      </trans-unit>
+      <trans-unit id="22u_cEl" resname="hospitals.size.field">
+        <source>hospitals.size.field</source>
+        <target>Size</target>
+      </trans-unit>
+      <trans-unit id="AKLNaIZ" resname="hospitals.beds.field">
+        <source>hospitals.beds.field</source>
+        <target>Beds</target>
+      </trans-unit>
+      <trans-unit id="uwhMJa5" resname="hospitals.owner.field">
+        <source>hospitals.owner.field</source>
+        <target>Owner</target>
+      </trans-unit>
+      <trans-unit id="0C_h2L4" resname="hospitals.created_at.field">
+        <source>hospitals.created_at.field</source>
+        <target>Created at:</target>
+      </trans-unit>
+      <trans-unit id="wPHYKdr" resname="hospitals.updated_at.field">
+        <source>hospitals.updated_at.field</source>
+        <target>Updated at:</target>
+      </trans-unit>
+      <trans-unit id="iMlZg1s" resname="hospitals.statistics.title">
+        <source>hospitals.statistics.title</source>
+        <target>Statistics</target>
+      </trans-unit>
+      <trans-unit id="y125qmS" resname="dashboard.allocations.by_hospital">
+        <source>dashboard.allocations.by_hospital</source>
+        <target>There are %count% allocations from this hospital.</target>
+      </trans-unit>
+      <trans-unit id="iPZX6a2" resname="hospitals.admin.warning">
+        <source>hospitals.admin.warning</source>
+        <target>WARNING - You should know what you are doing, when applying changes in this section.</target>
+      </trans-unit>
+      <trans-unit id="5stMlbn" resname="allocations.title">
+        <source>allocations.title</source>
+        <target>Allocations</target>
+      </trans-unit>
+      <trans-unit id="tbzR99_" resname="allocations.show.title">
+        <source>allocations.show.title</source>
+        <target>Show Allocation</target>
+      </trans-unit>
+      <trans-unit id="rU3KeY4" resname="allocations.link.back">
+        <source>allocations.link.back</source>
+        <target>Back to list</target>
+      </trans-unit>
+      <trans-unit id="NFcU2_5" resname="allocations.card.hospital">
+        <source>allocations.card.hospital</source>
+        <target>Hospital</target>
+      </trans-unit>
+      <trans-unit id="QK577QV" resname="allocations.field.hospital">
+        <source>allocations.field.hospital</source>
+        <target>Hospital</target>
+      </trans-unit>
+      <trans-unit id="jJ7giC." resname="allocations.fields.area">
+        <source>allocations.fields.area</source>
+        <target>Areas</target>
+      </trans-unit>
+      <trans-unit id="9QegSpP" resname="allocations.field.supplyArea">
+        <source>allocations.field.supplyArea</source>
+        <target>Supply Area</target>
+      </trans-unit>
+      <trans-unit id="d4aNrFI" resname="allocations.field.dispatchArea">
+        <source>allocations.field.dispatchArea</source>
+        <target>Dispatch Area</target>
+      </trans-unit>
+      <trans-unit id="PsmgUWc" resname="allocations.field.speciality">
+        <source>allocations.field.speciality</source>
+        <target>Speciality</target>
+      </trans-unit>
+      <trans-unit id="Xtmh5GH" resname="allocations.field.specialityDetail">
+        <source>allocations.field.specialityDetail</source>
+        <target>Speciality Details</target>
+      </trans-unit>
+      <trans-unit id="T391WpC" resname="allocations.field.specialityWasClosed">
+        <source>allocations.field.specialityWasClosed</source>
+        <target>Was this speciality closed?</target>
+      </trans-unit>
+      <trans-unit id="Bte0yLi" resname="allocations.field.specialityClosed">
+        <source>allocations.field.specialityClosed</source>
+        <target>Yes (Closed)</target>
+      </trans-unit>
+      <trans-unit id="C2cMZ.u" resname="allocations.field.specialityOpen">
+        <source>allocations.field.specialityOpen</source>
+        <target>No (Open)</target>
+      </trans-unit>
+      <trans-unit id="jxx_za8" resname="allocations.field.handoverPoint">
+        <source>allocations.field.handoverPoint</source>
+        <target>Handover Point</target>
+      </trans-unit>
+      <trans-unit id="jxXlE6S" resname="allocations.card.deployment">
+        <source>allocations.card.deployment</source>
+        <target>Deployment</target>
+      </trans-unit>
+      <trans-unit id="aSye1u3" resname="allocations.field.pzc">
+        <source>allocations.field.pzc</source>
+        <target>PZC</target>
+      </trans-unit>
+      <trans-unit id="wu4mAac" resname="allocations.field.SK">
+        <source>allocations.field.SK</source>
+        <target>SK</target>
+      </trans-unit>
+      <trans-unit id="VAvrtYV" resname="allocations.field.RMIText">
+        <source>allocations.field.RMIText</source>
+        <target>RMI with Text</target>
+      </trans-unit>
+      <trans-unit id="tQGAeXr" resname="allocations.field.secondaryRMIText">
+        <source>allocations.field.secondaryRMIText</source>
+        <target>Secondary RMI with Text</target>
+      </trans-unit>
+      <trans-unit id="luVm1wl" resname="allocations.field.noSecondaryRMI">
+        <source>allocations.field.noSecondaryRMI</source>
+        <target>No secondary RMI</target>
+      </trans-unit>
+      <trans-unit id="8LJczjD" resname="allocations.field.occasion">
+        <source>allocations.field.occasion</source>
+        <target>Occasion</target>
+      </trans-unit>
+      <trans-unit id="kSW7Gi2" resname="allocations.field.assignment">
+        <source>allocations.field.assignment</source>
+        <target>Assignment</target>
+      </trans-unit>
+      <trans-unit id="2oj8F3T" resname="allocations.field.transport">
+        <source>allocations.field.transport</source>
+        <target>Transport</target>
+      </trans-unit>
+      <trans-unit id="NgKRY09" resname="allocations.field.modeOfTransport">
+        <source>allocations.field.modeOfTransport</source>
+        <target>Mode of Transport</target>
+      </trans-unit>
+      <trans-unit id="t3mijg5" resname="allocations.field.isWithPhysician">
+        <source>allocations.field.isWithPhysician</source>
+        <target>Is with Physician</target>
+      </trans-unit>
+      <trans-unit id="1ZR7Ta7" resname="allocations.field.isWithPhysician.true">
+        <source>allocations.field.isWithPhysician.true</source>
+        <target>Yes (N+)</target>
+      </trans-unit>
+      <trans-unit id="GA5hkhg" resname="allocations.field.isWithPhysician.false">
+        <source>allocations.field.isWithPhysician.false</source>
+        <target>No (N-)</target>
+      </trans-unit>
+      <trans-unit id="zy3fCt." resname="allocations.field.requiresResus">
+        <source>allocations.field.requiresResus</source>
+        <target>Requires Resus</target>
+      </trans-unit>
+      <trans-unit id="syWT5x1" resname="allocations.field.requiresResus.true">
+        <source>allocations.field.requiresResus.true</source>
+        <target>Yes (S+)</target>
+      </trans-unit>
+      <trans-unit id="KUzA.je" resname="allocations.field.requiresResus.false">
+        <source>allocations.field.requiresResus.false</source>
+        <target>No (S-)</target>
+      </trans-unit>
+      <trans-unit id="0rLcw3T" resname="allocations.field.requiresCathlab">
+        <source>allocations.field.requiresCathlab</source>
+        <target>Requires Cathlab</target>
+      </trans-unit>
+      <trans-unit id="nolfr5J" resname="allocations.field.requiresCathlab.true">
+        <source>allocations.field.requiresCathlab.true</source>
+        <target>Yes (H+)</target>
+      </trans-unit>
+      <trans-unit id="c5ibvXn" resname="allocations.field.requiresCathlab.false">
+        <source>allocations.field.requiresCathlab.false</source>
+        <target>No (H-)</target>
+      </trans-unit>
+      <trans-unit id="Ke3gFse" resname="allocations.field.commentary">
+        <source>allocations.field.commentary</source>
+        <target>Commentary</target>
+      </trans-unit>
+      <trans-unit id="_2FZBQj" resname="allocations.field.noCommentary">
+        <source>allocations.field.noCommentary</source>
+        <target>No Comment.</target>
+      </trans-unit>
+      <trans-unit id="J7yQf2G" resname="allocations.card.timestamps">
+        <source>allocations.card.timestamps</source>
+        <target>Timestamps</target>
+      </trans-unit>
+      <trans-unit id="jr.GpSs" resname="allocations.field.createdAt">
+        <source>allocations.field.createdAt</source>
+        <target>Created at</target>
+      </trans-unit>
+      <trans-unit id="p86RFby" resname="allocations.field.arrivalAt">
+        <source>allocations.field.arrivalAt</source>
+        <target>Arrival at</target>
+      </trans-unit>
+      <trans-unit id="nWgxoDc" resname="allocations.card.patient">
+        <source>allocations.card.patient</source>
+        <target>Patient</target>
+      </trans-unit>
+      <trans-unit id="Kn.0XWU" resname="allocations.field.age">
+        <source>allocations.field.age</source>
+        <target>Age</target>
+      </trans-unit>
+      <trans-unit id="JsktL55" resname="allocations.field.gender">
+        <source>allocations.field.gender</source>
+        <target>Gender</target>
+      </trans-unit>
+      <trans-unit id="sSgj1Zy" resname="allocations.field.gender.male">
+        <source>allocations.field.gender.male</source>
+        <target>Male</target>
+      </trans-unit>
+      <trans-unit id="efW.JGO" resname="allocations.field.gender.female">
+        <source>allocations.field.gender.female</source>
+        <target>Female</target>
+      </trans-unit>
+      <trans-unit id="FLUwXcc" resname="allocations.field.gender.other">
+        <source>allocations.field.gender.other</source>
+        <target>Other</target>
+      </trans-unit>
+      <trans-unit id="Fcj4gtX" resname="allocations.field.isCPR">
+        <source>allocations.field.isCPR</source>
+        <target>Is CPR?</target>
+      </trans-unit>
+      <trans-unit id="ywS_Rrt" resname="allocations.field.isCPR.true">
+        <source>allocations.field.isCPR.true</source>
+        <target>Yes (R+)</target>
+      </trans-unit>
+      <trans-unit id="wXXlU4l" resname="allocations.field.isCPR.false">
+        <source>allocations.field.isCPR.false</source>
+        <target>No (R-)</target>
+      </trans-unit>
+      <trans-unit id="FKv91UW" resname="allocations.field.infectious">
+        <source>allocations.field.infectious</source>
+        <target>Is Infectious?</target>
+      </trans-unit>
+      <trans-unit id="b64slMh" resname="allocations.field.isInfectious.false">
+        <source>allocations.field.isInfectious.false</source>
+        <target>No.</target>
+      </trans-unit>
+      <trans-unit id="X96TrgJ" resname="allocations.field.isVentilated">
+        <source>allocations.field.isVentilated</source>
+        <target>Is ventilated?</target>
+      </trans-unit>
+      <trans-unit id="Fn40ZBK" resname="allocations.field.isVentilated.true">
+        <source>allocations.field.isVentilated.true</source>
+        <target>Yes (B+)</target>
+      </trans-unit>
+      <trans-unit id="A5TWQID" resname="allocations.field.isVentilated.false">
+        <source>allocations.field.isVentilated.false</source>
+        <target>No (B-)</target>
+      </trans-unit>
+      <trans-unit id="a2jd15L" resname="allocations.field.isPregnant">
+        <source>allocations.field.isPregnant</source>
+        <target>Is pregnant?</target>
+      </trans-unit>
+      <trans-unit id="O9wC7Sq" resname="allocations.field.isPregnant.true">
+        <source>allocations.field.isPregnant.true</source>
+        <target>Yes</target>
+      </trans-unit>
+      <trans-unit id="41AOj2I" resname="allocations.field.isPregnant.false">
+        <source>allocations.field.isPregnant.false</source>
+        <target>No</target>
+      </trans-unit>
+      <trans-unit id="pF54nx1" resname="allocations.field.isShock">
+        <source>allocations.field.isShock</source>
+        <target>Is schock?</target>
+      </trans-unit>
+      <trans-unit id="zI7O0yr" resname="allocations.field.isShock.true">
+        <source>allocations.field.isShock.true</source>
+        <target>Yes</target>
+      </trans-unit>
+      <trans-unit id="BpwrbAs" resname="allocations.field.isShock.false">
+        <source>allocations.field.isShock.false</source>
+        <target>No</target>
+      </trans-unit>
+      <trans-unit id="tWd9GRa" resname="allocations.field.isWorkAccident">
+        <source>allocations.field.isWorkAccident</source>
+        <target>Is work/ school accident?</target>
+      </trans-unit>
+      <trans-unit id="wf4hSE4" resname="allocations.field.isWorkAccident.true">
+        <source>allocations.field.isWorkAccident.true</source>
+        <target>Yes (BG+)</target>
+      </trans-unit>
+      <trans-unit id="yAtBjRQ" resname="allocations.field.isWorkAccident.false">
+        <source>allocations.field.isWorkAccident.false</source>
+        <target>No (BG-)</target>
+      </trans-unit>
+      <trans-unit id="uHbF2hZ" resname="allocations.field.import">
+        <source>allocations.field.import</source>
+        <target>Import</target>
+      </trans-unit>
+      <trans-unit id="ntInA7_" resname="allocations.field.importedBy">
+        <source>allocations.field.importedBy</source>
+        <target>Imported by %name%.</target>
+      </trans-unit>
+      <trans-unit id="xjESv_S" resname="allocations.field.importedAt">
+        <source>allocations.field.importedAt</source>
+        <target>Imported at %time%.</target>
+      </trans-unit>
+      <trans-unit id="jPnL6cj" resname="import.title">
+        <source>import.title</source>
+        <target>Import</target>
+      </trans-unit>
+      <trans-unit id="oibupu6" resname="import.list.title">
+        <source>import.list.title</source>
+        <target>Your Imports</target>
+      </trans-unit>
+      <trans-unit id="kTAXuhX" resname="import.fields.id">
+        <source>import.fields.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="GGh7KIO" resname="import.fields.caption">
+        <source>import.fields.caption</source>
+        <target>Caption</target>
+      </trans-unit>
+      <trans-unit id="JBWEg_C" resname="import.fields.date">
+        <source>import.fields.date</source>
+        <target>Date</target>
+      </trans-unit>
+      <trans-unit id="OTIaXaM" resname="import.fields.status">
+        <source>import.fields.status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="1XYRCsh" resname="import.fields.loading">
+        <source>import.fields.loading</source>
+        <target>Loading</target>
+      </trans-unit>
+      <trans-unit id="JDWT.kr" resname="import.button.view">
+        <source>import.button.view</source>
+        <target>View</target>
+      </trans-unit>
+      <trans-unit id="8YeW.Bb" resname="import.button.delete">
+        <source>import.button.delete</source>
+        <target>Delete</target>
+      </trans-unit>
+      <trans-unit id="KjpGG6i" resname="import.noUploads">
+        <source>import.noUploads</source>
+        <target>No files have been uploaded.</target>
+      </trans-unit>
+      <trans-unit id="EDVOt5H" resname="import.new.title">
+        <source>import.new.title</source>
+        <target>Add a new import</target>
+      </trans-unit>
+      <trans-unit id="5e9WaPb" resname="import.show.title">
+        <source>import.show.title</source>
+        <target>Show import</target>
+      </trans-unit>
+      <trans-unit id="fZ2cYDa" resname="import.link.back">
+        <source>import.link.back</source>
+        <target>Back</target>
+      </trans-unit>
+      <trans-unit id="KWpJppl" resname="import.card.basics">
+        <source>import.card.basics</source>
+        <target>Basics</target>
+      </trans-unit>
+      <trans-unit id="G7iJ9C5" resname="import.field.caption">
+        <source>import.field.caption</source>
+        <target>Caption</target>
+      </trans-unit>
+      <trans-unit id="PkImvQb" resname="import.field.contents">
+        <source>import.field.contents</source>
+        <target>Contents</target>
+      </trans-unit>
+      <trans-unit id="ju62sly" resname="import.field.status">
+        <source>import.field.status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="PUXQElR" resname="import.field.loading">
+        <source>import.field.loading</source>
+        <target>Loading</target>
+      </trans-unit>
+      <trans-unit id="CGBHmDG" resname="import.card.details">
+        <source>import.card.details</source>
+        <target>Details</target>
+      </trans-unit>
+      <trans-unit id="FsGp6_I" resname="import.field.error">
+        <source>import.field.error</source>
+        <target>Error</target>
+      </trans-unit>
+      <trans-unit id="WyjOrQQ" resname="import.field.noError">
+        <source>import.field.noError</source>
+        <target>No errors.</target>
+      </trans-unit>
+      <trans-unit id=".IYiLDj" resname="import.field.statistics">
+        <source>import.field.statistics</source>
+        <target>Statistics</target>
+      </trans-unit>
+      <trans-unit id="t3EuDZr" resname="import.field.itemCount">
+        <source>import.field.itemCount</source>
+        <target>Item count</target>
+      </trans-unit>
+      <trans-unit id="ORl2mGO" resname="import.field.runtime">
+        <source>import.field.runtime</source>
+        <target>Runtime</target>
+      </trans-unit>
+      <trans-unit id="x8kpI2E" resname="import.field.timesRun">
+        <source>import.field.timesRun</source>
+        <target>Times run</target>
+      </trans-unit>
+      <trans-unit id="D_3EHYf" resname="import.field.createdBy">
+        <source>import.field.createdBy</source>
+        <target>Created by</target>
+      </trans-unit>
+      <trans-unit id="00V9HyA" resname="import.field.createdAt">
+        <source>import.field.createdAt</source>
+        <target>Created at: %time%</target>
+      </trans-unit>
+      <trans-unit id="qyVm9oB" resname="import.field.lastRun">
+        <source>import.field.lastRun</source>
+        <target>Last run at: %time%</target>
+      </trans-unit>
+      <trans-unit id="FRNSwCx" resname="import.card.debugging">
+        <source>import.card.debugging</source>
+        <target>Debugging</target>
+      </trans-unit>
+      <trans-unit id="C1f447." resname="import.field.download">
+        <source>import.field.download</source>
+        <target>Download file</target>
+      </trans-unit>
+      <trans-unit id="_JrLEnp" resname="security.login.title">
+        <source>security.login.title</source>
+        <target>Login</target>
+      </trans-unit>
+      <trans-unit id="ZvVqbii" resname="security.login.alreadyLoggedIn">
+        <source>security.login.alreadyLoggedIn</source>
+        <target>You are already logged in as: %name%. Did you want to logout? </target>
+      </trans-unit>
+      <trans-unit id="GeCNtXW" resname="security.login.message">
+        <source>security.login.message</source>
+        <target>Enter your credentials and click on login.</target>
+      </trans-unit>
+      <trans-unit id="Lpa.VEy" resname="security.login.button">
+        <source>security.login.button</source>
+        <target>Login</target>
+      </trans-unit>
+      <trans-unit id="x_PUEjD" resname="security.login.rememberMe">
+        <source>security.login.rememberMe</source>
+        <target>Remember me</target>
+      </trans-unit>
+      <trans-unit id="jAyXqep" resname="security.login.forgotPassword">
+        <source>security.login.forgotPassword</source>
+        <target>Have you forgot your password?</target>
+      </trans-unit>
+      <trans-unit id="ZKZni.Y" resname="security.link.forgotPassword">
+        <source>security.link.forgotPassword</source>
+        <target>Click here to reset your password.</target>
+      </trans-unit>
+      <trans-unit id="1MaDcUF" resname="security.link.logout">
+        <source>security.link.logout</source>
+        <target>Click here to logout.</target>
+      </trans-unit>
+      <trans-unit id="D7LhLIZ" resname="security.requestReset.title">
+        <source>security.requestReset.title</source>
+        <target>Reset your password</target>
+      </trans-unit>
+      <trans-unit id="h3LmmlH" resname="security.requestReset.message">
+        <source>security.requestReset.message</source>
+        <target>Enter your email address and we we will send you a link to reset your password.</target>
+      </trans-unit>
+      <trans-unit id="raAxerI" resname="security.requestReset.button">
+        <source>security.requestReset.button</source>
+        <target>Reset password</target>
+      </trans-unit>
+      <trans-unit id="GaSM3XU" resname="security.reset.title">
+        <source>security.reset.title</source>
+        <target>Reset your password</target>
+      </trans-unit>
+      <trans-unit id="fNwvDHV" resname="security.reset.button">
+        <source>security.reset.button</source>
+        <target>Set new password</target>
+      </trans-unit>
+      <trans-unit id="6Xc7I3F" resname="security.reset.message">
+        <source>security.reset.message</source>
+        <target>To set a new password, enter it below and click on the button to confirm.</target>
+      </trans-unit>
+      <trans-unit id="B1dO0LR" resname="security.requestResetSend.title">
+        <source>security.requestResetSend.title</source>
+        <target>Password Reset Email Sent</target>
+      </trans-unit>
+      <trans-unit id="ywixQwm" resname="security.requestResetSend.message">
+        <source>security.requestResetSend.message</source>
+        <target>An email has been sent that contains a link that you can click to reset your
+          password. It will expire in: </target>
+      </trans-unit>
+      <trans-unit id="m229.Ug" resname="security.requestResetSend.failure">
+        <source>security.requestResetSend.failure</source>
+        <target>If you don't receive an email please check your spam folder or </target>
+      </trans-unit>
+      <trans-unit id="RCgIeOi" resname="security.requestResetSend.tryAgain">
+        <source>security.requestResetSend.tryAgain</source>
+        <target>Try again.</target>
+      </trans-unit>
+      <trans-unit id="SEv2eG_" resname="security.requestMail.title">
+        <source>security.requestMail.title</source>
+        <target>Reset your password</target>
+      </trans-unit>
+      <trans-unit id="ZZiGCyq" resname="security.requestMail.message">
+        <source>security.requestMail.message</source>
+        <target>A reset of your password has been requested. To proceed click on the link below, or copy and paste it to your browser. If you didn't request it by yourself, please ignore this e-mail.</target>
+      </trans-unit>
+      <trans-unit id="zEOJTdO" resname="security.requestMail.expiration">
+        <source>security.requestMail.expiration</source>
+        <target>The link above will expire in: </target>
+      </trans-unit>
+      <trans-unit id="9fewk_8" resname="msg.verify.email">
+        <source>msg.verify.email</source>
+        <target>Please verify your new E-Mail address</target>
+      </trans-unit>
+      <trans-unit id="WPwwSAW" resname="msg.verfiyEmail.failure">
+        <source>msg.verfiyEmail.failure</source>
+        <target>Your E-Mail address has been updated. But the system failed to send you an confirmation message.</target>
+      </trans-unit>
+      <trans-unit id="dyDvWmo" resname="msg.verfiyEmail.success">
+        <source>msg.verfiyEmail.success</source>
+        <target>Your E-Mail address has been updated. Also a confirmation has been sent to your E-Mail address.</target>
+      </trans-unit>
+      <trans-unit id="8oEprEf" resname="msg.email.alreadyVerified">
+        <source>msg.email.alreadyVerified</source>
+        <target>Your E-Mail address is already verified.</target>
+      </trans-unit>
+      <trans-unit id="2_nVZMI" resname="msg.verify.email.failed">
+        <source>msg.verify.email.failed</source>
+        <target>Cannot send you an new confirmation E-Mail.</target>
+      </trans-unit>
+      <trans-unit id="I.1GJ2Z" resname="msg.verify.email.success">
+        <source>msg.verify.email.success</source>
+        <target>A new confirmation has been sent to your E-Mail address.</target>
+      </trans-unit>
+      <trans-unit id="hJHmyxk" resname="user.account.title">
+        <source>user.account.title</source>
+        <target>Account</target>
+      </trans-unit>
+      <trans-unit id="uRecB8T" resname="user.link.overview">
+        <source>user.link.overview</source>
+        <target>Overview</target>
+      </trans-unit>
+      <trans-unit id="YuU7VD." resname="user.link.account">
+        <source>user.link.account</source>
+        <target>Account</target>
+      </trans-unit>
+      <trans-unit id="lqbveeX" resname="user.link.security">
+        <source>user.link.security</source>
+        <target>Security</target>
+      </trans-unit>
+      <trans-unit id="LZ0unkK" resname="user.card.account">
+        <source>user.card.account</source>
+        <target>Account</target>
+      </trans-unit>
+      <trans-unit id="C699COU" resname="user.card.account.subtitle">
+        <source>user.card.account.subtitle</source>
+        <target>Manage your account and profile</target>
+      </trans-unit>
+      <trans-unit id="SpqH2It" resname="user.card.account.text">
+        <source>user.card.account.text</source>
+        <target>Take care of your personal profile (e.g. your username) and your E-Mail settings.</target>
+      </trans-unit>
+      <trans-unit id="s9uyfrH" resname="user.link.profile">
+        <source>user.link.profile</source>
+        <target>Profile</target>
+      </trans-unit>
+      <trans-unit id="sAQbiZ4" resname="user.link.email">
+        <source>user.link.email</source>
+        <target>E-Mail address</target>
+      </trans-unit>
+      <trans-unit id="r6Y32Id" resname="user.account.password">
+        <source>user.account.password</source>
+        <target>Password</target>
+      </trans-unit>
+      <trans-unit id="xVPG6ab" resname="user.link.password">
+        <source>user.link.password</source>
+        <target>Change Password</target>
+      </trans-unit>
+      <trans-unit id="ML7dRMH" resname="user.password.title">
+        <source>user.password.title</source>
+        <target>Your password</target>
+      </trans-unit>
+      <trans-unit id="9nDHwyx" resname="user.account.email.title">
+        <source>user.account.email.title</source>
+        <target>Your E-Mail address</target>
+      </trans-unit>
+      <trans-unit id="g1_yPM7" resname="user.email.title">
+        <source>user.email.title</source>
+        <target>Change your E-Mail address</target>
+      </trans-unit>
+      <trans-unit id="VObN5dM" resname="user.email.message">
+        <source>user.email.message</source>
+        <target>Your current E-Mail address is:</target>
+      </trans-unit>
+      <trans-unit id="bEaiRIQ" resname="user.email.verify">
+        <source>user.email.verify</source>
+        <target>Your E-Mail address is currently:</target>
+      </trans-unit>
+      <trans-unit id="hqhwjCA" resname="user.email.verified">
+        <source>user.email.verified</source>
+        <target>verified</target>
+      </trans-unit>
+      <trans-unit id="V5VSe3i" resname="user.email.notVerified">
+        <source>user.email.notVerified</source>
+        <target>not verified</target>
+      </trans-unit>
+      <trans-unit id="aigkpwT" resname="user.link.verifyEmail">
+        <source>user.link.verifyEmail</source>
+        <target>Verify your E-Mail.</target>
+      </trans-unit>
+      <trans-unit id="fAwwayc" resname="user.account.profile">
+        <source>user.account.profile</source>
+        <target>Your account</target>
+      </trans-unit>
+      <trans-unit id="HdsKVq_" resname="user.profile.title">
+        <source>user.profile.title</source>
+        <target>Your profile</target>
+      </trans-unit>
+      <trans-unit id="fy3zeWd" resname="msg.user.profile.updated">
+        <source>msg.user.profile.updated</source>
+        <target>Your profile has been updated.</target>
+      </trans-unit>
+      <trans-unit id="YLXj6wf" resname="msg.user.password.changed">
+        <source>msg.user.password.changed</source>
+        <target>Your password has been changed.</target>
+      </trans-unit>
+      <trans-unit id="Zv2ErhC" resname="user.card.security">
+        <source>user.card.security</source>
+        <target>Security</target>
+      </trans-unit>
+      <trans-unit id="JntdPOF" resname="user.card.security.subtitle">
+        <source>user.card.security.subtitle</source>
+        <target>Manage your password</target>
+      </trans-unit>
+      <trans-unit id="iEm6f4O" resname="user.card.security.text">
+        <source>user.card.security.text</source>
+        <target>Mange or update your password.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

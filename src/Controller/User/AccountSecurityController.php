@@ -9,9 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Route("/user/security")
+ * @Route("/{_locale<%app.supported_locales%>}/user/security")
  * @IsGranted("ROLE_USER")
  */
 class AccountSecurityController extends AbstractController
@@ -27,7 +28,7 @@ class AccountSecurityController extends AbstractController
     /**
      * @Route("/change_password", name="account_change_password")
      */
-    public function changePassword(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function changePassword(Request $request, UserPasswordEncoderInterface $passwordEncoder, TranslatorInterface $translator): Response
     {
         $user = $this->getUser();
 
@@ -43,7 +44,7 @@ class AccountSecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Your password has been changed!');
+            $this->addFlash('success', $translator->trans('msg.user.password.changed'));
 
             return $this->redirectToRoute('account_change_password');
         }

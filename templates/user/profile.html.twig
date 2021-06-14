@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Account - {{ parent() }}
+    {{ 'user.account.profile'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
     <h1>
-        My Account
+        {{ 'user.account.title'|trans }}
     </h1>
 
     {% for label, messages in app.flashes %}
@@ -19,18 +19,20 @@
 
     <ul class="nav nav-tabs mb-3">
         <li class="nav-item">
-            <a class="nav-link" href="{{ path('account') }}">Overview</a>
+            <a class="nav-link" href="{{ path('account') }}">
+                {{ 'user.link.overview'|trans }}
+            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link active"
                 aria-current="page"
                 href="{{ path('account_profile') }}">
-                Account
+                {{ 'user.link.account'|trans }}
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{{ path('account_security') }}">
-                Security
+                {{ 'user.link.security'|trans }}
             </a>
         </li>
     </ul>
@@ -39,19 +41,19 @@
         <div class="col-md-3">
             <div class="list-group">
                 <a href="{{ path('account_profile') }}"
-                    class="list-group-item list-group-item-action active"
-                    aria-current="true">
-                    Profile
+                    class="list-group-item list-group-item-action active">
+                    {{ 'user.link.profile'|trans }}
                 </a>
                 <a href="{{ path('account_email') }}"
-                    class="list-group-item list-group-item-action">
-                    E-Mail
+                    class="list-group-item list-group-item-action"
+                    aria-current="true">
+                    {{ 'user.link.email'|trans }}
                 </a>
             </div>
         </div>
         <div class="col-md-9 order-first order-md-last my-auto">
             <h2>
-                Profile
+                {{ 'user.profile.title'|trans }}
             </h2>
             <hr />
 

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Hospitals - {{ parent() }}
+    {{ 'hospitals.title'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block stylesheets %}
@@ -30,12 +30,12 @@
                     )
                     }}"
                     role="button">
-                    View your hospital
+                    {{ 'hospitals.link_view'|trans }}
                 </a>
                 <a class="btn btn-outline-primary"
                     href="{{ path('hospital_edit') }}"
                     role="button">
-                    Edit your hospital
+                    {{ 'hospitals.link_edit'|trans }}
                 </a>
             {% endif %}
         </div>

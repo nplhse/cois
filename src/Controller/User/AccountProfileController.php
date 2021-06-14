@@ -8,9 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Route("/user/profile")
+ * @Route("/{_locale<%app.supported_locales%>}/user/profile")
  * @IsGranted("ROLE_USER")
  */
 class AccountProfileController extends AbstractController
@@ -18,7 +19,7 @@ class AccountProfileController extends AbstractController
     /**
      * @Route("/", name="account_profile")
      */
-    public function profile(Request $request): Response
+    public function profile(Request $request, TranslatorInterface $translator): Response
     {
         $user = $this->getUser();
 
@@ -36,7 +37,7 @@ class AccountProfileController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Your profile has been updated.');
+            $this->addFlash('success', $translator->trans('msg.user.profile.updated'));
 
             return $this->redirectToRoute('account_profile');
         }

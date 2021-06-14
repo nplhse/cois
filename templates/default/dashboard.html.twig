@@ -1,242 +1,127 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Welcome - {{ parent() }}
+    {{ 'dashboard.title'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
-    <ul class="nav nav-tabs mb-2" id="defaultTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active"
-                id="dashboard-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#dashboard"
-                type="button"
-                role="tab"
-                aria-controls="home"
-                aria-selected="true">
-                Dashboard
-            </button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link"
-                id="changelog-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#changelog"
-                type="button"
-                role="tab"
-                aria-controls="profile"
-                aria-selected="false">
-                Changelog
-            </button>
-        </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active"
-            id="dashboard"
-            role="tabpanel"
-            aria-labelledby="home-tab">
-            <div class="row">
-                <h1>
-                    Welcome to Collaborative IVENA statistics
-                </h1>
+    <div class="row">
+        <h1>
+            {{ 'dashboard.welcome'|trans }}
+        </h1>
 
-                <div class="col-md">
-                    <p>
-                        Want to know where to get started? Here are some ideas.
+        <div class="col-md">
+            <p>
+                {{ 'dashboard.get_started'|trans }}
+            </p>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        {{ 'dashboard.allocation.title'|trans }}
+                    </h2>
+                    <p class="card-text">
+                        {{ 'dashboard.allocation.text'|trans }}
                     </p>
-
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h2 class="card-title">
-                                Allocations
-                            </h2>
-                            <p class="card-text">
-                                Browse trough all the data, filter it and
-                                explore what IVENA got for us.
-                            </p>
-                            <a href="{{ path('allocation_index') }}"
-                                class="btn btn-primary">
-                                View all Allocations
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h2 class="card-title">
-                                Your Hospital
-                            </h2>
-                            <p class="card-text">
-                                Check if your hospital has been set up correctly
-                                and change data if necessary.
-                            </p>
-                            <a href="{{ path('hospital_edit') }}"
-                                class="btn btn-primary">
-                                Edit hospital
-                            </a>
-                            <a href="{{ path('hospital_index') }}"
-                                class="btn btn-secondary">
-                                View all hospitals
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h2 class="card-title">
-                                Import data
-                            </h2>
-                            <p class="card-text">
-                                Add some of your data to the database.
-                            </p>
-                            <a href="{{ path('import_index') }}"
-                                class="btn btn-primary">
-                                Import data
-                            </a>
-                        </div>
-                    </div>
+                    <a href="{{ path('allocation_index') }}"
+                        class="btn btn-primary">
+                        {{ 'dashboard.allocation.button'|trans }}
+                    </a>
                 </div>
-                <div class="col-md">
-                    <div class="card text-dark bg-light mb-2">
-                        <div class="card-body">
-                            <h3>
-                                <i class="bi bi-person-fill"></i> {{ users }}
-                                <small class="text-muted">Users</small>
-                            </h3>
-                        </div>
-                    </div>
+            </div>
 
-                    <div class="card text-dark bg-light mb-2">
-                        <div class="card-body">
-                            <h3>
-                                <i class="bi bi-house-door-fill"></i>
-                                {{ hospitals }}
-                                <small class="text-muted">Hospitals</small>
-                            </h3>
-                        </div>
-                    </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        {{ 'dashboard.hospital.title'|trans }}
+                    </h2>
+                    <p class="card-text">
+                        {{ 'dashboard.hospital.text'|trans }}
+                    </p>
+                    <a href="{{ path('hospital_edit') }}"
+                        class="btn btn-primary">
+                        {{ 'dashboard.hospital.button_edit'|trans }}
+                    </a>
+                    <a href="{{ path('hospital_index') }}"
+                        class="btn btn-secondary">
+                        {{ 'dashboard.hospital.button_view'|trans }}
+                    </a>
+                </div>
+            </div>
 
-                    <div class="card text-dark bg-light mb-2">
-                        <div class="card-body">
-                            <h3>
-                                <i class="bi bi-list-ul"></i> {{ allocations }}
-                                <small class="text-muted">Allocations</small>
-                            </h3>
-                            <p>
-                                With <strong>{{ hospital_allocations }}</strong>
-                                Allocations from your hospital.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="card text-dark bg-light mb-2">
-                        <div class="card-body">
-                            <h3>
-                                <i class="bi bi-file-earmark-arrow-up-fill"></i>
-                                {{ imports }}
-                                <small class="text-muted">Imports</small>
-                            </h3>
-                            <p>
-                                With <strong>{{ user_imports }}</strong> Imports
-                                from you.
-                            </p>
-                        </div>
-                    </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        {{ 'dashboard.import.title'|trans }}
+                    </h2>
+                    <p class="card-text">
+                        {{ 'dashboard.import.text'|trans }}
+                    </p>
+                    <a href="{{ path('import_index') }}"
+                        class="btn btn-primary">
+                        {{ 'dashboard.import.button'|trans }}
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade"
-            id="changelog"
-            role="tabpanel"
-            aria-labelledby="profile-tab">
-            <div class="card border-warning mb-3">
-                <div class="card-header">
-                    March
-                </div>
+        <div class="col-md">
+            <div class="card text-dark bg-light mb-2">
                 <div class="card-body">
-                    <h5 class="card-title">
-                        04.05.2021
-                    </h5>
-                    <ul>
-                        <li>
-                            Added a lot of charts for a first impression of the
-                            statistics.
-                        </li>
-                    </ul>
-                    <h5 class="card-title">
-                        29.04.2021
-                    </h5>
-                    <ul>
-                        <li>
-                            Minor adjustments to the design, including the
-                            change to a fluid wide screen layout on all pages
-                            and other small changes for a more consistent
-                            experience.
-                        </li>
-                    </ul>
-                    <h5 class="card-title">
-                        27.04.2021
-                    </h5>
-                    <ul>
-                        <li>
-                            Added first basic demographic statistics to the
-                            tool.
-                        </li>
-                    </ul>
-                    <h5 class="card-title">
-                        28.03.2021
-                    </h5>
-                    <ul>
-                        <li>
-                            Updated the "homepage" with more statistics on the
-                            dashboard and a separate tab for the changelog to
-                            keep things clearer.
-                        </li>
-                    </ul>
-                    <h5 class="card-title">
-                        27.03.2021
-                    </h5>
-                    <ul>
-                        <li>Imports can now be deleted by their owner.</li>
-                        <li>
-                            Added a sidebar with some first filters by some
-                            basic fields of the Allocations.
-                        </li>
-                    </ul>
-                    <h5 class="card-title">
-                        18.03.2021
-                    </h5>
-                    <ul>
-                        <li>
-                            Added first filter to sort by (at least some) fields
-                            of the Allocations.
-                        </li>
-                    </ul>
-                    <h5 class="card-title">
-                        10.03.2021
-                    </h5>
-                    <ul>
-                        <li>
-                            Improved imports with a better layout and a basic
-                            detail view.
-                        </li>
-                    </ul>
-                    <h5 class="card-title">
-                        08.03.2021
-                    </h5>
-                    <ul>
-                        <li>
-                            Small improvements e.g. fixed typos& namings, set
-                            correct timezone, improved imports.
-                        </li>
-                    </ul>
-                    <h5 class="card-title">
-                        03.03.2021
-                    </h5>
-                    <ul>
-                        <li>First Alpha-Release.</li>
-                    </ul>
+                    <h3>
+                        <i class="bi bi-person-fill"></i> {{ users }}
+                        <small class="text-muted">
+                            {{ 'dashboard.users'|trans }}
+                        </small>
+                    </h3>
+                </div>
+            </div>
+
+            <div class="card text-dark bg-light mb-2">
+                <div class="card-body">
+                    <h3>
+                        <i class="bi bi-house-door-fill"></i>
+                        {{ hospitals }}
+                        <small class="text-muted">
+                            {{ 'dashboard.hospitals'|trans }}
+                        </small>
+                    </h3>
+                </div>
+            </div>
+
+            <div class="card text-dark bg-light mb-2">
+                <div class="card-body">
+                    <h3>
+                        <i class="bi bi-list-ul"></i> {{ allocations }}
+                        <small class="text-muted">
+                            {{ 'dashboard.allocations'|trans }}
+                        </small>
+                    </h3>
+                    <p>
+                        {{
+                            'dashboard.allocations.by_your_hospital'|trans({
+                                '%count%': hospital_allocations
+                            })
+                        }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="card text-dark bg-light mb-2">
+                <div class="card-body">
+                    <h3>
+                        <i class="bi bi-file-earmark-arrow-up-fill"></i>
+                        {{ imports }}
+                        <small class="text-muted">
+                            {{ 'dashboard.imports'|trans }}
+                        </small>
+                    </h3>
+                    <p>
+                        {{
+                            'dashboard.imports.by_you'|trans({
+                                '%count%': user_imports
+                            })
+                        }}
+                    </p>
                 </div>
             </div>
         </div>
