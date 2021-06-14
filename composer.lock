@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ecef1d7bf1778114e628cebcb2bb06bc",
+    "content-hash": "81f3cdcd3ed4714901a4a46db27ac527",
     "packages": [
         {
             "name": "api-platform/core",
@@ -3958,7 +3958,7 @@
         },
         {
             "name": "symfony/doctrine-messenger",
-            "version": "v5.2.10",
+            "version": "v5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/doctrine-messenger.git",
