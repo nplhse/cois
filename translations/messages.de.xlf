@@ -805,6 +805,42 @@
         <source>user.card.security.text</source>
         <target>Verwalten oder ändern Sie Ihr Passwort.</target>
       </trans-unit>
+      <trans-unit id="6qNM5OD" resname="default.title">
+        <source>default.title</source>
+        <target>Willkommen</target>
+      </trans-unit>
+      <trans-unit id="ILiv0v6" resname="default.welcome.title">
+        <source>default.welcome.title</source>
+        <target>Willkommen bei den kollaborativen IVENA Statistiken</target>
+      </trans-unit>
+      <trans-unit id="swglSDP" resname="default.welcome.text">
+        <source>default.welcome.text</source>
+        <target>Dieses Projekt hat das Ziel Statistiken zur notfallmedizinischen Versorgungsforschung in Deutschland bereitzustellen. Grundlage hierfür sind Daten, welche auf Basis des IVENA-Systems zur Zuweisung von Patienten im Rettungsdienst genutzt werden.</target>
+      </trans-unit>
+      <trans-unit id="iOSoddH" resname="link.faq">
+        <source>link.faq</source>
+        <target>Mehr erfahren (FAQ)</target>
+      </trans-unit>
+      <trans-unit id="r8V9rio" resname="default.login.title">
+        <source>default.login.title</source>
+        <target>Anmelden</target>
+      </trans-unit>
+      <trans-unit id="SW4Jvts" resname="default.login.text">
+        <source>default.login.text</source>
+        <target>Für den vollen Zugriff auf das Projekt ist es notwendig, dass Sie sich anmelden. Falls sie noch kein Benutzerkonto haben, können Sie sich auch registrieren.</target>
+      </trans-unit>
+      <trans-unit id="sToQk7i" resname="link.register">
+        <source>link.register</source>
+        <target>Registrieren</target>
+      </trans-unit>
+      <trans-unit id="IlFe3.M" resname="default.stats.title">
+        <source>default.stats.title</source>
+        <target>Statistiken</target>
+      </trans-unit>
+      <trans-unit id="oV8JwpT" resname="default.stats.text">
+        <source>default.stats.text</source>
+        <target>Wir haben derzeit %allocations% Einsätze von %hospitals% Krankenhäusern in unserer Datenbank und fügen regelmäßig neue Statistiken auf Basis dieser Daten hinzu. Und das Beste: Einige dieser Statistiken sind öffentlich verfügbar!</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

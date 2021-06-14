@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% trans_default_domain "errors" %}
+{% trans_default_domain 'errors' %}
 
 {% block title %}
     {{ 'title.error'|trans }} - {{ parent() }}
@@ -15,30 +15,30 @@
                     {{ 'title'|trans([], 'messages') }}
                 </a>
                 <button class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarCollapse"
-                        aria-controls="navbarCollapse"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse"
-                     id="navbarSupportedContent">
+                    id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             {% if
                                 app.request.attributes.get('_route')
-                                starts with 'hospital' %}
+                                    starts with 'hospital' %}
                                 <a class="nav-link active"
-                                   aria-current="page"
-                                   href="{{ path('hospital_index') }}">
+                                    aria-current="page"
+                                    href="{{ path('hospital_index') }}">
                                     {{ 'link.hospitals'|trans([], 'messages') }}
                                 </a>
                             {% else %}
                                 <a class="nav-link"
-                                   aria-current="page"
-                                   href="{{ path('hospital_index') }}">
+                                    aria-current="page"
+                                    href="{{ path('hospital_index') }}">
                                     {{ 'link.hospitals'|trans([], 'messages') }}
                                 </a>
                             {% endif %}
@@ -46,50 +46,58 @@
                         <li class="nav-item">
                             {% if
                                 app.request.attributes.get('_route')
-                                starts with 'allocation' %}
+                                    starts with 'allocation' %}
                                 <a class="nav-link active"
-                                   aria-current="page"
-                                   href="{{ path('allocation_index') }}">
-                                    {{ 'link.allocations'|trans([], 'messages') }}
+                                    aria-current="page"
+                                    href="{{ path('allocation_index') }}">
+                                    {{
+                                        'link.allocations'|trans([], 'messages')
+                                    }}
                                 </a>
                             {% else %}
                                 <a class="nav-link"
-                                   aria-current="page"
-                                   href="{{ path('allocation_index') }}">
-                                    {{ 'link.allocations'|trans([], 'messages') }}
+                                    aria-current="page"
+                                    href="{{ path('allocation_index') }}">
+                                    {{
+                                        'link.allocations'|trans([], 'messages')
+                                    }}
                                 </a>
                             {% endif %}
                         </li>
                         <li class="nav-item">
                             {% if
                                 app.request.attributes.get('_route')
-                                starts with 'statistics' %}
+                                    starts with 'statistics' %}
                                 <a class="nav-link active"
-                                   aria-current="page"
-                                   href="{{ path('statistics_index') }}">
-                                    {{ 'link.statistics'|trans([], 'messages') }}
+                                    aria-current="page"
+                                    href="{{ path('statistics_index') }}">
+                                    {{
+                                        'link.statistics'|trans([], 'messages')
+                                    }}
                                 </a>
                             {% else %}
                                 <a class="nav-link"
-                                   aria-current="page"
-                                   href="{{ path('statistics_index') }}">
-                                    {{ 'link.statistics'|trans([], 'messages') }}
+                                    aria-current="page"
+                                    href="{{ path('statistics_index') }}">
+                                    {{
+                                        'link.statistics'|trans([], 'messages')
+                                    }}
                                 </a>
                             {% endif %}
                         </li>
                         <li class="nav-item">
                             {% if
                                 app.request.attributes.get('_route')
-                                starts with 'import' %}
+                                    starts with 'import' %}
                                 <a class="nav-link active"
-                                   aria-current="page"
-                                   href="{{ path('import_index') }}">
+                                    aria-current="page"
+                                    href="{{ path('import_index') }}">
                                     {{ 'link.import'|trans([], 'messages') }}
                                 </a>
                             {% else %}
                                 <a class="nav-link"
-                                   aria-current="page"
-                                   href="{{ path('import_index') }}">
+                                    aria-current="page"
+                                    href="{{ path('import_index') }}">
                                     {{ 'link.import'|trans([], 'messages') }}
                                 </a>
                             {% endif %}
@@ -111,9 +119,25 @@
         <div class="content container">
             <div class="row justify-content-center">
                 <div class="col-md-12 text-center">
-                    <span class="display-1 d-block">{{ ("messages." ~ exception.getStatusCode ~ ".title")|trans({}) }} ({{ exception.getStatusCode }})</span>
-                    <div class="mb-4 lead">{{ ("messages." ~ exception.getStatusCode ~ ".description")|trans({})|nl2br }}</div>
-                    <a href="javascript:history.back()">{{ "link.to.lastpage"|trans }}</a>, <a href="{{ path("default") }}" class="btn btn-link">{{ "link.to.homepage"|trans }}</a>
+                    <span class="display-1 d-block">
+                        {{
+                            ('messages.' ~ exception.getStatusCode
+                                ~ '.title')|trans({})
+                        }} ({{ exception.getStatusCode }})
+                    </span>
+                    <div class="mb-4 lead">
+                        {{
+                            ('messages.' ~ exception.getStatusCode
+                                ~ '.description')
+                                |trans({})
+                                |nl2br
+                        }}
+                    </div>
+                    <a href="javascript:history.back()">
+                        {{ 'link.to.lastpage'|trans }}
+                    </a>, <a href="{{ path('default') }}" class="btn btn-link">{{
+                            'link.to.homepage'|trans
+                        }}</a>
                 </div>
             </div>
         </div>
