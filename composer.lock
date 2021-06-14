@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0726bfd126a419841dfc3a09c34cad77",
+    "content-hash": "31cf4cbff379e65f1592b1cef87ce108",
     "packages": [
         {
             "name": "api-platform/core",
@@ -6577,7 +6577,7 @@
         },
         {
             "name": "symfony/process",
-            "version": "v5.2.10",
+            "version": "v5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
