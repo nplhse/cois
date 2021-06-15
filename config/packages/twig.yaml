@@ -4,3 +4,7 @@ twig:
 
     date:
         timezone: Europe/Berlin
+
+    paths:
+        # point this wherever your css files live
+        '%kernel.project_dir%/assets/styles': styles
