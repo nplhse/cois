@@ -840,7 +840,7 @@
       </trans-unit>
       <trans-unit id="oV8JwpT" resname="default.stats.text">
         <source>default.stats.text</source>
-        <target>We currently have %allocations% allocations from %hospitals% hospitals in our database. We're constantly adding more and more statistics generated from this database. And the best: Some of your statistics are available without login!</target>
+        <target>We currently have %allocations% allocations from %hospitals% hospitals in our database. We're constantly adding more and more statistics generated from this database. And the best: Some of your statistics are available for free without login!</target>
       </trans-unit>
       <trans-unit id="WZCoVSI" resname="faq.title">
         <source>faq.title</source>

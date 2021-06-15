@@ -839,7 +839,7 @@
       </trans-unit>
       <trans-unit id="oV8JwpT" resname="default.stats.text">
         <source>default.stats.text</source>
-        <target>Wir haben derzeit %allocations% Einsätze von %hospitals% Krankenhäusern in unserer Datenbank und fügen regelmäßig neue Statistiken auf Basis dieser Daten hinzu. Und das Beste: Einige dieser Statistiken sind öffentlich verfügbar!</target>
+        <target>Wir haben derzeit %allocations% Einsätze von %hospitals% Krankenhäusern in unserer Datenbank und fügen regelmäßig neue Statistiken auf Basis dieser Daten hinzu. Und das Beste: Einige dieser Statistiken sind sogar öffentlich verfügbar!</target>
       </trans-unit>
       <trans-unit id="WZCoVSI" resname="faq.title">
         <source>faq.title</source>
