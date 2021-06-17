@@ -56,7 +56,7 @@
                 </div>
             {% endif %}
 
-            {% if app.user.isVerified and app.user.isParticipant %}
+            {% if app.user.isParticipant %}
                 <p>
                     {{ 'dashboard.get_started'|trans }}
                 </p>
@@ -143,7 +143,7 @@
                             {{ 'dashboard.allocations'|trans }}
                         </small>
                     </h3>
-                    {% if app.user.isVerified and app.user.isParticipant %}
+                    {% if app.user.isParticipant %}
                         <p>
                             {{
                                 'dashboard.allocations.by_your_hospital'|trans({
@@ -164,7 +164,7 @@
                             {{ 'dashboard.imports'|trans }}
                         </small>
                     </h3>
-                    {% if app.user.isVerified and app.user.isParticipant %}
+                    {% if app.user.isParticipant %}
                         <p>
                             {{
                                 'dashboard.imports.by_you'|trans({
