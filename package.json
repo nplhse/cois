@@ -8,7 +8,7 @@
         "@symfony/ux-chartjs": "file:vendor/symfony/ux-chartjs/Resources/assets",
         "@symfony/ux-dropzone": "file:vendor/symfony/ux-dropzone/Resources/assets",
         "@symfony/webpack-encore": "^1.4.0",
-        "@vue/compiler-sfc": "^3.0.11",
+        "@vue/compiler-sfc": "^3.1.4",
         "autoprefixer": "^10.2.5",
         "babel-loader": "^8.2.2",
         "bootstrap": "^5.0.1",
