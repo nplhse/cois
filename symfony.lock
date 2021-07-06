@@ -212,6 +212,9 @@
     "league/mime-type-detection": {
         "version": "1.7.0"
     },
+    "lorenzo/pinky": {
+        "version": "1.0.5"
+    },
     "markrogoyski/math-php": {
         "version": "v1.10.0"
     },
@@ -791,8 +794,17 @@
             "ref": "fe5a50faf580eb58f08ada2abe8afbd2d4941e05"
         }
     },
+    "tijsverkoyen/css-to-inline-styles": {
+        "version": "2.2.3"
+    },
+    "twig/cssinliner-extra": {
+        "version": "v3.3.0"
+    },
     "twig/extra-bundle": {
         "version": "v3.2.1"
+    },
+    "twig/inky-extra": {
+        "version": "v3.3.0"
     },
     "twig/intl-extra": {
         "version": "v3.3.0"

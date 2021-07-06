@@ -80,6 +80,7 @@ class UserCrudController extends AbstractCrudController
         $roles = ArrayField::new('roles');
         $isVerified = BooleanField::new('isVerified', 'Is verified?');
         $isCredentialsExpired = BooleanField::new('isCredentialsExpired', 'Credentials are expired?');
+        $isParticipant = BooleanField::new('isParticipant', 'Is Participant?');
         $panel3 = FormField::addPanel('Set new password');
         $panel4 = FormField::addPanel('Hospitals');
         $hospital = AssociationField::new('hospital', 'Hospital');
@@ -89,11 +90,11 @@ class UserCrudController extends AbstractCrudController
         if (Crud::PAGE_INDEX === $pageName) {
             $fields = [$id, $username, $email, $hospital];
         } elseif (Crud::PAGE_DETAIL === $pageName) {
-            $fields = [$panel1, $id, $username, $email, $panel2, $roles, $isVerified, $isCredentialsExpired, $panel4, $hospital];
+            $fields = [$panel1, $id, $username, $email, $panel2, $roles, $isVerified, $isCredentialsExpired, $isParticipant, $panel4, $hospital];
         } elseif (Crud::PAGE_NEW === $pageName) {
-            $fields = [$panel1, $username, $plainPassword, $email, $panel2, $roles, $isVerified, $isCredentialsExpired];
+            $fields = [$panel1, $username, $plainPassword, $email, $panel2, $roles, $isVerified, $isCredentialsExpired, $isParticipant];
         } elseif (Crud::PAGE_EDIT === $pageName) {
-            $fields = [$panel1, $id, $username, $email, $panel2, $roles, $isVerified, $isCredentialsExpired, $panel3, $plainPassword, $panel4, $hospital];
+            $fields = [$panel1, $id, $username, $email, $panel2, $roles, $isVerified, $isCredentialsExpired, $isParticipant, $panel3, $plainPassword, $panel4, $hospital];
         }
 
         return $fields;

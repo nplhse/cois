@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Something went wrong!</target>
+      </trans-unit>
+      <trans-unit id="yQRveje" resname="description">
+        <source>description</source>
+        <target>If you can see this message something went wrong. We already send a message to the administrator, so we can take care of fixing this issue.</target>
+      </trans-unit>
+      <trans-unit id="8Vu_BOU" resname="messages.403.title">
+        <source>messages.403.title</source>
+        <target>Access denied</target>
+      </trans-unit>
+      <trans-unit id="913sdS1" resname="messages.403.description">
+        <source>messages.403.description</source>
+        <target>You do not have the required permissions to access this page.</target>
+      </trans-unit>
+      <trans-unit id="JXTFFpG" resname="messages.404.title">
+        <source>messages.404.title</source>
+        <target>Page not found</target>
+      </trans-unit>
+      <trans-unit id="6mzvrpY" resname="messages.404.description">
+        <source>messages.404.description</source>
+        <target>There is no content at this address.
+                    It appears you followed a broken or outdated link from a search engine.</target>
+      </trans-unit>
+      <trans-unit id="dXp0Afq" resname="messages.405.title">
+        <source>messages.405.title</source>
+        <target>Request method not supported</target>
+      </trans-unit>
+      <trans-unit id="iNVZuFU" resname="messages.405.description">
+        <source>messages.405.description</source>
+        <target>The HTTP request method you've used is not supported at this URL.</target>
+      </trans-unit>
+      <trans-unit id="IavyfVV" resname="messages.500.title">
+        <source>messages.500.title</source>
+        <target>Internal server error</target>
+      </trans-unit>
+      <trans-unit id="ZK300Nf" resname="messages.500.description">
+        <source>messages.500.description</source>
+        <target>A error occured while generating the page.
+                    The information necessary to resolve the problem has been recorded and forwarded to the relevant authority.</target>
+      </trans-unit>
+      <trans-unit id="ig_GfmI" resname="link.to.homepage">
+        <source>link.to.homepage</source>
+        <target>Back to homepage</target>
+      </trans-unit>
+      <trans-unit id="VHSF3BW" resname="link.to.lastpage">
+        <source>link.to.lastpage</source>
+        <target>Back to last page</target>
+      </trans-unit>
+      <trans-unit id="ScuUX1R" resname="title.error">
+        <source>title.error</source>
+        <target>__title.error</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -806,6 +806,54 @@
         <source>user.card.security.text</source>
         <target>Mange or update your password.</target>
       </trans-unit>
+      <trans-unit id="6qNM5OD" resname="default.title">
+        <source>default.title</source>
+        <target>Welcome</target>
+      </trans-unit>
+      <trans-unit id="ILiv0v6" resname="default.welcome.title">
+        <source>default.welcome.title</source>
+        <target>Welcome to Collaborative IVENA statistics</target>
+      </trans-unit>
+      <trans-unit id="swglSDP" resname="default.welcome.text">
+        <source>default.welcome.text</source>
+        <target>This is the website of the Collaborative IVENA statistics project. We provide statistics about german emergency medicine with the help of IVENA, which is a tool that is used to dispatch patients to hospitals.</target>
+      </trans-unit>
+      <trans-unit id="iOSoddH" resname="link.faq">
+        <source>link.faq</source>
+        <target>Help (FAQ)</target>
+      </trans-unit>
+      <trans-unit id="r8V9rio" resname="default.login.title">
+        <source>default.login.title</source>
+        <target>Login</target>
+      </trans-unit>
+      <trans-unit id="SW4Jvts" resname="default.login.text">
+        <source>default.login.text</source>
+        <target>For full access to this project, you need to login. If you don't already have a login you can register yourself.</target>
+      </trans-unit>
+      <trans-unit id="sToQk7i" resname="link.register">
+        <source>link.register</source>
+        <target>Register</target>
+      </trans-unit>
+      <trans-unit id="IlFe3.M" resname="default.stats.title">
+        <source>default.stats.title</source>
+        <target>Statistics</target>
+      </trans-unit>
+      <trans-unit id="oV8JwpT" resname="default.stats.text">
+        <source>default.stats.text</source>
+        <target>We currently have %allocations% allocations from %hospitals% hospitals in our database. We're constantly adding more and more statistics generated from this database. And the best: Some of your statistics are available for free without login!</target>
+      </trans-unit>
+      <trans-unit id="WZCoVSI" resname="faq.title">
+        <source>faq.title</source>
+        <target>Help (FAQ)</target>
+      </trans-unit>
+      <trans-unit id="9qDTsiM" resname="dashboard.verify.title">
+        <source>dashboard.verify.title</source>
+        <target>Waiting for your verification</target>
+      </trans-unit>
+      <trans-unit id="eRq1lRV" resname="dashboard.verify.text">
+        <source>dashboard.verify.text</source>
+        <target>We are currently waiting for your verification process to be completed before you can get started. In the meantime you can take a look at our statistics of the FAQ.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

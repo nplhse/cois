@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -16,6 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     itemOperations={"get"},
  *     normalizationContext={"groups"={"user:read"}}
  * )
+ * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  */
 class User implements UserInterface
 {
@@ -71,6 +73,11 @@ class User implements UserInterface
      */
     private bool $isCredentialsExpired = false;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private ?bool $isParticipant = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,6 +98,11 @@ class User implements UserInterface
         $this->username = $username;
 
         return $this;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->username;
     }
 
     /**
@@ -132,9 +144,9 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPlainPassword(): string
+    public function getPlainPassword(): ?string
     {
-        return (string) $this->plainPassword;
+        return $this->plainPassword;
     }
 
     public function setPlainPassword(?string $plainPassword): self
@@ -174,6 +186,30 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getIsCredentialsExpired(): ?bool
+    {
+        return $this->isCredentialsExpired;
+    }
+
+    public function setIsCredentialsExpired(bool $isCredentialsExpired): self
+    {
+        $this->isCredentialsExpired = $isCredentialsExpired;
+
+        return $this;
+    }
+
     /**
      * Returning a salt is only needed, if you are not using a modern
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
@@ -198,26 +234,19 @@ class User implements UserInterface
         return $this->getUsername();
     }
 
-    public function getIsVerified(): ?bool
+    public function isVerified(): bool
     {
         return $this->isVerified;
     }
 
-    public function setIsVerified(bool $isVerified): self
+    public function getIsParticipant(): ?bool
     {
-        $this->isVerified = $isVerified;
-
-        return $this;
+        return $this->isParticipant;
     }
 
-    public function getIsCredentialsExpired(): ?bool
+    public function setIsParticipant(?bool $isParticipant): self
     {
-        return $this->isCredentialsExpired;
-    }
-
-    public function setIsCredentialsExpired(bool $isCredentialsExpired): self
-    {
-        $this->isCredentialsExpired = $isCredentialsExpired;
+        $this->isParticipant = $isParticipant;
 
         return $this;
     }

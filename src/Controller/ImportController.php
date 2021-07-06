@@ -68,7 +68,7 @@ class ImportController extends AbstractController
 
         $imports = $importRepository->findByUser($this->getUser());
 
-        return $this->render('import/form.html.twig', [
+        return $this->render('import/index.html.twig', [
             'form' => $form->createView(),
             'imports' => $imports,
         ]);

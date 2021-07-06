@@ -31,7 +31,6 @@ class ImportCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setDescription(self::$defaultDescription)
             ->addArgument('id', InputArgument::OPTIONAL, 'ID of the import')
         ;
     }
