@@ -24,7 +24,9 @@
                 <div class="collapse navbar-collapse"
                     id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        {% if is_granted('ROLE_USER') and app.user.isParticipant %}
+                        {% if
+                            is_granted('ROLE_USER')
+                                and app.user.isParticipant %}
                             <li class="nav-item">
                                 {% if
                                     app.request.attributes.get('_route')
@@ -43,7 +45,9 @@
                                 {% endif %}
                             </li>
                         {% endif %}
-                        {% if is_granted('ROLE_USER') and app.user.isParticipant %}
+                        {% if
+                            is_granted('ROLE_USER')
+                                and app.user.isParticipant %}
                             <li class="nav-item">
                                 {% if
                                     app.request.attributes.get('_route')
@@ -79,7 +83,9 @@
                                 </a>
                             {% endif %}
                         </li>
-                        {% if is_granted('ROLE_USER') and app.user.isParticipant %}
+                        {% if
+                            is_granted('ROLE_USER')
+                                and app.user.isParticipant %}
                             <li class="nav-item">
                                 {% if
                                     app.request.attributes.get('_route')
@@ -98,7 +104,9 @@
                                 {% endif %}
                             </li>
                         {% endif %}
-                        {% if is_granted('ROLE_USER') and app.user.isParticipant %}
+                        {% if
+                            is_granted('ROLE_USER')
+                                and app.user.isParticipant %}
                             <li class="">
                                 <a class="nav-link disabled">
                                     {{ 'link.export'|trans }}
