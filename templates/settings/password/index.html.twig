@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Change your Password'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-3">
+            {{ include('settings/_settings_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <h1>
+                {{ 'Change your Password'|trans }}
+            </h1>
+
+            {{ form_start(form) }}
+
+            {{ form_row(form.currentPassword) }}
+            {{ form_row(form.plainPassword) }}
+
+            <div class="btn-group" role="group">
+                <button class="btn btn-primary">
+                    {{ 'Change Password'|trans({}, 'forms') }}
+                </button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

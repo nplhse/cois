@@ -22,7 +22,7 @@ class HashPasswordSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @return string[]
+     * @return array<string, mixed>
      */
     public static function getSubscribedEvents(): array
     {

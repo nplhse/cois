@@ -231,6 +231,17 @@
                                                 {{ 'link.account'|trans }}
                                             </a>
                                         </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                                href="{{
+                                                path(
+                                                    'app_settings'
+                                                )
+                                                }}">
+                                                <i class="bi-gear"></i>
+                                                {{ 'Settings'|trans }}
+                                            </a>
+                                        </li>
                                         <li><hr class="dropdown-divider" /></li>
                                     {% endif %}
                                     {% if is_granted('IS_IMPERSONATOR') %}

@@ -1,0 +1,59 @@
+<h3>
+    Account
+</h3>
+<ul class="list-group mb-3">
+    {% if
+        app.request.attributes.get('_route') starts with 'app_settings_email' %}
+        <li class="list-group-item active">
+            <i class="bi bi-mailbox2"></i>
+            <a class="text-light" href="{{ path('app_settings_email') }}">
+                {{ 'E-Mail'|trans }}
+            </a>
+        </li>
+    {% else %}
+        <li class="list-group-item">
+            <i class="bi bi-mailbox"></i>
+            <a href="{{ path('app_settings_email') }}">{{ 'E-Mail'|trans }}</a>
+        </li>
+    {% endif %}
+    {% if
+        app.request.attributes.get('_route')
+            starts with 'app_settings_profile' %}
+        <li class="list-group-item active">
+            <i class="bi bi-people-fill"></i>
+            <a class="text-light" href="{{ path('app_settings_profile') }}">
+                {{ 'Profile'|trans }}
+            </a>
+        </li>
+    {% else %}
+        <li class="list-group-item">
+            <i class="bi bi-people"></i>
+            <a href="{{ path('app_settings_profile') }}">
+                {{ 'Profile'|trans }}
+            </a>
+        </li>
+    {% endif %}
+    {% if
+        app.request.attributes.get('_route')
+            starts with 'app_settings_password' %}
+        <li class="list-group-item active">
+            <i class="bi bi-shield-lock-fill"></i>
+            <a class="text-light" href="{{ path('app_settings_password') }}">
+                {{ 'Password'|trans }}
+            </a>
+        </li>
+    {% else %}
+        <li class="list-group-item">
+            <i class="bi bi-shield-lock"></i>
+            <a href="{{ path('app_settings_password') }}">
+                {{ 'Password'|trans }}
+            </a>
+        </li>
+    {% endif %}
+</ul>
+
+{% if is_granted('ROLE_ADMIN') %}
+    <h3>
+        Administration
+    </h3>
+{% endif %}

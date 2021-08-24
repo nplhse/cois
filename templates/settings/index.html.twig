@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Settings'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-3">
+            {{ include('settings/_settings_subnav.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Update your Profile'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-3">
+            {{ include('settings/_settings_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <h1>
+                {{ 'Change your Profile'|trans }}
+            </h1>
+
+            {{ form_start(form_profile) }}
+
+            {{ form_row(form_profile.username) }}
+
+            {{ form_row(form_profile.submit) }}
+
+            {{ form_end(form_profile) }}
+        </div>
+    </div>
+{% endblock %}

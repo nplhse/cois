@@ -26,5 +26,10 @@
                 <directory name="src/Repository" />
             </errorLevel>
         </LessSpecificImplementedReturnType>
+        <MethodSignatureMismatch>
+            <errorLevel type="suppress">
+                <directory name="src/Repository" />
+            </errorLevel>
+        </MethodSignatureMismatch>
     </issueHandlers>
 </psalm>

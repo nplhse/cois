@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Change your E-Mail'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-3">
+            {{ include('settings/_settings_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <h1>
+                {{ 'Change your E-Mail'|trans }}
+            </h1>
+
+            <p>
+                {{ 'user.email.message'|trans }} <mark>{{ user.email }}</mark><br />
+                {{ 'user.email.verify'|trans }} {% if user.isVerified %}
+                    <mark>{{ 'user.email.verified'|trans }}</mark>.
+                {% else %}
+                    <mark>{{ 'user.email.notVerified'|trans }}</mark>. <a href="{{
+                        path(
+                            'account_email_verify'
+                        )
+                        }}">
+                        {{ 'user.link.verifyEmail'|trans }}
+                    </a>
+                {% endif %}
+            </p>
+
+            {{ form_start(form_email) }}
+
+            {{ form_row(form_email.new_email) }}
+
+            {{ form_row(form_email.submit) }}
+
+            {{ form_end(form_email) }}
+        </div>
+    </div>
+{% endblock %}
