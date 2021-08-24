@@ -2439,16 +2439,16 @@
         },
         {
             "name": "markrogoyski/math-php",
-            "version": "v2.0.0",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/markrogoyski/math-php.git",
-                "reference": "4dab1f0efe96b547bd21b17b66a5b7efec5902b3"
+                "reference": "cb4a3968f64830ce7f479c8f2ca8fa9eb3980db1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/markrogoyski/math-php/zipball/4dab1f0efe96b547bd21b17b66a5b7efec5902b3",
-                "reference": "4dab1f0efe96b547bd21b17b66a5b7efec5902b3",
+                "url": "https://api.github.com/repos/markrogoyski/math-php/zipball/cb4a3968f64830ce7f479c8f2ca8fa9eb3980db1",
+                "reference": "cb4a3968f64830ce7f479c8f2ca8fa9eb3980db1",
                 "shasum": ""
             },
             "require": {
@@ -2508,9 +2508,9 @@
             ],
             "support": {
                 "issues": "https://github.com/markrogoyski/math-php/issues",
-                "source": "https://github.com/markrogoyski/math-php/tree/v2.0.0"
+                "source": "https://github.com/markrogoyski/math-php/tree/v2.4.0"
             },
-            "time": "2021-05-09T19:53:17+00:00"
+            "time": "2021-07-28T01:32:13+00:00"
         },
         {
             "name": "monolog/monolog",
