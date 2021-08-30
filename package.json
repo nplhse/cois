@@ -3,7 +3,7 @@
         "@babel/core": "^7.14.6",
         "@babel/eslint-parser": "^7.15.0",
         "@babel/preset-env": "^7.14.5",
-        "@popperjs/core": "^2.9.2",
+        "@popperjs/core": "^2.9.3",
         "@symfony/stimulus-bridge": "^2.1.0",
         "@symfony/ux-chartjs": "file:vendor/symfony/ux-chartjs/Resources/assets",
         "@symfony/ux-dropzone": "file:vendor/symfony/ux-dropzone/Resources/assets",
