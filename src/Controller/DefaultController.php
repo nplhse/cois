@@ -12,17 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
-    /**
-     * @Route("/", name="app_no_locale")
-     */
-    public function indexNoLocale(): Response
-    {
-        return $this->redirectToRoute('default', ['_locale' => 'en']);
-    }
-
-    /**
-     * @Route("/{_locale<%app.supported_locales%>}/", name="default")
-     */
+    #[Route('/', name: 'app_default')]
     public function index(AllocationRepository $allocationRepository, HospitalRepository $hospitalRepository, UserRepository $userRepository, ImportRepository $importRepository): Response
     {
         return $this->render('default/welcome.html.twig', [

@@ -5,99 +5,125 @@
 {% endblock %}
 
 {% block body %}
-    <ul class="nav nav-tabs mb-3">
-        <li class="nav-item">
-            <a class="nav-link active" href="{{ path('statistics_index') }}">
-                Demographics
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('statistics_times') }}">Times</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('statistics_allocations') }}">
-                Allocations
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('statistics_specialities') }}">
-                Specialities
-            </a>
-        </li>
-    </ul>
-
     <div class="row">
-        <div class="col-8">
-            <div class="card">
-                <div class="card-header">
-                    Age
-                </div>
-                <div class="card-body">
-                    {{ render_chart(age_chart) }}
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('app_dashboard') }}">
+                            {{ 'Home'|trans }}
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item" aria-current="page">
+                        {{ 'Statistics'|trans }}
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <ul class="nav nav-tabs mb-3">
+            <li class="nav-item">
+                <a class="nav-link active"
+                    href="{{ path('statistics_index') }}">
+                    Demographics
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('statistics_times') }}">
+                    Times
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('statistics_allocations') }}">
+                    Allocations
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                    href="{{ path('statistics_specialities') }}">
+                    Specialities
+                </a>
+            </li>
+        </ul>
+
+        <div class="row">
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-header">
+                        Age
+                    </div>
+                    <div class="card-body">
+                        {{ render_chart(age_chart) }}
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-4">
-            <div class="card text-dark bg-light mb-2">
-                <div class="card-header">
-                    Gender
-                </div>
-                <div class="card-body">
-                    {{ render_chart(gender_chart) }}
-                    <p>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th colspan="3">
-                                        Gender
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        Male
-                                    </td>
-                                    <td>
-                                        {{ gender.maleCount }}
-                                    </td>
-                                    <td>
-                                        {{
-                                            gender.malePercent|number_format(1)
-                                        }}%
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Female
-                                    </td>
-                                    <td>
-                                        {{ gender.femaleCount }}
-                                    </td>
-                                    <td>
-                                        {{
-                                            gender.femalePercent|number_format(
-                                                1
-                                            )
-                                        }}%
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Other
-                                    </td>
-                                    <td>
-                                        {{ gender.otherCount }}
-                                    </td>
-                                    <td>
-                                        {{
-                                            gender.otherPercent|number_format(1)
-                                        }}%
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </p>
+            <div class="col-4">
+                <div class="card text-dark bg-light mb-2">
+                    <div class="card-header">
+                        Gender
+                    </div>
+                    <div class="card-body">
+                        {{ render_chart(gender_chart) }}
+                        <p>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3">
+                                            Gender
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            Male
+                                        </td>
+                                        <td>
+                                            {{ gender.maleCount }}
+                                        </td>
+                                        <td>
+                                            {{
+                                                gender.malePercent|number_format(
+                                                    1
+                                                )
+                                            }}%
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Female
+                                        </td>
+                                        <td>
+                                            {{ gender.femaleCount }}
+                                        </td>
+                                        <td>
+                                            {{
+                                                gender.femalePercent|number_format(
+                                                    1
+                                                )
+                                            }}%
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Other
+                                        </td>
+                                        <td>
+                                            {{ gender.otherCount }}
+                                        </td>
+                                        <td>
+                                            {{
+                                                gender.otherPercent|number_format(
+                                                    1
+                                                )
+                                            }}%
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

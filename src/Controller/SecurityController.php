@@ -22,7 +22,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale<%app.supported_locales%>}/login", name="app_login")
+     * @Route("login", name="app_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -57,7 +57,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/{_locale<%app.supported_locales%>}/verify", name="app_confirm_email")
+     * @Route("verify", name="app_confirm_email")
      */
     public function verifyUserEmail(Request $request, UserRepository $userRepository): Response
     {

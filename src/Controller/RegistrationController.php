@@ -18,7 +18,7 @@ use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 /**
- * @Route("/{_locale<%app.supported_locales%>}/register")
+ * @Route("register")
  */
 class RegistrationController extends AbstractController
 {

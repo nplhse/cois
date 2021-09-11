@@ -12,18 +12,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractController
 {
-    /**
-     * @Route("/dashboard/", name="dashboard")
-     */
+    #[Route('/dashboard/', name: 'app_dashboard')]
     public function index(AllocationRepository $allocationRepository, HospitalRepository $hospitalRepository, UserRepository $userRepository, ImportRepository $importRepository): Response
     {
         $user = $this->getUser();
-        $hospital = $hospitalRepository->findOneByUser($user);
 
         return $this->render('dashboard/index.html.twig', [
             'allocations' => $allocationRepository->countAllocations(),
             'hospitals' => $hospitalRepository->countHospitals(),
-            'hospital_allocations' => $allocationRepository->countAllocations($hospital),
+            'hospital_allocations' => $allocationRepository->countAllocations($hospitalRepository->findOneByUser($user)),
             'users' => $userRepository->countUsers(),
             'user_imports' => $importRepository->countImports($user),
             'imports' => $importRepository->countImports(),
