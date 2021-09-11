@@ -1,0 +1,284 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ hospital.name }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('dashboard') }}">{{ 'Home'|trans }}</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('app_hospital_index') }}">
+                            {{ 'Hospitals'|trans }}
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        {{ hospital.name }}
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <h1>
+            {{ hospital.name }} <small>(<i>#{{ hospital.id }}</i>)</small>
+        </h1>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        {{ 'Basic information'|trans }}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {{ 'Address'|trans }}
+                        </h5>
+                        <p>
+                            {{ hospital.address|nl2br }}
+                        </p>
+
+                        <h5 class="card-title">
+                            {{ 'Hospital location'|trans }}
+                        </h5>
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 class="card-subtitle text-muted">
+                                    {{ 'SupplyArea'|trans }}
+                                </h6>
+                                <p>
+                                    <span class="badge bg-primary">
+                                        <i class="bi bi-collection"></i>
+                                        <a class="link-light"
+                                            href="{{
+                                            path(
+                                                'app_hospital_index',
+                                                app.request.query.all|merge({
+                                                    supplyArea: hospital.supplyArea,
+                                                    offset: '0'
+                                                })
+                                            )
+                                            }}">
+                                            {{ hospital.supplyArea }}
+                                        </a>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="card-subtitle text-muted">
+                                    {{ 'DispatchArea'|trans }}
+                                </h6>
+                                <p>
+                                    <span class="badge bg-primary">
+                                        <i class="bi bi-collection"></i>
+                                        <a class="link-light"
+                                            href="{{
+                                            path(
+                                                'app_hospital_index',
+                                                app.request.query.all|merge({
+                                                    dispatchArea: hospital.dispatchArea,
+                                                    offset: '0'
+                                                })
+                                            )
+                                            }}">
+                                            {{ hospital.dispatchArea }}
+                                        </a>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <h5 class="card-title">
+                            {{ 'Location'|trans }}
+                        </h5>
+                        <p>
+                            {% if hospital.location == 'rural' %}
+                                <span class="badge bg-info">
+                                    <i class="bi bi-collection"></i>
+                                    <a class="link-light"
+                                        href="{{
+                                        path(
+                                            'app_hospital_index',
+                                            app.request.query.all|merge({
+                                                location: 'rural',
+                                                offset: '0'
+                                            })
+                                        )
+                                        }}">
+                                        {{ 'Rural'|trans }}
+                                    </a>
+                                </span>
+                            {% elseif hospital.location == 'urban' %}
+                                <span class="badge bg-info">
+                                    <i class="bi bi-collection"></i>
+                                    <a class="link-light"
+                                        href="{{
+                                        path(
+                                            'app_hospital_index',
+                                            app.request.query.all|merge({
+                                                location: 'urban',
+                                                offset: '0'
+                                            })
+                                        )
+                                        }}">
+                                        {{ 'Urban'|trans }}
+                                    </a>
+                                </span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-header">
+                        {{ 'Hospital size'|trans }}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-title">
+                                    {{ 'Size'|trans }}
+                                </h5>
+                                <p>
+                                    {% if hospital.size == 'small' %}
+                                        <span class="badge bg-success">
+                                            <i class="bi bi-collection"></i>
+                                            <a class="link-light"
+                                                href="{{
+                                                path(
+                                                    'app_hospital_index',
+                                                    app.request.query.all|merge({
+                                                        size: 'small',
+                                                        offset: '0'
+                                                    })
+                                                )
+                                                }}">
+                                                {{ 'Small'|trans }}
+                                            </a>
+                                        </span>
+                                    {% elseif hospital.size == 'medium' %}
+                                        <span class="badge bg-success">
+                                            <i class="bi bi-collection"></i>
+                                            <a class="link-light"
+                                                href="{{
+                                                path(
+                                                    'app_hospital_index',
+                                                    app.request.query.all|merge({
+                                                        size: 'medium',
+                                                        offset: '0'
+                                                    })
+                                                )
+                                                }}">
+                                                {{ 'Medium'|trans }}
+                                            </a>
+                                        </span>
+                                    {% elseif hospital.size == 'large' %}
+                                        <span class="badge bg-success">
+                                            <i class="bi bi-collection"></i>
+                                            <a class="link-light"
+                                                href="{{
+                                                path(
+                                                    'app_hospital_index',
+                                                    app.request.query.all|merge({
+                                                        size: 'large',
+                                                        offset: '0'
+                                                    })
+                                                )
+                                                }}">
+                                                {{ 'Large'|trans }}
+                                            </a>
+                                        </span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="col-6">
+                                <h5 class="card-title">
+                                    {{ 'Beds'|trans }}
+                                </h5>
+                                <p>
+                                    {{ hospital.beds }} {{ 'Beds'|trans }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card border-primary mb-3">
+                    <div class="card-header bg-primary text-white">
+                        {{ 'Hospital facts'|trans }}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {{ 'Hospital owner'|trans }}
+                        </h5>
+                        <p>
+                            {{ hospital.owner }}
+                        </p>
+
+                        <h5 class="card-title">
+                            {{ 'Timestamps'|trans }}
+                        </h5>
+                        <p>
+                            {{ 'hospitals.created_at.field'|trans }}
+                            {{ hospital.createdAt
+                                ? hospital.createdAt|date('d.m.Y H:i')
+                                : '' }}
+                            <br />
+                            {{ 'hospitals.updated_at.field'|trans }}
+                            {{ hospital.updatedAt
+                                ? hospital.updatedAt|date('d.m.Y H:i')
+                                : '' }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header">
+                        {{ 'Statistics'|trans }}
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            {{
+                                'dashboard.allocations.by_hospital'|trans({
+                                    '%count%': hospital_allocations
+                                })
+                            }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end mb-2">
+            <div class="btn-group"
+                role="group"
+                aria-label="Basic outlined example">
+                {% if user_can_edit %}
+                    <a class="btn btn-outline-primary"
+                        href="{{
+                        path(
+                            'app_hospital_edit',
+                            {
+                                id: hospital.id
+                            }
+                        )
+                        }}"
+                        role="button">
+                        {{ 'Edit hospitals'|trans }}
+                    </a>
+                {% endif %}
+                <a class="btn btn-outline-secondary"
+                    href="{{ path('app_hospital_index') }}"
+                    role="button">
+                    {{ 'Back to list'|trans }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

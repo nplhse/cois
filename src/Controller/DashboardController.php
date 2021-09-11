@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashboardController extends AbstractController
 {
     /**
-     * @Route("/{_locale<%app.supported_locales%>}/dashboard/", name="dashboard")
+     * @Route("/dashboard/", name="dashboard")
      */
     public function index(AllocationRepository $allocationRepository, HospitalRepository $hospitalRepository, UserRepository $userRepository, ImportRepository $importRepository): Response
     {

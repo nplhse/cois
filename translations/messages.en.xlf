@@ -854,6 +854,206 @@
         <source>dashboard.verify.text</source>
         <target>We are currently waiting for your verification process to be completed before you can get started. In the meantime you can take a look at our statistics of the FAQ.</target>
       </trans-unit>
+      <trans-unit id="drag3Pb" resname="Change your Password">
+        <source>Change your Password</source>
+        <target>Change your Password</target>
+      </trans-unit>
+      <trans-unit id="dKiDoDe" resname="Settings">
+        <source>Settings</source>
+        <target>Settings</target>
+      </trans-unit>
+      <trans-unit id="L65vsws" resname="E-Mail">
+        <source>E-Mail</source>
+        <target>E-Mail</target>
+      </trans-unit>
+      <trans-unit id="1pajW90" resname="Profile">
+        <source>Profile</source>
+        <target>Profile</target>
+      </trans-unit>
+      <trans-unit id="588_9PF" resname="Password">
+        <source>Password</source>
+        <target>Password</target>
+      </trans-unit>
+      <trans-unit id="qLb.7di" resname="Update your Profile">
+        <source>Update your Profile</source>
+        <target>Update your Profile</target>
+      </trans-unit>
+      <trans-unit id="8.uALNH" resname="Change your Profile">
+        <source>Change your Profile</source>
+        <target>Change your Profile</target>
+      </trans-unit>
+      <trans-unit id="otmY.fA" resname="Change your E-Mail">
+        <source>Change your E-Mail</source>
+        <target>Change your E-Mail</target>
+      </trans-unit>
+      <trans-unit id="NwYJOq0" resname="Edit hospitals">
+        <source>Edit hospitals</source>
+        <target>Edit hospitals</target>
+      </trans-unit>
+      <trans-unit id="6E896yI" resname="View hospital">
+        <source>View hospital</source>
+        <target>View hospital</target>
+      </trans-unit>
+      <trans-unit id="LCfia2r" resname="Save Hospital">
+        <source>Save Hospital</source>
+        <target>Save Hospital</target>
+      </trans-unit>
+      <trans-unit id="Xaj3_8K" resname="Back to list">
+        <source>Back to list</source>
+        <target>Back to list</target>
+      </trans-unit>
+      <trans-unit id="wmgjLAo" resname="Hospitals">
+        <source>Hospitals</source>
+        <target>Hospitals</target>
+      </trans-unit>
+      <trans-unit id="OnhpU4i" resname="Home">
+        <source>Home</source>
+        <target>Home</target>
+      </trans-unit>
+      <trans-unit id="cDvbj_8" resname="Showing count Hospitals">
+        <source>Showing count Hospitals</source>
+        <target>Showing %count% Snippets, with %perPage% items per Page.</target>
+      </trans-unit>
+      <trans-unit id="jYMUtzW" resname="Searching for">
+        <source>Searching for</source>
+        <target>Searching for</target>
+      </trans-unit>
+      <trans-unit id="EfuQP2q" resname="Click here to end search">
+        <source>Click here to end search</source>
+        <target>Click here to end search</target>
+      </trans-unit>
+      <trans-unit id="yJ53qQC" resname="Rural">
+        <source>Rural</source>
+        <target>Rural</target>
+      </trans-unit>
+      <trans-unit id="Nj6vQ7S" resname="Urban">
+        <source>Urban</source>
+        <target>Urban</target>
+      </trans-unit>
+      <trans-unit id="UmMpP8I" resname="Small">
+        <source>Small</source>
+        <target>Small</target>
+      </trans-unit>
+      <trans-unit id="Lio80aA" resname="Beds">
+        <source>Beds</source>
+        <target>Beds</target>
+      </trans-unit>
+      <trans-unit id="jliM0Yd" resname="Medium">
+        <source>Medium</source>
+        <target>Medium</target>
+      </trans-unit>
+      <trans-unit id="q4BUDZj" resname="Large">
+        <source>Large</source>
+        <target>Large</target>
+      </trans-unit>
+      <trans-unit id="uWwxAle" resname="No Hospitals found">
+        <source>No Hospitals found</source>
+        <target>No Hospitals found</target>
+      </trans-unit>
+      <trans-unit id="pXsIpIC" resname="Previous">
+        <source>Previous</source>
+        <target>Previous</target>
+      </trans-unit>
+      <trans-unit id="H.V6Kdf" resname="Next">
+        <source>Next</source>
+        <target>Next</target>
+      </trans-unit>
+      <trans-unit id="ScJmuqq" resname="Search">
+        <source>Search</source>
+        <target>Search</target>
+      </trans-unit>
+      <trans-unit id="f1U4Ihn" resname="Search...">
+        <source>Search...</source>
+        <target>Search for...</target>
+      </trans-unit>
+      <trans-unit id="YZnxvT9" resname="Filter by SupplyArea">
+        <source>Filter by SupplyArea</source>
+        <target>Filter by Supply Area</target>
+      </trans-unit>
+      <trans-unit id="Vj3zJuz" resname="No SupplyAreas found">
+        <source>No SupplyAreas found</source>
+        <target>No Supply Areas found</target>
+      </trans-unit>
+      <trans-unit id="NNu1FMb" resname="Filter by DispatchArea">
+        <source>Filter by DispatchArea</source>
+        <target>Filter by Dispatch Area</target>
+      </trans-unit>
+      <trans-unit id="YHz3jZw" resname="No DispatchAreas found">
+        <source>No DispatchAreas found</source>
+        <target>No Dispatch Areas found</target>
+      </trans-unit>
+      <trans-unit id="L9y1ynv" resname="Filter by Location">
+        <source>Filter by Location</source>
+        <target>Filter by Location</target>
+      </trans-unit>
+      <trans-unit id="BZ07sXi" resname="Filter by Size">
+        <source>Filter by Size</source>
+        <target>Filter by Size</target>
+      </trans-unit>
+      <trans-unit id="bAksnKA" resname="Basic information">
+        <source>Basic information</source>
+        <target>Basic information</target>
+      </trans-unit>
+      <trans-unit id="Vu_PIJV" resname="Address">
+        <source>Address</source>
+        <target>Address</target>
+      </trans-unit>
+      <trans-unit id="uXiYdU6" resname="Hospital location">
+        <source>Hospital location</source>
+        <target>Hospital location</target>
+      </trans-unit>
+      <trans-unit id="jlcqP1o" resname="SupplyArea">
+        <source>SupplyArea</source>
+        <target>Supply Area</target>
+      </trans-unit>
+      <trans-unit id="gCiAmUW" resname="DispatchArea">
+        <source>DispatchArea</source>
+        <target>Dispatch Area</target>
+      </trans-unit>
+      <trans-unit id="FbYZdLJ" resname="Location">
+        <source>Location</source>
+        <target>Location</target>
+      </trans-unit>
+      <trans-unit id="CKvaMdt" resname="Hospital size">
+        <source>Hospital size</source>
+        <target>Hospital size</target>
+      </trans-unit>
+      <trans-unit id="GvhRkHM" resname="Size">
+        <source>Size</source>
+        <target>Size</target>
+      </trans-unit>
+      <trans-unit id="nMbscBy" resname="Hospital facts">
+        <source>Hospital facts</source>
+        <target>Hospital facts</target>
+      </trans-unit>
+      <trans-unit id="tsMO7J5" resname="Hospital owner">
+        <source>Hospital owner</source>
+        <target>Hospital owner</target>
+      </trans-unit>
+      <trans-unit id="dV8Jnb9" resname="Timestamps">
+        <source>Timestamps</source>
+        <target>Timestamps</target>
+      </trans-unit>
+      <trans-unit id="plYQfpn" resname="Statistics">
+        <source>Statistics</source>
+        <target>Statistics</target>
+      </trans-unit>
+      <trans-unit id="FMRx6Vy" resname="dashboard.hospitals.title">
+        <source>dashboard.hospitals.title</source>
+        <target>Hospitals</target>
+      </trans-unit>
+      <trans-unit id="7YtS5S3" resname="dashboard.hospitals.text">
+        <source>dashboard.hospitals.text</source>
+        <target>__dashboard.hospitals.text</target>
+      </trans-unit>
+      <trans-unit id="wbsZ3_o" resname="dashboard.hospitals.button_edit">
+        <source>dashboard.hospitals.button_edit</source>
+        <target>Edit hospital</target>
+      </trans-unit>
+      <trans-unit id="XrVi6Dj" resname="dashboard.hospitals.button_view">
+        <source>dashboard.hospitals.button_view</source>
+        <target>View hospitals</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

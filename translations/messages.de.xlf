@@ -853,6 +853,206 @@
         <source>dashboard.verify.text</source>
         <target>Da Sie noch nicht vollständig verifiziert worden sind, können Sie aktuell noch nicht auf alle Inhalte zugreifen. Sie können sich aber schon die öffentlichen Statistiken, sowie die häufig gestellten Fragen (FAQ) ansehen.</target>
       </trans-unit>
+      <trans-unit id="drag3Pb" resname="Change your Password">
+        <source>Change your Password</source>
+        <target>Passwort ändern</target>
+      </trans-unit>
+      <trans-unit id="dKiDoDe" resname="Settings">
+        <source>Settings</source>
+        <target>Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="L65vsws" resname="E-Mail">
+        <source>E-Mail</source>
+        <target>E-Mail</target>
+      </trans-unit>
+      <trans-unit id="1pajW90" resname="Profile">
+        <source>Profile</source>
+        <target>Profil</target>
+      </trans-unit>
+      <trans-unit id="588_9PF" resname="Password">
+        <source>Password</source>
+        <target>Passwort</target>
+      </trans-unit>
+      <trans-unit id="qLb.7di" resname="Update your Profile">
+        <source>Update your Profile</source>
+        <target>Profil aktualisieren</target>
+      </trans-unit>
+      <trans-unit id="8.uALNH" resname="Change your Profile">
+        <source>Change your Profile</source>
+        <target>Profil ändern</target>
+      </trans-unit>
+      <trans-unit id="otmY.fA" resname="Change your E-Mail">
+        <source>Change your E-Mail</source>
+        <target>E-Mail ändern</target>
+      </trans-unit>
+      <trans-unit id="NwYJOq0" resname="Edit hospitals">
+        <source>Edit hospitals</source>
+        <target>Klinik bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="6E896yI" resname="View hospital">
+        <source>View hospital</source>
+        <target>Klinik ansehen</target>
+      </trans-unit>
+      <trans-unit id="LCfia2r" resname="Save Hospital">
+        <source>Save Hospital</source>
+        <target>Änderungen speichern</target>
+      </trans-unit>
+      <trans-unit id="Xaj3_8K" resname="Back to list">
+        <source>Back to list</source>
+        <target>Zurück zur Liste</target>
+      </trans-unit>
+      <trans-unit id="wmgjLAo" resname="Hospitals">
+        <source>Hospitals</source>
+        <target>Kliniken</target>
+      </trans-unit>
+      <trans-unit id="OnhpU4i" resname="Home">
+        <source>Home</source>
+        <target>Startseite</target>
+      </trans-unit>
+      <trans-unit id="cDvbj_8" resname="Showing count Hospitals">
+        <source>Showing count Hospitals</source>
+        <target>Zeige %count% Kliniken an, mit %perPage% pro Seite.</target>
+      </trans-unit>
+      <trans-unit id="jYMUtzW" resname="Searching for">
+        <source>Searching for</source>
+        <target>Suche nach</target>
+      </trans-unit>
+      <trans-unit id="EfuQP2q" resname="Click here to end search">
+        <source>Click here to end search</source>
+        <target>Hier klicken, um die Suche zu beenden.</target>
+      </trans-unit>
+      <trans-unit id="yJ53qQC" resname="Rural">
+        <source>Rural</source>
+        <target>Ländlich</target>
+      </trans-unit>
+      <trans-unit id="Nj6vQ7S" resname="Urban">
+        <source>Urban</source>
+        <target>Städtisch</target>
+      </trans-unit>
+      <trans-unit id="UmMpP8I" resname="Small">
+        <source>Small</source>
+        <target>Klein</target>
+      </trans-unit>
+      <trans-unit id="Lio80aA" resname="Beds">
+        <source>Beds</source>
+        <target>Betten</target>
+      </trans-unit>
+      <trans-unit id="jliM0Yd" resname="Medium">
+        <source>Medium</source>
+        <target>Mittel</target>
+      </trans-unit>
+      <trans-unit id="q4BUDZj" resname="Large">
+        <source>Large</source>
+        <target>Groß</target>
+      </trans-unit>
+      <trans-unit id="uWwxAle" resname="No Hospitals found">
+        <source>No Hospitals found</source>
+        <target>Keine Kliniken gefunden.</target>
+      </trans-unit>
+      <trans-unit id="pXsIpIC" resname="Previous">
+        <source>Previous</source>
+        <target>Vorherige</target>
+      </trans-unit>
+      <trans-unit id="H.V6Kdf" resname="Next">
+        <source>Next</source>
+        <target>Nächste</target>
+      </trans-unit>
+      <trans-unit id="ScJmuqq" resname="Search">
+        <source>Search</source>
+        <target>Suche</target>
+      </trans-unit>
+      <trans-unit id="f1U4Ihn" resname="Search...">
+        <source>Search...</source>
+        <target>Suche nach...</target>
+      </trans-unit>
+      <trans-unit id="YZnxvT9" resname="Filter by SupplyArea">
+        <source>Filter by SupplyArea</source>
+        <target>Filter nach Versorgungsgebiet</target>
+      </trans-unit>
+      <trans-unit id="Vj3zJuz" resname="No SupplyAreas found">
+        <source>No SupplyAreas found</source>
+        <target>Keine Versorgungsgebiete gefunden.</target>
+      </trans-unit>
+      <trans-unit id="NNu1FMb" resname="Filter by DispatchArea">
+        <source>Filter by DispatchArea</source>
+        <target>Filter nach Leitstelle</target>
+      </trans-unit>
+      <trans-unit id="YHz3jZw" resname="No DispatchAreas found">
+        <source>No DispatchAreas found</source>
+        <target>Keine Leitstellen gefunden</target>
+      </trans-unit>
+      <trans-unit id="L9y1ynv" resname="Filter by Location">
+        <source>Filter by Location</source>
+        <target>Filtern nach Lage</target>
+      </trans-unit>
+      <trans-unit id="BZ07sXi" resname="Filter by Size">
+        <source>Filter by Size</source>
+        <target>Filtern nach Größe</target>
+      </trans-unit>
+      <trans-unit id="bAksnKA" resname="Basic information">
+        <source>Basic information</source>
+        <target>Basisinformationen</target>
+      </trans-unit>
+      <trans-unit id="Vu_PIJV" resname="Address">
+        <source>Address</source>
+        <target>Adresse</target>
+      </trans-unit>
+      <trans-unit id="uXiYdU6" resname="Hospital location">
+        <source>Hospital location</source>
+        <target>Lage der Klinik</target>
+      </trans-unit>
+      <trans-unit id="jlcqP1o" resname="SupplyArea">
+        <source>SupplyArea</source>
+        <target>Versorgungsgebiet</target>
+      </trans-unit>
+      <trans-unit id="gCiAmUW" resname="DispatchArea">
+        <source>DispatchArea</source>
+        <target>Leitstelle</target>
+      </trans-unit>
+      <trans-unit id="FbYZdLJ" resname="Location">
+        <source>Location</source>
+        <target>Lage</target>
+      </trans-unit>
+      <trans-unit id="CKvaMdt" resname="Hospital size">
+        <source>Hospital size</source>
+        <target>Größe der Klinik</target>
+      </trans-unit>
+      <trans-unit id="GvhRkHM" resname="Size">
+        <source>Size</source>
+        <target>Größe</target>
+      </trans-unit>
+      <trans-unit id="nMbscBy" resname="Hospital facts">
+        <source>Hospital facts</source>
+        <target>Informationen</target>
+      </trans-unit>
+      <trans-unit id="tsMO7J5" resname="Hospital owner">
+        <source>Hospital owner</source>
+        <target>Verantwortlicher Benutzer</target>
+      </trans-unit>
+      <trans-unit id="dV8Jnb9" resname="Timestamps">
+        <source>Timestamps</source>
+        <target>Zeitstempel</target>
+      </trans-unit>
+      <trans-unit id="plYQfpn" resname="Statistics">
+        <source>Statistics</source>
+        <target>Statistiken</target>
+      </trans-unit>
+      <trans-unit id="FMRx6Vy" resname="dashboard.hospitals.title">
+        <source>dashboard.hospitals.title</source>
+        <target>Kliniken</target>
+      </trans-unit>
+      <trans-unit id="7YtS5S3" resname="dashboard.hospitals.text">
+        <source>dashboard.hospitals.text</source>
+        <target>__dashboard.hospitals.text</target>
+      </trans-unit>
+      <trans-unit id="wbsZ3_o" resname="dashboard.hospitals.button_edit">
+        <source>dashboard.hospitals.button_edit</source>
+        <target>Klinik bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="XrVi6Dj" resname="dashboard.hospitals.button_view">
+        <source>dashboard.hospitals.button_view</source>
+        <target>Kliniken ansehen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

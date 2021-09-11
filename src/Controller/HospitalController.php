@@ -6,46 +6,78 @@ use App\Entity\Hospital;
 use App\Form\HospitalType;
 use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
-/**
- * @Route("/{_locale<%app.supported_locales%>}/hospitals")
- * @IsGranted("ROLE_USER")
- */
+#[Route('/hospitals')]
 class HospitalController extends AbstractController
 {
-    /**
-     * @Route("/", name="hospital_index", methods={"GET"})
-     */
-    public function index(HospitalRepository $hospitalRepository): Response
-    {
-        $userHospital = $hospitalRepository->findOneBy(['owner' => $this->getUser()->getId()]);
-        $userIsOwner = $userHospital;
+    private Security $security;
 
-        return $this->render('hospital/index.html.twig', [
-            'hospitals' => $hospitalRepository->findAll(),
-            'user_hospital' => $userHospital,
-            'user_is_owner' => $userIsOwner,
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
+    #[Route('/', name: 'app_hospital_index')]
+    public function index(Request $request, HospitalRepository $hospitalRepository): Response
+    {
+        $search = $request->query->get('search');
+        $location = $request->query->get('location');
+        $size = $request->query->get('size');
+        $supplyArea = $request->query->get('supplyArea');
+        $dispatchArea = $request->query->get('dispatchArea');
+
+        $filters = [];
+        $filters['search'] = $search;
+
+        if ($location) {
+            $filters['location'] = $location;
+        } else {
+            $filters['location'] = null;
+        }
+
+        if ($size) {
+            $filters['size'] = $size;
+        } else {
+            $filters['size'] = null;
+        }
+
+        if ($supplyArea) {
+            $filters['supplyArea'] = $supplyArea;
+        } else {
+            $filters['supplyArea'] = null;
+        }
+
+        if ($dispatchArea) {
+            $filters['dispatchArea'] = $dispatchArea;
+        } else {
+            $filters['dispatchArea'] = null;
+        }
+
+        $offset = max(0, $request->query->getInt('offset', 0));
+        $paginator = $hospitalRepository->getHospitalPaginator($offset, $filters);
+
+        return $this->render('hospitals/index.html.twig', [
+            'hospitals' => $paginator,
+            'search' => $search,
+            'perPage' => HospitalRepository::PAGINATOR_PER_PAGE,
+            'previous' => $offset - HospitalRepository::PAGINATOR_PER_PAGE,
+            'next' => min(count($paginator), $offset + HospitalRepository::PAGINATOR_PER_PAGE),
+            'filters' => $filters,
+            'supplyAreas' => $hospitalRepository->getSupplyAreas(),
+            'dispatchAreas' => $hospitalRepository->getDispatchAreas(),
         ]);
     }
 
     /**
-     * @Route("/edit", name="hospital_edit", methods={"GET","POST"})
+     * @Route("/edit/{id}", name="app_hospital_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, HospitalRepository $hospitalRepository): Response
+    public function edit(Hospital $hospital, Request $request, HospitalRepository $hospitalRepository): Response
     {
-        $hospital = $hospitalRepository->findOneBy(['owner' => $this->getUser()->getId()]);
-
-        if (!$hospital) {
-            $this->addFlash('danger', 'You been redirected, because you have to be owner of a hospital in order to access this page.');
-
-            return $this->redirectToRoute('hospital_index');
-        }
-
         $form = $this->createForm(HospitalType::class, $hospital);
         $form->handleRequest($request);
 
@@ -56,27 +88,30 @@ class HospitalController extends AbstractController
 
             $this->addFlash('success', 'Hospital was successfully edited.');
 
-            return $this->redirectToRoute('hospital_index');
+            return $this->redirectToRoute('app_hospital_index');
         }
 
-        return $this->render('hospital/edit.html.twig', [
+        return $this->render('hospitals/edit.html.twig', [
             'form' => $form->createView(),
             'hospital' => $hospital,
-            'user_hospital' => $hospitalRepository->findOneBy(['owner' => $this->getUser()->getId()]),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="hospital_show", methods={"GET"})
+     * @Route("/{id}", name="app_hospital_show", methods={"GET"})
      */
     public function show(Hospital $hospital, AllocationRepository $allocationRepository): Response
     {
         $userIsOwner = $hospital->getOwner() == $this->getUser();
 
-        return $this->render('hospital/show.html.twig', [
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            $userIsOwner = true;
+        }
+
+        return $this->render('hospitals/show.html.twig', [
             'hospital' => $hospital,
             'hospital_allocations' => $allocationRepository->countAllocations($hospital),
-            'user_is_owner' => $userIsOwner,
+            'user_can_edit' => true,
         ]);
     }
 }

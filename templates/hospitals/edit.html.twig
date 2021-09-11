@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'Edit hospitals'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('dashboard') }}">Home</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('app_hospital_index') }}">Hospitals</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Edit hospital
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <h1>
+            {{ 'Edit hospitals'|trans }}
+        </h1>
+
+        {{ form_start(form) }}
+
+        <div>
+            <div class="card mb-3">
+                <div class="card-header">
+                    {{ 'hospitals.basics.title'|trans }}
+                </div>
+                <div class="card-body">
+                    {{ form_row(form.name) }}
+
+                    {{ form_row(form.address) }}
+
+                    {{ form_row(form.dispatchArea) }}
+
+                    {{ form_row(form.supplyArea) }}
+
+                    {{ form_row(form.location) }}
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    {{ 'hospitals.size.title'|trans }}
+                </div>
+                <div class="card-body">
+                    {{ form_row(form.size) }}
+
+                    {{ form_row(form.beds) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-toolbar d-flex justify-content-end mb-2">
+            <div class="btn-group me-2" role="group">
+                <a class="btn btn-outline-primary"
+                    href="{{
+                    path(
+                        'app_hospital_show',
+                        {
+                            id: hospital.id
+                        }
+                    )
+                    }}"
+                    role="button">
+                    {{ 'View hospital'|trans }}
+                </a>
+            </div>
+            <div class="btn-group" role="group">
+                <button class="btn btn-success">
+                    {{ 'Save Hospital'|trans({}) }}
+                </button>
+                <a class="btn btn-outline-secondary"
+                    href="{{ path('app_hospital_index') }}"
+                    role="button">
+                    {{ 'Back to list'|trans }}
+                </a>
+            </div>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

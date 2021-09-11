@@ -6,6 +6,17 @@
 
 {% block body %}
     <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('dashboard') }}">Home</a>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
         <h1>
             {{ 'dashboard.welcome'|trans }}
         </h1>
@@ -79,18 +90,17 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <h2 class="card-title">
-                            {{ 'dashboard.hospital.title'|trans }}
+                            {{ 'dashboard.hospitals.title'|trans }}
                         </h2>
                         <p class="card-text">
-                            {{ 'dashboard.hospital.text'|trans }}
+                            {{ 'dashboard.hospitals.text'|trans }}
                         </p>
-                        <a href="{{ path('hospital_edit') }}"
-                            class="btn btn-primary">
-                            {{ 'dashboard.hospital.button_edit'|trans }}
+                        <a href="#" class="btn btn-primary" disabled>
+                            {{ 'dashboard.hospitals.button_edit'|trans }}
                         </a>
-                        <a href="{{ path('hospital_index') }}"
+                        <a href="{{ path('app_hospital_index') }}"
                             class="btn btn-secondary">
-                            {{ 'dashboard.hospital.button_view'|trans }}
+                            {{ 'dashboard.hospitals.button_view'|trans }}
                         </a>
                     </div>
                 </div>
