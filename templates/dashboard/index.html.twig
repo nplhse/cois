@@ -113,7 +113,7 @@
                         <p class="card-text">
                             {{ 'dashboard.import.text'|trans }}
                         </p>
-                        <a href="{{ path('import_index') }}"
+                        <a href="{{ path('app_import_index') }}"
                             class="btn btn-primary">
                             {{ 'dashboard.import.button'|trans }}
                         </a>
@@ -139,10 +139,14 @@
                         <i class="bi bi-house-door-fill"></i>
                         {{ hospitals }}
                         <small class="text-muted">
-                            <a class="text-muted"
-                                href="{{ path('app_hospital_index') }}">
+                            {% if app.user.isParticipant %}
+                                <a class="text-muted"
+                                    href="{{ path('app_hospital_index') }}">
+                                    {{ 'dashboard.hospitals'|trans }}
+                                </a>
+                            {% else %}
                                 {{ 'dashboard.hospitals'|trans }}
-                            </a>
+                            {% endif %}
                         </small>
                     </h3>
                 </div>
@@ -153,7 +157,14 @@
                     <h3>
                         <i class="bi bi-list-ul"></i> {{ allocations }}
                         <small class="text-muted">
-                            {{ 'dashboard.allocations'|trans }}
+                            {% if app.user.isParticipant %}
+                                <a class="text-muted"
+                                    href="{{ path('allocation_index') }}">
+                                    {{ 'dashboard.allocations'|trans }}
+                                </a>
+                            {% else %}
+                                {{ 'dashboard.allocations'|trans }}
+                            {% endif %}
                         </small>
                     </h3>
                     {% if app.user.isParticipant %}
@@ -174,7 +185,14 @@
                         <i class="bi bi-file-earmark-arrow-up-fill"></i>
                         {{ imports }}
                         <small class="text-muted">
-                            {{ 'dashboard.imports'|trans }}
+                            {% if app.user.canImport %}
+                                <a class="text-muted"
+                                    href="{{ path('app_import_index') }}">
+                                    {{ 'dashboard.imports'|trans }}
+                                </a>
+                            {% else %}
+                                {{ 'dashboard.imports'|trans }}
+                            {% endif %}
                         </small>
                     </h3>
                     {% if app.user.isParticipant %}

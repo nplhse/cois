@@ -28,7 +28,7 @@ class AllocationController extends AbstractController
 
         foreach ($hospitals as $hospital) {
             $hospitalList['/api/hospitals/'.$hospital->getId()] = $hospital->getName();
-            $hospitalLink['/api/hospitals/'.$hospital->getId()] = $this->generateUrl('hospital_show', ['id' => $hospital->getId()]);
+            $hospitalLink['/api/hospitals/'.$hospital->getId()] = $this->generateUrl('app_hospital_show', ['id' => $hospital->getId()]);
         }
 
         return $this->render('allocation/index.html.twig', [

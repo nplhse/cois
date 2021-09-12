@@ -250,4 +250,15 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function canImport(): bool
+    {
+        if ($this->hospital) {
+            dump($this->hospital);
+
+            return true;
+        }
+
+        return false;
+    }
 }

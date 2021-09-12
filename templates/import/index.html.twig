@@ -1,10 +1,30 @@
 {% extends 'base.html.twig' %}
 
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
 {% block title %}
     {{ 'import.title'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            label: 'Import'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-8">
             <h1>
@@ -95,7 +115,7 @@
                         </tr>
                     {% else %}
                         <tr>
-                            <td scope="col" colspan="3" class="text-muted">
+                            <td scope="col" colspan="5" class="text-muted">
                                 {{ 'import.noUploads'|trans }}
                             </td>
                         </tr>

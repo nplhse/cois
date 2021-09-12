@@ -18,13 +18,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/{_locale<%app.supported_locales%>}/import")
+ * @Route("/import")
  * @IsGranted("ROLE_USER")
  */
 class ImportController extends AbstractController
 {
     /**
-     * @Route("/", name="import_index")
+     * @Route("/", name="app_import_index")
      */
     public function index(Request $request, FileUploader $fileUploader, ImportRepository $importRepository, HospitalRepository $hospitalRepository): Response
     {
@@ -75,7 +75,7 @@ class ImportController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="import_show", methods={"GET"})
+     * @Route("/{id}", name="app_import_show", methods={"GET"})
      */
     public function show(Import $import): Response
     {
@@ -88,14 +88,14 @@ class ImportController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/delete", name="import_delete", methods={"GET"})
+     * @Route("/{id}/delete", name="app_import_delete", methods={"GET"})
      */
     public function delete(Import $import, AllocationRepository $allocationRepository, EntityManagerInterface $em): Response
     {
         $userIsOwner = $import->getUser() == $this->getUser();
 
         if (!$userIsOwner) {
-            return $this->redirectToRoute('import_index');
+            return $this->redirectToRoute('app_import_index');
         }
 
         $allocationRepository->deleteByImport($import);
@@ -103,6 +103,6 @@ class ImportController extends AbstractController
         $em->remove($import);
         $em->flush();
 
-        return $this->redirectToRoute('import_index');
+        return $this->redirectToRoute('app_import_index');
     }
 }

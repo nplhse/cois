@@ -1,24 +1,31 @@
 {% extends 'base.html.twig' %}
 
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
 {% block title %}
     {{ 'import.show.title'|trans }} (#{{ import.id }}) - {{ parent() }}
 {% endblock %}
 
 {% block body %}
-    <div class="d-flex justify-content-end mb-2">
-        <div class="btn-group" role="group" aria-label="Basic outlined example">
-            {% if user_is_owner %}
-                <a class="btn btn-outline-primary disabled"
-                    href="#"
-                    role="button">
-                    {{ 'import.button.delete'|trans }}
-                </a>
-            {% endif %}
-            <a class="btn btn-outline-primary"
-                href="{{ path('import_index') }}"
-                role="button">
-                {{ 'import.link.back'|trans }}
-            </a>
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_import_index'),
+                            label: 'Import'|trans
+                        },
+                        {
+                            label: 'View Import'|trans
+                        }
+                    ]
+                )
+            }}
         </div>
     </div>
 
@@ -203,7 +210,7 @@
                 </a>
             {% endif %}
             <a class="btn btn-outline-primary"
-                href="{{ path('import_index') }}"
+                href="{{ path('app_import_index') }}"
                 role="button">
                 {{ 'import.link.back'|trans }}
             </a>
