@@ -1,0 +1,248 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'Hospitals'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_settings'),
+                            label: 'Settings'|trans
+                        },
+                        {
+                            label: 'Hospitals'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            {{ include('settings/_settings_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <h1>
+                {{ 'Hospitals'|trans }}
+            </h1>
+
+            <p>
+                {{
+                    'Showing count Hospitals'|trans({
+                        '%perPage%': perPage,
+                        '%count%': hospitals.count
+                    })
+                }}
+            </p>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <a data-toggle="collapse"
+                        href="#collapse-example"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapse-example"
+                        aria-expanded="false"
+                        class="collapsible d-block">
+                        <i class="bi bi-chevron-bar-down float-end collapsed">
+
+                        </i>
+                        {{ 'Filters'|trans({}, 'forms') }}
+                    </a>
+                </div>
+                <div id="collapse-example"
+                    class="collapse"
+                    aria-labelledby="heading-example">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Search
+                        </h5>
+                        <form>
+                            <div class="input-group mb-3">
+                                {% if filters.search %}
+                                    <input type="text"
+                                        name="search"
+                                        class="form-control"
+                                        placeholder="{{ filters.search }}"
+                                        aria-label="Search" />
+                                {% else %}
+                                    <input type="text"
+                                        name="search"
+                                        class="form-control"
+                                        placeholder="Search..."
+                                        aria-label="Search" />
+                                {% endif %}
+                                <button type="submit"
+                                    class="btn btn-outline-secondary">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            {% if filters.search %}
+                <div class="alert alert-info" role="alert">
+                    {{ 'Searching for'|trans }}: "<i>{{ search }}</i>" | <a href="{{
+                        path(
+                            'app_settings_hospital_index',
+                            app.request.query.all|merge({
+                                search: '',
+                                offset: '0'
+                            })
+                        )
+                        }}">
+                        {{ 'Click here to end search'|trans }}
+                    </a>
+                </div>
+            {% endif %}
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            {{ 'Id'|trans({}, 'forms') }}
+                        </th>
+                        <th>
+                            {{ 'Name'|trans({}, 'forms') }}
+                        </th>
+                        <th>
+                            {{ 'Owner'|trans({}, 'forms') }}
+                        </th>
+                        <th>
+                            {{ 'Actions'|trans({}, 'forms') }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for hospital in hospitals %}
+                        <tr>
+                            <td>
+                                {{ hospital.id }}
+                            </td>
+                            <td>
+                                <a href="{{
+                                    path(
+                                        'app_settings_hospital_show',
+                                        {
+                                            id: hospital.id
+                                        }
+                                    )
+                                    }}">
+                                    {{ hospital.name }}
+                                </a>
+                            </td>
+                            <td>
+                                {% if hospital.owner %}
+                                    <a href="{{
+                                        path(
+                                            'app_settings_user_show',
+                                            {
+                                                id: hospital.owner.id
+                                            }
+                                        )
+                                        }}">
+                                        {{ hospital.owner }}
+                                    </a>
+                                {% else %}
+                                    {{ 'Hospital has no Onwer'|trans }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-primary"
+                                    href="{{
+                                    path(
+                                        'app_settings_hospital_edit',
+                                        {
+                                            id: hospital.id
+                                        }
+                                    )
+                                    }}">
+                                    {{ 'Edit'|trans({}, 'forms') }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">
+                                {{ 'No Hospitals found'|trans({}, 'forms') }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% if (hospitals|length) > 0 %}
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        {% if previous >= 0 %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="{{
+                                    path(
+                                        'app_settings_hospital_index',
+                                        app.request.query.all|merge({
+                                            offset: previous
+                                        })
+                                    )
+                                    }}">
+                                    Previous
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link"
+                                    href="#"
+                                    tabindex="-1"
+                                    aria-disabled="true">
+                                    Previous
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if next < (hospitals|length) %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="{{
+                                    path(
+                                        'app_settings_domain_index',
+                                        app.request.query.all|merge({
+                                            offset: next
+                                        })
+                                    )
+                                    }}">
+                                    Next
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link"
+                                    href="#"
+                                    tabindex="-1"
+                                    aria-disabled="true">
+                                    Next
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+
+            <a class="btn btn-primary"
+                href="{{ path('app_settings_hospital_new') }}">
+                {{ 'Create new Hospital'|trans({}, 'forms') }}
+            </a>
+        </div>
+    </div>
+{% endblock %}
