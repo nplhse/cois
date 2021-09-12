@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
 {% block title %}
     {{ hospital.name }} - {{ parent() }}
 {% endblock %}
@@ -7,23 +9,23 @@
 {% block body %}
     <div class="row">
         <div class="col">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="{{ path('app_dashboard') }}">
-                            {{ 'Home'|trans }}
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="{{ path('app_hospital_index') }}">
-                            {{ 'Hospitals'|trans }}
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                        {{ hospital.name }}
-                    </li>
-                </ol>
-            </nav>
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_hospital_index'),
+                            label: 'Hospitals'|trans
+                        },
+                        {
+                            label: hospital.name
+                        }
+                    ]
+                )
+            }}
         </div>
     </div>
     <div class="row">
@@ -44,10 +46,13 @@
                         <p>
                             {{ hospital.address|nl2br }}
                         </p>
-
-                        <h5 class="card-title">
-                            {{ 'Hospital location'|trans }}
-                        </h5>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-header">
+                        {{ 'Hospital location'|trans }}
+                    </div>
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-6">
                                 <h6 class="card-subtitle text-muted">
@@ -272,7 +277,7 @@
                         )
                         }}"
                         role="button">
-                        {{ 'Edit hospitals'|trans }}
+                        {{ 'Edit hospital'|trans }}
                     </a>
                 {% endif %}
                 <a class="btn btn-outline-secondary"

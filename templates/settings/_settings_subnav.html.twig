@@ -1,5 +1,5 @@
 <h3>
-    Account
+    {{ 'Account'|trans }}
 </h3>
 <ul class="list-group mb-3">
     {% if
@@ -54,6 +54,6 @@
 
 {% if is_granted('ROLE_ADMIN') %}
     <h3>
-        Administration
+        {{ 'Administration'|trans }}
     </h3>
 {% endif %}

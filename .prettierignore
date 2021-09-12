@@ -13,3 +13,6 @@ composer.lock
 package.json
 symfony.lock
 yarn.lock
+
+# Ignore Twig Macros
+/templates/_elements/macro/

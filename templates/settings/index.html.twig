@@ -1,13 +1,30 @@
 {% extends 'base.html.twig' %}
 
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
 {% block title %}
     {{ 'Settings'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
     <div class="row">
-        <div class="col-3">
-            {{ include('settings/_settings_subnav.html.twig') }}
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_settings'),
+                            label: 'Settings'|trans
+                        }
+                    ]
+                )
+            }}
         </div>
     </div>
+
+    {{ include('settings/_settings_subnav.html.twig') }}
 {% endblock %}

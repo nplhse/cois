@@ -1,30 +1,36 @@
 {% extends 'base.html.twig' %}
 
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
 {% block title %}
-    {{ 'Edit hospitals'|trans }} - {{ parent() }}
+    {{ 'Edit hospital'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
     <div class="row">
         <div class="col">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="{{ path('app_dashboard') }}">Home</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="{{ path('app_hospital_index') }}">Hospitals</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                        Edit hospital
-                    </li>
-                </ol>
-            </nav>
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_hospital_index'),
+                            label: 'Hospitals'|trans
+                        },
+                        {
+                            label: 'Edit hospital'|trans
+                        }
+                    ]
+                )
+            }}
         </div>
     </div>
     <div class="row">
         <h1>
-            {{ 'Edit hospitals'|trans }}
+            {{ 'Edit hospital'|trans }}
         </h1>
 
         {{ form_start(form) }}
@@ -32,13 +38,19 @@
         <div>
             <div class="card mb-3">
                 <div class="card-header">
-                    {{ 'hospitals.basics.title'|trans }}
+                    {{ 'Basic information'|trans }}
                 </div>
                 <div class="card-body">
                     {{ form_row(form.name) }}
 
                     {{ form_row(form.address) }}
-
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-header">
+                    {{ 'Hospital location'|trans }}
+                </div>
+                <div class="card-body">
                     {{ form_row(form.dispatchArea) }}
 
                     {{ form_row(form.supplyArea) }}
@@ -49,7 +61,7 @@
 
             <div class="card mb-3">
                 <div class="card-header">
-                    {{ 'hospitals.size.title'|trans }}
+                    {{ 'Hospital size'|trans }}
                 </div>
                 <div class="card-body">
                     {{ form_row(form.size) }}

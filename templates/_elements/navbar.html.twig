@@ -146,21 +146,16 @@
                                 {% endif %}
                                 <ul class="dropdown-menu"
                                     aria-labelledby="navbarDropdown">
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                        <li>
-                                            <a class="dropdown-item"
-                                                href="{{ path('admin') }}">
-                                                <i class="bi-gear-fill"></i>
-                                                {{ 'link.backend'|trans }}
-                                            </a>
-                                        </li>
-                                    {% endif %}
                                     {% if is_granted('ROLE_USER') %}
                                         <li>
                                             <a class="dropdown-item"
-                                                href="{{ path('account') }}">
+                                                href="{{
+                                                path(
+                                                    'app_settings_profile'
+                                                )
+                                                }}">
                                                 <i class="bi-person-circle"></i>
-                                                {{ 'link.account'|trans }}
+                                                {{ 'Edit your profile'|trans }}
                                             </a>
                                         </li>
                                         <li>
