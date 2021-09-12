@@ -61,7 +61,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToOne(targetEntity=Hospital::class, mappedBy="owner", cascade={"persist", "remove"})
      */
-    private Hospital $hospital;
+    private ?Hospital $hospital = null;
 
     /**
      * @ORM\Column(type="boolean")

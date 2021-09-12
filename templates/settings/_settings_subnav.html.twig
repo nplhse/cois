@@ -56,4 +56,24 @@
     <h3>
         {{ 'Administration'|trans }}
     </h3>
+    <ul class="list-group">
+        {% if
+            app.request.attributes.get('_route')
+                starts with 'app_settings_user' %}
+            <li class="list-group-item active">
+                <i class="bi bi-people-fill"></i>
+                <a class="text-light"
+                    href="{{ path('app_settings_user_index') }}">
+                    {{ 'Users'|trans }}
+                </a>
+            </li>
+        {% else %}
+            <li class="list-group-item">
+                <i class="bi bi-people"></i>
+                <a href="{{ path('app_settings_user_index') }}">
+                    {{ 'Users'|trans }}
+                </a>
+            </li>
+        {% endif %}
+    </ul>
 {% endif %}

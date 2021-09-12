@@ -889,7 +889,7 @@
         <source>Edit hospitals</source>
         <target>Klinik bearbeiten</target>
       </trans-unit>
-      <trans-unit id="6E896yI" resname="View hospital">
+      <trans-unit id="SqtMwrv" resname="View hospital">
         <source>View hospital</source>
         <target>Klinik ansehen</target>
       </trans-unit>
@@ -1052,6 +1052,74 @@
       <trans-unit id="XrVi6Dj" resname="dashboard.hospitals.button_view">
         <source>dashboard.hospitals.button_view</source>
         <target>Kliniken ansehen</target>
+      </trans-unit>
+      <trans-unit id="6KiDUxl" resname="Edit User">
+        <source>Edit User</source>
+        <target>Benutzer bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="awzJBNC" resname="Users">
+        <source>Users</source>
+        <target>Benutzer</target>
+      </trans-unit>
+      <trans-unit id="gFMuwLY" resname="Create User">
+        <source>Create User</source>
+        <target>Benutzer erstellen</target>
+      </trans-unit>
+      <trans-unit id="g36VwXo" resname="Create new User">
+        <source>Create new User</source>
+        <target>Neuen Benutzer erstellen</target>
+      </trans-unit>
+      <trans-unit id="rBfIncv" resname="Showing count Users">
+        <source>Showing count Users</source>
+        <target>Zeige %count% Benutzer an, mit %perPage% pro Seite.</target>
+      </trans-unit>
+      <trans-unit id="Fe2um2j" resname="View User">
+        <source>View User</source>
+        <target>Benutzer ansehen</target>
+      </trans-unit>
+      <trans-unit id="j15AHHx" resname="No hospital linked to User">
+        <source>No hospital linked to User</source>
+        <target>Mit diesem Benutzer ist keine Klinik verknüpft.</target>
+      </trans-unit>
+      <trans-unit id="4yjyX51" resname="Credentials are Expired">
+        <source>Credentials are Expired</source>
+        <target>Password ist abgelaufen</target>
+      </trans-unit>
+      <trans-unit id="knggpLb" resname="Credentials are valid">
+        <source>Credentials are valid</source>
+        <target>Passwort ist gültig</target>
+      </trans-unit>
+      <trans-unit id="lBxFlZl" resname="User is verified">
+        <source>User is verified</source>
+        <target>Benutzer ist verifiziert</target>
+      </trans-unit>
+      <trans-unit id="WQQn7rZ" resname="User is not verified">
+        <source>User is not verified</source>
+        <target>Benutzer ist nicht verifiziert</target>
+      </trans-unit>
+      <trans-unit id="UxLJPrc" resname="User is participant">
+        <source>User is participant</source>
+        <target>Benutzer ist Teilnehmer</target>
+      </trans-unit>
+      <trans-unit id="3CQwdTX" resname="User no participant">
+        <source>User no participant</source>
+        <target>Benutzer ist kein Teilnehmer</target>
+      </trans-unit>
+      <trans-unit id="fhsNVkH" resname="Account">
+        <source>Account</source>
+        <target>Eigenes Konto</target>
+      </trans-unit>
+      <trans-unit id="S0LGaQ6" resname="Administration">
+        <source>Administration</source>
+        <target>Administration</target>
+      </trans-unit>
+      <trans-unit id="wm7i.0i" resname="Edit hospital">
+        <source>Edit hospital</source>
+        <target>Klinik bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="m1yvpiK" resname="Edit your profile">
+        <source>Edit your profile</source>
+        <target>Profil bearbeiten</target>
       </trans-unit>
     </body>
   </file>

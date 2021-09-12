@@ -123,7 +123,7 @@ class ResetPasswordController extends AbstractController
 
             $this->addFlash('success', 'Your password has been changed successfully.');
 
-            return $this->redirectToRoute('default');
+            return $this->redirectToRoute('app_default');
         }
 
         return $this->render('security/reset_password/reset.html.twig', [
@@ -163,7 +163,7 @@ class ResetPasswordController extends AbstractController
 
             $this->addFlash('success', 'Your password has been changed successfully.');
 
-            return $this->redirectToRoute('default');
+            return $this->redirectToRoute('app_dashboard');
         }
 
         return $this->render('security/reset_password/reset.html.twig', [

@@ -1,0 +1,181 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'View User'|trans }}: {{ user.username }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_settings'),
+                            label: 'Settings'|trans
+                        },
+                        {
+                            url: url('app_settings_user_index'),
+                            label: 'Users'|trans
+                        },
+                        {
+                            label: 'View User'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            {{ include('settings/_settings_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <div class="float-end">
+                {{ include('settings/user/_delete_form.html.twig') }}
+            </div>
+
+            <h1>
+                {{ 'View User'|trans }}
+            </h1>
+
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th>
+                            {{ 'Id'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            {{ user.id }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Username'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            {{ user.username }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Email'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            {{ user.email }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Roles'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            {% for role in user.roles|sort %}
+                                {% if role == 'ROLE_ADMIN' %}
+                                    <span class="badge bg-primary">
+                                        {{ 'Administrator'|trans({}, 'forms') }}
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-secondary">
+                                        {{ 'User'|trans({}, 'forms') }}
+                                    </span>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Hospital'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            {% if user.hospital %}
+                                <span class="badge bg-info">
+                                    {{ user.hospital }}
+                                </span>
+                            {% else %}
+                                <p>
+                                    {{ 'No hospital linked to User'|trans }}
+                                </p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Status'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            <ul>
+                                {% if user.isCredentialsExpired %}
+                                    <li>
+                                        <span class="badge bg-danger">
+                                            {{
+                                                'Credentials are Expired'|trans
+                                            }}
+                                        </span>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <span class="badge bg-success">
+                                            {{ 'Credentials are valid'|trans }}
+                                        </span>
+                                    </li>
+                                {% endif %}
+                                {% if user.isVerified %}
+                                    <li>
+                                        <span class="badge bg-success">
+                                            {{ 'User is verified'|trans }}
+                                        </span>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <span class="badge bg-danger">
+                                            {{ 'User is not verified'|trans }}
+                                        </span>
+                                    </li>
+                                {% endif %}
+                                {% if user.isParticipant %}
+                                    <li>
+                                        <span class="badge bg-success">
+                                            {{ 'User is participant'|trans }}
+                                        </span>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <span class="badge bg-danger">
+                                            {{ 'User no participant'|trans }}
+                                        </span>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a class="btn btn-primary"
+                    href="{{
+                    path(
+                        'app_settings_user_edit',
+                        {
+                            id: user.id
+                        }
+                    )
+                    }}">
+                    {{ 'Edit User'|trans({}, 'forms') }}
+                </a>
+                <a class="btn btn-outline-secondary"
+                    href="{{ path('app_settings_user_index') }}">
+                    {{ 'Back to list'|trans({}, 'forms') }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
