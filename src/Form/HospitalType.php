@@ -32,12 +32,19 @@ class HospitalType extends AbstractType
             ])
             ->add('beds')
         ;
+
+        if ($options['backend']) {
+            $builder
+                ->add('owner')
+                ;
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Hospital::class,
+            'backend' => false,
         ]);
     }
 }

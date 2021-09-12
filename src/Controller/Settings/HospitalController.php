@@ -44,7 +44,7 @@ class HospitalController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         $hospital = new Hospital();
-        $form = $this->createForm(HospitalType::class, $hospital);
+        $form = $this->createForm(HospitalType::class, $hospital, ['backend' => true]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -76,7 +76,7 @@ class HospitalController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $form = $this->createForm(HospitalType::class, $hospital);
+        $form = $this->createForm(HospitalType::class, $hospital, ['backend' => true]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
