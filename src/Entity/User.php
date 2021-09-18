@@ -254,8 +254,6 @@ class User implements UserInterface
     public function canImport(): bool
     {
         if ($this->hospital) {
-            dump($this->hospital);
-
             return true;
         }
 
