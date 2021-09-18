@@ -17,6 +17,10 @@ class DashboardController extends AbstractController
     {
         $user = $this->getUser();
 
+        if (null === $user) {
+            return $this->redirectToRoute('app_default');
+        }
+
         return $this->render('dashboard/index.html.twig', [
             'allocations' => $allocationRepository->countAllocations(),
             'hospitals' => $hospitalRepository->countHospitals(),

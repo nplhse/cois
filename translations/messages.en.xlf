@@ -912,7 +912,7 @@
       </trans-unit>
       <trans-unit id="cDvbj_8" resname="Showing count Hospitals">
         <source>Showing count Hospitals</source>
-        <target>Showing %count% Snippets, with %perPage% items per Page.</target>
+        <target>Showing %count% Hospitals, with %perPage% items per Page.</target>
       </trans-unit>
       <trans-unit id="jYMUtzW" resname="Searching for">
         <source>Searching for</source>
