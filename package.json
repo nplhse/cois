@@ -25,7 +25,7 @@
         "postcss-loader": "^6.1.1",
         "prettier": "^2.3.2",
         "prettier-plugin-twig-melody": "^0.4.6",
-        "regenerator-runtime": "^0.13.2",
+        "regenerator-runtime": "^0.13.9",
         "sass-loader": "^12.1.0",
         "stimulus": "^2.0.0",
         "vue-eslint-parser": "^7.6.0",
