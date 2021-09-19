@@ -56,153 +56,164 @@
                 </div>
             {% endif %}
 
-            {% for hospital in hospitals %}
-                <div class="card mb-3">
-                    <div class="card-header"></div>
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="{{
-                                path(
-                                    'app_hospital_show',
-                                    {
-                                        id: hospital.id
-                                    }
-                                )
-                                }}">
-                                {{ hospital.name }}
-                            </a>
-                        </h5>
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            {{ hospital.owner }}
-                        </h6>
+            {% for row in hospitals|batch(2, null) %}
+                <div class="row">
+                    {% for hospital in row %}
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-header"></div>
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a href="{{
+                                            path(
+                                                'app_hospital_show',
+                                                {
+                                                    id: hospital.id
+                                                }
+                                            )
+                                            }}">
+                                            {{ hospital.name }}
+                                        </a>
+                                    </h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">
+                                        {{ hospital.owner }}
+                                    </h6>
 
-                        <p class="m-0">
-                            {% if hospital.supplyArea %}
-                                <span class="badge bg-primary">
-                                    <i class="bi bi-collection"></i>
-                                    <a class="link-light"
-                                        href="{{
-                                        path(
-                                            'app_hospital_index',
-                                            app.request.query.all|merge({
-                                                supplyArea: hospital.supplyArea,
-                                                offset: '0'
-                                            })
-                                        )
-                                        }}">
-                                        {{ hospital.supplyArea }}
-                                    </a>
-                                </span>
-                            {% endif %}
+                                    <p class="m-0">
+                                        {% if hospital.supplyArea %}
+                                            <span class="badge bg-primary">
+                                                <i class="bi bi-collection"></i>
+                                                <a class="link-light"
+                                                    href="{{
+                                                    path(
+                                                        'app_hospital_index',
+                                                        app.request.query.all|merge({
+                                                            supplyArea: hospital.supplyArea,
+                                                            offset: '0'
+                                                        })
+                                                    )
+                                                    }}">
+                                                    {{ hospital.supplyArea }}
+                                                </a>
+                                            </span>
+                                        {% endif %}
 
-                            {% if hospital.dispatchArea %}
-                                <span class="badge bg-primary">
-                                    <i class="bi bi-collection"></i>
-                                    <a class="link-light"
-                                        href="{{
-                                        path(
-                                            'app_hospital_index',
-                                            app.request.query.all|merge({
-                                                dispatchArea: hospital.dispatchArea,
-                                                offset: '0'
-                                            })
-                                        )
-                                        }}">
-                                        {{ hospital.dispatchArea }}
-                                    </a>
-                                </span>
-                            {% endif %}
+                                        {% if hospital.dispatchArea %}
+                                            <span class="badge bg-primary">
+                                                <i class="bi bi-collection"></i>
+                                                <a class="link-light"
+                                                    href="{{
+                                                    path(
+                                                        'app_hospital_index',
+                                                        app.request.query.all|merge({
+                                                            dispatchArea: hospital.dispatchArea,
+                                                            offset: '0'
+                                                        })
+                                                    )
+                                                    }}">
+                                                    {{ hospital.dispatchArea }}
+                                                </a>
+                                            </span>
+                                        {% endif %}
 
-                            {% if hospital.location == 'rural' %}
-                                <span class="badge bg-info">
-                                    <i class="bi bi-collection"></i>
-                                    <a class="link-light"
-                                        href="{{
-                                        path(
-                                            'app_hospital_index',
-                                            app.request.query.all|merge({
-                                                location: 'rural',
-                                                offset: '0'
-                                            })
-                                        )
-                                        }}">
-                                        {{ 'Rural'|trans }}
-                                    </a>
-                                </span>
-                            {% elseif hospital.location == 'urban' %}
-                                <span class="badge bg-info">
-                                    <i class="bi bi-collection"></i>
-                                    <a class="link-light"
-                                        href="{{
-                                        path(
-                                            'app_hospital_index',
-                                            app.request.query.all|merge({
-                                                location: 'urban',
-                                                offset: '0'
-                                            })
-                                        )
-                                        }}">
-                                        {{ 'Urban'|trans }}
-                                    </a>
-                                </span>
-                            {% endif %}
+                                        {% if hospital.location == 'rural' %}
+                                            <span class="badge bg-info">
+                                                <i class="bi bi-collection"></i>
+                                                <a class="link-light"
+                                                    href="{{
+                                                    path(
+                                                        'app_hospital_index',
+                                                        app.request.query.all|merge({
+                                                            location: 'rural',
+                                                            offset: '0'
+                                                        })
+                                                    )
+                                                    }}">
+                                                    {{ 'Rural'|trans }}
+                                                </a>
+                                            </span>
+                                        {% elseif
+                                            hospital.location == 'urban' %}
+                                            <span class="badge bg-info">
+                                                <i class="bi bi-collection"></i>
+                                                <a class="link-light"
+                                                    href="{{
+                                                    path(
+                                                        'app_hospital_index',
+                                                        app.request.query.all|merge({
+                                                            location: 'urban',
+                                                            offset: '0'
+                                                        })
+                                                    )
+                                                    }}">
+                                                    {{ 'Urban'|trans }}
+                                                </a>
+                                            </span>
+                                        {% endif %}
 
-                            {% if hospital.size == 'small' %}
-                                <span class="badge bg-success">
-                                    <i class="bi bi-collection"></i>
-                                    <a class="link-light"
-                                        href="{{
-                                        path(
-                                            'app_hospital_index',
-                                            app.request.query.all|merge({
-                                                size: 'small',
-                                                offset: '0'
-                                            })
-                                        )
-                                        }}">
-                                        {{ 'Small'|trans }} ({{ hospital.beds }}
-                                        {{ 'Beds'|trans }})
-                                    </a>
-                                </span>
-                            {% elseif hospital.size == 'medium' %}
-                                <span class="badge bg-success">
-                                    <i class="bi bi-collection"></i>
-                                    <a class="link-light"
-                                        href="{{
-                                        path(
-                                            'app_hospital_index',
-                                            app.request.query.all|merge({
-                                                size: 'medium',
-                                                offset: '0'
-                                            })
-                                        )
-                                        }}">
-                                        {{ 'Medium'|trans }} ({{
-                                            hospital.beds
-                                        }}
-                                        {{ 'Beds'|trans }})
-                                    </a>
-                                </span>
-                            {% elseif hospital.size == 'large' %}
-                                <span class="badge bg-success">
-                                    <i class="bi bi-collection"></i>
-                                    <a class="link-light"
-                                        href="{{
-                                        path(
-                                            'app_hospital_index',
-                                            app.request.query.all|merge({
-                                                size: 'large',
-                                                offset: '0'
-                                            })
-                                        )
-                                        }}">
-                                        {{ 'Large'|trans }} ({{ hospital.beds }}
-                                        {{ 'Beds'|trans }})
-                                    </a>
-                                </span>
-                            {% endif %}
-                        </p>
-                    </div>
+                                        {% if hospital.size == 'small' %}
+                                            <span class="badge bg-success">
+                                                <i class="bi bi-collection"></i>
+                                                <a class="link-light"
+                                                    href="{{
+                                                    path(
+                                                        'app_hospital_index',
+                                                        app.request.query.all|merge({
+                                                            size: 'small',
+                                                            offset: '0'
+                                                        })
+                                                    )
+                                                    }}">
+                                                    {{ 'Small'|trans }} ({{
+                                                        hospital.beds
+                                                    }}
+                                                    {{ 'Beds'|trans }})
+                                                </a>
+                                            </span>
+                                        {% elseif hospital.size == 'medium' %}
+                                            <span class="badge bg-success">
+                                                <i class="bi bi-collection"></i>
+                                                <a class="link-light"
+                                                    href="{{
+                                                    path(
+                                                        'app_hospital_index',
+                                                        app.request.query.all|merge({
+                                                            size: 'medium',
+                                                            offset: '0'
+                                                        })
+                                                    )
+                                                    }}">
+                                                    {{ 'Medium'|trans }} ({{
+                                                        hospital.beds
+                                                    }}
+                                                    {{ 'Beds'|trans }})
+                                                </a>
+                                            </span>
+                                        {% elseif hospital.size == 'large' %}
+                                            <span class="badge bg-success">
+                                                <i class="bi bi-collection"></i>
+                                                <a class="link-light"
+                                                    href="{{
+                                                    path(
+                                                        'app_hospital_index',
+                                                        app.request.query.all|merge({
+                                                            size: 'large',
+                                                            offset: '0'
+                                                        })
+                                                    )
+                                                    }}">
+                                                    {{ 'Large'|trans }} ({{
+                                                        hospital.beds
+                                                    }}
+                                                    {{ 'Beds'|trans }})
+                                                </a>
+                                            </span>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             {% else %}
                 <p class="text-center">

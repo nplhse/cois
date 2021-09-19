@@ -16,7 +16,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class HospitalRepository extends ServiceEntityRepository
 {
-    public const PAGINATOR_PER_PAGE = 5;
+    public const PAGINATOR_PER_PAGE = 10;
 
     public function __construct(ManagerRegistry $registry)
     {
