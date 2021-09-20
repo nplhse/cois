@@ -2,7 +2,7 @@
     "devDependencies": {
         "@babel/core": "^7.15.5",
         "@babel/eslint-parser": "^7.15.0",
-        "@babel/preset-env": "^7.14.5",
+        "@babel/preset-env": "^7.15.6",
         "@popperjs/core": "^2.10.1",
         "@symfony/stimulus-bridge": "^2.1.0",
         "@symfony/ux-chartjs": "file:vendor/symfony/ux-chartjs/Resources/assets",
