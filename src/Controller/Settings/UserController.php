@@ -109,7 +109,9 @@ class UserController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        $CsrfToken = $request->request->get('_token');
+
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $CsrfToken)) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();

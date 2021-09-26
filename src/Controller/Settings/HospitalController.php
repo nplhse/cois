@@ -96,7 +96,9 @@ class HospitalController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        if ($this->isCsrfTokenValid('delete'.$hospital->getId(), $request->request->get('_token'))) {
+        $CsrfToken = $request->request->get('_token');
+
+        if ($this->isCsrfTokenValid('delete'.$hospital->getId(), $CsrfToken)) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($hospital);
             $entityManager->flush();

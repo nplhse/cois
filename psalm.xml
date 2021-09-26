@@ -31,5 +31,10 @@
                 <directory name="src/Repository" />
             </errorLevel>
         </MethodSignatureMismatch>
+        <InvalidScalarArgument>
+            <errorLevel type="suppress">
+                <directory name="src/Controller/Settings/" />
+            </errorLevel>
+        </InvalidScalarArgument>
     </issueHandlers>
 </psalm>
