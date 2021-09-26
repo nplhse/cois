@@ -26,5 +26,96 @@
         </div>
     </div>
 
-    {{ include('settings/_settings_subnav.html.twig') }}
+    <div class="row">
+        <div class="col-sm-12 col-md-3">
+            {{ include('settings/_settings_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <div class="row">
+                <h1>
+                    {{ 'Account'|trans }}
+                </h1>
+
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <a href="{{ path('app_settings_email') }}">
+                                <i class="bi bi-mailbox"
+                                    style="font-size: 5rem; color: cornflowerblue;">
+
+                                </i><br />
+                                {{ 'E-Mail'|trans }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <a href="{{ path('app_settings_profile') }}">
+                                <i class="bi bi-people"
+                                    style="font-size: 5rem; color: cornflowerblue;">
+
+                                </i><br />
+
+                                {{ 'Profile'|trans }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <a href="{{ path('app_settings_password') }}">
+                                <i class="bi bi-shield-lock"
+                                    style="font-size: 5rem; color: cornflowerblue;">
+
+                                </i><br />
+                                {{ 'Password'|trans }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="row mt-4">
+                    <h1>
+                        {{ 'Administration'|trans }}
+                    </h1>
+
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <a href="{{ path('app_settings_user_index') }}">
+                                    <i class="bi bi-people"
+                                        style="font-size: 5rem; color: cornflowerblue;">
+
+                                    </i><br />
+                                    {{ 'Users'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <a href="{{
+                                    path(
+                                        'app_settings_hospital_index'
+                                    )
+                                    }}">
+                                    <i class="bi bi-house"
+                                        style="font-size: 5rem; color: cornflowerblue;">
+
+                                    </i><br />
+                                    {{ 'Hospitals'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
