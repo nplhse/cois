@@ -266,7 +266,7 @@
             <div class="btn-group"
                 role="group"
                 aria-label="Basic outlined example">
-                {% if user_can_edit %}
+                {% if is_granted('edit', hospital) %}
                     <a class="btn btn-outline-primary"
                         href="{{
                         path(

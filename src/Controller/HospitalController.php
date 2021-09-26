@@ -78,6 +78,8 @@ class HospitalController extends AbstractController
      */
     public function edit(Hospital $hospital, Request $request, HospitalRepository $hospitalRepository): Response
     {
+        $this->denyAccessUnlessGranted('edit', $hospital);
+
         $form = $this->createForm(HospitalType::class, $hospital);
         $form->handleRequest($request);
 
