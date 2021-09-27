@@ -5,7 +5,6 @@ body {
     font-family: Helvetica, Arial, sans-serif;
 }
 h1 {
-    background-color: #264459;
     color: #ffffff;
     /*padding: 30px 0 50px 0;*/
     font-weight: normal;
@@ -16,7 +15,7 @@ hr {
     margin: 20px;
 }
 .welcome {
-    background-color: #264459;
+    background-color: #6b7280;
 }
 .bottom {
     background-color: #efefee;

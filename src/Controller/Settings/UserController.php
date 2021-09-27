@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserCreateType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,9 +21,12 @@ class UserController extends AbstractController
      */
     private $passwordHasher;
 
-    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    private MailerService $mailer;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher, MailerService $mailer)
     {
         $this->passwordHasher = $passwordHasher;
+        $this->mailer = $mailer;
     }
 
     #[Route('/', name: 'app_settings_user_index', methods: ['GET'])]
@@ -118,5 +122,17 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('app_settings_user_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/welcome', name: 'app_settings_user_welcome')]
+    public function sendWelcomeEmail(User $user): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $this->mailer->sendWelcomeEmail($user);
+
+        $this->addFlash('success', 'Welcome E-Mail was successfully sent to '.$user->getUsername().'.');
+
+        return $this->redirectToRoute('app_settings_user_show', ['id' => $user->getId()]);
     }
 }

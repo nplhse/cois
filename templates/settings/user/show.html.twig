@@ -171,6 +171,17 @@
                     }}">
                     {{ 'Edit User'|trans({}, 'forms') }}
                 </a>
+                <a class="btn btn-secondary"
+                    href="{{
+                    path(
+                        'app_settings_user_welcome',
+                        {
+                            id: user.id
+                        }
+                    )
+                    }}">
+                    {{ 'Send Welcome E-Mail'|trans({}, 'forms') }}
+                </a>
                 <a class="btn btn-outline-secondary"
                     href="{{ path('app_settings_user_index') }}">
                     {{ 'Back to list'|trans({}, 'forms') }}
