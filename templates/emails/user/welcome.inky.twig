@@ -1,0 +1,67 @@
+{% extends 'emails/base.inky.twig' %}
+
+{% block content %}
+    <row>
+        <columns>
+            <callout class="primary">
+                <h1>
+                    <center>
+                        {{
+                            'Nice to meet you %username%!'|trans(
+                                {
+                                    '%username%': user.username
+                                },
+                                'emails'
+                            )
+                        }}
+                    </center>
+                </h1>
+            </callout>
+        </columns>
+    </row>
+    <row>
+        <columns>
+            <p>
+                {{
+                    'Welcome to COIS - Collaborative IVENA statistics, we are looking forward to your participation in our project and can`t wait for your first data.'|trans(
+                        {},
+                        'emails'
+                    )
+                }}
+            </p>
+            <p>
+                {{
+                    'An account has been created for you with the username: %username%.'|trans(
+                        {
+                            '%username%': user.username
+                        },
+                        'emails'
+                    )
+                }}
+            </p>
+        </columns>
+    </row>
+    <row>
+        <columns>
+            <center>
+                <button href="{{ link }}">
+                    {{ 'Click here to login'|trans({}, 'emails') }}
+                </button>
+            </center>
+        </columns>
+    </row>
+    <row>
+        <columns>
+            <p>
+                {{
+                    'Your initial password should have already been submitted to you
+                by the administrator, you will have to change it immediately
+                after your first login.'|trans(
+                        {},
+                        'emails'
+                    )
+                }}
+            </p>
+        </columns>
+    </row>
+{% endblock %}

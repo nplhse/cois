@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
@@ -59,7 +60,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("verify", name="app_confirm_email")
      */
-    public function verifyUserEmail(Request $request, UserRepository $userRepository): Response
+    public function verifyUserEmail(Request $request, UserRepository $userRepository, TranslatorInterface $translator): Response
     {
         $user = $this->getUser();
 
@@ -68,14 +69,14 @@ class SecurityController extends AbstractController
 
             // Verify the user id exists and is not null
             if (null === $id) {
-                return $this->redirectToRoute('default');
+                return $this->redirectToRoute('app_dashboard');
             }
 
             $user = $userRepository->findOneBy(['id' => $id]);
 
             // Ensure the user exists in persistence
             if (null === $user) {
-                return $this->redirectToRoute('default');
+                return $this->redirectToRoute('app_dashboard');
             }
         }
 
@@ -88,13 +89,13 @@ class SecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
         } catch (VerifyEmailExceptionInterface $e) {
-            $this->addFlash('danger', 'Verification failed.');
+            $this->addFlash('danger', $translator->trans('Your E-Mail address could not be verified.'));
 
-            return $this->redirectToRoute('default');
+            return $this->redirectToRoute('app_dashboard');
         }
 
-        $this->addFlash('success', 'Your E-Mail address has been verified!');
+        $this->addFlash('success', $translator->trans('Your E-Mail address has been successfully verified.'));
 
-        return $this->redirectToRoute('default');
+        return $this->redirectToRoute('app_dashboard');
     }
 }

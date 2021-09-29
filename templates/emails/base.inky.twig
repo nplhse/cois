@@ -1,0 +1,47 @@
+{% apply inky_to_html|inline_css(
+    source('@styles/foundation-emails.css'),
+    source('@styles/email.css')
+)
+%}
+<container>
+    <row class="header">
+        <columns>
+            <center>
+                <a href="{{ url('app_dashboard') }}">
+                    {{ 'COIS - Collaborative IVENA statistics'|trans }}
+                </a>
+            </center>
+        </columns>
+    </row>
+    {% block content %}
+
+    {% endblock %}
+    <row class="footer">
+        <columns>
+            <p>
+                {{ 'Cheers,'|trans({}, 'emails') }}
+            </p>
+            <p>
+                {{ 'Your friendly COIS-Team.'|trans({}, 'emails') }}
+            </p>
+        </columns>
+    </row>
+    <row class="bottom">
+        <columns>
+            <center>
+                <spacer size="20"></spacer>
+                <div>
+                    <a href="{{ url('app_default') }}">
+                        {{
+                            'Sent from Collaborative IVENA statistics'|trans(
+                                {},
+                                'emails'
+                            )
+                        }}
+                    </a>
+                </div>
+            </center>
+        </columns>
+    </row>
+</container>
+{% endapply %}

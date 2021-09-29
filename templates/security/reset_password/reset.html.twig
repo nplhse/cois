@@ -5,16 +5,20 @@
 {% endblock %}
 
 {% block body %}
-    <h1>
-        {{ 'security.reset.title'|trans }}
-    </h1>
+    <div class="container">
+        <h1>
+            {{ 'Reset your password'|trans }}
+        </h1>
 
-    <p>
-        {{ 'security.reset.message'|trans }}
-    </p>
+        <p>
+            {{ 'security.reset.message'|trans }}
+        </p>
 
-    {{ form_start(resetForm) }}
-    {{ form_row(resetForm.plainPassword) }}
-    <button class="btn btn-primary">{{ 'security.reset.button'|trans }}</button>
-    {{ form_end(resetForm) }}
+        {{ form_start(resetForm) }}
+        {{ form_row(resetForm.plainPassword) }}
+        <button class="btn btn-primary">
+            {{ 'security.reset.button'|trans }}
+        </button>
+        {{ form_end(resetForm) }}
+    </div>
 {% endblock %}

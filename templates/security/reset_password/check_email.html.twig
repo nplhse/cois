@@ -5,19 +5,24 @@
 {% endblock %}
 
 {% block body %}
-    <p>
-        {{ 'security.requestResetSend.message'|trans }}
-        {{
-            resetToken.expirationMessageKey|trans(
-                resetToken.expirationMessageData,
-                'ResetPasswordBundle'
-            )
-        }}.
-    </p>
-    <p>
-        {{ 'security.requestResetSend.failure'|trans }}
-        <a href="{{ path('app_forgot_password_request') }}">
-            {{ 'security.requestResetSend.tryAgain'|trans }}
-        </a>.
-    </p>
+    <div class="container">
+        <h1>
+            {{ 'Reset your password'|trans }}
+        </h1>
+        <p>
+            {{ 'security.requestResetSend.message'|trans }}
+            {{
+                resetToken.expirationMessageKey|trans(
+                    resetToken.expirationMessageData,
+                    'ResetPasswordBundle'
+                )
+            }}.
+        </p>
+        <p>
+            {{ 'security.requestResetSend.failure'|trans }}
+            <a href="{{ path('app_forgot_password_request') }}">
+                {{ 'security.requestResetSend.tryAgain'|trans }}
+            </a>.
+        </p>
+    </div>
 {% endblock %}
