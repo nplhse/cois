@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Import;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -15,6 +16,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ImportRepository extends ServiceEntityRepository
 {
+    public const PAGINATOR_PER_PAGE = 10;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Import::class);
@@ -48,5 +51,24 @@ class ImportRepository extends ServiceEntityRepository
         }
 
         return $qb;
+    }
+
+    public function getAllImports(): array
+    {
+        return $this->findBy([], ['name' => 'ASC']);
+    }
+
+    public function getImportPaginator(int $offset, array $filter): Paginator
+    {
+        $query = $this->createQueryBuilder('i');
+
+        $query
+            ->orderBy('i.createdAt', 'ASC')
+            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setFirstResult($offset)
+            ->getQuery()
+        ;
+
+        return new Paginator($query);
     }
 }

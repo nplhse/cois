@@ -1,0 +1,217 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'View Import'|trans }}: {{ import.name }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_settings'),
+                            label: 'Settings'|trans
+                        },
+                        {
+                            url: url('app_settings_hospital_index'),
+                            label: 'Imports'|trans
+                        },
+                        {
+                            label: 'View Import'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            {{ include('settings/_settings_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <div class="float-end">
+                {{ include('settings/import/_delete_form.html.twig') }}
+            </div>
+
+            <h1>
+                {{ 'View Import'|trans }}
+            </h1>
+
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th>
+                            {{ 'Id'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            {{ import.id }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Name'|trans({}) }}
+                        </th>
+                        <td>
+                            {{ import.name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Created by'|trans({}) }}
+                        </th>
+                        <td>
+                            <a href="{{
+                                path(
+                                    'app_settings_user_show',
+                                    {
+                                        id: import.user.id
+                                    }
+                                )
+                                }}">
+                                {{ import.user.username }}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Status'|trans({}) }}
+                        </th>
+                        <td>
+                            {% if import.status == 'finished' %}
+                                <i class="bi bi-check-circle-fill text-success">
+
+                                </i>
+                            {% elseif import.status == 'pending' %}
+                                <div class="spinner-border text-secondary spinner-border-sm"
+                                    role="status">
+                                    <span class="visually-hidden">
+                                        {{ 'import.field.loading'|trans }}
+                                    </span>
+                                </div>
+                            {% elseif import.status == 'processing' %}
+                                <div class="spinner-border text-primary spinner-border-sm"
+                                    role="status">
+                                    <span class="visually-hidden">
+                                        {{ 'import.field.loading'|trans }}
+                                    </span>
+                                </div>
+                            {% elseif import.status == 'failed' %}
+                                <i class="bi bi-exclamation-circle-fill text-warning">
+
+                                </i>
+                            {% endif %}
+
+                            {{ import.status }}
+                        </td>
+                    </tr>
+                    {% if import.isFixture %}
+                        <tr class="table-warning">
+                            <th>
+                                {{ 'Is Fixture?'|trans }}
+                            </th>
+                            <td>
+                                <strong>
+                                    {{ 'Import is a Fixture'|trans }}
+                                </strong>
+                            </td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <th>
+                            {{ 'Errors'|trans }}
+                        </th>
+                        <td>
+                            {% if import.lastError %}
+                                {{ import.lastError }}
+                            {% else %}
+                                {{ 'No Errors'|trans }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Statistics'|trans }}
+                        </th>
+                        <td>
+                            <ul>
+                                <li>
+                                    {{ 'Item count'|trans }}: {{
+                                        import.itemCount
+                                    }}
+                                </li>
+                                <li>
+                                    {{ 'Duration'|trans }}: {{
+                                        import.duration|number_format(
+                                            5,
+                                            '.',
+                                            ','
+                                        )
+                                    }}s
+                                </li>
+                                <li>
+                                    {{ 'Times run'|trans }}: {{
+                                        import.timesRun
+                                    }}
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Import File'|trans }}
+                        </th>
+                        <td>
+                            {% if import.isFixture %}
+                                <p>
+                                    /{{ import.path }}{{ import.extension }} ({{
+                                        import.mimeType
+                                    }})
+                                </p>
+                            {% else %}
+                                <p>
+                                    <a href="{{
+                                        path(
+                                            'app_files_allocations',
+                                            {
+                                                id: import.id
+                                            }
+                                        )
+                                        }}">
+                                        /{{ import.path }}{{ import.extension }}
+                                    </a> ({{ import.mimeType }})
+                                </p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="btn-group" role="group">
+                <a class="btn btn-primary"
+                    href="{{
+                    path(
+                        'app_settings_import_edit',
+                        {
+                            id: import.id
+                        }
+                    )
+                    }}">
+                    Edit Import
+                </a>
+                <a class="btn btn-outline-secondary"
+                    href="{{ path('app_settings_import_index') }}">
+                    {{ 'Back to list'|trans({}, 'forms') }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

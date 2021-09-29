@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Import;
-use App\Form\ImportType;
+use App\Form\UploadType;
 use App\Message\ImportDataMessage;
 use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
@@ -38,7 +38,7 @@ class ImportController extends AbstractController
 
         $import = new Import();
 
-        $form = $this->createForm(ImportType::class);
+        $form = $this->createForm(UploadType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
