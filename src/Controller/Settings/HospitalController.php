@@ -48,6 +48,9 @@ class HospitalController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $hospital->setCreatedAt(new \DateTime('NOW'));
+            $hospital->setUpdatedAt(new \DateTime('NOW'));
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($hospital);
             $entityManager->flush();
