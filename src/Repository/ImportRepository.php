@@ -68,9 +68,9 @@ class ImportRepository extends ServiceEntityRepository
             ;
         }
 
-        if ($filter['hospital']) {
-            $query->andWhere('i.hospital = :hospital')
-                ->setParameter('hospital', $filter['hospital'])
+        if ($filter['user']) {
+            $query->andWhere('i.user = :user')
+                ->setParameter('user', $filter['user'])
             ;
         }
 

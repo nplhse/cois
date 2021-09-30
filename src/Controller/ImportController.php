@@ -37,7 +37,7 @@ class ImportController extends AbstractController
         }
 
         $filter = [];
-        $filter['hospital'] = $hospital->getId();
+        $filter['user'] = $this->getUser();
         $filter['search'] = $request->query->get('search');
 
         $offset = max(0, $request->query->getInt('offset', 0));
