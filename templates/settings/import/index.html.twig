@@ -85,7 +85,7 @@
                                         }
                                     )
                                     }}">
-                                    {{ import.name }}
+                                    {{ import.caption }}
                                 </a>
                             </td>
                             <td>
@@ -160,7 +160,7 @@
                                 <a class="page-link"
                                     href="{{
                                     path(
-                                        'app_settings_hospital_index',
+                                        'app_settings_import_index',
                                         app.request.query.all|merge({
                                             offset: previous
                                         })
@@ -184,7 +184,7 @@
                                 <a class="page-link"
                                     href="{{
                                     path(
-                                        'app_settings_hospital_index',
+                                        'app_settings_import_index',
                                         app.request.query.all|merge({
                                             offset: next
                                         })
