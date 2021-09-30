@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'Create new Import'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_import_index'),
+                            label: 'Import'|trans
+                        },
+                        {
+                            label: 'Create new Import'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+
+    <div class="row">
+        <h1>
+            {{ 'Create new Import'|trans }}
+        </h1>
+
+        <div class="col">
+            {{ form_start(form) }}
+
+            {{ form_widget(form) }}
+
+            <div class="btn-group" role="group">
+                <button class="btn btn-primary">
+                    {{ 'Import new Data'|trans({}, 'forms') }}
+                </button>
+                <a class="btn btn-outline-secondary"
+                    href="{{ path('app_import_index') }}">
+                    {{ 'Back to list'|trans({}, 'forms') }}
+                </a>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

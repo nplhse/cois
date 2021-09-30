@@ -62,6 +62,18 @@ class ImportRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('i');
 
+        if ($filter['search']) {
+            $query->where('i.caption LIKE :search')
+                ->setParameter('search', '%'.$filter['search'].'%')
+            ;
+        }
+
+        if ($filter['hospital']) {
+            $query->andWhere('i.hospital = :hospital')
+                ->setParameter('hospital', $filter['hospital'])
+            ;
+        }
+
         $query
             ->orderBy('i.createdAt', 'ASC')
             ->setMaxResults(self::PAGINATOR_PER_PAGE)

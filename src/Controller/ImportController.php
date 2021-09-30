@@ -36,6 +36,35 @@ class ImportController extends AbstractController
             return $this->redirectToRoute('allocation_index');
         }
 
+        $filter = [];
+        $filter['hospital'] = $hospital->getId();
+        $filter['search'] = $request->query->get('search');
+
+        $offset = max(0, $request->query->getInt('offset', 0));
+        $paginator = $importRepository->getImportPaginator($offset, $filter);
+
+        return $this->render('import/index.html.twig', [
+            'imports' => $paginator,
+            'perPage' => ImportRepository::PAGINATOR_PER_PAGE,
+            'previous' => $offset - ImportRepository::PAGINATOR_PER_PAGE,
+            'next' => min(count($paginator), $offset + ImportRepository::PAGINATOR_PER_PAGE),
+            'search' => $filter['search'],
+        ]);
+    }
+
+    /**
+     * @Route("/new", name="app_import_new")
+     */
+    public function new(Request $request, FileUploader $fileUploader, ImportRepository $importRepository, HospitalRepository $hospitalRepository): Response
+    {
+        $hospital = $hospitalRepository->findOneBy(['owner' => $this->getUser()->getId()]);
+
+        if (!$hospital) {
+            $this->addFlash('danger', 'You been redirected, because you have to be owner of a hospital in order to access this page.');
+
+            return $this->redirectToRoute('app_dashboard');
+        }
+
         $import = new Import();
         $user = $this->getUser();
 
@@ -70,13 +99,12 @@ class ImportController extends AbstractController
             $entityManager->flush();
 
             $this->dispatchMessage(new ImportDataMessage($import, $hospital));
+
+            $this->redirectToRoute('app_import_index');
         }
 
-        $imports = $importRepository->findByUser($this->getUser());
-
-        return $this->render('import/index.html.twig', [
+        return $this->render('import/new.html.twig', [
             'form' => $form->createView(),
-            'imports' => $imports,
         ]);
     }
 
@@ -94,7 +122,7 @@ class ImportController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/delete", name="app_import_delete", methods={"GET"})
+     * @Route("/{id}/delete", name="app_import_delete", methods={"POST"})
      */
     public function delete(Import $import, AllocationRepository $allocationRepository, EntityManagerInterface $em): Response
     {

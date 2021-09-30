@@ -109,7 +109,7 @@ class Hospital
     /**
      * @ORM\OneToMany(targetEntity=Import::class, mappedBy="hospital")
      */
-    private ArrayCollection $imports;
+    private Collection $imports;
 
     public function __construct()
     {
@@ -254,9 +254,6 @@ class Hospital
         return $this;
     }
 
-    /**
-     * @return Collection
-     */
     public function getImports(): Collection
     {
         return $this->imports;

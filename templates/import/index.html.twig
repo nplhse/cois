@@ -26,42 +26,91 @@
     </div>
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col">
             <h1>
-                {{ 'import.list.title'|trans }}
+                {{ 'Your Imports'|trans }}
             </h1>
+
+            {% if search %}
+                <div class="alert alert-info" role="alert">
+                    {{ 'Searching for'|trans }}: "<i>{{ search }}</i>" | <a href="{{
+                        path(
+                            'app_import_index',
+                            app.request.query.all|merge({
+                                search: '',
+                                offset: '0'
+                            })
+                        )
+                        }}">
+                        {{ 'Click here to end search'|trans }}
+                    </a>
+                </div>
+            {% endif %}
 
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">
-                            {{ 'import.fields.id'|trans }}
+                        <th>
+                            {{ 'Id'|trans({}, 'forms') }}
                         </th>
-                        <th scope="col">
-                            {{ 'import.fields.caption'|trans }}
+                        <th>
+                            {{ 'Name'|trans({}, 'forms') }}
                         </th>
-                        <th scope="col">
-                            {{ 'import.fields.date'|trans }}
+                        <th>
+                            {{ 'User'|trans({}, 'forms') }}
                         </th>
-                        <th scope="col">
-                            {{ 'import.fields.status'|trans }}
+                        <th>
+                            {{ 'Hospital'|trans({}, 'forms') }}
                         </th>
-                        <th scope="col"></th>
+                        <th>
+                            {{ 'Created at'|trans({}, 'forms') }}
+                        </th>
+                        <th>
+                            {{ 'Status'|trans({}, 'forms') }}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for import in imports %}
                         <tr>
-                            <td scope="col">
-                                #{{ import.id }}
+                            <td>
+                                {{ import.id }}
                             </td>
-                            <td scope="col">
+                            <td>
+                                <a href="{{
+                                    path(
+                                        'app_import_show',
+                                        {
+                                            id: import.id
+                                        }
+                                    )
+                                    }}">
+                                    {{ import.caption }}
+                                </a>
+                            </td>
+                            <td>
+                                {{ import.user.username }}
+                            </td>
+                            <td>
+                                {% if import.hospital %}
+                                    <a href="{{
+                                        path(
+                                            'app_hospital_show',
+                                            {
+                                                id: import.hospital.id
+                                            }
+                                        )
+                                        }}">
+                                        {{ import.hospital }}
+                                    </a>
+                                {% else %}
+                                    {{ 'Import has no Hospital'|trans }}
+                                {% endif %}
+                            </td>
+                            <td>
                                 {{ import.createdAt|date('d.m.Y H:i') }}
                             </td>
-                            <td scope="col">
-                                {{ import.caption }}
-                            </td>
-                            <td scope="col">
+                            <td>
                                 {% if import.status == 'finished' %}
                                     <i class="bi bi-check-circle-fill text-success">
 
@@ -86,32 +135,6 @@
                                     </i>
                                 {% endif %}
                             </td>
-                            <td scope="col">
-                                <a class="btn btn-primary"
-                                    href="{{
-                                    path(
-                                        'app_import_show',
-                                        {
-                                            id: import.id
-                                        }
-                                    )
-                                    }}"
-                                    role="button">
-                                    {{ 'import.button.view'|trans }}
-                                </a>
-                                <a class="btn btn-danger"
-                                    href="{{
-                                    path(
-                                        'app_import_delete',
-                                        {
-                                            id: import.id
-                                        }
-                                    )
-                                    }}"
-                                    role="button">
-                                    {{ 'import.button.delete'|trans }}
-                                </a>
-                            </td>
                         </tr>
                     {% else %}
                         <tr>
@@ -122,14 +145,98 @@
                     {% endfor %}
                 </tbody>
             </table>
+
+            {% if (imports|length) > 0 %}
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        {% if previous >= 0 %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="{{
+                                    path(
+                                        'app_import_index',
+                                        app.request.query.all|merge({
+                                            offset: previous
+                                        })
+                                    )
+                                    }}">
+                                    Previous
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link"
+                                    href="#"
+                                    tabindex="-1"
+                                    aria-disabled="true">
+                                    Previous
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if next < (imports|length) %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="{{
+                                    path(
+                                        'app_import_index',
+                                        app.request.query.all|merge({
+                                            offset: next
+                                        })
+                                    )
+                                    }}">
+                                    Next
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link"
+                                    href="#"
+                                    tabindex="-1"
+                                    aria-disabled="true">
+                                    Next
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
         </div>
-        <div class="col-md-4">
-            <div class="card mb-3">
+        <div class="col-3">
+            <p>
+                <a class="btn btn-primary" href="{{ path('app_import_new') }}">
+                    {{ 'Import new Data'|trans({}, 'forms') }}
+                </a>
+            </p>
+
+            <div class="card">
                 <div class="card-header">
-                    {{ 'import.new.title'|trans }}
+                    {{ 'Filters'|trans({}, 'forms') }}
                 </div>
                 <div class="card-body">
-                    {{ form(form) }}
+                    <h5 class="card-title">
+                        {{ 'Search'|trans }}
+                    </h5>
+                    <form>
+                        <div class="input-group mb-3">
+                            {% if search %}
+                                <input type="text"
+                                    name="search"
+                                    class="form-control"
+                                    placeholder="{{ search }}"
+                                    aria-label="{{ 'Search'|trans }}" />
+                            {% else %}
+                                <input type="text"
+                                    name="search"
+                                    class="form-control"
+                                    placeholder="{{ 'Search...'|trans }}"
+                                    aria-label="{{ 'Search'|trans }}" />
+                            {% endif %}
+                            <button type="submit"
+                                class="btn btn-outline-secondary">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
