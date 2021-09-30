@@ -182,6 +182,17 @@
                     }}">
                     {{ 'Send Welcome E-Mail'|trans({}, 'forms') }}
                 </a>
+                <a class="btn btn-secondary"
+                    href="{{
+                    path(
+                        'app_settings',
+                        app.request.query.all|merge({
+                            _switch_user: user.username
+                        })
+                    )
+                    }}">
+                    {{ 'Impersonate'|trans({}, 'forms') }}
+                </a>
                 <a class="btn btn-outline-secondary"
                     href="{{ path('app_settings_user_index') }}">
                     {{ 'Back to list'|trans({}, 'forms') }}
