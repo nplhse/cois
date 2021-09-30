@@ -104,6 +104,11 @@ class Import
      */
     private ?string $lastError;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Hospital::class, inversedBy="imports")
+     */
+    private ?Hospital $hospital;
+
     public function __construct()
     {
         $this->lastRun = new \DateTime('NOW');
@@ -320,6 +325,18 @@ class Import
     public function setLastError(?string $lastError): self
     {
         $this->lastError = $lastError;
+
+        return $this;
+    }
+
+    public function getHospital(): ?Hospital
+    {
+        return $this->hospital;
+    }
+
+    public function setHospital(?Hospital $hospital): self
+    {
+        $this->hospital = $hospital;
 
         return $this;
     }

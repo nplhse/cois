@@ -25,6 +25,7 @@ final class ImportDataMessageHandler implements MessageHandlerInterface
         // 1. Prepare
         $import = $message->getImport();
         $hospital = $message->getHospital();
+        $import->setHospital($hospital);
 
         if ($message->getCli()) {
             $path = 'var/storage/import/'.$import->getPath();

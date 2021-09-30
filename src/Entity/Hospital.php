@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\HospitalRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -103,6 +105,16 @@ class Hospital
      * @Groups({"hospital:read"})
      */
     private string $location;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Import::class, mappedBy="hospital")
+     */
+    private ArrayCollection $imports;
+
+    public function __construct()
+    {
+        $this->imports = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -238,6 +250,36 @@ class Hospital
     public function setLocation(string $location): self
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getImports(): Collection
+    {
+        return $this->imports;
+    }
+
+    public function addImport(Import $import): self
+    {
+        if (!$this->imports->contains($import)) {
+            $this->imports[] = $import;
+            $import->setHospital($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImport(Import $import): self
+    {
+        if ($this->imports->removeElement($import)) {
+            // set the owning side to null (unless already changed)
+            if ($import->getHospital() === $this) {
+                $import->setHospital(null);
+            }
+        }
 
         return $this;
     }

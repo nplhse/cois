@@ -39,6 +39,7 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
         $import->setMimeType('CSV');
         $import->setSize(1234);
         $import->setUser($this->getReference(UserFixtures::BASE_USER_REFERENCE));
+        $import->setHospital($hospital);
         $import->setIsFixture(true);
         $import->setCaption('Demo Import');
         $import->setContents('allocation');

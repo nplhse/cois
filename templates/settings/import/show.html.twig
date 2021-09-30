@@ -66,6 +66,27 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ 'Hospital'|trans({}) }}
+                        </th>
+                        <td>
+                            {% if import.hospital %}
+                                <a href="{{
+                                    path(
+                                        'app_settings_hospital_show',
+                                        {
+                                            id: import.hospital.id
+                                        }
+                                    )
+                                    }}">
+                                    {{ import.hospital }}
+                                </a>
+                            {% else %}
+                                {{ 'Import has no Hospital'|trans }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ 'Created by'|trans({}) }}
                         </th>
                         <td>

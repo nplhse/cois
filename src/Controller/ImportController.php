@@ -37,6 +37,7 @@ class ImportController extends AbstractController
         }
 
         $import = new Import();
+        $user = $this->getUser();
 
         $form = $this->createForm(UploadType::class);
         $form->handleRequest($request);
@@ -56,7 +57,12 @@ class ImportController extends AbstractController
             $import->setCreatedAt(new \DateTime('NOW'));
             $import->setIsFixture(false);
             $import->setFile(null);
-            $import->setUser($this->getUser());
+            $import->setUser($user);
+
+            if ($user->getHospital()) {
+                $import->setHospital($user->getHospital());
+            }
+
             $import->setStatus('pending');
 
             $entityManager = $this->getDoctrine()->getManager();

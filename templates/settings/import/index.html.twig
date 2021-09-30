@@ -60,6 +60,9 @@
                             {{ 'User'|trans({}, 'forms') }}
                         </th>
                         <th>
+                            {{ 'Hospital'|trans({}, 'forms') }}
+                        </th>
+                        <th>
                             {{ 'Created at'|trans({}, 'forms') }}
                         </th>
                         <th>
@@ -99,6 +102,22 @@
                                     }}">
                                     {{ import.user.username }}
                                 </a>
+                            </td>
+                            <td>
+                                {% if import.hospital %}
+                                    <a href="{{
+                                        path(
+                                            'app_settings_hospital_show',
+                                            {
+                                                id: import.hospital.id
+                                            }
+                                        )
+                                        }}">
+                                        {{ import.hospital }}
+                                    </a>
+                                {% else %}
+                                    {{ 'Import has no Hospital'|trans }}
+                                {% endif %}
                             </td>
                             <td>
                                 {{ import.createdAt|date('d.m.Y H:i') }}
