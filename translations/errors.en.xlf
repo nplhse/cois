@@ -57,7 +57,7 @@
       </trans-unit>
       <trans-unit id="ScuUX1R" resname="title.error">
         <source>title.error</source>
-        <target>__title.error</target>
+        <target>An Error occured</target>
       </trans-unit>
     </body>
   </file>

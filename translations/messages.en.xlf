@@ -1122,6 +1122,146 @@
         <source>Edit your profile</source>
         <target>Edit your profile</target>
       </trans-unit>
+      <trans-unit id="_x16rKr" resname="Failed to send verification E-Mail. Please try again later.">
+        <source>Failed to send verification E-Mail. Please try again later.</source>
+        <target>Failed to send verification E-Mail. Please try again later.</target>
+      </trans-unit>
+      <trans-unit id="xMe0RaL" resname="A verification E-Mail has been sent to you, please check your Inbox.">
+        <source>A verification E-Mail has been sent to you, please check your Inbox.</source>
+        <target>A verification E-Mail has been sent to you, please check your Inbox.</target>
+      </trans-unit>
+      <trans-unit id="2yS_u5p" resname="Your E-Mail address is already verified.">
+        <source>Your E-Mail address is already verified.</source>
+        <target>Your E-Mail address is already verified.</target>
+      </trans-unit>
+      <trans-unit id="yr0KjUj" resname="Your E-Mail address could not be verified.">
+        <source>Your E-Mail address could not be verified.</source>
+        <target>Your E-Mail address could not be verified.</target>
+      </trans-unit>
+      <trans-unit id="R6GwzmA" resname="Your E-Mail address has been successfully verified.">
+        <source>Your E-Mail address has been successfully verified.</source>
+        <target>Your E-Mail address has been successfully verified.</target>
+      </trans-unit>
+      <trans-unit id="ffYLZOf" resname="Imports">
+        <source>Imports</source>
+        <target>Imports</target>
+      </trans-unit>
+      <trans-unit id="s6YOYaU" resname="Tasks">
+        <source>Tasks</source>
+        <target>Tasks</target>
+      </trans-unit>
+      <trans-unit id="XZHC2BN" resname="Edit Hospital">
+        <source>Edit Hospital</source>
+        <target>Edit Hospital</target>
+      </trans-unit>
+      <trans-unit id="qSnU_5z" resname="Create Hospital">
+        <source>Create Hospital</source>
+        <target>Create Hospital</target>
+      </trans-unit>
+      <trans-unit id="RwlwUbD" resname="Hospital has no Onwer">
+        <source>Hospital has no Onwer</source>
+        <target>Hospital has no Onwer</target>
+      </trans-unit>
+      <trans-unit id="KuMGtX8" resname="View Hospital">
+        <source>View Hospital</source>
+        <target>View Hospital</target>
+      </trans-unit>
+      <trans-unit id="3NHVIj9" resname="Name">
+        <source>Name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="SxuKo2C" resname="Owner">
+        <source>Owner</source>
+        <target>Owner</target>
+      </trans-unit>
+      <trans-unit id="aiRx3fU" resname="Edit Import">
+        <source>Edit Import</source>
+        <target>Edit Import</target>
+      </trans-unit>
+      <trans-unit id="g3wFomD" resname="Create Import">
+        <source>Create Import</source>
+        <target>Create Import</target>
+      </trans-unit>
+      <trans-unit id="Mk0fZVX" resname="Showing count Imports">
+        <source>Showing count Imports</source>
+        <target>Showing %count% Imports, with %perPage% items per Page.</target>
+      </trans-unit>
+      <trans-unit id="dlPUA0a" resname="Import has no Hospital">
+        <source>Import has no Hospital</source>
+        <target>Import has no Hospital</target>
+      </trans-unit>
+      <trans-unit id="zxSWjD." resname="View Import">
+        <source>View Import</source>
+        <target>View Import</target>
+      </trans-unit>
+      <trans-unit id="l_liNmH" resname="Hospital">
+        <source>Hospital</source>
+        <target>Hospital</target>
+      </trans-unit>
+      <trans-unit id="N0zZ0iD" resname="Created by">
+        <source>Created by</source>
+        <target>Created by</target>
+      </trans-unit>
+      <trans-unit id="kg5BPH1" resname="Status">
+        <source>Status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="gLX5BuG" resname="Is Fixture?">
+        <source>Is Fixture?</source>
+        <target>Is Fixture?</target>
+      </trans-unit>
+      <trans-unit id="9Y89BVJ" resname="Import is a Fixture">
+        <source>Import is a Fixture</source>
+        <target>Import is a Fixture</target>
+      </trans-unit>
+      <trans-unit id="y3AjePM" resname="Errors">
+        <source>Errors</source>
+        <target>Errors</target>
+      </trans-unit>
+      <trans-unit id="Mbgthhp" resname="No Errors">
+        <source>No Errors</source>
+        <target>No Errors</target>
+      </trans-unit>
+      <trans-unit id="yAWOmtS" resname="Item count">
+        <source>Item count</source>
+        <target>Item count</target>
+      </trans-unit>
+      <trans-unit id="T8UqPEx" resname="Duration">
+        <source>Duration</source>
+        <target>Duration</target>
+      </trans-unit>
+      <trans-unit id="i5oyEKD" resname="Times run">
+        <source>Times run</source>
+        <target>Times run</target>
+      </trans-unit>
+      <trans-unit id="rGhFZcK" resname="Import File">
+        <source>Import File</source>
+        <target>Import File</target>
+      </trans-unit>
+      <trans-unit id="WfpDeb4" resname="Reset your password">
+        <source>Reset your password</source>
+        <target>Reset your password</target>
+      </trans-unit>
+      <trans-unit id="4.YoQaN" resname="COIS - Collaborative IVENA statistics">
+        <source>COIS - Collaborative IVENA statistics</source>
+        <target>COIS - Collaborative IVENA statistics</target>
+      </trans-unit>
+      <trans-unit id="Eu8ueBs" resname="Create new Import">
+        <source>Create new Import</source>
+        <target>Create new Import</target>
+      </trans-unit>
+      <trans-unit id="LP_bqr9" resname="Import">
+        <source>Import</source>
+        <target>Import</target>
+      </trans-unit>
+      <trans-unit id="Zidvujv" resname="Your Imports">
+        <source>Your Imports</source>
+        <target>Your Imports</target>
+      </trans-unit>
+      <trans-unit id="NXvvj6Z" resname="Exit impersonation">
+        <source>Exit impersonation</source>
+        <target>Exit impersonation</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

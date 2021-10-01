@@ -1043,7 +1043,7 @@
       </trans-unit>
       <trans-unit id="7YtS5S3" resname="dashboard.hospitals.text">
         <source>dashboard.hospitals.text</source>
-        <target>__dashboard.hospitals.text</target>
+        <target>Betrachten Sie die am Projekt teilnehmenden Kliniken, oder bearbeiten Sie Ihre eigene Klinik.</target>
       </trans-unit>
       <trans-unit id="wbsZ3_o" resname="dashboard.hospitals.button_edit">
         <source>dashboard.hospitals.button_edit</source>
@@ -1120,6 +1120,146 @@
       <trans-unit id="m1yvpiK" resname="Edit your profile">
         <source>Edit your profile</source>
         <target>Profil bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="_x16rKr" resname="Failed to send verification E-Mail. Please try again later.">
+        <source>Failed to send verification E-Mail. Please try again later.</source>
+        <target>Die E-Mail zur Verifizierung konnte nicht versendet werden. Bitte versuchen Sie es später nochmals.</target>
+      </trans-unit>
+      <trans-unit id="xMe0RaL" resname="A verification E-Mail has been sent to you, please check your Inbox.">
+        <source>A verification E-Mail has been sent to you, please check your Inbox.</source>
+        <target>An Sie wurde eine E-Mail zur Bestätigung versendet, bitte prüfen Sie ihren Posteingang.</target>
+      </trans-unit>
+      <trans-unit id="2yS_u5p" resname="Your E-Mail address is already verified.">
+        <source>Your E-Mail address is already verified.</source>
+        <target>Diese E-Mail Adresse ist bereits bestätigt.</target>
+      </trans-unit>
+      <trans-unit id="yr0KjUj" resname="Your E-Mail address could not be verified.">
+        <source>Your E-Mail address could not be verified.</source>
+        <target>Ihre E-Mail Adresse konnte nicht bestätigt werden.</target>
+      </trans-unit>
+      <trans-unit id="R6GwzmA" resname="Your E-Mail address has been successfully verified.">
+        <source>Your E-Mail address has been successfully verified.</source>
+        <target>Ihre E-Mail Adresse wurde erfolgreich bestätigt.</target>
+      </trans-unit>
+      <trans-unit id="ffYLZOf" resname="Imports">
+        <source>Imports</source>
+        <target>Importe</target>
+      </trans-unit>
+      <trans-unit id="s6YOYaU" resname="Tasks">
+        <source>Tasks</source>
+        <target>Aufgaben</target>
+      </trans-unit>
+      <trans-unit id="XZHC2BN" resname="Edit Hospital">
+        <source>Edit Hospital</source>
+        <target>Klinik bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="qSnU_5z" resname="Create Hospital">
+        <source>Create Hospital</source>
+        <target>Klinik erstellen</target>
+      </trans-unit>
+      <trans-unit id="RwlwUbD" resname="Hospital has no Onwer">
+        <source>Hospital has no Onwer</source>
+        <target>Klinik hat keinen Besitzer</target>
+      </trans-unit>
+      <trans-unit id="KuMGtX8" resname="View Hospital">
+        <source>View Hospital</source>
+        <target>Klinik ansehen</target>
+      </trans-unit>
+      <trans-unit id="3NHVIj9" resname="Name">
+        <source>Name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="SxuKo2C" resname="Owner">
+        <source>Owner</source>
+        <target>Besitzer</target>
+      </trans-unit>
+      <trans-unit id="aiRx3fU" resname="Edit Import">
+        <source>Edit Import</source>
+        <target>Import bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="g3wFomD" resname="Create Import">
+        <source>Create Import</source>
+        <target>Neuen Import erstellen</target>
+      </trans-unit>
+      <trans-unit id="Mk0fZVX" resname="Showing count Imports">
+        <source>Showing count Imports</source>
+        <target>Zeige %count% Importe an, mit %perPage% pro Seite.</target>
+      </trans-unit>
+      <trans-unit id="dlPUA0a" resname="Import has no Hospital">
+        <source>Import has no Hospital</source>
+        <target>Import hat keine Klinik.</target>
+      </trans-unit>
+      <trans-unit id="zxSWjD." resname="View Import">
+        <source>View Import</source>
+        <target>Import ansehen</target>
+      </trans-unit>
+      <trans-unit id="l_liNmH" resname="Hospital">
+        <source>Hospital</source>
+        <target>Klinik</target>
+      </trans-unit>
+      <trans-unit id="N0zZ0iD" resname="Created by">
+        <source>Created by</source>
+        <target>Erstellt von</target>
+      </trans-unit>
+      <trans-unit id="kg5BPH1" resname="Status">
+        <source>Status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="gLX5BuG" resname="Is Fixture?">
+        <source>Is Fixture?</source>
+        <target>Ist eine Fixture?</target>
+      </trans-unit>
+      <trans-unit id="9Y89BVJ" resname="Import is a Fixture">
+        <source>Import is a Fixture</source>
+        <target>Import ist eine Fixture</target>
+      </trans-unit>
+      <trans-unit id="y3AjePM" resname="Errors">
+        <source>Errors</source>
+        <target>Fehler</target>
+      </trans-unit>
+      <trans-unit id="Mbgthhp" resname="No Errors">
+        <source>No Errors</source>
+        <target>Keine Fehler.</target>
+      </trans-unit>
+      <trans-unit id="yAWOmtS" resname="Item count">
+        <source>Item count</source>
+        <target>Anzahl der Datensätze</target>
+      </trans-unit>
+      <trans-unit id="T8UqPEx" resname="Duration">
+        <source>Duration</source>
+        <target>Dauer der Verarbeitung</target>
+      </trans-unit>
+      <trans-unit id="i5oyEKD" resname="Times run">
+        <source>Times run</source>
+        <target>Anzahl der Durchläufe</target>
+      </trans-unit>
+      <trans-unit id="rGhFZcK" resname="Import File">
+        <source>Import File</source>
+        <target>Original-Datei</target>
+      </trans-unit>
+      <trans-unit id="WfpDeb4" resname="Reset your password">
+        <source>Reset your password</source>
+        <target>Passwort zurücksetzen</target>
+      </trans-unit>
+      <trans-unit id="4.YoQaN" resname="COIS - Collaborative IVENA statistics">
+        <source>COIS - Collaborative IVENA statistics</source>
+        <target>Kollaborative IVENA Statistiken</target>
+      </trans-unit>
+      <trans-unit id="Eu8ueBs" resname="Create new Import">
+        <source>Create new Import</source>
+        <target>Neuen Import erstellen</target>
+      </trans-unit>
+      <trans-unit id="LP_bqr9" resname="Import">
+        <source>Import</source>
+        <target>Import</target>
+      </trans-unit>
+      <trans-unit id="Zidvujv" resname="Your Imports">
+        <source>Your Imports</source>
+        <target>Ihre Importe</target>
+      </trans-unit>
+      <trans-unit id="NXvvj6Z" resname="Exit impersonation">
+        <source>Exit impersonation</source>
+        <target>Identitätswechsel beenden</target>
       </trans-unit>
     </body>
   </file>

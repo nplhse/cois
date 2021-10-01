@@ -11,7 +11,8 @@
       </trans-unit>
       <trans-unit id="yQRveje" resname="description">
         <source>description</source>
-        <target>Wenn Sie diese Seite sehen können, ist etwas schiefgelaufen. Eine Mitteilung an den Administrator ist erstellt worden und wir versuchen das Problem so schnell wie möglich zu beheben.</target>
+        <target>Wenn Sie diese Seite sehen können, ist etwas schiefgelaufen. Eine Mitteilung an den Administrator
+                    ist erstellt worden und wir versuchen das Problem so schnell wie möglich zu beheben.</target>
       </trans-unit>
       <trans-unit id="8Vu_BOU" resname="messages.403.title">
         <source>messages.403.title</source>
@@ -58,7 +59,7 @@
       </trans-unit>
       <trans-unit id="ScuUX1R" resname="title.error">
         <source>title.error</source>
-        <target>__title.error</target>
+        <target>Ein Fehler ist aufgetreten</target>
       </trans-unit>
     </body>
   </file>

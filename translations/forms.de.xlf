@@ -73,6 +73,70 @@
         <source>Status</source>
         <target>Status</target>
       </trans-unit>
+      <trans-unit id="azp2EZD" resname="Send Welcome E-Mail">
+        <source>Send Welcome E-Mail</source>
+        <target>Willkommens-Email verschicken</target>
+      </trans-unit>
+      <trans-unit id="94V33HR" resname="Impersonate">
+        <source>Impersonate</source>
+        <target>Identität übernehmen</target>
+      </trans-unit>
+      <trans-unit id="4tClSWj" resname="Delete">
+        <source>Delete</source>
+        <target>Löschen</target>
+      </trans-unit>
+      <trans-unit id="rtzIDup" resname="Update Hospital">
+        <source>Update Hospital</source>
+        <target>Klinik aktualisieren</target>
+      </trans-unit>
+      <trans-unit id="qSnU_5z" resname="Create Hospital">
+        <source>Create Hospital</source>
+        <target>Klinik erstellen</target>
+      </trans-unit>
+      <trans-unit id="3NHVIj9" resname="Name">
+        <source>Name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="SxuKo2C" resname="Owner">
+        <source>Owner</source>
+        <target>Besitzer</target>
+      </trans-unit>
+      <trans-unit id="uWwxAle" resname="No Hospitals found">
+        <source>No Hospitals found</source>
+        <target>Keine Kliniken gefunden.</target>
+      </trans-unit>
+      <trans-unit id="WbriLra" resname="Create new Hospital">
+        <source>Create new Hospital</source>
+        <target>Neue Klinik erstellen</target>
+      </trans-unit>
+      <trans-unit id="3f8r2.u" resname="Update Import">
+        <source>Update Import</source>
+        <target>Import aktualisieren</target>
+      </trans-unit>
+      <trans-unit id="g3wFomD" resname="Create Import">
+        <source>Create Import</source>
+        <target>Neuen Import erstellen</target>
+      </trans-unit>
+      <trans-unit id="d1tb_WR" resname="Created at">
+        <source>Created at</source>
+        <target>Erstellt am</target>
+      </trans-unit>
+      <trans-unit id="VBCMceU" resname="No Imports found">
+        <source>No Imports found</source>
+        <target>Keine Importe gefunden</target>
+      </trans-unit>
+      <trans-unit id="Eu8ueBs" resname="Create new Import">
+        <source>Create new Import</source>
+        <target>Neuen Import erstellen</target>
+      </trans-unit>
+      <trans-unit id="SEPZMZS" resname="Refresh Import">
+        <source>Refresh Import</source>
+        <target>Erneut importieren.</target>
+      </trans-unit>
+      <trans-unit id="3_ELkbq" resname="Import new Data">
+        <source>Import new Data</source>
+        <target>Neue Daten hinzufügen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
