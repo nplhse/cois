@@ -184,19 +184,12 @@
                                     {% if is_granted('IS_IMPERSONATOR') %}
                                         <li>
                                             <a class="dropdown-item text-danger"
-                                                href="{{
-                                                path(
-                                                    'app_settings',
-                                                    app.request.query.all|merge({
-                                                        _switch_user: '_exit'
-                                                    })
-                                                )
-                                                }}">
+                                                href="{{ impersonation_exit_path(path('app_settings_user_index')) }}">
                                                 <i class="bi-door-closed-fill">
 
                                                 </i>
                                                 {{
-                                                    'link.impersonation_exit'|trans
+                                                    'Exit impersonation'|trans
                                                 }}
                                             </a>
                                         </li>
