@@ -6,6 +6,7 @@ use App\Entity\Allocation;
 use App\Entity\Hospital;
 use App\Entity\Import;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,6 +17,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AllocationRepository extends ServiceEntityRepository
 {
+    public const PAGINATOR_PER_PAGE = 25;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Allocation::class);
@@ -207,5 +210,19 @@ class AllocationRepository extends ServiceEntityRepository
             ->setParameter(':import', $import->getId());
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function getAllocationPaginator(int $offset, array $filter): Paginator
+    {
+        $query = $this->createQueryBuilder('a');
+
+        $query
+            ->orderBy('a.createdAt', 'ASC')
+            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setFirstResult($offset)
+            ->getQuery()
+        ;
+
+        return new Paginator($query);
     }
 }

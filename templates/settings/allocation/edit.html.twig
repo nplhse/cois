@@ -1,0 +1,215 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'Edit Allocation'|trans }}: #{{ allocation.id }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_settings'),
+                            label: 'Settings'|trans
+                        },
+                        {
+                            url: url('app_settings_allocation_index'),
+                            label: 'Allocations'|trans
+                        },
+                        {
+                            label: 'Edit Allocation'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            {{ include('settings/_settings_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <h1>
+                {{ 'Edit Allocation'|trans }}
+            </h1>
+
+            {{ form_start(form) }}
+
+            <h2>
+                {{ 'General'|trans({}, 'forms') }}
+            </h2>
+
+            {{ form_row(form.hospital) }}
+
+            {{ form_row(form.import) }}
+
+            {{ form_row(form.dispatchArea) }}
+
+            {{ form_row(form.supplyArea) }}
+
+            <div class="row">
+                <div class="col">
+                    <h2>
+                        {{ 'Creation'|trans({}, 'forms') }}
+                    </h2>
+
+                    {{ form_row(form.createdAt) }}
+
+                    {{ form_row(form.creationYear) }}
+
+                    {{ form_row(form.creationDate) }}
+
+                    {{ form_row(form.creationMonth) }}
+
+                    {{ form_row(form.creationWeekday) }}
+
+                    {{ form_row(form.creationDay) }}
+
+                    {{ form_row(form.creationTime) }}
+
+                    {{ form_row(form.creationHour) }}
+
+                    {{ form_row(form.creationMinute) }}
+                </div>
+                <div class="col">
+                    <h2>
+                        {{ 'Arrival'|trans({}, 'forms') }}
+                    </h2>
+
+                    {{ form_row(form.arrivalAt) }}
+
+                    {{ form_row(form.arrivalYear) }}
+
+                    {{ form_row(form.arrivalDate) }}
+
+                    {{ form_row(form.arrivalMonth) }}
+
+                    {{ form_row(form.arrivalWeekday) }}
+
+                    {{ form_row(form.arrivalDay) }}
+
+                    {{ form_row(form.arrivalTime) }}
+
+                    {{ form_row(form.arrivalHour) }}
+
+                    {{ form_row(form.arrivalMinute) }}
+                </div>
+            </div>
+
+            <h2>
+                {{ 'Transport'|trans({}, 'forms') }}
+            </h2>
+
+            {{ form_row(form.occasion) }}
+
+            {{ form_row(form.assignment) }}
+
+            {{ form_row(form.modeOfTransport) }}
+
+            {{ form_row(form.handoverPoint) }}
+
+            <h2>
+                {{ 'Demographics'|trans({}, 'forms') }}
+            </h2>
+
+            {{ form_row(form.age) }}
+
+            {{ form_row(form.gender) }}
+
+            <div class="row">
+                <h2>
+                    {{ 'Attributes'|trans({}, 'forms') }}
+                </h2>
+
+                <div class="col">
+                    {{ form_row(form.requiresResus) }}
+
+                    {{ form_row(form.requiresCathlab) }}
+
+                    {{ form_row(form.isCPR) }}
+
+                    {{ form_row(form.isVentilated) }}
+
+                    {{ form_row(form.isShock) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.isWithPhysician) }}
+
+                    {{ form_row(form.isPregnant) }}
+
+                    {{ form_row(form.isWorkAccident) }}
+
+                    {{ form_row(form.isInfectious) }}
+                </div>
+            </div>
+
+            <h2>
+                {{ 'Speciality'|trans({}, 'forms') }}
+            </h2>
+
+            {{ form_row(form.speciality) }}
+
+            {{ form_row(form.specialityDetail) }}
+
+            {{ form_row(form.specialityWasClosed) }}
+
+            <h2>
+                {{ 'Deployment'|trans({}, 'forms') }}
+            </h2>
+
+            {{ form_row(form.SK) }}
+
+            {{ form_row(form.RMI) }}
+
+            <h2>
+                {{ 'Comment'|trans({}, 'forms') }}
+            </h2>
+
+            {{ form_row(form.comment) }}
+
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form.PZC) }}
+
+                    {{ form_row(form.PZCText) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.secondaryPZC) }}
+
+                    {{ form_row(form.secondaryPZCText) }}
+                </div>
+            </div>
+
+            <div class="btn-group" role="group">
+                <button class="btn btn-primary">
+                    {{ 'Update Allocation'|trans({}, 'forms') }}
+                </button>
+                <a class="btn btn-secondary"
+                    href="{{
+                    path(
+                        'app_settings_allocation_show',
+                        {
+                            id: allocation.id
+                        }
+                    )
+                    }}">
+                    {{ 'View Allocation'|trans({}, 'forms') }}
+                </a>
+                <a class="btn btn-outline-secondary"
+                    href="{{ path('app_settings_allocation_index') }}">
+                    {{ 'Back to list'|trans({}, 'forms') }}
+                </a>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

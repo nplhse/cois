@@ -1,0 +1,395 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'View Allocation'|trans }}: #{{ allocation.id }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_settings'),
+                            label: 'Settings'|trans
+                        },
+                        {
+                            url: url('app_settings_allocation_index'),
+                            label: 'Allocation'|trans
+                        },
+                        {
+                            label: 'View Allocation'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            {{ include('settings/_settings_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <div class="float-end">
+                {{ include('settings/allocation/_delete_form.html.twig') }}
+            </div>
+
+            <h1>
+                {{ 'View Allocation'|trans }}
+            </h1>
+
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th style="width: 30%">
+                            {{ 'Id'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            {{ allocation.id }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Dispatch Area'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            {{ allocation.dispatchArea }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Supply Area'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            {{ allocation.supplyArea }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Creation'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            <p>
+                                {{ allocation.createdAt|date('d.m.Y H:i:s') }}
+                            </p>
+
+                            <ul>
+                                <li>
+                                    {{ 'Creation Year'|trans({}, 'forms') }}: {{
+                                        allocation.creationYear
+                                    }}
+                                </li>
+                                <li>
+                                    {{ 'Creation Date'|trans({}, 'forms') }}: {{
+                                        allocation.creationDate
+                                    }}
+                                </li>
+                                <li>
+                                    {{ 'Creation Month'|trans({}, 'forms') }}: {{
+                                        allocation.creationMonth
+                                    }}
+                                </li>
+                                <li>
+                                    {{ 'Creation Weekday'|trans({}, 'forms') }}: {{
+                                        allocation.creationWeekday
+                                    }}
+                                </li>
+                                <li>
+                                    {{ 'Creation Day'|trans({}, 'forms') }}: {{
+                                        allocation.creationDay
+                                    }}
+                                </li>
+                                <li>
+                                    {{ 'Creation Time'|trans({}, 'forms') }}: {{
+                                        allocation.creationTime
+                                    }}
+                                </li>
+                                <li>
+                                    {{ 'Creation Hour'|trans({}, 'forms') }}: {{
+                                        allocation.creationHour
+                                    }}
+                                </li>
+                                <li>
+                                    {{ 'Creation Minute'|trans({}, 'forms') }}: {{
+                                        allocation.creationMinute
+                                    }}
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Arrival'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            <p>
+                                {{ allocation.arrivalAt|date('d.m.Y H:i:s') }}
+                            </p>
+
+                            <ul>
+                                <li>
+                                    {{ 'Arrival Year'|trans({}, 'forms') }}: {{
+                                        allocation.arrivalYear
+                                    }}
+                                </li>
+                                <li>
+                                    {{ 'Arrival Date'|trans({}, 'forms') }}: {{
+                                        allocation.arrivalDate
+                                    }}
+                                </li>
+                                <li>
+                                    {{ 'Arrival Month'|trans({}, 'forms') }}: {{
+                                        allocation.arrivalMonth
+                                    }}
+                                </li>
+                                <li>
+                                    {{ 'Arrival Weekday'|trans({}, 'forms') }}: {{
+                                        allocation.arrivalWeekday
+                                    }}
+                                </li>
+                                <li>
+                                    {{ 'Arrival Day'|trans({}, 'forms') }}: {{
+                                        allocation.arrivalDay
+                                    }}
+                                </li>
+                                <li>
+                                    {{ 'Arrival Time'|trans({}, 'forms') }}: {{
+                                        allocation.arrivalTime
+                                    }}
+                                </li>
+                                <li>
+                                    {{ 'Arrival Hour'|trans({}, 'forms') }}: {{
+                                        allocation.arrivalHour
+                                    }}
+                                </li>
+                                <li>
+                                    {{ 'Arrival Year'|trans({}, 'forms') }}: {{
+                                        allocation.arrivalMinute
+                                    }}
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Transport'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            <p>
+                                {{ 'Ocassion'|trans({}, 'forms') }}: {{
+                                    allocation.occasion
+                                }}
+                            </p>
+                            <p>
+                                {{ 'Assignment'|trans({}, 'forms') }}: {{
+                                    allocation.assignment
+                                }}
+                            </p>
+                            <p>
+                                {{ 'Mode of Transport'|trans({}, 'forms') }}: {{
+                                    allocation.modeOfTransport
+                                }}
+                            </p>
+                            <p>
+                                {{ 'Handover Point'|trans({}, 'forms') }}: {{
+                                    allocation.handoverPoint
+                                }}
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Demographics'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            <p>
+                                {{ 'Gender'|trans({}, 'forms') }}: {{
+                                    allocation.gender
+                                }}
+                            </p>
+                            <p>
+                                {{ 'Age'|trans({}, 'forms') }}: {{
+                                    allocation.age
+                                }}
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Attributes'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            <p>
+                                {{ 'Requires Resus'|trans({}, 'forms') }}:{% if
+                                    allocation.requiresResus %}
+                                    {{ 'True'|trans }}
+                                {% else %}
+                                    {{ 'False'|trans }}
+                                {% endif %}
+                            </p>
+                            <p>
+                                {{ 'Requires Cathlab'|trans({}, 'forms') }}:{% if
+                                    allocation.requiresCathlab %}
+                                    {{ 'True'|trans }}
+                                {% else %}
+                                    {{ 'False'|trans }}
+                                {% endif %}
+                            </p>
+                            <p>
+                                {{ 'Is CPR'|trans({}, 'forms') }}:{% if
+                                    allocation.isCPR %}
+                                    {{ 'True'|trans }}
+                                {% else %}
+                                    {{ 'False'|trans }}
+                                {% endif %}
+                            </p>
+                            <p>
+                                {{ 'Is Ventilated?'|trans({}, 'forms') }}:{% if
+                                    allocation.isVentilated %}
+                                    {{ 'True'|trans }}
+                                {% else %}
+                                    {{ 'False'|trans }}
+                                {% endif %}
+                            </p>
+                            <p>
+                                {{ 'Is in Shock'|trans({}, 'forms') }}:{% if
+                                    allocation.isShock %}
+                                    {{ 'True'|trans }}
+                                {% else %}
+                                    {{ 'False'|trans }}
+                                {% endif %}
+                            </p>
+                            <p>
+                                {{ 'Is with Physician'|trans({}, 'forms') }}:{% if
+                                    allocation.isWithPhysician %}
+                                    {{ 'True'|trans }}
+                                {% else %}
+                                    {{ 'False'|trans }}
+                                {% endif %}
+                            </p>
+                            <p>
+                                {{ 'Is Infectious'|trans({}, 'forms') }}: {{
+                                    allocation.isInfectious
+                                }}
+                            </p>
+                            <p>
+                                {{ 'Is Pregnant'|trans({}, 'forms') }}:{% if
+                                    allocation.isPregnant %}
+                                    {{ 'True'|trans }}
+                                {% else %}
+                                    {{ 'False'|trans }}
+                                {% endif %}
+                            </p>
+                            <p>
+                                {{ 'Is Work Accident'|trans({}, 'forms') }}:{% if
+                                    allocation.isWorkAccident %}
+                                    {{ 'True'|trans }}
+                                {% else %}
+                                    {{ 'False'|trans }}
+                                {% endif %}
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Speciality'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            <p>
+                                {{ 'Speciality'|trans({}, 'forms') }}: {{
+                                    allocation.speciality
+                                }}
+                            </p>
+                            <p>
+                                {{ 'Speciality detail'|trans({}, 'forms') }}: {{
+                                    allocation.specialityDetail
+                                }}
+                            </p>
+                            <p>
+                                {{ 'Speciality was closed'|trans({}, 'forms') }}:{% if
+                                    allocation.specialityWasClosed %}
+                                    {{ 'True'|trans }}
+                                {% else %}
+                                    {{ 'False'|trans }}
+                                {% endif %}
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Deployment'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            <p>
+                                {{ 'Urgency'|trans({}, 'forms') }}: {{
+                                    allocation.sK
+                                }}
+                            </p>
+                            <p>
+                                {{ 'RMI'|trans({}, 'forms') }}: {{
+                                    allocation.rMI
+                                }}
+                            </p>
+                            <p>
+                                {{ 'PZC'|trans({}, 'forms') }}: {{
+                                    allocation.pZC
+                                }}
+                            </p>
+                            <p>
+                                {{ 'PZC with text'|trans({}, 'forms') }}: {{
+                                    allocation.pZCText
+                                }}
+                            </p>
+                            <p>
+                                {{ 'Secondary PZC'|trans({}, 'forms') }}: {{
+                                    allocation.secondaryPZC
+                                }}
+                            </p>
+                            <p>
+                                {{
+                                    'Secondary PZC with text'|trans({}, 'forms')
+                                }}: {{ allocation.secondaryPZCText }}
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Comment'|trans({}, 'forms') }}
+                        </th>
+                        <td>
+                            <p>
+                                {{ allocation.comment }}
+                            </p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="btn-group" role="group">
+                <a class="btn btn-primary"
+                    href="{{
+                    path(
+                        'app_settings_allocation_edit',
+                        {
+                            id: allocation.id
+                        }
+                    )
+                    }}">
+                    {{ 'Edit Allocation'|trans({}, 'forms') }}
+                </a>
+                <a class="btn btn-outline-secondary"
+                    href="{{ path('app_settings_allocation_index') }}">
+                    {{ 'Back to list'|trans({}, 'forms') }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

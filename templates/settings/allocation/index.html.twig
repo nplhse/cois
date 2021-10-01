@@ -1,0 +1,192 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'Allocations'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_settings'),
+                            label: 'Settings'|trans
+                        },
+                        {
+                            label: 'Allocations'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            {{ include('settings/_settings_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <h1>
+                {{ 'Allocations'|trans }}
+            </h1>
+
+            <p>
+                {{
+                    'Showing count Allocations'|trans({
+                        '%perPage%': perPage,
+                        '%count%': allocations.count
+                    })
+                }}
+            </p>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            {{ 'Id'|trans({}, 'forms') }}
+                        </th>
+                        <th>
+                            {{ 'Created at'|trans({}, 'forms') }}
+                        </th>
+                        <th>
+                            {{ 'Hospital'|trans({}, 'forms') }}
+                        </th>
+                        <th>
+                            {{ 'Import'|trans({}, 'forms') }}
+                        </th>
+                        <th>
+                            {{ 'Actions'|trans({}, 'forms') }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for allocation in allocations %}
+                        <tr>
+                            <td>
+                                <a href="{{
+                                    path(
+                                        'app_settings_allocation_show',
+                                        {
+                                            id: allocation.id
+                                        }
+                                    )
+                                    }}">
+                                    {{ allocation.id }}
+                                </a>
+                            </td>
+                            <td>
+                                {{ allocation.createdAt|date('d.m.Y H:i:s') }}
+                            </td>
+                            <td>
+                                <a href="{{
+                                    path(
+                                        'app_settings_hospital_show',
+                                        {
+                                            id: allocation.hospital
+                                        }
+                                    )
+                                    }}">
+                                    {{ allocation.hospital.name }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{
+                                    path(
+                                        'app_settings_import_show',
+                                        {
+                                            id: allocation.import.id
+                                        }
+                                    )
+                                    }}">
+                                    {{ allocation.import.caption }}
+                                </a>
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-primary"
+                                    href="{{
+                                    path(
+                                        'app_settings_allocation_edit',
+                                        {
+                                            id: allocation.id
+                                        }
+                                    )
+                                    }}">
+                                    {{ 'Edit'|trans({}, 'forms') }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">
+                                {{ 'No Allocations found'|trans({}, 'forms') }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% if (allocations|length) > 0 %}
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        {% if previous >= 0 %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="{{
+                                    path(
+                                        'app_settings_allocation_index',
+                                        app.request.query.all|merge({
+                                            offset: previous
+                                        })
+                                    )
+                                    }}">
+                                    {{ 'Previous'|trans }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link"
+                                    href="#"
+                                    tabindex="-1"
+                                    aria-disabled="true">
+                                    {{ 'Previous'|trans }}
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if next < (allocations|length) %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="{{
+                                    path(
+                                        'app_settings_allocation_index',
+                                        app.request.query.all|merge({
+                                            offset: next
+                                        })
+                                    )
+                                    }}">
+                                    {{ 'Next'|trans }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link"
+                                    href="#"
+                                    tabindex="-1"
+                                    aria-disabled="true">
+                                    {{ 'Next'|trans }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

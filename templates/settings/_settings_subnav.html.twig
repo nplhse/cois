@@ -111,5 +111,23 @@
                 </a>
             </li>
         {% endif %}
+        {% if
+            app.request.attributes.get('_route')
+                starts with 'app_settings_allocation' %}
+            <li class="list-group-item active">
+                <i class="bi bi-collection-fill"></i>
+                <a class="text-light"
+                    href="{{ path('app_settings_allocation_index') }}">
+                    {{ 'Allocations'|trans }}
+                </a>
+            </li>
+        {% else %}
+            <li class="list-group-item">
+                <i class="bi bi-collection"></i>
+                <a href="{{ path('app_settings_allocation_index') }}">
+                    {{ 'Allocations'|trans }}
+                </a>
+            </li>
+        {% endif %}
     </ul>
 {% endif %}
