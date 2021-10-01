@@ -2,9 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Hospital;
 use App\Entity\Import;
 use App\Entity\User;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -24,22 +24,20 @@ class ImportType extends AbstractType
             ])
             ->add('user', EntityType::class, [
                 'class' => User::class,
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')
-                        ->orderBy('u.username', 'ASC');
-                },
-                'choice_label' => 'User',
+            ])
+            ->add('hospital', EntityType::class, [
+                'class' => Hospital::class,
             ])
             ->add('contents', ChoiceType::class, [
                 'choices' => [
-                    'Allocatation' => 'allocation',
+                    'Allocation' => 'allocation',
                 ],
                 'required' => true,
             ])
             ->add('file', DropzoneType::class, [
                 'label' => 'Import data (Must be a *.csv file!)',
                 'mapped' => true,
-                'required' => true,
+                'required' => false,
 
                 // unmapped fields can't define their validation using annotations
                 // in the associated entity, so you can use the PHP constraint classes

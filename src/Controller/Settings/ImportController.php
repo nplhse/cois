@@ -96,7 +96,7 @@ class ImportController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $form = $this->createForm(ImportType::class, $import, ['backend' => true]);
+        $form = $this->createForm(ImportType::class, $import);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

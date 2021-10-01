@@ -21,7 +21,7 @@ class UploadType extends AbstractType
             ])
             ->add('contents', ChoiceType::class, [
                 'choices' => [
-                    'Allocatation' => 'allocation',
+                    'Allocation' => 'allocation',
                 ],
                 'required' => true,
             ])
