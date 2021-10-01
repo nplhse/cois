@@ -22,6 +22,8 @@ class ImportController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         $filter = [];
+        $filter['search'] = '';
+        $filter['user'] = '';
 
         $offset = max(0, $request->query->getInt('offset', 0));
         $paginator = $importRepository->getImportPaginator($offset, $filter);
