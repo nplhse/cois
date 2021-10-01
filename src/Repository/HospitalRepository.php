@@ -43,6 +43,16 @@ class HospitalRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function getHospitals(): array
+    {
+        return $this->createQueryBuilder('h')
+            ->select('h.name')
+            ->distinct(true)
+            ->getQuery()
+            ->getArrayResult()
+            ;
+    }
+
     public function getSupplyAreas(): array
     {
         return $this->createQueryBuilder('h')

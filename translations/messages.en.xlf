@@ -1262,6 +1262,38 @@
         <source>Exit impersonation</source>
         <target>Exit impersonation</target>
       </trans-unit>
+      <trans-unit id="9Nx7Xew" resname="Allocations">
+        <source>Allocations</source>
+        <target>Allocations</target>
+      </trans-unit>
+      <trans-unit id="qxqU7lm" resname="Edit Allocation">
+        <source>Edit Allocation</source>
+        <target>Edit Allocation</target>
+      </trans-unit>
+      <trans-unit id="D2XwUmu" resname="Showing count Allocations">
+        <source>Showing count Allocations</source>
+        <target>Showing %count% Allocations, with %perPage% items per Page.</target>
+      </trans-unit>
+      <trans-unit id="0jvOxQO" resname="Filter by Hospital">
+        <source>Filter by Hospital</source>
+        <target>Filter by Hospital</target>
+      </trans-unit>
+      <trans-unit id="3PEyGfw" resname="View Allocation">
+        <source>View Allocation</source>
+        <target>View Allocation</target>
+      </trans-unit>
+      <trans-unit id="W8x9O83" resname="Allocation">
+        <source>Allocation</source>
+        <target>Allocation</target>
+      </trans-unit>
+      <trans-unit id="PLyHx2g" resname="True">
+        <source>True</source>
+        <target>True</target>
+      </trans-unit>
+      <trans-unit id="YKM_bPU" resname="False">
+        <source>False</source>
+        <target>False</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -47,6 +47,185 @@
                 }}
             </p>
 
+            <div class="card mb-3">
+                <div class="card-header">
+                    <a data-toggle="collapse"
+                        href="#collapse-example"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapse-example"
+                        aria-expanded="false"
+                        class="collapsible d-block">
+                        <i class="bi bi-chevron-bar-down float-end collapsed">
+
+                        </i>
+                        {{ 'Filters'|trans({}, 'forms') }}
+                    </a>
+                </div>
+                <div id="collapse-example"
+                    class="collapse"
+                    aria-labelledby="heading-example">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Search
+                        </h5>
+                        <form>
+                            <div class="input-group mb-3">
+                                {% if filters.search %}
+                                    <input type="text"
+                                        name="search"
+                                        class="form-control"
+                                        placeholder="{{ filters.search }}"
+                                        aria-label="Search" />
+                                {% else %}
+                                    <input type="text"
+                                        name="search"
+                                        class="form-control"
+                                        placeholder="Search..."
+                                        aria-label="Search" />
+                                {% endif %}
+                                <button type="submit"
+                                    class="btn btn-outline-secondary">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </form>
+
+                        <h5 class="card-title">
+                            {{ 'Filter by SupplyArea'|trans }}
+                        </h5>
+                        <p>
+                            {% for supplyArea in supplyAreas %}
+                                {% if
+                                    supplyArea.supplyArea
+                                        == filters.supplyArea %}
+                                    <span class="badge bg-warning">
+                                        <i class="bi bi-tag"></i>
+                                        <a class="link-light"
+                                            href="{{
+                                            path(
+                                                'app_settings_allocation_index',
+                                                app.request.query.all|merge({
+                                                    supplyArea: '',
+                                                    offset: '0'
+                                                })
+                                            )
+                                            }}">
+                                            {{ supplyArea.supplyArea }}
+                                        </a>
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-primary">
+                                        <i class="bi bi-tag"></i>
+                                        <a class="link-light"
+                                            href="{{
+                                            path(
+                                                'app_settings_allocation_index',
+                                                app.request.query.all|merge({
+                                                    supplyArea: supplyArea.supplyArea,
+                                                    offset: '0'
+                                                })
+                                            )
+                                            }}">
+                                            {{ supplyArea.supplyArea }}
+                                        </a>
+                                    </span>
+                                {% endif %}
+                            {% else %}
+                                {{ 'No SupplyAreas found'|trans }}
+                            {% endfor %}
+                        </p>
+
+                        <h5 class="card-title">
+                            {{ 'Filter by DispatchArea'|trans }}
+                        </h5>
+                        <p>
+                            {% for dispatchArea in dispatchAreas %}
+                                {% if
+                                    dispatchArea.dispatchArea
+                                        == filters.dispatchArea %}
+                                    <span class="badge bg-warning">
+                                        <i class="bi bi-tag"></i>
+                                        <a class="link-light"
+                                            href="{{
+                                            path(
+                                                'app_settings_allocation_index',
+                                                app.request.query.all|merge({
+                                                    dispatchArea: '',
+                                                    offset: '0'
+                                                })
+                                            )
+                                            }}">
+                                            {{ dispatchArea.dispatchArea }}
+                                        </a>
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-primary">
+                                        <i class="bi bi-tag"></i>
+                                        <a class="link-light"
+                                            href="{{
+                                            path(
+                                                'app_settings_allocation_index',
+                                                app.request.query.all|merge({
+                                                    dispatchArea: dispatchArea.dispatchArea,
+                                                    offset: '0'
+                                                })
+                                            )
+                                            }}">
+                                            {{ dispatchArea.dispatchArea }}
+                                        </a>
+                                    </span>
+                                {% endif %}
+                            {% else %}
+                                {{ 'No DispatchAreas found'|trans }}
+                            {% endfor %}
+                        </p>
+
+                        <h5 class="card-title">
+                            {{ 'Filter by Hospital'|trans }}
+                        </h5>
+                        <p class="mb-2">
+                            {% for hospital in hospitals %}
+                                {% if hospital.name == filters.hospital %}
+                                    <span class="badge bg-warning">
+                                        <i class="bi bi-tag"></i>
+                                        <a class="link-light"
+                                            href="{{
+                                            path(
+                                                'app_settings_allocation_index',
+                                                app.request.query.all|merge({
+                                                    hospital: '',
+                                                    offset: '0'
+                                                })
+                                            )
+                                            }}">
+                                            {{ hospital.name }}
+                                        </a>
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-primary">
+                                        <i class="bi bi-tag"></i>
+                                        <a class="link-light"
+                                            href="{{
+                                            path(
+                                                'app_settings_allocation_index',
+                                                app.request.query.all|merge({
+                                                    hospital: hospital.name,
+                                                    offset: '0'
+                                                })
+                                            )
+                                            }}">
+                                            {{ hospital.name }}
+                                        </a>
+                                    </span>
+                                {% endif %}
+                            {% else %}
+                                {{ 'No Hospitals found'|trans }}
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <table class="table table-hover">
                 <thead>
                     <tr>

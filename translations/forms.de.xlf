@@ -137,6 +137,222 @@
         <source>Import new Data</source>
         <target>Neue Daten hinzufügen</target>
       </trans-unit>
+      <trans-unit id="yRDUdNz" resname="General">
+        <source>General</source>
+        <target>Allgemeines</target>
+      </trans-unit>
+      <trans-unit id="bQqINz0" resname="Creation">
+        <source>Creation</source>
+        <target>Erstellung</target>
+      </trans-unit>
+      <trans-unit id="eUrbvGw" resname="Arrival">
+        <source>Arrival</source>
+        <target>Ankunft</target>
+      </trans-unit>
+      <trans-unit id="qurUq.X" resname="Transport">
+        <source>Transport</source>
+        <target>Transport</target>
+      </trans-unit>
+      <trans-unit id="e88DJUT" resname="Demographics">
+        <source>Demographics</source>
+        <target>Demographie</target>
+      </trans-unit>
+      <trans-unit id="Sw7Yj32" resname="Attributes">
+        <source>Attributes</source>
+        <target>Eigenschaften</target>
+      </trans-unit>
+      <trans-unit id="dxp9bkY" resname="Speciality">
+        <source>Speciality</source>
+        <target>Fachrichtung</target>
+      </trans-unit>
+      <trans-unit id="hwqP.Zj" resname="Deployment">
+        <source>Deployment</source>
+        <target>Einsatzdaten</target>
+      </trans-unit>
+      <trans-unit id="RPXj__x" resname="Comment">
+        <source>Comment</source>
+        <target>Kommentar</target>
+      </trans-unit>
+      <trans-unit id="10H1GCd" resname="Update Allocation">
+        <source>Update Allocation</source>
+        <target>Einsatz aktualisieren</target>
+      </trans-unit>
+      <trans-unit id="3PEyGfw" resname="View Allocation">
+        <source>View Allocation</source>
+        <target>Einsatz ansehen</target>
+      </trans-unit>
+      <trans-unit id="LP_bqr9" resname="Import">
+        <source>Import</source>
+        <target>Import</target>
+      </trans-unit>
+      <trans-unit id="TzIDpVA" resname="No Allocations found">
+        <source>No Allocations found</source>
+        <target>Keine Einsätze gefunden</target>
+      </trans-unit>
+      <trans-unit id="5pDjgts" resname="Dispatch Area">
+        <source>Dispatch Area</source>
+        <target>Leitstelle</target>
+      </trans-unit>
+      <trans-unit id="2UeUZmd" resname="Supply Area">
+        <source>Supply Area</source>
+        <target>Versorgungsgebiet</target>
+      </trans-unit>
+      <trans-unit id="LKA.rit" resname="Creation Year">
+        <source>Creation Year</source>
+        <target>Jahr</target>
+      </trans-unit>
+      <trans-unit id="b93npnx" resname="Creation Date">
+        <source>Creation Date</source>
+        <target>Datum</target>
+      </trans-unit>
+      <trans-unit id="qtDVk6h" resname="Creation Month">
+        <source>Creation Month</source>
+        <target>Monat</target>
+      </trans-unit>
+      <trans-unit id="miz59KK" resname="Creation Weekday">
+        <source>Creation Weekday</source>
+        <target>Wochentag</target>
+      </trans-unit>
+      <trans-unit id="tR1el9H" resname="Creation Day">
+        <source>Creation Day</source>
+        <target>Tag</target>
+      </trans-unit>
+      <trans-unit id="udD_2Xi" resname="Creation Time">
+        <source>Creation Time</source>
+        <target>Uhrzeit</target>
+      </trans-unit>
+      <trans-unit id="K5e4oFU" resname="Creation Hour">
+        <source>Creation Hour</source>
+        <target>Uhrzeit</target>
+      </trans-unit>
+      <trans-unit id="sTZeTOp" resname="Creation Minute">
+        <source>Creation Minute</source>
+        <target>Minute</target>
+      </trans-unit>
+      <trans-unit id="Au2Xun4" resname="Arrival Year">
+        <source>Arrival Year</source>
+        <target>Jahr</target>
+      </trans-unit>
+      <trans-unit id="m78S3nV" resname="Arrival Date">
+        <source>Arrival Date</source>
+        <target>Datum</target>
+      </trans-unit>
+      <trans-unit id="rJ943mU" resname="Arrival Month">
+        <source>Arrival Month</source>
+        <target>Monat</target>
+      </trans-unit>
+      <trans-unit id="XFtlJ5t" resname="Arrival Weekday">
+        <source>Arrival Weekday</source>
+        <target>Wochentag</target>
+      </trans-unit>
+      <trans-unit id="_IFWKnO" resname="Arrival Day">
+        <source>Arrival Day</source>
+        <target>Tag</target>
+      </trans-unit>
+      <trans-unit id="dVTRSEK" resname="Arrival Time">
+        <source>Arrival Time</source>
+        <target>Uhrzeit</target>
+      </trans-unit>
+      <trans-unit id="fwdi9nr" resname="Arrival Hour">
+        <source>Arrival Hour</source>
+        <target>Stunde</target>
+      </trans-unit>
+      <trans-unit id="CqflCZx" resname="Ocassion">
+        <source>Ocassion</source>
+        <target>Anlass</target>
+      </trans-unit>
+      <trans-unit id="FTzarsV" resname="Assignment">
+        <source>Assignment</source>
+        <target>Zuweisung</target>
+      </trans-unit>
+      <trans-unit id="oa17QsI" resname="Mode of Transport">
+        <source>Mode of Transport</source>
+        <target>Transportart</target>
+      </trans-unit>
+      <trans-unit id="ezwkuWK" resname="Handover Point">
+        <source>Handover Point</source>
+        <target>Übergabepunkt</target>
+      </trans-unit>
+      <trans-unit id="oEYw74v" resname="Gender">
+        <source>Gender</source>
+        <target>Geschlecht</target>
+      </trans-unit>
+      <trans-unit id="Obc3DzC" resname="Age">
+        <source>Age</source>
+        <target>Alter</target>
+      </trans-unit>
+      <trans-unit id="0eAiaxp" resname="Requires Resus">
+        <source>Requires Resus</source>
+        <target>Schockraum (S+)</target>
+      </trans-unit>
+      <trans-unit id="L9Q4LcT" resname="Requires Cathlab">
+        <source>Requires Cathlab</source>
+        <target>Herzkatheter (H+)</target>
+      </trans-unit>
+      <trans-unit id="LIilwYI" resname="Is CPR">
+        <source>Is CPR</source>
+        <target>Reanimation (R+)</target>
+      </trans-unit>
+      <trans-unit id="YpoE5g9" resname="Is Ventilated?">
+        <source>Is Ventilated?</source>
+        <target>Beatmet (B+)</target>
+      </trans-unit>
+      <trans-unit id="UZ.4cYr" resname="Is in Shock">
+        <source>Is in Shock</source>
+        <target>Schock</target>
+      </trans-unit>
+      <trans-unit id="jPLlzrp" resname="Is with Physician">
+        <source>Is with Physician</source>
+        <target>Notarztbegleitet (N+)</target>
+      </trans-unit>
+      <trans-unit id="N7VqoVm" resname="Is Infectious">
+        <source>Is Infectious</source>
+        <target>Infektiös</target>
+      </trans-unit>
+      <trans-unit id="MaFNYCR" resname="Is Pregnant">
+        <source>Is Pregnant</source>
+        <target>Schwanger</target>
+      </trans-unit>
+      <trans-unit id="8XtOuw6" resname="Is Work Accident">
+        <source>Is Work Accident</source>
+        <target>Arbeitsunfall (BG+)</target>
+      </trans-unit>
+      <trans-unit id="fPwVxAJ" resname="Speciality detail">
+        <source>Speciality detail</source>
+        <target>Fachbereich</target>
+      </trans-unit>
+      <trans-unit id="xshpf7V" resname="Speciality was closed">
+        <source>Speciality was closed</source>
+        <target>Fachrichtung abgemeldet</target>
+      </trans-unit>
+      <trans-unit id="A9N_mlN" resname="Urgency">
+        <source>Urgency</source>
+        <target>Dringlichkeit</target>
+      </trans-unit>
+      <trans-unit id="ktH1lcB" resname="RMI">
+        <source>RMI</source>
+        <target>RMI</target>
+      </trans-unit>
+      <trans-unit id="JBwB1Vo" resname="PZC">
+        <source>PZC</source>
+        <target>PZC</target>
+      </trans-unit>
+      <trans-unit id="mOAis.x" resname="PZC with text">
+        <source>PZC with text</source>
+        <target>PZC mit Text</target>
+      </trans-unit>
+      <trans-unit id="9DiRCMT" resname="Secondary PZC">
+        <source>Secondary PZC</source>
+        <target>Sekundäre PZC</target>
+      </trans-unit>
+      <trans-unit id="0qbiRiw" resname="Secondary PZC with text">
+        <source>Secondary PZC with text</source>
+        <target>Sekundäre PZC mit Text</target>
+      </trans-unit>
+      <trans-unit id="qxqU7lm" resname="Edit Allocation">
+        <source>Edit Allocation</source>
+        <target>Einsatz bearbeiten</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

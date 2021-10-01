@@ -216,6 +216,30 @@ class AllocationRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('a');
 
+        if ($filter['search']) {
+            $query->where('a.id LIKE :search')
+                ->setParameter('search', '%'.$filter['search'].'%')
+            ;
+        }
+
+        if ($filter['hospital']) {
+            $query->andWhere('a.hospital = :location')
+                ->setParameter('location', $filter['hospital'])
+            ;
+        }
+
+        if ($filter['supplyArea']) {
+            $query->andWhere('a.supplyArea = :supplyArea')
+                ->setParameter('supplyArea', $filter['supplyArea'])
+            ;
+        }
+
+        if ($filter['dispatchArea']) {
+            $query->andWhere('a.dispatchArea = :dispatchArea')
+                ->setParameter('dispatchArea', $filter['dispatchArea'])
+            ;
+        }
+
         $query
             ->orderBy('a.createdAt', 'ASC')
             ->setMaxResults(self::PAGINATOR_PER_PAGE)

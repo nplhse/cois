@@ -1261,6 +1261,38 @@
         <source>Exit impersonation</source>
         <target>Identitätswechsel beenden</target>
       </trans-unit>
+      <trans-unit id="9Nx7Xew" resname="Allocations">
+        <source>Allocations</source>
+        <target>Einsätze</target>
+      </trans-unit>
+      <trans-unit id="qxqU7lm" resname="Edit Allocation">
+        <source>Edit Allocation</source>
+        <target>Einsatz bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="D2XwUmu" resname="Showing count Allocations">
+        <source>Showing count Allocations</source>
+        <target>Zeige %count% Einsätze an, mit %perPage% pro Seite.</target>
+      </trans-unit>
+      <trans-unit id="0jvOxQO" resname="Filter by Hospital">
+        <source>Filter by Hospital</source>
+        <target>Nach Klinik filtern</target>
+      </trans-unit>
+      <trans-unit id="3PEyGfw" resname="View Allocation">
+        <source>View Allocation</source>
+        <target>Einsatz ansehen</target>
+      </trans-unit>
+      <trans-unit id="W8x9O83" resname="Allocation">
+        <source>Allocation</source>
+        <target>Einsätze</target>
+      </trans-unit>
+      <trans-unit id="PLyHx2g" resname="True">
+        <source>True</source>
+        <target>Ja</target>
+      </trans-unit>
+      <trans-unit id="YKM_bPU" resname="False">
+        <source>False</source>
+        <target>Nein</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

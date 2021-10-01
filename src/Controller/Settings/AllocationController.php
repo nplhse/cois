@@ -5,6 +5,7 @@ namespace App\Controller\Settings;
 use App\Entity\Allocation;
 use App\Form\AllocationType;
 use App\Repository\AllocationRepository;
+use App\Repository\HospitalRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,23 +15,48 @@ use Symfony\Component\Routing\Annotation\Route;
 class AllocationController extends AbstractController
 {
     #[Route('/', name: 'app_settings_allocation_index', methods: ['GET'])]
-    public function index(Request $request, AllocationRepository $allocationRepository): Response
+    public function index(Request $request, AllocationRepository $allocationRepository, HospitalRepository $hospitalRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $filter = [];
-        $filter['search'] = $request->query->get('search');
+        $hospital = $request->query->get('hospital');
+        $supplyArea = $request->query->get('supplyArea');
+        $dispatchArea = $request->query->get('dispatchArea');
+
+        $filters = [];
+        $filters['search'] = $request->query->get('search');
+
+        if ($hospital) {
+            $filters['hospital'] = $hospital;
+        } else {
+            $filters['hospital'] = null;
+        }
+
+        if ($supplyArea) {
+            $filters['supplyArea'] = $supplyArea;
+        } else {
+            $filters['supplyArea'] = null;
+        }
+
+        if ($dispatchArea) {
+            $filters['dispatchArea'] = $dispatchArea;
+        } else {
+            $filters['dispatchArea'] = null;
+        }
 
         $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator = $allocationRepository->getAllocationPaginator($offset, $filter);
+        $paginator = $allocationRepository->getAllocationPaginator($offset, $filters);
 
         return $this->render('settings/allocation/index.html.twig', [
             'allocations' => $paginator,
-            'search' => $filter['search'],
-            'filters' => $filter,
+            'search' => $filters['search'],
+            'filters' => $filters,
             'perPage' => AllocationRepository::PAGINATOR_PER_PAGE,
             'previous' => $offset - AllocationRepository::PAGINATOR_PER_PAGE,
             'next' => min(count($paginator), $offset + AllocationRepository::PAGINATOR_PER_PAGE),
+            'hospitals' => $hospitalRepository->getHospitals(),
+            'supplyAreas' => $hospitalRepository->getSupplyAreas(),
+            'dispatchAreas' => $hospitalRepository->getDispatchAreas(),
         ]);
     }
 
