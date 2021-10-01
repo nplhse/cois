@@ -72,73 +72,77 @@
                 </thead>
                 <tbody>
                     {% for import in imports %}
-                        <tr>
-                            <td>
-                                {{ import.id }}
-                            </td>
-                            <td>
-                                <a href="{{
-                                    path(
-                                        'app_import_show',
-                                        {
-                                            id: import.id
-                                        }
-                                    )
-                                    }}">
-                                    {{ import.caption }}
-                                </a>
-                            </td>
-                            <td>
-                                {{ import.user.username }}
-                            </td>
-                            <td>
-                                {% if import.hospital %}
+                        {% if import.hospital != app.user.hospital %}
+                            <tr class="table-secondary text-muted">
+                        {% else %}
+                            <tr>
+                        {% endif %}
+                                <td>
+                                    {{ import.id }}
+                                </td>
+                                <td>
                                     <a href="{{
                                         path(
-                                            'app_hospital_show',
+                                            'app_import_show',
                                             {
-                                                id: import.hospital.id
+                                                id: import.id
                                             }
                                         )
                                         }}">
-                                        {{ import.hospital }}
+                                        {{ import.caption }}
                                     </a>
-                                {% else %}
-                                    {{ 'Import has no Hospital'|trans }}
-                                {% endif %}
-                            </td>
-                            <td>
-                                {{ import.createdAt|date('d.m.Y H:i') }}
-                            </td>
-                            <td>
-                                {% if import.status == 'finished' %}
-                                    <i class="bi bi-check-circle-fill text-success">
+                                </td>
+                                <td>
+                                    {{ import.user.username }}
+                                </td>
+                                <td>
+                                    {% if import.hospital %}
+                                        <a href="{{
+                                            path(
+                                                'app_hospital_show',
+                                                {
+                                                    id: import.hospital.id
+                                                }
+                                            )
+                                            }}">
+                                            {{ import.hospital }}
+                                        </a>
+                                    {% else %}
+                                        {{ 'Import has no Hospital'|trans }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {{ import.createdAt|date('d.m.Y H:i') }}
+                                </td>
+                                <td>
+                                    {% if import.status == 'finished' %}
+                                        <i class="bi bi-check-circle-fill text-success">
 
-                                    </i>
-                                {% elseif import.status == 'pending' %}
-                                    <div class="spinner-border text-secondary spinner-border-sm"
-                                        role="status">
-                                        <span class="visually-hidden">
-                                            {{ 'import.fields.loading'|trans }}
-                                        </span>
-                                    </div>
-                                {% elseif import.status == 'processing' %}
-                                    <div class="spinner-border text-primary spinner-border-sm"
-                                        role="status">
-                                        <span class="visually-hidden">
-                                            {{ 'import.fields.loading'|trans }}
-                                        </span>
-                                    </div>
-                                {% elseif import.status == 'failed' %}
-                                    <i class="bi bi-exclamation-circle-fill text-warning">
+                                        </i>
+                                    {% elseif import.status == 'pending' %}
+                                        <div class="spinner-border text-secondary spinner-border-sm"
+                                            role="status">
+                                            <span class="visually-hidden">
+                                                {{ 'import.fields.loading'|trans }}
+                                            </span>
+                                        </div>
+                                    {% elseif import.status == 'processing' %}
+                                        <div class="spinner-border text-primary spinner-border-sm"
+                                            role="status">
+                                            <span class="visually-hidden">
+                                                {{ 'import.fields.loading'|trans }}
+                                            </span>
+                                        </div>
+                                    {% elseif import.status == 'failed' %}
+                                        <i class="bi bi-exclamation-circle-fill text-warning">
 
-                                    </i>
-                                {% endif %}
-                            </td>
+                                        </i>
+                                    {% endif %}
+                                </td>
                         </tr>
                     {% else %}
                         <tr>
-                            <td scope="col" colspan="5" class="text-muted">
+                            <td scope="col" colspan="6" class="text-muted">
                                 {{ 'import.noUploads'|trans }}
                             </td>
                         </tr>
@@ -202,11 +206,13 @@
             {% endif %}
         </div>
         <div class="col-3">
-            <p>
-                <a class="btn btn-primary" href="{{ path('app_import_new') }}">
-                    {{ 'Import new Data'|trans({}, 'forms') }}
-                </a>
-            </p>
+            {% if app.user.hospital %}
+                <p>
+                    <a class="btn btn-primary" href="{{ path('app_import_new') }}">
+                        {{ 'Import new Data'|trans({}, 'forms') }}
+                    </a>
+                </p>
+            {% endif %}
 
             <div class="card">
                 <div class="card-header">

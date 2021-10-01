@@ -157,28 +157,30 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>{{ 'Tasks'|trans }}</th>
+                        <th>
+                            {{ 'Tasks'|trans }}
+                        </th>
                         <td>
                             <a class="btn btn-secondary"
-                               href="{{
-                               path(
-                                   'app_settings_user_welcome',
-                                   {
-                                       id: user.id
-                                   }
-                               )
-                               }}">
+                                href="{{
+                                path(
+                                    'app_settings_user_welcome',
+                                    {
+                                        id: user.id
+                                    }
+                                )
+                                }}">
                                 {{ 'Send Welcome E-Mail'|trans({}, 'forms') }}
                             </a>
                             <a class="btn btn-secondary"
-                               href="{{
-                               path(
-                                   'app_settings',
-                                   app.request.query.all|merge({
-                                   _switch_user: user.username
-                               })
-                               )
-                               }}">
+                                href="{{
+                                path(
+                                    'app_settings',
+                                    app.request.query.all|merge({
+                                        _switch_user: user.username
+                                    })
+                                )
+                                }}">
                                 {{ 'Impersonate'|trans({}, 'forms') }}
                             </a>
                         </td>
@@ -187,20 +189,22 @@
             </table>
 
             <div class="float-right">
-                <div class="btn-group float-right" role="group" aria-label="Basic example">
+                <div class="btn-group float-right"
+                    role="group"
+                    aria-label="Basic example">
                     <a class="btn btn-primary"
-                       href="{{
-                       path(
-                           'app_settings_user_edit',
-                           {
-                               id: user.id
-                           }
-                       )
-                       }}">
+                        href="{{
+                        path(
+                            'app_settings_user_edit',
+                            {
+                                id: user.id
+                            }
+                        )
+                        }}">
                         {{ 'Edit User'|trans({}, 'forms') }}
                     </a>
                     <a class="btn btn-outline-secondary"
-                       href="{{ path('app_settings_user_index') }}">
+                        href="{{ path('app_settings_user_index') }}">
                         {{ 'Back to list'|trans({}, 'forms') }}
                     </a>
                 </div>

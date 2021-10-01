@@ -71,11 +71,19 @@ class ImportRepository extends ServiceEntityRepository
         if ($filter['user']) {
             $query->andWhere('i.user = :user')
                 ->setParameter('user', $filter['user'])
+                ->orWhere('i.hospital = :hospital')
+                ->setParameter('hospital', $filter['hospital'])
             ;
+
+            if ($filter['hospital']) {
+                $query->orWhere('i.hospital = :hospital')
+                    ->setParameter('hospital', $filter['hospital'])
+                ;
+            }
         }
 
         $query
-            ->orderBy('i.createdAt', 'ASC')
+            ->orderBy('i.createdAt', 'DESC')
             ->setMaxResults(self::PAGINATOR_PER_PAGE)
             ->setFirstResult($offset)
             ->getQuery()

@@ -24,6 +24,7 @@ class ImportController extends AbstractController
         $filter = [];
         $filter['search'] = '';
         $filter['user'] = '';
+        $filter['hospital'] = '';
 
         $offset = max(0, $request->query->getInt('offset', 0));
         $paginator = $importRepository->getImportPaginator($offset, $filter);

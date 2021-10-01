@@ -30,14 +30,9 @@ class ImportController extends AbstractController
     {
         $hospital = $hospitalRepository->findOneBy(['owner' => $this->getUser()->getId()]);
 
-        if (!$hospital) {
-            $this->addFlash('danger', 'You been redirected, because you have to be owner of a hospital in order to access this page.');
-
-            return $this->redirectToRoute('allocation_index');
-        }
-
         $filter = [];
         $filter['user'] = $this->getUser();
+        $filter['hospital'] = $this->getUser()->getHospital();
         $filter['search'] = $request->query->get('search');
 
         $offset = max(0, $request->query->getInt('offset', 0));
@@ -55,14 +50,12 @@ class ImportController extends AbstractController
     /**
      * @Route("/new", name="app_import_new")
      */
-    public function new(Request $request, FileUploader $fileUploader, ImportRepository $importRepository, HospitalRepository $hospitalRepository): Response
+    public function new(Request $request, FileUploader $fileUploader, ImportRepository $importRepository): Response
     {
-        $hospital = $hospitalRepository->findOneBy(['owner' => $this->getUser()->getId()]);
+        $hospital = $this->getUser()->getHospital();
 
-        if (!$hospital) {
-            $this->addFlash('danger', 'You been redirected, because you have to be owner of a hospital in order to access this page.');
-
-            return $this->redirectToRoute('app_dashboard');
+        if (!isset($hospital)) {
+            return $this->redirectToRoute('app_import_index');
         }
 
         $import = new Import();
@@ -100,7 +93,7 @@ class ImportController extends AbstractController
 
             $this->dispatchMessage(new ImportDataMessage($import, $hospital));
 
-            $this->redirectToRoute('app_import_index');
+            return $this->redirectToRoute('app_import_index');
         }
 
         return $this->render('import/new.html.twig', [
@@ -126,11 +119,7 @@ class ImportController extends AbstractController
      */
     public function delete(Import $import, AllocationRepository $allocationRepository, EntityManagerInterface $em): Response
     {
-        $userIsOwner = $import->getUser() == $this->getUser();
-
-        if (!$userIsOwner) {
-            return $this->redirectToRoute('app_import_index');
-        }
+        $this->denyAccessUnlessGranted('delete', $import);
 
         $allocationRepository->deleteByImport($import);
 

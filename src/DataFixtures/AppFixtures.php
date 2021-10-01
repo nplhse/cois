@@ -32,29 +32,49 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
 
         $manager->persist($hospital);
 
-        $import = new Import();
-        $import->setName('DemoImport');
-        $import->setExtension('.csv');
-        $import->setPath('dummy');
-        $import->setMimeType('CSV');
-        $import->setSize(1234);
-        $import->setUser($this->getReference(UserFixtures::BASE_USER_REFERENCE));
-        $import->setHospital($hospital);
-        $import->setIsFixture(true);
-        $import->setCaption('Demo Import');
-        $import->setContents('allocation');
-        $import->setStatus('finished');
+        $import1 = new Import();
+        $import1->setName('DemoImport');
+        $import1->setExtension('.csv');
+        $import1->setPath('dummyPath');
+        $import1->setMimeType('CSV');
+        $import1->setSize(1234);
+        $import1->setUser($this->getReference(UserFixtures::OTHER_USER_REFERENCE));
+        $import1->setHospital($hospital);
+        $import1->setIsFixture(true);
+        $import1->setCaption('Demo Import');
+        $import1->setContents('allocation');
+        $import1->setStatus('finished');
+        $import1->setCreatedAt($date->addMinutes(rand(10, 150)));
 
-        $import->setCreatedAt($date->addMinutes(rand(10, 150)));
+        $manager->persist($import1);
 
-        $manager->persist($import);
+        $import2 = new Import();
+        $import2->setName('DemoImport');
+        $import2->setExtension('.csv');
+        $import2->setPath('dummy');
+        $import2->setMimeType('CSV');
+        $import2->setSize(1234);
+        $import2->setUser($this->getReference(UserFixtures::BASE_USER_REFERENCE));
+        $import2->setHospital($hospital);
+        $import2->setIsFixture(true);
+        $import2->setCaption('Demo Import');
+        $import2->setContents('allocation');
+        $import2->setStatus('finished');
+        $import2->setCreatedAt($date->addMinutes(rand(10, 150)));
+
+        $manager->persist($import2);
 
         for ($i = 1; $i <= 100; ++$i) {
             $date = Carbon::create(rand(2019, 2021), rand(1, 12), rand(1, 31), rand(0, 23), rand(0, 59), rand(0, 59), 'Europe/Berlin');
 
             $allocation = new Allocation();
             $allocation->setHospital($hospital);
-            $allocation->setImport($import);
+
+            if ($i <= 20) {
+                $allocation->setImport($import1);
+            } else {
+                $allocation->setImport($import2);
+            }
 
             $allocation->setDispatchArea('Test Area');
             $allocation->setSupplyArea('Test Area');
