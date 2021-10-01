@@ -95,9 +95,20 @@
                         <p class="card-text">
                             {{ 'dashboard.hospitals.text'|trans }}
                         </p>
-                        <a href="#" class="btn btn-primary" disabled>
-                            {{ 'dashboard.hospitals.button_edit'|trans }}
-                        </a>
+                        {% if app.user.hospital %}
+                            <a href="{{
+                                path(
+                                    'app_hospital_edit',
+                                    {
+                                        id: app.user.hospital.id
+                                    }
+                                )
+                                }}"
+                                class="btn btn-primary"
+                                disabled>
+                                {{ 'dashboard.hospitals.button_edit'|trans }}
+                            </a>
+                        {% endif %}
                         <a href="{{ path('app_hospital_index') }}"
                             class="btn btn-secondary">
                             {{ 'dashboard.hospitals.button_view'|trans }}
@@ -121,7 +132,7 @@
                 </div>
             {% endif %}
         </div>
-        <div class="col-md">
+        <div class="col-md-4">
             <div class="card text-dark bg-light mb-2">
                 <div class="card-body">
                     <h3>

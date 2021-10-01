@@ -1044,7 +1044,7 @@
       </trans-unit>
       <trans-unit id="7YtS5S3" resname="dashboard.hospitals.text">
         <source>dashboard.hospitals.text</source>
-        <target>__dashboard.hospitals.text</target>
+        <target>Explore the participating hospitals, or edit your own hospitals information.</target>
       </trans-unit>
       <trans-unit id="wbsZ3_o" resname="dashboard.hospitals.button_edit">
         <source>dashboard.hospitals.button_edit</source>

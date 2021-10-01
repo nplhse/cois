@@ -21,10 +21,16 @@ class DashboardController extends AbstractController
             return $this->redirectToRoute('app_default');
         }
 
+        if (null == $user->getHospital()) {
+            $allocationCount = 0;
+        } else {
+            $allocationCount = $allocationRepository->countAllocations($user->getHospital());
+        }
+
         return $this->render('dashboard/index.html.twig', [
             'allocations' => $allocationRepository->countAllocations(),
             'hospitals' => $hospitalRepository->countHospitals(),
-            'hospital_allocations' => $allocationRepository->countAllocations($hospitalRepository->findOneByUser($user)),
+            'hospital_allocations' => $allocationCount,
             'users' => $userRepository->countUsers(),
             'user_imports' => $importRepository->countImports($user),
             'imports' => $importRepository->countImports(),
