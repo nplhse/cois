@@ -3,7 +3,7 @@
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
 
 {% block title %}
-    {{ 'View Import'|trans }}: {{ import.name }} - {{ parent() }}
+    {{ 'View Import'|trans }}: {{ import.caption }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -49,7 +49,7 @@
             <table class="table table-hover">
                 <tbody>
                     <tr>
-                        <th>
+                        <th style="width: 30%">
                             {{ 'Id'|trans({}, 'forms') }}
                         </th>
                         <td>
@@ -61,7 +61,7 @@
                             {{ 'Name'|trans({}) }}
                         </th>
                         <td>
-                            {{ import.name }}
+                            {{ import.caption }}
                         </td>
                     </tr>
                     <tr>
@@ -198,7 +198,7 @@
                                     }})
                                 </p>
                             {% else %}
-                                <p>
+                                <p class="text-wrap">
                                     <a href="{{
                                         path(
                                             'app_files_allocations',
@@ -214,6 +214,24 @@
                                     </em>)
                                 </p>
                             {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Tasks'|trans }}
+                        </th>
+                        <td>
+                            <a class="btn btn-secondary"
+                                href="{{
+                                path(
+                                    'app_settings_import_refresh',
+                                    {
+                                        id: import.id
+                                    }
+                                )
+                                }}">
+                                {{ 'Refresh Import'|trans({}, 'forms') }}
+                            </a>
                         </td>
                     </tr>
                 </tbody>

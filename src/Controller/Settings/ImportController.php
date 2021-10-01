@@ -5,6 +5,7 @@ namespace App\Controller\Settings;
 use App\Entity\Import;
 use App\Form\ImportType;
 use App\Message\ImportDataMessage;
+use App\Repository\AllocationRepository;
 use App\Repository\ImportRepository;
 use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -124,5 +125,28 @@ class ImportController extends AbstractController
         }
 
         return $this->redirectToRoute('app_settings_import_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/refresh', name: 'app_settings_import_refresh')]
+    public function refresh(Request $request, Import $import, AllocationRepository $allocationRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $allocationRepository->deleteByImport($import);
+
+        $user = $import->getUser();
+
+        if (!$import->getHospital()) {
+            $hospital = $user->getHospital();
+        } else {
+            $hospital = $import->getHospital();
+        }
+
+        $command = new ImportDataMessage($import, $hospital);
+
+        $this->dispatchMessage($command);
+        $this->addFlash('success', 'Refreshed Import in database.');
+
+        return $this->redirectToRoute('app_settings_import_show', ['id' => $import->getId()]);
     }
 }

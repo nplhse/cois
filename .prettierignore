@@ -16,3 +16,4 @@ yarn.lock
 
 # Ignore Twig Macros
 /templates/_elements/macro/
+/templates/import/index.html.twig
