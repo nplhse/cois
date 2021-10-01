@@ -50,19 +50,19 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>
+                        <th style="width: 10%">
                             {{ 'Id'|trans({}, 'forms') }}
                         </th>
-                        <th>
-                            {{ 'Email'|trans({}, 'forms') }}
+                        <th style="width: 20%">
+                            {{ 'Username'|trans({}, 'forms') }}
                         </th>
-                        <th>
+                        <th style="width: 20%">
                             {{ 'Roles'|trans({}, 'forms') }}
                         </th>
-                        <th>
+                        <th style="width: 20%">
                             {{ 'Hospital'|trans({}, 'forms') }}
                         </th>
-                        <th>
+                        <th style="width: 10%">
                             {{ 'Actions'|trans({}, 'forms') }}
                         </th>
                     </tr>
@@ -82,7 +82,7 @@
                                         }
                                     )
                                     }}">
-                                    {{ user.email }}
+                                    {{ user.username }}
                                 </a>
                             </td>
                             <td>

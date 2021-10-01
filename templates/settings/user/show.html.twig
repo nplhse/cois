@@ -49,7 +49,7 @@
             <table class="table table-hover">
                 <tbody>
                     <tr>
-                        <th>
+                        <th style="width: 30%">
                             {{ 'Id'|trans({}, 'forms') }}
                         </th>
                         <td>
@@ -156,47 +156,54 @@
                             </ul>
                         </td>
                     </tr>
+                    <tr>
+                        <th>{{ 'Tasks'|trans }}</th>
+                        <td>
+                            <a class="btn btn-secondary"
+                               href="{{
+                               path(
+                                   'app_settings_user_welcome',
+                                   {
+                                       id: user.id
+                                   }
+                               )
+                               }}">
+                                {{ 'Send Welcome E-Mail'|trans({}, 'forms') }}
+                            </a>
+                            <a class="btn btn-secondary"
+                               href="{{
+                               path(
+                                   'app_settings',
+                                   app.request.query.all|merge({
+                                   _switch_user: user.username
+                               })
+                               )
+                               }}">
+                                {{ 'Impersonate'|trans({}, 'forms') }}
+                            </a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <a class="btn btn-primary"
-                    href="{{
-                    path(
-                        'app_settings_user_edit',
-                        {
-                            id: user.id
-                        }
-                    )
-                    }}">
-                    {{ 'Edit User'|trans({}, 'forms') }}
-                </a>
-                <a class="btn btn-secondary"
-                    href="{{
-                    path(
-                        'app_settings_user_welcome',
-                        {
-                            id: user.id
-                        }
-                    )
-                    }}">
-                    {{ 'Send Welcome E-Mail'|trans({}, 'forms') }}
-                </a>
-                <a class="btn btn-secondary"
-                    href="{{
-                    path(
-                        'app_settings',
-                        app.request.query.all|merge({
-                            _switch_user: user.username
-                        })
-                    )
-                    }}">
-                    {{ 'Impersonate'|trans({}, 'forms') }}
-                </a>
-                <a class="btn btn-outline-secondary"
-                    href="{{ path('app_settings_user_index') }}">
-                    {{ 'Back to list'|trans({}, 'forms') }}
-                </a>
+            <div class="float-right">
+                <div class="btn-group float-right" role="group" aria-label="Basic example">
+                    <a class="btn btn-primary"
+                       href="{{
+                       path(
+                           'app_settings_user_edit',
+                           {
+                               id: user.id
+                           }
+                       )
+                       }}">
+                        {{ 'Edit User'|trans({}, 'forms') }}
+                    </a>
+                    <a class="btn btn-outline-secondary"
+                       href="{{ path('app_settings_user_index') }}">
+                        {{ 'Back to list'|trans({}, 'forms') }}
+                    </a>
+                </div>
             </div>
         </div>
     </div>
