@@ -185,7 +185,7 @@
                         </h5>
                         <p class="mb-2">
                             {% for hospital in hospitals %}
-                                {% if hospital.name == filters.hospital %}
+                                {% if hospital.id == filters.hospital %}
                                     <span class="badge bg-warning">
                                         <i class="bi bi-tag"></i>
                                         <a class="link-light"
@@ -209,7 +209,7 @@
                                             path(
                                                 'app_settings_allocation_index',
                                                 app.request.query.all|merge({
-                                                    hospital: hospital.name,
+                                                    hospital: hospital.id,
                                                     offset: '0'
                                                 })
                                             )

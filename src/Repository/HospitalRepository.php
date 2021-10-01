@@ -46,7 +46,7 @@ class HospitalRepository extends ServiceEntityRepository
     public function getHospitals(): array
     {
         return $this->createQueryBuilder('h')
-            ->select('h.name')
+            ->select('h.name, h.id')
             ->distinct(true)
             ->getQuery()
             ->getArrayResult()
