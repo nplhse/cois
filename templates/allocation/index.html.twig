@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
 {% block title %}
     {{ 'allocations.title'|trans }} - {{ parent() }}
 {% endblock %}
@@ -30,5 +32,36 @@
 {% endblock %}
 
 {% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            label: 'Allocations'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">
+                Current Version
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_allocation_index') }}">
+                Preview new Version
+            </a>
+        </li>
+    </ul>
+
     <div id="app"></div>
 {% endblock %}

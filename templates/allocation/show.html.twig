@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
 {% block title %}
     {{ 'allocations.show.title'|trans }} (#{{ allocation.id }}) - {{ parent() }}
 {% endblock %}
@@ -17,13 +19,21 @@
 {% endblock %}
 
 {% block body %}
-    <div class="d-flex justify-content-end">
-        <div class="btn-group" role="group" aria-label="Basic outlined example">
-            <a class="btn btn-outline-primary"
-                href="{{ path('allocation_index') }}"
-                role="button">
-                {{ 'allocations.link.back'|trans }}
-            </a>
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            label: 'Allocations'|trans
+                        }
+                    ]
+                )
+            }}
         </div>
     </div>
 
