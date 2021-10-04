@@ -43,7 +43,7 @@ class ImportType extends AbstractType
                 // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [
                     new File([
-                        'maxSize' => '2048k',
+                        'maxSize' => '12500k',
                         'mimeTypes' => [
                             'text/plain',
                             'text/csv',
