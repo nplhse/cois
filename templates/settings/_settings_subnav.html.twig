@@ -59,19 +59,19 @@
     <ul class="list-group">
         {% if
             app.request.attributes.get('_route')
-                starts with 'app_settings_user' %}
+                starts with 'app_settings_allocation' %}
             <li class="list-group-item active">
-                <i class="bi bi-people-fill"></i>
+                <i class="bi bi-collection-fill"></i>
                 <a class="text-light"
-                    href="{{ path('app_settings_user_index') }}">
-                    {{ 'Users'|trans }}
+                    href="{{ path('app_settings_allocation_index') }}">
+                    {{ 'Allocations'|trans }}
                 </a>
             </li>
         {% else %}
             <li class="list-group-item">
-                <i class="bi bi-people"></i>
-                <a href="{{ path('app_settings_user_index') }}">
-                    {{ 'Users'|trans }}
+                <i class="bi bi-collection"></i>
+                <a href="{{ path('app_settings_allocation_index') }}">
+                    {{ 'Allocations'|trans }}
                 </a>
             </li>
         {% endif %}
@@ -113,19 +113,37 @@
         {% endif %}
         {% if
             app.request.attributes.get('_route')
-                starts with 'app_settings_allocation' %}
+                starts with 'app_settings_task' %}
             <li class="list-group-item active">
-                <i class="bi bi-collection-fill"></i>
+                <i class="bi bi-list-check"></i>
                 <a class="text-light"
-                    href="{{ path('app_settings_allocation_index') }}">
-                    {{ 'Allocations'|trans }}
+                    href="{{ path('app_settings_task_index') }}">
+                    {{ 'Tasks'|trans }}
                 </a>
             </li>
         {% else %}
             <li class="list-group-item">
-                <i class="bi bi-collection"></i>
-                <a href="{{ path('app_settings_allocation_index') }}">
-                    {{ 'Allocations'|trans }}
+                <i class="bi bi-list-check"></i>
+                <a href="{{ path('app_settings_task_index') }}">
+                    {{ 'Tasks'|trans }}
+                </a>
+            </li>
+        {% endif %}
+        {% if
+            app.request.attributes.get('_route')
+                starts with 'app_settings_user' %}
+            <li class="list-group-item active">
+                <i class="bi bi-people-fill"></i>
+                <a class="text-light"
+                    href="{{ path('app_settings_user_index') }}">
+                    {{ 'Users'|trans }}
+                </a>
+            </li>
+        {% else %}
+            <li class="list-group-item">
+                <i class="bi bi-people"></i>
+                <a href="{{ path('app_settings_user_index') }}">
+                    {{ 'Users'|trans }}
                 </a>
             </li>
         {% endif %}

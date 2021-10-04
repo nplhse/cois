@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'Tasks'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_settings'),
+                            label: 'Settings'|trans
+                        },
+                        {
+                            label: 'Tasks'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            {{ include('settings/_settings_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <h1>
+                {{ 'Tasks'|trans }}
+            </h1>
+
+            <table class="table table-hover">
+                <thead>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <i class="bi bi-envelope-open"></i> E-Mail
+                        </td>
+                        <td>
+                            Monthly reminder to import data for Hospital owners.
+                        </td>
+                        <td>
+                            <a class="btn btn-primary"
+                                href="{{ path('app_settings_task_run1') }}">
+                                <i class="bi bi-arrow-right-circle-fill"></i> Send
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

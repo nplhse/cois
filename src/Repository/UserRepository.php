@@ -62,4 +62,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         return new Paginator($query);
     }
+
+    public function getHospitalOwnerRecipients(): array
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->leftJoin('u.hospital', 'h')
+            ->where('h.owner is NOT NULL')
+            ->orderBy('u.id', 'ASC')
+            ->getQuery()
+            ->execute();
+
+        return $qb;
+    }
 }

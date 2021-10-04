@@ -12,3 +12,4 @@ framework:
         routing:
             'App\Message\ImportDataMessage': sync
             'Symfony\Component\Mailer\Messenger\SendEmailMessage': sync
+            App\Message\SendImportReminderMessage: sync

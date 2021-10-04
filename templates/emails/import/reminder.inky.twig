@@ -1,0 +1,48 @@
+{% extends 'emails/base.inky.twig' %}
+
+{% block content %}
+    <row>
+        <columns>
+            <h1>
+                <center>
+                    {{ 'Want to upload new data?'|trans({}, 'emails') }}
+                </center>
+            </h1>
+            <p>
+                {{
+                    'Hey there %username%!'|trans(
+                        {
+                            '%username%': user.username
+                        },
+                        'emails'
+                    )
+                }}
+            </p>
+            <p>
+                {{
+                    'Have you noticed? Yet another month has passed. And you know what? We think that is a great moment to upload some new data to our project!'|trans(
+                        {},
+                        'emails'
+                    )
+                }}
+            </p>
+            <p>
+                {{
+                    'But how do you ask? Very good question. The process is simple: Just login into IVENA, dump all the allocations from the last month as .CSV file and submit them via our form.'|trans(
+                        {},
+                        'emails'
+                    )
+                }}
+            </p>
+        </columns>
+    </row>
+    <row>
+        <columns>
+            <center>
+                <button href="{{ link|raw }}">
+                    {{ 'Click here to upload new data'|trans({}, 'emails') }}
+                </button>
+            </center>
+        </columns>
+    </row>
+{% endblock %}

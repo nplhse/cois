@@ -6,11 +6,14 @@
 <container>
     <row class="header">
         <columns>
+            <spacer size="10"></spacer>
             <center>
                 <a href="{{ url('app_dashboard') }}">
                     {{ 'COIS - Collaborative IVENA statistics'|trans }}
                 </a>
             </center>
+
+            <hr />
         </columns>
     </row>
     {% block content %}

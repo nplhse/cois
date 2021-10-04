@@ -28,6 +28,21 @@ class MailerService
         $this->mailerFrom = $mailerFrom;
     }
 
+    public function sendImportReminderEmail(User $user): void
+    {
+        $email = (new TemplatedEmail())
+            ->to(new Address($user->getEmail()))
+            ->from(new Address($this->mailerSender, $this->mailerFrom))
+            ->subject('Monthly reminder to import new data')
+            ->htmlTemplate('emails/import/reminder.inky.twig')
+            ->context([
+                'user' => $user,
+                'link' => $this->router->generate('app_import_new', [], UrlGenerator::ABSOLUTE_URL),
+            ]);
+
+        $this->mailer->send($email);
+    }
+
     public function sendPasswordResetEmail(User $user, ResetPasswordToken $resetToken): void
     {
         $email = (new TemplatedEmail())

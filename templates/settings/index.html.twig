@@ -87,12 +87,16 @@
                     <div class="col-4">
                         <div class="card">
                             <div class="card-body text-center">
-                                <a href="{{ path('app_settings_user_index') }}">
-                                    <i class="bi bi-people"
+                                <a href="{{
+                                    path(
+                                        'app_settings_allocation_index'
+                                    )
+                                    }}">
+                                    <i class="bi bi-collection"
                                         style="font-size: 5rem; color: cornflowerblue;">
 
                                     </i><br />
-                                    {{ 'Users'|trans }}
+                                    {{ 'Allocations'|trans }}
                                 </a>
                             </div>
                         </div>
@@ -136,16 +140,25 @@
                     <div class="col-4">
                         <div class="card">
                             <div class="card-body text-center">
-                                <a href="{{
-                                    path(
-                                        'app_settings_allocation_index'
-                                    )
-                                    }}">
-                                    <i class="bi bi-collection"
+                                <a href="{{ path('app_settings_user_index') }}">
+                                    <i class="bi bi-people"
                                         style="font-size: 5rem; color: cornflowerblue;">
 
                                     </i><br />
-                                    {{ 'Allocations'|trans }}
+                                    {{ 'Users'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <a href="{{ path('app_settings_task_index') }}">
+                                    <i class="bi bi-list-check"
+                                        style="font-size: 5rem; color: cornflowerblue;">
+
+                                    </i><br />
+                                    {{ 'Tasks'|trans }}
                                 </a>
                             </div>
                         </div>
