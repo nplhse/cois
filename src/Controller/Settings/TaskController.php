@@ -23,8 +23,6 @@ class TaskController extends AbstractController
 
         $message = new SendImportReminderMessage($recipients);
 
-        dump($message);
-
         $this->dispatchMessage($message);
 
         $this->addFlash('success', 'Import Reminder successfully sent to Hospital owners.');

@@ -3,6 +3,7 @@
 namespace App\Controller\Settings;
 
 use App\Form\EmailChangeType;
+use App\Form\EmailSettingsType;
 use App\Service\MailerService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -70,10 +71,40 @@ class ChangeEmailController extends AbstractController
             return $this->redirectToRoute('app_settings_email');
         }
 
+        $form2 = $this->createForm(EmailSettingsType::class, $user);
+        $form2->handleRequest($request);
+
+        if ($form2->isSubmitted() && $form2->isValid()) {
+            $data = $form2->getData();
+
+            if ($data->getAllowsEmail()) {
+                $user->setAllowsEmail(true);
+
+                if ($data->getAllowsEmailReminder()) {
+                    $user->setAllowsEmailReminder(true);
+                } else {
+                    $user->setAllowsEmailReminder(false);
+                }
+            } else {
+                $user->setAllowsEmail(false);
+                $user->setAllowsEmailReminder(false);
+            }
+
+            $this->addFlash('success', $this->translator->trans('Updated your notification Settings.'));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_settings_email');
+        }
+
         return $this->render('settings/email/index.html.twig', [
             'user' => $user,
             'form_email' => $form->createView(),
             'errors' => $form->getErrors(true, false),
+            'form_settings' => $form2->createView(),
+            'errors2' => $form->getErrors(true, false),
         ]);
     }
 

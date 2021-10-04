@@ -79,6 +79,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private ?bool $isParticipant = false;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private ?bool $allowsEmail;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private ?bool $allowsEmailReminder;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -259,5 +269,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return false;
+    }
+
+    public function getAllowsEmail(): ?bool
+    {
+        return $this->allowsEmail;
+    }
+
+    public function setAllowsEmail(?bool $allowsEmail): self
+    {
+        $this->allowsEmail = $allowsEmail;
+
+        return $this;
+    }
+
+    public function getAllowsEmailReminder(): ?bool
+    {
+        return $this->allowsEmailReminder;
+    }
+
+    public function setAllowsEmailReminder(?bool $allowsEmailReminder): self
+    {
+        $this->allowsEmailReminder = $allowsEmailReminder;
+
+        return $this;
     }
 }

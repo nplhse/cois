@@ -3,7 +3,7 @@
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
 
 {% block title %}
-    {{ 'Change your E-Mail'|trans }} - {{ parent() }}
+    {{ 'E-Mail settings'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -60,6 +60,40 @@
             {{ form_row(form_email.submit) }}
 
             {{ form_end(form_email) }}
+
+            <hr />
+
+            <h1>
+                {{ 'Mange your notification settings'|trans }}
+            </h1>
+
+            {{ form_start(form_settings) }}
+
+            {{
+                form_row(
+                    form_settings.allowsEmail,
+                    {
+                        label_attr: {
+                            class: 'switch-custom'
+                        }
+                    }
+                )
+            }}
+
+            {{
+                form_row(
+                    form_settings.allowsEmailReminder,
+                    {
+                        label_attr: {
+                            class: 'switch-custom'
+                        }
+                    }
+                )
+            }}
+
+            {{ form_row(form_settings.submit) }}
+
+            {{ form_end(form_settings) }}
         </div>
     </div>
 {% endblock %}

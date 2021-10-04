@@ -20,7 +20,9 @@ final class SendImportReminderMessageHandler implements MessageHandlerInterface
         $users = $message->getRecipients();
 
         foreach ($users as $user) {
-            $this->mailer->sendImportReminderEmail($user);
+            if ($user->getAllowsEmail() && $user->getAllowsEmailReminder()) {
+                $this->mailer->sendImportReminderEmail($user);
+            }
         }
     }
 }
