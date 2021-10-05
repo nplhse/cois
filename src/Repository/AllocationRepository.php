@@ -6,6 +6,7 @@ use App\Entity\Allocation;
 use App\Entity\Hospital;
 use App\Entity\Import;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -217,8 +218,11 @@ class AllocationRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('a');
 
         if ($filter['search']) {
-            $query->where('a.id LIKE :search')
-                ->setParameter('search', '%'.$filter['search'].'%')
+            $search = str_replace($filter['search'], '+', ' ');
+
+            $query->where('a.PZCText LIKE :search')
+                ->andWhere('a.occasion LIKE :search')
+                ->setParameter('search', '%'.$search.'%')
             ;
         }
 
@@ -238,6 +242,54 @@ class AllocationRepository extends ServiceEntityRepository
             $query->andWhere('a.dispatchArea = :dispatchArea')
                 ->setParameter('dispatchArea', $filter['dispatchArea'])
             ;
+        }
+
+        if ($filter['start']) {
+            $date = \DateTime::createFromFormat('Y-m-d', $filter['start']);
+
+            $query->andWhere('a.createdAt >= :startDate')
+                ->setParameter('startDate', $date, Types::DATE_IMMUTABLE)
+            ;
+        }
+
+        if ($filter['end']) {
+            $date = \DateTime::createFromFormat('Y-m-d', $filter['end']);
+
+            $query->andWhere('a.createdAt <= :endDate')
+                ->setParameter('endDate', $date, Types::DATE_IMMUTABLE)
+            ;
+        }
+
+        if ($filter['reqResus']) {
+            $query->andWhere('a.requiresResus = TRUE');
+        }
+
+        if ($filter['reqCath']) {
+            $query->andWhere('a.requiresCathlab = TRUE');
+        }
+
+        if ($filter['isCPR']) {
+            $query->andWhere('a.isCPR = TRUE');
+        }
+
+        if ($filter['isVent']) {
+            $query->andWhere('a.isVentilated = TRUE');
+        }
+
+        if ($filter['isShock']) {
+            $query->andWhere('a.isShock = TRUE');
+        }
+
+        if ($filter['isWithDoc']) {
+            $query->andWhere('a.isWithPhysician = TRUE');
+        }
+
+        if ($filter['isPreg']) {
+            $query->andWhere('a.isPregnant = TRUE');
+        }
+
+        if ($filter['isWork']) {
+            $query->andWhere('a.isWorkAccident = TRUE');
         }
 
         $query

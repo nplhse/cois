@@ -3,32 +3,7 @@
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
 
 {% block title %}
-    {{ 'allocations.title'|trans }} - {{ parent() }}
-{% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
-
-    {{ encore_entry_link_tags('allocations') }}
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-
-    {{ encore_entry_script_tags('allocations') }}
-
-    <script>
-        {% if hospitals is defined %}
-            window.hospitals = {{ hospitals|raw }};
-        {% else %}
-            window.hospitals = null;
-        {% endif %}
-        {% if hospital_links is defined %}
-            window.hospitalLinks = {{ hospital_links|raw }};
-        {% else %}
-            window.hospitalLinks = null;
-        {% endif %}
-    </script>
+    {{ 'Allocations'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -50,18 +25,608 @@
         </div>
     </div>
 
-    <ul class="nav nav-tabs mb-3">
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">
-                Current Version
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ path('app_allocation_index') }}">
-                Preview new Version
-            </a>
-        </li>
-    </ul>
+    <div class="row">
+        <div class="col">
+            <div class="float-end">
+                <a class="btn btn-primary"
+                    data-bs-toggle="collapse"
+                    href="#collapseFilters"
+                    role="button"
+                    aria-expanded="true"
+                    aria-controls="collapseFilters">
+                    <i class="bi bi-funnel"></i> Toogle Filters
+                </a>
+            </div>
 
-    <div id="app"></div>
+            <h1>
+                {{ 'Allocations'|trans }}
+            </h1>
+
+            <p>
+                {{
+                    'Showing count Allocations'|trans({
+                        '%perPage%': perPage,
+                        '%count%': allocations.count
+                    })
+                }}
+            </p>
+
+            {% if search %}
+                <div class="alert alert-info" role="alert">
+                    {{ 'Searching for'|trans }}: "<i>{{ search }}</i>" | <a href="{{
+                        path(
+                            'app_allocation_index',
+                            app.request.query.all|merge({
+                                search: '',
+                                offset: '0'
+                            })
+                        )
+                        }}">
+                        {{ 'Click here to end search'|trans }}
+                    </a>
+                </div>
+            {% endif %}
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            {{
+                                'Dispatch Area'
+                                    |trans({}, 'forms')
+                                    |replace({
+                                        Landreis: ''
+                                    })
+                            }}
+                        </th>
+                        <th>
+                            {{ 'Hospital'|trans({}, 'forms') }}
+                        </th>
+                        <th>
+                            {{ 'Times'|trans({}, 'forms') }}
+                        </th>
+                        <th>
+                            {{ 'Dem.'|trans({}, 'forms') }}
+                        </th>
+                        <th>
+                            {{ 'Urgency'|trans({}, 'forms') }}
+                        </th>
+                        <th>
+                            {{ 'Dispatch'|trans({}, 'forms') }}
+                        </th>
+                        <th>
+                            {{ 'Properties'|trans({}, 'forms') }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for allocation in allocations %}
+                        <tr>
+                            <td>
+                                <a href="{{
+                                    path(
+                                        'app_allocation_show',
+                                        {
+                                            id: allocation.id
+                                        }
+                                    )
+                                    }}">
+                                    <i class="bi bi-search"></i>
+                                </a>
+                            </td>
+                            <td>
+                                {{ allocation.dispatchArea }}
+                            </td>
+                            <td>
+                                <a href="{{
+                                    path(
+                                        'app_hospital_show',
+                                        {
+                                            id: allocation.hospital
+                                        }
+                                    )
+                                    }}">
+                                    {{ allocation.hospital.name }}
+                                </a>
+                            </td>
+                            <td>
+                                <p>
+                                    {{ allocation.createdAt|date('d.m.y H:i') }}<br />
+                                    {{ allocation.arrivalAt|date('d.m.y H:i') }}
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    {{ allocation.gender }}<br />
+                                    {{ allocation.age }}
+                                </p>
+                            </td>
+                            <td>
+                                {% if allocation.SK == '1' %}
+                                    <p class="text-danger fw-bold">
+                                        {{ allocation.SK }}
+                                    </p>
+                                {% elseif allocation.SK == '2' %}
+                                    <p class="text-warning fw-bold">
+                                        {{ allocation.SK }}
+                                    </p>
+                                {% else %}
+                                    <p class="text-success fw-bold">
+                                        {{ allocation.SK }}
+                                    </p>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <p>
+                                    <strong>{{ allocation.speciality }}</strong><br />
+                                    {{ allocation.PZCText }}
+                                </p>
+                            </td>
+                            <td>
+                                <span class="text-danger">
+                                    {% if allocation.requiresResus %}
+                                        {{ 'S+'|trans }}
+                                    {% endif %}
+                                    {% if allocation.requiresCathlab %}
+                                        {{ 'H+'|trans }}
+                                    {% endif %}
+                                    {% if allocation.isCPR %}
+                                        {{ 'R+'|trans }}
+                                    {% endif %}
+                                    {% if allocation.isVentilated %}
+                                        {{ 'B+'|trans }}
+                                    {% endif %}
+                                    {% if allocation.isWithPhysician %}
+                                        {{ 'N+'|trans }}
+                                    {% endif %}
+                                    {% if allocation.isWorkAccident %}
+                                        {{ 'BG+'|trans }}
+                                    {% endif %}
+                                    {% if allocation.isPregnant %}
+                                        {{ 'Pregnant'|trans }}
+                                    {% endif %}
+                                </span><br />
+                                <span class="text-warning">
+                                    {% if allocation.isInfectious == 'Keine' %}
+
+                                    {% else %}
+                                        {{ allocation.isInfectious }}
+                                    {% endif %}
+                                </span>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">
+                                {{ 'No Allocations found'|trans({}, 'forms') }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% if (allocations|length) > 0 %}
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        {% if previous >= 0 %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="{{
+                                    path(
+                                        'app_allocation_index',
+                                        app.request.query.all|merge({
+                                            offset: previous
+                                        })
+                                    )
+                                    }}">
+                                    {{ 'Previous'|trans }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link"
+                                    href="#"
+                                    tabindex="-1"
+                                    aria-disabled="true">
+                                    {{ 'Previous'|trans }}
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if next < (allocations|length) %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="{{
+                                    path(
+                                        'app_allocation_index',
+                                        app.request.query.all|merge({
+                                            offset: next
+                                        })
+                                    )
+                                    }}">
+                                    {{ 'Next'|trans }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link"
+                                    href="#"
+                                    tabindex="-1"
+                                    aria-disabled="true">
+                                    {{ 'Next'|trans }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+        </div>
+        <div class="col-3 collapse" id="collapseFilters">
+            <div class="card">
+                <div class="card-header">
+                    {{ 'Filters'|trans({}, 'forms') }}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ 'Search'|trans }}
+                    </h5>
+                    <form>
+                        <div class="input-group mb-3">
+                            {% if search %}
+                                <input type="text"
+                                    name="search"
+                                    class="form-control"
+                                    placeholder="{{ search }}"
+                                    aria-label="{{ 'Search'|trans }}" />
+                            {% else %}
+                                <input type="text"
+                                    name="search"
+                                    class="form-control"
+                                    placeholder="{{ 'Search by PZC or Text'|trans }}"
+                                    aria-label="{{ 'Search'|trans }}" />
+                            {% endif %}
+                            <button type="submit"
+                                class="btn btn-outline-secondary">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <h5 class="card-title">
+                        {{ 'Filter by SupplyArea'|trans }}
+                    </h5>
+                    <p>
+                        {% for supplyArea in supplyAreas %}
+                            {% if supplyArea.supplyArea == filters.supplyArea %}
+                                <span class="badge bg-warning">
+                                    <i class="bi bi-tag"></i>
+                                    <a class="link-light"
+                                        href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            app.request.query.all|merge({
+                                                supplyArea: '',
+                                                offset: '0'
+                                            })
+                                        )
+                                        }}">
+                                        {{ supplyArea.supplyArea }}
+                                    </a>
+                                </span>
+                            {% else %}
+                                <span class="badge bg-primary">
+                                    <i class="bi bi-tag"></i>
+                                    <a class="link-light"
+                                        href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            app.request.query.all|merge({
+                                                supplyArea: supplyArea.supplyArea,
+                                                offset: '0'
+                                            })
+                                        )
+                                        }}">
+                                        {{ supplyArea.supplyArea }}
+                                    </a>
+                                </span>
+                            {% endif %}
+                        {% else %}
+                            {{ 'No SupplyAreas found'|trans }}
+                        {% endfor %}
+                    </p>
+
+                    <h5 class="card-title">
+                        {{ 'Filter by DispatchArea'|trans }}
+                    </h5>
+                    <p>
+                        {% for dispatchArea in dispatchAreas %}
+                            {% if
+                                dispatchArea.dispatchArea
+                                    == filters.dispatchArea %}
+                                <span class="badge bg-warning">
+                                    <i class="bi bi-tag"></i>
+                                    <a class="link-light"
+                                        href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            app.request.query.all|merge({
+                                                dispatchArea: '',
+                                                offset: '0'
+                                            })
+                                        )
+                                        }}">
+                                        {{ dispatchArea.dispatchArea }}
+                                    </a>
+                                </span>
+                            {% else %}
+                                <span class="badge bg-primary">
+                                    <i class="bi bi-tag"></i>
+                                    <a class="link-light"
+                                        href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            app.request.query.all|merge({
+                                                dispatchArea: dispatchArea.dispatchArea,
+                                                offset: '0'
+                                            })
+                                        )
+                                        }}">
+                                        {{ dispatchArea.dispatchArea }}
+                                    </a>
+                                </span>
+                            {% endif %}
+                        {% else %}
+                            {{ 'No DispatchAreas found'|trans }}
+                        {% endfor %}
+                    </p>
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <h5 class="card-title">
+                            {{ 'Filter by Hospital'|trans }}
+                        </h5>
+                        <p class="mb-2">
+                            {% for hospital in hospitals %}
+                                {% if hospital.id == filters.hospital %}
+                                    <span class="badge bg-warning">
+                                        <i class="bi bi-tag"></i>
+                                        <a class="link-light"
+                                            href="{{
+                                            path(
+                                                'app_allocation_index',
+                                                app.request.query.all|merge({
+                                                    hospital: '',
+                                                    offset: '0'
+                                                })
+                                            )
+                                            }}">
+                                            {{ hospital.name }}
+                                        </a>
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-primary">
+                                        <i class="bi bi-tag"></i>
+                                        <a class="link-light"
+                                            href="{{
+                                            path(
+                                                'app_allocation_index',
+                                                app.request.query.all|merge({
+                                                    hospital: hospital.id,
+                                                    offset: '0'
+                                                })
+                                            )
+                                            }}">
+                                            {{ hospital.name }}
+                                        </a>
+                                    </span>
+                                {% endif %}
+                            {% else %}
+                                {{ 'No Hospitals found'|trans }}
+                            {% endfor %}
+                        </p>
+                    {% elseif app.user.hospital %}
+                        <h5 class="card-title">
+                            {{ 'Filter by Hospital'|trans }}
+                        </h5>
+                        <p class="mb-2">
+                            {% if app.user.hospital.id == filters.hospital %}
+                                <span class="badge bg-warning">
+                                    <i class="bi bi-tag"></i>
+                                    <a class="link-light"
+                                        href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            app.request.query.all|merge({
+                                                hospital: '',
+                                                offset: '0'
+                                            })
+                                        )
+                                        }}">
+                                        {{ app.user.hospital.name }}
+                                    </a>
+                                </span>
+                            {% else %}
+                                <span class="badge bg-primary">
+                                    <i class="bi bi-tag"></i>
+                                    <a class="link-light"
+                                        href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            app.request.query.all|merge({
+                                                hospital: app.user.hospital.id,
+                                                offset: '0'
+                                            })
+                                        )
+                                        }}">
+                                        {{ app.user.hospital.name }}
+                                    </a>
+                                </span>
+                            {% endif %}
+                        </p>
+                    {% endif %}
+
+                    <h5 class="card-title">
+                        {{ 'Filter by Dates'|trans }}
+                    </h5>
+                    <form>
+                        <div class="input-group mb-3">
+                            <input type="date"
+                                name="start"
+                                class="form-control"
+                                value="{{ filters.start }}"
+                                aria-label="{{ 'Start Date'|trans }}" />
+                            <input type="date"
+                                name="end"
+                                class="form-control"
+                                value="{{ filters.end }}"
+                                aria-label="{{ 'End Date'|trans }}" />
+                            <button type="submit"
+                                class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-right-square"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <h5 class="card-title">
+                        {{ 'Filter by Properties'|trans }}
+                    </h5>
+                    <form>
+                        <div class="form-check form-switch">
+                            {% if filters.reqResus %}
+                                <input class="form-check-input"
+                                    type="checkbox"
+                                    name="reqResus"
+                                    checked="checked" />
+                            {% else %}
+                                <input class="form-check-input"
+                                    type="checkbox"
+                                    name="reqResus" />
+                            {% endif %}
+                            <label class="form-check-label"
+                                for="flexSwitchCheckDefault">
+                                {{ 'Requires Resuscitation'|trans }}
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            {% if filters.reqCath %}
+                                <input class="form-check-input"
+                                    type="checkbox"
+                                    name="reqCath"
+                                    checked="checked" />
+                            {% else %}
+                                <input class="form-check-input"
+                                    type="checkbox"
+                                    name="reqCath" />
+                            {% endif %}
+                            <label class="form-check-label"
+                                for="flexSwitchCheckDefault">
+                                {{ 'Requires Cathlab'|trans }}
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            {% if filters.isCPR %}
+                                <input class="form-check-input"
+                                    type="checkbox"
+                                    name="isCPR"
+                                    checked="checked" />
+                            {% else %}
+                                <input class="form-check-input"
+                                    type="checkbox"
+                                    name="isCPR" />
+                            {% endif %}
+                            <label class="form-check-label"
+                                for="flexSwitchCheckDefault">
+                                {{ 'Is CPR'|trans }}
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            {% if filters.isVent %}
+                                <input class="form-check-input"
+                                    type="checkbox"
+                                    name="isVent"
+                                    checked="checked" />
+                            {% else %}
+                                <input class="form-check-input"
+                                    type="checkbox"
+                                    name="isVent" />
+                            {% endif %}
+                            <label class="form-check-label"
+                                for="flexSwitchCheckDefault">
+                                {{ 'Is Ventilated'|trans }}
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            {% if filters.isShock %}
+                                <input class="form-check-input"
+                                    type="checkbox"
+                                    name="isShock"
+                                    checked="checked" />
+                            {% else %}
+                                <input class="form-check-input"
+                                    type="checkbox"
+                                    name="isShock" />
+                            {% endif %}
+                            <label class="form-check-label"
+                                for="flexSwitchCheckDefault">
+                                {{ 'Is Shock'|trans }}
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            {% if filters.isWithDoc %}
+                                <input class="form-check-input"
+                                    type="checkbox"
+                                    name="isWithDoc"
+                                    checked="checked" />
+                            {% else %}
+                                <input class="form-check-input"
+                                    type="checkbox"
+                                    name="isWithDoc" />
+                            {% endif %}
+                            <label class="form-check-label"
+                                for="flexSwitchCheckDefault">
+                                {{ 'Is with Physician'|trans }}
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            {% if filters.isPreg %}
+                                <input class="form-check-input"
+                                    type="checkbox"
+                                    name="isPreg"
+                                    checked="checked" />
+                            {% else %}
+                                <input class="form-check-input"
+                                    type="checkbox"
+                                    name="isPreg" />
+                            {% endif %}
+                            <label class="form-check-label"
+                                for="flexSwitchCheckDefault">
+                                {{ 'Is with Pregnant'|trans }}
+                            </label>
+                        </div>
+                        <div class="form-check form-switch">
+                            {% if filters.isWork %}
+                                <input class="form-check-input"
+                                    type="checkbox"
+                                    name="isWork"
+                                    checked="checked" />
+                            {% else %}
+                                <input class="form-check-input"
+                                    type="checkbox"
+                                    name="isWork" />
+                            {% endif %}
+                            <label class="form-check-label"
+                                for="flexSwitchCheckDefault">
+                                {{ 'Is Work Accident'|trans }}
+                            </label>
+                        </div>
+                        <div class="float-end">
+                            <button type="submit"
+                                class="btn btn-outline-secondary">
+                                Apply filters <i class="bi bi-arrow-right-square"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

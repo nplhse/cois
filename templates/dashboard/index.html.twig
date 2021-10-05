@@ -80,7 +80,7 @@
                         <p class="card-text">
                             {{ 'dashboard.allocation.text'|trans }}
                         </p>
-                        <a href="{{ path('allocation_index') }}"
+                        <a href="{{ path('app_allocation_index') }}"
                             class="btn btn-primary">
                             {{ 'dashboard.allocation.button'|trans }}
                         </a>
@@ -170,7 +170,7 @@
                         <small class="text-muted">
                             {% if app.user.isParticipant %}
                                 <a class="text-muted"
-                                    href="{{ path('allocation_index') }}">
+                                    href="{{ path('app_allocation_index') }}">
                                     {{ 'dashboard.allocations'|trans }}
                                 </a>
                             {% else %}
