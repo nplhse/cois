@@ -4,22 +4,6 @@
     Statistics - {{ parent() }}
 {% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-
-    {{ encore_entry_link_tags('statistics') }}
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-
-    <script id="pageData" type="application/json">
-        {{ items|raw }}
-    </script>
-
-    {{ encore_entry_script_tags('statistics') }}
-{% endblock %}
-
 {% block body %}
     <div class="row">
         <div class="col">

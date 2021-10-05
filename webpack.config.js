@@ -12,7 +12,7 @@ Encore
     // public path used by the web server to access the output path
     .setPublicPath("/build")
     // only needed for CDN's or sub-directory deploy
-    //.setManifestKeyPrefix('build/')
+    // .setManifestKeyPrefix('build/')
 
     /*
      * ENTRY CONFIG
@@ -21,9 +21,6 @@ Encore
      * and one CSS file (e.g. app.scss) if your JavaScript imports CSS.
      */
     .addEntry("app", "./assets/js/app.js")
-    .addEntry("allocations", "./assets/js/allocations.js")
-    .addEntry("hospitals", "./assets/js/hospitals.js")
-    .addEntry("statistics", "./assets/js/statistics.js")
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge("./assets/controllers.json")
@@ -64,9 +61,6 @@ Encore
             ? "images/[path][name].[hash:8].[ext]"
             : "images/[path][name].[ext]",
     })
-
-    // enables Vue
-    .enableVueLoader()
 
     // enables Sass/SCSS support
     .enableSassLoader()
