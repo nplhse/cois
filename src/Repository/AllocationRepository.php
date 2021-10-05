@@ -245,18 +245,18 @@ class AllocationRepository extends ServiceEntityRepository
         }
 
         if ($filter['start']) {
-            $date = \DateTime::createFromFormat('Y-m-d', $filter['start']);
+            $date = \DateTime::createFromFormat('Y-m-d G:i', $filter['start'].'00:00');
 
             $query->andWhere('a.createdAt >= :startDate')
-                ->setParameter('startDate', $date, Types::DATE_IMMUTABLE)
+                ->setParameter('startDate', $date, Types::DATETIME_MUTABLE)
             ;
         }
 
         if ($filter['end']) {
-            $date = \DateTime::createFromFormat('Y-m-d', $filter['end']);
+            $date = \DateTime::createFromFormat('Y-m-d G:i', $filter['end'].'23:59');
 
             $query->andWhere('a.createdAt <= :endDate')
-                ->setParameter('endDate', $date, Types::DATE_IMMUTABLE)
+                ->setParameter('endDate', $date, Types::DATETIME_MUTABLE)
             ;
         }
 
