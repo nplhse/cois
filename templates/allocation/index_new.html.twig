@@ -40,6 +40,17 @@
 
     <div class="row">
         <div class="col">
+            <div class="float-end">
+                <a class="btn btn-primary"
+                    data-bs-toggle="collapse"
+                    href="#collapseFilters"
+                    role="button"
+                    aria-expanded="true"
+                    aria-controls="collapseFilters">
+                    <i class="bi bi-funnel"></i> Toogle Filters
+                </a>
+            </div>
+
             <h1>
                 {{ 'Allocations'|trans }}
             </h1>
@@ -74,7 +85,13 @@
                     <tr>
                         <th></th>
                         <th>
-                            {{ 'Dispatch Area'|trans({}, 'forms') }}
+                            {{
+                                'Dispatch Area'
+                                    |trans({}, 'forms')
+                                    |replace({
+                                        Landreis: ''
+                                    })
+                            }}
                         </th>
                         <th>
                             {{ 'Hospital'|trans({}, 'forms') }}
@@ -140,15 +157,15 @@
                             </td>
                             <td>
                                 {% if allocation.SK == '1' %}
-                                    <p class="text-danger text-center fw-bold">
+                                    <p class="text-danger fw-bold">
                                         {{ allocation.SK }}
                                     </p>
                                 {% elseif allocation.SK == '2' %}
-                                    <p class="text-warning text-center fw-bold">
+                                    <p class="text-warning fw-bold">
                                         {{ allocation.SK }}
                                     </p>
                                 {% else %}
-                                    <p class="text-success text-center fw-bold">
+                                    <p class="text-success fw-bold">
                                         {{ allocation.SK }}
                                     </p>
                                 {% endif %}
@@ -257,7 +274,7 @@
                 </nav>
             {% endif %}
         </div>
-        <div class="col-3">
+        <div class="col-3 collapse" id="collapseFilters">
             <div class="card">
                 <div class="card-header">
                     {{ 'Filters'|trans({}, 'forms') }}
@@ -376,12 +393,55 @@
                         {% endfor %}
                     </p>
 
-                    <h5 class="card-title">
-                        {{ 'Filter by Hospital'|trans }}
-                    </h5>
-                    <p class="mb-2">
-                        {% for hospital in hospitals %}
-                            {% if hospital.id == filters.hospital %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <h5 class="card-title">
+                            {{ 'Filter by Hospital'|trans }}
+                        </h5>
+                        <p class="mb-2">
+                            {% for hospital in hospitals %}
+                                {% if hospital.id == filters.hospital %}
+                                    <span class="badge bg-warning">
+                                        <i class="bi bi-tag"></i>
+                                        <a class="link-light"
+                                            href="{{
+                                            path(
+                                                'app_allocation_index',
+                                                app.request.query.all|merge({
+                                                    hospital: '',
+                                                    offset: '0'
+                                                })
+                                            )
+                                            }}">
+                                            {{ hospital.name }}
+                                        </a>
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-primary">
+                                        <i class="bi bi-tag"></i>
+                                        <a class="link-light"
+                                            href="{{
+                                            path(
+                                                'app_allocation_index',
+                                                app.request.query.all|merge({
+                                                    hospital: hospital.id,
+                                                    offset: '0'
+                                                })
+                                            )
+                                            }}">
+                                            {{ hospital.name }}
+                                        </a>
+                                    </span>
+                                {% endif %}
+                            {% else %}
+                                {{ 'No Hospitals found'|trans }}
+                            {% endfor %}
+                        </p>
+                    {% elseif app.user.hospital %}
+                        <h5 class="card-title">
+                            {{ 'Filter by Hospital'|trans }}
+                        </h5>
+                        <p class="mb-2">
+                            {% if app.user.hospital.id == filters.hospital %}
                                 <span class="badge bg-warning">
                                     <i class="bi bi-tag"></i>
                                     <a class="link-light"
@@ -394,7 +454,7 @@
                                             })
                                         )
                                         }}">
-                                        {{ hospital.name }}
+                                        {{ app.user.hospital.name }}
                                     </a>
                                 </span>
                             {% else %}
@@ -405,19 +465,17 @@
                                         path(
                                             'app_allocation_index',
                                             app.request.query.all|merge({
-                                                hospital: hospital.id,
+                                                hospital: app.user.hospital.id,
                                                 offset: '0'
                                             })
                                         )
                                         }}">
-                                        {{ hospital.name }}
+                                        {{ app.user.hospital.name }}
                                     </a>
                                 </span>
                             {% endif %}
-                        {% else %}
-                            {{ 'No Hospitals found'|trans }}
-                        {% endfor %}
-                    </p>
+                        </p>
+                    {% endif %}
                 </div>
             </div>
         </div>

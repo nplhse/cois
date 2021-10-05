@@ -49,7 +49,11 @@ class AllocationController extends AbstractController
         $filters['search'] = $request->query->get('search');
 
         if ($hospital) {
-            $filters['hospital'] = $hospital;
+            if ($this->isGranted('ROLE_ADMIN')) {
+                $filters['hospital'] = $hospital;
+            } else {
+                $filters['hospital'] = $this->getUser()->getHospital()->getId();
+            }
         } else {
             $filters['hospital'] = null;
         }

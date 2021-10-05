@@ -241,7 +241,7 @@ class AllocationRepository extends ServiceEntityRepository
         }
 
         $query
-            ->orderBy('a.createdAt', 'ASC')
+            ->orderBy('a.createdAt', 'DESC')
             ->setMaxResults(self::PAGINATOR_PER_PAGE)
             ->setFirstResult($offset)
             ->getQuery()
