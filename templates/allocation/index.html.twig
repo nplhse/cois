@@ -34,7 +34,7 @@
                     role="button"
                     aria-expanded="true"
                     aria-controls="collapseFilters">
-                    <i class="bi bi-funnel"></i> Toogle Filters
+                    <i class="bi bi-funnel"></i> {{ 'Toogle Options'|trans }}
                 </a>
             </div>
 
@@ -72,25 +72,193 @@
                     <tr>
                         <th></th>
                         <th>
-                            {{
-                                'Dispatch Area'
-                                    |trans({}, 'forms')
-                                    |replace({
-                                        Landreis: ''
-                                    })
-                            }}
+                            {% if
+                                filters.sortBy == 'dispatchArea'
+                                    and filters.order == 'desc' %}
+                                <a href="{{
+                                    path(
+                                        'app_allocation_index',
+                                        app.request.query.all|merge({
+                                            order: 'asc'
+                                        })
+                                    )
+                                    }}">
+                                    <em>
+                                        {{ 'Dispatch Area'|trans({}, 'forms') }}
+                                    </em>
+                                </a>
+
+                                <i class="bi bi-chevron-double-down"></i>
+                            {% elseif
+                                filters.sortBy == 'dispatchArea'
+                                    and filters.order == 'asc' %}
+                                <a href="{{
+                                    path(
+                                        'app_allocation_index',
+                                        app.request.query.all|merge({
+                                            order: 'desc'
+                                        })
+                                    )
+                                    }}">
+                                    <em>
+                                        {{ 'Dispatch Area'|trans({}, 'forms') }}
+                                    </em>
+                                </a>
+
+                                <i class="bi bi-chevron-double-up"></i>
+                            {% else %}
+                                <a href="{{
+                                    path(
+                                        'app_allocation_index',
+                                        app.request.query.all|merge({
+                                            sortBy: 'dispatchArea',
+                                            order: 'desc'
+                                        })
+                                    )
+                                    }}">
+                                    {{ 'Dispatch Area'|trans({}, 'forms') }}
+                                </a>
+                            {% endif %}
                         </th>
                         <th>
                             {{ 'Hospital'|trans({}, 'forms') }}
                         </th>
                         <th>
-                            {{ 'Times'|trans({}, 'forms') }}
+                            {% if
+                                filters.sortBy == 'times'
+                                    and filters.order == 'desc' %}
+                                <a href="{{
+                                    path(
+                                        'app_allocation_index',
+                                        app.request.query.all|merge({
+                                            order: 'asc'
+                                        })
+                                    )
+                                    }}">
+                                    <em>{{ 'Times'|trans({}, 'forms') }}</em>
+                                </a>
+
+                                <i class="bi bi-chevron-double-down"></i>
+                            {% elseif
+                                filters.sortBy == 'times'
+                                    and filters.order == 'asc' %}
+                                <a href="{{
+                                    path(
+                                        'app_allocation_index',
+                                        app.request.query.all|merge({
+                                            order: 'desc'
+                                        })
+                                    )
+                                    }}">
+                                    <em>{{ 'Times'|trans({}, 'forms') }}</em>
+                                </a>
+
+                                <i class="bi bi-chevron-double-up"></i>
+                            {% elseif filters.sortBy == null %}
+                                <a href="{{
+                                    path(
+                                        'app_allocation_index',
+                                        app.request.query.all|merge({
+                                            sortBy: 'times',
+                                            order: 'asc'
+                                        })
+                                    )
+                                    }}">
+                                    <em>{{ 'Times'|trans({}, 'forms') }}</em>
+                                </a>
+
+                                <i class="bi bi-chevron-double-down"></i>
+                            {% else %}
+                                <a href="{{
+                                    path(
+                                        'app_allocation_index',
+                                        app.request.query.all|merge({
+                                            sortBy: 'times',
+                                            order: 'desc'
+                                        })
+                                    )
+                                    }}">
+                                    {{ 'Times'|trans({}, 'forms') }}
+                                </a>
+                            {% endif %}
                         </th>
                         <th>
-                            {{ 'Dem.'|trans({}, 'forms') }}
+                            {% if
+                                filters.sortBy == 'age'
+                                    or filters.sortBy == 'gender' %}
+                                {% if filters.order == 'desc' %}
+                                    <a href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            app.request.query.all|merge({
+                                                order: 'asc'
+                                            })
+                                        )
+                                        }}">
+                                        {{ 'Dem.'|trans({}, 'forms') }}
+                                    </a>
+                                    <i class="bi bi-chevron-double-down"></i>
+                                {% else %}
+                                    <a href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            app.request.query.all|merge({
+                                                order: 'desc'
+                                            })
+                                        )
+                                        }}">
+                                        {{ 'Dem.'|trans({}, 'forms') }}
+                                    </a>
+                                    <i class="bi bi-chevron-double-up"></i>
+                                {% endif %}
+                            {% else %}
+                                {{ 'Dem.'|trans({}, 'forms') }}
+                            {% endif %}
                         </th>
                         <th>
-                            {{ 'Urgency'|trans({}, 'forms') }}
+                            {% if
+                                filters.sortBy == 'urgency'
+                                    and filters.order == 'desc' %}
+                                <a href="{{
+                                    path(
+                                        'app_allocation_index',
+                                        app.request.query.all|merge({
+                                            order: 'asc'
+                                        })
+                                    )
+                                    }}">
+                                    <em>{{ 'Urgency'|trans({}, 'forms') }}</em>
+                                </a>
+
+                                <i class="bi bi-chevron-double-down"></i>
+                            {% elseif
+                                filters.sortBy == 'urgency'
+                                    and filters.order == 'asc' %}
+                                <a href="{{
+                                    path(
+                                        'app_allocation_index',
+                                        app.request.query.all|merge({
+                                            order: 'desc'
+                                        })
+                                    )
+                                    }}">
+                                    <em>{{ 'Urgency'|trans({}, 'forms') }}</em>
+                                </a>
+
+                                <i class="bi bi-chevron-double-up"></i>
+                            {% else %}
+                                <a href="{{
+                                    path(
+                                        'app_allocation_index',
+                                        app.request.query.all|merge({
+                                            sortBy: 'urgency',
+                                            order: 'desc'
+                                        })
+                                    )
+                                    }}">
+                                    {{ 'Urgency'|trans({}, 'forms') }}
+                                </a>
+                            {% endif %}
                         </th>
                         <th>
                             {{ 'Dispatch'|trans({}, 'forms') }}
@@ -116,7 +284,11 @@
                                 </a>
                             </td>
                             <td>
-                                {{ allocation.dispatchArea }}
+                                {{
+                                    allocation.dispatchArea|replace({
+                                        Leitstelle: ''
+                                    })
+                                }}
                             </td>
                             <td>
                                 <a href="{{
@@ -216,6 +388,20 @@
                                     path(
                                         'app_allocation_index',
                                         app.request.query.all|merge({
+                                            offset: 0
+                                        })
+                                    )
+                                    }}">
+                                    <i class="bi bi-chevron-bar-left"></i>
+                                    {{ 'First'|trans }}
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="{{
+                                    path(
+                                        'app_allocation_index',
+                                        app.request.query.all|merge({
                                             offset: previous
                                         })
                                     )
@@ -224,6 +410,15 @@
                                 </a>
                             </li>
                         {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link"
+                                    href="#"
+                                    tabindex="-1"
+                                    aria-disabled="true">
+                                    <i class="bi bi-chevron-bar-left"></i>
+                                    {{ 'First'|trans }}
+                                </a>
+                            </li>
                             <li class="page-item disabled">
                                 <a class="page-link"
                                     href="#"
@@ -247,6 +442,20 @@
                                     {{ 'Next'|trans }}
                                 </a>
                             </li>
+                            <li class="page-item">
+                                <a class="page-link"
+                                    href="{{
+                                    path(
+                                        'app_allocation_index',
+                                        app.request.query.all|merge({
+                                            offset: last
+                                        })
+                                    )
+                                    }}">
+                                    {{ 'Last'|trans }}
+                                    <i class="bi bi-chevron-bar-right"></i>
+                                </a>
+                            </li>
                         {% else %}
                             <li class="page-item disabled">
                                 <a class="page-link"
@@ -256,13 +465,22 @@
                                     {{ 'Next'|trans }}
                                 </a>
                             </li>
+                            <li class="page-item disabled">
+                                <a class="page-link"
+                                    href="#"
+                                    tabindex="-1"
+                                    aria-disabled="true">
+                                    {{ 'Last'|trans }}
+                                    <i class="bi bi-chevron-bar-right"></i>
+                                </a>
+                            </li>
                         {% endif %}
                     </ul>
                 </nav>
             {% endif %}
         </div>
         <div class="col-3 collapse" id="collapseFilters">
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-header">
                     {{ 'Filters'|trans({}, 'forms') }}
                 </div>
@@ -285,6 +503,98 @@
                                     placeholder="{{ 'Search by PZC or Text'|trans }}"
                                     aria-label="{{ 'Search'|trans }}" />
                             {% endif %}
+
+                            {% if filters.hospital %}
+                                <input type="hidden"
+                                    id="hospital"
+                                    name="hospital"
+                                    value="{{ filters.hospital }}" />
+                            {% endif %}
+                            {% if filters.supplyArea %}
+                                <input type="hidden"
+                                    id="supplyArea"
+                                    name="supplyArea"
+                                    value="{{ filters.supplyArea }}" />
+                            {% endif %}
+                            {% if filters.dispatchArea %}
+                                <input type="hidden"
+                                    id="dispatchArea"
+                                    name="dispatchArea"
+                                    value="{{ filters.dispatchArea }}" />
+                            {% endif %}
+                            {% if filters.start %}
+                                <input type="hidden"
+                                    id="start"
+                                    name="start"
+                                    value="{{ filters.start }}" />
+                            {% endif %}
+                            {% if filters.end %}
+                                <input type="hidden"
+                                    id="end"
+                                    name="end"
+                                    value="{{ filters.end }}" />
+                            {% endif %}
+                            {% if filters.reqResus %}
+                                <input type="hidden"
+                                    id="reqResus"
+                                    name="reqResus"
+                                    value="{{ filters.reqResus }}" />
+                            {% endif %}
+                            {% if filters.reqCath %}
+                                <input type="hidden"
+                                    id="reqCath"
+                                    name="reqCath"
+                                    value="{{ filters.reqCath }}" />
+                            {% endif %}
+                            {% if filters.isCPR %}
+                                <input type="hidden"
+                                    id="isCPR"
+                                    name="isCPR"
+                                    value="{{ filters.isCPR }}" />
+                            {% endif %}
+                            {% if filters.isVent %}
+                                <input type="hidden"
+                                    id="isVent"
+                                    name="isVent"
+                                    value="{{ filters.isVent }}" />
+                            {% endif %}
+                            {% if filters.isShock %}
+                                <input type="hidden"
+                                    id="isShock"
+                                    name="isShock"
+                                    value="{{ filters.isShock }}" />
+                            {% endif %}
+                            {% if filters.isWithDoc %}
+                                <input type="hidden"
+                                    id="isWithDoc"
+                                    name="isWithDoc"
+                                    value="{{ filters.isWithDoc }}" />
+                            {% endif %}
+                            {% if filters.isPreg %}
+                                <input type="hidden"
+                                    id="isPreg"
+                                    name="isPreg"
+                                    value="{{ filters.isPreg }}" />
+                            {% endif %}
+                            {% if filters.isWork %}
+                                <input type="hidden"
+                                    id="isWork"
+                                    name="isWork"
+                                    value="{{ filters.isWork }}" />
+                            {% endif %}
+                            {% if filters.sortBy %}
+                                <input type="hidden"
+                                    id="sortBy"
+                                    name="sortBy"
+                                    value="{{ filters.sortBy }}" />
+                            {% endif %}
+                            {% if filters.order %}
+                                <input type="hidden"
+                                    id="order"
+                                    name="order"
+                                    value="{{ filters.order }}" />
+                            {% endif %}
+
                             <button type="submit"
                                 class="btn btn-outline-secondary">
                                 <i class="bi bi-search"></i>
@@ -612,10 +922,207 @@
                                 {{ 'Is Work Accident'|trans }}
                             </label>
                         </div>
+
+                        {% if filters.sortBy %}
+                            <input type="hidden"
+                                id="sortBy"
+                                name="sortBy"
+                                value="{{ filters.sortBy }}" />
+                        {% endif %}
+                        {% if filters.order %}
+                            <input type="hidden"
+                                id="order"
+                                name="order"
+                                value="{{ filters.order }}" />
+                        {% endif %}
+
                         <div class="float-end">
                             <button type="submit"
                                 class="btn btn-outline-secondary">
                                 Apply filters <i class="bi bi-arrow-right-square"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    Sorting
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-floating mb-2">
+                            <select id="sortBy"
+                                name="sortBy"
+                                class="form-select"
+                                aria-label="sortBy">
+                                {% if filters.sortBy == 'time' %}
+                                    <option value="time" selected="selected">
+                                        {{ 'Time'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="time">
+                                        {{ 'Time'|trans }}
+                                    </option>
+                                {% endif %}
+                                {% if filters.sortBy == 'urgency' %}
+                                    <option value="urgency" selected="selected">
+                                        {{ 'Urgency'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="urgency">
+                                        {{ 'Urgency'|trans }}
+                                    </option>
+                                {% endif %}
+
+                                {% if filters.sortBy == 'dispatchArea' %}
+                                    <option value="dispatchArea"
+                                        selected="selected">
+                                        {{ 'DispatchArea'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="dispatchArea">
+                                        {{ 'DispatchArea'|trans }}
+                                    </option>
+                                {% endif %}
+                                {% if filters.sortBy == 'age' %}
+                                    <option value="age" selected="selected">
+                                        {{ 'Age'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="age">
+                                        {{ 'Age'|trans }}
+                                    </option>
+                                {% endif %}
+                                {% if filters.sortBy == 'gender' %}
+                                    <option value="gender" selected="selected">
+                                        {{ 'Gender'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="gender">
+                                        {{ 'Gender'|trans }}
+                                    </option>
+                                {% endif %}
+                            </select>
+                            <label for="sortBy">Sort by</label>
+                        </div>
+                        <div class="form-floating mb-2">
+                            <select id="order"
+                                name="order"
+                                class="form-select"
+                                aria-label="sortorder">
+                                {% if filters.order == 'asc' %}
+                                    <option value="asc" selected="selected">
+                                        {{ 'Ascending'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="asc">
+                                        {{ 'Ascending'|trans }}
+                                    </option>
+                                {% endif %}
+
+                                {% if filters.order == 'desc' %}
+                                    <option value="desc" selected="selected">
+                                        {{ 'Descending'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="desc">
+                                        {{ 'Descending'|trans }}
+                                    </option>
+                                {% endif %}
+                            </select>
+                            <label for="sortorder">Sort</label>
+                        </div>
+
+                        {% if filters.search %}
+                            <input type="hidden"
+                                id="search"
+                                name="search"
+                                value="{{ filters.search }}" />
+                        {% endif %}
+                        {% if filters.hospital %}
+                            <input type="hidden"
+                                id="hospital"
+                                name="hospital"
+                                value="{{ filters.hospital }}" />
+                        {% endif %}
+                        {% if filters.supplyArea %}
+                            <input type="hidden"
+                                id="supplyArea"
+                                name="supplyArea"
+                                value="{{ filters.supplyArea }}" />
+                        {% endif %}
+                        {% if filters.dispatchArea %}
+                            <input type="hidden"
+                                id="dispatchArea"
+                                name="dispatchArea"
+                                value="{{ filters.dispatchArea }}" />
+                        {% endif %}
+                        {% if filters.start %}
+                            <input type="hidden"
+                                id="start"
+                                name="start"
+                                value="{{ filters.start }}" />
+                        {% endif %}
+                        {% if filters.end %}
+                            <input type="hidden"
+                                id="end"
+                                name="end"
+                                value="{{ filters.end }}" />
+                        {% endif %}
+                        {% if filters.reqResus %}
+                            <input type="hidden"
+                                id="reqResus"
+                                name="reqResus"
+                                value="{{ filters.reqResus }}" />
+                        {% endif %}
+                        {% if filters.reqCath %}
+                            <input type="hidden"
+                                id="reqCath"
+                                name="reqCath"
+                                value="{{ filters.reqCath }}" />
+                        {% endif %}
+                        {% if filters.isCPR %}
+                            <input type="hidden"
+                                id="isCPR"
+                                name="isCPR"
+                                value="{{ filters.isCPR }}" />
+                        {% endif %}
+                        {% if filters.isVent %}
+                            <input type="hidden"
+                                id="isVent"
+                                name="isVent"
+                                value="{{ filters.isVent }}" />
+                        {% endif %}
+                        {% if filters.isShock %}
+                            <input type="hidden"
+                                id="isShock"
+                                name="isShock"
+                                value="{{ filters.isShock }}" />
+                        {% endif %}
+                        {% if filters.isWithDoc %}
+                            <input type="hidden"
+                                id="isWithDoc"
+                                name="isWithDoc"
+                                value="{{ filters.isWithDoc }}" />
+                        {% endif %}
+                        {% if filters.isPreg %}
+                            <input type="hidden"
+                                id="isPreg"
+                                name="isPreg"
+                                value="{{ filters.isPreg }}" />
+                        {% endif %}
+                        {% if filters.isWork %}
+                            <input type="hidden"
+                                id="isWork"
+                                name="isWork"
+                                value="{{ filters.isWork }}" />
+                        {% endif %}
+
+                        <div class="float-end">
+                            <button type="submit" class="btn btn-primary">
+                                Submit
                             </button>
                         </div>
                     </form>

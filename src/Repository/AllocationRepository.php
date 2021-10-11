@@ -221,7 +221,6 @@ class AllocationRepository extends ServiceEntityRepository
             $search = str_replace($filter['search'], '+', ' ');
 
             $query->where('a.PZCText LIKE :search')
-                ->andWhere('a.occasion LIKE :search')
                 ->setParameter('search', '%'.$search.'%')
             ;
         }
@@ -292,8 +291,24 @@ class AllocationRepository extends ServiceEntityRepository
             $query->andWhere('a.isWorkAccident = TRUE');
         }
 
+        $sortBy = match ($filter['sortBy']) {
+            'dispatchArea' => 'a.dispatchArea',
+            'urgency' => 'a.SK',
+            'age' => 'a.age',
+            'gender' => 'a.gender',
+            default => 'a.createdAt',
+        };
+
+        if ('desc' === $filter['order']) {
+            $order = 'DESC';
+        } elseif ('asc' === $filter['order']) {
+            $order = 'ASC';
+        } else {
+            $order = 'DESC';
+        }
+
         $query
-            ->orderBy('a.createdAt', 'DESC')
+            ->orderBy($sortBy, $order)
             ->setMaxResults(self::PAGINATOR_PER_PAGE)
             ->setFirstResult($offset)
             ->getQuery()

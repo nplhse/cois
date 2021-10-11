@@ -33,6 +33,8 @@ class AllocationController extends AbstractController
         $isWithDoc = $request->query->get('isWithDoc');
         $isPreg = $request->query->get('isPreg');
         $isWork = $request->query->get('isWork');
+        $sortBy = $request->query->get('sortBy');
+        $order = $request->query->get('order');
 
         $filters = [];
         $filters['search'] = $request->query->get('search');
@@ -125,8 +127,27 @@ class AllocationController extends AbstractController
             $filters['isWork'] = false;
         }
 
+        if ($sortBy) {
+            $filters['sortBy'] = $sortBy;
+        } else {
+            $filters['sortBy'] = null;
+        }
+
+        if ($order) {
+            $filters['order'] = $order;
+        } else {
+            $filters['order'] = null;
+        }
+
         $offset = max(0, $request->query->getInt('offset', 0));
         $paginator = $allocationRepository->getAllocationPaginator($offset, $filters);
+        $count = count($paginator);
+
+        if (0 == $count % 10) {
+            $last = $count - 10;
+        } else {
+            $last = floor($count / 10) * 10;
+        }
 
         return $this->render('allocation/index.html.twig', [
             'allocations' => $paginator,
@@ -134,7 +155,8 @@ class AllocationController extends AbstractController
             'filters' => $filters,
             'perPage' => AllocationRepository::PAGINATOR_PER_PAGE,
             'previous' => $offset - AllocationRepository::PAGINATOR_PER_PAGE,
-            'next' => min(count($paginator), $offset + AllocationRepository::PAGINATOR_PER_PAGE),
+            'next' => min($count, $offset + AllocationRepository::PAGINATOR_PER_PAGE),
+            'last' => $last,
             'hospitals' => $hospitalRepository->getHospitals(),
             'supplyAreas' => $hospitalRepository->getSupplyAreas(),
             'dispatchAreas' => $hospitalRepository->getDispatchAreas(),
