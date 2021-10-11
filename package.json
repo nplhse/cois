@@ -3,7 +3,7 @@
         "@babel/core": "^7.15.5",
         "@babel/eslint-parser": "^7.15.8",
         "@babel/preset-env": "^7.15.6",
-        "@popperjs/core": "^2.10.1",
+        "@popperjs/core": "^2.10.2",
         "@symfony/stimulus-bridge": "^2.1.0",
         "@symfony/ux-chartjs": "file:vendor/symfony/ux-chartjs/Resources/assets",
         "@symfony/ux-dropzone": "file:vendor/symfony/ux-dropzone/Resources/assets",
@@ -20,7 +20,7 @@
         "eslint-plugin-vue": "^7.19.1",
         "file-loader": "^6.0.0",
         "node-sass": "^6.0.1",
-        "postcss": "^8.3.8",
+        "postcss": "^8.3.9",
         "postcss-loader": "^6.1.1",
         "prettier": "^2.4.1",
         "prettier-plugin-twig-melody": "^0.4.6",
@@ -41,7 +41,7 @@
         "bootstrap-icons": "^1.5.0",
         "bootstrap-vue": "^2.21.2",
         "c3": "^0.7.20",
-        "d3": "^7.0.4",
+        "d3": "^7.1.1",
         "d3-scale": "^4.0.1"
     },
     "browserslist": ["defaults"]
