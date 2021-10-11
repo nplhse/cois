@@ -41,7 +41,7 @@
         "bootstrap-icons": "^1.5.0",
         "bootstrap-vue": "^2.21.2",
         "c3": "^0.7.20",
-        "d3": "^7.0.4",
+        "d3": "^7.1.1",
         "d3-scale": "^4.0.1"
     },
     "browserslist": ["defaults"]
