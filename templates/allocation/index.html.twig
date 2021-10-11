@@ -304,8 +304,8 @@
                             </td>
                             <td>
                                 <p>
-                                    {{ allocation.createdAt|date('d.m.y H:i') }}<br />
-                                    {{ allocation.arrivalAt|date('d.m.y H:i') }}
+                                    {{ allocation.createdAt|date('d.m.y H:i', "Europe/Berlin") }}<br />
+                                    {{ allocation.arrivalAt|date('d.m.y H:i', "Europe/Berlin") }}
                                 </p>
                             </td>
                             <td>

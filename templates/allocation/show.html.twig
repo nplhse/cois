@@ -177,7 +177,7 @@
                                 {% else %}
                                     {{
                                         'allocations.field.noSecondaryRMI'|trans
-                                    }} }}
+                                    }}
                                 {% endif %}
                             </p>
                         </div>
@@ -230,7 +230,7 @@
                                 {% else %}
                                     {{
                                         'allocations.field.isWithPhysician.false'|trans
-                                    }} }}
+                                    }}
                                 {% endif %}
                             </p>
                         </div>
@@ -254,7 +254,7 @@
                                 {% else %}
                                     {{
                                         'allocations.field.requiresResus.false'|trans
-                                    }} }}
+                                    }}
                                 {% endif %}
                             </p>
                         </div>
@@ -274,7 +274,7 @@
                                 {% else %}
                                     {{
                                         'allocations.field.requiresCathlab.false'|trans
-                                    }} }}
+                                    }}
                                 {% endif %}
                             </p>
                         </div>
@@ -307,7 +307,7 @@
                     </h5>
                     <p>
                         {{ allocation.creationWeekday }}, {{
-                            allocation.createdAt|date('d.m.Y H:i:s')
+                            allocation.createdAt|date('d.m.Y H:i:s', "Europe/Berlin")
                         }}
                     </p>
 
@@ -316,7 +316,7 @@
                     </h5>
                     <p>
                         {{ allocation.arrivalWeekday }}, {{
-                            allocation.arrivalAt|date('d.m.Y H:i:s')
+                            allocation.arrivalAt|date('d.m.Y H:i:s', "Europe/Berlin")
                         }}
                     </p>
                 </div>
@@ -498,7 +498,7 @@
                         {{
                             'allocations.field.importedAt'|trans({
                                 '%time%': allocation.import.createdAt|date(
-                                    'd.m.Y H:i:s'
+                                    'd.m.Y H:i:s', "Europe/Berlin"
                                 )
                             })
                         }}
