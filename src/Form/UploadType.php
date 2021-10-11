@@ -34,7 +34,7 @@ class UploadType extends AbstractType
                 // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [
                     new File([
-                        'maxSize' => '12500k',
+                        'maxSize' => '12M',
                         'mimeTypes' => [
                             'text/plain',
                             'text/csv',
