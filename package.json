@@ -1,7 +1,7 @@
 {
     "devDependencies": {
         "@babel/core": "^7.15.5",
-        "@babel/eslint-parser": "^7.15.0",
+        "@babel/eslint-parser": "^7.15.8",
         "@babel/preset-env": "^7.15.6",
         "@popperjs/core": "^2.10.1",
         "@symfony/stimulus-bridge": "^2.1.0",
@@ -17,7 +17,7 @@
         "eslint-config-airbnb-base": "^14.2.1",
         "eslint-config-alloy": "^4.1.0",
         "eslint-plugin-import": "^2.23.4",
-        "eslint-plugin-vue": "^7.18.0",
+        "eslint-plugin-vue": "^7.19.1",
         "file-loader": "^6.0.0",
         "node-sass": "^6.0.1",
         "postcss": "^8.3.8",
