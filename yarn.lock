@@ -3478,10 +3478,10 @@ eslint-config-airbnb-base@^14.2.1:
     object.assign "^4.1.2"
     object.entries "^1.1.2"
 
-eslint-config-alloy@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-alloy/-/eslint-config-alloy-4.1.0.tgz#3d5df5d139fb27797943c36e91945be5b300886e"
-  integrity sha512-zpW7rxURMsGyNBaN1z9gISm0NWglNR5BzwrOI3TKocT+30jyi8qBjMJJZoYlKbYHPkdy/DM8O2oGvqgJjKTxNA==
+eslint-config-alloy@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-alloy/-/eslint-config-alloy-4.4.0.tgz#0ff7268fdaa3b886f8bfb33833b09c389ef952d4"
+  integrity sha512-yWG9T+ufc7V5EDg+7z1VEBi9wX259uWR73pGhTGx+FkPqlO3gdvH0kxtzuirEweJ9nXhTtMiArPcfS24VvJe2A==
 
 eslint-import-resolver-node@^0.3.6:
   version "0.3.6"
