@@ -921,7 +921,9 @@
                                             })
                                         )
                                         }}">
-                                        {{ dispatchArea.dispatchArea }}
+                                        {{ dispatchArea.dispatchArea|replace({
+                                            Leitstelle: ''
+                                        }) }}
                                     </a>
                                 </span>
                             {% else %}
