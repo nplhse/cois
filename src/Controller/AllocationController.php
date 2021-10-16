@@ -174,8 +174,6 @@ class AllocationController extends AbstractController
         $previous = $offset - AllocationRepository::PAGINATOR_PER_PAGE;
         $next = min($count, $offset + AllocationRepository::PAGINATOR_PER_PAGE);
 
-        dump($offset, $count, $previous, $next, $last);
-
         $PZCs = $allocationRepository->getPZCs();
 
         $col = array_column($PZCs, 'PZC');
