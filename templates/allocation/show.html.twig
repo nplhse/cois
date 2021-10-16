@@ -307,7 +307,10 @@
                     </h5>
                     <p>
                         {{ allocation.creationWeekday }}, {{
-                            allocation.createdAt|date('d.m.Y H:i:s', "Europe/Berlin")
+                            allocation.createdAt|date(
+                                'd.m.Y H:i:s',
+                                'Europe/Berlin'
+                            )
                         }}
                     </p>
 
@@ -316,7 +319,10 @@
                     </h5>
                     <p>
                         {{ allocation.arrivalWeekday }}, {{
-                            allocation.arrivalAt|date('d.m.Y H:i:s', "Europe/Berlin")
+                            allocation.arrivalAt|date(
+                                'd.m.Y H:i:s',
+                                'Europe/Berlin'
+                            )
                         }}
                     </p>
                 </div>
@@ -498,7 +504,8 @@
                         {{
                             'allocations.field.importedAt'|trans({
                                 '%time%': allocation.import.createdAt|date(
-                                    'd.m.Y H:i:s', "Europe/Berlin"
+                                    'd.m.Y H:i:s',
+                                    'Europe/Berlin'
                                 )
                             })
                         }}

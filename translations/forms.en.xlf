@@ -353,6 +353,22 @@
         <source>Edit Allocation</source>
         <target>Edit Allocation</target>
       </trans-unit>
+      <trans-unit id="DA.THGf" resname="Times">
+        <source>Times</source>
+        <target>Times</target>
+      </trans-unit>
+      <trans-unit id="vyYCkiM" resname="Dem.">
+        <source>Dem.</source>
+        <target>Dem.</target>
+      </trans-unit>
+      <trans-unit id="gRrOl7z" resname="Dispatch">
+        <source>Dispatch</source>
+        <target>Dispatch</target>
+      </trans-unit>
+      <trans-unit id="rkNpKyo" resname="Properties">
+        <source>Properties</source>
+        <target>Properties</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

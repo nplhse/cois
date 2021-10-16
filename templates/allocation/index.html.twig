@@ -304,8 +304,18 @@
                             </td>
                             <td>
                                 <p>
-                                    {{ allocation.createdAt|date('d.m.y H:i', "Europe/Berlin") }}<br />
-                                    {{ allocation.arrivalAt|date('d.m.y H:i', "Europe/Berlin") }}
+                                    {{
+                                        allocation.createdAt|date(
+                                            'd.m.y H:i',
+                                            'Europe/Berlin'
+                                        )
+                                    }}<br />
+                                    {{
+                                        allocation.arrivalAt|date(
+                                            'd.m.y H:i',
+                                            'Europe/Berlin'
+                                        )
+                                    }}
                                 </p>
                             </td>
                             <td>
@@ -378,131 +388,228 @@
                 </tbody>
             </table>
 
-            {% if (allocations|length) > 0 %}
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                        {% if previous >= 0 %}
-                            <li class="page-item">
-                                <a class="page-link"
-                                    href="{{
-                                    path(
-                                        'app_allocation_index',
-                                        app.request.query.all|merge({
-                                            offset: 0
-                                        })
-                                    )
-                                    }}">
-                                    <i class="bi bi-chevron-bar-left"></i>
-                                    {{ 'First'|trans }}
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link"
-                                    href="{{
-                                    path(
-                                        'app_allocation_index',
-                                        app.request.query.all|merge({
-                                            offset: previous
-                                        })
-                                    )
-                                    }}">
-                                    {{ 'Previous'|trans }}
-                                </a>
-                            </li>
-                        {% else %}
-                            <li class="page-item disabled">
-                                <a class="page-link"
-                                    href="#"
-                                    tabindex="-1"
-                                    aria-disabled="true">
-                                    <i class="bi bi-chevron-bar-left"></i>
-                                    {{ 'First'|trans }}
-                                </a>
-                            </li>
-                            <li class="page-item disabled">
-                                <a class="page-link"
-                                    href="#"
-                                    tabindex="-1"
-                                    aria-disabled="true">
-                                    {{ 'Previous'|trans }}
-                                </a>
-                            </li>
-                        {% endif %}
-                        {% if next < (allocations|length) %}
-                            <li class="page-item">
-                                <a class="page-link"
-                                    href="{{
-                                    path(
-                                        'app_allocation_index',
-                                        app.request.query.all|merge({
-                                            offset: next
-                                        })
-                                    )
-                                    }}">
-                                    {{ 'Next'|trans }}
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link"
-                                    href="{{
-                                    path(
-                                        'app_allocation_index',
-                                        app.request.query.all|merge({
-                                            offset: last
-                                        })
-                                    )
-                                    }}">
-                                    {{ 'Last'|trans }}
-                                    <i class="bi bi-chevron-bar-right"></i>
-                                </a>
-                            </li>
-                        {% else %}
-                            <li class="page-item disabled">
-                                <a class="page-link"
-                                    href="#"
-                                    tabindex="-1"
-                                    aria-disabled="true">
-                                    {{ 'Next'|trans }}
-                                </a>
-                            </li>
-                            <li class="page-item disabled">
-                                <a class="page-link"
-                                    href="#"
-                                    tabindex="-1"
-                                    aria-disabled="true">
-                                    {{ 'Last'|trans }}
-                                    <i class="bi bi-chevron-bar-right"></i>
-                                </a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </nav>
-            {% endif %}
-        </div>
-        <div class="col-3 collapse" id="collapseFilters">
-            <div class="card mb-3">
-                <div class="card-header">
-                    {{ 'Filters'|trans({}, 'forms') }}
+            <div class="row">
+                <div class="col-2">
+                    <p>
+                        {{
+                            'Showing Page page of pages'|trans({
+                                '%page%': currentPage,
+                                '%pages%': pages
+                            })
+                        }}
+                    </p>
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        {{ 'Search'|trans }}
-                    </h5>
+                <div class="col-8">
+                    {% if (allocations|length) > 0 %}
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                {% if previous >= 0 %}
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                            href="{{
+                                            path(
+                                                'app_allocation_index',
+                                                app.request.query.all|merge({
+                                                    offset: 0,
+                                                    page: null
+                                                })
+                                            )
+                                            }}">
+                                            <i class="bi bi-chevron-bar-left">
+
+                                            </i>
+                                            {{ 'First'|trans }}
+                                        </a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                            href="{{
+                                            path(
+                                                'app_allocation_index',
+                                                app.request.query.all|merge({
+                                                    offset: previous,
+                                                    page: null
+                                                })
+                                            )
+                                            }}">
+                                            {{ 'Previous'|trans }}
+                                        </a>
+                                    </li>
+                                    {% if previous >= 10 %}
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                href="{{
+                                                path(
+                                                    'app_allocation_index',
+                                                    app.request.query.all|merge({
+                                                        offset: previous - 10,
+                                                        page: null
+                                                    })
+                                                )
+                                                }}">
+                                                {{ currentPage - 2 }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                            href="{{
+                                            path(
+                                                'app_allocation_index',
+                                                app.request.query.all|merge({
+                                                    offset: previous,
+                                                    page: null
+                                                })
+                                            )
+                                            }}">
+                                            {{ currentPage - 1 }}
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link"
+                                            href="#"
+                                            tabindex="-1"
+                                            aria-disabled="true">
+                                            <i class="bi bi-chevron-bar-left">
+
+                                            </i>
+                                            {{ 'First'|trans }}
+                                        </a>
+                                    </li>
+                                    <li class="page-item disabled">
+                                        <a class="page-link"
+                                            href="#"
+                                            tabindex="-1"
+                                            aria-disabled="true">
+                                            {{ 'Previous'|trans }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                <li class="page-item active">
+                                    <a class="page-link" href="#" tabindex="-1">
+                                        {{ currentPage }}
+                                    </a>
+                                </li>
+                                {% if next <= (allocations|length) %}
+                                    {% if currentPage != pages %}
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                href="{{
+                                                path(
+                                                    'app_allocation_index',
+                                                    app.request.query.all|merge({
+                                                        offset: next,
+                                                        page: null
+                                                    })
+                                                )
+                                                }}">
+                                                {{ currentPage + 1 }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if next + 10 < (allocations|length) %}
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                href="{{
+                                                path(
+                                                    'app_allocation_index',
+                                                    app.request.query.all|merge({
+                                                        offset: next + 10,
+                                                        page: null
+                                                    })
+                                                )
+                                                }}">
+                                                {{ currentPage + 2 }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if currentPage != pages %}
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                href="{{
+                                                path(
+                                                    'app_allocation_index',
+                                                    app.request.query.all|merge({
+                                                        offset: next,
+                                                        page: null
+                                                    })
+                                                )
+                                                }}">
+                                                {{ 'Next'|trans }}
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link"
+                                                href="{{
+                                                path(
+                                                    'app_allocation_index',
+                                                    app.request.query.all|merge({
+                                                        offset: last,
+                                                        page: null
+                                                    })
+                                                )
+                                                }}">
+                                                {{ 'Last'|trans }}
+                                                <i class="bi bi-chevron-bar-right">
+
+                                                </i>
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled">
+                                            <a class="page-link"
+                                                href="#"
+                                                tabindex="-1"
+                                                aria-disabled="true">
+                                                {{ 'Next'|trans }}
+                                            </a>
+                                        </li>
+                                        <li class="page-item disabled">
+                                            <a class="page-link"
+                                                href="#"
+                                                tabindex="-1"
+                                                aria-disabled="true">
+                                                {{ 'Last'|trans }}
+                                                <i class="bi bi-chevron-bar-right">
+
+                                                </i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <a class="page-link"
+                                            href="#"
+                                            tabindex="-1"
+                                            aria-disabled="true">
+                                            {{ 'Next'|trans }}
+                                        </a>
+                                    </li>
+                                    <li class="page-item disabled">
+                                        <a class="page-link"
+                                            href="#"
+                                            tabindex="-1"
+                                            aria-disabled="true">
+                                            {{ 'Last'|trans }}
+                                            <i class="bi bi-chevron-bar-right">
+
+                                            </i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    {% endif %}
+                </div>
+                <div class="col-2">
                     <form>
                         <div class="input-group mb-3">
-                            {% if search %}
-                                <input type="text"
-                                    name="search"
-                                    class="form-control"
-                                    placeholder="{{ search }}"
-                                    aria-label="{{ 'Search'|trans }}" />
-                            {% else %}
-                                <input type="text"
-                                    name="search"
-                                    class="form-control"
-                                    placeholder="{{ 'Search by PZC or Text'|trans }}"
-                                    aria-label="{{ 'Search'|trans }}" />
-                            {% endif %}
+                            <input type="text"
+                                name="page"
+                                class="form-control"
+                                placeholder="{{ 'Go to Page'|trans }}"
+                                aria-label="{{ 'Go to Page'|trans }}" />
 
                             {% if filters.hospital %}
                                 <input type="hidden"
@@ -533,6 +640,12 @@
                                     id="end"
                                     name="end"
                                     value="{{ filters.end }}" />
+                            {% endif %}
+                            {% if filters.pzc %}
+                                <input type="hidden"
+                                    id="pzc"
+                                    name="pzc"
+                                    value="{{ filters.pzc }}" />
                             {% endif %}
                             {% if filters.reqResus %}
                                 <input type="hidden"
@@ -593,6 +706,149 @@
                                     id="order"
                                     name="order"
                                     value="{{ filters.order }}" />
+                            {% endif %}
+                            {% if page %}
+                                <input type="hidden"
+                                    id="page"
+                                    name="page"
+                                    value="" />
+                            {% endif %}
+
+                            <button type="submit"
+                                class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-right-circle"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 collapse" id="collapseFilters">
+            <div class="card mb-3">
+                <div class="card-header">
+                    {{ 'Filters'|trans({}, 'forms') }}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ 'Search'|trans }}
+                    </h5>
+                    <form>
+                        <div class="input-group mb-3">
+                            {% if search %}
+                                <input type="text"
+                                    name="search"
+                                    class="form-control"
+                                    placeholder="{{ search }}"
+                                    aria-label="{{ 'Search'|trans }}" />
+                            {% else %}
+                                <input type="text"
+                                    name="search"
+                                    class="form-control"
+                                    placeholder="{{ 'Search by PZC or Text'|trans }}"
+                                    aria-label="{{ 'Search'|trans }}" />
+                            {% endif %}
+
+                            {% if filters.hospital %}
+                                <input type="hidden"
+                                    id="hospital"
+                                    name="hospital"
+                                    value="{{ filters.hospital }}" />
+                            {% endif %}
+                            {% if filters.supplyArea %}
+                                <input type="hidden"
+                                    id="supplyArea"
+                                    name="supplyArea"
+                                    value="{{ filters.supplyArea }}" />
+                            {% endif %}
+                            {% if filters.dispatchArea %}
+                                <input type="hidden"
+                                    id="dispatchArea"
+                                    name="dispatchArea"
+                                    value="{{ filters.dispatchArea }}" />
+                            {% endif %}
+                            {% if filters.start %}
+                                <input type="hidden"
+                                    id="start"
+                                    name="start"
+                                    value="{{ filters.start }}" />
+                            {% endif %}
+                            {% if filters.end %}
+                                <input type="hidden"
+                                    id="end"
+                                    name="end"
+                                    value="{{ filters.end }}" />
+                            {% endif %}
+                            {% if filters.pzc %}
+                                <input type="hidden"
+                                    id="pzc"
+                                    name="pzc"
+                                    value="{{ filters.pzc }}" />
+                            {% endif %}
+                            {% if filters.reqResus %}
+                                <input type="hidden"
+                                    id="reqResus"
+                                    name="reqResus"
+                                    value="{{ filters.reqResus }}" />
+                            {% endif %}
+                            {% if filters.reqCath %}
+                                <input type="hidden"
+                                    id="reqCath"
+                                    name="reqCath"
+                                    value="{{ filters.reqCath }}" />
+                            {% endif %}
+                            {% if filters.isCPR %}
+                                <input type="hidden"
+                                    id="isCPR"
+                                    name="isCPR"
+                                    value="{{ filters.isCPR }}" />
+                            {% endif %}
+                            {% if filters.isVent %}
+                                <input type="hidden"
+                                    id="isVent"
+                                    name="isVent"
+                                    value="{{ filters.isVent }}" />
+                            {% endif %}
+                            {% if filters.isShock %}
+                                <input type="hidden"
+                                    id="isShock"
+                                    name="isShock"
+                                    value="{{ filters.isShock }}" />
+                            {% endif %}
+                            {% if filters.isWithDoc %}
+                                <input type="hidden"
+                                    id="isWithDoc"
+                                    name="isWithDoc"
+                                    value="{{ filters.isWithDoc }}" />
+                            {% endif %}
+                            {% if filters.isPreg %}
+                                <input type="hidden"
+                                    id="isPreg"
+                                    name="isPreg"
+                                    value="{{ filters.isPreg }}" />
+                            {% endif %}
+                            {% if filters.isWork %}
+                                <input type="hidden"
+                                    id="isWork"
+                                    name="isWork"
+                                    value="{{ filters.isWork }}" />
+                            {% endif %}
+                            {% if filters.sortBy %}
+                                <input type="hidden"
+                                    id="sortBy"
+                                    name="sortBy"
+                                    value="{{ filters.sortBy }}" />
+                            {% endif %}
+                            {% if filters.order %}
+                                <input type="hidden"
+                                    id="order"
+                                    name="order"
+                                    value="{{ filters.order }}" />
+                            {% endif %}
+                            {% if page %}
+                                <input type="hidden"
+                                    id="page"
+                                    name="page"
+                                    value="" />
                             {% endif %}
 
                             <button type="submit"
@@ -794,6 +1050,41 @@
                         <h5 class="card-title">
                             {{ 'Filter by Properties'|trans }}
                         </h5>
+                        <p>
+                            <select class="form-select"
+                                name="pzc"
+                                aria-label="filterPZC">
+                                {% if filters.pzc is defined and not null %}
+                                    <option value="">
+                                        Stop filtering by PZC
+                                    </option>
+                                    {% for item in PZCs %}
+                                        {% if item.PZC != filters.pzc %}
+                                            <option value="{{ item.PZC }}">
+                                                {{ item.PZC }}
+                                                {{ item.PZCText }}
+                                            </option>
+                                        {% else %}
+                                            <option value="{{ item.PZC }}"
+                                                selected>
+                                                {{ item.PZC }}
+                                                {{ item.PZCText }}
+                                            </option>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <option selected>
+                                        Filter by PZC
+                                    </option>
+                                    {% for item in PZCs %}
+                                        <option value="{{ item.PZC }}">
+                                            {{ item.PZC }} {{ item.PZCText }}
+                                        </option>
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                        </p>
+
                         <div class="form-check form-switch">
                             {% if filters.reqResus %}
                                 <input class="form-check-input"
@@ -1070,6 +1361,12 @@
                                 id="end"
                                 name="end"
                                 value="{{ filters.end }}" />
+                        {% endif %}
+                        {% if filters.pzc %}
+                            <input type="hidden"
+                                id="pzc"
+                                name="pzc"
+                                value="{{ filters.pzc }}" />
                         {% endif %}
                         {% if filters.reqResus %}
                             <input type="hidden"

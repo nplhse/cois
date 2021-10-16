@@ -1293,6 +1293,138 @@
         <source>False</source>
         <target>Nein</target>
       </trans-unit>
+      <trans-unit id="WSAr8vK" resname="Updated your notification Settings.">
+        <source>Updated your notification Settings.</source>
+        <target>Einstellungen für Benachrichtigungen wurden aktualisiert.</target>
+      </trans-unit>
+      <trans-unit id="DNqG7Xn" resname="E-Mail settings">
+        <source>E-Mail settings</source>
+        <target>E-Mail Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="g62Wt9L" resname="Mange your notification settings">
+        <source>Mange your notification settings</source>
+        <target>Benachtigungen verwalten</target>
+      </trans-unit>
+      <trans-unit id="Y5PeZTC" resname="Toogle Options">
+        <source>Toogle Options</source>
+        <target>Zeige Optionen</target>
+      </trans-unit>
+      <trans-unit id="GMzt9j." resname="S+">
+        <source>S+</source>
+        <target>S+</target>
+      </trans-unit>
+      <trans-unit id="mU._u_A" resname="H+">
+        <source>H+</source>
+        <target>H+</target>
+      </trans-unit>
+      <trans-unit id="cEiJ515" resname="R+">
+        <source>R+</source>
+        <target>R+</target>
+      </trans-unit>
+      <trans-unit id="QhHyzI4" resname="B+">
+        <source>B+</source>
+        <target>B+</target>
+      </trans-unit>
+      <trans-unit id="FdwAGM_" resname="N+">
+        <source>N+</source>
+        <target>N+</target>
+      </trans-unit>
+      <trans-unit id="H2sksNd" resname="BG+">
+        <source>BG+</source>
+        <target>BG+</target>
+      </trans-unit>
+      <trans-unit id="1IGPkIp" resname="Pregnant">
+        <source>Pregnant</source>
+        <target>Schwanger</target>
+      </trans-unit>
+      <trans-unit id="ufhHyt5" resname="Showing Page page of pages">
+        <source>Showing Page page of pages</source>
+        <target>Seite %page% von %pages%</target>
+      </trans-unit>
+      <trans-unit id="oVHOsXE" resname="First">
+        <source>First</source>
+        <target>Erste</target>
+      </trans-unit>
+      <trans-unit id="65cOsJU" resname="Last">
+        <source>Last</source>
+        <target>Letzte</target>
+      </trans-unit>
+      <trans-unit id="xZlqF4w" resname="Search by PZC or Text">
+        <source>Search by PZC or Text</source>
+        <target>Suche nach RMI oder Stichwort</target>
+      </trans-unit>
+      <trans-unit id="OMcKmmh" resname="Filter by Dates">
+        <source>Filter by Dates</source>
+        <target>Filter nach Datum</target>
+      </trans-unit>
+      <trans-unit id="TFL6rV3" resname="Start Date">
+        <source>Start Date</source>
+        <target>Von</target>
+      </trans-unit>
+      <trans-unit id="6XCVHPt" resname="End Date">
+        <source>End Date</source>
+        <target>Bis</target>
+      </trans-unit>
+      <trans-unit id="EsKOigS" resname="Filter by Properties">
+        <source>Filter by Properties</source>
+        <target>Filter nach Eigenschaften</target>
+      </trans-unit>
+      <trans-unit id="PWD8uew" resname="Requires Resuscitation">
+        <source>Requires Resuscitation</source>
+        <target>Schockraum</target>
+      </trans-unit>
+      <trans-unit id="L9Q4LcT" resname="Requires Cathlab">
+        <source>Requires Cathlab</source>
+        <target>Herzkatheter</target>
+      </trans-unit>
+      <trans-unit id="LIilwYI" resname="Is CPR">
+        <source>Is CPR</source>
+        <target>Reanimation</target>
+      </trans-unit>
+      <trans-unit id="kObb1V0" resname="Is Ventilated">
+        <source>Is Ventilated</source>
+        <target>Beatmet</target>
+      </trans-unit>
+      <trans-unit id="Vih5E7V" resname="Is Shock">
+        <source>Is Shock</source>
+        <target>Schock</target>
+      </trans-unit>
+      <trans-unit id="jPLlzrp" resname="Is with Physician">
+        <source>Is with Physician</source>
+        <target>Mit Notarzt</target>
+      </trans-unit>
+      <trans-unit id="YjkxCqm" resname="Is with Pregnant">
+        <source>Is with Pregnant</source>
+        <target>Schwangerschaft</target>
+      </trans-unit>
+      <trans-unit id="8XtOuw6" resname="Is Work Accident">
+        <source>Is Work Accident</source>
+        <target>Arbeitsunfall</target>
+      </trans-unit>
+      <trans-unit id="M7k0ds9" resname="Time">
+        <source>Time</source>
+        <target>Zeiten</target>
+      </trans-unit>
+      <trans-unit id="A9N_mlN" resname="Urgency">
+        <source>Urgency</source>
+        <target>Dringlichkeit</target>
+      </trans-unit>
+      <trans-unit id="Obc3DzC" resname="Age">
+        <source>Age</source>
+        <target>Alter</target>
+      </trans-unit>
+      <trans-unit id="oEYw74v" resname="Gender">
+        <source>Gender</source>
+        <target>Geschlecht</target>
+      </trans-unit>
+      <trans-unit id="dxhFlb3" resname="Ascending">
+        <source>Ascending</source>
+        <target>Aufsteigend</target>
+      </trans-unit>
+      <trans-unit id="eUeabHb" resname="Descending">
+        <source>Descending</source>
+        <target>Absteigend</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

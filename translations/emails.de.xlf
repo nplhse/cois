@@ -70,6 +70,26 @@
         <target>Ein erstes Passwort wurde für Sie vom Administrator festgelegt und wird an Sie
                 übermittelt werden. Das Passwort muss bei der ersten Anmeldung geändert werden.</target>
       </trans-unit>
+      <trans-unit id="C.8EXTd" resname="Want to upload new data?">
+        <source>Want to upload new data?</source>
+        <target>Want to upload new data?</target>
+      </trans-unit>
+      <trans-unit id="mFvZ1.W" resname="Hey there %username%!">
+        <source>Hey there %username%!</source>
+        <target>Hey there %username%!</target>
+      </trans-unit>
+      <trans-unit id="q6.kNTA" resname="Have you noticed? Yet another month has passed. And you know what? We think that is a great moment to upload some new data to our project!">
+        <source>Have you noticed? Yet another month has passed. And you know what? We think that is a great moment to upload some new data to our project!</source>
+        <target>Have you noticed? Yet another month has passed. And you know what? We think that is a great moment to upload some new data to our project!</target>
+      </trans-unit>
+      <trans-unit id="1k4iclW" resname="But how do you ask? Very good question. The process is simple: Just login into IVENA, dump all the allocations from the last month as .CSV file and submit them via our form.">
+        <source>But how do you ask? Very good question. The process is simple: Just login into IVENA, dump all the allocations from the last month as .CSV file and submit them via our form.</source>
+        <target>But how do you ask? Very good question. The process is simple: Just login into IVENA, dump all the allocations from the last month as .CSV file and submit them via our form.</target>
+      </trans-unit>
+      <trans-unit id="1sKE.Vq" resname="Click here to upload new data">
+        <source>Click here to upload new data</source>
+        <target>Click here to upload new data</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

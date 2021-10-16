@@ -213,6 +213,16 @@ class AllocationRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function getPZCs(): array
+    {
+        $query = $this->createQueryBuilder('a');
+        $query->select($query->expr()->substring('a.PZC', 1, 3).'AS PZC, a.PZCText')
+            ->distinct(true)
+            ;
+
+        return $query->getQuery()->getArrayResult();
+    }
+
     public function getAllocationPaginator(int $offset, array $filter): Paginator
     {
         $query = $this->createQueryBuilder('a');
@@ -257,6 +267,11 @@ class AllocationRepository extends ServiceEntityRepository
             $query->andWhere('a.createdAt <= :endDate')
                 ->setParameter('endDate', $date, Types::DATETIME_MUTABLE)
             ;
+        }
+
+        if ($filter['pzc']) {
+            $query->andWhere('a.RMI = :pzc')
+                ->setParameter('pzc', $filter['pzc']);
         }
 
         if ($filter['reqResus']) {

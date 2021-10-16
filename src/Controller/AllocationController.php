@@ -35,6 +35,8 @@ class AllocationController extends AbstractController
         $isWork = $request->query->get('isWork');
         $sortBy = $request->query->get('sortBy');
         $order = $request->query->get('order');
+        $PZC = $request->query->get('pzc');
+        $page = $request->query->get('page');
 
         $filters = [];
         $filters['search'] = $request->query->get('search');
@@ -139,7 +141,19 @@ class AllocationController extends AbstractController
             $filters['order'] = null;
         }
 
-        $offset = max(0, $request->query->getInt('offset', 0));
+        if ($PZC) {
+            $filters['pzc'] = $PZC;
+        } else {
+            $filters['pzc'] = null;
+        }
+
+        if (empty($page)) {
+            $offset = max(0, $request->query->getInt('offset', 0));
+        } else {
+            $offset = (int) $page * AllocationRepository::PAGINATOR_PER_PAGE;
+            --$offset;
+        }
+
         $paginator = $allocationRepository->getAllocationPaginator($offset, $filters);
         $count = count($paginator);
 
@@ -149,17 +163,39 @@ class AllocationController extends AbstractController
             $last = floor($count / 10) * 10;
         }
 
+        //if (null != $offset) {
+        //    $offset = $count - AllocationRepository::PAGINATOR_PER_PAGE;
+        //    $paginator = $allocationRepository->getAllocationPaginator($offset, $filters);
+        //}
+
+        $pages = ceil($count / AllocationRepository::PAGINATOR_PER_PAGE);
+
+        $currentPage = ceil(($offset - 1) / AllocationRepository::PAGINATOR_PER_PAGE) + 1;
+        $previous = $offset - AllocationRepository::PAGINATOR_PER_PAGE;
+        $next = min($count, $offset + AllocationRepository::PAGINATOR_PER_PAGE);
+
+        dump($offset, $count, $previous, $next, $last);
+
+        $PZCs = $allocationRepository->getPZCs();
+
+        $col = array_column($PZCs, 'PZC');
+        array_multisort($col, SORT_ASC, $PZCs);
+
         return $this->render('allocation/index.html.twig', [
             'allocations' => $paginator,
             'search' => $filters['search'],
             'filters' => $filters,
             'perPage' => AllocationRepository::PAGINATOR_PER_PAGE,
-            'previous' => $offset - AllocationRepository::PAGINATOR_PER_PAGE,
-            'next' => min($count, $offset + AllocationRepository::PAGINATOR_PER_PAGE),
+            'previous' => $previous,
+            'next' => $next,
             'last' => $last,
+            'pages' => $pages,
+            'currentPage' => $currentPage,
             'hospitals' => $hospitalRepository->getHospitals(),
             'supplyAreas' => $hospitalRepository->getSupplyAreas(),
             'dispatchAreas' => $hospitalRepository->getDispatchAreas(),
+            'PZCs' => $PZCs,
+            'page' => $page,
         ]);
     }
 
