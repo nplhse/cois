@@ -1059,11 +1059,13 @@
                                         Stop filtering by PZC
                                     </option>
                                     {% for item in PZCs %}
-                                        {% if item.PZC != filters.pzc or item.PZC == 0 %}
+                                        {% if item.PZC != filters.pzc %}
                                             <option value="{{ item.PZC }}">
                                                 {{ item.PZC }}
                                                 {{ item.PZCText }}
                                             </option>
+                                        {% elseif item.PZC != 0 or item.PZCText == null %}
+                                            <!-- empty -->
                                         {% else %}
                                             <option value="{{ item.PZC }}"
                                                 selected>
