@@ -921,9 +921,11 @@
                                             })
                                         )
                                         }}">
-                                        {{ dispatchArea.dispatchArea|replace({
-                                            Leitstelle: ''
-                                        }) }}
+                                        {{
+                                            dispatchArea.dispatchArea|replace({
+                                                Leitstelle: ''
+                                            })
+                                        }}
                                     </a>
                                 </span>
                             {% else %}
@@ -1053,30 +1055,12 @@
                             {{ 'Filter by Properties'|trans }}
                         </h5>
                         <p>
+                            {{ dump(filters.pzc) }}
+
                             <select class="form-select"
                                 name="pzc"
                                 aria-label="filterPZC">
-                                {% if filters.pzc is defined and not null %}
-                                    <option value="">
-                                        Stop filtering by PZC
-                                    </option>
-                                    {% for item in PZCs %}
-                                        {% if item.PZC != filters.pzc %}
-                                            <option value="{{ item.PZC }}">
-                                                {{ item.PZC }}
-                                                {{ item.PZCText }}
-                                            </option>
-                                        {% elseif item.PZC != 0 or item.PZCText == null %}
-                                            <!-- empty -->
-                                        {% else %}
-                                            <option value="{{ item.PZC }}"
-                                                selected>
-                                                {{ item.PZC }}
-                                                {{ item.PZCText }}
-                                            </option>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% else %}
+                                {% if filters.pzc == null %}
                                     <option selected>
                                         Filter by PZC
                                     </option>
@@ -1084,6 +1068,28 @@
                                         <option value="{{ item.PZC }}">
                                             {{ item.PZC }} {{ item.PZCText }}
                                         </option>
+                                    {% endfor %}
+                                {% else %}
+                                    <option value="">
+                                        Stop filtering by PZC
+                                    </option>
+                                    {% for item in PZCs %}
+                                        {% if item.PZC == filters.pzc %}
+                                            <option value="{{ item.PZC }}"
+                                                selected>
+                                                {{ item.PZC }}
+                                                {{ item.PZCText }}
+                                            </option>
+                                        {% elseif
+                                            item.PZC == 0
+                                                or item.PZCText == null %}
+                                            <!-- empty -->
+                                        {% else %}
+                                            <option value="{{ item.PZC }}">
+                                                {{ item.PZC }}
+                                                {{ item.PZCText }}
+                                            </option>
+                                        {% endif %}
                                     {% endfor %}
                                 {% endif %}
                             </select>
