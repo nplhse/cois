@@ -1062,34 +1062,27 @@
                                     <option selected>
                                         Filter by PZC
                                     </option>
-                                    {% for item in PZCs %}
-                                        <option value="{{ item.PZC }}">
-                                            {{ item.PZC }} {{ item.PZCText }}
-                                        </option>
-                                    {% endfor %}
                                 {% else %}
                                     <option value="">
                                         Stop filtering by PZC
                                     </option>
-                                    {% for item in PZCs %}
-                                        {% if item.PZC == filters.pzc %}
-                                            <option value="{{ item.PZC }}"
-                                                selected>
-                                                {{ item.PZC }}
-                                                {{ item.PZCText }}
-                                            </option>
-                                        {% elseif
-                                            item.PZC == 0
-                                                or item.PZCText == null %}
-                                            <!-- empty -->
-                                        {% else %}
-                                            <option value="{{ item.PZC }}">
-                                                {{ item.PZC }}
-                                                {{ item.PZCText }}
-                                            </option>
-                                        {% endif %}
-                                    {% endfor %}
                                 {% endif %}
+                                {% for item in PZCs %}
+                                    {% if item.PZC == filters.pzc %}
+                                        <option value="{{ item.PZC }}" selected>
+                                            {{ item.PZC }}
+                                            {{ item.PZCText }}
+                                        </option>
+                                    {% elseif
+                                        item.PZC == 0 or item.PZCText == null %}
+                                        <!-- empty -->
+                                    {% else %}
+                                        <option value="{{ item.PZC }}">
+                                            {{ item.PZC }}
+                                            {{ item.PZCText }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
                             </select>
                         </p>
 
