@@ -1,0 +1,17 @@
+<h3>
+    {{ 'General'|trans }}
+</h3>
+<ul class="list-group mb-3">
+    {% if
+        app.request.attributes.get('_route') starts with 'app_statistics_age' %}
+        <li class="list-group-item active">
+            <a class="text-light" href="{{ path('app_statistics_age') }}">
+                {{ 'Age'|trans }}
+            </a>
+        </li>
+    {% else %}
+        <li class="list-group-item">
+            <a href="{{ path('app_statistics_age') }}">{{ 'Age'|trans }}</a>
+        </li>
+    {% endif %}
+</ul>

@@ -2823,7 +2823,7 @@ d3-shape@1:
   dependencies:
     d3-path "1"
 
-d3-shape@3:
+d3-shape@3, d3-shape@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/d3-shape/-/d3-shape-3.0.1.tgz#9ccdfb28fd9b0d12f2d8aec234cd5c4a9ea27931"
   integrity sha512-HNZNEQoDhuCrDWEc/BMbF/hKtzMZVoe64TvisFLDp2Iyj0UShB/E6/lBsLlJTfBMbYgftHj90cXJ0SEitlE6Xw==

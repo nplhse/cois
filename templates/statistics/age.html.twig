@@ -4,12 +4,6 @@
     Statistics - {{ parent() }}
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-
-    {{ encore_entry_script_tags('stats') }}
-{% endblock %}
-
 {% block body %}
     <div class="row">
         <div class="col">
@@ -31,6 +25,14 @@
         <div class="col-sm-12 col-md-3">
             {{ include('statistics/_statistics_subnav.html.twig') }}
         </div>
-        <div class="col"></div>
+        <div class="col">
+            <h1>
+                {{ 'Age Statistics'|trans }}
+            </h1>
+
+            <div data-controller="piechart" data-piechart-url-value="{{ url('app_data_gender') }}">
+                <div id="chart"></div>
+            </div>
+        </div>
     </div>
 {% endblock %}

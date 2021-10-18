@@ -12,6 +12,8 @@ class HospitalVoter extends Voter
 {
     private const EDIT = 'edit';
 
+    private const VIEWSTATS = 'viewStats';
+
     private Security $security;
 
     public function __construct(Security $security)
@@ -22,7 +24,7 @@ class HospitalVoter extends Voter
     protected function supports(string $attribute, $subject): bool
     {
         // if the attribute isn't one we support, return false
-        if (!in_array($attribute, [self::EDIT])) {
+        if (!in_array($attribute, [self::EDIT, self::VIEWSTATS])) {
             return false;
         }
 
@@ -50,6 +52,9 @@ class HospitalVoter extends Voter
         switch ($attribute) {
             case self::EDIT:
                 return $this->canEdit($hospital, $user);
+
+            case self::VIEWSTATS:
+                return $this->canViewStats($hospital, $user);
         }
 
         throw new \LogicException('This code should not be reached!');
@@ -62,5 +67,18 @@ class HospitalVoter extends Voter
         }
 
         return $user === $hospital->getOwner();
+    }
+
+    private function canViewStats(Hospital $hospital, User $user): bool
+    {
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            return true;
+        }
+
+        if ($user === $hospital->getOwner()) {
+            return true;
+        }
+
+        return false;
     }
 }

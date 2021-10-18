@@ -59,16 +59,20 @@ class AllocationRepository extends ServiceEntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function countAllocationsByGender(): array
+    public function countAllocationsByGender(Hospital $hospital = null): array
     {
-        $qb = $this->createQueryBuilder('a')
-            ->select('a.gender, COUNT(a.gender) AS counter')
-            ->groupBy('a.gender')
-            ->addOrderBy('a.gender', 'DESC')
-            ->getQuery()
-            ->getResult();
+        $qb = $this->createQueryBuilder('a');
 
-        return $qb;
+        if ($hospital) {
+            $qb->where('a.hospital = :hospital')
+                ->setParameter(':hospital', $hospital);
+        }
+
+        $qb->select('a.gender, COUNT(a.gender) AS counter')
+            ->groupBy('a.gender')
+            ->addOrderBy('a.gender', 'DESC');
+
+        return $qb->getQuery()->getResult();
     }
 
     public function countAllocationsByTime(): array
