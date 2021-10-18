@@ -1101,7 +1101,8 @@
                                 {% endif %}
                                 {% for item in assignments %}
                                     {% if
-                                        item.assignment == filters.assignment %}
+                                        item.assignment == filters.assignment
+                                            and item.assignment != '' %}
                                         <option value="{{ item.assignment }}"
                                             selected>
                                             {{ item.assignment }}
