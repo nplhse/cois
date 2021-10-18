@@ -25,7 +25,7 @@
         "prettier": "^2.4.1",
         "prettier-plugin-twig-melody": "^0.4.6",
         "regenerator-runtime": "^0.13.9",
-        "sass-loader": "^12.1.0",
+        "sass-loader": "^12.2.0",
         "stimulus": "^2.0.0",
         "webpack-notifier": "^1.14.1"
     },
