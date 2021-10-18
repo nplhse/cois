@@ -270,7 +270,11 @@
                 </thead>
                 <tbody>
                     {% for allocation in allocations %}
-                        <tr>
+                        {% if allocation.specialityWasClosed %}
+                            <tr class="table-warning">
+                        {% else %}
+                            <tr>
+                        {% endif %}
                             <td>
                                 <a href="{{
                                     path(
@@ -707,6 +711,24 @@
                                     name="order"
                                     value="{{ filters.order }}" />
                             {% endif %}
+                            {% if filters.assignment %}
+                                <input type="hidden"
+                                       id="assignment"
+                                       name="assignment"
+                                       value="{{ filters.assignment }}" />
+                            {% endif %}
+                            {% if filters.occasion %}
+                                <input type="hidden"
+                                       id="occasion"
+                                       name="occasion"
+                                       value="{{ filters.occasion }}" />
+                            {% endif %}
+                            {% if filters.modeOfTransport %}
+                                <input type="hidden"
+                                       id="transport"
+                                       name="transport"
+                                       value="{{ filters.modeOfTransport }}" />
+                            {% endif %}
                             {% if page %}
                                 <input type="hidden"
                                     id="page"
@@ -843,6 +865,24 @@
                                     id="order"
                                     name="order"
                                     value="{{ filters.order }}" />
+                            {% endif %}
+                            {% if filters.assignment %}
+                                <input type="hidden"
+                                       id="assignment"
+                                       name="assignment"
+                                       value="{{ filters.assignment }}" />
+                            {% endif %}
+                            {% if filters.occasion %}
+                                <input type="hidden"
+                                       id="occasion"
+                                       name="occasion"
+                                       value="{{ filters.occasion }}" />
+                            {% endif %}
+                            {% if filters.modeOfTransport %}
+                                <input type="hidden"
+                                       id="transport"
+                                       name="transport"
+                                       value="{{ filters.modeOfTransport }}" />
                             {% endif %}
                             {% if page %}
                                 <input type="hidden"
