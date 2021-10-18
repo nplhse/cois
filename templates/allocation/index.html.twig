@@ -1059,7 +1059,7 @@
                                 name="pzc"
                                 aria-label="filterPZC">
                                 {% if filters.pzc == null %}
-                                    <option selected>
+                                    <option value="" selected>
                                         Filter by PZC
                                     </option>
                                 {% else %}
@@ -1080,6 +1080,110 @@
                                         <option value="{{ item.PZC }}">
                                             {{ item.PZC }}
                                             {{ item.PZCText }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </p>
+
+                        <p>
+                            <select class="form-select"
+                                name="assignment"
+                                aria-label="filterAssignment">
+                                {% if filters.assignment == null %}
+                                    <option value="" selected>
+                                        Filter by Assignment
+                                    </option>
+                                {% else %}
+                                    <option value="">
+                                        Stop filtering by Assignment
+                                    </option>
+                                {% endif %}
+                                {% for item in assignments %}
+                                    {% if
+                                        item.assignment == filters.assignment %}
+                                        <option value="{{ item.assignment }}"
+                                            selected>
+                                            {{ item.assignment }}
+                                        </option>
+                                    {% elseif
+                                        item.assignment == 0
+                                            or item.assignment == null %}
+                                        <!-- empty -->
+                                    {% else %}
+                                        <option value="{{ item.assignment }}">
+                                            {{ item.assignment }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </p>
+                        <p>
+                            <select class="form-select"
+                                name="occasion"
+                                aria-label="filterOccasion">
+                                {% if filters.occasion == null %}
+                                    <option value="" selected>
+                                        Filter by Occasion
+                                    </option>
+                                {% else %}
+                                    <option value="">
+                                        Stop filtering by Occasion
+                                    </option>
+                                {% endif %}
+                                {% for item in occasions %}
+                                    {% if
+                                        item.occasion == filters.occasion
+                                            and item.occasion != '' %}
+                                        <option value="{{ item.occasion }}"
+                                            selected>
+                                            {{ item.occasion }}
+                                        </option>
+                                    {% elseif
+                                        item.occasion == ''
+                                            or item.occasion == null %}
+                                        <!-- empty -->
+                                    {% else %}
+                                        <option value="{{ item.occasion }}">
+                                            {{ item.occasion }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </p>
+                        <p>
+                            <select class="form-select"
+                                name="transport"
+                                aria-label="filterTransport">
+                                {% if filters.modeOfTransport == null %}
+                                    <option value="" selected>
+                                        Filter by mode of Transport
+                                    </option>
+                                {% else %}
+                                    <option value="">
+                                        Stop filtering by mode of Transport
+                                    </option>
+                                {% endif %}
+                                {% for item in transports %}
+                                    {% if
+                                        item.modeOfTransport
+                                            == filters.modeOfTransport
+                                            and item.modeOfTransport != '' %}
+                                        <option value="{{
+                                            item.modeOfTransport
+                                            }}"
+                                            selected>
+                                            {{ item.modeOfTransport }}
+                                        </option>
+                                    {% elseif
+                                        item.modeOfTransport == ''
+                                            or item.modeOfTransport == null %}
+                                        <!-- empty -->
+                                    {% else %}
+                                        <option value="{{
+                                            item.modeOfTransport
+                                            }}">
+                                            {{ item.modeOfTransport }}
                                         </option>
                                     {% endif %}
                                 {% endfor %}

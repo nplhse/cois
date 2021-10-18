@@ -37,6 +37,9 @@ class AllocationController extends AbstractController
         $order = $request->query->get('order');
         $PZC = $request->query->get('pzc');
         $page = $request->query->get('page');
+        $assignment = $request->query->get('assignment');
+        $occasion = $request->query->get('occasion');
+        $modeOfTransport = $request->query->get('transport');
 
         $filters = [];
         $filters['search'] = $request->query->get('search');
@@ -154,6 +157,24 @@ class AllocationController extends AbstractController
             --$offset;
         }
 
+        if ($assignment) {
+            $filters['assignment'] = $assignment;
+        } else {
+            $filters['assignment'] = null;
+        }
+
+        if ($occasion) {
+            $filters['occasion'] = $occasion;
+        } else {
+            $filters['occasion'] = null;
+        }
+
+        if ($modeOfTransport) {
+            $filters['modeOfTransport'] = $modeOfTransport;
+        } else {
+            $filters['modeOfTransport'] = null;
+        }
+
         $paginator = $allocationRepository->getAllocationPaginator($offset, $filters);
         $count = count($paginator);
 
@@ -192,6 +213,9 @@ class AllocationController extends AbstractController
             'hospitals' => $hospitalRepository->getHospitals(),
             'supplyAreas' => $hospitalRepository->getSupplyAreas(),
             'dispatchAreas' => $hospitalRepository->getDispatchAreas(),
+            'assignments' => $allocationRepository->getAllAssignments(),
+            'occasions' => $allocationRepository->getAllOccasions(),
+            'transports' => $allocationRepository->getAllTransportModes(),
             'PZCs' => $PZCs,
             'page' => $page,
         ]);

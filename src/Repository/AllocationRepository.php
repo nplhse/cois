@@ -130,6 +130,39 @@ class AllocationRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function getAllAssignments(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('DISTINCT a.assignment')
+            ->addOrderBy('a.assignment', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
+    public function getAllOccasions(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('DISTINCT a.occasion')
+            ->addOrderBy('a.occasion', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
+    public function getAllTransportModes(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('DISTINCT a.modeOfTransport')
+            ->addOrderBy('a.modeOfTransport', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
     public function countAllocationsBySpeciality(bool $detail = false): array
     {
         if ($detail) {
@@ -304,6 +337,24 @@ class AllocationRepository extends ServiceEntityRepository
 
         if ($filter['isWork']) {
             $query->andWhere('a.isWorkAccident = TRUE');
+        }
+
+        if ($filter['assignment']) {
+            $query->andWhere('a.assignment = :assignment')
+                ->setParameter('assignment', str_replace($filter['assignment'], '+', ' '))
+            ;
+        }
+
+        if ($filter['occasion']) {
+            $query->andWhere('a.occasion = :occasion')
+                ->setParameter('occasion', str_replace($filter['occasion'], '+', ' '))
+            ;
+        }
+
+        if ($filter['modeOfTransport']) {
+            $query->andWhere('a.modeOfTransport = :modeOfTransport')
+                ->setParameter('modeOfTransport', $filter['modeOfTransport'])
+            ;
         }
 
         $sortBy = match ($filter['sortBy']) {
