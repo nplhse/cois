@@ -290,7 +290,11 @@ class RequestParamService
 
     public function getPagination(int $count, int $page, int $perPage): PaginationDto
     {
-        (int) $last = ceil($count / $perPage);
+        $last = floor($count / $perPage);
+
+        if (0 == (int) $last) {
+            $last = 1;
+        }
 
         if ($page > 1) {
             $previous = $page - 1;
