@@ -324,6 +324,20 @@
                         {{ 'Create Hospital'|trans }}
                     </a>
                 </p>
+            {% elseif app.user.hospital %}
+                <p>
+                    <a href="{{
+                        path(
+                            'app_hospital_edit',
+                            {
+                                id: app.user.hospital.id
+                            }
+                        )
+                        }}"
+                        class="btn btn-primary">
+                        {{ 'Edit your Hospital'|trans }}
+                    </a>
+                </p>
             {% endif %}
 
             <div class="card">

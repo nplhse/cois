@@ -306,74 +306,81 @@ class AllocationRepository extends ServiceEntityRepository
             ;
         }
 
-        if ($filter['pzc']) {
+        if (isset($filter['pzc'])) {
             $query->andWhere('a.RMI = :pzc')
                 ->setParameter('pzc', $filter['pzc']);
         }
 
-        if ($filter['reqResus']) {
+        if (isset($filter['reqResus'])) {
             $query->andWhere('a.requiresResus = TRUE');
         }
 
-        if ($filter['reqCath']) {
+        if (isset($filter['reqCath'])) {
             $query->andWhere('a.requiresCathlab = TRUE');
         }
 
-        if ($filter['isCPR']) {
+        if (isset($filter['isCPR'])) {
             $query->andWhere('a.isCPR = TRUE');
         }
 
-        if ($filter['isVent']) {
+        if (isset($filter['isVent'])) {
             $query->andWhere('a.isVentilated = TRUE');
         }
 
-        if ($filter['isShock']) {
+        if (isset($filter['isShock'])) {
             $query->andWhere('a.isShock = TRUE');
         }
 
-        if ($filter['isWithDoc']) {
+        if (isset($filter['isWithDoc'])) {
             $query->andWhere('a.isWithPhysician = TRUE');
         }
 
-        if ($filter['isPreg']) {
+        if (isset($filter['isPreg'])) {
             $query->andWhere('a.isPregnant = TRUE');
         }
 
-        if ($filter['isWork']) {
+        if (isset($filter['isWork'])) {
             $query->andWhere('a.isWorkAccident = TRUE');
         }
 
-        if ($filter['assignment']) {
+        if (isset($filter['assignment'])) {
             $query->andWhere('a.assignment = :assignment')
                 ->setParameter('assignment', $filter['assignment'])
             ;
         }
 
-        if ($filter['occasion']) {
-            dump($filter['occasion']);
+        if (isset($filter['occasion'])) {
             $query->andWhere('a.occasion = :occasion')
                 ->setParameter('occasion', $filter['occasion'])
             ;
         }
 
-        if ($filter['modeOfTransport']) {
+        if (isset($filter['modeOfTransport'])) {
             $query->andWhere('a.modeOfTransport = :modeOfTransport')
                 ->setParameter('modeOfTransport', $filter['modeOfTransport'])
             ;
         }
 
-        $sortBy = match ($filter['sortBy']) {
-            'dispatchArea' => 'a.dispatchArea',
-            'urgency' => 'a.SK',
-            'age' => 'a.age',
-            'gender' => 'a.gender',
-            default => 'a.createdAt',
-        };
+        if (isset($filter['sortBy'])) {
+            $sortBy = match ($filter['sortBy']) {
+                'dispatchArea' => 'a.dispatchArea',
+                'urgency' => 'a.SK',
+                'age' => 'a.age',
+                'gender' => 'a.gender',
+                default => 'a.createdAt',
+            };
+        } else {
+            $sortBy = 'a.createdAt';
+        }
 
-        if ('desc' === $filter['orderBy']) {
-            $order = 'DESC';
-        } elseif ('asc' === $filter['orderBy']) {
-            $order = 'ASC';
+        if (isset($filter['orderBy'])) {
+            if ('desc' === $filter['orderBy']) {
+                $order = 'DESC';
+            } elseif ('asc' === $filter['orderBy']) {
+                $order = 'ASC';
+            } else {
+                $order = 'DESC';
+            }
         } else {
             $order = 'DESC';
         }

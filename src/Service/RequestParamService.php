@@ -292,6 +292,10 @@ class RequestParamService
     {
         $last = floor($count / $perPage);
 
+        if (0 == $count % 10) {
+            --$last;
+        }
+
         if (0 == (int) $last) {
             $last = 1;
         }
