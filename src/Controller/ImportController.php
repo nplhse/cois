@@ -36,9 +36,13 @@ class ImportController extends AbstractController
         $filters = [];
         $filters['search'] = $paramService->getSearch();
         $filters['page'] = $paramService->getPage();
+        $filters['show'] = $paramService->getShow();
 
         $filters['user'] = $this->getUser();
         $filters['hospital'] = $this->getUser()->getHospital();
+
+        $filters['sortBy'] = $paramService->getSortBy();
+        $filters['orderBy'] = $paramService->getOrderBy();
 
         $paginator = $importRepository->getImportPaginator($paramService->getPage(), $filters);
 

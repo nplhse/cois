@@ -266,11 +266,26 @@ class RequestParamService
         return $date;
     }
 
+    public function getShow(): string|null
+    {
+        $show = $this->request->query->get('show');
+
+        if (empty($show)) {
+            return null;
+        }
+
+        return $show;
+    }
+
     public function getOrderBy(): string
     {
         $order = $this->request->query->get('orderBy');
 
         if (empty($order)) {
+            if ('name' === $this->getSortBy() or 'caption' === $this->getSortBy()) {
+                return 'asc';
+            }
+
             return 'desc';
         }
 

@@ -340,7 +340,7 @@
                 </p>
             {% endif %}
 
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-header">
                     <i class="bi bi-filter-left"></i>
                     {{ 'Filters'|trans({}, 'forms') }}
@@ -399,6 +399,111 @@
                     <p class="mb-2">
                         {{ filter.tagFilter(size, 'size', filters.size) }}
                     </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    Sorting
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-floating mb-2">
+                            <select id="sortBy"
+                                name="sortBy"
+                                class="form-select"
+                                aria-label="sortBy">
+                                {% if filters.sortBy == 'name' %}
+                                    <option value="name" selected="selected">
+                                        {{ 'Name'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="supplyArea">
+                                        {{ 'Name'|trans }}
+                                    </option>
+                                {% endif %}
+                                {% if filters.sortBy == 'supplyArea' %}
+                                    <option value="supplyArea"
+                                        selected="selected">
+                                        {{ 'SupplyArea'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="supplyArea">
+                                        {{ 'Supply Area'|trans }}
+                                    </option>
+                                {% endif %}
+                                {% if filters.sortBy == 'dispatchArea' %}
+                                    <option value="dispatchArea"
+                                        selected="selected">
+                                        {{ 'DispatchArea'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="dispatchArea">
+                                        {{ 'DispatchArea'|trans }}
+                                    </option>
+                                {% endif %}
+                                {% if filters.sortBy == 'size' %}
+                                    <option value="size" selected="selected">
+                                        {{ 'Size'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="size">
+                                        {{ 'Size'|trans }}
+                                    </option>
+                                {% endif %}
+                                {% if filters.sortBy == 'location' %}
+                                    <option value="location"
+                                        selected="selected">
+                                        {{ 'Location'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="status">
+                                        {{ 'Location'|trans }}
+                                    </option>
+                                {% endif %}
+                            </select>
+                            <label for="sortBy">Sort by</label>
+                        </div>
+                        <div class="form-floating mb-2">
+                            <select id="orderBy"
+                                name="orderBy"
+                                class="form-select"
+                                aria-label="sortorder">
+                                {% if filters.orderBy == 'asc' %}
+                                    <option value="asc" selected="selected">
+                                        {{ 'Ascending'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="asc">
+                                        {{ 'Ascending'|trans }}
+                                    </option>
+                                {% endif %}
+                                {% if filters.orderBy == 'desc' %}
+                                    <option value="desc" selected="selected">
+                                        {{ 'Descending'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="desc">
+                                        {{ 'Descending'|trans }}
+                                    </option>
+                                {% endif %}
+                            </select>
+                            <label for="sortorder">Sort</label>
+                        </div>
+
+                        {% if filters.search %}
+                            <input type="hidden"
+                                id="search"
+                                name="search"
+                                value="{{ filters.search }}" />
+                        {% endif %}
+
+                        <div class="float-end">
+                            <button type="submit" class="btn btn-primary">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

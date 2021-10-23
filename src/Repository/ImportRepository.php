@@ -74,20 +74,48 @@ class ImportRepository extends ServiceEntityRepository
             ;
         }
 
-        if ($filter['user']) {
+        if ('user' == $filter['show']) {
             $query->andWhere('i.user = :user')
-                ->setParameter('user', $filter['user'])
+                ->setParameter(':user', $filter['user'])
+                ;
+        } elseif ('hospital' == $filter['show']) {
+            $query->andWhere('i.hospital = :hospital')
+                ->setParameter(':hospital', $filter['hospital'])
             ;
         }
 
-        if ($filter['hospital']) {
-            $query->orWhere('i.hospital = :hospital')
-                ->setParameter('hospital', $filter['hospital'])
+        if (empty($filter['show'])) {
+            $query->andWhere('i.user = :user')
+                ->setParameter(':user', $filter['user'])
+                ->orWhere('i.hospital = :hospital')
+                ->setParameter(':hospital', $filter['hospital'])
             ;
+        }
+
+        if (isset($filter['sortBy'])) {
+            $sortBy = match ($filter['sortBy']) {
+                'status' => 'i.status',
+                'caption' => 'i.caption',
+                default => 'i.createdAt',
+            };
+        } else {
+            $sortBy = 'i.createdAt';
+        }
+
+        if (isset($filter['orderBy'])) {
+            if ('desc' === $filter['orderBy']) {
+                $order = 'DESC';
+            } elseif ('asc' === $filter['orderBy']) {
+                $order = 'ASC';
+            } else {
+                $order = 'DESC';
+            }
+        } else {
+            $order = 'DESC';
         }
 
         $query
-            ->orderBy('i.createdAt', 'DESC')
+            ->orderBy($sortBy, $order)
             ->setMaxResults(self::PAGINATOR_PER_PAGE)
             ->setFirstResult($offset)
             ->getQuery()

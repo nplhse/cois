@@ -39,6 +39,9 @@ class HospitalController extends AbstractController
         $filters['supplyArea'] = $paramService->getSupplyArea();
         $filters['dispatchArea'] = $paramService->getDispatchArea();
 
+        $filters['sortBy'] = $paramService->getSortBy();
+        $filters['orderBy'] = $paramService->getOrderBy();
+
         $paginator = $hospitalRepository->getHospitalPaginator($paramService->getPage(), $filters);
 
         return $this->render('hospitals/index.html.twig', [
@@ -63,7 +66,7 @@ class HospitalController extends AbstractController
 
         $hospital = new Hospital();
 
-        $form = $this->createForm(HospitalType::class);
+        $form = $this->createForm(HospitalType::class, $hospital);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -71,7 +74,9 @@ class HospitalController extends AbstractController
             $hospital->setUpdatedAt(new \DateTime('NOW'));
             $hospital->setOwner($this->getUser());
 
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($hospital);
+            $entityManager->flush();
 
             $this->addFlash('success', 'Your hospital was successfully created.');
 

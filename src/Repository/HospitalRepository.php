@@ -27,10 +27,20 @@ class HospitalRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('h')
             ->andWhere('h.owner = :user')
-            ->setParameter('user', $user->getId())
+            ->setParameter(':user', $user->getId())
             ->getQuery()
             ->getOneOrNullResult()
         ;
+    }
+
+    public function findById(int $id): ?Hospital
+    {
+        return $this->createQueryBuilder('h')
+            ->andWhere('h.id = :id')
+            ->setParameter(':user', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
     }
 
     public function countHospitals(): string
@@ -135,8 +145,32 @@ class HospitalRepository extends ServiceEntityRepository
             ;
         }
 
+        if (isset($filter['sortBy'])) {
+            $sortBy = match ($filter['sortBy']) {
+                'dispatchArea' => 'h.dispatchArea',
+                'supplyArea' => 'h.supplyArea',
+                'size' => 'h.beds',
+                'location' => 'h.location',
+                default => 'h.name',
+            };
+        } else {
+            $sortBy = 'h.name';
+        }
+
+        if (isset($filter['orderBy'])) {
+            if ('desc' === $filter['orderBy']) {
+                $order = 'DESC';
+            } elseif ('asc' === $filter['orderBy']) {
+                $order = 'ASC';
+            } else {
+                $order = 'DESC';
+            }
+        } else {
+            $order = 'DESC';
+        }
+
         $query
-            ->orderBy('h.name', 'ASC')
+            ->orderBy($sortBy, $order)
             ->setMaxResults(self::PAGINATOR_PER_PAGE)
             ->setFirstResult($offset)
             ->getQuery()

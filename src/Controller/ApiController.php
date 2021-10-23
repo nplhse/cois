@@ -6,6 +6,7 @@ use App\DataTransferObjects\GenderStats;
 use App\Query\AllocationQuery;
 use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
+use App\Service\RequestParamService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,10 +31,11 @@ class ApiController extends AbstractController
     #[Route('/api/gender.json', name: 'app_data_gender')]
     public function gender(Request $request): Response
     {
-        $hospitalId = $request->query->get('hospital');
+        $paramService = new RequestParamService($request);
+        $hospitalId = $paramService->hospital;
 
         if (isset($hospitalId) && !empty($hospitalId)) {
-            $hospital = $this->hospitalRepository->findOneById($hospitalId);
+            $hospital = $this->hospitalRepository->findById($hospitalId);
 
             if ($this->isGranted('viewStats', $hospital)) {
                 $this->allocationQuery->filterByHospital($hospital);

@@ -196,7 +196,7 @@
                 </p>
             {% endif %}
 
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-header">
                     <i class="bi bi-filter-left"></i>
                     {{ 'Filters'|trans({}, 'forms') }}
@@ -207,6 +207,142 @@
                     </h5>
 
                     {{ filter.search(filters.search) }}
+
+                    <h5 class="card-title">
+                        {{ 'Filter by Properties'|trans }}
+                    </h5>
+
+                    <form>
+                        <select class="form-select" name="show" aria-label="Default select example">
+                            {% if filters.show == null %}
+                                <option value="" selected>{{ 'Filter by Properties'|trans }}</option>
+                            {% else %}
+                                <option value="">{{ 'Stop filtering by Properties'|trans }}</option>
+                            {% endif %}
+                            {% if filters.show == 'user' %}
+                                <option value="user" selected>{{ 'By Yourself'|trans }}</option>
+                            {% else %}
+                                <option value="user">{{ 'By Yourself'|trans }}</option>
+                            {% endif %}
+                            {% if app.user.hospital %}
+                                {% if filters.show != 'hospital' %}
+                                    <option value="hospital">{{ 'By your Hospital'|trans }}</option>
+                                {% elseif app.user.hospital and filters.show == 'hospital' %}
+                                    <option value="hospital" selected>{{ 'By your Hospital'|trans }}</option>
+                                {% endif %}
+                            {% endif %}
+                        </select>
+
+                        {% if filters.sortBy %}
+                            <input type="hidden"
+                                   id="sortBy"
+                                   name="sortBy"
+                                   value="{{ filters.sortBy }}" />
+                        {% endif %}
+                        {% if filters.orderBy %}
+                            <input type="hidden"
+                                   id="orderBy"
+                                   name="orderBy"
+                                   value="{{ filters.orderBy }}" />
+                        {% endif %}
+
+                        <div class="float-end mt-2">
+                            <button type="submit"
+                                    class="btn btn-outline-secondary">
+                                Apply filters <i class="bi bi-arrow-right-square"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    Sorting
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-floating mb-2">
+                            <select id="sortBy"
+                                    name="sortBy"
+                                    class="form-select"
+                                    aria-label="sortBy">
+                                {% if filters.sortBy == 'time' %}
+                                    <option value="time" selected="selected">
+                                        {{ 'Time'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="time">
+                                        {{ 'Time'|trans }}
+                                    </option>
+                                {% endif %}
+                                {% if filters.sortBy == 'caption' %}
+                                    <option value="caption" selected="selected">
+                                        {{ 'Caption'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="caption">
+                                        {{ 'Caption'|trans }}
+                                    </option>
+                                {% endif %}
+                                {% if filters.sortBy == 'status' %}
+                                    <option value="status" selected="selected">
+                                        {{ 'Status'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="status">
+                                        {{ 'Status'|trans }}
+                                    </option>
+                                {% endif %}
+                            </select>
+                            <label for="sortBy">Sort by</label>
+                        </div>
+                        <div class="form-floating mb-2">
+                            <select id="orderBy"
+                                    name="orderBy"
+                                    class="form-select"
+                                    aria-label="sortorder">
+                                {% if filters.orderBy == 'asc' %}
+                                    <option value="asc" selected="selected">
+                                        {{ 'Ascending'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="asc">
+                                        {{ 'Ascending'|trans }}
+                                    </option>
+                                {% endif %}
+                                {% if filters.orderBy == 'desc' %}
+                                    <option value="desc" selected="selected">
+                                        {{ 'Descending'|trans }}
+                                    </option>
+                                {% else %}
+                                    <option value="desc">
+                                        {{ 'Descending'|trans }}
+                                    </option>
+                                {% endif %}
+                            </select>
+                            <label for="sortorder">Sort</label>
+                        </div>
+
+                        {% if filters.search %}
+                            <input type="hidden"
+                                   id="search"
+                                   name="search"
+                                   value="{{ filters.search }}" />
+                        {% endif %}
+                        {% if filters.show %}
+                            <input type="hidden"
+                                   id="show"
+                                   name="show"
+                                   value="{{ filters.show }}" />
+                        {% endif %}
+
+                        <div class="float-end">
+                            <button type="submit" class="btn btn-primary">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
