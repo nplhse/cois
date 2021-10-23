@@ -2475,16 +2475,16 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "30f38bffc6f24293dadd1823936372dfa9e86e2f"
+                "reference": "a12f7e301eb7258bb68acd89d4aefa05c2906cae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/30f38bffc6f24293dadd1823936372dfa9e86e2f",
-                "reference": "30f38bffc6f24293dadd1823936372dfa9e86e2f",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/a12f7e301eb7258bb68acd89d4aefa05c2906cae",
+                "reference": "a12f7e301eb7258bb68acd89d4aefa05c2906cae",
                 "shasum": ""
             },
             "require": {
@@ -2519,9 +2519,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.5.0"
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.5.1"
             },
-            "time": "2021-09-17T15:28:14+00:00"
+            "time": "2021-10-02T14:08:47+00:00"
         },
         {
             "name": "psr/cache",
@@ -4248,16 +4248,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.16.3",
+            "version": "v1.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "f05406b33681409b83285f4d2ff4efbca7c55b03"
+                "reference": "782ef2269622b8349c4bc3dc795fc79d39e8a5b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/f05406b33681409b83285f4d2ff4efbca7c55b03",
-                "reference": "f05406b33681409b83285f4d2ff4efbca7c55b03",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/782ef2269622b8349c4bc3dc795fc79d39e8a5b2",
+                "reference": "782ef2269622b8349c4bc3dc795fc79d39e8a5b2",
                 "shasum": ""
             },
             "require": {
@@ -4274,7 +4274,7 @@
             "type": "composer-plugin",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.16-dev"
+                    "dev-main": "1.17-dev"
                 },
                 "class": "Symfony\\Flex\\Flex"
             },
@@ -4296,7 +4296,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v1.16.3"
+                "source": "https://github.com/symfony/flex/tree/v1.17.1"
             },
             "funding": [
                 {
@@ -4312,7 +4312,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-09-28T17:00:52+00:00"
+            "time": "2021-10-14T06:14:48+00:00"
         },
         {
             "name": "symfony/form",
@@ -10386,16 +10386,16 @@
         },
         {
             "name": "psalm/plugin-symfony",
-            "version": "v3.0.3",
+            "version": "v3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psalm/psalm-plugin-symfony.git",
-                "reference": "7b19393d11204e63a1c4b3cdee8585aa72a0ea70"
+                "reference": "65586604237c9062c15adc92faee5f84d1698af6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/psalm-plugin-symfony/zipball/7b19393d11204e63a1c4b3cdee8585aa72a0ea70",
-                "reference": "7b19393d11204e63a1c4b3cdee8585aa72a0ea70",
+                "url": "https://api.github.com/repos/psalm/psalm-plugin-symfony/zipball/65586604237c9062c15adc92faee5f84d1698af6",
+                "reference": "65586604237c9062c15adc92faee5f84d1698af6",
                 "shasum": ""
             },
             "require": {
@@ -10444,9 +10444,9 @@
             "description": "Psalm Plugin for Symfony",
             "support": {
                 "issues": "https://github.com/psalm/psalm-plugin-symfony/issues",
-                "source": "https://github.com/psalm/psalm-plugin-symfony/tree/v3.0.3"
+                "source": "https://github.com/psalm/psalm-plugin-symfony/tree/v3.0.4"
             },
-            "time": "2021-09-06T15:39:00+00:00"
+            "time": "2021-10-14T04:48:39+00:00"
         },
         {
             "name": "sebastian/diff",
@@ -10742,16 +10742,16 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.34.0",
+            "version": "v1.34.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "c1ead8581cddeb4b2b9dcc8a3f00910093c4e5e8"
+                "reference": "c9ae401f3fa2b42881120d33ad79416630d1f2be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/c1ead8581cddeb4b2b9dcc8a3f00910093c4e5e8",
-                "reference": "c1ead8581cddeb4b2b9dcc8a3f00910093c4e5e8",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/c9ae401f3fa2b42881120d33ad79416630d1f2be",
+                "reference": "c9ae401f3fa2b42881120d33ad79416630d1f2be",
                 "shasum": ""
             },
             "require": {
@@ -10810,7 +10810,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/maker-bundle/issues",
-                "source": "https://github.com/symfony/maker-bundle/tree/v1.34.0"
+                "source": "https://github.com/symfony/maker-bundle/tree/v1.34.1"
             },
             "funding": [
                 {
@@ -10826,7 +10826,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-09-27T14:29:38+00:00"
+            "time": "2021-10-13T15:58:56+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",

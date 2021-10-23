@@ -134,6 +134,39 @@ class AllocationRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function getAllAssignments(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('DISTINCT a.assignment')
+            ->addOrderBy('a.assignment', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
+    public function getAllOccasions(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('DISTINCT a.occasion')
+            ->addOrderBy('a.occasion', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
+    public function getAllTransportModes(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('DISTINCT a.modeOfTransport')
+            ->addOrderBy('a.modeOfTransport', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
     public function countAllocationsBySpeciality(bool $detail = false): array
     {
         if ($detail) {
@@ -227,15 +260,19 @@ class AllocationRepository extends ServiceEntityRepository
         return $query->getQuery()->getArrayResult();
     }
 
-    public function getAllocationPaginator(int $offset, array $filter): Paginator
+    public function getAllocationPaginator(int $page, array $filter): Paginator
     {
+        if (1 != $page) {
+            $offset = $page * self::PAGINATOR_PER_PAGE;
+        } else {
+            $offset = 0;
+        }
+
         $query = $this->createQueryBuilder('a');
 
         if ($filter['search']) {
-            $search = str_replace($filter['search'], '+', ' ');
-
             $query->where('a.PZCText LIKE :search')
-                ->setParameter('search', '%'.$search.'%')
+                ->setParameter('search', '%'.$filter['search'].'%')
             ;
         }
 
@@ -257,71 +294,97 @@ class AllocationRepository extends ServiceEntityRepository
             ;
         }
 
-        if ($filter['start']) {
-            $date = \DateTime::createFromFormat('Y-m-d G:i', $filter['start'].'00:00');
+        if ($filter['startDate']) {
+            $date = \DateTime::createFromFormat('Y-m-d G:i', $filter['startDate'].'00:00');
 
             $query->andWhere('a.createdAt >= :startDate')
                 ->setParameter('startDate', $date, Types::DATETIME_MUTABLE)
             ;
         }
 
-        if ($filter['end']) {
-            $date = \DateTime::createFromFormat('Y-m-d G:i', $filter['end'].'23:59');
+        if ($filter['endDate']) {
+            $date = \DateTime::createFromFormat('Y-m-d G:i', $filter['endDate'].'23:59');
 
             $query->andWhere('a.createdAt <= :endDate')
                 ->setParameter('endDate', $date, Types::DATETIME_MUTABLE)
             ;
         }
 
-        if ($filter['pzc']) {
+        if (isset($filter['pzc'])) {
             $query->andWhere('a.RMI = :pzc')
                 ->setParameter('pzc', $filter['pzc']);
         }
 
-        if ($filter['reqResus']) {
+        if (isset($filter['reqResus'])) {
             $query->andWhere('a.requiresResus = TRUE');
         }
 
-        if ($filter['reqCath']) {
+        if (isset($filter['reqCath'])) {
             $query->andWhere('a.requiresCathlab = TRUE');
         }
 
-        if ($filter['isCPR']) {
+        if (isset($filter['isCPR'])) {
             $query->andWhere('a.isCPR = TRUE');
         }
 
-        if ($filter['isVent']) {
+        if (isset($filter['isVent'])) {
             $query->andWhere('a.isVentilated = TRUE');
         }
 
-        if ($filter['isShock']) {
+        if (isset($filter['isShock'])) {
             $query->andWhere('a.isShock = TRUE');
         }
 
-        if ($filter['isWithDoc']) {
+        if (isset($filter['isWithDoc'])) {
             $query->andWhere('a.isWithPhysician = TRUE');
         }
 
-        if ($filter['isPreg']) {
+        if (isset($filter['isPreg'])) {
             $query->andWhere('a.isPregnant = TRUE');
         }
 
-        if ($filter['isWork']) {
+        if (isset($filter['isWork'])) {
             $query->andWhere('a.isWorkAccident = TRUE');
         }
 
-        $sortBy = match ($filter['sortBy']) {
-            'dispatchArea' => 'a.dispatchArea',
-            'urgency' => 'a.SK',
-            'age' => 'a.age',
-            'gender' => 'a.gender',
-            default => 'a.createdAt',
-        };
+        if (isset($filter['assignment'])) {
+            $query->andWhere('a.assignment = :assignment')
+                ->setParameter('assignment', $filter['assignment'])
+            ;
+        }
 
-        if ('desc' === $filter['order']) {
-            $order = 'DESC';
-        } elseif ('asc' === $filter['order']) {
-            $order = 'ASC';
+        if (isset($filter['occasion'])) {
+            $query->andWhere('a.occasion = :occasion')
+                ->setParameter('occasion', $filter['occasion'])
+            ;
+        }
+
+        if (isset($filter['modeOfTransport'])) {
+            $query->andWhere('a.modeOfTransport = :modeOfTransport')
+                ->setParameter('modeOfTransport', $filter['modeOfTransport'])
+            ;
+        }
+
+        if (isset($filter['sortBy'])) {
+            $sortBy = match ($filter['sortBy']) {
+                'dispatchArea' => 'a.dispatchArea',
+                'urgency' => 'a.SK',
+                'age' => 'a.age',
+                'gender' => 'a.gender',
+                default => 'a.createdAt',
+            };
+        } else {
+            $sortBy = 'a.createdAt';
+        }
+
+        if (isset($filter['orderBy'])) {
+            if ('desc' === $filter['orderBy']) {
+                $order = 'DESC';
+            } elseif ('asc' === $filter['orderBy']) {
+                $order = 'ASC';
+            } else {
+                $order = 'DESC';
+            }
         } else {
             $order = 'DESC';
         }

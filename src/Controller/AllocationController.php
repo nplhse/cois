@@ -6,6 +6,7 @@ use App\Entity\Allocation;
 use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
 use App\Repository\ImportRepository;
+use App\Service\RequestParamService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,180 +21,60 @@ class AllocationController extends AbstractController
     #[Route('/allocations/', name: 'app_allocation_index', methods: ['GET'])]
     public function index_new(Request $request, AllocationRepository $allocationRepository, HospitalRepository $hospitalRepository): Response
     {
-        $hospital = $request->query->get('hospital');
-        $supplyArea = $request->query->get('supplyArea');
-        $dispatchArea = $request->query->get('dispatchArea');
-        $startDate = $request->query->get('start');
-        $endDate = $request->query->get('end');
-        $reqResus = $request->query->get('reqResus');
-        $reqCath = $request->query->get('reqCath');
-        $isCPR = $request->query->get('isCPR');
-        $isVent = $request->query->get('isVent');
-        $isShock = $request->query->get('isShock');
-        $isWithDoc = $request->query->get('isWithDoc');
-        $isPreg = $request->query->get('isPreg');
-        $isWork = $request->query->get('isWork');
-        $sortBy = $request->query->get('sortBy');
-        $order = $request->query->get('order');
-        $PZC = $request->query->get('pzc');
-        $page = $request->query->get('page');
+        $paramService = new RequestParamService($request);
 
         $filters = [];
-        $filters['search'] = $request->query->get('search');
+        $filters['search'] = $paramService->getSearch();
+        $filters['page'] = $paramService->getPage();
 
-        if ($hospital) {
+        $filters['supplyArea'] = $paramService->getSupplyArea();
+        $filters['dispatchArea'] = $paramService->getDispatchArea();
+        $filters['assignment'] = $paramService->getAssignment();
+        $filters['occasion'] = $paramService->getOccasion();
+        $filters['modeOfTransport'] = $paramService->getTransport();
+        $filters['pzc'] = $paramService->getPZC();
+
+        $filters['reqResus'] = $paramService->getReqResus();
+        $filters['reqCath'] = $paramService->getReqCath();
+        $filters['isCPR'] = $paramService->getIsCPR();
+        $filters['isVent'] = $paramService->getIsVentilated();
+        $filters['isShock'] = $paramService->getIsShock();
+        $filters['isWithDoc'] = $paramService->getIsWithDoctor();
+        $filters['isPreg'] = $paramService->getIsPregnant();
+        $filters['isWork'] = $paramService->getIsWorkAccident();
+
+        $filters['startDate'] = $paramService->getStartDate();
+        $filters['endDate'] = $paramService->getEndDate();
+        $filters['sortBy'] = $paramService->getSortBy();
+        $filters['orderBy'] = $paramService->getOrderBy();
+
+        if ($paramService->getHospital()) {
             if ($this->isGranted('ROLE_ADMIN')) {
-                $filters['hospital'] = $hospital;
+                $filters['hospital'] = $paramService->getHospital();
             } else {
-                $filters['hospital'] = $this->getUser()->getHospital()->getId();
+                if ($paramService->getHospital() != $this->getUser()->getHospital()->getId()) {
+                    $this->createAccessDeniedException('Cannot filter by this hospital.');
+                }
+
+                $filters['hospital'] = $paramService->getHospital();
             }
         } else {
             $filters['hospital'] = null;
         }
 
-        if ($supplyArea) {
-            $filters['supplyArea'] = $supplyArea;
-        } else {
-            $filters['supplyArea'] = null;
-        }
-
-        if ($dispatchArea) {
-            $filters['dispatchArea'] = $dispatchArea;
-        } else {
-            $filters['dispatchArea'] = null;
-        }
-
-        if ($startDate) {
-            $filters['start'] = $startDate;
-        } else {
-            $filters['start'] = null;
-        }
-
-        if ($endDate) {
-            $filters['end'] = $endDate;
-        } else {
-            $filters['end'] = null;
-        }
-
-        if ($reqResus) {
-            $filters['reqResus'] = $reqResus;
-        } else {
-            $filters['reqResus'] = false;
-        }
-
-        if ($reqCath) {
-            $filters['reqCath'] = $reqCath;
-        } else {
-            $filters['reqCath'] = false;
-        }
-
-        if ($isCPR) {
-            $filters['isCPR'] = $isCPR;
-        } else {
-            $filters['isCPR'] = false;
-        }
-
-        if ($isVent) {
-            $filters['isVent'] = $isVent;
-        } else {
-            $filters['isVent'] = false;
-        }
-
-        if ($isShock) {
-            $filters['isShock'] = $isShock;
-        } else {
-            $filters['isShock'] = false;
-        }
-
-        if ($isVent) {
-            $filters['isVent'] = $isVent;
-        } else {
-            $filters['isVent'] = false;
-        }
-
-        if ($isWithDoc) {
-            $filters['isWithDoc'] = $isWithDoc;
-        } else {
-            $filters['isWithDoc'] = false;
-        }
-
-        if ($isPreg) {
-            $filters['isPreg'] = $isPreg;
-        } else {
-            $filters['isPreg'] = false;
-        }
-
-        if ($isWork) {
-            $filters['isWork'] = $isWork;
-        } else {
-            $filters['isWork'] = false;
-        }
-
-        if ($sortBy) {
-            $filters['sortBy'] = $sortBy;
-        } else {
-            $filters['sortBy'] = null;
-        }
-
-        if ($order) {
-            $filters['order'] = $order;
-        } else {
-            $filters['order'] = null;
-        }
-
-        if ($PZC) {
-            $filters['pzc'] = $PZC;
-        } else {
-            $filters['pzc'] = null;
-        }
-
-        if (empty($page)) {
-            $offset = max(0, $request->query->getInt('offset', 0));
-        } else {
-            $offset = (int) $page * AllocationRepository::PAGINATOR_PER_PAGE;
-            --$offset;
-        }
-
-        $paginator = $allocationRepository->getAllocationPaginator($offset, $filters);
-        $count = count($paginator);
-
-        if (0 == $count % 10) {
-            $last = $count - 10;
-        } else {
-            $last = floor($count / 10) * 10;
-        }
-
-        //if (null != $offset) {
-        //    $offset = $count - AllocationRepository::PAGINATOR_PER_PAGE;
-        //    $paginator = $allocationRepository->getAllocationPaginator($offset, $filters);
-        //}
-
-        $pages = ceil($count / AllocationRepository::PAGINATOR_PER_PAGE);
-
-        $currentPage = ceil(($offset - 1) / AllocationRepository::PAGINATOR_PER_PAGE) + 1;
-        $previous = $offset - AllocationRepository::PAGINATOR_PER_PAGE;
-        $next = min($count, $offset + AllocationRepository::PAGINATOR_PER_PAGE);
-
-        $PZCs = $allocationRepository->getPZCs();
-
-        $col = array_column($PZCs, 'PZC');
-        array_multisort($col, SORT_ASC, $PZCs);
+        $paginator = $allocationRepository->getAllocationPaginator($paramService->getPage(), $filters);
 
         return $this->render('allocation/index.html.twig', [
             'allocations' => $paginator,
-            'search' => $filters['search'],
             'filters' => $filters,
-            'perPage' => AllocationRepository::PAGINATOR_PER_PAGE,
-            'previous' => $previous,
-            'next' => $next,
-            'last' => $last,
-            'pages' => $pages,
-            'currentPage' => $currentPage,
+            'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), AllocationRepository::PAGINATOR_PER_PAGE),
             'hospitals' => $hospitalRepository->getHospitals(),
             'supplyAreas' => $hospitalRepository->getSupplyAreas(),
             'dispatchAreas' => $hospitalRepository->getDispatchAreas(),
-            'PZCs' => $PZCs,
-            'page' => $page,
+            'assignments' => $allocationRepository->getAllAssignments(),
+            'occasions' => $allocationRepository->getAllOccasions(),
+            'transports' => $allocationRepository->getAllTransportModes(),
+            'PZCs' => $this->getAllPZCs($allocationRepository),
         ]);
     }
 
@@ -207,5 +88,15 @@ class AllocationController extends AbstractController
             'allocation' => $allocation,
             'importUser' => $importUser,
         ]);
+    }
+
+    private function getAllPZCs(AllocationRepository $allocationRepository): array
+    {
+        $PZCs = $allocationRepository->getPZCs();
+
+        $col = array_column($PZCs, 'PZC');
+        array_multisort($col, SORT_ASC, $PZCs);
+
+        return $PZCs;
     }
 }

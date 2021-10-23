@@ -1,0 +1,72 @@
+{% macro search(search) %}
+    <form action="{{ path(app.request.attributes.get('_route')) }}" method="get">
+        <div class="input-group mb-3">
+            {% if search %}
+                <input type="text"
+                       name="search"
+                       class="form-control"
+                       placeholder="{{ search }}"
+                       aria-label="{{ 'Search'|trans }}" />
+            {% else %}
+                <input type="text"
+                       name="search"
+                       class="form-control"
+                       placeholder="{{ 'Search...'|trans }}"
+                       aria-label="{{ 'Search'|trans }}" />
+            {% endif %}
+            <button type="submit"
+                    class="btn btn-outline-secondary">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+
+        {% for key, value in app.request.query.all %}
+            {% if key != 'search' %}
+                <input type="hidden"
+                       id="{{ key }}"
+                       name="{{ key }}"
+                       value="{{ value }}" />
+            {% endif %}
+        {% endfor %}
+    </form>
+{% endmacro %}
+
+{% macro tagFilter(items, target, active, emptyMessage = 'No items found') %}
+    {% for item in items %}
+            {% if item.element == active %}
+                <span class="badge bg-primary">
+                                    <i class="bi bi-tag-fill"></i>
+                                    <a class="link-light"
+                                       href="{{
+                                       path(
+                                           'app_hospital_index',
+                                           app.request.query.all|merge({
+                                           (target): '',
+                                           page: 1
+                                       })
+                                       )
+                                       }}">
+                                        {{ item.element[0:1]|upper ~ item.element[1:] }}
+                                    </a>
+                                </span>
+            {% else %}
+                <span class="badge bg-secondary">
+                                    <i class="bi bi-tag"></i>
+                                    <a class="link-light"
+                                       href="{{
+                                       path(
+                                           'app_hospital_index',
+                                           app.request.query.all|merge({
+                                           (target): item.element,
+                                           page: 1
+                                       })
+                                       )
+                                       }}">
+                                        {{ item.element[0:1]|upper ~ item.element[1:] }}
+                                    </a>
+                                </span>
+            {% endif %}
+    {% else %}
+        {{ emptyMessage|trans }}
+    {% endfor %}
+{% endmacro %}

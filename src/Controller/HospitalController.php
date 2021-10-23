@@ -6,6 +6,7 @@ use App\Entity\Hospital;
 use App\Form\HospitalType;
 use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
+use App\Service\RequestParamService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,8 @@ use Symfony\Component\Security\Core\Security;
 #[Route('/hospitals')]
 class HospitalController extends AbstractController
 {
+    private RequestParamService $paramService;
+
     private Security $security;
 
     public function __construct(Security $security)
@@ -25,51 +28,59 @@ class HospitalController extends AbstractController
     #[Route('/', name: 'app_hospital_index')]
     public function index(Request $request, HospitalRepository $hospitalRepository): Response
     {
-        $search = $request->query->get('search');
-        $location = $request->query->get('location');
-        $size = $request->query->get('size');
-        $supplyArea = $request->query->get('supplyArea');
-        $dispatchArea = $request->query->get('dispatchArea');
+        $paramService = new RequestParamService($request);
 
         $filters = [];
-        $filters['search'] = $search;
+        $filters['search'] = $paramService->getSearch();
+        $filters['page'] = $paramService->getPage();
 
-        if ($location) {
-            $filters['location'] = $location;
-        } else {
-            $filters['location'] = null;
-        }
+        $filters['location'] = $paramService->getLocation();
+        $filters['size'] = $paramService->getSize();
+        $filters['supplyArea'] = $paramService->getSupplyArea();
+        $filters['dispatchArea'] = $paramService->getDispatchArea();
 
-        if ($size) {
-            $filters['size'] = $size;
-        } else {
-            $filters['size'] = null;
-        }
-
-        if ($supplyArea) {
-            $filters['supplyArea'] = $supplyArea;
-        } else {
-            $filters['supplyArea'] = null;
-        }
-
-        if ($dispatchArea) {
-            $filters['dispatchArea'] = $dispatchArea;
-        } else {
-            $filters['dispatchArea'] = null;
-        }
-
-        $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator = $hospitalRepository->getHospitalPaginator($offset, $filters);
+        $paginator = $hospitalRepository->getHospitalPaginator($paramService->getPage(), $filters);
 
         return $this->render('hospitals/index.html.twig', [
             'hospitals' => $paginator,
-            'search' => $search,
-            'perPage' => HospitalRepository::PAGINATOR_PER_PAGE,
-            'previous' => $offset - HospitalRepository::PAGINATOR_PER_PAGE,
-            'next' => min(count($paginator), $offset + HospitalRepository::PAGINATOR_PER_PAGE),
+            'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), HospitalRepository::PAGINATOR_PER_PAGE),
             'filters' => $filters,
+            'locations' => $this->getLocations(),
+            'size' => $this->getSizes(),
             'supplyAreas' => $hospitalRepository->getSupplyAreas(),
             'dispatchAreas' => $hospitalRepository->getDispatchAreas(),
+        ]);
+    }
+
+    /**
+     * @Route("/new", name="app_hospital_new", methods={"GET","POST"})
+     */
+    public function new(Request $request, HospitalRepository $hospitalRepository): Response
+    {
+        if (null !== $this->getUser()->getHospital()) {
+            throw $this->createAccessDeniedException('You cannot create another hospital.');
+        }
+
+        $hospital = new Hospital();
+
+        $form = $this->createForm(HospitalType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $hospital->setCreatedAt(new \DateTime('NOW'));
+            $hospital->setUpdatedAt(new \DateTime('NOW'));
+            $hospital->setOwner($this->getUser());
+
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Your hospital was successfully created.');
+
+            return $this->redirectToRoute('app_hospital_index');
+        }
+
+        return $this->render('hospitals/new.html.twig', [
+            'form' => $form->createView(),
+            'hospital' => $hospital,
         ]);
     }
 
@@ -115,5 +126,32 @@ class HospitalController extends AbstractController
             'hospital_allocations' => $allocationRepository->countAllocations($hospital),
             'user_can_edit' => true,
         ]);
+    }
+
+    private function getLocations(): array
+    {
+        return [
+            [
+                'element' => 'rural',
+            ],
+            [
+                'element' => 'urban',
+            ],
+        ];
+    }
+
+    private function getSizes(): array
+    {
+        return [
+            [
+                'element' => 'small',
+            ],
+            [
+                'element' => 'medium',
+            ],
+            [
+                'element' => 'large',
+            ],
+        ];
     }
 }

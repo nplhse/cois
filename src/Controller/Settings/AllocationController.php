@@ -6,6 +6,7 @@ use App\Entity\Allocation;
 use App\Form\AllocationType;
 use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
+use App\Service\RequestParamService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,30 +20,16 @@ class AllocationController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $hospital = $request->query->get('hospital');
-        $supplyArea = $request->query->get('supplyArea');
-        $dispatchArea = $request->query->get('dispatchArea');
+        $paramService = new RequestParamService($request);
 
         $filters = [];
-        $filters['search'] = $request->query->get('search');
+        $filters['search'] = $paramService->getSearch();
 
-        if ($hospital) {
-            $filters['hospital'] = $hospital;
-        } else {
-            $filters['hospital'] = null;
-        }
-
-        if ($supplyArea) {
-            $filters['supplyArea'] = $supplyArea;
-        } else {
-            $filters['supplyArea'] = null;
-        }
-
-        if ($dispatchArea) {
-            $filters['dispatchArea'] = $dispatchArea;
-        } else {
-            $filters['dispatchArea'] = null;
-        }
+        $filters['hospital'] = $paramService->getHospital();
+        $filters['supplyArea'] = $paramService->getSupplyArea();
+        $filters['dispatchArea'] = $paramService->getDispatchArea();
+        $filters['startDate'] = $paramService->getStartDate();
+        $filters['endDate'] = $paramService->getEndDate();
 
         $offset = max(0, $request->query->getInt('offset', 0));
         $paginator = $allocationRepository->getAllocationPaginator($offset, $filters);

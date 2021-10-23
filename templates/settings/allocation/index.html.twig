@@ -96,8 +96,7 @@
                         <p>
                             {% for supplyArea in supplyAreas %}
                                 {% if
-                                    supplyArea.supplyArea
-                                        == filters.supplyArea %}
+                                    supplyArea.element == filters.supplyArea %}
                                     <span class="badge bg-warning">
                                         <i class="bi bi-tag"></i>
                                         <a class="link-light"
@@ -110,7 +109,7 @@
                                                 })
                                             )
                                             }}">
-                                            {{ supplyArea.supplyArea }}
+                                            {{ supplyArea.element }}
                                         </a>
                                     </span>
                                 {% else %}
@@ -121,12 +120,12 @@
                                             path(
                                                 'app_settings_allocation_index',
                                                 app.request.query.all|merge({
-                                                    supplyArea: supplyArea.supplyArea,
+                                                    supplyArea: supplyArea.element,
                                                     offset: '0'
                                                 })
                                             )
                                             }}">
-                                            {{ supplyArea.supplyArea }}
+                                            {{ supplyArea.element }}
                                         </a>
                                     </span>
                                 {% endif %}
@@ -141,7 +140,7 @@
                         <p>
                             {% for dispatchArea in dispatchAreas %}
                                 {% if
-                                    dispatchArea.dispatchArea
+                                    dispatchArea.element
                                         == filters.dispatchArea %}
                                     <span class="badge bg-warning">
                                         <i class="bi bi-tag"></i>
@@ -155,7 +154,7 @@
                                                 })
                                             )
                                             }}">
-                                            {{ dispatchArea.dispatchArea }}
+                                            {{ dispatchArea.element }}
                                         </a>
                                     </span>
                                 {% else %}
@@ -166,12 +165,12 @@
                                             path(
                                                 'app_settings_allocation_index',
                                                 app.request.query.all|merge({
-                                                    dispatchArea: dispatchArea.dispatchArea,
+                                                    dispatchArea: dispatchArea.element,
                                                     offset: '0'
                                                 })
                                             )
                                             }}">
-                                            {{ dispatchArea.dispatchArea }}
+                                            {{ dispatchArea.element }}
                                         </a>
                                     </span>
                                 {% endif %}

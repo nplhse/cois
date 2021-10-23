@@ -30,7 +30,7 @@
                             <li class="nav-item">
                                 {% if
                                     app.request.attributes.get('_route')
-                                        starts with 'hospitals' %}
+                                        starts with 'app_hospital' %}
                                     <a class="nav-link active"
                                         aria-current="page"
                                         href="{{ path('app_hospital_index') }}">
@@ -51,7 +51,7 @@
                             <li class="nav-item">
                                 {% if
                                     app.request.attributes.get('_route')
-                                        starts with 'allocation' %}
+                                        starts with 'app_allocation' %}
                                     <a class="nav-link active"
                                         aria-current="page"
                                         href="{{
@@ -97,7 +97,7 @@
                             <li class="nav-item">
                                 {% if
                                     app.request.attributes.get('_route')
-                                        starts with 'import' %}
+                                        starts with 'app_import' %}
                                     <a class="nav-link active"
                                         aria-current="page"
                                         href="{{ path('app_import_index') }}">

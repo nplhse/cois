@@ -9,6 +9,7 @@ use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
 use App\Repository\ImportRepository;
 use App\Service\FileUploader;
+use App\Service\RequestParamService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,20 +31,21 @@ class ImportController extends AbstractController
     {
         $hospital = $hospitalRepository->findOneBy(['owner' => $this->getUser()->getId()]);
 
-        $filter = [];
-        $filter['user'] = $this->getUser();
-        $filter['hospital'] = $this->getUser()->getHospital();
-        $filter['search'] = $request->query->get('search');
+        $paramService = new RequestParamService($request);
 
-        $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator = $importRepository->getImportPaginator($offset, $filter);
+        $filters = [];
+        $filters['search'] = $paramService->getSearch();
+        $filters['page'] = $paramService->getPage();
+
+        $filters['user'] = $this->getUser();
+        $filters['hospital'] = $this->getUser()->getHospital();
+
+        $paginator = $importRepository->getImportPaginator($paramService->getPage(), $filters);
 
         return $this->render('import/index.html.twig', [
             'imports' => $paginator,
-            'perPage' => ImportRepository::PAGINATOR_PER_PAGE,
-            'previous' => $offset - ImportRepository::PAGINATOR_PER_PAGE,
-            'next' => min(count($paginator), $offset + ImportRepository::PAGINATOR_PER_PAGE),
-            'search' => $filter['search'],
+            'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), HospitalRepository::PAGINATOR_PER_PAGE),
+            'filters' => $filters,
         ]);
     }
 
