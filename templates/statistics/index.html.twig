@@ -4,12 +4,6 @@
     Statistics - {{ parent() }}
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-
-    {{ encore_entry_script_tags('stats') }}
-{% endblock %}
-
 {% block body %}
     <div class="row">
         <div class="col">
@@ -31,6 +25,26 @@
         <div class="col-sm-12 col-md-3">
             {{ include('statistics/_statistics_subnav.html.twig') }}
         </div>
-        <div class="col"></div>
+        <div class="col">
+            <div class="row">
+                <h1>
+                    {{ 'General'|trans }}
+                </h1>
+
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <a href="{{ path('app_statistics_gender') }}">
+                                <i class="bi bi-gender-ambiguous"
+                                    style="font-size: 5rem; color: cornflowerblue;">
+
+                                </i><br />
+                                {{ 'Gender'|trans }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

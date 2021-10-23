@@ -1,52 +1,70 @@
-import { Controller } from 'stimulus';
-import * as d3 from 'd3';
+import { Controller } from "stimulus";
+import * as d3 from "d3";
 
 export default class extends Controller {
-    static values = { url: String }
+    static values = {
+        url: String,
+    };
 
     connect() {
-        // set the dimensions and margins of the graph
-        const width = 450,
-            height = 450,
-            margin = 40;
+        this.render();
+    }
 
-// The radius of the pieplot is half the width or half the height (smallest one). I subtract a bit of margin.
-        const radius = Math.min(width, height) / 2 - margin;
+    async render() {
+        const responce = await fetch(this.urlValue);
+        const data = await responce.json();
 
-// append the svg object to the div called 'my_dataviz'
-        const svg = d3.select("chart")
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height)
+        let pie = d3
+            .pie()
+            .value((d) => d.count)
+            .padAngle(0.025)(data);
+
+        let arcMkr = d3.arc().innerRadius(50).outerRadius(100);
+
+        let scC = d3
+            .scaleOrdinal(d3.schemeTableau10)
+            .domain(pie.map((d) => d.index));
+
+        let g = d3
+            .select("#graph")
             .append("g")
-            .attr("transform", `translate(${width/2}, ${height/2})`);
+            .attr("transform", "translate(100, 100)");
 
-// Create dummy data
-        const data = d3.json(this.urlValue)
+        g.selectAll("path")
+            .data(pie)
+            .enter()
+            .append("path")
+            .attr("d", arcMkr)
+            .attr("fill", (d) => scC(d.index))
+            .attr("stoke", "grey");
 
-        console.log(data)
+        g.selectAll("text")
+            .data(pie)
+            .enter()
+            .append("text")
+            .text((d) => data.caption)
+            .attr("x", (d) => arcMkr.innerRadius(85).centroid(d)[0])
+            .attr("y", (d) => arcMkr.innerRadius(85).centroid(d)[1])
+            .attr("font-family", "sans-serif")
+            .attr("font-size", 14)
+            .attr("text-anchor", "middle");
 
-// set the color scale
-        const color = d3.scaleOrdinal()
-            .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56"])
+        var tr = d3
+            .select(".objecttable tbody")
+            .selectAll("tr")
+            .data(data)
+            .enter()
+            .append("tr");
 
-// Compute the position of each group on the pie:
-        const pie = d3.pie()
-            .value(function(d) {return d[1]})
-        const data_ready = pie(Object.entries(data))
-
-// Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
-        svg
-            .selectAll('whatever')
-            .data(data_ready)
-            .join('path')
-            .attr('d', d3.arc()
-                .innerRadius(0)
-                .outerRadius(radius)
-            )
-            .attr('fill', function(d){ return(color(d.data[1])) })
-            .attr("stroke", "black")
-            .style("stroke-width", "2px")
-            .style("opacity", 0.7)
+        var td = tr
+            .selectAll("td")
+            .data(function (d, i) {
+                return Object.values(d);
+            })
+            .enter()
+            .append("td")
+            .text(function (d) {
+                return d;
+            });
     }
 }

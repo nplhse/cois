@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Statistics - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ path('app_dashboard') }}">
+                            {{ 'Home'|trans }}
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item" aria-current="page">
+                        {{ 'Statistics'|trans }}
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-3">
+            {{ include('statistics/_statistics_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <h1>
+                {{ 'Gender Statistics'|trans }}
+            </h1>
+
+            <h2>
+                Distribution of genders
+            </h2>
+            <div class="row"
+                data-controller="piechart"
+                data-piechart-url-value="{{ url('app_data_gender') }}">
+                <div class="col-4">
+                    <svg id="graph" width="250" height="250"></svg>
+                </div>
+                <div class="col-8">
+                    <table id="table" class="objecttable table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Gender
+                                </th>
+                                <th>
+                                    Count
+                                </th>
+                                <th>
+                                    Percent
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

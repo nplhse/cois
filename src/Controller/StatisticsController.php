@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 
 /**
  * @IsGranted("ROLE_USER")
@@ -14,16 +13,16 @@ use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 class StatisticsController extends AbstractController
 {
     #[Route('/statistics', name: 'app_statistics_index')]
-    public function index(ChartBuilderInterface $chartBuilder): Response
+    public function index(): Response
     {
         return $this->render('statistics/index.html.twig', [
         ]);
     }
 
-    #[Route('/statistics/age', name: 'app_statistics_age')]
-    public function demographics(ChartBuilderInterface $chartBuilder): Response
+    #[Route('/statistics/gender', name: 'app_statistics_gender')]
+    public function demographics(): Response
     {
-        return $this->render('statistics/age.html.twig', [
+        return $this->render('statistics/gender.html.twig', [
         ]);
     }
 }
