@@ -2,9 +2,8 @@
 
 namespace App\Command;
 
-use App\Entity\Import;
 use App\Message\ImportDataMessage;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ImportRepository;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -19,15 +18,15 @@ use Symfony\Component\Messenger\MessageBusInterface;
 )]
 class ImportCommand extends Command
 {
-    private EntityManagerInterface $em;
+    private ImportRepository $importRepository;
 
     private MessageBusInterface $messageBus;
 
-    public function __construct(EntityManagerInterface $entityManager, MessageBusInterface $messageBus)
+    public function __construct(ImportRepository $importRepository, MessageBusInterface $messageBus)
     {
         parent::__construct();
 
-        $this->em = $entityManager;
+        $this->importRepository = $importRepository;
         $this->messageBus = $messageBus;
     }
 
@@ -43,7 +42,7 @@ class ImportCommand extends Command
 
         $importId = $input->getArgument('id');
 
-        $import = $this->em->getRepository(Import::class)->findOneBy(['id' => $importId]);
+        $import = $this->importRepository->findOneBy(['id' => $importId]);
 
         $user = $import->getUser();
         $hospital = $user->getHospital();

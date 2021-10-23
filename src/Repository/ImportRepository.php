@@ -58,8 +58,14 @@ class ImportRepository extends ServiceEntityRepository
         return $this->findBy([], ['name' => 'ASC']);
     }
 
-    public function getImportPaginator(int $offset, array $filter): Paginator
+    public function getImportPaginator(int $page, array $filter): Paginator
     {
+        if (1 != $page) {
+            $offset = $page * self::PAGINATOR_PER_PAGE;
+        } else {
+            $offset = 0;
+        }
+
         $query = $this->createQueryBuilder('i');
 
         if ($filter['search']) {
@@ -71,15 +77,13 @@ class ImportRepository extends ServiceEntityRepository
         if ($filter['user']) {
             $query->andWhere('i.user = :user')
                 ->setParameter('user', $filter['user'])
-                ->orWhere('i.hospital = :hospital')
+            ;
+        }
+
+        if ($filter['hospital']) {
+            $query->orWhere('i.hospital = :hospital')
                 ->setParameter('hospital', $filter['hospital'])
             ;
-
-            if ($filter['hospital']) {
-                $query->orWhere('i.hospital = :hospital')
-                    ->setParameter('hospital', $filter['hospital'])
-                ;
-            }
         }
 
         $query

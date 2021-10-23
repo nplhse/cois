@@ -256,15 +256,19 @@ class AllocationRepository extends ServiceEntityRepository
         return $query->getQuery()->getArrayResult();
     }
 
-    public function getAllocationPaginator(int $offset, array $filter): Paginator
+    public function getAllocationPaginator(int $page, array $filter): Paginator
     {
+        if (1 != $page) {
+            $offset = $page * self::PAGINATOR_PER_PAGE;
+        } else {
+            $offset = 0;
+        }
+
         $query = $this->createQueryBuilder('a');
 
         if ($filter['search']) {
-            $search = str_replace($filter['search'], '+', ' ');
-
             $query->where('a.PZCText LIKE :search')
-                ->setParameter('search', '%'.$search.'%')
+                ->setParameter('search', '%'.$filter['search'].'%')
             ;
         }
 
@@ -286,16 +290,16 @@ class AllocationRepository extends ServiceEntityRepository
             ;
         }
 
-        if ($filter['start']) {
-            $date = \DateTime::createFromFormat('Y-m-d G:i', $filter['start'].'00:00');
+        if ($filter['startDate']) {
+            $date = \DateTime::createFromFormat('Y-m-d G:i', $filter['startDate'].'00:00');
 
             $query->andWhere('a.createdAt >= :startDate')
                 ->setParameter('startDate', $date, Types::DATETIME_MUTABLE)
             ;
         }
 
-        if ($filter['end']) {
-            $date = \DateTime::createFromFormat('Y-m-d G:i', $filter['end'].'23:59');
+        if ($filter['endDate']) {
+            $date = \DateTime::createFromFormat('Y-m-d G:i', $filter['endDate'].'23:59');
 
             $query->andWhere('a.createdAt <= :endDate')
                 ->setParameter('endDate', $date, Types::DATETIME_MUTABLE)
@@ -341,13 +345,14 @@ class AllocationRepository extends ServiceEntityRepository
 
         if ($filter['assignment']) {
             $query->andWhere('a.assignment = :assignment')
-                ->setParameter('assignment', str_replace($filter['assignment'], '+', ' '))
+                ->setParameter('assignment', $filter['assignment'])
             ;
         }
 
         if ($filter['occasion']) {
+            dump($filter['occasion']);
             $query->andWhere('a.occasion = :occasion')
-                ->setParameter('occasion', str_replace($filter['occasion'], '+', ' '))
+                ->setParameter('occasion', $filter['occasion'])
             ;
         }
 
@@ -365,9 +370,9 @@ class AllocationRepository extends ServiceEntityRepository
             default => 'a.createdAt',
         };
 
-        if ('desc' === $filter['order']) {
+        if ('desc' === $filter['orderBy']) {
             $order = 'DESC';
-        } elseif ('asc' === $filter['order']) {
+        } elseif ('asc' === $filter['orderBy']) {
             $order = 'ASC';
         } else {
             $order = 'DESC';

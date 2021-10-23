@@ -56,7 +56,7 @@ class HospitalRepository extends ServiceEntityRepository
     public function getSupplyAreas(): array
     {
         return $this->createQueryBuilder('h')
-            ->select('h.supplyArea')
+            ->select('h.supplyArea as element')
             ->distinct(true)
             ->getQuery()
             ->getArrayResult()
@@ -66,15 +66,21 @@ class HospitalRepository extends ServiceEntityRepository
     public function getDispatchAreas(): array
     {
         return $this->createQueryBuilder('h')
-            ->select('h.dispatchArea')
+            ->select('h.dispatchArea as element')
             ->distinct(true)
             ->getQuery()
             ->getArrayResult()
             ;
     }
 
-    public function getHospitalPaginator(int $offset, array $filter): Paginator
+    public function getHospitalPaginator(int $page, array $filter): Paginator
     {
+        if (1 != $page) {
+            $offset = $page * self::PAGINATOR_PER_PAGE;
+        } else {
+            $offset = 0;
+        }
+
         $query = $this->createQueryBuilder('h');
 
         if ($filter['search']) {

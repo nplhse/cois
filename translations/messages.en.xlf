@@ -1394,9 +1394,9 @@
         <source>Is with Physician</source>
         <target>Is with Physician</target>
       </trans-unit>
-      <trans-unit id="YjkxCqm" resname="Is with Pregnant">
-        <source>Is with Pregnant</source>
-        <target>Is with Pregnant</target>
+      <trans-unit id="YjkxCqm" resname="Is Pregnant">
+        <source>Is Pregnant</source>
+        <target>Is Pregnant</target>
       </trans-unit>
       <trans-unit id="8XtOuw6" resname="Is Work Accident">
         <source>Is Work Accident</source>

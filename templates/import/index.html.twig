@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+{% import '_elements/macro/pagination.html.twig' as pagination %}
+{% import '_elements/macro/filters.html.twig' as filter %}
 
 {% block title %}
     {{ 'import.title'|trans }} - {{ parent() }}
@@ -31,14 +33,23 @@
                 {{ 'Your Imports'|trans }}
             </h1>
 
-            {% if search %}
+            <p>
+                {{
+                'Showing count Imports'|trans({
+                    '%perPage%': pages.perPage,
+                    '%count%': imports.count
+                })
+                }}
+            </p>
+
+            {% if filters.search %}
                 <div class="alert alert-info" role="alert">
-                    {{ 'Searching for'|trans }}: "<i>{{ search }}</i>" | <a href="{{
+                    {{ 'Searching for'|trans }}: "<i>{{ filters.search }}</i>" | <a href="{{
                         path(
                             'app_import_index',
                             app.request.query.all|merge({
                                 search: '',
-                                offset: '0'
+                                page: 1
                             })
                         )
                         }}">
@@ -150,60 +161,31 @@
                 </tbody>
             </table>
 
-            {% if (imports|length) > 0 %}
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                        {% if previous >= 0 %}
-                            <li class="page-item">
-                                <a class="page-link"
-                                    href="{{
-                                    path(
-                                        'app_import_index',
-                                        app.request.query.all|merge({
-                                            offset: previous
-                                        })
-                                    )
-                                    }}">
-                                    Previous
-                                </a>
-                            </li>
-                        {% else %}
-                            <li class="page-item disabled">
-                                <a class="page-link"
-                                    href="#"
-                                    tabindex="-1"
-                                    aria-disabled="true">
-                                    Previous
-                                </a>
-                            </li>
-                        {% endif %}
-                        {% if next < (imports|length) %}
-                            <li class="page-item">
-                                <a class="page-link"
-                                    href="{{
-                                    path(
-                                        'app_import_index',
-                                        app.request.query.all|merge({
-                                            offset: next
-                                        })
-                                    )
-                                    }}">
-                                    Next
-                                </a>
-                            </li>
-                        {% else %}
-                            <li class="page-item disabled">
-                                <a class="page-link"
-                                    href="#"
-                                    tabindex="-1"
-                                    aria-disabled="true">
-                                    Next
-                                </a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </nav>
-            {% endif %}
+            <div class="row">
+                <div class="col-2">
+                    <p class="text-muted">
+                        {{
+                        'Showing Page page of pages'|trans({
+                            '%page%': pages.page,
+                            '%pages%': pages.last
+                        })
+                        }}
+                    </p>
+                </div>
+                <div class="col-8">
+                    {{
+                    pagination.navbar(
+                        pages.last,
+                        pages.page,
+                        pages.previous,
+                        pages.next
+                    )
+                    }}
+                </div>
+                <div class="col-2">
+                    {{ pagination.goTo('app_import_index') }}
+                </div>
+            </div>
         </div>
         <div class="col-3">
             {% if app.user.hospital %}
@@ -216,33 +198,15 @@
 
             <div class="card">
                 <div class="card-header">
+                    <i class="bi bi-filter-left"></i>
                     {{ 'Filters'|trans({}, 'forms') }}
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
                         {{ 'Search'|trans }}
                     </h5>
-                    <form>
-                        <div class="input-group mb-3">
-                            {% if search %}
-                                <input type="text"
-                                    name="search"
-                                    class="form-control"
-                                    placeholder="{{ search }}"
-                                    aria-label="{{ 'Search'|trans }}" />
-                            {% else %}
-                                <input type="text"
-                                    name="search"
-                                    class="form-control"
-                                    placeholder="{{ 'Search...'|trans }}"
-                                    aria-label="{{ 'Search'|trans }}" />
-                            {% endif %}
-                            <button type="submit"
-                                class="btn btn-outline-secondary">
-                                <i class="bi bi-search"></i>
-                            </button>
-                        </div>
-                    </form>
+
+                    {{ filter.search(filters.search) }}
                 </div>
             </div>
         </div>
