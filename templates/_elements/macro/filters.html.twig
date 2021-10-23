@@ -46,7 +46,7 @@
                                        })
                                        )
                                        }}">
-                                        {{ item.element|capitalize }}
+                                        {{ item.element[0:1]|upper ~ item.element[1:] }}
                                     </a>
                                 </span>
             {% else %}
@@ -62,7 +62,7 @@
                                        })
                                        )
                                        }}">
-                                        {{ item.element|capitalize }}
+                                        {{ item.element[0:1]|upper ~ item.element[1:] }}
                                     </a>
                                 </span>
             {% endif %}
