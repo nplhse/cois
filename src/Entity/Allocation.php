@@ -2,47 +2,11 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\AllocationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=AllocationRepository::class)
- *
- * @ApiResource(
- *     collectionOperations={"get"},
- *     itemOperations={"get"},
- *     attributes={
- *      "pagination_items_per_page"=10,
- *      "order"={"createdAt": "DESC"}
- *     }
- * )
- * @ApiFilter(BooleanFilter::class, properties={
- *     "requiresResus",
- *     "requiresCathlab",
- *     "isWithPhysician",
- *     "isCPR",
- *     "isVentilated",
- *     "isShock",
- *     "isPregnant",
- *     "isWorkAccident"
- * })
- * @ApiFilter(DateFilter::class, properties={"createdAt"})
- * @ApiFilter(OrderFilter::class, properties={"id", "dispatchArea", "hospital.name", "createdAt"})
- * @ApiFilter(SearchFilter::class, properties={
- *     "dispatchArea": "partial",
- *     "supplyArea": "partial",
- *     "hospital.name": "partial",
- *     "RMI": "partial",
- *     "PZCText": "partial",
- *     "assignment": "partial",
- *     "occasion": "partial",
- * })
  */
 class Allocation
 {
