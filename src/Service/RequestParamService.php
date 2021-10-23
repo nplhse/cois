@@ -282,10 +282,6 @@ class RequestParamService
         $order = $this->request->query->get('orderBy');
 
         if (empty($order)) {
-            if ('name' === $this->getSortBy() or 'caption' === $this->getSortBy()) {
-                return 'asc';
-            }
-
             return 'desc';
         }
 

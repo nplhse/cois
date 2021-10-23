@@ -40,7 +40,12 @@ class HospitalController extends AbstractController
         $filters['dispatchArea'] = $paramService->getDispatchArea();
 
         $filters['sortBy'] = $paramService->getSortBy();
-        $filters['orderBy'] = $paramService->getOrderBy();
+
+        if (!$paramService->getSortBy()) {
+            $filters['orderBy'] = 'asc';
+        } else {
+            $filters['orderBy'] = $paramService->getOrderBy();
+        }
 
         $paginator = $hospitalRepository->getHospitalPaginator($paramService->getPage(), $filters);
 
