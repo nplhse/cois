@@ -2,21 +2,13 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\HospitalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=HospitalRepository::class)
- *
- * @ApiResource(
- *     collectionOperations={"get"},
- *     itemOperations={"get"},
- *     normalizationContext={"groups"={"hospital:read"}}
- * )
  */
 class Hospital
 {
@@ -30,79 +22,57 @@ class Hospital
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     *
-     * @Groups({"hospital:read"})
      */
     private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
-     * @Groups({"hospital:read"})
      */
     private string $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     *
-     * @Groups({"hospital:read"})
      */
     private ?string $address = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     * @Groups({"hospital:read"})
      */
     private ?string $supplyArea = null;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="hospital", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
-     *
-     * @Groups({"hospital:read"})
      */
     private User $owner;
 
     /**
      * @ORM\Column(type="datetime")
-     *
-     * @Groups({"hospital:read"})
      */
     private \DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
-     *
-     * @Groups({"hospital:read"})
      */
     private \DateTimeInterface $updatedAt;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
-     * @Groups({"hospital:read"})
      */
     private string $size;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     *
-     * @Groups({"hospital:read"})
      */
     private ?int $beds = null;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
-     * @Groups({"hospital:read"})
      */
     private string $dispatchArea;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
-     * @Groups({"hospital:read"})
      */
     private string $location;
 

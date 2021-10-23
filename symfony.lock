@@ -8,20 +8,6 @@
     "api-platform/api-pack": {
         "version": "v1.3.0"
     },
-    "api-platform/core": {
-        "version": "2.5",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "2.5",
-            "ref": "a93061567140e386f107be75340ac2aee3f86cbf"
-        },
-        "files": [
-            "config/packages/api_platform.yaml",
-            "config/routes/api_platform.yaml",
-            "src/Entity/.gitignore"
-        ]
-    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
@@ -136,9 +122,6 @@
     },
     "felixfbecker/language-server-protocol": {
         "version": "1.5.1"
-    },
-    "fig/link-util": {
-        "version": "1.1.2"
     },
     "friendsofphp/php-cs-fixer": {
         "version": "2.16",
@@ -761,13 +744,7 @@
     "webmozart/path-util": {
         "version": "2.3.0"
     },
-    "webonyx/graphql-php": {
-        "version": "v14.5.1"
-    },
     "weirdan/doctrine-psalm-plugin": {
         "version": "1.0.0"
-    },
-    "willdurand/negotiation": {
-        "version": "3.0.0"
     }
 }

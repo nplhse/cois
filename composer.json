@@ -22,7 +22,6 @@
         "php": ">=8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "api-platform/core": "^2.6",
         "composer/package-versions-deprecated": "1.11.99.4",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.2",
@@ -74,8 +73,7 @@
         "twig/inky-extra": "^3.3",
         "twig/intl-extra": "^3.3",
         "twig/string-extra": "^3.3",
-        "twig/twig": "^2.12|^3.0",
-        "webonyx/graphql-php": "^14.5"
+        "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
