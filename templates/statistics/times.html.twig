@@ -27,35 +27,17 @@
         </div>
         <div class="col">
             <h1>
-                {{ 'Gender Statistics'|trans }}
+                {{ 'Time Statistics'|trans }}
             </h1>
 
             <p>
-                Distribution of genders
+                Distribution of allocations by hours
             </p>
             <div class="row"
-                data-controller="piechart"
-                data-piechart-url-value="{{ url('app_data_gender') }}">
-                <div class="col-4 justify-content-center">
-                    <svg id="graph" width="250" height="250"></svg>
-                </div>
-                <div class="col-8">
-                    <table id="table" class="objecttable table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Gender
-                                </th>
-                                <th>
-                                    Count
-                                </th>
-                                <th>
-                                    Percent
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                data-controller="curve"
+                data-curve-url-value="{{ url('app_data_time') }}">
+                <div class="">
+                    <svg id="graph" width="750" height="550"></svg>
                 </div>
             </div>
         </div>

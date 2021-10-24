@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\DataTransferObjects\GenderStats;
+use App\DataTransferObjects\TimeStats;
 use App\Query\AllocationQuery;
 use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
@@ -15,15 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ApiController extends AbstractController
 {
-    private AllocationRepository $allocationRepository;
-
     private HospitalRepository $hospitalRepository;
 
     private AllocationQuery $allocationQuery;
 
-    public function __construct(AllocationRepository $allocationRepository, HospitalRepository $hospitalRepository, AllocationQuery $allocationQuery)
+    public function __construct(HospitalRepository $hospitalRepository, AllocationQuery $allocationQuery)
     {
-        $this->allocationRepository = $allocationRepository;
         $this->hospitalRepository = $hospitalRepository;
         $this->allocationQuery = $allocationQuery;
     }
@@ -64,9 +62,40 @@ class ApiController extends AbstractController
             }
 
             $results[] = [
-                'caption' => $gender,
+                'label' => $gender,
                 'count' => $allocation->getCounter(),
-                'percent' => round(($allocation->getCounter() / $total) * 100, 1),
+                'percent' => number_format(round(($allocation->getCounter() / $total) * 100, 1), 2).'%',
+            ];
+        }
+
+        return new JsonResponse($results);
+    }
+
+    #[Route('/api/times.json', name: 'app_data_time')]
+    public function times(Request $request): Response
+    {
+        $paramService = new RequestParamService($request);
+        $hospitalId = $paramService->hospital;
+
+        if (isset($hospitalId) && !empty($hospitalId)) {
+            $hospital = $this->hospitalRepository->findById($hospitalId);
+
+            if ($this->isGranted('viewStats', $hospital)) {
+                $this->allocationQuery->filterByHospital($hospital);
+            } else {
+                throw $this->createAccessDeniedException('Cannot access this resource.');
+            }
+        }
+
+        $this->allocationQuery->groupBy('times');
+        $allocations = $this->allocationQuery->execute()->hydrateResultsAs(TimeStats::class);
+
+        $results = [];
+
+        foreach ($allocations->getItems() as $allocation) {
+            $results[] = [
+                'time' => $allocation->getTime(),
+                'count' => $allocation->getCounter(),
             ];
         }
 

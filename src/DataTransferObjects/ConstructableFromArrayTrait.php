@@ -4,7 +4,7 @@ namespace App\DataTransferObjects;
 
 trait ConstructableFromArrayTrait
 {
-    public static function fromArray(array $array)
+    public static function fromArray(array $array): object
     {
         // Construct a reflection method from the constructor and then get all its parameters
         $reflectionMethod = new \ReflectionMethod(static::class, '__construct');

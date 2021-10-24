@@ -4,9 +4,9 @@ namespace App\DataTransferObjects;
 
 interface ResultCollectionInterface
 {
-    public function getSingleResult();
+    public function getSingleResult(): array;
 
-    public function hydrateSingleResultAs(string $className);
+    public function hydrateSingleResultAs(string $className): object;
 
-    public function hydrateResultsAs(string $className);
+    public function hydrateResultsAs(string $className): object;
 }

@@ -4,5 +4,5 @@ namespace App\DataTransferObjects;
 
 interface ConstructFromArrayInterface
 {
-    public static function fromArray(array $array);
+    public static function fromArray(array $array): object;
 }

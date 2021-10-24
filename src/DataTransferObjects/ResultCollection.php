@@ -11,19 +11,19 @@ final class ResultCollection implements ResultCollectionInterface
         $this->items = $items;
     }
 
-    public function getSingleResult(): mixed
+    public function getSingleResult(): array
     {
         return \reset($this->items);
     }
 
-    public function hydrateSingleResultAs(string $className): mixed
+    public function hydrateSingleResultAs(string $className): object
     {
         $item = $this->getSingleResult();
 
         return $className::fromArray($item);
     }
 
-    public function hydrateResultsAs(string $className): ResultCollectionInterface
+    public function hydrateResultsAs(string $className): object
     {
         $hydratedItems = [];
         foreach ($this->items as $item) {

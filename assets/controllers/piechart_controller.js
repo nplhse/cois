@@ -11,8 +11,8 @@ export default class extends Controller {
     }
 
     async render() {
-        const responce = await fetch(this.urlValue);
-        const data = await responce.json();
+        const response = await fetch(this.urlValue);
+        const data = await response.json();
 
         let pie = d3
             .pie()
@@ -36,15 +36,15 @@ export default class extends Controller {
             .append("path")
             .attr("d", arcMkr)
             .attr("fill", (d) => scC(d.index))
-            .attr("stoke", "grey");
+            .attr("stoke", "black");
 
         g.selectAll("text")
             .data(pie)
             .enter()
             .append("text")
-            .text((d) => data.caption)
-            .attr("x", (d) => arcMkr.innerRadius(85).centroid(d)[0])
-            .attr("y", (d) => arcMkr.innerRadius(85).centroid(d)[1])
+            .text((d) => d.data.label)
+            .attr("x", (d) => arcMkr.innerRadius(50).centroid(d)[0])
+            .attr("y", (d) => arcMkr.innerRadius(50).centroid(d)[1])
             .attr("font-family", "sans-serif")
             .attr("font-size", 14)
             .attr("text-anchor", "middle");

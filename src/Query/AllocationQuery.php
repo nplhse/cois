@@ -33,6 +33,14 @@ final class AllocationQuery
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.gender')
                 ->addOrderBy('allocation.gender', 'DESC');
+        } elseif ('times' === $this->property) {
+            $qb->select(
+                'allocation.creationHour AS time',
+                'COUNT(allocation.creationHour) AS counter'
+            )
+                ->from(Allocation::class, 'allocation')
+                ->groupBy('allocation.creationHour')
+                ->addOrderBy('allocation.creationHour', 'ASC');
         }
 
         if (null !== $this->hospital) {
