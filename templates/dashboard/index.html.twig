@@ -173,7 +173,7 @@
             <div class="card text-dark bg-light mb-2">
                 <div class="card-body">
                     <h3>
-                        <i class="bi bi-list-ul"></i> {{ allocations }}
+                        <i class="bi bi-list-ul"></i> {{ allocations|number_format(0, '', '.') }}
                         <small class="text-muted">
                             {% if app.user.isParticipant %}
                                 <a class="text-muted"
