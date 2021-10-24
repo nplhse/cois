@@ -31,7 +31,7 @@ class AllocationRepository extends ServiceEntityRepository
             $qb = $this->createQueryBuilder('a')
                 ->select('COUNT(a.id)')
                 ->andWhere('a.hospital = :hospital')
-                ->setParameter('hospital', $hospital->getId())
+                ->setParameter('hospital', $hospital->getId(), Types::INTEGER)
                 ->getQuery()
                 ->getSingleScalarResult();
         } else {
@@ -65,7 +65,7 @@ class AllocationRepository extends ServiceEntityRepository
 
         if ($hospital) {
             $qb->where('a.hospital = :hospital')
-                ->setParameter(':hospital', $hospital);
+                ->setParameter(':hospital', $hospital->getId(), Types::INTEGER);
         }
 
         $qb->select('a.gender, COUNT(a.gender) AS counter')
@@ -278,7 +278,7 @@ class AllocationRepository extends ServiceEntityRepository
 
         if ($filter['hospital']) {
             $query->andWhere('a.hospital = :location')
-                ->setParameter('location', $filter['hospital'])
+                ->setParameter('location', $filter['hospital'], Types::INTEGER)
             ;
         }
 
