@@ -2,7 +2,7 @@
 
 namespace App\DataTransferObjects;
 
-class TimeStats implements ConstructFromArrayInterface
+class TimeStatisticsDto implements ConstructFromArrayInterface
 {
     use ConstructableFromArrayTrait;
 
@@ -10,7 +10,7 @@ class TimeStats implements ConstructFromArrayInterface
 
     private int $counter;
 
-    public function __construct(int $time, int $counter)
+    final public function __construct(int $time, int $counter)
     {
         $this->time = $time;
         $this->counter = $counter;

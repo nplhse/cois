@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
-use App\DataTransferObjects\GenderStats;
-use App\DataTransferObjects\TimeStats;
+use App\DataTransferObjects\GenderStatisticsDto;
+use App\DataTransferObjects\TimeStatisticsDto;
 use App\Query\AllocationQuery;
-use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
 use App\Service\RequestParamService;
+use App\Service\StatisticsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,53 +20,23 @@ class ApiController extends AbstractController
 
     private AllocationQuery $allocationQuery;
 
-    public function __construct(HospitalRepository $hospitalRepository, AllocationQuery $allocationQuery)
+    private StatisticsService $statisticsService;
+
+    public function __construct(HospitalRepository $hospitalRepository, AllocationQuery $allocationQuery, StatisticsService $statisticsService)
     {
         $this->hospitalRepository = $hospitalRepository;
         $this->allocationQuery = $allocationQuery;
+        $this->statisticsService = $statisticsService;
     }
 
     #[Route('/api/gender.json', name: 'app_data_gender')]
     public function gender(Request $request): Response
     {
-        $paramService = new RequestParamService($request);
-        $hospitalId = $paramService->hospital;
-
-        if (isset($hospitalId) && !empty($hospitalId)) {
-            $hospital = $this->hospitalRepository->findById($hospitalId);
-
-            if ($this->isGranted('viewStats', $hospital)) {
-                $this->allocationQuery->filterByHospital($hospital);
-            } else {
-                throw $this->createAccessDeniedException('Cannot access this resource.');
-            }
-        }
+        $this->filterByHospital($request);
 
         $this->allocationQuery->groupBy('gender');
-        $allocations = $this->allocationQuery->execute()->hydrateResultsAs(GenderStats::class);
-
-        $results = [];
-        $total = 0;
-
-        foreach ($allocations->getItems() as $allocation) {
-            $total = $total + $allocation->getCounter();
-        }
-
-        foreach ($allocations->getItems() as $allocation) {
-            if ('M' == $allocation->getGender()) {
-                $gender = 'male';
-            } elseif ('W' == $allocation->getGender()) {
-                $gender = 'female';
-            } else {
-                $gender = 'other';
-            }
-
-            $results[] = [
-                'label' => $gender,
-                'count' => $allocation->getCounter(),
-                'percent' => number_format(round(($allocation->getCounter() / $total) * 100, 1), 2).'%',
-            ];
-        }
+        $allocations = $this->allocationQuery->execute()->hydrateResultsAs(GenderStatisticsDto::class);
+        $results = $this->statisticsService->generateGenderResults($allocations);
 
         return new JsonResponse($results);
     }
@@ -74,21 +44,10 @@ class ApiController extends AbstractController
     #[Route('/api/times.json', name: 'app_data_time')]
     public function times(Request $request): Response
     {
-        $paramService = new RequestParamService($request);
-        $hospitalId = $paramService->hospital;
-
-        if (isset($hospitalId) && !empty($hospitalId)) {
-            $hospital = $this->hospitalRepository->findById($hospitalId);
-
-            if ($this->isGranted('viewStats', $hospital)) {
-                $this->allocationQuery->filterByHospital($hospital);
-            } else {
-                throw $this->createAccessDeniedException('Cannot access this resource.');
-            }
-        }
+        $this->filterByHospital($request);
 
         $this->allocationQuery->groupBy('times');
-        $allocations = $this->allocationQuery->execute()->hydrateResultsAs(TimeStats::class);
+        $allocations = $this->allocationQuery->execute()->hydrateResultsAs(TimeStatisticsDto::class);
 
         $results = [];
 
@@ -100,5 +59,23 @@ class ApiController extends AbstractController
         }
 
         return new JsonResponse($results);
+    }
+
+    private function filterByHospital(Request $request): void
+    {
+        if ($this->getUser()) {
+            $paramService = new RequestParamService($request);
+            $hospitalId = (int) $paramService->getHospital();
+
+            if (!empty($hospitalId)) {
+                $hospital = $this->hospitalRepository->findById($hospitalId);
+
+                if ($this->isGranted('viewStats', $hospital)) {
+                    $this->allocationQuery->filterByHospital($hospital);
+                } else {
+                    throw $this->createAccessDeniedException('Cannot access this resource.');
+                }
+            }
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\DataTransferObjects;
 
-class GenderStats implements ConstructFromArrayInterface
+class GenderStatisticsDto implements ConstructFromArrayInterface
 {
     use ConstructableFromArrayTrait;
 
@@ -10,7 +10,7 @@ class GenderStats implements ConstructFromArrayInterface
 
     private int $counter;
 
-    public function __construct(string $gender, int $counter)
+    final public function __construct(string $gender, int $counter)
     {
         $this->gender = $gender;
         $this->counter = $counter;
