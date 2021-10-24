@@ -2,303 +2,45 @@
 
 namespace App\Service;
 
-use App\DataTransferObjects\AgeStatistics;
-use App\DataTransferObjects\AllocationStatistics;
-use App\DataTransferObjects\GenderStatistics;
-use App\DataTransferObjects\TimeStatistics;
-use App\Repository\AllocationRepository;
-
 class StatisticsService
 {
-    private AllocationRepository $allocationRepository;
+    public const VALUE_PRECISION = 2;
 
-    private const PRECISION = 2;
-
-    private int $total;
-
-    public function __construct(AllocationRepository $allocationRepository)
+    public function generateGenderResults(object $allocations): array
     {
-        $this->allocationRepository = $allocationRepository;
+        $results = [];
+        $total = 0;
 
-        $this->total = (int) $this->allocationRepository->countAllocations();
-    }
-
-    public function generateGenderStats(): GenderStatistics
-    {
-        $genderStatistics = new GenderStatistics();
-
-        $stats = $this->allocationRepository->countAllocationsByGender();
-
-        foreach ($stats as $item) {
-            if ('M' === $item['gender']) {
-                $genderStatistics->setMaleCount($item['counter']);
-                $genderStatistics->setMalePercent($this->getValueInPercent($item['counter']));
-            }
-
-            if ('W' === $item['gender']) {
-                $genderStatistics->setFemaleCount($item['counter']);
-                $genderStatistics->setFemalePercent($this->getValueInPercent($item['counter']));
-            }
-
-            if ('D' === $item['gender']) {
-                $genderStatistics->setOtherCount($item['counter']);
-                $genderStatistics->setOtherPercent($this->getValueInPercent($item['counter']));
-            }
+        foreach ($allocations->getItems() as $allocation) {
+            $total = $total + $allocation->getCounter();
         }
 
-        return $genderStatistics;
-    }
-
-    public function generateAgeStats(): AgeStatistics
-    {
-        $ageStatistics = new AgeStatistics();
-        $ageStatistics->setAges($this->buildAgeStats($this->allocationRepository->countAllocationsByAge()));
-
-        $params = [];
-        $params['gender'] = 'M';
-        $ageStatistics->setMaleAges($this->buildAgeStats($this->allocationRepository->countAllocationsByAge($params)));
-
-        $params['gender'] = 'W';
-        $ageStatistics->setFemaleAges($this->buildAgeStats($this->allocationRepository->countAllocationsByAge($params)));
-
-        $params['gender'] = 'D';
-        $ageStatistics->setOtherAges($this->buildAgeStats($this->allocationRepository->countAllocationsByAge($params)));
-
-        return $ageStatistics;
-    }
-
-    private function buildAgeStats(array $stats): array
-    {
-        $i = 0;
-        $max = 0;
-        $length = count($stats) - 1;
-
-        foreach ($stats as $item) {
-            $result[$item['age']] = $item['counter'];
-
-            if ($i === $length) {
-                $max = $item['age'];
-            }
-
-            ++$i;
-        }
-
-        $i = 0;
-        $ages = [];
-
-        while ($i <= $max) {
-            if (isset($result[$i])) {
-                $ages[$i] = $result[$i];
+        foreach ($allocations->getItems() as $allocation) {
+            if ('M' == $allocation->getGender()) {
+                $gender = 'male';
+            } elseif ('W' == $allocation->getGender()) {
+                $gender = 'female';
             } else {
-                $ages[$i] = 0;
+                $gender = 'other';
             }
 
-            ++$i;
+            $results[] = [
+                'label' => $gender,
+                'count' => $allocation->getCounter(),
+                'percent' => $this->getFormattedNumber($this->getValueInPercent($allocation->getCounter(), $total)).'%',
+            ];
         }
 
-        return $ages;
+        return $results;
     }
 
-    public function generateTimeStats(): TimeStatistics
+    private function getValueInPercent(int $value, int $total): float
     {
-        $timeStatistics = new TimeStatistics();
-
-        $stats = $this->allocationRepository->countAllocationsByTime();
-
-        foreach ($stats as $item) {
-            $timeStatistics->setTimeOfDay($item['arrivalHour'], $item['counter']);
-        }
-
-        $i = 0;
-        $ages = [];
-
-        while ($i <= 23) {
-            $times[$i] = $timeStatistics->getTimeOfDay($i);
-            ++$i;
-        }
-
-        $timeStatistics->setTimesOfDay($times);
-
-        $stats = $this->allocationRepository->countAllocationsByWeekday();
-
-        $weekdays = [];
-
-        foreach ($stats as $item) {
-            $weekdays[$item['arrivalWeekday']] = $item['counter'];
-        }
-
-        $sorted_weekdays = [];
-        $sorted_weekdays[0] = $weekdays['Montag'];
-        $sorted_weekdays[1] = $weekdays['Dienstag'];
-        $sorted_weekdays[2] = $weekdays['Mittwoch'];
-        $sorted_weekdays[3] = $weekdays['Donnerstag'];
-        $sorted_weekdays[4] = $weekdays['Freitag'];
-        $sorted_weekdays[5] = $weekdays['Samstag'];
-        $sorted_weekdays[6] = $weekdays['Sonntag'];
-
-        $timeStatistics->setWeekdays($sorted_weekdays);
-
-        return $timeStatistics;
+        return round(($value / $total) * 100, self::VALUE_PRECISION);
     }
 
-    public function generateAllocationStats(): AllocationStatistics
+    private function getFormattedNumber(float $value): float
     {
-        $allocationStatistics = new AllocationStatistics();
-
-        $stats = $this->allocationRepository->countAllocationsByRMI();
-
-        $counts = [];
-        $SK = [];
-
-        foreach ($stats as $key => $value) {
-            $rmi = substr($value['PZC'], 0, 3);
-            $sk = substr($value['PZC'], 5, 1);
-
-            if (isset($counts[$rmi])) {
-                $counts[$rmi] += $value['counter'];
-            } else {
-                $counts[$rmi] = $value['counter'];
-            }
-
-            if ('' !== $sk) {
-                if (isset($SK[$sk])) {
-                    $SK[$sk] += $value['counter'];
-                } else {
-                    $SK[$sk] = $value['counter'];
-                }
-            }
-        }
-
-        $SK = array_reverse($SK);
-        $allocationStatistics->setSK($SK);
-
-        $PZCTexts = $this->allocationRepository->getAllPCZTexts();
-
-        $RMI = [];
-
-        foreach ($PZCTexts as $key => $value) {
-            $rmi = substr($value['PZC'], 0, 3);
-
-            if (isset($RMI[$rmi])) {
-                $RMI[$rmi] = $value['PZCText'];
-            } else {
-                $RMI[$rmi] = $value['PZCText'];
-            }
-        }
-
-        $result = [];
-
-        foreach ($RMI as $key => $value) {
-            $tmp = [];
-            $tmp['RMI'] = $key;
-            $tmp['PZCText'] = $RMI[$key];
-            $tmp['count'] = $counts[$key];
-
-            $result[$key] = $tmp;
-        }
-
-        $allocationStatistics->setRMIs($result);
-
-        $stats = $this->allocationRepository->countAllocationsBySpeciality();
-
-        $specialities = [];
-
-        foreach ($stats as $item) {
-            if ('' !== $item['speciality']) {
-                $specialities[$item['speciality']] = $item['counter'];
-            }
-        }
-
-        $allocationStatistics->setSpecialities($specialities);
-
-        $stats = $this->allocationRepository->countAllocationsBySpeciality(true);
-
-        $specialityDetails = [];
-
-        foreach ($stats as $item) {
-            $specialityDetails[$item['specialityDetail']] = $item['counter'];
-        }
-
-        $allocationStatistics->setSpecialityDetails($specialityDetails);
-
-        $stats = $this->allocationRepository->countAllocationsByDetail('requiresResus');
-        $allocationStatistics->setRequiresResus($this->buildResultArray($stats, 'requiresResus'));
-
-        $stats = $this->allocationRepository->countAllocationsByDetail('requiresCathlab');
-        $allocationStatistics->setRequiresCathlab($this->buildResultArray($stats, 'requiresCathlab'));
-
-        $stats = $this->allocationRepository->countAllocationsByDetail('isCPR');
-        $allocationStatistics->setIsCPR($this->buildResultArray($stats, 'isCPR'));
-
-        $stats = $this->allocationRepository->countAllocationsByDetail('isVentilated');
-        $allocationStatistics->setIsVentilated($this->buildResultArray($stats, 'isVentilated'));
-
-        $stats = $this->allocationRepository->countAllocationsByDetail('isShock');
-        $allocationStatistics->setIsShock($this->buildResultArray($stats, 'isShock'));
-
-        $stats = $this->allocationRepository->countAllocationsByDetail('isInfectious');
-
-        $infections = [];
-
-        foreach ($stats as $item) {
-            if ($item['isInfectious']) {
-                $infections[$item['isInfectious']] = $item['counter'];
-            }
-        }
-
-        $allocationStatistics->setIsInfectious($infections);
-
-        $stats = $this->allocationRepository->countAllocationsByDetail('isPregnant');
-        $allocationStatistics->setIsPregnant($this->buildResultArray($stats, 'isPregnant'));
-
-        $stats = $this->allocationRepository->countAllocationsByDetail('isWithPhysician');
-        $allocationStatistics->setIsWithPhysician($this->buildResultArray($stats, 'isWithPhysician'));
-
-        $stats = $this->allocationRepository->countAllocationsByDetail('isWorkAccident');
-        $allocationStatistics->setIsWorkAccident($this->buildResultArray($stats, 'isWorkAccident'));
-
-        return $allocationStatistics;
-    }
-
-    public function getScaleForXAxis(int $maxValue, int $n = 5): array
-    {
-        $scale = [];
-        $i = 0;
-
-        for ($i = 0; $i <= $maxValue; ++$i) {
-            if (0 === $i % $n) {
-                $scale[$i] = $i;
-            } else {
-                $scale[$i] = null;
-            }
-        }
-
-        return $scale;
-    }
-
-    private function buildResultArray(array $data, string $key): array
-    {
-        $result = [];
-
-        foreach ($data as $item) {
-            if (true === $item[$key]) {
-                $result[$key] = $item['counter'];
-            } elseif (false === $item[$key]) {
-                $result['Others'] = $item['counter'];
-
-                if (!isset($result[$key])) {
-                    $result[$key] = 0;
-                }
-            } else {
-                $result[$item[$key]] = $item['counter'];
-            }
-        }
-
-        return array_reverse($result);
-    }
-
-    private function getValueInPercent(int $value): float
-    {
-        return round(($value / $this->total) * 100, 2);
+        return (float) number_format($value, 2, ',', '.');
     }
 }
