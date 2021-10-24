@@ -30,14 +30,27 @@
                 {{ 'Time Statistics'|trans }}
             </h1>
 
-            <p>
+            <h2>
                 Distribution of allocations by hours
-            </p>
-            <div class="row"
+            </h2>
+            <div class="row mb-3"
                 data-controller="curve"
+                data-curve-target-value="#graph1"
                 data-curve-url-value="{{ url('app_data_time') }}">
                 <div class="">
-                    <svg id="graph" width="750" height="550"></svg>
+                    <svg id="graph1" width="750" height="400"></svg>
+                </div>
+            </div>
+
+            <h2>
+                Distribution of allocations by days
+            </h2>
+            <div class="row"
+                data-controller="barplot"
+                data-barplot-target-value="#graph2"
+                data-barplot-url-value="{{ url('app_data_days') }}">
+                <div class="">
+                    <svg id="graph2" width="750" height="400"></svg>
                 </div>
             </div>
         </div>

@@ -25,7 +25,15 @@ final class AllocationQuery
     {
         $qb = $this->entityManager->createQueryBuilder();
 
-        if ('gender' === $this->property) {
+        if ('days' === $this->property) {
+            $qb->select(
+                'allocation.creationWeekday AS day',
+                'COUNT(allocation.creationWeekday) AS counter'
+            )
+                ->from(Allocation::class, 'allocation')
+                ->groupBy('allocation.creationWeekday')
+                ->addOrderBy('allocation.creationWeekday', 'DESC');
+        } elseif ('gender' === $this->property) {
             $qb->select(
                     'allocation.gender',
                     'COUNT(allocation.gender) AS counter'

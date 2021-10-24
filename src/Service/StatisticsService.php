@@ -6,6 +6,29 @@ class StatisticsService
 {
     public const VALUE_PRECISION = 2;
 
+    public function generateDayResults(object $allocations): array
+    {
+        $weekdays = [];
+
+        foreach ($allocations->getItems() as $allocation) {
+            $weekdays[$allocation->getDay()] = [
+                'day' => $allocation->getDay(),
+                'count' => $allocation->getCounter(),
+            ];
+        }
+
+        $results = [];
+        $results[0] = $weekdays['Montag'];
+        $results[1] = $weekdays['Dienstag'];
+        $results[2] = $weekdays['Mittwoch'];
+        $results[3] = $weekdays['Donnerstag'];
+        $results[4] = $weekdays['Freitag'];
+        $results[5] = $weekdays['Samstag'];
+        $results[6] = $weekdays['Sonntag'];
+
+        return $results;
+    }
+
     public function generateGenderResults(object $allocations): array
     {
         $results = [];
@@ -24,10 +47,26 @@ class StatisticsService
                 $gender = 'other';
             }
 
+            $percent = $this->getFormattedNumber($this->getValueInPercent($allocation->getCounter(), $total)).'%';
+
             $results[] = [
                 'label' => $gender,
                 'count' => $allocation->getCounter(),
-                'percent' => $this->getFormattedNumber($this->getValueInPercent($allocation->getCounter(), $total)).'%',
+                'percent' => $percent,
+            ];
+        }
+
+        return $results;
+    }
+
+    public function generateTimeResults(object $allocations): array
+    {
+        $results = [];
+
+        foreach ($allocations->getItems() as $allocation) {
+            $results[] = [
+                'time' => $allocation->getTime(),
+                'count' => $allocation->getCounter(),
             ];
         }
 

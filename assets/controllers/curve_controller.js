@@ -4,6 +4,7 @@ import * as d3 from "d3";
 export default class extends Controller {
     static values = {
         url: String,
+        target: String,
     };
 
     connect() {
@@ -14,10 +15,8 @@ export default class extends Controller {
         const response = await fetch(this.urlValue);
         const data = await response.json();
 
-        let svg = d3.select("#graph");
-
-        let pxX = 750;
-        let pxY = 250;
+        let pxX = 700;
+        let pxY = 380;
 
         let makeScale = function (accessor, range) {
             return d3
@@ -48,12 +47,16 @@ export default class extends Controller {
             g.append("path").attr("fill", "none").attr("d", lnMkr(data));
         };
 
-        let g = svg.append("g");
+        const svg = d3
+            .select(this.targetValue)
+            .append("svg")
+            .append("g")
+            .attr("transform", `translate(40, 10)`);
 
-        drawData(g, (d) => scY(d["count"]), d3.curveNatural);
+        drawData(svg, (d) => scY(d["count"]), d3.curveNatural);
 
-        g.selectAll("circle").attr("fill", "green");
-        g.selectAll("path").attr("stroke", "black");
+        svg.selectAll("circle").attr("fill", "green");
+        svg.selectAll("path").attr("stroke", "black");
 
         let axMkr = d3.axisLeft(scY);
         axMkr(svg.append("g"));

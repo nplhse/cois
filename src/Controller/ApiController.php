@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\DataTransferObjects\DayStatisticsDto;
 use App\DataTransferObjects\GenderStatisticsDto;
 use App\DataTransferObjects\TimeStatisticsDto;
 use App\Query\AllocationQuery;
@@ -29,6 +30,19 @@ class ApiController extends AbstractController
         $this->statisticsService = $statisticsService;
     }
 
+    #[Route('/api/days.json', name: 'app_data_days')]
+    public function days(Request $request): Response
+    {
+        $this->filterByHospital($request);
+
+        $this->allocationQuery->groupBy('days');
+        $allocations = $this->allocationQuery->execute()->hydrateResultsAs(DayStatisticsDto::class);
+
+        $results = $this->statisticsService->generateDayResults($allocations);
+
+        return new JsonResponse($results);
+    }
+
     #[Route('/api/gender.json', name: 'app_data_gender')]
     public function gender(Request $request): Response
     {
@@ -36,6 +50,7 @@ class ApiController extends AbstractController
 
         $this->allocationQuery->groupBy('gender');
         $allocations = $this->allocationQuery->execute()->hydrateResultsAs(GenderStatisticsDto::class);
+
         $results = $this->statisticsService->generateGenderResults($allocations);
 
         return new JsonResponse($results);
@@ -49,14 +64,7 @@ class ApiController extends AbstractController
         $this->allocationQuery->groupBy('times');
         $allocations = $this->allocationQuery->execute()->hydrateResultsAs(TimeStatisticsDto::class);
 
-        $results = [];
-
-        foreach ($allocations->getItems() as $allocation) {
-            $results[] = [
-                'time' => $allocation->getTime(),
-                'count' => $allocation->getCounter(),
-            ];
-        }
+        $results = $this->statisticsService->generateTimeResults($allocations);
 
         return new JsonResponse($results);
     }

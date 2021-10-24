@@ -4,6 +4,7 @@ import * as d3 from "d3";
 export default class extends Controller {
     static values = {
         url: String,
+        target: String,
     };
 
     connect() {
@@ -13,6 +14,12 @@ export default class extends Controller {
     async render() {
         const response = await fetch(this.urlValue);
         const data = await response.json();
+
+        const svg = d3
+            .select(this.targetValue)
+            .append("svg")
+            .append("g")
+            .attr("transform", `translate(100, 100)`);
 
         let pie = d3
             .pie()
@@ -25,12 +32,7 @@ export default class extends Controller {
             .scaleOrdinal(d3.schemeTableau10)
             .domain(pie.map((d) => d.index));
 
-        let g = d3
-            .select("#graph")
-            .append("g")
-            .attr("transform", "translate(100, 100)");
-
-        g.selectAll("path")
+        svg.selectAll("path")
             .data(pie)
             .enter()
             .append("path")
@@ -38,7 +40,7 @@ export default class extends Controller {
             .attr("fill", (d) => scC(d.index))
             .attr("stoke", "black");
 
-        g.selectAll("text")
+        svg.selectAll("text")
             .data(pie)
             .enter()
             .append("text")
