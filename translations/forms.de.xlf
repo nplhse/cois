@@ -369,6 +369,66 @@
         <source>Properties</source>
         <target>Eigenschaften</target>
       </trans-unit>
+      <trans-unit id="vMcWaA3" resname="Back to hospitals">
+        <source>Back to hospitals</source>
+        <target>Zurück zu Kliniken</target>
+      </trans-unit>
+      <trans-unit id="yRKQJb0" resname="Sort by">
+        <source>Sort by</source>
+        <target>Sortieren nach</target>
+      </trans-unit>
+      <trans-unit id="ijel8Hr" resname="Order by">
+        <source>Order by</source>
+        <target>Reihenfolge</target>
+      </trans-unit>
+      <trans-unit id="REE8PZe" resname="Are you sure you want to delete this item?">
+        <source>Are you sure you want to delete this item?</source>
+        <target>Soll dieses Element wirklich gelöscht werden?</target>
+      </trans-unit>
+      <trans-unit id="q7yW0Id" resname="Back to imports">
+        <source>Back to imports</source>
+        <target>Zurück zu Importen</target>
+      </trans-unit>
+      <trans-unit id="Gsse_8Z" resname="Save Import">
+        <source>Save Import</source>
+        <target>Import speichern</target>
+      </trans-unit>
+      <trans-unit id="2Aqxm37" resname="Apply filters">
+        <source>Apply filters</source>
+        <target>Filter anwenden</target>
+      </trans-unit>
+      <trans-unit id="Upfw90e" resname="Filter by PZC">
+        <source>Filter by PZC</source>
+        <target>Filtern nach PZC</target>
+      </trans-unit>
+      <trans-unit id="iZHd4kb" resname="Stop filtering by PZC">
+        <source>Stop filtering by PZC</source>
+        <target>Fiiltern nach PZC beenden</target>
+      </trans-unit>
+      <trans-unit id="Z1Z8iFW" resname="Filter by Assignment">
+        <source>Filter by Assignment</source>
+        <target>Filtern nach Zuweisung</target>
+      </trans-unit>
+      <trans-unit id="3PvTDAl" resname="Stop filtering by Assignment">
+        <source>Stop filtering by Assignment</source>
+        <target>Filtern nach Zweisung beenden</target>
+      </trans-unit>
+      <trans-unit id="l66fTa1" resname="Filter by Occasion">
+        <source>Filter by Occasion</source>
+        <target>Filtern nach Anlass</target>
+      </trans-unit>
+      <trans-unit id="mdPzj7K" resname="Stop filtering by Occasion">
+        <source>Stop filtering by Occasion</source>
+        <target>Filtern nach Anlass beenden</target>
+      </trans-unit>
+      <trans-unit id="lQEDjQg" resname="Filter by mode of Transport">
+        <source>Filter by mode of Transport</source>
+        <target>Filtern nach Transportart</target>
+      </trans-unit>
+      <trans-unit id="vBtERzL" resname="Stop filtering by mode of Transport">
+        <source>Stop filtering by mode of Transport</source>
+        <target>Filtern nach Transportart beenden</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

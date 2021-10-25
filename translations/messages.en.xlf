@@ -1394,7 +1394,7 @@
         <source>Is with Physician</source>
         <target>Is with Physician</target>
       </trans-unit>
-      <trans-unit id="YjkxCqm" resname="Is Pregnant">
+      <trans-unit id="MaFNYCR" resname="Is Pregnant">
         <source>Is Pregnant</source>
         <target>Is Pregnant</target>
       </trans-unit>
@@ -1425,6 +1425,218 @@
       <trans-unit id="eUeabHb" resname="Descending">
         <source>Descending</source>
         <target>Descending</target>
+      </trans-unit>
+      <trans-unit id="yRDUdNz" resname="General">
+        <source>General</source>
+        <target>General</target>
+      </trans-unit>
+      <trans-unit id="DA.THGf" resname="Times">
+        <source>Times</source>
+        <target>Times</target>
+      </trans-unit>
+      <trans-unit id="1FW.WM_" resname="Gender Statistics">
+        <source>Gender Statistics</source>
+        <target>Gender Statistics</target>
+      </trans-unit>
+      <trans-unit id="QT6HzJK" resname="Time Statistics">
+        <source>Time Statistics</source>
+        <target>Time Statistics</target>
+      </trans-unit>
+      <trans-unit id="8ovWtYY" resname="Manage your notification settings">
+        <source>Manage your notification settings</source>
+        <target>Manage your notification settings</target>
+      </trans-unit>
+      <trans-unit id="u3I07BJ" resname="Register">
+        <source>Register</source>
+        <target>Register</target>
+      </trans-unit>
+      <trans-unit id="eYyizhi" resname="Create account">
+        <source>Create account</source>
+        <target>Create account</target>
+      </trans-unit>
+      <trans-unit id="nWMiwfT" resname="Login">
+        <source>Login</source>
+        <target>Login</target>
+      </trans-unit>
+      <trans-unit id="p4VIQfv" resname="How to participate">
+        <source>How to participate</source>
+        <target>How to participate</target>
+      </trans-unit>
+      <trans-unit id="bkss3J_" resname="For full access to this project, you need to login. If you don´t already have a login you can register yourself.">
+        <source>For full access to this project, you need to login. If you don´t already have a login you can register yourself.</source>
+        <target>For full access to this project, you need to login. If you don´t already have a login you can register yourself.</target>
+      </trans-unit>
+      <trans-unit id="q.sr6NJ" resname="Click here to Login">
+        <source>Click here to Login</source>
+        <target>Click here to Login</target>
+      </trans-unit>
+      <trans-unit id="w5LJ1z7" resname="Create a new Account">
+        <source>Create a new Account</source>
+        <target>Create a new Account</target>
+      </trans-unit>
+      <trans-unit id="Chh6dcd" resname="Explore the platform">
+        <source>Explore the platform</source>
+        <target>Explore the platform</target>
+      </trans-unit>
+      <trans-unit id="64TOTxg" resname="Discover what we´ve got: Browse the Hospitals, search and filter our Allocations or import new Data.">
+        <source>Discover what we´ve got: Browse the Hospitals, search and filter our Allocations or import new Data.</source>
+        <target>Discover what we´ve got: Browse the Hospitals, search and filter our Allocations or import new Data.</target>
+      </trans-unit>
+      <trans-unit id="8IXuhlc" resname="Go to dashboard">
+        <source>Go to dashboard</source>
+        <target>Go to dashboard</target>
+      </trans-unit>
+      <trans-unit id="L0fB1wR" resname="View statistics">
+        <source>View statistics</source>
+        <target>View statistics</target>
+      </trans-unit>
+      <trans-unit id="1Xxidvu" resname="Create hospital">
+        <source>Create hospital</source>
+        <target>Create hospital</target>
+      </trans-unit>
+      <trans-unit id="eX1eziG" resname="Edit your Hospital">
+        <source>Edit your Hospital</source>
+        <target>Edit your Hospital</target>
+      </trans-unit>
+      <trans-unit id="yyT31Aq" resname="Sorting">
+        <source>Sorting</source>
+        <target>Sorting</target>
+      </trans-unit>
+      <trans-unit id="2UeUZmd" resname="Supply Area">
+        <source>Supply Area</source>
+        <target>Supply Area</target>
+      </trans-unit>
+      <trans-unit id="DxVuvFN" resname="Sort hospitals">
+        <source>Sort hospitals</source>
+        <target>Sort hospitals</target>
+      </trans-unit>
+      <trans-unit id="8fB5ft7" resname="Hospital details">
+        <source>Hospital details</source>
+        <target>Hospital details</target>
+      </trans-unit>
+      <trans-unit id="d1tb_WR" resname="Created at">
+        <source>Created at</source>
+        <target>Created at</target>
+      </trans-unit>
+      <trans-unit id="PCEFPeg" resname="Updated at">
+        <source>Updated at</source>
+        <target>Updated at</target>
+      </trans-unit>
+      <trans-unit id="vMcWaA3" resname="Back to hospitals">
+        <source>Back to hospitals</source>
+        <target>Back to hospitals</target>
+      </trans-unit>
+      <trans-unit id="vO_fXnE" resname="Browse trough all the data, filter it and explore what IVENA got for us.">
+        <source>Browse trough all the data, filter it and explore what IVENA got for us.</source>
+        <target>Browse trough all the data, filter it and explore what IVENA got for us.</target>
+      </trans-unit>
+      <trans-unit id="2lEsCXB" resname="View all Allocations">
+        <source>View all Allocations</source>
+        <target>View all Allocations</target>
+      </trans-unit>
+      <trans-unit id="8BCVnSZ" resname="Explore the statistics that we already generated from our IVENA data.">
+        <source>Explore the statistics that we already generated from our IVENA data.</source>
+        <target>Explore the statistics that we already generated from our IVENA data.</target>
+      </trans-unit>
+      <trans-unit id="fHHcFBd" resname="View Statistics">
+        <source>View Statistics</source>
+        <target>View Statistics</target>
+      </trans-unit>
+      <trans-unit id="Fjc8KBn" resname="Explore the participating hospitals, add or edit your own hospital.">
+        <source>Explore the participating hospitals, add or edit your own hospital.</source>
+        <target>Explore the participating hospitals, add or edit your own hospital.</target>
+      </trans-unit>
+      <trans-unit id=".PG3Pfb" resname="View all hospitals">
+        <source>View all hospitals</source>
+        <target>View all hospitals</target>
+      </trans-unit>
+      <trans-unit id="B3xNSNb" resname="Import data">
+        <source>Import data</source>
+        <target>Import data</target>
+      </trans-unit>
+      <trans-unit id="CnyleX8" resname="Add some of your data to the database.">
+        <source>Add some of your data to the database.</source>
+        <target>Add some of your data to the database.</target>
+      </trans-unit>
+      <trans-unit id="pgx8Xpe" resname="View your imports">
+        <source>View your imports</source>
+        <target>View your imports</target>
+      </trans-unit>
+      <trans-unit id="L9kW858" resname="Please notice">
+        <source>Please notice</source>
+        <target>Please notice</target>
+      </trans-unit>
+      <trans-unit id="JTMu8YM" resname="Import edit infotext">
+        <source>Import edit infotext</source>
+        <target>At the moment it is only possible to edit the title of an import - you cannot change the file or other properties.</target>
+      </trans-unit>
+      <trans-unit id="XIPiXLg" resname="Import infotext">
+        <source>Import infotext</source>
+        <target>First download the data from IVENA as CSV-file then upload it via this form and give it a meaningful caption.</target>
+      </trans-unit>
+      <trans-unit id="0L7I_Dc" resname="Stop filtering by Properties">
+        <source>Stop filtering by Properties</source>
+        <target>Stop filtering by Properties</target>
+      </trans-unit>
+      <trans-unit id="JqvF.Fm" resname="By Yourself">
+        <source>By Yourself</source>
+        <target>By Yourself</target>
+      </trans-unit>
+      <trans-unit id="gDPh4zf" resname="By your Hospital">
+        <source>By your Hospital</source>
+        <target>By your Hospital</target>
+      </trans-unit>
+      <trans-unit id="h9KW7JS" resname="Caption">
+        <source>Caption</source>
+        <target>Caption</target>
+      </trans-unit>
+      <trans-unit id="Olc5uxm" resname="Sort imports">
+        <source>Sort imports</source>
+        <target>Sort imports</target>
+      </trans-unit>
+      <trans-unit id="IHTnUHi" resname="Show Import">
+        <source>Show Import</source>
+        <target>Show Import</target>
+      </trans-unit>
+      <trans-unit id="R70pB1_" resname="Content">
+        <source>Content</source>
+        <target>Content</target>
+      </trans-unit>
+      <trans-unit id="qru.LWu" resname="Import details">
+        <source>Import details</source>
+        <target>Import details</target>
+      </trans-unit>
+      <trans-unit id="URM8ujA" resname="No errors occured.">
+        <source>No errors occured.</source>
+        <target>No errors occured.</target>
+      </trans-unit>
+      <trans-unit id="EJMRWJe" resname="Runtime">
+        <source>Runtime</source>
+        <target>Runtime</target>
+      </trans-unit>
+      <trans-unit id="n4Rf0o8" resname="Last run at">
+        <source>Last run at</source>
+        <target>Last run at</target>
+      </trans-unit>
+      <trans-unit id="R.xb_1a" resname="Debugging">
+        <source>Debugging</source>
+        <target>Debugging</target>
+      </trans-unit>
+      <trans-unit id="1ur_gjW" resname="Download">
+        <source>Download</source>
+        <target>Download</target>
+      </trans-unit>
+      <trans-unit id="Cpp_dlA" resname="Get original import file">
+        <source>Get original import file</source>
+        <target>Get original import file</target>
+      </trans-unit>
+      <trans-unit id="MtsY.r4" resname="Go to Page">
+        <source>Go to Page</source>
+        <target>Go to Page</target>
+      </trans-unit>
+      <trans-unit id="mnKKuhQ" resname="Sort allocations">
+        <source>Sort allocations</source>
+        <target>Sort allocations</target>
       </trans-unit>
     </body>
   </file>
