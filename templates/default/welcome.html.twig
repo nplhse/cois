@@ -20,26 +20,28 @@
         <div class="row align-items-md-stretch">
             <div class="col-md-6">
                 <div class="h-100 p-5 text-white bg-secondary rounded-3">
-                    <h2>
-                        {{ 'default.login.title'|trans }}
-                    </h2>
-                    <p>
-                        {{ 'default.login.text'|trans }}
-                    </p>
-                    <div class="btn-group"
-                        role="group"
-                        aria-label="Basic example">
-                        <a class="btn btn-outline-light"
-                            href="{{ path('app_login') }}"
-                            role="button">
-                            {{ 'link.login'|trans }}
-                        </a>
-                        <a class="btn btn-outline-light"
-                            href="{{ path('app_register') }}"
-                            role="button">
-                            {{ 'link.register'|trans }}
-                        </a>
-                    </div>
+                    {% if app.user == null %}
+                        <h2>
+                            {{ 'default.login.title'|trans }}
+                        </h2>
+                        <p>
+                            {{ 'default.login.text'|trans }}
+                        </p>
+                        <div class="btn-group"
+                            role="group"
+                            aria-label="Basic example">
+                            <a class="btn btn-outline-light"
+                                href="{{ path('app_login') }}"
+                                role="button">
+                                {{ 'link.login'|trans }}
+                            </a>
+                            <a class="btn btn-outline-light"
+                                href="{{ path('app_register') }}"
+                                role="button">
+                                {{ 'link.register'|trans }}
+                            </a>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-md-6">

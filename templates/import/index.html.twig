@@ -191,6 +191,7 @@
             {% if app.user.hospital %}
                 <p>
                     <a class="btn btn-primary" href="{{ path('app_import_new') }}">
+                        <i class="bi bi-plus-circle-fill"></i>
                         {{ 'Import new Data'|trans({}, 'forms') }}
                     </a>
                 </p>
@@ -198,7 +199,7 @@
 
             <div class="card mb-3">
                 <div class="card-header">
-                    <i class="bi bi-filter-left"></i>
+                    <i class="bi bi-funnel"></i>
                     {{ 'Filters'|trans({}, 'forms') }}
                 </div>
                 <div class="card-body">
@@ -248,8 +249,8 @@
 
                         <div class="float-end mt-2">
                             <button type="submit"
-                                    class="btn btn-outline-secondary">
-                                Apply filters <i class="bi bi-arrow-right-square"></i>
+                                    class="btn btn-outline-primary">
+                                {{ "Apply filters"|trans({}, 'forms') }} <i class="bi bi-arrow-right-square"></i>
                             </button>
                         </div>
                     </form>
@@ -258,7 +259,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    Sorting
+                    <i class="bi bi-sort-down"></i> {{ "Sorting"|trans }}
                 </div>
                 <div class="card-body">
                     <form>
@@ -295,7 +296,7 @@
                                     </option>
                                 {% endif %}
                             </select>
-                            <label for="sortBy">Sort by</label>
+                            <label for="sortBy">{{ "Sort by"|trans({}, 'forms') }}</label>
                         </div>
                         <div class="form-floating mb-2">
                             <select id="orderBy"
@@ -321,7 +322,7 @@
                                     </option>
                                 {% endif %}
                             </select>
-                            <label for="sortorder">Sort</label>
+                            <label for="sortorder">{{ "Order by"|trans({}, 'forms') }}</label>
                         </div>
 
                         {% if filters.search %}
@@ -338,8 +339,8 @@
                         {% endif %}
 
                         <div class="float-end">
-                            <button type="submit" class="btn btn-primary">
-                                Submit
+                            <button type="submit" class="btn btn-outline-primary">
+                                {{ "Sort imports"|trans }}
                             </button>
                         </div>
                     </form>

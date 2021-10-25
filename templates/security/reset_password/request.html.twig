@@ -10,21 +10,28 @@
             {{ 'Reset your password'|trans }}
         </h1>
 
-        {% for flashError in app.flashes('reset_password_error') %}
-            <div class="alert alert-danger" role="alert">
-                {{ flashError }}
+        <div class="card">
+            <div class="card-body">
+                {% for flashError in app.flashes('reset_password_error') %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ flashError }}
+                    </div>
+                {% endfor %}
+
+                {{ form_start(requestForm) }}
+                {{ form_row(requestForm.email) }}
+                <div>
+                    <small>{{ 'security.requestReset.message'|trans }}</small>
+                </div>
+
+                <div class="float-end">
+                    <button class="btn btn-primary">
+                        {{ 'security.requestReset.button'|trans }}
+                    </button>
+                </div>
+
+                {{ form_end(requestForm) }}
             </div>
-        {% endfor %}
-
-        {{ form_start(requestForm) }}
-        {{ form_row(requestForm.email) }}
-        <div>
-            <small>{{ 'security.requestReset.message'|trans }}</small>
         </div>
-
-        <button class="btn btn-primary">
-            {{ 'security.requestReset.button'|trans }}
-        </button>
-        {{ form_end(requestForm) }}
     </div>
 {% endblock %}

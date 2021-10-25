@@ -12,6 +12,8 @@ class ImportVoter extends Voter
 {
     private const DELETE = 'delete';
 
+    private const EDIT = 'edit';
+
     private Security $security;
 
     public function __construct(Security $security)
@@ -50,12 +52,34 @@ class ImportVoter extends Voter
         switch ($attribute) {
             case self::DELETE:
                 return $this->canDelete($import, $user);
+
+            case self::EDIT:
+                return $this->canEdit($import, $user);
         }
 
         throw new \LogicException('This code should not be reached!');
     }
 
     private function canDelete(Import $import, User $user): bool
+    {
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            return true;
+        }
+
+        if ($import->getHospital()) {
+            $hospitalOwner = $import->getHospital()->getOwner();
+        } else {
+            $hospitalOwner = null;
+        }
+
+        if ($hospitalOwner) {
+            return $user === $hospitalOwner;
+        } else {
+            return $user === $import->getUser();
+        }
+    }
+
+    private function canEdit(Import $import, User $user): bool
     {
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;

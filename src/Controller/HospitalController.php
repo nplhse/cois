@@ -85,7 +85,7 @@ class HospitalController extends AbstractController
 
             $this->addFlash('success', 'Your hospital was successfully created.');
 
-            return $this->redirectToRoute('app_hospital_index');
+            return $this->redirectToRoute('app_hospital_show', ['id' => $hospital->getId()]);
         }
 
         return $this->render('hospitals/new.html.twig', [
@@ -111,7 +111,7 @@ class HospitalController extends AbstractController
 
             $this->addFlash('success', 'Hospital was successfully edited.');
 
-            return $this->redirectToRoute('app_hospital_index');
+            return $this->redirectToRoute('app_hospital_show', ['id' => $hospital->getId()]);
         }
 
         return $this->render('hospitals/edit.html.twig', [

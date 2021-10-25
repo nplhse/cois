@@ -3,7 +3,7 @@
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
 
 {% block title %}
-    {{ 'Edit hospital'|trans }} - {{ parent() }}
+    {{ 'Edit Import'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -17,11 +17,11 @@
                             label: 'Home'|trans
                         },
                         {
-                            url: url('app_hospital_index'),
-                            label: 'Hospitals'|trans
+                            url: url('app_import_index'),
+                            label: 'Import'|trans
                         },
                         {
-                            label: 'Edit hospital'|trans
+                            label: 'Edit Import'|trans
                         }
                     ]
                 )
@@ -30,62 +30,49 @@
     </div>
 
     <div class="container">
+        {% if is_granted('delete', import) %}
+            <div class="float-end">
+                {{ include('import/_delete_form.html.twig') }}
+            </div>
+        {% endif %}
+
         <h1>
-            {{ 'Edit hospital'|trans }}
+            <strong>{{ 'Edit Import'|trans }}</strong>
         </h1>
 
         <div class="card">
             <div class="card-body">
+                <div class="alert alert-warning" role="alert">
+                    <strong>{{ 'Please notice'|trans }}:</strong>
+                    {{ 'Import edit infotext'|trans }}
+                </div>
+
                 {{ form_start(form) }}
 
-                <h3>
-                    {{ 'Basic information'|trans }}
-                </h3>
-
-                {{ form_row(form.name) }}
-
-                {{ form_row(form.address) }}
-
-                <h3>
-                    {{ 'Hospital location'|trans }}
-                </h3>
-
-                {{ form_row(form.dispatchArea) }}
-
-                {{ form_row(form.supplyArea) }}
-
-                {{ form_row(form.location) }}
-
-                <h3>
-                    {{ 'Hospital size'|trans }}
-                </h3>
-
-                {{ form_row(form.size) }}
-
-                {{ form_row(form.beds) }}
+                {{ form_widget(form) }}
 
                 <a class="btn btn-outline-primary"
                     href="{{
                     path(
-                        'app_hospital_show',
+                        'app_import_show',
                         {
-                            id: hospital.id
+                            id: import.id
                         }
                     )
                     }}"
                     role="button">
                     <i class="bi bi-search"></i>
-                    {{ 'View hospital'|trans }}
+                    {{ 'View Import'|trans }}
                 </a>
 
                 <div class="float-end">
                     <a class="btn btn-outline-secondary"
-                        href="{{ path('app_hospital_index') }}">
-                        {{ 'Back to hospitals'|trans({}, 'forms') }}
+                        href="{{ path('app_import_index') }}">
+                        {{ 'Back to imports'|trans({}, 'forms') }}
                     </a>
                     <button class="btn btn-success">
-                        <i class="bi bi-check-circle-fill"></i>
-                        {{ 'Save Hospital'|trans({}) }}
+                        <i class="bi bi-check-circle"></i>
+                        {{ 'Save Import'|trans({}, 'forms') }}
                     </button>
                 </div>
                 {{ form_end(form) }}

@@ -29,26 +29,34 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="container">
         <h1>
-            {{ 'Create new Import'|trans }}
+            <strong>{{ 'Create new Import'|trans }}</strong>
         </h1>
 
-        <div class="col">
-            {{ form_start(form) }}
+        <div class="card">
+            <div class="card-body">
+                <div class="alert alert-warning" role="alert">
+                    <strong>{{ 'Please notice'|trans }}:</strong>
+                    {{ 'Import infotext'|trans }}
+                </div>
 
-            {{ form_widget(form) }}
+                {{ form_start(form) }}
 
-            <div class="btn-group" role="group">
-                <button class="btn btn-primary">
-                    {{ 'Import new Data'|trans({}, 'forms') }}
-                </button>
-                <a class="btn btn-outline-secondary"
-                    href="{{ path('app_import_index') }}">
-                    {{ 'Back to list'|trans({}, 'forms') }}
-                </a>
+                {{ form_widget(form) }}
+
+                <div class="float-end">
+                    <a class="btn btn-outline-secondary"
+                        href="{{ path('app_import_index') }}">
+                        {{ 'Back to imports'|trans({}, 'forms') }}
+                    </a>
+                    <button class="btn btn-primary">
+                        <i class="bi bi-folder-plus"></i>
+                        {{ 'Import new Data'|trans({}, 'forms') }}
+                    </button>
+                </div>
+                {{ form_end(form) }}
             </div>
-            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}

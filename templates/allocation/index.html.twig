@@ -36,7 +36,7 @@
                     role="button"
                     aria-expanded="true"
                     aria-controls="collapseFilters">
-                    <i class="bi bi-funnel"></i> {{ 'Toogle Options'|trans }}
+                    <i class="bi bi-sliders"></i> {{ 'Toogle Options'|trans }}
                 </a>
             </div>
 
@@ -419,7 +419,7 @@
         <div class="col-3 collapse" id="collapseFilters">
             <div class="card mb-3">
                 <div class="card-header">
-                    <i class="bi bi-filter-left"></i>
+                    <i class="bi bi-funnel"></i>
                     {{ 'Filters'|trans({}, 'forms') }}
                 </div>
                 <div class="card-body">
@@ -567,11 +567,16 @@
                                 aria-label="filterPZC">
                                 {% if filters.pzc == null %}
                                     <option value="" selected>
-                                        Filter by PZC
+                                        {{ 'Filter by PZC'|trans({}, 'forms') }}
                                     </option>
                                 {% else %}
                                     <option value="">
-                                        Stop filtering by PZC
+                                        {{
+                                            'Stop filtering by PZC'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
                                     </option>
                                 {% endif %}
                                 {% for item in PZCs %}
@@ -599,11 +604,21 @@
                                 aria-label="filterAssignment">
                                 {% if filters.assignment == null %}
                                     <option value="" selected>
-                                        Filter by Assignment
+                                        {{
+                                            'Filter by Assignment'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
                                     </option>
                                 {% else %}
                                     <option value="">
-                                        Stop filtering by Assignment
+                                        {{
+                                            'Stop filtering by Assignment'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
                                     </option>
                                 {% endif %}
                                 {% for item in assignments %}
@@ -632,11 +647,21 @@
                                 aria-label="filterOccasion">
                                 {% if filters.occasion == null %}
                                     <option value="" selected>
-                                        Filter by Occasion
+                                        {{
+                                            'Filter by Occasion'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
                                     </option>
                                 {% else %}
                                     <option value="">
-                                        Stop filtering by Occasion
+                                        {{
+                                            'Stop filtering by Occasion'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
                                     </option>
                                 {% endif %}
                                 {% for item in occasions %}
@@ -665,11 +690,21 @@
                                 aria-label="filterTransport">
                                 {% if filters.modeOfTransport == null %}
                                     <option value="" selected>
-                                        Filter by mode of Transport
+                                        {{
+                                            'Filter by mode of Transport'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
                                     </option>
                                 {% else %}
                                     <option value="">
-                                        Stop filtering by mode of Transport
+                                        {{
+                                            'Stop filtering by mode of Transport'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
                                     </option>
                                 {% endif %}
                                 {% for item in transports %}
@@ -838,8 +873,9 @@
 
                         <div class="float-end">
                             <button type="submit"
-                                class="btn btn-outline-secondary">
-                                Apply filters <i class="bi bi-arrow-right-square"></i>
+                                class="btn btn-outline-primary">
+                                {{ 'Apply filters'|trans({}, 'forms') }}
+                                <i class="bi bi-arrow-right-square"></i>
                             </button>
                         </div>
                     </form>
@@ -848,7 +884,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    Sorting
+                    <i class="bi bi-sort-down"></i> {{ 'Sorting'|trans }}
                 </div>
                 <div class="card-body">
                     <form>
@@ -905,7 +941,9 @@
                                     </option>
                                 {% endif %}
                             </select>
-                            <label for="sortBy">Sort by</label>
+                            <label for="sortBy">
+                                {{ 'Sort by'|trans({}, 'forms') }}
+                            </label>
                         </div>
                         <div class="form-floating mb-2">
                             <select id="orderBy"
@@ -932,7 +970,9 @@
                                     </option>
                                 {% endif %}
                             </select>
-                            <label for="sortorder">Sort</label>
+                            <label for="sortorder">
+                                {{ 'Order by'|trans({}, 'forms') }}
+                            </label>
                         </div>
 
                         {% if filters.search %}
@@ -1027,8 +1067,10 @@
                         {% endif %}
 
                         <div class="float-end">
-                            <button type="submit" class="btn btn-primary">
-                                Submit
+                            <button type="submit"
+                                class="btn btn-outline-primary">
+                                {{ 'Sort allocations'|trans }}
+                                <i class="bi bi-arrow-right-square"></i>
                             </button>
                         </div>
                     </form>

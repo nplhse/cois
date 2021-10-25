@@ -27,7 +27,8 @@ export default class extends Controller {
             .append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`);
 
-        const x = d3.scaleBand()
+        const x = d3
+            .scaleBand()
             .domain(data.map((d) => d.day))
             .range([0, width])
             .padding(0.2);
@@ -39,8 +40,9 @@ export default class extends Controller {
             .attr("transform", "translate(-10,0)rotate(-45)")
             .style("text-anchor", "end");
 
-        const y = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d.count * 1.1)])
+        const y = d3
+            .scaleLinear()
+            .domain([0, d3.max(data, (d) => d.count * 1.1)])
             .range([height, 0]);
 
         svg.append("g").call(d3.axisLeft(y));

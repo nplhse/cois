@@ -7,9 +7,14 @@
         }
     )
     }}"
-    onsubmit="return confirm('Are you sure you want to delete this item?');">
+    onsubmit="return confirm({{ 'Are you sure you want to delete this item?'|trans(
+        {},
+        'forms'
+    ) }});">
     <input type="hidden"
         name="_token"
         value="{{ csrf_token('delete' ~ import.id) }}" />
-    <button class="btn btn-danger">{{ 'Delete'|trans({}, 'forms') }}</button>
+    <button class="btn btn-danger">
+        <i class="bi bi-trash-fill"></i> {{ 'Delete'|trans({}, 'forms') }}
+    </button>
 </form>

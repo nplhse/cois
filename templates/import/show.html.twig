@@ -3,7 +3,9 @@
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
 
 {% block title %}
-    {{ 'import.show.title'|trans }} (#{{ import.id }}) - {{ parent() }}
+    {{ 'Show Import'|trans }}: {{ import.caption }} (#{{ import.id }}) - {{
+        parent()
+    }}
 {% endblock %}
 
 {% block body %}
@@ -36,19 +38,19 @@
     {% endif %}
 
     <h1>
-        {{ 'import.show.title'|trans }} - {{ import.caption }}
-        <small>(<i>#{{ import.id }}</i>)</small>
+        {{ 'Show Import'|trans }} - {{ import.caption }}
+        <small class="text-muted">(<i>#{{ import.id }}</i>)</small>
     </h1>
 
     <div class="row">
         <div class="col-md-8">
             <div class="card mb-3">
                 <div class="card-header">
-                    {{ 'import.card.basics'|trans }}
+                    {{ 'Basic information'|trans }}
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
-                        {{ 'import.field.caption'|trans }}
+                        {{ 'Caption'|trans }}
                     </h5>
                     <p>
                         {{ import.caption }}
@@ -57,7 +59,7 @@
                     <div class="row">
                         <div class="col-6">
                             <h5 class="card-title">
-                                {{ 'import.field.contents'|trans }}
+                                {{ 'Content'|trans }}
                             </h5>
                             <p>
                                 {{ import.contents }}
@@ -65,7 +67,7 @@
                         </div>
                         <div class="col-6">
                             <h5 class="card-title">
-                                {{ 'import.field.status'|trans }}
+                                {{ 'Status'|trans }}
                             </h5>
                             <p>
                                 {% if import.status == 'finished' %}
@@ -101,27 +103,27 @@
 
             <div class="card mb-3">
                 <div class="card-header">
-                    {{ 'import.card.details'|trans }}
+                    {{ 'Import details'|trans }}
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
-                        {{ 'import.field.error'|trans }}
+                        {{ 'Errors'|trans }}
                     </h5>
                     <p>
                         {% if import.lastError %}
                             {{ import.lastError }}
                         {% else %}
-                            {{ 'import.field.noError'|trans }}
+                            {{ 'No errors occured.'|trans }}
                         {% endif %}
                     </p>
 
                     <h5 class="card-title">
-                        {{ 'import.field.statistics'|trans }}
+                        {{ 'Statistics'|trans }}
                     </h5>
                     <div class="row">
                         <div class="col-6">
                             <h6 class="card-subtitle text-muted">
-                                {{ 'import.field.itemCount'|trans }}
+                                {{ 'Item count'|trans }}
                             </h6>
                             <p>
                                 {{ import.itemCount }}
@@ -129,7 +131,7 @@
                         </div>
                         <div class="col-6">
                             <h6 class="card-subtitle text-muted">
-                                {{ 'import.field.runtime'|trans }}
+                                {{ 'Runtime'|trans }}
                             </h6>
                             <p>
                                 {{ import.duration|number_format(5, '.', ',') }}s
@@ -139,7 +141,7 @@
                     <div class="row">
                         <div class="col-6">
                             <h6 class="card-subtitle text-muted">
-                                {{ 'import.field.timesRun'|trans }}
+                                {{ 'Times run'|trans }}
                             </h6>
                             <p>
                                 {{ import.timesRun }}
@@ -151,54 +153,61 @@
         </div>
 
         <div class="col-md-4">
-            <div class="card border-primary mb-3">
+            <div class="card border-secondary mb-3">
+                <div class="card-header bg-secondary text-white">
+                    {{ 'Import details'|trans }}
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">
-                        {{ 'import.field.createdBy'|trans }}
+                        {{ 'Created by'|trans }}
                     </h5>
                     <p>
-                        {{ import.user }}
+                        <i class="bi bi-person-fill"></i>
+                        <strong>{{ import.user }}</strong>
                     </p>
 
+                    <h5 class="card-title">
+                        {{ 'Timestamps'|trans }}
+                    </h5>
                     <p>
-                        {% if import.createdAt %}
-                            {{
-                                'import.field.createdAt'|trans({
-                                    '%time%': import.createdAt|date(
-                                        'd.m.Y H:i:s'
-                                    )
-                                })
-                            }}
-                        {% endif %}
-                    </p>
-                    <p>
-                        {% if import.lastRun %}
-                            {{
-                                'import.field.lastRun'|trans({
-                                    '%time%': import.lastRun|date('d.m.Y H:i:s')
-                                })
-                            }}
-                        {% endif %}
+                        <i class="bi bi-clock"></i>
+                        <strong>{{ 'Created at'|trans }}</strong>
+                        {{ import.createdAt
+                            ? import.createdAt|date('d.m.Y H:i')
+                            : '' }}
+                        <br />
+                        <i class="bi bi-clock-history"></i>
+                        <strong>{{ 'Last run at'|trans }}</strong>
+                        {{ import.lastRun
+                            ? import.lastRun|date('d.m.Y H:i')
+                            : '' }}
                     </p>
                 </div>
             </div>
 
             {% if is_granted('ROLE_ADMIN') %}
                 <div class="card border-warning text-warning mb-3">
+                    <div class="card-header bg-warning text-white">
+                        {{ 'Debugging'|trans }}
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">
-                            {{ 'import.card.debugging'|trans }}
+                            {{ 'Download'|trans }}
                         </h5>
-                        <a href="{{
-                            path(
-                                'app_files_allocations',
-                                {
-                                    id: import.id
-                                }
-                            )
-                            }}">
-                            {{ 'import.field.download'|trans }}
-                        </a>
+
+                        <p>
+                            <a href="{{
+                                path(
+                                    'app_files_allocations',
+                                    {
+                                        id: import.id
+                                    }
+                                )
+                                }}">
+                                <i class="bi bi-file-earmark-arrow-down"></i>
+                                {{ 'Get original import file'|trans }}
+                            </a>
+                        </p>
                     </div>
                 </div>
             {% endif %}
@@ -206,12 +215,26 @@
     </div>
 
     <div class="d-flex justify-content-end mb-2">
-        <div class="btn-group" role="group" aria-label="Basic outlined example">
-            <a class="btn btn-outline-primary"
+        <p>
+            <a class="btn btn-outline-secondary"
                 href="{{ path('app_import_index') }}"
                 role="button">
-                {{ 'import.link.back'|trans }}
+                {{ 'Back to imports'|trans({}, 'forms') }}
             </a>
-        </div>
+            {% if is_granted('delete', import) %}
+                <a class="btn btn-primary"
+                    href="{{
+                    path(
+                        'app_import_edit',
+                        {
+                            id: import.id
+                        }
+                    )
+                    }}">
+                    <i class="bi bi-pencil-fill"></i>
+                    {{ 'Edit Import'|trans }}
+                </a>
+            {% endif %}
+        </p>
     </div>
 {% endblock %}

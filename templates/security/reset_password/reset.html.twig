@@ -10,15 +10,23 @@
             {{ 'Reset your password'|trans }}
         </h1>
 
-        <p>
-            {{ 'security.reset.message'|trans }}
-        </p>
+        <div class="card">
+            <div class="card-body">
+                <p>
+                    {{ 'security.reset.message'|trans }}
+                </p>
 
-        {{ form_start(resetForm) }}
-        {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">
-            {{ 'security.reset.button'|trans }}
-        </button>
-        {{ form_end(resetForm) }}
+                {{ form_start(resetForm) }}
+                {{ form_row(resetForm.plainPassword) }}
+
+                <div class="float-end">
+                    <button class="btn btn-primary">
+                        {{ 'security.reset.button'|trans }}
+                    </button>
+                </div>
+
+                {{ form_end(resetForm) }}
+            </div>
+        </div>
     </div>
 {% endblock %}

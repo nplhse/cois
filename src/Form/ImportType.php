@@ -21,44 +21,48 @@ class ImportType extends AbstractType
         $builder
             ->add('caption', TextType::class, [
                 'required' => true,
-            ])
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-            ])
-            ->add('hospital', EntityType::class, [
-                'class' => Hospital::class,
-            ])
-            ->add('contents', ChoiceType::class, [
-                'choices' => [
-                    'Allocation' => 'allocation',
-                ],
-                'required' => true,
-            ])
-            ->add('file', DropzoneType::class, [
-                'label' => 'Import data (Must be a *.csv file!)',
-                'mapped' => true,
-                'required' => false,
+            ]);
 
-                // unmapped fields can't define their validation using annotations
-                // in the associated entity, so you can use the PHP constraint classes
-                'constraints' => [
-                    new File([
-                        'maxSize' => '12M',
-                        'mimeTypes' => [
-                            'text/plain',
-                            'text/csv',
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid CSV document',
-                    ]),
-                ],
-            ])
-        ;
+        if ($options['create']) {
+            $builder
+                ->add('user', EntityType::class, [
+                    'class' => User::class,
+                ])
+                ->add('hospital', EntityType::class, [
+                    'class' => Hospital::class,
+                ])
+                ->add('contents', ChoiceType::class, [
+                    'choices' => [
+                        'Allocation' => 'allocation',
+                    ],
+                    'required' => true,
+                ])
+                ->add('file', DropzoneType::class, [
+                    'label' => 'Import data (Must be a *.csv file!)',
+                    'mapped' => true,
+                    'required' => false,
+
+                    // unmapped fields can't define their validation using annotations
+                    // in the associated entity, so you can use the PHP constraint classes
+                    'constraints' => [
+                        new File([
+                            'maxSize' => '12M',
+                            'mimeTypes' => [
+                                'text/plain',
+                                'text/csv',
+                            ],
+                            'mimeTypesMessage' => 'Please upload a valid CSV document',
+                        ]),
+                    ],
+                ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Import::class,
+            'create' => true,
         ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Import;
+use App\Form\ImportType;
 use App\Form\UploadType;
 use App\Message\ImportDataMessage;
 use App\Repository\AllocationRepository;
@@ -99,10 +100,38 @@ class ImportController extends AbstractController
 
             $this->dispatchMessage(new ImportDataMessage($import, $hospital));
 
-            return $this->redirectToRoute('app_import_index');
+            $this->addFlash('success', 'Your import was successfully created.');
+
+            return $this->redirectToRoute('app_import_show', ['id' => $import->getId()]);
         }
 
         return $this->render('import/new.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/edit/{id}", name="app_import_edit")
+     */
+    public function edit(Import $import, Request $request, ImportRepository $importRepository): Response
+    {
+        $this->denyAccessUnlessGranted('delete', $import);
+
+        $form = $this->createForm(ImportType::class, $import, ['create' => false]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($import);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Your import was successfully updated.');
+
+            return $this->redirectToRoute('app_import_show', ['id' => $import->getId()]);
+        }
+
+        return $this->render('import/edit.html.twig', [
+            'import' => $import,
             'form' => $form->createView(),
         ]);
     }
@@ -131,6 +160,8 @@ class ImportController extends AbstractController
 
         $em->remove($import);
         $em->flush();
+
+        $this->addFlash('danger', 'Your import was successfully deleted.');
 
         return $this->redirectToRoute('app_import_index');
     }

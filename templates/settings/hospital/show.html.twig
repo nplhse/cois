@@ -139,7 +139,11 @@
                 </tbody>
             </table>
 
-            <div class="btn-group" role="group">
+            <div class="float-end">
+                <a class="btn btn-outline-secondary"
+                    href="{{ path('app_settings_hospital_index') }}">
+                    {{ 'Back to list'|trans({}, 'forms') }}
+                </a>
                 <a class="btn btn-primary"
                     href="{{
                     path(
@@ -150,10 +154,6 @@
                     )
                     }}">
                     Edit Hospital
-                </a>
-                <a class="btn btn-outline-secondary"
-                    href="{{ path('app_settings_hospital_index') }}">
-                    {{ 'Back to list'|trans({}, 'forms') }}
                 </a>
             </div>
         </div>

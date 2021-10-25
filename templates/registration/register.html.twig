@@ -5,28 +5,40 @@
 {% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">
-            {{ flashError }}
+    <div class="container">
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">
+                {{ flashError }}
+            </div>
+        {% endfor %}
+
+        <h1>
+            {{ 'Register'|trans }}
+        </h1>
+
+        <div class="card">
+            <div class="card-body">
+                {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.username) }}
+                {{
+                    form_row(
+                        registrationForm.plainPassword,
+                        {
+                            label: 'Password'
+                        }
+                    )
+                }}
+                {{ form_row(registrationForm.email) }}
+
+                <div class="float-end">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-person-plus-fill"></i>
+                        {{ 'Create account'|trans }}
+                    </button>
+                </div>
+
+                {{ form_end(registrationForm) }}
+            </div>
         </div>
-    {% endfor %}
-
-    <h1>
-        Register
-    </h1>
-
-    {{ form_start(registrationForm) }}
-    {{ form_row(registrationForm.username) }}
-    {{
-        form_row(
-            registrationForm.plainPassword,
-            {
-                label: 'Password'
-            }
-        )
-    }}
-    {{ form_row(registrationForm.email) }}
-
-    <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    </div>
 {% endblock %}
