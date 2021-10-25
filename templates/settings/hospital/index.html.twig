@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+{% import '_elements/macro/pagination.html.twig' as pagination %}
+{% import '_elements/macro/filters.html.twig' as filter %}
 
 {% block title %}
     {{ 'Hospitals'|trans }} - {{ parent() }}
@@ -34,6 +36,13 @@
             {{ include('settings/_settings_subnav.html.twig') }}
         </div>
         <div class="col">
+            <div class="float-end">
+                <a class="btn btn-primary"
+                   href="{{ path('app_settings_hospital_new') }}">
+                    {{ 'Create new Hospital'|trans({}, 'forms') }}
+                </a>
+            </div>
+
             <h1>
                 {{ 'Hospitals'|trans }}
             </h1>
@@ -41,7 +50,7 @@
             <p>
                 {{
                     'Showing count Hospitals'|trans({
-                        '%perPage%': perPage,
+                        '%perPage%': pages.perPage,
                         '%count%': hospitals.count
                     })
                 }}
@@ -184,65 +193,31 @@
                 </tbody>
             </table>
 
-            {% if (hospitals|length) > 0 %}
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                        {% if previous >= 0 %}
-                            <li class="page-item">
-                                <a class="page-link"
-                                    href="{{
-                                    path(
-                                        'app_settings_hospital_index',
-                                        app.request.query.all|merge({
-                                            offset: previous
-                                        })
-                                    )
-                                    }}">
-                                    Previous
-                                </a>
-                            </li>
-                        {% else %}
-                            <li class="page-item disabled">
-                                <a class="page-link"
-                                    href="#"
-                                    tabindex="-1"
-                                    aria-disabled="true">
-                                    Previous
-                                </a>
-                            </li>
-                        {% endif %}
-                        {% if next < (hospitals|length) %}
-                            <li class="page-item">
-                                <a class="page-link"
-                                    href="{{
-                                    path(
-                                        'app_settings_hospital_index',
-                                        app.request.query.all|merge({
-                                            offset: next
-                                        })
-                                    )
-                                    }}">
-                                    Next
-                                </a>
-                            </li>
-                        {% else %}
-                            <li class="page-item disabled">
-                                <a class="page-link"
-                                    href="#"
-                                    tabindex="-1"
-                                    aria-disabled="true">
-                                    Next
-                                </a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </nav>
-            {% endif %}
-
-            <a class="btn btn-primary"
-                href="{{ path('app_settings_hospital_new') }}">
-                {{ 'Create new Hospital'|trans({}, 'forms') }}
-            </a>
+            <div class="row">
+                <div class="col-2">
+                    <p class="text-muted">
+                        {{
+                        'Showing Page page of pages'|trans({
+                            '%page%': pages.page,
+                            '%pages%': pages.last
+                        })
+                        }}
+                    </p>
+                </div>
+                <div class="col-8">
+                    {{
+                    pagination.navbar(
+                        pages.last,
+                        pages.page,
+                        pages.previous,
+                        pages.next
+                    )
+                    }}
+                </div>
+                <div class="col-2">
+                    {{ pagination.goTo('app_hospital_index') }}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

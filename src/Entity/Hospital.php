@@ -41,7 +41,7 @@ class Hospital
     private ?string $supplyArea = null;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="hospital", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="hospital")
      * @ORM\JoinColumn(nullable=false)
      */
     private User $owner;

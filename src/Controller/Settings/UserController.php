@@ -5,8 +5,10 @@ namespace App\Controller\Settings;
 use App\Entity\User;
 use App\Form\UserCreateType;
 use App\Form\UserType;
+use App\Repository\ImportRepository;
 use App\Repository\UserRepository;
 use App\Service\MailerService;
+use App\Service\RequestParamService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,14 +36,19 @@ class UserController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator = $userRepository->getUserPaginator($offset);
+        $paramService = new RequestParamService($request);
+
+        $filters = [];
+        $filters['search'] = $paramService->getSearch();
+        $filters['page'] = $paramService->getPage();
+
+        $paginator = $userRepository->getUserPaginator($paramService->getPage(), $filters);
 
         return $this->render('settings/user/index.html.twig', [
             'users' => $paginator,
-            'perPage' => UserRepository::PAGINATOR_PER_PAGE,
-            'previous' => $offset - UserRepository::PAGINATOR_PER_PAGE,
-            'next' => min(count($paginator), $offset + UserRepository::PAGINATOR_PER_PAGE),
+            'search' => $filters['search'],
+            'filters' => $filters,
+            'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), UserRepository::PAGINATOR_PER_PAGE),
         ]);
     }
 

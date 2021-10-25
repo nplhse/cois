@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
 {% block title %}
     {{ 'dashboard.title'|trans }} - {{ parent() }}
 {% endblock %}
@@ -7,13 +9,16 @@
 {% block body %}
     <div class="row">
         <div class="col">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="{{ path('app_dashboard') }}">Home</a>
-                    </li>
-                </ol>
-            </nav>
+            {{
+            breadcrumbs.render(
+                [
+                    {
+                        url: url('app_dashboard'),
+                        label: 'Home'|trans
+                    }
+                ]
+            )
+            }}
         </div>
     </div>
     <div class="row">

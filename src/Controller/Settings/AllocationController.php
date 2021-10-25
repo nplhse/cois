@@ -24,6 +24,7 @@ class AllocationController extends AbstractController
 
         $filters = [];
         $filters['search'] = $paramService->getSearch();
+        $filters['page'] = $paramService->getPage();
 
         $filters['hospital'] = $paramService->getHospital();
         $filters['supplyArea'] = $paramService->getSupplyArea();
@@ -31,16 +32,13 @@ class AllocationController extends AbstractController
         $filters['startDate'] = $paramService->getStartDate();
         $filters['endDate'] = $paramService->getEndDate();
 
-        $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator = $allocationRepository->getAllocationPaginator($offset, $filters);
+        $paginator = $allocationRepository->getAllocationPaginator($paramService->getPage(), $filters);
 
         return $this->render('settings/allocation/index.html.twig', [
             'allocations' => $paginator,
             'search' => $filters['search'],
             'filters' => $filters,
-            'perPage' => AllocationRepository::PAGINATOR_PER_PAGE,
-            'previous' => $offset - AllocationRepository::PAGINATOR_PER_PAGE,
-            'next' => min(count($paginator), $offset + AllocationRepository::PAGINATOR_PER_PAGE),
+            'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), AllocationRepository::PAGINATOR_PER_PAGE),
             'hospitals' => $hospitalRepository->getHospitals(),
             'supplyAreas' => $hospitalRepository->getSupplyAreas(),
             'dispatchAreas' => $hospitalRepository->getDispatchAreas(),

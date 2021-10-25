@@ -46,7 +46,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $email;
 
     /**
-     * @ORM\OneToOne(targetEntity=Hospital::class, mappedBy="owner", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Hospital::class, mappedBy="owner")
      */
     private ?Hospital $hospital = null;
 

@@ -6,8 +6,10 @@ use App\Entity\Import;
 use App\Form\ImportType;
 use App\Message\ImportDataMessage;
 use App\Repository\AllocationRepository;
+use App\Repository\HospitalRepository;
 use App\Repository\ImportRepository;
 use App\Service\FileUploader;
+use App\Service\RequestParamService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,19 +24,23 @@ class ImportController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $filter = [];
-        $filter['search'] = '';
-        $filter['user'] = '';
-        $filter['hospital'] = '';
+        $paramService = new RequestParamService($request);
 
-        $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator = $importRepository->getImportPaginator($offset, $filter);
+        $filters = [];
+        $filters['search'] = $paramService->getSearch();
+        $filters['page'] = $paramService->getPage();
+
+        $filters['user'] = $paramService->user;
+        $filters['hospital'] = $paramService->getHospital();
+        $filters['show'] = 'all';
+
+        $paginator = $importRepository->getImportPaginator($paramService->getPage(), $filters);
 
         return $this->render('settings/import/index.html.twig', [
             'imports' => $paginator,
-            'perPage' => ImportRepository::PAGINATOR_PER_PAGE,
-            'previous' => $offset - ImportRepository::PAGINATOR_PER_PAGE,
-            'next' => min(count($paginator), $offset + ImportRepository::PAGINATOR_PER_PAGE),
+            'search' => $filters['search'],
+            'filters' => $filters,
+            'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), ImportRepository::PAGINATOR_PER_PAGE),
         ]);
     }
 

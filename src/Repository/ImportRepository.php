@@ -82,6 +82,8 @@ class ImportRepository extends ServiceEntityRepository
             $query->andWhere('i.hospital = :hospital')
                 ->setParameter(':hospital', $filter['hospital'])
             ;
+        } elseif ('all' == $filter['show']) {
+            // do nothing
         }
 
         if (empty($filter['show'])) {

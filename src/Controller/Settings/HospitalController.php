@@ -4,7 +4,9 @@ namespace App\Controller\Settings;
 
 use App\Entity\Hospital;
 use App\Form\HospitalType;
+use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
+use App\Service\RequestParamService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,23 +20,25 @@ class HospitalController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $filter = [];
-        $filter['search'] = $request->query->get('search');
-        $filter['location'] = null;
-        $filter['size'] = null;
-        $filter['supplyArea'] = null;
-        $filter['dispatchArea'] = null;
+        $paramService = new RequestParamService($request);
 
-        $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator = $hospitalRepository->getHospitalPaginator($offset, $filter);
+        $filters = [];
+        $filters['search'] = $paramService->getSearch();
+        $filters['page'] = $paramService->getPage();
+
+        $filters['hospital'] = $paramService->getHospital();
+        $filters['supplyArea'] = $paramService->getSupplyArea();
+        $filters['dispatchArea'] = $paramService->getDispatchArea();
+        $filters['location'] = $paramService->getLocation();
+        $filters['size'] = $paramService->getSize();
+
+        $paginator = $hospitalRepository->getHospitalPaginator($paramService->getPage(), $filters);
 
         return $this->render('settings/hospital/index.html.twig', [
             'hospitals' => $paginator,
-            'search' => $filter['search'],
-            'filters' => $filter,
-            'perPage' => HospitalRepository::PAGINATOR_PER_PAGE,
-            'previous' => $offset - HospitalRepository::PAGINATOR_PER_PAGE,
-            'next' => min(count($paginator), $offset + HospitalRepository::PAGINATOR_PER_PAGE),
+            'search' => $filters['search'],
+            'filters' => $filters,
+            'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), HospitalRepository::PAGINATOR_PER_PAGE),
         ]);
     }
 

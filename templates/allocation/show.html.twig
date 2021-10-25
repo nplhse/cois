@@ -306,6 +306,7 @@
                         {{ 'allocations.field.createdAt'|trans }}
                     </h5>
                     <p>
+                        <i class="bi bi-clock"></i>
                         {{ allocation.creationWeekday }}, {{
                             allocation.createdAt|date(
                                 'd.m.Y H:i:s',
@@ -318,6 +319,7 @@
                         {{ 'allocations.field.arrivalAt'|trans }}
                     </h5>
                     <p>
+                        <i class="bi bi-clock-history"></i>
                         {{ allocation.arrivalWeekday }}, {{
                             allocation.arrivalAt|date(
                                 'd.m.Y H:i:s',
@@ -480,27 +482,30 @@
                 </div>
             </div>
 
-            <div class="card border-primary mb-3">
+            <div class="card border-secondary mb-3">
+                <div class="card-header bg-secondary">
+                    <a class="text-white" href="{{
+                    path(
+                        'app_import_show',
+                        {
+                            id: allocation.import.id
+                        }
+                    )
+                    }}">
+                        {{ 'allocations.field.import'|trans }}
+                        (#<i>{{ allocation.import.id }})</i>
+                    </a>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="{{
-                            path(
-                                'app_import_show',
-                                {
-                                    id: allocation.import.id
-                                }
-                            )
-                            }}">
-                            {{ 'allocations.field.import'|trans }}
-                            <small>(#<i>{{ allocation.import.id }})</i></small>
-                        </a>
-                    </h5>
                     <p>
+                        <i class="bi bi-person-fill"></i>
                         {{
                             'allocations.field.importedBy'|trans({
                                 '%name%': importUser.username
                             })
                         }}
+                        </br>
+                        <i class="bi bi-clock"></i>
                         {{
                             'allocations.field.importedAt'|trans({
                                 '%time%': allocation.import.createdAt|date(
