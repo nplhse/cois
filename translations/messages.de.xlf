@@ -619,7 +619,7 @@
       </trans-unit>
       <trans-unit id="ZKZni.Y" resname="security.link.forgotPassword">
         <source>security.link.forgotPassword</source>
-        <target>Hier klicken, um das Passwort zurück zusetzen.</target>
+        <target>Hier klicken, um das Passwort zurück zu setzen.</target>
       </trans-unit>
       <trans-unit id="1MaDcUF" resname="security.link.logout">
         <source>security.link.logout</source>
@@ -1027,11 +1027,11 @@
       </trans-unit>
       <trans-unit id="tsMO7J5" resname="Hospital owner">
         <source>Hospital owner</source>
-        <target>Verantwortlicher Benutzer</target>
+        <target>Benutzer</target>
       </trans-unit>
       <trans-unit id="dV8Jnb9" resname="Timestamps">
         <source>Timestamps</source>
-        <target>Zeitstempel</target>
+        <target>Zeiten</target>
       </trans-unit>
       <trans-unit id="plYQfpn" resname="Statistics">
         <source>Statistics</source>
@@ -1463,11 +1463,11 @@
       </trans-unit>
       <trans-unit id="bkss3J_" resname="For full access to this project, you need to login. If you don´t already have a login you can register yourself.">
         <source>For full access to this project, you need to login. If you don´t already have a login you can register yourself.</source>
-        <target>Für kompletten Zugriff auf das Projekt müssen Sie sich anmelden. Falls Sie noch kein Benutezrkonto haben, können Sie sich registrieren.</target>
+        <target>Für kompletten Zugriff auf das Projekt müssen Sie sich anmelden. Falls Sie noch kein Benutzerkonto haben, können Sie sich registrieren.</target>
       </trans-unit>
       <trans-unit id="q.sr6NJ" resname="Click here to Login">
         <source>Click here to Login</source>
-        <target>Hier klicken zum anmelden</target>
+        <target>Zur Anmeldung</target>
       </trans-unit>
       <trans-unit id="w5LJ1z7" resname="Create a new Account">
         <source>Create a new Account</source>
