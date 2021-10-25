@@ -49,7 +49,7 @@
                         </h2>
                         <p>
                             {{
-                                'Explore what we´ve got: Browse the hospitals, filter our Allocations or import data.'|trans
+                                'Discover what we´ve got: Browse the Hospitals, search and filter our Allocations or import new Data.'|trans
                             }}
                         </p>
                         <div class="btn-group"
@@ -58,17 +58,7 @@
                             <a class="btn btn-outline-light"
                                 href="{{ path('app_hospital_index') }}"
                                 role="button">
-                                {{ 'View Hospitals'|trans }}
-                            </a>
-                            <a class="btn btn-outline-light"
-                                href="{{ path('app_allocation_index') }}"
-                                role="button">
-                                {{ 'View Allocations'|trans }}
-                            </a>
-                            <a class="btn btn-outline-light"
-                                href="{{ path('app_import_index') }}"
-                                role="button">
-                                {{ 'Import data'|trans }}
+                                {{ 'Go to dashboard'|trans }}
                             </a>
                         </div>
                     {% endif %}
