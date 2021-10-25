@@ -7,7 +7,7 @@
     <body>
       <trans-unit id="qUn0YjB" resname="Change Password">
         <source>Change Password</source>
-        <target>Passwort ändern</target>
+        <target>Change Password</target>
       </trans-unit>
       <trans-unit id="VG67jrm" resname="Filters">
         <source>Filters</source>
