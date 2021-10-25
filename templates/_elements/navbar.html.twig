@@ -209,6 +209,13 @@
                         {% else %}
                             <li class="nav-item">
                                 <a class="nav-link"
+                                   aria-current="page"
+                                   href="{{ path('app_login') }}">
+                                    {{ 'Register'|trans }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link"
                                     aria-current="page"
                                     href="{{ path('app_login') }}">
                                     {{ 'link.login'|trans }}
