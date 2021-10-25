@@ -157,11 +157,13 @@
                         <p class="card-text">
                             {{ 'Add some of your data to the database.'|trans }}
                         </p>
-                        <a href="{{ path('app_import_new') }}"
-                            class="btn btn-primary">
-                            <i class="bi bi-plus-circle"></i>
-                            {{ 'Import data'|trans }}
-                        </a>
+                        {% if app.user.hospital %}
+                            <a href="{{ path('app_import_new') }}"
+                                class="btn btn-primary">
+                                <i class="bi bi-plus-circle"></i>
+                                {{ 'Import data'|trans }}
+                            </a>
+                        {% endif %}
                         <a href="{{ path('app_import_index') }}"
                             class="btn btn-secondary">
                             <i class="bi bi-search"></i>

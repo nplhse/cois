@@ -22,10 +22,12 @@
                 <div class="h-100 p-5 text-white bg-secondary rounded-3">
                     {% if app.user == null %}
                         <h2>
-                            {{ 'default.login.title'|trans }}
+                            {{ 'How to participate'|trans }}
                         </h2>
                         <p>
-                            {{ 'default.login.text'|trans }}
+                            {{
+                                'For full access to this project, you need to login. If you don´t already have a login you can register yourself.'|trans
+                            }}
                         </p>
                         <div class="btn-group"
                             role="group"
@@ -33,12 +35,40 @@
                             <a class="btn btn-outline-light"
                                 href="{{ path('app_login') }}"
                                 role="button">
-                                {{ 'link.login'|trans }}
+                                {{ 'Click here to Login'|trans }}
                             </a>
                             <a class="btn btn-outline-light"
                                 href="{{ path('app_register') }}"
                                 role="button">
-                                {{ 'link.register'|trans }}
+                                {{ 'Create a new Account'|trans }}
+                            </a>
+                        </div>
+                    {% else %}
+                        <h2>
+                            {{ 'Explore the platform'|trans }}
+                        </h2>
+                        <p>
+                            {{
+                                'Explore what we´ve got: Browse the hospitals, filter our Allocations or import data.'|trans
+                            }}
+                        </p>
+                        <div class="btn-group"
+                            role="group"
+                            aria-label="Basic example">
+                            <a class="btn btn-outline-light"
+                                href="{{ path('app_hospital_index') }}"
+                                role="button">
+                                {{ 'View Hospitals'|trans }}
+                            </a>
+                            <a class="btn btn-outline-light"
+                                href="{{ path('app_allocation_index') }}"
+                                role="button">
+                                {{ 'View Allocations'|trans }}
+                            </a>
+                            <a class="btn btn-outline-light"
+                                href="{{ path('app_import_index') }}"
+                                role="button">
+                                {{ 'Import data'|trans }}
                             </a>
                         </div>
                     {% endif %}
@@ -61,7 +91,7 @@
                     <a class="btn btn-outline-secondary"
                         href="{{ path('app_statistics_index') }}"
                         role="button">
-                        {{ 'link.statistics'|trans }}
+                        {{ 'View statistics'|trans }}
                     </a>
                 </div>
             </div>
