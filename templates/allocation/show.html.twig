@@ -484,14 +484,15 @@
 
             <div class="card border-secondary mb-3">
                 <div class="card-header bg-secondary">
-                    <a class="text-white" href="{{
-                    path(
-                        'app_import_show',
-                        {
-                            id: allocation.import.id
-                        }
-                    )
-                    }}">
+                    <a class="text-white"
+                        href="{{
+                        path(
+                            'app_import_show',
+                            {
+                                id: allocation.import.id
+                            }
+                        )
+                        }}">
                         {{ 'allocations.field.import'|trans }}
                         (#<i>{{ allocation.import.id }})</i>
                     </a>
@@ -504,7 +505,9 @@
                                 '%name%': importUser.username
                             })
                         }}
-                        </br>
+
+                        <br />
+
                         <i class="bi bi-clock"></i>
                         {{
                             'allocations.field.importedAt'|trans({

@@ -5,7 +5,6 @@ namespace App\Controller\Settings;
 use App\Entity\User;
 use App\Form\UserCreateType;
 use App\Form\UserType;
-use App\Repository\ImportRepository;
 use App\Repository\UserRepository;
 use App\Service\MailerService;
 use App\Service\RequestParamService;

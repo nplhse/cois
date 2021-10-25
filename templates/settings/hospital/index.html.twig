@@ -38,7 +38,7 @@
         <div class="col">
             <div class="float-end">
                 <a class="btn btn-primary"
-                   href="{{ path('app_settings_hospital_new') }}">
+                    href="{{ path('app_settings_hospital_new') }}">
                     {{ 'Create new Hospital'|trans({}, 'forms') }}
                 </a>
             </div>
@@ -197,21 +197,21 @@
                 <div class="col-2">
                     <p class="text-muted">
                         {{
-                        'Showing Page page of pages'|trans({
-                            '%page%': pages.page,
-                            '%pages%': pages.last
-                        })
+                            'Showing Page page of pages'|trans({
+                                '%page%': pages.page,
+                                '%pages%': pages.last
+                            })
                         }}
                     </p>
                 </div>
                 <div class="col-8">
                     {{
-                    pagination.navbar(
-                        pages.last,
-                        pages.page,
-                        pages.previous,
-                        pages.next
-                    )
+                        pagination.navbar(
+                            pages.last,
+                            pages.page,
+                            pages.previous,
+                            pages.next
+                        )
                     }}
                 </div>
                 <div class="col-2">

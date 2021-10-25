@@ -6,7 +6,6 @@ use App\Entity\Import;
 use App\Form\ImportType;
 use App\Message\ImportDataMessage;
 use App\Repository\AllocationRepository;
-use App\Repository\HospitalRepository;
 use App\Repository\ImportRepository;
 use App\Service\FileUploader;
 use App\Service\RequestParamService;
@@ -30,7 +29,7 @@ class ImportController extends AbstractController
         $filters['search'] = $paramService->getSearch();
         $filters['page'] = $paramService->getPage();
 
-        $filters['user'] = $paramService->user;
+        $filters['user'] = $paramService->getUser();
         $filters['hospital'] = $paramService->getHospital();
         $filters['show'] = 'all';
 

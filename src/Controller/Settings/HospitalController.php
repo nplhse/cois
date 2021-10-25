@@ -4,7 +4,6 @@ namespace App\Controller\Settings;
 
 use App\Entity\Hospital;
 use App\Form\HospitalType;
-use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
 use App\Service\RequestParamService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

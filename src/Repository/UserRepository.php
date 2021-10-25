@@ -49,8 +49,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $qb;
     }
 
-    public function getUserPaginator(int $offset): Paginator
+    public function getUserPaginator(int $page, array $filter): Paginator
     {
+        if (1 != $page) {
+            $offset = $page * self::PAGINATOR_PER_PAGE;
+        } else {
+            $offset = 0;
+        }
+
         $query = $this->createQueryBuilder('u');
 
         $query

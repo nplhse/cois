@@ -299,6 +299,17 @@ class RequestParamService
         return $sortBy;
     }
 
+    public function getUser(): string|null
+    {
+        $user = $this->request->query->get('user');
+
+        if (empty($user)) {
+            return null;
+        }
+
+        return $user;
+    }
+
     public function getPagination(int $count, int $page, int $perPage): PaginationDto
     {
         $last = floor($count / $perPage);
