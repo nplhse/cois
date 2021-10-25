@@ -24,7 +24,9 @@ class EmailSettingsType extends AbstractType
                 'label' => 'Yes, send me monthly reminders to upload new data.',
                 'required' => false,
             ])
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+                'label' => 'Update notification settings',
+            ])
         ;
     }
 

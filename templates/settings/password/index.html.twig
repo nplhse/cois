@@ -38,17 +38,22 @@
                 {{ 'Change your Password'|trans }}
             </h1>
 
-            {{ form_start(form) }}
+            <div class="card">
+                <div class="card-body">
+                    {{ form_start(form) }}
 
-            {{ form_row(form.currentPassword) }}
-            {{ form_row(form.plainPassword) }}
+                    {{ form_row(form.currentPassword) }}
 
-            <div class="btn-group" role="group">
-                <button class="btn btn-primary">
-                    {{ 'Change Password'|trans({}, 'forms') }}
-                </button>
+                    {{ form_row(form.plainPassword) }}
+
+                    <div class="float-end">
+                        <button class="btn btn-primary">
+                            {{ 'Change Password'|trans({}, 'forms') }}
+                        </button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
             </div>
-            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}

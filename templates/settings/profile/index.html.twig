@@ -38,13 +38,19 @@
                 {{ 'Change your Profile'|trans }}
             </h1>
 
-            {{ form_start(form_profile) }}
+            <div class="card">
+                <div class="card-body">
+                    {{ form_start(form_profile) }}
 
-            {{ form_row(form_profile.username) }}
+                    {{ form_row(form_profile.username) }}
 
-            {{ form_row(form_profile.submit) }}
+                    <div class="float-end">
+                        {{ form_row(form_profile.submit) }}
+                    </div>
 
-            {{ form_end(form_profile) }}
+                    {{ form_end(form_profile) }}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
