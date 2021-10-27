@@ -25,8 +25,6 @@ final class ResultCollection implements ResultCollectionInterface
 
     public function hydrateResultsAs(string $className): object
     {
-        dump($this->items);
-
         $hydratedItems = [];
         foreach ($this->items as $item) {
             $hydratedItems[] = $className::fromArray($item);
