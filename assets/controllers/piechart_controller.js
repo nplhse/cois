@@ -5,7 +5,8 @@ export default class extends Controller {
     static values = {
         url: String,
         target: String,
-        schema: String
+        schema: String,
+        sort: Boolean,
     };
 
     connect() {
@@ -22,17 +23,32 @@ export default class extends Controller {
             .append("g")
             .attr("transform", `translate(100, 100)`);
 
-        let pie = d3
-            .pie()
-            .value((d) => d.count)
-            .padAngle(0.025)(data);
+        if (this.hasSortValue && this.sortValue === false) {
+            var pie = d3
+                .pie()
+                .value((d) => d.count)
+                .sort(null)
+                .padAngle(0.025)(data);
+        } else {
+            var pie = d3
+                .pie()
+                .value((d) => d.count)
+                .padAngle(0.025)(data);
+        }
 
         let arcMkr = d3.arc().innerRadius(50).outerRadius(100);
 
         if (this.hasSchemaValue) {
-            if (this.schemaValue === 'urgency') {
-                var scC = d3.scaleOrdinal().domain(data)
-                    .range([d3.schemeTableau10[0], d3.schemeTableau10[2], d3.schemeTableau10[1], d3.schemeTableau10[4]])
+            if (this.schemaValue === "urgency") {
+                var scC = d3
+                    .scaleOrdinal()
+                    .domain(data)
+                    .range([
+                        d3.schemeTableau10[0],
+                        d3.schemeTableau10[2],
+                        d3.schemeTableau10[1],
+                        d3.schemeTableau10[4],
+                    ]);
             } else {
                 var scC = d3
                     .scaleOrdinal(d3.schemeTableau10)
