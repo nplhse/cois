@@ -139,8 +139,8 @@ class StatisticsService
         return round(($value / $total) * 100, self::VALUE_PRECISION);
     }
 
-    private function getFormattedNumber(float $value): float
+    private function getFormattedNumber(float $value): string
     {
-        return (float) number_format($value, 2, ',', '.');
+        return number_format($value, self::VALUE_PRECISION, ',', '.');
     }
 }

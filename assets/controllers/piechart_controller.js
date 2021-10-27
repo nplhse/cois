@@ -46,7 +46,7 @@ export default class extends Controller {
                     .range([
                         d3.schemeTableau10[0],
                         d3.schemeTableau10[2],
-                        d3.schemeTableau10[1],
+                        d3.schemeTableau10[5],
                         d3.schemeTableau10[4],
                     ]);
             } else {
