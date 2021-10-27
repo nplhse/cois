@@ -40,11 +40,11 @@ class StatisticsService
 
         foreach ($allocations->getItems() as $allocation) {
             if ('M' == $allocation->getGender()) {
-                $gender = 'male';
+                $gender = 'Male';
             } elseif ('W' == $allocation->getGender()) {
-                $gender = 'female';
+                $gender = 'Female';
             } else {
-                $gender = 'other';
+                $gender = 'Other';
             }
 
             $percent = $this->getFormattedNumber($this->getValueInPercent($allocation->getCounter(), $total)).'%';
@@ -67,6 +67,33 @@ class StatisticsService
             $results[] = [
                 'time' => $allocation->getTime(),
                 'count' => $allocation->getCounter(),
+            ];
+        }
+
+        return $results;
+    }
+
+    public function generatePZCResults(object $allocations): array
+    {
+        $results = [];
+        $total = 0;
+
+        foreach ($allocations->getItems() as $allocation) {
+            $total = $total + $allocation->getCounter();
+        }
+
+        foreach ($allocations->getItems() as $allocation) {
+            if (0 === $allocation->getPZC()) {
+                break;
+            }
+
+            $percent = $this->getFormattedNumber($this->getValueInPercent($allocation->getCounter(), $total)).'%';
+
+            $results[] = [
+                'PZC' => $allocation->getPZC(),
+                'count' => $allocation->getCounter(),
+                'percent' => $percent,
+                'label' => $allocation->getPZC().' '.$allocation->getPZCText(),
             ];
         }
 

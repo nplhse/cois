@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'Statistics'|trans }}: {{ 'Time Statistics'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_statistics_index'),
+                            label: 'Statistics'|trans
+                        },
+                        {
+                            label: 'PZC Statistics'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-3">
+            {{ include('statistics/_statistics_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <h1>
+                {{ 'PZC Statistics'|trans }}
+            </h1>
+
+            <h2>
+                {{ 'Distribution of PZCs'|trans }}
+            </h2>
+            <div class="row mb-3"
+                data-controller="pzcbar"
+                data-pzcbar-target-value="#graph1"
+                data-pzcbar-url-value="{{ url('app_data_pzc') }}">
+                <div class="">
+                    <svg id="graph1" width="750" height="800"></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

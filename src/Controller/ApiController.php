@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\DataTransferObjects\DayStatisticsDto;
 use App\DataTransferObjects\GenderStatisticsDto;
+use App\DataTransferObjects\PZCStatisticsDto;
 use App\DataTransferObjects\TimeStatisticsDto;
 use App\DataTransferObjects\UrgencyStatisticsDto;
 use App\Query\AllocationQuery;
@@ -66,6 +67,19 @@ class ApiController extends AbstractController
         $allocations = $this->allocationQuery->execute()->hydrateResultsAs(TimeStatisticsDto::class);
 
         $results = $this->statisticsService->generateTimeResults($allocations);
+
+        return new JsonResponse($results);
+    }
+
+    #[Route('/api/pzc.json', name: 'app_data_pzc')]
+    public function pzc(Request $request): Response
+    {
+        $this->filterByHospital($request);
+
+        $this->allocationQuery->groupBy('pzc');
+        $allocations = $this->allocationQuery->execute()->hydrateResultsAs(PZCStatisticsDto::class);
+
+        $results = $this->statisticsService->generatePZCResults($allocations);
 
         return new JsonResponse($results);
     }

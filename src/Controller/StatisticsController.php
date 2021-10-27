@@ -33,6 +33,13 @@ class StatisticsController extends AbstractController
         ]);
     }
 
+    #[Route('/statistics/pzc', name: 'app_statistics_pzc')]
+    public function pzc(): Response
+    {
+        return $this->render('statistics/pzc.html.twig', [
+        ]);
+    }
+
     #[Route('/statistics/urgency', name: 'app_statistics_urgency')]
     public function urgency(): Response
     {

@@ -58,6 +58,15 @@ final class AllocationQuery
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.SK')
                 ->addOrderBy('allocation.SK', 'ASC');
+        } elseif ('pzc' === $this->property) {
+            $qb->select(
+                'allocation.RMI AS PZC',
+                'COUNT(allocation.RMI) AS counter',
+                'allocation.PZCText AS PZCText'
+            )
+                ->from(Allocation::class, 'allocation')
+                ->groupBy('allocation.RMI, allocation.PZCText')
+                ->addOrderBy('counter', 'DESC');
         }
 
         if (null !== $this->hospital) {
