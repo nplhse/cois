@@ -1,24 +1,27 @@
 {% extends 'base.html.twig' %}
 
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
 {% block title %}
-    Statistics - {{ parent() }}
+    {{ 'Statistics'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
     <div class="row">
         <div class="col">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="{{ path('app_dashboard') }}">
-                            {{ 'Home'|trans }}
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item" aria-current="page">
-                        {{ 'Statistics'|trans }}
-                    </li>
-                </ol>
-            </nav>
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            label: 'Statistics'|trans
+                        }
+                    ]
+                )
+            }}
         </div>
     </div>
     <div class="row">
@@ -53,6 +56,19 @@
 
                                 </i><br />
                                 {{ 'Times'|trans }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <a href="{{ path('app_statistics_urgency') }}">
+                                <i class="bi bi-exclamation-circle"
+                                    style="font-size: 5rem; color: cornflowerblue;">
+
+                                </i><br />
+                                {{ 'Urgency'|trans }}
                             </a>
                         </div>
                     </div>

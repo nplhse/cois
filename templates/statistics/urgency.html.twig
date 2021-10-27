@@ -3,7 +3,7 @@
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
 
 {% block title %}
-    {{ 'Statistics'|trans }}: {{ 'Gender Statistics'|trans }} - {{ parent() }}
+    {{ 'Statistics'|trans }}: {{ 'Urgency Statistics'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -21,7 +21,7 @@
                             label: 'Statistics'|trans
                         },
                         {
-                            label: 'Gender Statistics'|trans
+                            label: 'Urgency Statistics'|trans
                         }
                     ]
                 )
@@ -34,16 +34,16 @@
         </div>
         <div class="col">
             <h1>
-                {{ 'Gender Statistics'|trans }}
+                {{ 'Urgency Statistics'|trans }}
             </h1>
 
             <p>
-                {{ 'Distribution of genders'|trans }}
+                {{ 'Distribution of urgencies'|trans }}
             </p>
             <div class="row"
                 data-controller="piechart"
                 data-piechart-target-value="#graph"
-                data-piechart-url-value="{{ url('app_data_gender') }}">
+                data-piechart-url-value="{{ url('app_data_urgency') }}">
                 <div class="col-4 justify-content-center">
                     <svg id="graph" class="m-2" width="200" height="200"></svg>
                 </div>
@@ -52,7 +52,7 @@
                         <thead>
                             <tr>
                                 <th>
-                                    Gender
+                                    Category
                                 </th>
                                 <th>
                                     Count

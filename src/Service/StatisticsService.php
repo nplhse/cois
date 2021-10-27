@@ -73,6 +73,40 @@ class StatisticsService
         return $results;
     }
 
+    public function generateUrgencyResults(object $allocations): array
+    {
+        $results = [];
+        $total = 0;
+
+        foreach ($allocations->getItems() as $allocation) {
+            $total = $total + $allocation->getCounter();
+        }
+
+        foreach ($allocations->getItems() as $allocation) {
+            if (preg_match('/(?P<SK>\w+)(?P<Count>\d+)/', $allocation->getUrgency())) {
+                $percent = $this->getFormattedNumber($this->getValueInPercent($allocation->getCounter(), $total)).'%';
+
+                $results[] = [
+                    'urgency' => $allocation->getUrgency(),
+                    'count' => $allocation->getCounter(),
+                    'percent' => $percent,
+                ];
+            } else {
+                if (0 !== $allocation->getCounter()) {
+                    $percent = $this->getFormattedNumber($this->getValueInPercent($allocation->getCounter(), $total)).'%';
+
+                    $results[] = [
+                        'urgency' => 'No SK',
+                        'count' => $allocation->getCounter(),
+                        'percent' => $percent,
+                    ];
+                }
+            }
+        }
+
+        return $results;
+    }
+
     private function getValueInPercent(int $value, int $total): float
     {
         return round(($value / $total) * 100, self::VALUE_PRECISION);

@@ -32,4 +32,11 @@ class StatisticsController extends AbstractController
         return $this->render('statistics/times.html.twig', [
         ]);
     }
+
+    #[Route('/statistics/urgency', name: 'app_statistics_urgency')]
+    public function urgency(): Response
+    {
+        return $this->render('statistics/urgency.html.twig', [
+        ]);
+    }
 }

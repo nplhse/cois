@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\DataTransferObjects\DayStatisticsDto;
 use App\DataTransferObjects\GenderStatisticsDto;
 use App\DataTransferObjects\TimeStatisticsDto;
+use App\DataTransferObjects\UrgencyStatisticsDto;
 use App\Query\AllocationQuery;
 use App\Repository\HospitalRepository;
 use App\Service\RequestParamService;
@@ -65,6 +66,19 @@ class ApiController extends AbstractController
         $allocations = $this->allocationQuery->execute()->hydrateResultsAs(TimeStatisticsDto::class);
 
         $results = $this->statisticsService->generateTimeResults($allocations);
+
+        return new JsonResponse($results);
+    }
+
+    #[Route('/api/urgency.json', name: 'app_data_urgency')]
+    public function urgency(Request $request): Response
+    {
+        $this->filterByHospital($request);
+
+        $this->allocationQuery->groupBy('urgency');
+        $allocations = $this->allocationQuery->execute()->hydrateResultsAs(UrgencyStatisticsDto::class);
+
+        $results = $this->statisticsService->generateUrgencyResults($allocations);
 
         return new JsonResponse($results);
     }

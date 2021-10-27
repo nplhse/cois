@@ -21,7 +21,12 @@ trait ConstructableFromArrayTrait
                      Only the following arguments are available: '.implode(', ', \array_keys($array)));
             }
 
-            $parameter = $array[$parameterName] ?? $reflectionParameter->getDefaultValue();
+            if ($reflectionParameter->isDefaultValueAvailable()) {
+                $parameter = $array[$parameterName] ?? $reflectionParameter->getDefaultValue();
+            } else {
+                $parameter = $array[$parameterName];
+            }
+
             if (\is_array($parameter) && $reflectionParameter->isVariadic()) {
                 $parameters = \array_merge($parameters, $parameter);
                 continue;
