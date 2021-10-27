@@ -87,7 +87,7 @@ class StatisticsService
                 $percent = $this->getFormattedNumber($this->getValueInPercent($allocation->getCounter(), $total)).'%';
 
                 $results[] = [
-                    'urgency' => $allocation->getUrgency(),
+                    'label' => $allocation->getUrgency(),
                     'count' => $allocation->getCounter(),
                     'percent' => $percent,
                 ];
@@ -96,7 +96,7 @@ class StatisticsService
                     $percent = $this->getFormattedNumber($this->getValueInPercent($allocation->getCounter(), $total)).'%';
 
                     $results[] = [
-                        'urgency' => 'No SK',
+                        'label' => 'No SK',
                         'count' => $allocation->getCounter(),
                         'percent' => $percent,
                     ];

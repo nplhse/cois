@@ -5,6 +5,7 @@ export default class extends Controller {
     static values = {
         url: String,
         target: String,
+        schema: String
     };
 
     connect() {
@@ -28,9 +29,20 @@ export default class extends Controller {
 
         let arcMkr = d3.arc().innerRadius(50).outerRadius(100);
 
-        let scC = d3
-            .scaleOrdinal(d3.schemeTableau10)
-            .domain(pie.map((d) => d.index));
+        if (this.hasSchemaValue) {
+            if (this.schemaValue === 'urgency') {
+                var scC = d3.scaleOrdinal().domain(data)
+                    .range([d3.schemeTableau10[0], d3.schemeTableau10[2], d3.schemeTableau10[1], d3.schemeTableau10[4]])
+            } else {
+                var scC = d3
+                    .scaleOrdinal(d3.schemeTableau10)
+                    .domain(pie.map((d) => d.index));
+            }
+        } else {
+            var scC = d3
+                .scaleOrdinal(d3.schemeTableau10)
+                .domain(pie.map((d) => d.index));
+        }
 
         svg.selectAll("path")
             .data(pie)
