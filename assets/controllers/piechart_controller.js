@@ -48,6 +48,15 @@ export default class extends Controller {
                         d3.schemeTableau10[5],
                         d3.schemeTableau10[4],
                     ]);
+            } else if (this.schemaValue === "gender") {
+                var scC = d3
+                    .scaleOrdinal()
+                    .domain(data)
+                    .range([
+                        d3.schemeTableau10[7],
+                        d3.schemeTableau10[3],
+                        d3.schemeTableau10[9],
+                    ]);
             } else {
                 var scC = d3
                     .scaleOrdinal(d3.schemeTableau10)

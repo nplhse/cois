@@ -54,6 +54,6 @@ export default class extends Controller {
             .attr("y", (d) => y(d.count))
             .attr("width", x.bandwidth())
             .attr("height", (d) => height - y(d.count))
-            .attr("fill", "#69b3a2");
+            .attr("fill", (d) => d3.schemeTableau10[0]);
     }
 }
