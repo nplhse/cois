@@ -34,42 +34,59 @@
                     {{ 'General'|trans }}
                 </h1>
 
-                <div class="col-4">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <a href="{{ path('app_statistics_gender') }}">
-                                <i class="bi bi-gender-ambiguous"
-                                    style="font-size: 5rem; color: cornflowerblue;">
+                <div class="row mt-4">
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <a href="{{ path('app_statistics_gender') }}">
+                                    <i class="bi bi-gender-ambiguous"
+                                        style="font-size: 5rem; color: cornflowerblue;">
 
-                                </i><br />
-                                {{ 'Gender'|trans }}
-                            </a>
+                                    </i><br />
+                                    {{ 'Gender'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <a href="{{ path('app_statistics_times') }}">
+                                    <i class="bi bi-clock"
+                                        style="font-size: 5rem; color: cornflowerblue;">
+
+                                    </i><br />
+                                    {{ 'Times'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <a href="{{ path('app_statistics_pzc') }}">
+                                    <i class="bi bi-card-list"
+                                        style="font-size: 5rem; color: cornflowerblue;">
+
+                                    </i><br />
+                                    {{ 'PZC'|trans }}
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <a href="{{ path('app_statistics_times') }}">
-                                <i class="bi bi-clock"
-                                    style="font-size: 5rem; color: cornflowerblue;">
+                <div class="row mt-4">
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <a href="{{ path('app_statistics_urgency') }}">
+                                    <i class="bi bi-exclamation-circle"
+                                        style="font-size: 5rem; color: cornflowerblue;">
 
-                                </i><br />
-                                {{ 'Times'|trans }}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <a href="{{ path('app_statistics_urgency') }}">
-                                <i class="bi bi-exclamation-circle"
-                                    style="font-size: 5rem; color: cornflowerblue;">
-
-                                </i><br />
-                                {{ 'Urgency'|trans }}
-                            </a>
+                                    </i><br />
+                                    {{ 'Urgency'|trans }}
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

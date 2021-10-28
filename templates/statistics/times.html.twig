@@ -37,9 +37,9 @@
                 {{ 'Time Statistics'|trans }}
             </h1>
 
-            <h2>
+            <p>
                 {{ 'Distribution of allocations by hours'|trans }}
-            </h2>
+            </p>
             <div class="row mb-3"
                 data-controller="curve"
                 data-curve-target-value="#graph1"
@@ -49,9 +49,11 @@
                 </div>
             </div>
 
-            <h2>
+            <hr />
+
+            <p>
                 {{ 'Distribution of allocations by days'|trans }}
-            </h2>
+            </p>
             <div class="row"
                 data-controller="barplot"
                 data-barplot-target-value="#graph2"

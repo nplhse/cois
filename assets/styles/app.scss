@@ -12,3 +12,11 @@ main {
 .form-group {
     margin-bottom: 1rem;
 }
+
+/*
+ * Hide elements in search
+ */
+
+.filter--notFound {
+    display: none;
+}

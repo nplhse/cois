@@ -37,55 +37,80 @@
                 {{ 'PZC Statistics'|trans }}
             </h1>
 
-            <h2>
+            <p>
                 {{ 'Distribution of PZCs'|trans }}
-            </h2>
-            <table class="table table-hover">
-                <thead>
-                    <th>
-                        Number
-                    </th>
-                    <th>
-                        PZC
-                    </th>
-                    <th>
-                        Bar
-                    </th>
-                    <th>
-                        Count
-                    </th>
-                    <th>
-                        Percentage
-                    </th>
-                </thead>
-                <tbody>
-                    {% for pzc in results %}
-                        <tr>
-                            <td>
-                                {{ loop.index }}
-                            </td>
-                            <td>
-                                {{ pzc.label }}
-                            </td>
-                            <td>
-                                <svg width="100px" height="65px">
-                                    <g class="bars">
-                                        <rect fill="#3d5599"
-                                            width="{{ pzc.percent }}px"
-                                            height="25"></rect>
-                                    </g>
-                                </svg>
-                            </td>
-                            <td>
-                                {{ pzc.count }}
-                            </td>
-                            <td>
-                                {{ pzc.percent }}%
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            </p>
+
+            <div data-controller="table">
+                <input class="form-control"
+                    type="search"
+                    data-table-target="source"
+                    data-action="input->table#filter"
+                    placeholder="Filter table" />
+
+                <table class="table table-hover">
+                    <thead>
+                        <th>
+                            Rank
+                        </th>
+                        <th>
+                            PZC
+                        </th>
+                        <th>
+                            Bar
+                        </th>
+                        <th>
+                            Count
+                        </th>
+                        <th>
+                            Percent
+                        </th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        {% for pzc in results %}
+                            <tr data-table-target="filterable"
+                                data-filter-key="{{ pzc.label|lower }}">
+                                <td>
+                                    {{ loop.index }}
+                                </td>
+                                <td>
+                                    {{ pzc.label }}
+                                </td>
+                                <td>
+                                    <svg width="100px" height="25px">
+                                        <g class="bars">
+                                            <rect fill="#3d5599"
+                                                width="100%"
+                                                height="25"></rect>;<rect fill="#cb4d3e"
+                                                width="{{ pzc.percent }}px"
+                                                height="25"></rect>
+                                        </g>
+                                    </svg>
+                                </td>
+                                <td>
+                                    {{ pzc.count }}
+                                </td>
+                                <td>
+                                    {{ pzc.percent }}%
+                                </td>
+                                <td>
+                                    <a href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            {
+                                                pzc: pzc.PZC
+                                            }
+                                        )
+                                        }}">
+                                        <i class="bi bi-search"></i><br />
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 {% endblock %}
