@@ -40,14 +40,52 @@
             <h2>
                 {{ 'Distribution of PZCs'|trans }}
             </h2>
-            <div class="row mb-3"
-                data-controller="pzcbar"
-                data-pzcbar-target-value="#graph1"
-                data-pzcbar-url-value="{{ url('app_data_pzc') }}">
-                <div class="">
-                    <svg id="graph1" width="750" height="800"></svg>
-                </div>
-            </div>
+            <table class="table table-hover">
+                <thead>
+                    <th>
+                        Number
+                    </th>
+                    <th>
+                        PZC
+                    </th>
+                    <th>
+                        Bar
+                    </th>
+                    <th>
+                        Count
+                    </th>
+                    <th>
+                        Percentage
+                    </th>
+                </thead>
+                <tbody>
+                    {% for pzc in results %}
+                        <tr>
+                            <td>
+                                {{ loop.index }}
+                            </td>
+                            <td>
+                                {{ pzc.label }}
+                            </td>
+                            <td>
+                                <svg width="100px" height="65px">
+                                    <g class="bars">
+                                        <rect fill="#3d5599"
+                                            width="{{ pzc.percent }}px"
+                                            height="25"></rect>
+                                    </g>
+                                </svg>
+                            </td>
+                            <td>
+                                {{ pzc.count }}
+                            </td>
+                            <td>
+                                {{ pzc.percent }}%
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock %}

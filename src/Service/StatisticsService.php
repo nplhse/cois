@@ -87,7 +87,8 @@ class StatisticsService
                 break;
             }
 
-            $percent = $this->getFormattedNumber($this->getValueInPercent($allocation->getCounter(), $total)).'%';
+            // For SVG creation, only returning percentage number
+            $percent = $this->getValueInPercent($allocation->getCounter(), $total);
 
             $results[] = [
                 'PZC' => $allocation->getPZC(),
