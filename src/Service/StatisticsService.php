@@ -118,16 +118,6 @@ class StatisticsService
                     'count' => $allocation->getCounter(),
                     'percent' => $percent,
                 ];
-            } else {
-                if (0 !== $allocation->getCounter()) {
-                    $percent = $this->getFormattedNumber($this->getValueInPercent($allocation->getCounter(), $total)).'%';
-
-                    $results[] = [
-                        'label' => 'No SK',
-                        'count' => $allocation->getCounter(),
-                        'percent' => $percent,
-                    ];
-                }
             }
         }
 

@@ -44,7 +44,6 @@ export default class extends Controller {
                     .scaleOrdinal()
                     .domain(data)
                     .range([
-                        d3.schemeTableau10[0],
                         d3.schemeTableau10[2],
                         d3.schemeTableau10[5],
                         d3.schemeTableau10[4],
