@@ -603,6 +603,50 @@
 
                         <p>
                             <select class="form-select"
+                                name="urgency"
+                                aria-label="filterUrgency">
+                                {% if filters.urgency == null %}
+                                    <option value="" selected>
+                                        {{
+                                            'Filter by Urgency'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
+                                    </option>
+                                {% else %}
+                                    <option value="">
+                                        {{
+                                            'Stop filtering by Urgency'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
+                                    </option>
+                                {% endif %}
+                                {% for item in urgencies %}
+                                    {% if
+                                        item.urgency == filters.urgency
+                                            and item.urgency != '' %}
+                                        <option value="{{ item.urgency|url_encode }}"
+                                            selected>
+                                            {{ item.urgency }}
+                                        </option>
+                                    {% elseif
+                                        item.urgency == 'SK'
+                                            or item.urgency == null %}
+                                        <!-- empty -->
+                                    {% else %}
+                                        <option value="{{ item.urgency|url_encode }}">
+                                            {{ item.urgency }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </p>
+
+                        <p>
+                            <select class="form-select"
                                 name="assignment"
                                 aria-label="filterAssignment">
                                 {% if filters.assignment == null %}

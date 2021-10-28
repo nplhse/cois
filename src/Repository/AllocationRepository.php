@@ -167,6 +167,17 @@ class AllocationRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function getAllUrgencies(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('DISTINCT a.SK AS urgency')
+            ->addOrderBy('a.SK', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
     public function countAllocationsBySpeciality(bool $detail = false): array
     {
         if ($detail) {
@@ -313,6 +324,11 @@ class AllocationRepository extends ServiceEntityRepository
         if (isset($filter['pzc'])) {
             $query->andWhere('a.RMI = :pzc')
                 ->setParameter('pzc', $filter['pzc']);
+        }
+
+        if (isset($filter['urgency'])) {
+            $query->andWhere('a.SK = :urgency')
+                ->setParameter('urgency', $filter['urgency']);
         }
 
         if (isset($filter['reqResus'])) {

@@ -310,6 +310,21 @@ class RequestParamService
         return $user;
     }
 
+    public function getUrgency(): string|null
+    {
+        $urgency = $this->request->query->get('urgency');
+
+        if (empty($urgency)) {
+            return null;
+        }
+
+        if ('SK' === $urgency) {
+            return null;
+        }
+
+        return $urgency;
+    }
+
     public function getPagination(int $count, int $page, int $perPage): PaginationDto
     {
         $last = floor($count / $perPage);
