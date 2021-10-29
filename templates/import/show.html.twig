@@ -172,10 +172,13 @@
                     <p>
                         <i class="bi bi-house"></i>
                         <strong>
-                            <a href="{{ path('app_hospital_show',
-                                {
-                                    id: import.hospital.id
-                                })
+                            <a href="{{
+                                path(
+                                    'app_hospital_show',
+                                    {
+                                        id: import.hospital.id
+                                    }
+                                )
                                 }}">
                                 {{ import.hospital }}
                             </a>

@@ -75,6 +75,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private ?bool $allowsEmailReminder;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private ?bool $toggleAllocSidebar = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -277,6 +282,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAllowsEmailReminder(?bool $allowsEmailReminder): self
     {
         $this->allowsEmailReminder = $allowsEmailReminder;
+
+        return $this;
+    }
+
+    public function getToggleAllocSidebar(): ?bool
+    {
+        return $this->toggleAllocSidebar;
+    }
+
+    public function setToggleAllocSidebar(?bool $toggleAllocSidebar): self
+    {
+        $this->toggleAllocSidebar = $toggleAllocSidebar;
+
+        return $this;
+    }
+
+    public function switchAllocSidebar(): self
+    {
+        if ($this->toggleAllocSidebar) {
+            $this->toggleAllocSidebar = false;
+        } else {
+            $this->toggleAllocSidebar = true;
+        }
 
         return $this;
     }

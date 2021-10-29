@@ -32,6 +32,30 @@ class ApiController extends AbstractController
         $this->statisticsService = $statisticsService;
     }
 
+    #[Route('/api/toggle', name: 'app_api_toggle')]
+    public function toggle(Request $request): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
+        $user = $this->getUser();
+
+        switch ($request->query->get('target')) {
+            case 'alloc-sidebar':
+                $user->switchAllocSidebar();
+
+                break;
+        }
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        $response = new Response();
+        $response->setStatusCode(Response::HTTP_OK);
+
+        return $response;
+    }
+
     #[Route('/api/days.json', name: 'app_data_days')]
     public function days(Request $request): Response
     {

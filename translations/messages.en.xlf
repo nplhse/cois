@@ -1306,9 +1306,9 @@
         <source>Mange your notification settings</source>
         <target>Mange your notification settings</target>
       </trans-unit>
-      <trans-unit id="Y5PeZTC" resname="Toogle Options">
-        <source>Toogle Options</source>
-        <target>Toogle Options</target>
+      <trans-unit id="Y5PeZTC" resname="Toggle Options">
+        <source>Toggle Options</source>
+        <target>Toggle Options</target>
       </trans-unit>
       <trans-unit id="GMzt9j." resname="S+">
         <source>S+</source>

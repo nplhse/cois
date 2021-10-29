@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use App\Service\MailerService;
 use App\Service\RequestParamService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -130,15 +131,11 @@ class UserController extends AbstractController
         return $this->redirectToRoute('app_settings_user_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/welcome', name: 'app_settings_user_welcome')]
-    public function sendWelcomeEmail(User $user): Response
+    #[Route('/{id}/toggle', name: 'app_settings_user_toggle')]
+    public function toggleOption(User $user): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_USER');
 
-        $this->mailer->sendWelcomeEmail($user);
-
-        $this->addFlash('success', 'Welcome E-Mail was successfully sent to '.$user->getUsername().'.');
-
-        return $this->redirectToRoute('app_settings_user_show', ['id' => $user->getId()]);
+        return new JsonResponse([]);
     }
 }

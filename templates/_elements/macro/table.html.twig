@@ -1,0 +1,71 @@
+{% macro sortableThead(element, sortBy, orderBy, link, caption, default = false, defaultOrder = 'desc') %}
+    {% if
+        sortBy == element
+        and orderBy == 'desc' %}
+        <th class="table-light">
+            <a href="{{
+            path(
+                link,
+                app.request.query.all|merge({
+                orderBy: 'asc'
+            })
+            )
+            }}">
+                <em>
+                    {{ caption }}
+                </em>
+            </a>
+
+            <i class="bi bi-chevron-double-down"></i>
+        </th>
+    {% elseif
+        sortBy == element
+        and orderBy == 'asc' %}
+        <th class="table-light">
+            <a href="{{
+            path(
+                link,
+                app.request.query.all|merge({
+                orderBy: 'desc'
+            })
+            )
+            }}">
+                <em>
+                    {{ caption }}
+                </em>
+            </a>
+
+            <i class="bi bi-chevron-double-up"></i>
+        </th>
+    {% elseif sortBy == null and default == true %}
+        <th class="table-light">
+            <a href="{{
+            path(
+                link,
+                app.request.query.all|merge({
+                sortBy: element,
+                orderBy: defaultOrder
+            })
+            )
+            }}">
+                <em>{{ caption }}</em>
+            </a>
+
+            <i class="bi bi-chevron-double-down"></i>
+        </th>
+    {% else %}
+        <th>
+            <a href="{{
+            path(
+                link,
+                app.request.query.all|merge({
+                sortBy: element,
+                orderBy: 'desc'
+            })
+            )
+            }}">
+                {{ caption }}
+            </a>
+        </th>
+    {% endif %}
+{% endmacro %}

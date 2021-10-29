@@ -1305,8 +1305,8 @@
         <source>Mange your notification settings</source>
         <target>Benachtigungen verwalten</target>
       </trans-unit>
-      <trans-unit id="Y5PeZTC" resname="Toogle Options">
-        <source>Toogle Options</source>
+      <trans-unit id="Y5PeZTC" resname="Toggle Options">
+        <source>Toggle Options</source>
         <target>Zeige Optionen</target>
       </trans-unit>
       <trans-unit id="GMzt9j." resname="S+">

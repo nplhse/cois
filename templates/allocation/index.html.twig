@@ -3,6 +3,7 @@
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
 {% import '_elements/macro/pagination.html.twig' as pagination %}
 {% import '_elements/macro/filters.html.twig' as filter %}
+{% import '_elements/macro/table.html.twig' as table %}
 
 {% block title %}
     {{ 'Allocations'|trans }} - {{ parent() }}
@@ -29,14 +30,18 @@
 
     <div class="row">
         <div class="col">
-            <div class="float-end">
+            <div class="float-end"
+                data-controller="toggle"
+                data-toggle-target-value="alloc-sidebar"
+                data-toggle-url-value="{{ path('app_api_toggle') }}">
                 <a class="btn btn-primary"
                     data-bs-toggle="collapse"
+                    data-action="toggle#switch"
                     href="#collapseFilters"
                     role="button"
-                    aria-expanded="true"
+                    aria-expanded="{{ app.user.ToggleAllocSidebar }}"
                     aria-controls="collapseFilters">
-                    <i class="bi bi-sliders"></i> {{ 'Toogle Options'|trans }}
+                    <i class="bi bi-sliders"></i> {{ 'Toggle Options'|trans }}
                 </a>
             </div>
 
@@ -73,213 +78,69 @@
                 <thead>
                     <tr>
                         <th></th>
-                            {% if
-                                filters.sortBy == 'dispatchArea'
-                                    and filters.orderBy == 'desc' %}
-                                <th class="table-light">
-                                    <a href="{{
-                                    path(
-                                        'app_allocation_index',
-                                        app.request.query.all|merge({
-                                        orderBy: 'asc'
-                                    })
-                                    )
-                                    }}">
-                                        <em>
-                                            {{ 'Dispatch Area'|trans({}, 'forms') }}
-                                        </em>
-                                    </a>
-
-                                    <i class="bi bi-chevron-double-down"></i>
-                                </th>
-                            {% elseif
-                                filters.sortBy == 'dispatchArea'
-                                    and filters.orderBy == 'asc' %}
-                                <th class="table-light">
-                                    <a href="{{
-                                        path(
-                                            'app_allocation_index',
-                                            app.request.query.all|merge({
-                                                orderBy: 'desc'
-                                            })
-                                        )
-                                        }}">
-                                        <em>
-                                            {{ 'Dispatch Area'|trans({}, 'forms') }}
-                                        </em>
-                                    </a>
-
-                                    <i class="bi bi-chevron-double-up"></i>
-                                <th>
-                            {% else %}
-                                <th>
-                                    <a href="{{
-                                        path(
-                                            'app_allocation_index',
-                                            app.request.query.all|merge({
-                                                sortBy: 'dispatchArea',
-                                                orderBy: 'desc'
-                                            })
-                                        )
-                                        }}">
-                                        {{ 'Dispatch Area'|trans({}, 'forms') }}
-                                    </a>
-                                </th>
-                            {% endif %}
+                        {{
+                            table.sortableThead(
+                                'dispatchArea',
+                                filters.sortBy,
+                                filters.orderBy,
+                                'app_allocation_index',
+                                'Dispatch Area'|trans({}, 'forms')
+                            )
+                        }}
                         <th>
                             {{ 'Hospital'|trans({}, 'forms') }}
                         </th>
-                            {% if
-                                filters.sortBy == 'times'
-                                    and filters.orderBy == 'desc' %}
-                                <th class="table-light">
-                                    <a href="{{
-                                        path(
-                                            'app_allocation_index',
-                                            app.request.query.all|merge({
-                                                orderBy: 'asc'
-                                            })
-                                        )
-                                        }}">
-                                        <em>{{ 'Times'|trans({}, 'forms') }}</em>
-                                    </a>
-
-                                    <i class="bi bi-chevron-double-down"></i>
-                                </th>
-                            {% elseif
-                                filters.sortBy == 'times'
-                                    and filters.orderBy == 'asc' %}
-                                <th class="table-light">
-                                    <a href="{{
-                                        path(
-                                            'app_allocation_index',
-                                            app.request.query.all|merge({
-                                                orderBy: 'desc'
-                                            })
-                                        )
-                                        }}">
-                                        <em>{{ 'Times'|trans({}, 'forms') }}</em>
-                                    </a>
-
-                                    <i class="bi bi-chevron-double-up"></i>
-                                </th>
-                            {% elseif filters.sortBy == null %}
-                                <th class="table-light">
-                                    <a href="{{
-                                        path(
-                                            'app_allocation_index',
-                                            app.request.query.all|merge({
-                                                sortBy: 'times',
-                                                orderBy: 'asc'
-                                            })
-                                        )
-                                        }}">
-                                        <em>{{ 'Times'|trans({}, 'forms') }}</em>
-                                    </a>
-
-                                    <i class="bi bi-chevron-double-down"></i>
-                                </th>
-                            {% else %}
-                                <th>
-                                    <a href="{{
-                                        path(
-                                            'app_allocation_index',
-                                            app.request.query.all|merge({
-                                                sortBy: 'times',
-                                                orderBy: 'desc'
-                                            })
-                                        )
-                                        }}">
-                                        {{ 'Times'|trans({}, 'forms') }}
-                                    </a>
-                                </th>
-                            {% endif %}
-                            {% if
-                                filters.sortBy == 'age'
-                                    or filters.sortBy == 'gender' %}
-                                {% if filters.orderBy == 'desc' %}
-                                    <th class="table-light">
-                                        <a href="{{
-                                        path(
-                                            'app_allocation_index',
-                                            app.request.query.all|merge({
-                                            orderBy: 'asc'
-                                        })
-                                        )
-                                        }}">
-                                            {{ 'Dem.'|trans({}, 'forms') }}
-                                        </a>
-                                        <i class="bi bi-chevron-double-down"></i>
-                                    </th>
-                                {% else %}
-                                    <th>
-                                        <a href="{{
-                                            path(
-                                                'app_allocation_index',
-                                                app.request.query.all|merge({
-                                                    orderBy: 'desc'
-                                                })
-                                            )
-                                            }}">
-                                            {{ 'Dem.'|trans({}, 'forms') }}
-                                        </a>
-                                        <i class="bi bi-chevron-double-up"></i>
-                                    </th>
-                                {% endif %}
-                            {% else %}
-                                <th>
-                                    {{ 'Dem.'|trans({}, 'forms') }}
-                                </th>
-                            {% endif %}
-                            {% if
-                                filters.sortBy == 'urgency'
-                                    and filters.orderBy == 'desc' %}
-                                <th class="table-light">
-                                    <a href="{{
-                                    path(
-                                        'app_allocation_index',
-                                        app.request.query.all|merge({
-                                        orderBy: 'asc'
-                                    })
-                                    )
-                                    }}">
-                                        <em>{{ 'Urgency'|trans({}, 'forms') }}</em>
-                                    </a>
-
-                                    <i class="bi bi-chevron-double-down"></i>
-                                </th>
-                            {% elseif
-                                filters.sortBy == 'urgency'
-                                    and filters.orderBy == 'asc' %}
-                                <th class="table-light">
-                                    <a href="{{
-                                    path(
-                                        'app_allocation_index',
-                                        app.request.query.all|merge({
-                                        orderBy: 'desc'
-                                    })
-                                    )
-                                    }}">
-                                        <em>{{ 'Urgency'|trans({}, 'forms') }}</em>
-                                    </a>
-
-                                    <i class="bi bi-chevron-double-up"></i>
-                                </th>
-                            {% else %}
-                                <th>
-                                    <a href="{{
-                                        path(
-                                            'app_allocation_index',
-                                            app.request.query.all|merge({
-                                                sortBy: 'urgency',
-                                                orderBy: 'desc'
-                                            })
-                                        )
-                                        }}">
-                                        {{ 'Urgency'|trans({}, 'forms') }}
-                                    </a>
-                                </th>
-                            {% endif %}
+                        {{
+                            table.sortableThead(
+                                'time',
+                                filters.sortBy,
+                                filters.orderBy,
+                                'app_allocation_index',
+                                'Times'|trans({}, 'forms'),
+                                true
+                            )
+                        }}
+                        {% if
+                            filters.sortBy == 'age' or filters.sortBy == null %}
+                            {{
+                                table.sortableThead(
+                                    'age',
+                                    filters.sortBy,
+                                    filters.orderBy,
+                                    'app_allocation_index',
+                                    'Age'|trans({}, 'forms')
+                                )
+                            }}
+                        {% elseif filters.sortBy == 'gender' %}
+                            {{
+                                table.sortableThead(
+                                    'gender',
+                                    filters.sortBy,
+                                    filters.orderBy,
+                                    'app_allocation_index',
+                                    'Gender'|trans({}, 'forms')
+                                )
+                            }}
+                        {% else %}
+                            {{
+                                table.sortableThead(
+                                    'age',
+                                    filters.sortBy,
+                                    filters.orderBy,
+                                    'app_allocation_index',
+                                    'Age'|trans({}, 'forms')
+                                )
+                            }}
+                        {% endif %}
+                        {{
+                            table.sortableThead(
+                                'urgency',
+                                filters.sortBy,
+                                filters.orderBy,
+                                'app_allocation_index',
+                                'Urgency'|trans({}, 'forms')
+                            )
+                        }}
                         <th>
                             {{ 'Dispatch'|trans({}, 'forms') }}
                         </th>
@@ -291,10 +152,12 @@
                 <tbody>
                     {% for allocation in allocations %}
                         {% if allocation.specialityWasClosed == false %}
-                            <tr>
+                            {% set class = '' %}
                         {% else %}
-                            <tr class="table-warning">
+                            {% set class = 'table-warning' %}
                         {% endif %}
+
+                        <tr class="{{ class }}">
                             <td>
                                 <a href="{{
                                     path(
@@ -441,7 +304,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-3 collapse" id="collapseFilters">
+
+        {% if app.user.ToggleAllocSidebar %}
+            {% set class = 'col-3 collapse show' %}
+        {% else %}
+            {% set class = 'col-3 collapse' %}
+        {% endif %}
+
+        <div class="{{ class }}" id="collapseFilters">
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="bi bi-funnel"></i>
