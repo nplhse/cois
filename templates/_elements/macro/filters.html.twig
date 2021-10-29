@@ -31,7 +31,7 @@
     </form>
 {% endmacro %}
 
-{% macro tagFilter(items, target, active, emptyMessage = 'No items found') %}
+{% macro tagFilter(items, target, active, link, emptyMessage = 'No items found') %}
     {% for item in items %}
             {% if item.element == active %}
                 <span class="badge bg-primary">
@@ -39,7 +39,7 @@
                                     <a class="link-light"
                                        href="{{
                                        path(
-                                           'app_hospital_index',
+                                           link,
                                            app.request.query.all|merge({
                                            (target): '',
                                            page: 1
@@ -55,7 +55,7 @@
                                     <a class="link-light"
                                        href="{{
                                        path(
-                                           'app_hospital_index',
+                                           link,
                                            app.request.query.all|merge({
                                            (target): item.element,
                                            page: 1

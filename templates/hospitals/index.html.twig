@@ -363,6 +363,7 @@
                                 supplyAreas,
                                 'supplyArea',
                                 filters.supplyArea,
+                                'app_hospital_index',
                                 'No SupplyAreas found'
                             )
                         }}
@@ -377,6 +378,7 @@
                                 dispatchAreas,
                                 'dispatchArea',
                                 filters.dispatchArea,
+                                'app_hospital_index',
                                 'No DispatchArea found'
                             )
                         }}
@@ -390,7 +392,8 @@
                             filter.tagFilter(
                                 locations,
                                 'location',
-                                filters.location
+                                filters.location,
+                                'app_hospital_index'
                             )
                         }}
                     </p>
@@ -399,7 +402,7 @@
                         {{ 'Filter by Size'|trans }}
                     </h5>
                     <p class="mb-2">
-                        {{ filter.tagFilter(size, 'size', filters.size) }}
+                        {{ filter.tagFilter(size, 'size', filters.size, 'app_hospital_index',) }}
                     </p>
                 </div>
             </div>
