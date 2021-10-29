@@ -68,7 +68,6 @@
                                                 'app_hospital_index',
                                                 app.request.query.all|merge({
                                                     supplyArea: hospital.supplyArea,
-                                                    offset: '0'
                                                 })
                                             )
                                             }}">
@@ -90,7 +89,6 @@
                                                 'app_hospital_index',
                                                 app.request.query.all|merge({
                                                     dispatchArea: hospital.dispatchArea,
-                                                    offset: '0'
                                                 })
                                             )
                                             }}">
@@ -114,7 +112,6 @@
                                             'app_hospital_index',
                                             app.request.query.all|merge({
                                                 location: 'rural',
-                                                offset: '0'
                                             })
                                         )
                                         }}">
@@ -130,7 +127,6 @@
                                             'app_hospital_index',
                                             app.request.query.all|merge({
                                                 location: 'urban',
-                                                offset: '0'
                                             })
                                         )
                                         }}">
@@ -161,7 +157,6 @@
                                                     'app_hospital_index',
                                                     app.request.query.all|merge({
                                                         size: 'small',
-                                                        offset: '0'
                                                     })
                                                 )
                                                 }}">
@@ -177,7 +172,6 @@
                                                     'app_hospital_index',
                                                     app.request.query.all|merge({
                                                         size: 'medium',
-                                                        offset: '0'
                                                     })
                                                 )
                                                 }}">
@@ -193,7 +187,6 @@
                                                     'app_hospital_index',
                                                     app.request.query.all|merge({
                                                         size: 'large',
-                                                        offset: '0'
                                                     })
                                                 )
                                                 }}">
@@ -257,7 +250,7 @@
                         <p>
                             {{
                                 'dashboard.allocations.by_hospital'|trans({
-                                    '%count%': hospital_allocations
+                                    '%count%': hospital_allocations|number_format(0, '', '.')
                                 })
                             }}
                         </p>
