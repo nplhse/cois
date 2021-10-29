@@ -611,7 +611,7 @@
       </trans-unit>
       <trans-unit id="x_PUEjD" resname="security.login.rememberMe">
         <source>security.login.rememberMe</source>
-        <target>Anmeldung beibehalten</target>
+        <target>Angemeldet bleiben</target>
       </trans-unit>
       <trans-unit id="jAyXqep" resname="security.login.forgotPassword">
         <source>security.login.forgotPassword</source>
@@ -1305,7 +1305,7 @@
         <source>Mange your notification settings</source>
         <target>Benachtigungen verwalten</target>
       </trans-unit>
-      <trans-unit id="Y5PeZTC" resname="Toggle Options">
+      <trans-unit id="nYIvWZR" resname="Toggle Options">
         <source>Toggle Options</source>
         <target>Zeige Optionen</target>
       </trans-unit>
@@ -1636,6 +1636,118 @@
       <trans-unit id="mnKKuhQ" resname="Sort allocations">
         <source>Sort allocations</source>
         <target>Einsätze sortieren</target>
+      </trans-unit>
+      <trans-unit id="lchrRcd" resname="Urgency Statistics">
+        <source>Urgency Statistics</source>
+        <target>Dringlichkeit</target>
+      </trans-unit>
+      <trans-unit id="3yDU158" resname="Distribution of urgencies">
+        <source>Distribution of urgencies</source>
+        <target>Verteilungen der Dringlichkeiten</target>
+      </trans-unit>
+      <trans-unit id="JBwB1Vo" resname="PZC">
+        <source>PZC</source>
+        <target>PZC</target>
+      </trans-unit>
+      <trans-unit id="6qRk1aA" resname="PZC Statistics">
+        <source>PZC Statistics</source>
+        <target>PZC Statistiken</target>
+      </trans-unit>
+      <trans-unit id="Nvhl36K" resname="Distribution of PZCs">
+        <source>Distribution of PZCs</source>
+        <target>Verteilung der Zuweisungscodes</target>
+      </trans-unit>
+      <trans-unit id="LRKkoVM" resname="Distribution of genders">
+        <source>Distribution of genders</source>
+        <target>Verteilung der Geschlechter</target>
+      </trans-unit>
+      <trans-unit id="QZsJngR" resname="Distribution of allocations by hours">
+        <source>Distribution of allocations by hours</source>
+        <target>Verteilung der Zuweisungen nach Stunden des Tages.</target>
+      </trans-unit>
+      <trans-unit id="0zdnxPN" resname="Distribution of allocations by days">
+        <source>Distribution of allocations by days</source>
+        <target>Verteilung der Zuweisungen nach Wochentagen.</target>
+      </trans-unit>
+      <trans-unit id="47ienTP" resname="Username">
+        <source>Username</source>
+        <target>Benutzername</target>
+      </trans-unit>
+      <trans-unit id="DSXIsdt" resname="New email">
+        <source>New email</source>
+        <target>Neue E-Mail</target>
+      </trans-unit>
+      <trans-unit id="4nRgqB0" resname="Update E-Mail settings">
+        <source>Update E-Mail settings</source>
+        <target>Neue E-Mail speichern</target>
+      </trans-unit>
+      <trans-unit id="U6X.amj" resname="Yes, send me E-Mails.">
+        <source>Yes, send me E-Mails.</source>
+        <target>Ja, ich möchte E-Mails erhalten</target>
+      </trans-unit>
+      <trans-unit id="bZyutLm" resname="Yes, send me monthly reminders to upload new data.">
+        <source>Yes, send me monthly reminders to upload new data.</source>
+        <target>Ja, ich möchte monatliche Erinnerungen an den Import von Daten erhalten.</target>
+      </trans-unit>
+      <trans-unit id="evjIiIU" resname="Update notification settings">
+        <source>Update notification settings</source>
+        <target>Einstellungen speichern</target>
+      </trans-unit>
+      <trans-unit id="NFQNEQe" resname="Update profile">
+        <source>Update profile</source>
+        <target>Änderungen speichern</target>
+      </trans-unit>
+      <trans-unit id="cu0r12f" resname="Current password">
+        <source>Current password</source>
+        <target>Aktuelles Passwort</target>
+      </trans-unit>
+      <trans-unit id="PdnfREH" resname="New password">
+        <source>New password</source>
+        <target>Neues Passwort</target>
+      </trans-unit>
+      <trans-unit id="DInsk4R" resname="Repeat new password">
+        <source>Repeat new password</source>
+        <target>Neues Passwort wiederholen</target>
+      </trans-unit>
+      <trans-unit id="tK9fzsT" resname="Dispatch area">
+        <source>Dispatch area</source>
+        <target>Leitstelle</target>
+      </trans-unit>
+      <trans-unit id="ukBfpN_" resname="Supply area">
+        <source>Supply area</source>
+        <target>Versorgungsgebiet</target>
+      </trans-unit>
+      <trans-unit id="5ZCcPMR" resname="urban">
+        <source>urban</source>
+        <target>Städtisch</target>
+      </trans-unit>
+      <trans-unit id="01nlKl7" resname="rural">
+        <source>rural</source>
+        <target>Ländlich</target>
+      </trans-unit>
+      <trans-unit id="01xBaoW" resname="large">
+        <source>large</source>
+        <target>Groß</target>
+      </trans-unit>
+      <trans-unit id="wIJFand" resname="medium">
+        <source>medium</source>
+        <target>Mittel</target>
+      </trans-unit>
+      <trans-unit id="gduOu7v" resname="small">
+        <source>small</source>
+        <target>Klein</target>
+      </trans-unit>
+      <trans-unit id="Q3rqYqW" resname="Contents">
+        <source>Contents</source>
+        <target>Inhalt</target>
+      </trans-unit>
+      <trans-unit id="JI4k4y4" resname="Import data (Must be a *.csv file!)">
+        <source>Import data (Must be a *.csv file!)</source>
+        <target>Daten Importieren (Achtung: Muss eine CSV-Datei sein!)</target>
+      </trans-unit>
+      <trans-unit id="VehQOl1" resname="Drag and drop or browse">
+        <source>Drag and drop or browse</source>
+        <target>Datei hinzufügen, durch Klick oder per Drag and drop</target>
       </trans-unit>
     </body>
   </file>

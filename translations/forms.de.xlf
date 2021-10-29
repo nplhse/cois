@@ -429,6 +429,22 @@
         <source>Stop filtering by mode of Transport</source>
         <target>Filtern nach Transportart beenden</target>
       </trans-unit>
+      <trans-unit id="h9KW7JS" resname="Caption">
+        <source>Caption</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="3Mg5pAF" resname="View">
+        <source>View</source>
+        <target>Ansehen</target>
+      </trans-unit>
+      <trans-unit id="zD2lVCq" resname="Filter by Urgency">
+        <source>Filter by Urgency</source>
+        <target>Filtern nach Dringlichkeit</target>
+      </trans-unit>
+      <trans-unit id="ShJocdo" resname="Stop filtering by Urgency">
+        <source>Stop filtering by Urgency</source>
+        <target>Filtern nach Dringlichkeit beenden</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1306,7 +1306,7 @@
         <source>Mange your notification settings</source>
         <target>Mange your notification settings</target>
       </trans-unit>
-      <trans-unit id="Y5PeZTC" resname="Toggle Options">
+      <trans-unit id="nYIvWZR" resname="Toggle Options">
         <source>Toggle Options</source>
         <target>Toggle Options</target>
       </trans-unit>
@@ -1637,6 +1637,38 @@
       <trans-unit id="mnKKuhQ" resname="Sort allocations">
         <source>Sort allocations</source>
         <target>Sort allocations</target>
+      </trans-unit>
+      <trans-unit id="lchrRcd" resname="Urgency Statistics">
+        <source>Urgency Statistics</source>
+        <target>Urgency Statistics</target>
+      </trans-unit>
+      <trans-unit id="3yDU158" resname="Distribution of urgencies">
+        <source>Distribution of urgencies</source>
+        <target>Distribution of urgencies</target>
+      </trans-unit>
+      <trans-unit id="JBwB1Vo" resname="PZC">
+        <source>PZC</source>
+        <target>PZC</target>
+      </trans-unit>
+      <trans-unit id="6qRk1aA" resname="PZC Statistics">
+        <source>PZC Statistics</source>
+        <target>PZC Statistics</target>
+      </trans-unit>
+      <trans-unit id="Nvhl36K" resname="Distribution of PZCs">
+        <source>Distribution of PZCs</source>
+        <target>Distribution of PZCs</target>
+      </trans-unit>
+      <trans-unit id="LRKkoVM" resname="Distribution of genders">
+        <source>Distribution of genders</source>
+        <target>Distribution of genders</target>
+      </trans-unit>
+      <trans-unit id="QZsJngR" resname="Distribution of allocations by hours">
+        <source>Distribution of allocations by hours</source>
+        <target>Distribution of allocations by hours</target>
+      </trans-unit>
+      <trans-unit id="0zdnxPN" resname="Distribution of allocations by days">
+        <source>Distribution of allocations by days</source>
+        <target>Distribution of allocations by days</target>
       </trans-unit>
     </body>
   </file>
