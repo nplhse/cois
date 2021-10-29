@@ -402,7 +402,14 @@
                         {{ 'Filter by Size'|trans }}
                     </h5>
                     <p class="mb-2">
-                        {{ filter.tagFilter(size, 'size', filters.size, 'app_hospital_index',) }}
+                        {{
+                            filter.tagFilter(
+                                size,
+                                'size',
+                                filters.size,
+                                'app_hospital_index'
+                            )
+                        }}
                     </p>
                 </div>
             </div>
