@@ -48,7 +48,7 @@
                 {{
                     'Showing count Allocations'|trans({
                         '%perPage%': pages.perPage,
-                        '%count%': allocations.count
+                        '%count%': allocations.count|number_format(0, '', '.')
                     })
                 }}
             </p>
@@ -399,7 +399,7 @@
                         {{
                             'Showing Page page of pages'|trans({
                                 '%page%': pages.page,
-                                '%pages%': pages.last
+                                '%pages%': pages.last|number_format(0, '', '.')
                             })
                         }}
                     </p>
