@@ -167,6 +167,22 @@
                     </p>
 
                     <h5 class="card-title">
+                        {{ 'Hospital'|trans }}
+                    </h5>
+                    <p>
+                        <i class="bi bi-house"></i>
+                        <strong>
+                            <a href="{{ path('app_hospital_show',
+                                {
+                                    id: import.hospital.id
+                                })
+                                }}">
+                                {{ import.hospital }}
+                            </a>
+                        </strong>
+                    </p>
+
+                    <h5 class="card-title">
                         {{ 'Timestamps'|trans }}
                     </h5>
                     <p>

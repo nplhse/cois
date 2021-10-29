@@ -41,6 +41,7 @@
                         {{ 'allocations.field.hospital'|trans }}
                     </h5>
                     <p>
+                        <i class="bi bi-house"></i>
                         <a href="{{
                             path(
                                 'app_hospital_show',
@@ -309,7 +310,7 @@
                         <i class="bi bi-clock"></i>
                         {{ allocation.creationWeekday }}, {{
                             allocation.createdAt|date(
-                                'd.m.Y H:i:s',
+                                'd.m.Y H:i',
                                 'Europe/Berlin'
                             )
                         }}
@@ -322,7 +323,7 @@
                         <i class="bi bi-clock-history"></i>
                         {{ allocation.arrivalWeekday }}, {{
                             allocation.arrivalAt|date(
-                                'd.m.Y H:i:s',
+                                'd.m.Y H:i',
                                 'Europe/Berlin'
                             )
                         }}
@@ -512,7 +513,7 @@
                         {{
                             'allocations.field.importedAt'|trans({
                                 '%time%': allocation.import.createdAt|date(
-                                    'd.m.Y H:i:s',
+                                    'd.m.Y H:i',
                                     'Europe/Berlin'
                                 )
                             })
