@@ -64,21 +64,187 @@
                         <th>
                             {{ 'Id'|trans({}, 'forms') }}
                         </th>
-                        <th>
-                            {{ 'Name'|trans({}, 'forms') }}
-                        </th>
+                        {% if
+                            filters.sortBy == 'caption'
+                            and filters.orderBy == 'desc' %}
+                            <th class="table-light">
+                                <a href="{{
+                                path(
+                                    'app_import_index',
+                                    app.request.query.all|merge({
+                                    sortBy: 'caption',
+                                    orderBy: 'asc'
+                                })
+                                )
+                                }}">
+                                    <em>
+                                        {{ 'Caption'|trans({}, 'forms') }}
+                                    </em>
+                                </a>
+
+                                <i class="bi bi-chevron-double-down"></i>
+                            </th>
+                        {% elseif
+                            filters.sortBy == 'caption'
+                            and filters.orderBy == 'asc' %}
+                            <th class="table-light">
+                                <a href="{{
+                                path(
+                                    'app_import_index',
+                                    app.request.query.all|merge({
+                                    sortBy: 'caption',
+                                    orderBy: 'desc'
+                                })
+                                )
+                                }}">
+                                    <em>
+                                        {{ 'Caption'|trans({}, 'forms') }}
+                                    </em>
+                                </a>
+
+                                <i class="bi bi-chevron-double-up"></i>
+                            </th>
+                        {% else %}
+                            <th>
+                                <a href="{{
+                                path(
+                                    'app_import_index',
+                                    app.request.query.all|merge({
+                                    sortBy: 'caption',
+                                    orderBy: 'desc'
+                                })
+                                )
+                                }}">
+                                    {{ 'Caption'|trans({}, 'forms') }}
+                                </a>
+                            </th>
+                        {% endif %}
                         <th>
                             {{ 'User'|trans({}, 'forms') }}
                         </th>
                         <th>
                             {{ 'Hospital'|trans({}, 'forms') }}
                         </th>
-                        <th>
-                            {{ 'Created at'|trans({}, 'forms') }}
-                        </th>
-                        <th>
-                            {{ 'Status'|trans({}, 'forms') }}
-                        </th>
+                        {% if
+                            filters.sortBy == 'times'
+                            and filters.orderBy == 'desc' %}
+                            <th class="table-light">
+                                <a href="{{
+                                path(
+                                    'app_import_index',
+                                    app.request.query.all|merge({
+                                    orderBy: 'asc'
+                                })
+                                )
+                                }}">
+                                    <em>{{ 'Created at'|trans({}, 'forms') }}</em>
+                                </a>
+
+                                <i class="bi bi-chevron-double-down"></i>
+                            </th>
+                        {% elseif
+                            filters.sortBy == 'times'
+                            and filters.orderBy == 'asc' %}
+                            <th class="table-light">
+                                <a href="{{
+                                path(
+                                    'app_import_index',
+                                    app.request.query.all|merge({
+                                    orderBy: 'desc'
+                                })
+                                )
+                                }}">
+                                    <em>{{ 'Created at'|trans({}, 'forms') }}</em>
+                                </a>
+
+                                <i class="bi bi-chevron-double-up"></i>
+                            </th>
+                        {% elseif filters.sortBy == null %}
+                            <th class="table-light">
+                                <a href="{{
+                                path(
+                                    'app_import_index',
+                                    app.request.query.all|merge({
+                                    sortBy: 'times',
+                                    orderBy: 'asc'
+                                })
+                                )
+                                }}">
+                                    <em>{{ 'Created at'|trans({}, 'forms') }}</em>
+                                </a>
+
+                                <i class="bi bi-chevron-double-down"></i>
+                            </th>
+                        {% else %}
+                            <th>
+                                <a href="{{
+                                path(
+                                    'app_import_index',
+                                    app.request.query.all|merge({
+                                    sortBy: 'times',
+                                    orderBy: 'desc'
+                                })
+                                )
+                                }}">
+                                    {{ 'Created at'|trans({}, 'forms') }}
+                                </a>
+                            </th>
+                        {% endif %}
+                        {% if
+                            filters.sortBy == 'status'
+                            and filters.orderBy == 'desc' %}
+                            <th class="table-light">
+                                <a href="{{
+                                path(
+                                    'app_import_index',
+                                    app.request.query.all|merge({
+                                    sortBy: 'status',
+                                    orderBy: 'asc'
+                                })
+                                )
+                                }}">
+                                    <em>
+                                        {{ 'Status'|trans({}, 'forms') }}
+                                    </em>
+                                </a>
+
+                                <i class="bi bi-chevron-double-down"></i>
+                            </th>
+                        {% elseif
+                            filters.sortBy == 'status'
+                            and filters.orderBy == 'asc' %}
+                            <th class="table-light">
+                                <a href="{{
+                                path(
+                                    'app_import_index',
+                                    app.request.query.all|merge({
+                                    sortBy: 'status',
+                                    orderBy: 'desc'
+                                })
+                                )
+                                }}">
+                                    <em>
+                                        {{ 'Status'|trans({}, 'forms') }}
+                                    </em>
+                                </a>
+
+                                <i class="bi bi-chevron-double-up"></i>
+                            </th>
+                        {% else %}
+                            <th>
+                                <a href="{{
+                                path(
+                                    'app_import_index',
+                                    app.request.query.all|merge({
+                                    sortBy: 'status',
+                                    orderBy: 'desc'
+                                })
+                                )
+                                }}">
+                                    {{ 'Status'|trans({}, 'forms') }}
+                                </a>
+                            </th>
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
