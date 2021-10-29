@@ -67,7 +67,7 @@
                                             path(
                                                 'app_hospital_index',
                                                 app.request.query.all|merge({
-                                                    supplyArea: hospital.supplyArea,
+                                                    supplyArea: hospital.supplyArea
                                                 })
                                             )
                                             }}">
@@ -88,7 +88,7 @@
                                             path(
                                                 'app_hospital_index',
                                                 app.request.query.all|merge({
-                                                    dispatchArea: hospital.dispatchArea,
+                                                    dispatchArea: hospital.dispatchArea
                                                 })
                                             )
                                             }}">
@@ -111,7 +111,7 @@
                                         path(
                                             'app_hospital_index',
                                             app.request.query.all|merge({
-                                                location: 'rural',
+                                                location: 'rural'
                                             })
                                         )
                                         }}">
@@ -126,7 +126,7 @@
                                         path(
                                             'app_hospital_index',
                                             app.request.query.all|merge({
-                                                location: 'urban',
+                                                location: 'urban'
                                             })
                                         )
                                         }}">
@@ -156,7 +156,7 @@
                                                 path(
                                                     'app_hospital_index',
                                                     app.request.query.all|merge({
-                                                        size: 'small',
+                                                        size: 'small'
                                                     })
                                                 )
                                                 }}">
@@ -171,7 +171,7 @@
                                                 path(
                                                     'app_hospital_index',
                                                     app.request.query.all|merge({
-                                                        size: 'medium',
+                                                        size: 'medium'
                                                     })
                                                 )
                                                 }}">
@@ -186,7 +186,7 @@
                                                 path(
                                                     'app_hospital_index',
                                                     app.request.query.all|merge({
-                                                        size: 'large',
+                                                        size: 'large'
                                                     })
                                                 )
                                                 }}">
@@ -250,7 +250,11 @@
                         <p>
                             {{
                                 'dashboard.allocations.by_hospital'|trans({
-                                    '%count%': hospital_allocations|number_format(0, '', '.')
+                                    '%count%': hospital_allocations|number_format(
+                                        0,
+                                        '',
+                                        '.'
+                                    )
                                 })
                             }}
                         </p>

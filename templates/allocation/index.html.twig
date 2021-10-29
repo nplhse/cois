@@ -73,134 +73,29 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>
                             {% if
                                 filters.sortBy == 'dispatchArea'
                                     and filters.orderBy == 'desc' %}
-                                <a href="{{
-                                    path(
-                                        'app_allocation_index',
-                                        app.request.query.all|merge({
-                                            orderBy: 'asc'
-                                        })
-                                    )
-                                    }}">
-                                    <em>
-                                        {{ 'Dispatch Area'|trans({}, 'forms') }}
-                                    </em>
-                                </a>
-
-                                <i class="bi bi-chevron-double-down"></i>
-                            {% elseif
-                                filters.sortBy == 'dispatchArea'
-                                    and filters.orderBy == 'asc' %}
-                                <a href="{{
-                                    path(
-                                        'app_allocation_index',
-                                        app.request.query.all|merge({
-                                            orderBy: 'desc'
-                                        })
-                                    )
-                                    }}">
-                                    <em>
-                                        {{ 'Dispatch Area'|trans({}, 'forms') }}
-                                    </em>
-                                </a>
-
-                                <i class="bi bi-chevron-double-up"></i>
-                            {% else %}
-                                <a href="{{
-                                    path(
-                                        'app_allocation_index',
-                                        app.request.query.all|merge({
-                                            sortBy: 'dispatchArea',
-                                            orderBy: 'desc'
-                                        })
-                                    )
-                                    }}">
-                                    {{ 'Dispatch Area'|trans({}, 'forms') }}
-                                </a>
-                            {% endif %}
-                        </th>
-                        <th>
-                            {{ 'Hospital'|trans({}, 'forms') }}
-                        </th>
-                        <th>
-                            {% if
-                                filters.sortBy == 'times'
-                                    and filters.orderBy == 'desc' %}
-                                <a href="{{
-                                    path(
-                                        'app_allocation_index',
-                                        app.request.query.all|merge({
-                                            orderBy: 'asc'
-                                        })
-                                    )
-                                    }}">
-                                    <em>{{ 'Times'|trans({}, 'forms') }}</em>
-                                </a>
-
-                                <i class="bi bi-chevron-double-down"></i>
-                            {% elseif
-                                filters.sortBy == 'times'
-                                    and filters.orderBy == 'asc' %}
-                                <a href="{{
-                                    path(
-                                        'app_allocation_index',
-                                        app.request.query.all|merge({
-                                            orderBy: 'desc'
-                                        })
-                                    )
-                                    }}">
-                                    <em>{{ 'Times'|trans({}, 'forms') }}</em>
-                                </a>
-
-                                <i class="bi bi-chevron-double-up"></i>
-                            {% elseif filters.sortBy == null %}
-                                <a href="{{
-                                    path(
-                                        'app_allocation_index',
-                                        app.request.query.all|merge({
-                                            sortBy: 'times',
-                                            orderBy: 'asc'
-                                        })
-                                    )
-                                    }}">
-                                    <em>{{ 'Times'|trans({}, 'forms') }}</em>
-                                </a>
-
-                                <i class="bi bi-chevron-double-down"></i>
-                            {% else %}
-                                <a href="{{
-                                    path(
-                                        'app_allocation_index',
-                                        app.request.query.all|merge({
-                                            sortBy: 'times',
-                                            orderBy: 'desc'
-                                        })
-                                    )
-                                    }}">
-                                    {{ 'Times'|trans({}, 'forms') }}
-                                </a>
-                            {% endif %}
-                        </th>
-                        <th>
-                            {% if
-                                filters.sortBy == 'age'
-                                    or filters.sortBy == 'gender' %}
-                                {% if filters.orderBy == 'desc' %}
+                                <th class="table-light">
                                     <a href="{{
-                                        path(
-                                            'app_allocation_index',
-                                            app.request.query.all|merge({
-                                                orderBy: 'asc'
-                                            })
-                                        )
-                                        }}">
-                                        {{ 'Dem.'|trans({}, 'forms') }}
+                                    path(
+                                        'app_allocation_index',
+                                        app.request.query.all|merge({
+                                        orderBy: 'asc'
+                                    })
+                                    )
+                                    }}">
+                                        <em>
+                                            {{ 'Dispatch Area'|trans({}, 'forms') }}
+                                        </em>
                                     </a>
+
                                     <i class="bi bi-chevron-double-down"></i>
-                                {% else %}
+                                </th>
+                            {% elseif
+                                filters.sortBy == 'dispatchArea'
+                                    and filters.orderBy == 'asc' %}
+                                <th class="table-light">
                                     <a href="{{
                                         path(
                                             'app_allocation_index',
@@ -209,59 +104,182 @@
                                             })
                                         )
                                         }}">
-                                        {{ 'Dem.'|trans({}, 'forms') }}
+                                        <em>
+                                            {{ 'Dispatch Area'|trans({}, 'forms') }}
+                                        </em>
                                     </a>
+
                                     <i class="bi bi-chevron-double-up"></i>
+                                <th>
+                            {% else %}
+                                <th>
+                                    <a href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            app.request.query.all|merge({
+                                                sortBy: 'dispatchArea',
+                                                orderBy: 'desc'
+                                            })
+                                        )
+                                        }}">
+                                        {{ 'Dispatch Area'|trans({}, 'forms') }}
+                                    </a>
+                                </th>
+                            {% endif %}
+                        <th>
+                            {{ 'Hospital'|trans({}, 'forms') }}
+                        </th>
+                            {% if
+                                filters.sortBy == 'times'
+                                    and filters.orderBy == 'desc' %}
+                                <th class="table-light">
+                                    <a href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            app.request.query.all|merge({
+                                                orderBy: 'asc'
+                                            })
+                                        )
+                                        }}">
+                                        <em>{{ 'Times'|trans({}, 'forms') }}</em>
+                                    </a>
+
+                                    <i class="bi bi-chevron-double-down"></i>
+                                </th>
+                            {% elseif
+                                filters.sortBy == 'times'
+                                    and filters.orderBy == 'asc' %}
+                                <th class="table-light">
+                                    <a href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            app.request.query.all|merge({
+                                                orderBy: 'desc'
+                                            })
+                                        )
+                                        }}">
+                                        <em>{{ 'Times'|trans({}, 'forms') }}</em>
+                                    </a>
+
+                                    <i class="bi bi-chevron-double-up"></i>
+                                </th>
+                            {% elseif filters.sortBy == null %}
+                                <th class="table-light">
+                                    <a href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            app.request.query.all|merge({
+                                                sortBy: 'times',
+                                                orderBy: 'asc'
+                                            })
+                                        )
+                                        }}">
+                                        <em>{{ 'Times'|trans({}, 'forms') }}</em>
+                                    </a>
+
+                                    <i class="bi bi-chevron-double-down"></i>
+                                </th>
+                            {% else %}
+                                <th>
+                                    <a href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            app.request.query.all|merge({
+                                                sortBy: 'times',
+                                                orderBy: 'desc'
+                                            })
+                                        )
+                                        }}">
+                                        {{ 'Times'|trans({}, 'forms') }}
+                                    </a>
+                                </th>
+                            {% endif %}
+                            {% if
+                                filters.sortBy == 'age'
+                                    or filters.sortBy == 'gender' %}
+                                {% if filters.orderBy == 'desc' %}
+                                    <th class="table-light">
+                                        <a href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            app.request.query.all|merge({
+                                            orderBy: 'asc'
+                                        })
+                                        )
+                                        }}">
+                                            {{ 'Dem.'|trans({}, 'forms') }}
+                                        </a>
+                                        <i class="bi bi-chevron-double-down"></i>
+                                    </th>
+                                {% else %}
+                                    <th>
+                                        <a href="{{
+                                            path(
+                                                'app_allocation_index',
+                                                app.request.query.all|merge({
+                                                    orderBy: 'desc'
+                                                })
+                                            )
+                                            }}">
+                                            {{ 'Dem.'|trans({}, 'forms') }}
+                                        </a>
+                                        <i class="bi bi-chevron-double-up"></i>
+                                    </th>
                                 {% endif %}
                             {% else %}
-                                {{ 'Dem.'|trans({}, 'forms') }}
+                                <th>
+                                    {{ 'Dem.'|trans({}, 'forms') }}
+                                </th>
                             {% endif %}
-                        </th>
-                        <th>
                             {% if
                                 filters.sortBy == 'urgency'
                                     and filters.orderBy == 'desc' %}
-                                <a href="{{
+                                <th class="table-light">
+                                    <a href="{{
                                     path(
                                         'app_allocation_index',
                                         app.request.query.all|merge({
-                                            orderBy: 'asc'
-                                        })
+                                        orderBy: 'asc'
+                                    })
                                     )
                                     }}">
-                                    <em>{{ 'Urgency'|trans({}, 'forms') }}</em>
-                                </a>
+                                        <em>{{ 'Urgency'|trans({}, 'forms') }}</em>
+                                    </a>
 
-                                <i class="bi bi-chevron-double-down"></i>
+                                    <i class="bi bi-chevron-double-down"></i>
+                                </th>
                             {% elseif
                                 filters.sortBy == 'urgency'
                                     and filters.orderBy == 'asc' %}
-                                <a href="{{
+                                <th class="table-light">
+                                    <a href="{{
                                     path(
                                         'app_allocation_index',
                                         app.request.query.all|merge({
-                                            orderBy: 'desc'
-                                        })
+                                        orderBy: 'desc'
+                                    })
                                     )
                                     }}">
-                                    <em>{{ 'Urgency'|trans({}, 'forms') }}</em>
-                                </a>
+                                        <em>{{ 'Urgency'|trans({}, 'forms') }}</em>
+                                    </a>
 
-                                <i class="bi bi-chevron-double-up"></i>
+                                    <i class="bi bi-chevron-double-up"></i>
+                                </th>
                             {% else %}
-                                <a href="{{
-                                    path(
-                                        'app_allocation_index',
-                                        app.request.query.all|merge({
-                                            sortBy: 'urgency',
-                                            orderBy: 'desc'
-                                        })
-                                    )
-                                    }}">
-                                    {{ 'Urgency'|trans({}, 'forms') }}
-                                </a>
+                                <th>
+                                    <a href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            app.request.query.all|merge({
+                                                sortBy: 'urgency',
+                                                orderBy: 'desc'
+                                            })
+                                        )
+                                        }}">
+                                        {{ 'Urgency'|trans({}, 'forms') }}
+                                    </a>
+                                </th>
                             {% endif %}
-                        </th>
                         <th>
                             {{ 'Dispatch'|trans({}, 'forms') }}
                         </th>
@@ -272,7 +290,11 @@
                 </thead>
                 <tbody>
                     {% for allocation in allocations %}
-                        <tr>
+                        {% if allocation.specialityWasClosed == false %}
+                            <tr>
+                        {% else %}
+                            <tr class="table-warning">
+                        {% endif %}
                             <td>
                                 <a href="{{
                                     path(
@@ -347,7 +369,7 @@
                             <td>
                                 <p>
                                     <strong>{{ allocation.speciality }}</strong><br />
-                                    {{ allocation.PZCText }}
+                                    {{ allocation.RMI }} {{ allocation.PZCText }}
                                 </p>
                             </td>
                             <td>
