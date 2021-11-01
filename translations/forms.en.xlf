@@ -445,6 +445,22 @@
         <source>Stop filtering by Urgency</source>
         <target>Stop filtering by Urgency</target>
       </trans-unit>
+      <trans-unit id="roZ1qYD" resname="Filter by Speciality">
+        <source>Filter by Speciality</source>
+        <target>Filter by Speciality</target>
+      </trans-unit>
+      <trans-unit id="s03PaGh" resname="Stop filtering by Speciality">
+        <source>Stop filtering by Speciality</source>
+        <target>Stop filtering by Speciality</target>
+      </trans-unit>
+      <trans-unit id="gC9zBRH" resname="Filter by Speciality Detail">
+        <source>Filter by Speciality Detail</source>
+        <target>Filter by Speciality Detail</target>
+      </trans-unit>
+      <trans-unit id="qPMS.rx" resname="Stop filtering by Speciality Detail">
+        <source>Stop filtering by Speciality Detail</source>
+        <target>Stop filtering by Speciality Detail</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

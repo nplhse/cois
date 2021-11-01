@@ -1749,6 +1749,22 @@
         <source>Drag and drop or browse</source>
         <target>Datei hinzufügen, durch Klick oder per Drag and drop</target>
       </trans-unit>
+      <trans-unit id="QtW6vxW" resname="Age Statistics">
+        <source>Age Statistics</source>
+        <target>Alter</target>
+      </trans-unit>
+      <trans-unit id="lqlsOll" resname="Distribution of ages by gender">
+        <source>Distribution of ages by gender</source>
+        <target>Verteilung der Altersgruppen nach Geschlchtern</target>
+      </trans-unit>
+      <trans-unit id="roZ1qYD" resname="Filter by Speciality">
+        <source>Filter by Speciality</source>
+        <target>Filtern nach Fachgebiet</target>
+      </trans-unit>
+      <trans-unit id="8W71d3t" resname="Filter by Transport">
+        <source>Filter by Transport</source>
+        <target>Filtern nach Transportkriterien</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

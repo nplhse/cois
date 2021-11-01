@@ -445,6 +445,22 @@
         <source>Stop filtering by Urgency</source>
         <target>Filtern nach Dringlichkeit beenden</target>
       </trans-unit>
+      <trans-unit id="roZ1qYD" resname="Filter by Speciality">
+        <source>Filter by Speciality</source>
+        <target>Filtern nach Fachgebiet</target>
+      </trans-unit>
+      <trans-unit id="s03PaGh" resname="Stop filtering by Speciality">
+        <source>Stop filtering by Speciality</source>
+        <target>Filtern nach Fachgebiet beenden</target>
+      </trans-unit>
+      <trans-unit id="gC9zBRH" resname="Filter by Speciality Detail">
+        <source>Filter by Speciality Detail</source>
+        <target>Filtern nach Fachbereich</target>
+      </trans-unit>
+      <trans-unit id="qPMS.rx" resname="Stop filtering by Speciality Detail">
+        <source>Stop filtering by Speciality Detail</source>
+        <target>Filtern nach Fachbereich beenden</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

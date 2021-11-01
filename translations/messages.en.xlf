@@ -1670,6 +1670,22 @@
         <source>Distribution of allocations by days</source>
         <target>Distribution of allocations by days</target>
       </trans-unit>
+      <trans-unit id="QtW6vxW" resname="Age Statistics">
+        <source>Age Statistics</source>
+        <target>Age Statistics</target>
+      </trans-unit>
+      <trans-unit id="lqlsOll" resname="Distribution of ages by gender">
+        <source>Distribution of ages by gender</source>
+        <target>Distribution of ages by gender</target>
+      </trans-unit>
+      <trans-unit id="roZ1qYD" resname="Filter by Speciality">
+        <source>Filter by Speciality</source>
+        <target>Filter by Speciality</target>
+      </trans-unit>
+      <trans-unit id="8W71d3t" resname="Filter by Transport">
+        <source>Filter by Transport</source>
+        <target>Filter by Transport</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

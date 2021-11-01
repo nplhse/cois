@@ -325,6 +325,28 @@ class RequestParamService
         return $urgency;
     }
 
+    public function getSpeciality(): string|null
+    {
+        $speciality = $this->request->query->get('speciality');
+
+        if (empty($speciality)) {
+            return null;
+        }
+
+        return $speciality;
+    }
+
+    public function getSpecialityDetail(): string|null
+    {
+        $specialityDetail = $this->request->query->get('specialityDetail');
+
+        if (empty($specialityDetail)) {
+            return null;
+        }
+
+        return $specialityDetail;
+    }
+
     public function getPagination(int $count, int $page, int $perPage): PaginationDto
     {
         $last = floor($count / $perPage);

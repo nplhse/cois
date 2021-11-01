@@ -178,6 +178,28 @@ class AllocationRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function getAllSpecialities(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('DISTINCT a.speciality AS speciality')
+            ->addOrderBy('a.speciality', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
+    public function getAllSpecialityDetails(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('DISTINCT a.specialityDetail AS specialityDetail')
+            ->addOrderBy('a.specialityDetail', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
     public function countAllocationsBySpeciality(bool $detail = false): array
     {
         if ($detail) {
@@ -378,6 +400,18 @@ class AllocationRepository extends ServiceEntityRepository
         if (isset($filter['modeOfTransport'])) {
             $query->andWhere('a.modeOfTransport = :modeOfTransport')
                 ->setParameter('modeOfTransport', $filter['modeOfTransport'])
+            ;
+        }
+
+        if (isset($filter['speciality'])) {
+            $query->andWhere('a.speciality = :speciality')
+                ->setParameter('speciality', $filter['speciality'])
+            ;
+        }
+
+        if (isset($filter['specialityDetail'])) {
+            $query->andWhere('a.specialityDetail = :specialityDetail')
+                ->setParameter('specialityDetail', $filter['specialityDetail'])
             ;
         }
 

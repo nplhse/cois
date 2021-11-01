@@ -34,6 +34,8 @@ class AllocationController extends AbstractController
         $filters['modeOfTransport'] = $paramService->getTransport();
         $filters['pzc'] = $paramService->getPZC();
         $filters['urgency'] = $paramService->getUrgency();
+        $filters['speciality'] = $paramService->getSpeciality();
+        $filters['specialityDetail'] = $paramService->getSpecialityDetail();
 
         $filters['reqResus'] = $paramService->getReqResus();
         $filters['reqCath'] = $paramService->getReqCath();
@@ -77,6 +79,8 @@ class AllocationController extends AbstractController
             'transports' => $allocationRepository->getAllTransportModes(),
             'urgencies' => $allocationRepository->getAllUrgencies(),
             'PZCs' => $this->getAllPZCs($allocationRepository),
+            'specialities' => $allocationRepository->getAllSpecialities(),
+            'specialityDetails' => $allocationRepository->getAllSpecialityDetails(),
         ]);
     }
 
