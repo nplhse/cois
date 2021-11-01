@@ -354,48 +354,41 @@
                         }}
                     </p>
 
+                    <form>
                     {% if is_granted('ROLE_ADMIN') %}
                         <h5 class="card-title">
                             {{ 'Filter by Hospital'|trans }}
                         </h5>
                         <p class="mb-2">
-                            {% for hospital in hospitals %}
-                                {% if hospital.id == filters.hospital %}
-                                    <span class="badge bg-primary">
-                                        <i class="bi bi-tag-fill"></i>
-                                        <a class="link-light"
-                                            href="{{
-                                            path(
-                                                'app_allocation_index',
-                                                app.request.query.all|merge({
-                                                    hospital: '',
-                                                    page: 1
-                                                })
-                                            )
-                                            }}">
-                                            {{ hospital.name }}
-                                        </a>
-                                    </span>
+                            <select class="form-select"
+                                    name="hospital"
+                                    aria-label="filterHospital">
+                                {% if filters.hospital == null %}
+                                    <option value="" selected>
+                                        {{ 'Filter by Hospital'|trans({}, 'forms') }}
+                                    </option>
                                 {% else %}
-                                    <span class="badge bg-secondary">
-                                        <i class="bi bi-tag"></i>
-                                        <a class="link-light"
-                                            href="{{
-                                            path(
-                                                'app_allocation_index',
-                                                app.request.query.all|merge({
-                                                    hospital: hospital.id,
-                                                    page: 1
-                                                })
-                                            )
-                                            }}">
-                                            {{ hospital.name }}
-                                        </a>
-                                    </span>
+                                    <option value="">
+                                        {{
+                                        'Stop filtering by Hospital'|trans(
+                                            {},
+                                            'forms'
+                                        )
+                                        }}
+                                    </option>
                                 {% endif %}
-                            {% else %}
-                                {{ 'No Hospitals found'|trans }}
-                            {% endfor %}
+                                {% for hospital in hospitals %}
+                                    {% if hospital.id == filters.hospital %}
+                                        <option value="{{ hospital.id }}" selected>
+                                            {{ hospital.name }}
+                                        </option>
+                                    {% else %}
+                                        <option value="{{ hospital.id }}">
+                                            {{ hospital.name }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
                         </p>
                     {% elseif app.user.hospital %}
                         <h5 class="card-title">
@@ -403,37 +396,28 @@
                         </h5>
                         <p class="mb-2">
                             {% if app.user.hospital.id == filters.hospital %}
-                                <span class="badge bg-primary">
-                                    <i class="bi bi-tag-fill"></i>
-                                    <a class="link-light"
-                                        href="{{
-                                        path(
-                                            'app_allocation_index',
-                                            app.request.query.all|merge({
-                                                hospital: '',
-                                                page: 1
-                                            })
-                                        )
-                                        }}">
-                                        {{ app.user.hospital.name }}
-                                    </a>
-                                </span>
+                                <div class="form-check form-switch">
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               name="hospital"
+                                               checked="checked"
+                                               value="" />
+                                    <label class="form-check-label"
+                                           for="flexSwitchCheckDefault">
+                                        {{ 'Show only Allocations from your hospital'|trans }}
+                                    </label>
+                                </div>
                             {% else %}
-                                <span class="badge bg-secondary">
-                                    <i class="bi bi-tag"></i>
-                                    <a class="link-light"
-                                        href="{{
-                                        path(
-                                            'app_allocation_index',
-                                            app.request.query.all|merge({
-                                                hospital: app.user.hospital.id,
-                                                page: 1
-                                            })
-                                        )
-                                        }}">
-                                        {{ app.user.hospital.name }}
-                                    </a>
-                                </span>
+                                <div class="form-check form-switch">
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               name="hospital"
+                                               value="{{ app.user.hospital.id }}" />
+                                    <label class="form-check-label"
+                                           for="flexSwitchCheckDefault">
+                                        {{ 'Show only Allocations from your hospital'|trans }}
+                                    </label>
+                                </div>
                             {% endif %}
                         </p>
                     {% endif %}
@@ -441,7 +425,6 @@
                     <h5 class="card-title">
                         {{ 'Filter by Dates'|trans }}
                     </h5>
-                    <form>
                         <div class="input-group mb-3">
                             <input type="date"
                                 name="start"
