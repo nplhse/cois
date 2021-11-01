@@ -456,6 +456,78 @@
                         </div>
 
                         <h5 class="card-title">
+                            {{ 'Filter by Speciality'|trans }}
+                        </h5>
+                        <p>
+                            <select class="form-select"
+                                    name="speciality"
+                                    aria-label="filterSpeciality">
+                                {% if filters.speciality == null %}
+                                    <option value="" selected>
+                                        {{ 'Filter by Speciality'|trans({}, 'forms') }}
+                                    </option>
+                                {% else %}
+                                    <option value="">
+                                        {{
+                                        'Stop filtering by Speciality'|trans(
+                                            {},
+                                            'forms'
+                                        )
+                                        }}
+                                    </option>
+                                {% endif %}
+                                {% for item in specialities %}
+                                    {% if item.speciality == filters.speciality %}
+                                        <option value="{{ item.speciality }}" selected>
+                                            {{ item.speciality }}
+                                        </option>
+                                    {% elseif
+                                        item.speciality == 0 or item.speciality == null %}
+                                        <!-- empty -->
+                                    {% else %}
+                                        <option value="{{ item.speciality }}">
+                                            {{ item.speciality }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </p>
+                        <p>
+                            <select class="form-select"
+                                    name="specialityDetail"
+                                    aria-label="filterSpecialityDetail">
+                                {% if filters.specialityDetail == null %}
+                                    <option value="" selected>
+                                        {{ 'Filter by Speciality Detail'|trans({}, 'forms') }}
+                                    </option>
+                                {% else %}
+                                    <option value="">
+                                        {{
+                                        'Stop filtering by Speciality Detail'|trans(
+                                            {},
+                                            'forms'
+                                        )
+                                        }}
+                                    </option>
+                                {% endif %}
+                                {% for item in specialityDetails %}
+                                    {% if item.specialityDetail == filters.specialityDetail %}
+                                        <option value="{{ item.specialityDetail }}" selected>
+                                            {{ item.specialityDetail }}
+                                        </option>
+                                    {% elseif
+                                        item.specialityDetail == 0 or item.specialityDetail == null %}
+                                        <!-- empty -->
+                                    {% else %}
+                                        <option value="{{ item.specialityDetail }}">
+                                            {{ item.specialityDetail }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </p>
+
+                        <h5 class="card-title">
                             {{ 'Filter by Properties'|trans }}
                         </h5>
                         <p>
@@ -540,264 +612,135 @@
                         </p>
 
                         <p>
-                            <select class="form-select"
-                                name="assignment"
-                                aria-label="filterAssignment">
-                                {% if filters.assignment == null %}
-                                    <option value="" selected>
-                                        {{
-                                            'Filter by Assignment'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% else %}
-                                    <option value="">
-                                        {{
-                                            'Stop filtering by Assignment'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% endif %}
-                                {% for item in assignments %}
-                                    {% if
-                                        item.assignment == filters.assignment
-                                            and item.assignment != '' %}
-                                        <option value="{{ item.assignment|url_encode }}"
-                                            selected>
-                                            {{ item.assignment }}
-                                        </option>
-                                    {% elseif
-                                        item.assignment == 0
-                                            or item.assignment == null %}
-                                        <!-- empty -->
-                                    {% else %}
-                                        <option value="{{ item.assignment|url_encode }}">
-                                            {{ item.assignment }}
-                                        </option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </p>
-                        <p>
-                            <select class="form-select"
-                                name="occasion"
-                                aria-label="filterOccasion">
-                                {% if filters.occasion == null %}
-                                    <option value="" selected>
-                                        {{
-                                            'Filter by Occasion'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% else %}
-                                    <option value="">
-                                        {{
-                                            'Stop filtering by Occasion'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% endif %}
-                                {% for item in occasions %}
-                                    {% if
-                                        item.occasion == filters.occasion
-                                            and item.occasion != '' %}
-                                        <option value="{{ item.occasion|url_encode }}"
-                                            selected>
-                                            {{ item.occasion }}
-                                        </option>
-                                    {% elseif
-                                        item.occasion == ''
-                                            or item.occasion == null %}
-                                        <!-- empty -->
-                                    {% else %}
-                                        <option value="{{ item.occasion|url_encode }}">
-                                            {{ item.occasion }}
-                                        </option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </p>
-                        <p>
-                            <select class="form-select"
-                                name="transport"
-                                aria-label="filterTransport">
-                                {% if filters.modeOfTransport == null %}
-                                    <option value="" selected>
-                                        {{
-                                            'Filter by mode of Transport'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% else %}
-                                    <option value="">
-                                        {{
-                                            'Stop filtering by mode of Transport'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% endif %}
-                                {% for item in transports %}
-                                    {% if
-                                        item.modeOfTransport
-                                            == filters.modeOfTransport
-                                            and item.modeOfTransport != '' %}
-                                        <option value="{{ item.modeOfTransport|url_encode }}"
-                                            selected>
-                                            {{ item.modeOfTransport }}
-                                        </option>
-                                    {% elseif
-                                        item.modeOfTransport == ''
-                                            or item.modeOfTransport == null %}
-                                        <!-- empty -->
-                                    {% else %}
-                                        <option value="{{ item.modeOfTransport|url_encode }}">
-                                            {{ item.modeOfTransport }}
-                                        </option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </p>
-
                         <div class="form-check form-switch">
                             {% if filters.reqResus %}
                                 <input class="form-check-input"
-                                    type="checkbox"
-                                    name="reqResus"
-                                    checked="checked" />
+                                       type="checkbox"
+                                       name="reqResus"
+                                       checked="checked" />
                             {% else %}
                                 <input class="form-check-input"
-                                    type="checkbox"
-                                    name="reqResus" />
+                                       type="checkbox"
+                                       name="reqResus" />
                             {% endif %}
                             <label class="form-check-label"
-                                for="flexSwitchCheckDefault">
+                                   for="flexSwitchCheckDefault">
                                 {{ 'Requires Resuscitation'|trans }}
                             </label>
                         </div>
                         <div class="form-check form-switch">
                             {% if filters.reqCath %}
                                 <input class="form-check-input"
-                                    type="checkbox"
-                                    name="reqCath"
-                                    checked="checked" />
+                                       type="checkbox"
+                                       name="reqCath"
+                                       checked="checked" />
                             {% else %}
                                 <input class="form-check-input"
-                                    type="checkbox"
-                                    name="reqCath" />
+                                       type="checkbox"
+                                       name="reqCath" />
                             {% endif %}
                             <label class="form-check-label"
-                                for="flexSwitchCheckDefault">
+                                   for="flexSwitchCheckDefault">
                                 {{ 'Requires Cathlab'|trans }}
                             </label>
                         </div>
                         <div class="form-check form-switch">
                             {% if filters.isCPR %}
                                 <input class="form-check-input"
-                                    type="checkbox"
-                                    name="isCPR"
-                                    checked="checked" />
+                                       type="checkbox"
+                                       name="isCPR"
+                                       checked="checked" />
                             {% else %}
                                 <input class="form-check-input"
-                                    type="checkbox"
-                                    name="isCPR" />
+                                       type="checkbox"
+                                       name="isCPR" />
                             {% endif %}
                             <label class="form-check-label"
-                                for="flexSwitchCheckDefault">
+                                   for="flexSwitchCheckDefault">
                                 {{ 'Is CPR'|trans }}
                             </label>
                         </div>
                         <div class="form-check form-switch">
                             {% if filters.isVent %}
                                 <input class="form-check-input"
-                                    type="checkbox"
-                                    name="isVent"
-                                    checked="checked" />
+                                       type="checkbox"
+                                       name="isVent"
+                                       checked="checked" />
                             {% else %}
                                 <input class="form-check-input"
-                                    type="checkbox"
-                                    name="isVent" />
+                                       type="checkbox"
+                                       name="isVent" />
                             {% endif %}
                             <label class="form-check-label"
-                                for="flexSwitchCheckDefault">
+                                   for="flexSwitchCheckDefault">
                                 {{ 'Is Ventilated'|trans }}
                             </label>
                         </div>
                         <div class="form-check form-switch">
                             {% if filters.isShock %}
                                 <input class="form-check-input"
-                                    type="checkbox"
-                                    name="isShock"
-                                    checked="checked" />
+                                       type="checkbox"
+                                       name="isShock"
+                                       checked="checked" />
                             {% else %}
                                 <input class="form-check-input"
-                                    type="checkbox"
-                                    name="isShock" />
+                                       type="checkbox"
+                                       name="isShock" />
                             {% endif %}
                             <label class="form-check-label"
-                                for="flexSwitchCheckDefault">
+                                   for="flexSwitchCheckDefault">
                                 {{ 'Is Shock'|trans }}
                             </label>
                         </div>
                         <div class="form-check form-switch">
                             {% if filters.isWithDoc %}
                                 <input class="form-check-input"
-                                    type="checkbox"
-                                    name="isWithDoc"
-                                    checked="checked" />
+                                       type="checkbox"
+                                       name="isWithDoc"
+                                       checked="checked" />
                             {% else %}
                                 <input class="form-check-input"
-                                    type="checkbox"
-                                    name="isWithDoc" />
+                                       type="checkbox"
+                                       name="isWithDoc" />
                             {% endif %}
                             <label class="form-check-label"
-                                for="flexSwitchCheckDefault">
+                                   for="flexSwitchCheckDefault">
                                 {{ 'Is with Physician'|trans }}
                             </label>
                         </div>
                         <div class="form-check form-switch">
                             {% if filters.isPreg %}
                                 <input class="form-check-input"
-                                    type="checkbox"
-                                    name="isPreg"
-                                    checked="checked" />
+                                       type="checkbox"
+                                       name="isPreg"
+                                       checked="checked" />
                             {% else %}
                                 <input class="form-check-input"
-                                    type="checkbox"
-                                    name="isPreg" />
+                                       type="checkbox"
+                                       name="isPreg" />
                             {% endif %}
                             <label class="form-check-label"
-                                for="flexSwitchCheckDefault">
+                                   for="flexSwitchCheckDefault">
                                 {{ 'Is Pregnant'|trans }}
                             </label>
                         </div>
                         <div class="form-check form-switch">
                             {% if filters.isWork %}
                                 <input class="form-check-input"
-                                    type="checkbox"
-                                    name="isWork"
-                                    checked="checked" />
+                                       type="checkbox"
+                                       name="isWork"
+                                       checked="checked" />
                             {% else %}
                                 <input class="form-check-input"
-                                    type="checkbox"
-                                    name="isWork" />
+                                       type="checkbox"
+                                       name="isWork" />
                             {% endif %}
                             <label class="form-check-label"
-                                for="flexSwitchCheckDefault">
+                                   for="flexSwitchCheckDefault">
                                 {{ 'Is Work Accident'|trans }}
                             </label>
                         </div>
+                        </p>
 
                         {% if filters.sortBy %}
                             <input type="hidden"
@@ -811,6 +754,140 @@
                                 name="orderBy"
                                 value="{{ filters.orderBy }}" />
                         {% endif %}
+
+                        <h5 class="card-title">
+                            {{ 'Filter by Transport'|trans }}
+                        </h5>
+                        <p>
+                            <select class="form-select"
+                                    name="assignment"
+                                    aria-label="filterAssignment">
+                                {% if filters.assignment == null %}
+                                    <option value="" selected>
+                                        {{
+                                        'Filter by Assignment'|trans(
+                                            {},
+                                            'forms'
+                                        )
+                                        }}
+                                    </option>
+                                {% else %}
+                                    <option value="">
+                                        {{
+                                        'Stop filtering by Assignment'|trans(
+                                            {},
+                                            'forms'
+                                        )
+                                        }}
+                                    </option>
+                                {% endif %}
+                                {% for item in assignments %}
+                                    {% if
+                                        item.assignment == filters.assignment
+                                        and item.assignment != '' %}
+                                        <option value="{{ item.assignment|url_encode }}"
+                                                selected>
+                                            {{ item.assignment }}
+                                        </option>
+                                    {% elseif
+                                        item.assignment == 0
+                                        or item.assignment == null %}
+                                        <!-- empty -->
+                                    {% else %}
+                                        <option value="{{ item.assignment|url_encode }}">
+                                            {{ item.assignment }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </p>
+                        <p>
+                            <select class="form-select"
+                                    name="occasion"
+                                    aria-label="filterOccasion">
+                                {% if filters.occasion == null %}
+                                    <option value="" selected>
+                                        {{
+                                        'Filter by Occasion'|trans(
+                                            {},
+                                            'forms'
+                                        )
+                                        }}
+                                    </option>
+                                {% else %}
+                                    <option value="">
+                                        {{
+                                        'Stop filtering by Occasion'|trans(
+                                            {},
+                                            'forms'
+                                        )
+                                        }}
+                                    </option>
+                                {% endif %}
+                                {% for item in occasions %}
+                                    {% if
+                                        item.occasion == filters.occasion
+                                        and item.occasion != '' %}
+                                        <option value="{{ item.occasion|url_encode }}"
+                                                selected>
+                                            {{ item.occasion }}
+                                        </option>
+                                    {% elseif
+                                        item.occasion == ''
+                                        or item.occasion == null %}
+                                        <!-- empty -->
+                                    {% else %}
+                                        <option value="{{ item.occasion|url_encode }}">
+                                            {{ item.occasion }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </p>
+                        <p>
+                            <select class="form-select"
+                                    name="transport"
+                                    aria-label="filterTransport">
+                                {% if filters.modeOfTransport == null %}
+                                    <option value="" selected>
+                                        {{
+                                        'Filter by mode of Transport'|trans(
+                                            {},
+                                            'forms'
+                                        )
+                                        }}
+                                    </option>
+                                {% else %}
+                                    <option value="">
+                                        {{
+                                        'Stop filtering by mode of Transport'|trans(
+                                            {},
+                                            'forms'
+                                        )
+                                        }}
+                                    </option>
+                                {% endif %}
+                                {% for item in transports %}
+                                    {% if
+                                        item.modeOfTransport
+                                        == filters.modeOfTransport
+                                        and item.modeOfTransport != '' %}
+                                        <option value="{{ item.modeOfTransport|url_encode }}"
+                                                selected>
+                                            {{ item.modeOfTransport }}
+                                        </option>
+                                    {% elseif
+                                        item.modeOfTransport == ''
+                                        or item.modeOfTransport == null %}
+                                        <!-- empty -->
+                                    {% else %}
+                                        <option value="{{ item.modeOfTransport|url_encode }}">
+                                            {{ item.modeOfTransport }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </p>
 
                         <div class="float-end">
                             <button type="submit"
@@ -1005,6 +1082,18 @@
                                 id="isWork"
                                 name="isWork"
                                 value="{{ filters.isWork }}" />
+                        {% endif %}
+                        {% if filters.speciality %}
+                            <input type="hidden"
+                                   id="speciality"
+                                   name="speciality"
+                                   value="{{ filters.speciality }}" />
+                        {% endif %}
+                        {% if filters.specialityDetail %}
+                            <input type="hidden"
+                                   id="specialityDetail"
+                                   name="specialityDetail"
+                                   value="{{ filters.specialityDetail }}" />
                         {% endif %}
 
                         <div class="float-end">
