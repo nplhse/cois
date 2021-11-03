@@ -479,7 +479,8 @@
                                 {% endif %}
                                 {% for item in specialities %}
                                     {% if
-                                        item.speciality == filters.speciality %}
+                                        item.speciality == filters.speciality
+                                            and item.speciality != '' %}
                                         <option value="{{ item.speciality }}"
                                             selected>
                                             {{ item.speciality }}
@@ -497,8 +498,6 @@
                             </select>
                         </p>
                         <p>
-                            {{ dump(specialityDetails) }}
-
                             <select class="form-select"
                                 name="specialityDetail"
                                 aria-label="filterSpecialityDetail">
@@ -524,7 +523,8 @@
                                 {% for item in specialityDetails %}
                                     {% if
                                         item.specialityDetail
-                                            == filters.specialityDetail %}
+                                            == filters.specialityDetail
+                                            and item.specialityDetail != '' %}
                                         <option value="{{
                                             item.specialityDetail
                                             }}"
