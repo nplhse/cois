@@ -58,6 +58,7 @@ class HospitalRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('h')
             ->select('h.name, h.id')
             ->distinct(true)
+            ->orderBy('h.name', 'ASC')
             ->getQuery()
             ->getArrayResult()
             ;
@@ -68,6 +69,7 @@ class HospitalRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('h')
             ->select('h.supplyArea as element')
             ->distinct(true)
+            ->orderBy('h.supplyArea', 'ASC')
             ->getQuery()
             ->getArrayResult()
             ;
@@ -78,6 +80,7 @@ class HospitalRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('h')
             ->select('h.dispatchArea as element')
             ->distinct(true)
+            ->orderBy('h.dispatchArea', 'ASC')
             ->getQuery()
             ->getArrayResult()
             ;

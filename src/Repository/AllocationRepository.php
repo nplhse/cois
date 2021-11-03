@@ -127,7 +127,7 @@ class AllocationRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('a')
             ->select('DISTINCT a.PZCText, a.PZC')
-            ->addOrderBy('a.PZCText', 'DESC')
+            ->addOrderBy('a.PZCText', 'ASC')
             ->getQuery()
             ->getResult();
 
@@ -138,7 +138,7 @@ class AllocationRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('a')
             ->select('DISTINCT a.assignment')
-            ->addOrderBy('a.assignment', 'DESC')
+            ->addOrderBy('a.assignment', 'ASC')
             ->getQuery()
             ->getResult();
 
@@ -149,7 +149,7 @@ class AllocationRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('a')
             ->select('DISTINCT a.occasion')
-            ->addOrderBy('a.occasion', 'DESC')
+            ->addOrderBy('a.occasion', 'ASC')
             ->getQuery()
             ->getResult();
 
@@ -160,7 +160,7 @@ class AllocationRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('a')
             ->select('DISTINCT a.modeOfTransport')
-            ->addOrderBy('a.modeOfTransport', 'DESC')
+            ->addOrderBy('a.modeOfTransport', 'ASC')
             ->getQuery()
             ->getResult();
 
