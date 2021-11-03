@@ -1765,6 +1765,10 @@
         <source>Filter by Transport</source>
         <target>Filtern nach Transportkriterien</target>
       </trans-unit>
+      <trans-unit id="YdNL0Ec" resname="Show only Allocations from your hospital">
+        <source>Show only Allocations from your hospital</source>
+        <target>Zeige nur Einsätze meiner Klinik</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

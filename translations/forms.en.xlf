@@ -461,6 +461,14 @@
         <source>Stop filtering by Speciality Detail</source>
         <target>Stop filtering by Speciality Detail</target>
       </trans-unit>
+      <trans-unit id="0jvOxQO" resname="Filter by Hospital">
+        <source>Filter by Hospital</source>
+        <target>Filter by Hospital</target>
+      </trans-unit>
+      <trans-unit id="y_34xS7" resname="Stop filtering by Hospital">
+        <source>Stop filtering by Hospital</source>
+        <target>Stop filtering by Hospital</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
