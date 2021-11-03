@@ -481,7 +481,7 @@
                                             and item.element != '' %}
                                         <option value="{{ item.element }}"
                                             selected>
-                                            {{ item.element }}
+                                            {{ item.element|trans }}
                                         </option>
                                     {% elseif
                                         item.element == ''
@@ -489,7 +489,7 @@
                                         <!-- empty -->
                                     {% else %}
                                         <option value="{{ item.element }}">
-                                            {{ item.element }}
+                                            {{ item.element|trans }}
                                         </option>
                                     {% endif %}
                                 {% endfor %}
@@ -525,7 +525,7 @@
                                             and item.element != '' %}
                                         <option value="{{ item.element }}"
                                             selected>
-                                            {{ item.element }}
+                                            {{ item.element|trans }}
                                         </option>
                                     {% elseif
                                         item.element == ''
@@ -533,7 +533,7 @@
                                         <!-- empty -->
                                     {% else %}
                                         <option value="{{ item.element }}">
-                                            {{ item.element }}
+                                            {{ item.element|trans }}
                                         </option>
                                     {% endif %}
                                 {% endfor %}

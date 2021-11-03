@@ -469,6 +469,38 @@
         <source>Stop filtering by Hospital</source>
         <target>Stop filtering by Hospital</target>
       </trans-unit>
+      <trans-unit id="GtAJV0x" resname="Filter by Supply Area">
+        <source>Filter by Supply Area</source>
+        <target>Filter by Supply Area</target>
+      </trans-unit>
+      <trans-unit id="f38tkoB" resname="Stop filtering by Supply Area">
+        <source>Stop filtering by Supply Area</source>
+        <target>Stop filtering by Supply Area</target>
+      </trans-unit>
+      <trans-unit id="nUJa5fw" resname="Filter by Dispatch Area">
+        <source>Filter by Dispatch Area</source>
+        <target>Filter by Dispatch Area</target>
+      </trans-unit>
+      <trans-unit id="Kh2cG2_" resname="Stop filtering by Dispatch Area">
+        <source>Stop filtering by Dispatch Area</source>
+        <target>Stop filtering by Dispatch Area</target>
+      </trans-unit>
+      <trans-unit id="L9y1ynv" resname="Filter by Location">
+        <source>Filter by Location</source>
+        <target>Filter by Location</target>
+      </trans-unit>
+      <trans-unit id="Y7K4D5." resname="Stop filtering by Location">
+        <source>Stop filtering by Location</source>
+        <target>Stop filtering by Location</target>
+      </trans-unit>
+      <trans-unit id="BZ07sXi" resname="Filter by Size">
+        <source>Filter by Size</source>
+        <target>Filter by Size</target>
+      </trans-unit>
+      <trans-unit id="H156_l5" resname="Stop filtering by Size">
+        <source>Stop filtering by Size</source>
+        <target>Stop filtering by Size</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
