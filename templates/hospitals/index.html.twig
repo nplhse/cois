@@ -354,63 +354,200 @@
 
                     {{ filter.search(filters.search) }}
 
-                    <h5 class="card-title">
-                        {{ 'Filter by SupplyArea'|trans }}
-                    </h5>
-                    <p>
-                        {{
-                            filter.tagFilter(
-                                supplyAreas,
-                                'supplyArea',
-                                filters.supplyArea,
-                                'app_hospital_index',
-                                'No SupplyAreas found'
-                            )
-                        }}
-                    </p>
+                    <form>
+                        <h5 class="card-title">
+                            {{ 'Filter by SupplyArea'|trans }}
+                        </h5>
+                        <p>
+                            <select class="form-select"
+                                name="supplyArea"
+                                aria-label="filterSupplyArea">
+                                {% if filters.supplyArea == null %}
+                                    <option value="" selected>
+                                        {{
+                                            'Filter by Supply Area'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
+                                    </option>
+                                {% else %}
+                                    <option value="">
+                                        {{
+                                            'Stop filtering by Supply Area'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
+                                    </option>
+                                {% endif %}
+                                {% for item in supplyAreas %}
+                                    {% if
+                                        item.element == filters.supplyArea
+                                            and item.element != '' %}
+                                        <option value="{{ item.element }}"
+                                            selected>
+                                            {{ item.element }}
+                                        </option>
+                                    {% elseif
+                                        item.element == ''
+                                            or item.element == null %}
+                                        <!-- empty -->
+                                    {% else %}
+                                        <option value="{{ item.element }}">
+                                            {{ item.element }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </p>
 
-                    <h5 class="card-title">
-                        {{ 'Filter by DispatchArea'|trans }}
-                    </h5>
-                    <p>
-                        {{
-                            filter.tagFilter(
-                                dispatchAreas,
-                                'dispatchArea',
-                                filters.dispatchArea,
-                                'app_hospital_index',
-                                'No DispatchArea found'
-                            )
-                        }}
-                    </p>
+                        <h5 class="card-title">
+                            {{ 'Filter by DispatchArea'|trans }}
+                        </h5>
+                        <p>
+                            <select class="form-select"
+                                name="dispatchArea"
+                                aria-label="filterDispatchArea">
+                                {% if filters.dispatchArea == null %}
+                                    <option value="" selected>
+                                        {{
+                                            'Filter by Dispatch Area'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
+                                    </option>
+                                {% else %}
+                                    <option value="">
+                                        {{
+                                            'Stop filtering by Dispatch Area'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
+                                    </option>
+                                {% endif %}
+                                {% for item in dispatchAreas %}
+                                    {% if
+                                        item.element == filters.dispatchArea
+                                            and item.element != '' %}
+                                        <option value="{{ item.element }}"
+                                            selected>
+                                            {{ item.element }}
+                                        </option>
+                                    {% elseif
+                                        item.element == ''
+                                            or item.element == null %}
+                                        <!-- empty -->
+                                    {% else %}
+                                        <option value="{{ item.element }}">
+                                            {{ item.element }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </p>
 
-                    <h5 class="card-title">
-                        {{ 'Filter by Location'|trans }}
-                    </h5>
-                    <p class="mb-2">
-                        {{
-                            filter.tagFilter(
-                                locations,
-                                'location',
-                                filters.location,
-                                'app_hospital_index'
-                            )
-                        }}
-                    </p>
+                        <h5 class="card-title">
+                            {{ 'Filter by Location'|trans }}
+                        </h5>
+                        <p class="mb-2">
+                            <select class="form-select"
+                                name="location"
+                                aria-label="filterLocation">
+                                {% if filters.location == null %}
+                                    <option value="" selected>
+                                        {{
+                                            'Filter by Location'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
+                                    </option>
+                                {% else %}
+                                    <option value="">
+                                        {{
+                                            'Stop filtering by Location'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
+                                    </option>
+                                {% endif %}
+                                {% for item in locations %}
+                                    {% if
+                                        item.element == filters.location
+                                            and item.element != '' %}
+                                        <option value="{{ item.element }}"
+                                            selected>
+                                            {{ item.element }}
+                                        </option>
+                                    {% elseif
+                                        item.element == ''
+                                            or item.element == null %}
+                                        <!-- empty -->
+                                    {% else %}
+                                        <option value="{{ item.element }}">
+                                            {{ item.element }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </p>
 
-                    <h5 class="card-title">
-                        {{ 'Filter by Size'|trans }}
-                    </h5>
-                    <p class="mb-2">
-                        {{
-                            filter.tagFilter(
-                                size,
-                                'size',
-                                filters.size,
-                                'app_hospital_index'
-                            )
-                        }}
-                    </p>
+                        <h5 class="card-title">
+                            {{ 'Filter by Size'|trans }}
+                        </h5>
+                        <p class="mb-2">
+                            <select class="form-select"
+                                name="size"
+                                aria-label="filterSize">
+                                {% if filters.size == null %}
+                                    <option value="" selected>
+                                        {{
+                                            'Filter by Size'|trans({}, 'forms')
+                                        }}
+                                    </option>
+                                {% else %}
+                                    <option value="">
+                                        {{
+                                            'Stop filtering by Size'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
+                                    </option>
+                                {% endif %}
+                                {% for item in sizes %}
+                                    {% if
+                                        item.element == filters.size
+                                            and item.element != '' %}
+                                        <option value="{{ item.element }}"
+                                            selected>
+                                            {{ item.element }}
+                                        </option>
+                                    {% elseif
+                                        item.element == ''
+                                            or item.element == null %}
+                                        <!-- empty -->
+                                    {% else %}
+                                        <option value="{{ item.element }}">
+                                            {{ item.element }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </p>
+
+                        <div class="float-end">
+                            <button type="submit"
+                                class="btn btn-outline-primary">
+                                {{ 'Apply filters'|trans({}, 'forms') }}
+                                <i class="bi bi-arrow-right-square"></i>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
