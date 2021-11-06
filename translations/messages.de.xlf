@@ -1639,7 +1639,7 @@
       </trans-unit>
       <trans-unit id="lchrRcd" resname="Urgency Statistics">
         <source>Urgency Statistics</source>
-        <target>Dringlichkeit</target>
+        <target>Statistiken nach Dringlichkeit</target>
       </trans-unit>
       <trans-unit id="3yDU158" resname="Distribution of urgencies">
         <source>Distribution of urgencies</source>
@@ -1647,11 +1647,11 @@
       </trans-unit>
       <trans-unit id="JBwB1Vo" resname="PZC">
         <source>PZC</source>
-        <target>PZC</target>
+        <target>Zuweigungscode</target>
       </trans-unit>
       <trans-unit id="6qRk1aA" resname="PZC Statistics">
         <source>PZC Statistics</source>
-        <target>PZC Statistiken</target>
+        <target>Statistiken nach Zuweisungscode</target>
       </trans-unit>
       <trans-unit id="Nvhl36K" resname="Distribution of PZCs">
         <source>Distribution of PZCs</source>
