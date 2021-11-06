@@ -388,7 +388,7 @@
                                 {{ 'allocations.field.infectious'|trans }}
                             </h5>
                             <p {{
-                                allocation.isInfectious == 'Keine'
+                                allocation.isInfectious == 'Keine' or allocation.isInfectious == 'I-'
                                     ? 'class="text-warning" fw-bold'
                                     : ''
                                 }}>

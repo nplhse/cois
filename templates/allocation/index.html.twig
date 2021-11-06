@@ -260,7 +260,7 @@
                                     {% endif %}
                                 </span><br />
                                 <span class="text-warning">
-                                    {% if allocation.isInfectious == 'Keine' %}
+                                    {% if allocation.isInfectious == 'Keine' or allocation.isInfectious == 'I-' %}
 
                                     {% else %}
                                         {{ allocation.isInfectious }}
