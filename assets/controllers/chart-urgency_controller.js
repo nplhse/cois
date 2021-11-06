@@ -5,8 +5,6 @@ export default class extends Controller {
     static values = {
         url: String,
         target: String,
-        schema: String,
-        sort: Boolean,
     };
 
     connect() {
@@ -23,50 +21,22 @@ export default class extends Controller {
             .append("g")
             .attr("transform", `translate(100, 100)`);
 
-        if (this.hasSortValue && this.sortValue === false) {
-            var pie = d3
-                .pie()
-                .value((d) => d.count)
-                .sort(null)
-                .padAngle(0.025)(data);
-        } else {
-            var pie = d3
-                .pie()
-                .value((d) => d.count)
-                .padAngle(0.025)(data);
-        }
+        var pie = d3
+            .pie()
+            .value((d) => d.count)
+            .sort(null)
+            .padAngle(0.025)(data);
 
         let arcMkr = d3.arc().innerRadius(50).outerRadius(100);
 
-        if (this.hasSchemaValue) {
-            if (this.schemaValue === "urgency") {
-                var scC = d3
-                    .scaleOrdinal()
-                    .domain(data)
-                    .range([
-                        d3.schemeTableau10[2],
-                        d3.schemeTableau10[5],
-                        d3.schemeTableau10[4],
-                    ]);
-            } else if (this.schemaValue === "gender") {
-                var scC = d3
-                    .scaleOrdinal()
-                    .domain(data)
-                    .range([
-                        d3.schemeTableau10[7],
-                        d3.schemeTableau10[3],
-                        d3.schemeTableau10[9],
-                    ]);
-            } else {
-                var scC = d3
-                    .scaleOrdinal(d3.schemeTableau10)
-                    .domain(pie.map((d) => d.index));
-            }
-        } else {
-            var scC = d3
-                .scaleOrdinal(d3.schemeTableau10)
-                .domain(pie.map((d) => d.index));
-        }
+        var scC = d3
+            .scaleOrdinal()
+            .domain(data)
+            .range([
+                d3.schemeTableau10[2],
+                d3.schemeTableau10[5],
+                d3.schemeTableau10[4],
+            ]);
 
         svg.selectAll("path")
             .data(pie)

@@ -41,12 +41,17 @@
                 {{ 'Distribution of genders'|trans }}
             </p>
             <div class="row"
-                data-controller="piechart"
-                data-piechart-target-value="#graph"
-                data-piechart-schema-value="gender"
-                data-piechart-url-value="{{ url('app_data_gender') }}">
+                {{
+                stimulus_controller(
+                    'chart-gender',
+                    {
+                        target: '#graph1',
+                        url: url('app_api_gender')
+                    }
+                )
+                }}>
                 <div class="col-4 justify-content-center">
-                    <svg id="graph" class="m-2" width="200" height="200"></svg>
+                    <svg id="graph1" class="m-2" width="200" height="200"></svg>
                 </div>
                 <div class="col-8">
                     <table id="table" class="objecttable table">

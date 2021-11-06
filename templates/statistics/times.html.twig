@@ -41,9 +41,15 @@
                 {{ 'Distribution of allocations by hours'|trans }}
             </p>
             <div class="row mb-3"
-                data-controller="curve"
-                data-curve-target-value="#graph1"
-                data-curve-url-value="{{ url('app_data_time') }}">
+                {{
+                stimulus_controller(
+                    'chart-times-perhours',
+                    {
+                        target: '#graph1',
+                        url: url('app_data_time')
+                    }
+                )
+                }}>
                 <div class="">
                     <svg id="graph1" width="750" height="400"></svg>
                 </div>
@@ -55,9 +61,15 @@
                 {{ 'Distribution of allocations by days'|trans }}
             </p>
             <div class="row"
-                data-controller="barplot"
-                data-barplot-target-value="#graph2"
-                data-barplot-url-value="{{ url('app_data_days') }}">
+                {{
+                stimulus_controller(
+                    'chart-times-perweekday',
+                    {
+                        target: '#graph2',
+                        url: url('app_api_days')
+                    }
+                )
+                }}>
                 <div class="">
                     <svg id="graph2" width="750" height="400"></svg>
                 </div>

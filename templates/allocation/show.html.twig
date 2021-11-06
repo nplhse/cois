@@ -3,7 +3,9 @@
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
 
 {% block title %}
-    {{ 'View Allocation'|trans }}: {{ 'allocations.show.title'|trans }} (#{{ allocation.id }}) - {{ parent() }}
+    {{ 'View Allocation'|trans }}: {{ 'allocations.show.title'|trans }} (#{{
+        allocation.id
+    }}) - {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -388,7 +390,8 @@
                                 {{ 'allocations.field.infectious'|trans }}
                             </h5>
                             <p {{
-                                allocation.isInfectious == 'Keine' or allocation.isInfectious == 'I-'
+                                allocation.isInfectious == 'Keine'
+                                    or allocation.isInfectious == 'I-'
                                     ? 'class="text-warning" fw-bold'
                                     : ''
                                 }}>
