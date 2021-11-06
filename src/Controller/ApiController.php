@@ -7,6 +7,7 @@ use App\DataTransferObjects\GenderStatisticsDto;
 use App\DataTransferObjects\PZCStatisticsDto;
 use App\DataTransferObjects\TimeStatisticsDto;
 use App\DataTransferObjects\UrgencyStatisticsDto;
+use App\Query\AllocationAgeQuery;
 use App\Query\AllocationQuery;
 use App\Repository\HospitalRepository;
 use App\Service\RequestParamService;
@@ -56,7 +57,18 @@ class ApiController extends AbstractController
         return $response;
     }
 
-    #[Route('/api/days.json', name: 'app_data_days')]
+    #[Route('/api/age.json', name: 'app_api_age')]
+    public function age(Request $request, AllocationAgeQuery $query): Response
+    {
+        $this->filterByHospital($request);
+
+        $allocations = $query->execute();
+        $result = $this->statisticsService->generateAgeResults($allocations);
+
+        return new JsonResponse($result);
+    }
+
+    #[Route('/api/days.json', name: 'app_api_days')]
     public function days(Request $request): Response
     {
         $this->filterByHospital($request);
@@ -69,7 +81,7 @@ class ApiController extends AbstractController
         return new JsonResponse($results);
     }
 
-    #[Route('/api/gender.json', name: 'app_data_gender')]
+    #[Route('/api/gender.json', name: 'app_api_gender')]
     public function gender(Request $request): Response
     {
         $this->filterByHospital($request);
@@ -108,7 +120,7 @@ class ApiController extends AbstractController
         return new JsonResponse($results);
     }
 
-    #[Route('/api/urgency.json', name: 'app_data_urgency')]
+    #[Route('/api/urgency.json', name: 'app_api_urgency')]
     public function urgency(Request $request): Response
     {
         $this->filterByHospital($request);

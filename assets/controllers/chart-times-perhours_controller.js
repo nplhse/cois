@@ -21,7 +21,7 @@ export default class extends Controller {
         let makeScale = function (accessor, range) {
             return d3
                 .scaleLinear()
-                .domain([0, d3.max(data, accessor)])
+                .domain([0, d3.max(data, accessor) * 1.1])
                 .range(range)
                 .nice();
         };
