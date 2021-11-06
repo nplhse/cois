@@ -3,7 +3,7 @@
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
 
 {% block title %}
-    {{ hospital.name }} - {{ parent() }}
+    {{ 'View Hospital'|trans }}: {{ hospital.name }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -21,7 +21,7 @@
                             label: 'Hospitals'|trans
                         },
                         {
-                            label: hospital.name
+                            label: 'View Hospital'|trans
                         }
                     ]
                 )
