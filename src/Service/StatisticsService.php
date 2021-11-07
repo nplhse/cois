@@ -118,6 +118,34 @@ class StatisticsService
         return $results;
     }
 
+    public function generateSpecialityResults(object $allocations): array
+    {
+        $results = [];
+        $total = 0;
+
+        foreach ($allocations->getItems() as $allocation) {
+            $total = $total + $allocation->getCounter();
+        }
+
+        foreach ($allocations->getItems() as $allocation) {
+            if (0 === $allocation->getSpeciality()) {
+                break;
+            }
+
+            // For SVG creation, only returning percentage number
+            $percent = $this->getValueInPercent($allocation->getCounter(), $total);
+
+            $results[] = [
+                'speciality' => $allocation->getSpeciality(),
+                'count' => $allocation->getCounter(),
+                'percent' => $percent,
+                'label' => $allocation->getSpeciality(),
+            ];
+        }
+
+        return $results;
+    }
+
     public function generatePZCResults(object $allocations): array
     {
         $results = [];

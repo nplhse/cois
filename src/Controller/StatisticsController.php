@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\DataTransferObjects\PZCStatisticsDto;
+use App\DataTransferObjects\SpecialityStatisticsDto;
 use App\Query\AllocationQuery;
 use App\Repository\HospitalRepository;
 use App\Service\RequestParamService;
@@ -49,6 +50,40 @@ class StatisticsController extends AbstractController
     public function gender(): Response
     {
         return $this->render('statistics/gender.html.twig', [
+        ]);
+    }
+
+    #[Route('/statistics/speciality', name: 'app_statistics_speciality')]
+    public function speciality(Request $request): Response
+    {
+        if ($this->getUser()) {
+            $paramService = new RequestParamService($request);
+            $hospitalId = (int) $paramService->getHospital();
+
+            if (!empty($hospitalId)) {
+                $hospital = $this->hospitalRepository->findById($hospitalId);
+
+                if ($this->isGranted('viewStats', $hospital)) {
+                    $this->allocationQuery->filterByHospital($hospital);
+                } else {
+                    throw $this->createAccessDeniedException('Cannot access this resource.');
+                }
+            }
+        }
+
+        $this->allocationQuery->groupBy('speciality');
+        $allocations = $this->allocationQuery->execute()->hydrateResultsAs(SpecialityStatisticsDto::class);
+
+        $specialityResults = $this->statisticsService->generateSpecialityResults($allocations);
+
+        $this->allocationQuery->groupBy('specialityDetail');
+        $allocations = $this->allocationQuery->execute()->hydrateResultsAs(SpecialityStatisticsDto::class);
+
+        $specialityDetailResults = $this->statisticsService->generateSpecialityResults($allocations);
+
+        return $this->render('statistics/speciality.html.twig', [
+            'specialityResults' => $specialityResults,
+            'specialityDetailResults' => $specialityDetailResults,
         ]);
     }
 

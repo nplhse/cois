@@ -38,6 +38,19 @@
                     <div class="col-4">
                         <div class="card">
                             <div class="card-body text-center">
+                                <a href="{{ path('app_statistics_age') }}">
+                                    <i class="bi bi-alarm"
+                                        style="font-size: 5rem; color: cornflowerblue;">
+
+                                    </i><br />
+                                    {{ 'Age'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body text-center">
                                 <a href="{{ path('app_statistics_gender') }}">
                                     <i class="bi bi-gender-ambiguous"
                                         style="font-size: 5rem; color: cornflowerblue;">
@@ -61,6 +74,21 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <a href="{{ path('app_statistics_urgency') }}">
+                                    <i class="bi bi-exclamation-circle"
+                                        style="font-size: 5rem; color: cornflowerblue;">
+
+                                    </i><br />
+                                    {{ 'Urgency'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-4">
                         <div class="card">
                             <div class="card-body text-center">
@@ -74,17 +102,19 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row mt-4">
                     <div class="col-4">
                         <div class="card">
                             <div class="card-body text-center">
-                                <a href="{{ path('app_statistics_urgency') }}">
-                                    <i class="bi bi-exclamation-circle"
+                                <a href="{{
+                                    path(
+                                        'app_statistics_speciality'
+                                    )
+                                    }}">
+                                    <i class="bi bi-file"
                                         style="font-size: 5rem; color: cornflowerblue;">
 
                                     </i><br />
-                                    {{ 'Urgency'|trans }}
+                                    {{ 'Speciality'|trans }}
                                 </a>
                             </div>
                         </div>

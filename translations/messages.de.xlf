@@ -1769,6 +1769,50 @@
         <source>Show only Allocations from your hospital</source>
         <target>Zeige nur Einsätze meiner Klinik</target>
       </trans-unit>
+      <trans-unit id="pBMNfSw" resname="Rank">
+        <source>Rank</source>
+        <target>Rang</target>
+      </trans-unit>
+      <trans-unit id="ldZMrM4" resname="Bar">
+        <source>Bar</source>
+        <target>Anteil</target>
+      </trans-unit>
+      <trans-unit id="N7rElSv" resname="Count">
+        <source>Count</source>
+        <target>Anzahl</target>
+      </trans-unit>
+      <trans-unit id="cW1jOxJ" resname="Percent">
+        <source>Percent</source>
+        <target>Prozent</target>
+      </trans-unit>
+      <trans-unit id="dxp9bkY" resname="Speciality">
+        <source>Speciality</source>
+        <target>Fachgebiete</target>
+      </trans-unit>
+      <trans-unit id="i9q9ow6" resname="Speciality Statistics">
+        <source>Speciality Statistics</source>
+        <target>Statistiken nach Fachgebieten</target>
+      </trans-unit>
+      <trans-unit id="84l0uXO" resname="Distribution of Specialities">
+        <source>Distribution of Specialities</source>
+        <target>Verteilung der Fachgebiete</target>
+      </trans-unit>
+      <trans-unit id="0uQJvY7" resname="No Speciality">
+        <source>No Speciality</source>
+        <target>Ohne Fachgebiet</target>
+      </trans-unit>
+      <trans-unit id="EEX4ACX" resname="Distribution of Speciality Details">
+        <source>Distribution of Speciality Details</source>
+        <target>Verteilung nach Fachbereichen</target>
+      </trans-unit>
+      <trans-unit id="jR67qUo" resname="Speciality Detail">
+        <source>Speciality Detail</source>
+        <target>Fachbereich</target>
+      </trans-unit>
+      <trans-unit id="Ki1Io2l" resname="No Speciality Detail">
+        <source>No Speciality Detail</source>
+        <target>Ohne Fachbereich</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

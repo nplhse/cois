@@ -67,6 +67,22 @@ final class AllocationQuery
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.RMI, allocation.PZCText')
                 ->addOrderBy('counter', 'DESC');
+        } elseif ('speciality' === $this->property) {
+            $qb->select(
+                'allocation.speciality AS speciality',
+                'COUNT(allocation.speciality) AS counter',
+            )
+                ->from(Allocation::class, 'allocation')
+                ->groupBy('allocation.speciality')
+                ->addOrderBy('counter', 'DESC');
+        } elseif ('specialityDetail' === $this->property) {
+            $qb->select(
+                'allocation.specialityDetail AS speciality',
+                'COUNT(allocation.speciality) AS counter',
+            )
+                ->from(Allocation::class, 'allocation')
+                ->groupBy('allocation.specialityDetail')
+                ->addOrderBy('counter', 'DESC');
         }
 
         if (null !== $this->hospital) {

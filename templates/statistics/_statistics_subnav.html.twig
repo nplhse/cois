@@ -49,6 +49,23 @@
         </li>
     {% endif %}
     {% if
+        app.request.attributes.get('_route')
+            starts with 'app_statistics_urgency' %}
+        <li class="list-group-item active">
+            <i class="bi bi-exclamation-circle-fill"></i>
+            <a class="text-light" href="{{ path('app_statistics_urgency') }}">
+                {{ 'Urgency'|trans }}
+            </a>
+        </li>
+    {% else %}
+        <li class="list-group-item">
+            <i class="bi bi-exclamation-circle"></i>
+            <a href="{{ path('app_statistics_urgency') }}">
+                {{ 'Urgency'|trans }}
+            </a>
+        </li>
+    {% endif %}
+    {% if
         app.request.attributes.get('_route') starts with 'app_statistics_pzc' %}
         <li class="list-group-item active">
             <i class="bi bi-card-list"></i>
@@ -64,18 +81,19 @@
     {% endif %}
     {% if
         app.request.attributes.get('_route')
-            starts with 'app_statistics_urgency' %}
+            starts with 'app_statistics_speciality' %}
         <li class="list-group-item active">
-            <i class="bi bi-exclamation-circle-fill"></i>
-            <a class="text-light" href="{{ path('app_statistics_urgency') }}">
-                {{ 'Urgency'|trans }}
+            <i class="bi bi-file-fill"></i>
+            <a class="text-light"
+                href="{{ path('app_statistics_speciality') }}">
+                {{ 'Speciality'|trans }}
             </a>
         </li>
     {% else %}
         <li class="list-group-item">
-            <i class="bi bi-exclamation-circle"></i>
-            <a href="{{ path('app_statistics_urgency') }}">
-                {{ 'Urgency'|trans }}
+            <i class="bi bi-file"></i>
+            <a href="{{ path('app_statistics_speciality') }}">
+                {{ 'Speciality'|trans }}
             </a>
         </li>
     {% endif %}
