@@ -1751,7 +1751,7 @@
       </trans-unit>
       <trans-unit id="QtW6vxW" resname="Age Statistics">
         <source>Age Statistics</source>
-        <target>Alter</target>
+        <target>Statistiken nach Alter</target>
       </trans-unit>
       <trans-unit id="lqlsOll" resname="Distribution of ages by gender">
         <source>Distribution of ages by gender</source>

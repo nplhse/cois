@@ -38,6 +38,13 @@ class StatisticsController extends AbstractController
         ]);
     }
 
+    #[Route('/statistics/age', name: 'app_statistics_age')]
+    public function age(): Response
+    {
+        return $this->render('statistics/age.html.twig', [
+        ]);
+    }
+
     #[Route('/statistics/gender', name: 'app_statistics_gender')]
     public function gender(): Response
     {

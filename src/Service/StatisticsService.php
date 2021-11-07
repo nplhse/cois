@@ -29,6 +29,51 @@ class StatisticsService
         return $results;
     }
 
+    public function generateAgeResults(object $allocations): array
+    {
+        $results = [];
+        $total = 0;
+        $max = 0;
+
+        foreach ($allocations->getItems() as $allocation) {
+            $total = $total + $allocation['counter'];
+            if ($allocation['age'] > $max) {
+                $max = $allocation['age'];
+            }
+        }
+
+        $temp = [];
+
+        for ($i = 1; $i <= $max; ++$i) {
+            $temp[$i] = [];
+            $temp[$i]['age'] = $i;
+            $temp[$i]['male'] = 0;
+            $temp[$i]['female'] = 0;
+            $temp[$i]['other'] = 0;
+        }
+
+        foreach ($allocations->getItems() as $allocation) {
+            if ('M' == $allocation['gender']) {
+                $temp[$allocation['age']]['male'] = $allocation['counter'];
+            } elseif ('W' == $allocation['gender']) {
+                $temp[$allocation['age']]['female'] = $allocation['counter'];
+            } else {
+                $temp[$allocation['age']]['other'] = $allocation['counter'];
+            }
+        }
+
+        foreach ($temp as $row) {
+            $results[] = [
+                'age' => $row['age'],
+                'male' => $row['male'],
+                'female' => $row['female'],
+                'other' => $row['other'],
+            ];
+        }
+
+        return $results;
+    }
+
     public function generateGenderResults(object $allocations): array
     {
         $results = [];

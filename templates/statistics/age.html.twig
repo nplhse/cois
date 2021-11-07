@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'Age Statistics'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_statistics_index'),
+                            label: 'Statistics'|trans
+                        },
+                        {
+                            label: 'Age Statistics'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-3">
+            {{ include('statistics/_statistics_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <h1>
+                {{ 'Age Statistics'|trans }}
+            </h1>
+
+            <p>
+                {{ 'Distribution of ages by gender'|trans }}
+            </p>
+            <div class="row mb-3"
+                    {{
+                    stimulus_controller(
+                        'chart-ages',
+                        {
+                            target: '#graph1',
+                            url: url('app_api_age')
+                        }
+                    )
+                    }}>
+                <div class="">
+                    <svg id="graph1" width="750" height="400"></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
