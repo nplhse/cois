@@ -18,15 +18,23 @@ export default class extends Controller {
         let pxX = 700;
         let pxY = 380;
 
-        let makeScale = function (accessor, range) {
+        let makeScale = function (accessor, range, surplus = true) {
+            if (surplus) {
+                return d3
+                    .scaleLinear()
+                    .domain([0, d3.max(data, accessor) * 1.1])
+                    .range(range)
+                    .nice();
+            }
+
             return d3
                 .scaleLinear()
-                .domain([0, d3.max(data, accessor) * 1.1])
+                .domain([0, d3.max(data, accessor)])
                 .range(range)
                 .nice();
         };
 
-        let scX = makeScale((d) => d["age"], [0, pxX]);
+        let scX = makeScale((d) => d["age"], [0, pxX], false);
         let scY1 = makeScale((d) => d["male"], [pxY, 0]);
         let scY2 = makeScale((d) => d["male"], [pxY, 0]);
 
@@ -51,7 +59,7 @@ export default class extends Controller {
         const svg = d3
             .select(this.targetValue)
             .append("svg")
-            .attr("transform", `translate(40, 10)`);
+            .attr("transform", `translate(40, 20)`);
 
         var g1 = svg.append("g");
         var g2 = svg.append("g");
@@ -60,10 +68,10 @@ export default class extends Controller {
         drawData(g2, (d) => scY2(d["male"]), d3.curveNatural);
 
         g1.selectAll("circle").attr("fill", "red");
-        g1.selectAll("path").attr("stroke", d3.schemeTableau10[7]);
+        g1.selectAll("path").attr("stroke", "lightsalmon");
 
         g2.selectAll("circle").attr("fill", "blue");
-        g2.selectAll("path").attr("stroke", d3.schemeTableau10[3]);
+        g2.selectAll("path").attr("stroke", "lightblue");
 
         let axMkr = d3.axisLeft(scY1);
         axMkr(svg.append("g"));
@@ -78,5 +86,23 @@ export default class extends Controller {
         svg.append("g")
             .call(d3.axisTop(scX))
             .attr("transform", "translate(0," + pxY + ")");
+
+        var tr = d3
+            .select(".objecttable tbody")
+            .selectAll("tr")
+            .data(data)
+            .enter()
+            .append("tr");
+
+        var td = tr
+            .selectAll("td")
+            .data(function (d, i) {
+                return Object.values(d);
+            })
+            .enter()
+            .append("td")
+            .text(function (d) {
+                return d;
+            });
     }
 }

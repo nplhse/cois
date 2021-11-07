@@ -44,7 +44,7 @@ class StatisticsService
 
         $temp = [];
 
-        for ($i = 1; $i <= $max; ++$i) {
+        for ($i = 0; $i <= $max; ++$i) {
             $temp[$i] = [];
             $temp[$i]['age'] = $i;
             $temp[$i]['male'] = 0;

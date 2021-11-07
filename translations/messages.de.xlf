@@ -1755,7 +1755,7 @@
       </trans-unit>
       <trans-unit id="lqlsOll" resname="Distribution of ages by gender">
         <source>Distribution of ages by gender</source>
-        <target>Verteilung der Altersgruppen nach Geschlchtern</target>
+        <target>Verteilung der Altersgruppen nach Geschlechtern</target>
       </trans-unit>
       <trans-unit id="roZ1qYD" resname="Filter by Speciality">
         <source>Filter by Speciality</source>

@@ -41,17 +41,38 @@
                 {{ 'Distribution of ages by gender'|trans }}
             </p>
             <div class="row mb-3"
-                    {{
-                    stimulus_controller(
-                        'chart-ages',
-                        {
-                            target: '#graph1',
-                            url: url('app_api_age')
-                        }
-                    )
-                    }}>
-                <div class="">
+                {{
+                stimulus_controller(
+                    'chart-ages',
+                    {
+                        target: '#graph1',
+                        url: url('app_api_age')
+                    }
+                )
+                }}>
+                <div class="row">
                     <svg id="graph1" width="750" height="400"></svg>
+                </div>
+                <div class="row">
+                    <table id="table" class="objecttable table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Age
+                                </th>
+                                <th>
+                                    Male
+                                </th>
+                                <th>
+                                    Female
+                                </th>
+                                <th>
+                                    Other
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
             </div>
         </div>
