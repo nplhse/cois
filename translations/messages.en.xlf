@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="de" target-language="en" datatype="plaintext" original="file.ext">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -1752,11 +1752,11 @@
       </trans-unit>
       <trans-unit id="3iJEfZG" resname="Clear all filters">
         <source>Clear all filters</source>
-        <target>__Clear all filters</target>
+        <target>Clear all filters</target>
       </trans-unit>
       <trans-unit id="tK9fzsT" resname="Dispatch area">
         <source>Dispatch area</source>
-        <target>__Dispatch area</target>
+        <target>Dispatch area</target>
       </trans-unit>
       <trans-unit id="zenlipp" resname="Ja">
         <source>Ja</source>
@@ -1773,6 +1773,10 @@
       <trans-unit id="oa17QsI" resname="Mode of Transport">
         <source>Mode of Transport</source>
         <target>Mode of Transport</target>
+      </trans-unit>
+      <trans-unit id="Qhpd5yy" resname="Active Filters">
+        <source>Active Filters</source>
+        <target>Active Filters</target>
       </trans-unit>
     </body>
   </file>
