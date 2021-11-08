@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'Infection Statistics'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_statistics_index'),
+                            label: 'Statistics'|trans
+                        },
+                        {
+                            label: 'Infection Statistics'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-3">
+            {{ include('statistics/_statistics_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <h1>
+                {{ 'Infection Statistics'|trans }}
+            </h1>
+
+            <h2>
+                {{ 'Distribution of Infections'|trans }}
+            </h2>
+
+            <div data-controller="table">
+                <input class="form-control"
+                    type="search"
+                    data-table-target="source"
+                    data-action="input->table#filter"
+                    placeholder="Filter table" />
+
+                <table class="table table-hover">
+                    <thead>
+                        <th>
+                            {{ 'Rank'|trans }}
+                        </th>
+                        <th>
+                            {{ 'Infection'|trans }}
+                        </th>
+                        <th>
+                            {{ 'Bar'|trans }}
+                        </th>
+                        <th>
+                            {{ 'Count'|trans }}
+                        </th>
+                        <th>
+                            {{ 'Percent'|trans }}
+                        </th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        {% for infection in results %}
+                            <tr data-table-target="filterable"
+                                data-filter-key="{{ infection.label|lower }}">
+                                <td>
+                                    {{ loop.index }}
+                                </td>
+                                <td>
+                                    {{ infection.label }}
+                                </td>
+                                <td>
+                                    <svg width="100px" height="25px">
+                                        <g class="bars">
+                                            <rect fill="#3d5599"
+                                                width="100%"
+                                                height="25"></rect>;<rect fill="#cb4d3e"
+                                                width="{{
+                                                infection.percent
+                                                }}px"
+                                                height="25"></rect>
+                                        </g>
+                                    </svg>
+                                </td>
+                                <td>
+                                    {{ infection.count }}
+                                </td>
+                                <td>
+                                    {{ infection.percent }}%
+                                </td>
+                                <td>
+                                    <a href="#">
+                                        <i class="bi bi-search"></i><br />
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

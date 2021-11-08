@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\DataTransferObjects\InfectionStatisticsDto;
 use App\DataTransferObjects\PZCStatisticsDto;
 use App\DataTransferObjects\SpecialityStatisticsDto;
 use App\Query\AllocationQuery;
@@ -50,6 +51,34 @@ class StatisticsController extends AbstractController
     public function gender(): Response
     {
         return $this->render('statistics/gender.html.twig', [
+        ]);
+    }
+
+    #[Route('/statistics/infection', name: 'app_statistics_infection')]
+    public function infection(Request $request): Response
+    {
+        if ($this->getUser()) {
+            $paramService = new RequestParamService($request);
+            $hospitalId = (int) $paramService->getHospital();
+
+            if (!empty($hospitalId)) {
+                $hospital = $this->hospitalRepository->findById($hospitalId);
+
+                if ($this->isGranted('viewStats', $hospital)) {
+                    $this->allocationQuery->filterByHospital($hospital);
+                } else {
+                    throw $this->createAccessDeniedException('Cannot access this resource.');
+                }
+            }
+        }
+
+        $this->allocationQuery->groupBy('infection');
+        $allocations = $this->allocationQuery->execute()->hydrateResultsAs(InfectionStatisticsDto::class);
+
+        $results = $this->statisticsService->generateInfectionResults($allocations);
+
+        return $this->render('statistics/infection.html.twig', [
+            'results' => $results,
         ]);
     }
 

@@ -83,6 +83,14 @@ final class AllocationQuery
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.specialityDetail')
                 ->addOrderBy('counter', 'DESC');
+        } elseif ('infection' === $this->property) {
+            $qb->select(
+                'allocation.isInfectious AS infection',
+                'COUNT(allocation.isInfectious) AS counter',
+            )
+                ->from(Allocation::class, 'allocation')
+                ->groupBy('allocation.isInfectious')
+                ->addOrderBy('counter', 'DESC');
         }
 
         if (null !== $this->hospital) {
