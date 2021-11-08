@@ -319,8 +319,6 @@ class RequestParamService
             return 'desc';
         }
 
-        $this->filterIsSet = true;
-
         return $order;
     }
 
@@ -331,8 +329,6 @@ class RequestParamService
         if (empty($sortBy)) {
             return null;
         }
-
-        $this->filterIsSet = true;
 
         return $sortBy;
     }
