@@ -22,7 +22,7 @@ class RequestParamService
             return null;
         }
 
-        return $item;
+        return urldecode($item);
     }
 
     public function getSearch(): string|null
@@ -33,7 +33,7 @@ class RequestParamService
             return null;
         }
 
-        return $search;
+        return urldecode($search);
     }
 
     public function getPage(): int
@@ -77,7 +77,7 @@ class RequestParamService
             return null;
         }
 
-        return $supplyArea;
+        return urldecode($supplyArea);
     }
 
     public function getDispatchArea(): string|null
@@ -88,7 +88,7 @@ class RequestParamService
             return null;
         }
 
-        return $dispatchArea;
+        return urldecode($dispatchArea);
     }
 
     public function getHospital(): string|null
@@ -110,14 +110,7 @@ class RequestParamService
             return null;
         }
 
-        $occasion = str_replace('%25', '%', $occasion);
-        $occasion = str_replace('%20', ' ', $occasion);
-        $occasion = str_replace('%3E', '>', $occasion);
-        $occasion = str_replace('%C3%A4', 'ä', $occasion);
-        $occasion = str_replace('%C3%96', 'Ö', $occasion);
-        $occasion = str_replace('%C3%B6', 'ö', $occasion);
-
-        return $occasion;
+        return urldecode($occasion);
     }
 
     public function getAssignment(): string|null
@@ -128,10 +121,7 @@ class RequestParamService
             return null;
         }
 
-        $assignment = str_replace('%25', '%', $assignment);
-        $assignment = str_replace('%2F', '/', $assignment);
-
-        return $assignment;
+        return urldecode($assignment);
     }
 
     public function getTransport(): string|null
@@ -333,7 +323,7 @@ class RequestParamService
             return null;
         }
 
-        return $speciality;
+        return urldecode($speciality);
     }
 
     public function getSpecialityDetail(): string|null
@@ -344,7 +334,18 @@ class RequestParamService
             return null;
         }
 
-        return $specialityDetail;
+        return urldecode($specialityDetail);
+    }
+
+    public function getInfection(): string|null
+    {
+        $infection = $this->request->query->get('infection');
+
+        if (empty($infection)) {
+            return null;
+        }
+
+        return urldecode($infection);
     }
 
     public function getPagination(int $count, int $page, int $perPage): PaginationDto

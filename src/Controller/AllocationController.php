@@ -36,6 +36,7 @@ class AllocationController extends AbstractController
         $filters['urgency'] = $paramService->getUrgency();
         $filters['speciality'] = $paramService->getSpeciality();
         $filters['specialityDetail'] = $paramService->getSpecialityDetail();
+        $filters['infection'] = $paramService->getInfection();
 
         $filters['reqResus'] = $paramService->getReqResus();
         $filters['reqCath'] = $paramService->getReqCath();
@@ -78,6 +79,7 @@ class AllocationController extends AbstractController
             'occasions' => $allocationRepository->getAllOccasions(),
             'transports' => $allocationRepository->getAllTransportModes(),
             'urgencies' => $allocationRepository->getAllUrgencies(),
+            'infections' => $allocationRepository->getAllInfections(),
             'PZCs' => $this->getAllPZCs($allocationRepository),
             'specialities' => $allocationRepository->getAllSpecialities(),
             'specialityDetails' => $allocationRepository->getAllSpecialityDetails(),

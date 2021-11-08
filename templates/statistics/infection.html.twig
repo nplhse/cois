@@ -103,7 +103,14 @@
                                     {{ infection.percent }}%
                                 </td>
                                 <td>
-                                    <a href="#">
+                                    <a href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            {
+                                                infection: infection.label|url_encode
+                                            }
+                                        )
+                                        }}">
                                         <i class="bi bi-search"></i><br />
                                     </a>
                                 </td>

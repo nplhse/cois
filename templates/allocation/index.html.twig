@@ -548,7 +548,7 @@
                                     {% if
                                         item.speciality == filters.speciality
                                             and item.speciality != '' %}
-                                        <option value="{{ item.speciality }}"
+                                        <option value="{{ item.speciality|url_encode }}"
                                             selected>
                                             {{ item.speciality }}
                                         </option>
@@ -557,7 +557,7 @@
                                             or item.speciality == null %}
                                         <!-- empty -->
                                     {% else %}
-                                        <option value="{{ item.speciality }}">
+                                        <option value="{{ item.speciality|url_encode }}">
                                             {{ item.speciality }}
                                         </option>
                                     {% endif %}
@@ -592,9 +592,7 @@
                                         item.specialityDetail
                                             == filters.specialityDetail
                                             and item.specialityDetail != '' %}
-                                        <option value="{{
-                                            item.specialityDetail
-                                            }}"
+                                        <option value="{{ item.specialityDetail|url_encode }}"
                                             selected>
                                             {{ item.specialityDetail }}
                                         </option>
@@ -603,9 +601,7 @@
                                             or item.specialityDetail == null %}
                                         <!-- empty -->
                                     {% else %}
-                                        <option value="{{
-                                            item.specialityDetail
-                                            }}">
+                                        <option value="{{ item.specialityDetail|url_encode }}">
                                             {{ item.specialityDetail }}
                                         </option>
                                     {% endif %}
@@ -691,6 +687,50 @@
                                     {% else %}
                                         <option value="{{ item.urgency|url_encode }}">
                                             {{ item.urgency }}
+                                        </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </p>
+
+                        <p>
+                            <select class="form-select"
+                                name="infection"
+                                aria-label="filterInfectiony">
+                                {% if filters.urgency == null %}
+                                    <option value="" selected>
+                                        {{
+                                            'Filter by Infection'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
+                                    </option>
+                                {% else %}
+                                    <option value="">
+                                        {{
+                                            'Stop filtering by Infection'|trans(
+                                                {},
+                                                'forms'
+                                            )
+                                        }}
+                                    </option>
+                                {% endif %}
+                                {% for item in infections %}
+                                    {% if
+                                        item.infection == filters.infection
+                                            and item.infection != '' %}
+                                        <option value="{{ item.infection|url_encode }}"
+                                            selected>
+                                            {{ item.infection }}
+                                        </option>
+                                    {% elseif
+                                        item.infection == ''
+                                            or item.infection == null %}
+                                        <!-- empty -->
+                                    {% else %}
+                                        <option value="{{ item.infection|url_encode }}">
+                                            {{ item.infection }}
                                         </option>
                                     {% endif %}
                                 {% endfor %}
@@ -1180,6 +1220,12 @@
                                 id="specialityDetail"
                                 name="specialityDetail"
                                 value="{{ filters.specialityDetail }}" />
+                        {% endif %}
+                        {% if filters.infection %}
+                            <input type="hidden"
+                                id="infection"
+                                name="infection"
+                                value="{{ filters.infection }}" />
                         {% endif %}
 
                         <div class="float-end">

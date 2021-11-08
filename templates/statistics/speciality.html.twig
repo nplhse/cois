@@ -107,7 +107,7 @@
                                         path(
                                             'app_allocation_index',
                                             {
-                                                speciality: speciality.speciality
+                                                speciality: speciality.speciality|url_encode
                                             }
                                         )
                                         }}">
@@ -192,7 +192,7 @@
                                         path(
                                             'app_allocation_index',
                                             {
-                                                speciality: speciality.speciality|escape
+                                                speciality: speciality.speciality|url_encode
                                             }
                                         )
                                         }}">

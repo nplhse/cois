@@ -178,6 +178,17 @@ class AllocationRepository extends ServiceEntityRepository
         return $qb;
     }
 
+    public function getAllInfections(): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('DISTINCT a.isInfectious AS infection')
+            ->addOrderBy('a.isInfectious', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
+
     public function getAllSpecialities(): array
     {
         $qb = $this->createQueryBuilder('a')
