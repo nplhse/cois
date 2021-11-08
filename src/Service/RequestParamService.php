@@ -9,6 +9,8 @@ class RequestParamService
 {
     private Request $request;
 
+    private bool $filterIsSet = false;
+
     public function __construct(Request $request)
     {
         $this->request = $request;
@@ -33,6 +35,8 @@ class RequestParamService
             return null;
         }
 
+        $this->filterIsSet = true;
+
         return urldecode($search);
     }
 
@@ -55,6 +59,8 @@ class RequestParamService
             return null;
         }
 
+        $this->filterIsSet = true;
+
         return $location;
     }
 
@@ -65,6 +71,8 @@ class RequestParamService
         if (empty($size)) {
             return null;
         }
+
+        $this->filterIsSet = true;
 
         return $size;
     }
@@ -77,6 +85,8 @@ class RequestParamService
             return null;
         }
 
+        $this->filterIsSet = true;
+
         return urldecode($supplyArea);
     }
 
@@ -87,6 +97,8 @@ class RequestParamService
         if (empty($dispatchArea)) {
             return null;
         }
+
+        $this->filterIsSet = true;
 
         return urldecode($dispatchArea);
     }
@@ -99,6 +111,8 @@ class RequestParamService
             return null;
         }
 
+        $this->filterIsSet = true;
+
         return $hospital;
     }
 
@@ -109,6 +123,8 @@ class RequestParamService
         if (empty($occasion)) {
             return null;
         }
+
+        $this->filterIsSet = true;
 
         return urldecode($occasion);
     }
@@ -121,6 +137,8 @@ class RequestParamService
             return null;
         }
 
+        $this->filterIsSet = true;
+
         return urldecode($assignment);
     }
 
@@ -131,6 +149,8 @@ class RequestParamService
         if (empty($transport)) {
             return null;
         }
+
+        $this->filterIsSet = true;
 
         return $transport;
     }
@@ -143,6 +163,8 @@ class RequestParamService
             return null;
         }
 
+        $this->filterIsSet = true;
+
         return $PZC;
     }
 
@@ -153,6 +175,8 @@ class RequestParamService
         if (empty($reqResus)) {
             return null;
         }
+
+        $this->filterIsSet = true;
 
         return $reqResus;
     }
@@ -165,6 +189,8 @@ class RequestParamService
             return null;
         }
 
+        $this->filterIsSet = true;
+
         return $reqCath;
     }
 
@@ -175,6 +201,8 @@ class RequestParamService
         if (empty($isCPR)) {
             return null;
         }
+
+        $this->filterIsSet = true;
 
         return $isCPR;
     }
@@ -187,6 +215,8 @@ class RequestParamService
             return null;
         }
 
+        $this->filterIsSet = true;
+
         return $isVent;
     }
 
@@ -197,6 +227,8 @@ class RequestParamService
         if (empty($isShock)) {
             return null;
         }
+
+        $this->filterIsSet = true;
 
         return $isShock;
     }
@@ -209,6 +241,8 @@ class RequestParamService
             return null;
         }
 
+        $this->filterIsSet = true;
+
         return $isWithDoc;
     }
 
@@ -219,6 +253,8 @@ class RequestParamService
         if (empty($isPreg)) {
             return null;
         }
+
+        $this->filterIsSet = true;
 
         return $isPreg;
     }
@@ -231,6 +267,8 @@ class RequestParamService
             return null;
         }
 
+        $this->filterIsSet = true;
+
         return $isWork;
     }
 
@@ -241,6 +279,8 @@ class RequestParamService
         if (empty($date)) {
             return null;
         }
+
+        $this->filterIsSet = true;
 
         return $date;
     }
@@ -253,6 +293,8 @@ class RequestParamService
             return null;
         }
 
+        $this->filterIsSet = true;
+
         return $date;
     }
 
@@ -263,6 +305,8 @@ class RequestParamService
         if (empty($show)) {
             return null;
         }
+
+        $this->filterIsSet = true;
 
         return $show;
     }
@@ -275,6 +319,8 @@ class RequestParamService
             return 'desc';
         }
 
+        $this->filterIsSet = true;
+
         return $order;
     }
 
@@ -286,6 +332,8 @@ class RequestParamService
             return null;
         }
 
+        $this->filterIsSet = true;
+
         return $sortBy;
     }
 
@@ -296,6 +344,8 @@ class RequestParamService
         if (empty($user)) {
             return null;
         }
+
+        $this->filterIsSet = true;
 
         return $user;
     }
@@ -312,6 +362,8 @@ class RequestParamService
             return null;
         }
 
+        $this->filterIsSet = true;
+
         return $urgency;
     }
 
@@ -322,6 +374,8 @@ class RequestParamService
         if (empty($speciality)) {
             return null;
         }
+
+        $this->filterIsSet = true;
 
         return urldecode($speciality);
     }
@@ -334,6 +388,8 @@ class RequestParamService
             return null;
         }
 
+        $this->filterIsSet = true;
+
         return urldecode($specialityDetail);
     }
 
@@ -345,7 +401,14 @@ class RequestParamService
             return null;
         }
 
+        $this->filterIsSet = true;
+
         return urldecode($infection);
+    }
+
+    public function isFilterIsSet(): bool
+    {
+        return $this->filterIsSet;
     }
 
     public function getPagination(int $count, int $page, int $perPage): PaginationDto

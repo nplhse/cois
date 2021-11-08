@@ -42,19 +42,99 @@
                 }}
             </p>
 
-            {% if filters.search %}
+            {% if filterIsSet %}
                 <div class="alert alert-info" role="alert">
-                    {{ 'Searching for'|trans }}: "<i>{{ filters.search }}</i>" | <a href="{{
-                        path(
-                            'app_hospital_index',
-                            app.request.query.all|merge({
-                                search: '',
-                                page: 1
-                            })
-                        )
-                        }}">
-                        {{ 'Click here to end search'|trans }}
-                    </a>
+                    <p class="float-end">
+                        <a href="{{ path('app_hospital_index') }}">
+                            {{ 'Clear all filters'|trans }}
+                        </a>
+                    </p>
+                    {% if filters.search %}
+                        <a href="{{
+                            path(
+                                'app_hospital_index',
+                                app.request.query.all|merge({
+                                    search: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Search'|trans }}: {{ filters.search }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.supplyArea %}
+                        <a href="{{
+                            path(
+                                'app_hospital_index',
+                                app.request.query.all|merge({
+                                    supplyArea: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Supply Area'|trans }}: {{
+                                    filters.supplyArea
+                                }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.dispatchArea %}
+                        <a href="{{
+                            path(
+                                'app_hospital_index',
+                                app.request.query.all|merge({
+                                    dispatchArea: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Dispatch area'|trans }}: {{
+                                    filters.dispatchArea
+                                }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.location %}
+                        <a href="{{
+                            path(
+                                'app_hospital_index',
+                                app.request.query.all|merge({
+                                    location: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Location'|trans }}: {{
+                                    filters.location|trans
+                                }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.size %}
+                        <a href="{{
+                            path(
+                                'app_hospital_index',
+                                app.request.query.all|merge({
+                                    size: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Size'|trans }}: {{ filters.size|trans }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
                 </div>
             {% endif %}
 

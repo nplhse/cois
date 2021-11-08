@@ -501,6 +501,14 @@
         <source>Stop filtering by Size</source>
         <target>Filtern nach Größe beenden</target>
       </trans-unit>
+      <trans-unit id="tF1n.2o" resname="Filter by Infection">
+        <source>Filter by Infection</source>
+        <target>Filtern nach Infektionen</target>
+      </trans-unit>
+      <trans-unit id="ebmtfe9" resname="Stop filtering by Infection">
+        <source>Stop filtering by Infection</source>
+        <target>Filtern nach Infektionen beenden</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

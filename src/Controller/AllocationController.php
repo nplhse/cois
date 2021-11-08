@@ -71,6 +71,7 @@ class AllocationController extends AbstractController
         return $this->render('allocation/index.html.twig', [
             'allocations' => $paginator,
             'filters' => $filters,
+            'filterIsSet' => $paramService->isFilterIsSet(),
             'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), AllocationRepository::PAGINATOR_PER_PAGE),
             'hospitals' => $hospitalRepository->getHospitals(),
             'supplyAreas' => $hospitalRepository->getSupplyAreas(),

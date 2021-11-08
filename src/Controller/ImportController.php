@@ -51,6 +51,7 @@ class ImportController extends AbstractController
             'imports' => $paginator,
             'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), HospitalRepository::PAGINATOR_PER_PAGE),
             'filters' => $filters,
+            'filterIsSet' => $paramService->isFilterIsSet(),
         ]);
     }
 

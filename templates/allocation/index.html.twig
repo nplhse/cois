@@ -58,19 +58,397 @@
                 }}
             </p>
 
-            {% if filters.search %}
+            {% if filterIsSet %}
                 <div class="alert alert-info" role="alert">
-                    {{ 'Searching for'|trans }}: "<i>{{ filters.search }}</i>" | <a href="{{
-                        path(
-                            'app_allocation_index',
-                            app.request.query.all|merge({
-                                search: '',
-                                page: 1
-                            })
-                        )
-                        }}">
-                        {{ 'Click here to end search'|trans }}
-                    </a>
+                    <p class="float-end">
+                        <a href="{{ path('app_allocation_index') }}">
+                            {{ 'Clear all filters'|trans }}
+                        </a>
+                    </p>
+                    {% if filters.search %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    search: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Search'|trans }}: {{ filters.search }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.hospital %}
+                        {% for hospital in hospitals %}
+                            {% if hospital.id == filters.hospital %}
+                                <a href="{{
+                                    path(
+                                        'app_allocation_index',
+                                        app.request.query.all|merge({
+                                            hospital: '',
+                                            page: ''
+                                        })
+                                    )
+                                    }}">
+                                    <span class="badge rounded-pill bg-primary">
+                                        {{ 'Hospital'|trans }}: {{
+                                            hospital.name
+                                        }}
+                                        <i class="bi bi-x-lg"></i>
+                                    </span>
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {% if filters.supplyArea %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    supplyArea: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Supply Area'|trans }}: {{
+                                    filters.supplyArea
+                                }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.dispatchArea %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    dispatchArea: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Dispatch area'|trans }}: {{
+                                    filters.dispatchArea
+                                }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.startDate %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    startDate: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Start Date'|trans }}: {{
+                                    filters.startDate|date(
+                                        'd.m.Y',
+                                        'Europe/Berlin'
+                                    )
+                                }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.endDate %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    endDate: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'End Date'|trans }}: {{
+                                    filters.endDate|date(
+                                        'd.m.Y',
+                                        'Europe/Berlin'
+                                    )
+                                }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.pzc %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    pzc: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'PZC'|trans }}: {{ filters.pzc }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.reqResus %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    reqResus: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Requires Resuscitation'|trans }}: {{
+                                    'Ja'|trans
+                                }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.reqCath %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    reqCath: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Requires Cathlab'|trans }}: {{ 'Ja'|trans }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.isCPR %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    isCPR: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Is CPR'|trans }}: {{ 'Ja'|trans }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.isVent %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    isVent: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Is Ventilated'|trans }}: {{ 'Ja'|trans }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.isShock %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    isShock: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Is Shock'|trans }}: {{ 'Ja'|trans }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.isWithDoc %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    isWithDoc: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Is with Physician'|trans }}: {{
+                                    'Ja'|trans
+                                }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.isPreg %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    isPreg: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Is Pregnant'|trans }}: {{ 'Ja'|trans }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.isWork %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    isWork: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Is Work Accident'|trans }}: {{ 'Ja'|trans }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.speciality %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    speciality: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Speciality'|trans }}: {{
+                                    filters.speciality
+                                }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.specialityDetail %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    specialityDetail: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Speciality Detail'|trans }}: {{
+                                    filters.specialityDetail
+                                }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.infection %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    infection: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Infection'|trans }}: {{ filters.infection }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.urgency %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    urgency: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Urgency'|trans }}: {{ filters.urgency }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.assignment %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    assignment: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Assignment'|trans }}: {{
+                                    filters.assignment
+                                }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.occasion %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    occasion: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Occasion'|trans }}: {{ filters.occasion }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.modeOfTransport %}
+                        <a href="{{
+                            path(
+                                'app_allocation_index',
+                                app.request.query.all|merge({
+                                    transport: '',
+                                    page: ''
+                                })
+                            )
+                            }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Mode of Transport'|trans }}: {{
+                                    filters.modeOfTransport
+                                }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
                 </div>
             {% endif %}
 
@@ -507,12 +885,12 @@
                         </h5>
                         <div class="input-group mb-3">
                             <input type="date"
-                                name="start"
+                                name="startDate"
                                 class="form-control"
                                 value="{{ filters.startDate }}"
                                 aria-label="{{ 'Start Date'|trans }}" />
                             <input type="date"
-                                name="end"
+                                name="endDate"
                                 class="form-control"
                                 value="{{ filters.endDate }}"
                                 aria-label="{{ 'End Date'|trans }}" />

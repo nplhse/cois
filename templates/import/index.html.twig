@@ -42,19 +42,52 @@
                 }}
             </p>
 
-            {% if filters.search %}
+            {% if filterIsSet %}
                 <div class="alert alert-info" role="alert">
-                    {{ 'Searching for'|trans }}: "<i>{{ filters.search }}</i>" | <a href="{{
+                    <p class="float-end">
+                        <a href="{{ path('app_hospital_index') }}">
+                            {{ 'Clear all filters'|trans }}
+                        </a>
+                    </p>
+                    {% if filters.search %}
+                        <a href="{{
                         path(
-                            'app_import_index',
+                            'app_hospital_index',
                             app.request.query.all|merge({
-                                search: '',
-                                page: 1
-                            })
+                            search: '',
+                            page: ''
+                        })
                         )
                         }}">
-                        {{ 'Click here to end search'|trans }}
-                    </a>
+                            <span class="badge rounded-pill bg-primary">
+                                {{ 'Search'|trans }}: {{ filters.search }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filters.show %}
+                        <a href="{{
+                        path(
+                            'app_hospital_index',
+                            app.request.query.all|merge({
+                            show: '',
+                            page: ''
+                        })
+                        )
+                        }}">
+                            {% if filters.show == "user" %}
+                                <span class="badge rounded-pill bg-primary">
+                                    {{ 'By Yourself'|trans }}
+                                    <i class="bi bi-x-lg"></i>
+                                </span>
+                            {% elseif filters.show == "hospital" %}
+                                <span class="badge rounded-pill bg-primary">
+                                    {{ 'By your Hospital'|trans }}
+                                    <i class="bi bi-x-lg"></i>
+                                </span>
+                            {% endif %}
+                        </a>
+                    {% endif %}
                 </div>
             {% endif %}
 

@@ -53,6 +53,7 @@ class HospitalController extends AbstractController
             'hospitals' => $paginator,
             'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), HospitalRepository::PAGINATOR_PER_PAGE),
             'filters' => $filters,
+            'filterIsSet' => $paramService->isFilterIsSet(),
             'locations' => $this->getLocations(),
             'sizes' => $this->getSizes(),
             'supplyAreas' => $hospitalRepository->getSupplyAreas(),

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" target-language="de" datatype="plaintext" original="file.ext">
+  <file source-language="de" target-language="de" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -1828,6 +1828,26 @@
       <trans-unit id="GOUanjM" resname="No Infection">
         <source>No Infection</source>
         <target>Keine Infektionen angegeben</target>
+      </trans-unit>
+      <trans-unit id="3iJEfZG" resname="Clear all filters">
+        <source>Clear all filters</source>
+        <target>Alle Filter zurücksetzen</target>
+      </trans-unit>
+      <trans-unit id="zenlipp" resname="Ja">
+        <source>Ja</source>
+        <target>Ja</target>
+      </trans-unit>
+      <trans-unit id="FTzarsV" resname="Assignment">
+        <source>Assignment</source>
+        <target>Zuweisung</target>
+      </trans-unit>
+      <trans-unit id="9o4LHvE" resname="Occasion">
+        <source>Occasion</source>
+        <target>Anlass</target>
+      </trans-unit>
+      <trans-unit id="oa17QsI" resname="Mode of Transport">
+        <source>Mode of Transport</source>
+        <target>Transportart</target>
       </trans-unit>
     </body>
   </file>
