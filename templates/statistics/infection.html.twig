@@ -75,7 +75,13 @@
                                     {{ loop.index }}
                                 </td>
                                 <td>
-                                    {{ infection.label }}
+                                    {% if infection.label == '' %}
+                                        <span class="text-muted">
+                                            {{ 'No Infection'|trans }}
+                                        </span>
+                                    {% else %}
+                                        {{ infection.label }}
+                                    {% endif %}
                                 </td>
                                 <td>
                                     <svg width="100px" height="25px">

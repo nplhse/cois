@@ -33,8 +33,7 @@
                 <h1>
                     {{ 'General'|trans }}
                 </h1>
-
-                <div class="row mt-4">
+                <div class="row">
                     <div class="col-4">
                         <div class="card">
                             <div class="card-body text-center">
@@ -76,6 +75,10 @@
                     </div>
                 </div>
                 <div class="row mt-4">
+                    <h1>
+                        {{ 'Allocations'|trans }}
+                    </h1>
+
                     <div class="col-4">
                         <div class="card">
                             <div class="card-body text-center">
@@ -110,11 +113,28 @@
                                         'app_statistics_speciality'
                                     )
                                     }}">
-                                    <i class="bi bi-file"
+                                    <i class="bi bi-tags"
                                         style="font-size: 5rem; color: cornflowerblue;">
 
                                     </i><br />
                                     {{ 'Speciality'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 mt-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <a href="{{
+                                    path(
+                                        'app_statistics_infection'
+                                    )
+                                    }}">
+                                    <i class="bi bi-bug"
+                                        style="font-size: 5rem; color: cornflowerblue;">
+
+                                    </i><br />
+                                    {{ 'Infection'|trans }}
                                 </a>
                             </div>
                         </div>

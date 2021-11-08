@@ -1734,6 +1734,22 @@
         <source>No Speciality Detail</source>
         <target>No Speciality Detail</target>
       </trans-unit>
+      <trans-unit id="_tb6S07" resname="Infection Statistics">
+        <source>Infection Statistics</source>
+        <target>Infection Statistics</target>
+      </trans-unit>
+      <trans-unit id="87wxdGQ" resname="Distribution of Infections">
+        <source>Distribution of Infections</source>
+        <target>Distribution of Infections</target>
+      </trans-unit>
+      <trans-unit id="ZHVzwxS" resname="Infection">
+        <source>Infection</source>
+        <target>Infections</target>
+      </trans-unit>
+      <trans-unit id="GOUanjM" resname="No Infection">
+        <source>No Infection</source>
+        <target>No Infection</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

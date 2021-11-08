@@ -1799,7 +1799,7 @@
       </trans-unit>
       <trans-unit id="0uQJvY7" resname="No Speciality">
         <source>No Speciality</source>
-        <target>Ohne Fachgebiet</target>
+        <target>Kein Fachgebiet angegeben</target>
       </trans-unit>
       <trans-unit id="EEX4ACX" resname="Distribution of Speciality Details">
         <source>Distribution of Speciality Details</source>
@@ -1811,7 +1811,23 @@
       </trans-unit>
       <trans-unit id="Ki1Io2l" resname="No Speciality Detail">
         <source>No Speciality Detail</source>
-        <target>Ohne Fachbereich</target>
+        <target>Kein Fachbereich angegeben</target>
+      </trans-unit>
+      <trans-unit id="_tb6S07" resname="Infection Statistics">
+        <source>Infection Statistics</source>
+        <target>Statistiken nach Infektionen</target>
+      </trans-unit>
+      <trans-unit id="87wxdGQ" resname="Distribution of Infections">
+        <source>Distribution of Infections</source>
+        <target>Verteilungen nach Infektionen</target>
+      </trans-unit>
+      <trans-unit id="ZHVzwxS" resname="Infection">
+        <source>Infection</source>
+        <target>Infektionen</target>
+      </trans-unit>
+      <trans-unit id="GOUanjM" resname="No Infection">
+        <source>No Infection</source>
+        <target>Keine Infektionen angegeben</target>
       </trans-unit>
     </body>
   </file>
