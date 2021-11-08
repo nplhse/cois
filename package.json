@@ -1,6 +1,6 @@
 {
     "devDependencies": {
-        "@babel/core": "^7.15.8",
+        "@babel/core": "^7.16.0",
         "@babel/eslint-parser": "^7.15.8",
         "@babel/preset-env": "^7.16.0",
         "@popperjs/core": "^2.10.2",
