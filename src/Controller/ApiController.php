@@ -116,8 +116,6 @@ class ApiController extends AbstractController
         $this->allocationQuery->groupBy('transport');
         $allocations = $this->allocationQuery->execute()->hydrateResultsAs(TransportStatisticsDto::class);
 
-        dump($allocations);
-
         $results = $this->statisticsService->generateTransportResults($allocations);
 
         return new JsonResponse($results);
