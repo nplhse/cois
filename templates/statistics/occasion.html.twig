@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'Occasion Statistics'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_statistics_index'),
+                            label: 'Statistics'|trans
+                        },
+                        {
+                            label: 'Occasion Statistics'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-3">
+            {{ include('statistics/_statistics_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <h1>
+                {{ 'Occasion Statistics'|trans }}
+            </h1>
+
+            <h2>
+                {{ 'Distribution of Occasions'|trans }}
+            </h2>
+
+            <div data-controller="table">
+                <input class="form-control"
+                    type="search"
+                    data-table-target="source"
+                    data-action="input->table#filter"
+                    placeholder="Filter table" />
+
+                <table class="table table-hover">
+                    <thead>
+                        <th width="5%">
+                            {{ 'Rank'|trans }}
+                        </th>
+                        <th width="50%">
+                            {{ 'Occasion'|trans }}
+                        </th>
+                        <th width="20%">
+                            {{ 'Bar'|trans }}
+                        </th>
+                        <th width="10%">
+                            {{ 'Count'|trans }}
+                        </th>
+                        <th width="10%">
+                            {{ 'Percent'|trans }}
+                        </th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        {% for occasion in results %}
+                            <tr data-table-target="filterable"
+                                data-filter-key="{{ occasion.label|lower }}">
+                                <td>
+                                    {{ loop.index }}
+                                </td>
+                                <td>
+                                    {% if occasion.label == '' %}
+                                        <span class="text-muted">
+                                            {{ 'No Occasion'|trans }}
+                                        </span>
+                                    {% else %}
+                                        {{ occasion.label }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <svg width="100px" height="25px">
+                                        <g class="bars">
+                                            <rect fill="#3d5599"
+                                                width="100%"
+                                                height="25"></rect>;<rect fill="#cb4d3e"
+                                                width="{{ occasion.percent }}px"
+                                                height="25"></rect>
+                                        </g>
+                                    </svg>
+                                </td>
+                                <td>
+                                    {{ occasion.count }}
+                                </td>
+                                <td>
+                                    {{ occasion.percent }}%
+                                </td>
+                                <td>
+                                    <a href="{{
+                                        path(
+                                            'app_allocation_index',
+                                            {
+                                                occasion: occasion.label|url_encode
+                                            }
+                                        )
+                                        }}">
+                                        <i class="bi bi-search"></i><br />
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

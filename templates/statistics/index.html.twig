@@ -82,6 +82,36 @@
                     <div class="col-4">
                         <div class="card">
                             <div class="card-body text-center">
+                                <a href="{{ path('app_statistics_occasion') }}">
+                                    <i class="bi bi-briefcase"
+                                        style="font-size: 5rem; color: cornflowerblue;">
+
+                                    </i><br />
+                                    {{ 'Occasion'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <a href="{{
+                                    path(
+                                        'app_statistics_assignment'
+                                    )
+                                    }}">
+                                    <i class="bi bi-chat-text"
+                                        style="font-size: 5rem; color: cornflowerblue;">
+
+                                    </i><br />
+                                    {{ 'Assignment'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body text-center">
                                 <a href="{{ path('app_statistics_urgency') }}">
                                     <i class="bi bi-exclamation-circle"
                                         style="font-size: 5rem; color: cornflowerblue;">
@@ -92,7 +122,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 mt-4">
                         <div class="card">
                             <div class="card-body text-center">
                                 <a href="{{ path('app_statistics_pzc') }}">
@@ -105,7 +135,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 mt-4">
                         <div class="card">
                             <div class="card-body text-center">
                                 <a href="{{

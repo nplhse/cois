@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\DataTransferObjects\AssignmentStatisticsDto;
 use App\DataTransferObjects\InfectionStatisticsDto;
+use App\DataTransferObjects\OccasionStatisticsDto;
 use App\DataTransferObjects\PZCStatisticsDto;
 use App\DataTransferObjects\SpecialityStatisticsDto;
 use App\Query\AllocationQuery;
@@ -54,6 +56,34 @@ class StatisticsController extends AbstractController
         ]);
     }
 
+    #[Route('/statistics/assignment', name: 'app_statistics_assignment')]
+    public function assignment(Request $request): Response
+    {
+        if ($this->getUser()) {
+            $paramService = new RequestParamService($request);
+            $hospitalId = (int) $paramService->getHospital();
+
+            if (!empty($hospitalId)) {
+                $hospital = $this->hospitalRepository->findById($hospitalId);
+
+                if ($this->isGranted('viewStats', $hospital)) {
+                    $this->allocationQuery->filterByHospital($hospital);
+                } else {
+                    throw $this->createAccessDeniedException('Cannot access this resource.');
+                }
+            }
+        }
+
+        $this->allocationQuery->groupBy('assignment');
+        $allocations = $this->allocationQuery->execute()->hydrateResultsAs(AssignmentStatisticsDto::class);
+
+        $results = $this->statisticsService->generateAssignmentResults($allocations);
+
+        return $this->render('statistics/assignment.html.twig', [
+            'results' => $results,
+        ]);
+    }
+
     #[Route('/statistics/infection', name: 'app_statistics_infection')]
     public function infection(Request $request): Response
     {
@@ -78,6 +108,34 @@ class StatisticsController extends AbstractController
         $results = $this->statisticsService->generateInfectionResults($allocations);
 
         return $this->render('statistics/infection.html.twig', [
+            'results' => $results,
+        ]);
+    }
+
+    #[Route('/statistics/occasion', name: 'app_statistics_occasion')]
+    public function occasion(Request $request): Response
+    {
+        if ($this->getUser()) {
+            $paramService = new RequestParamService($request);
+            $hospitalId = (int) $paramService->getHospital();
+
+            if (!empty($hospitalId)) {
+                $hospital = $this->hospitalRepository->findById($hospitalId);
+
+                if ($this->isGranted('viewStats', $hospital)) {
+                    $this->allocationQuery->filterByHospital($hospital);
+                } else {
+                    throw $this->createAccessDeniedException('Cannot access this resource.');
+                }
+            }
+        }
+
+        $this->allocationQuery->groupBy('occasion');
+        $allocations = $this->allocationQuery->execute()->hydrateResultsAs(OccasionStatisticsDto::class);
+
+        $results = $this->statisticsService->generateOccasionResults($allocations);
+
+        return $this->render('statistics/occasion.html.twig', [
             'results' => $results,
         ]);
     }

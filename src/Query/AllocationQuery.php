@@ -91,6 +91,22 @@ final class AllocationQuery
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.isInfectious')
                 ->addOrderBy('counter', 'DESC');
+        } elseif ('assignment' === $this->property) {
+            $qb->select(
+                'allocation.assignment AS assignment',
+                'COUNT(allocation.assignment) AS counter',
+            )
+                ->from(Allocation::class, 'allocation')
+                ->groupBy('allocation.assignment')
+                ->addOrderBy('counter', 'DESC');
+        } elseif ('occasion' === $this->property) {
+            $qb->select(
+                'allocation.occasion AS occasion',
+                'COUNT(allocation.occasion) AS counter',
+            )
+                ->from(Allocation::class, 'allocation')
+                ->groupBy('allocation.occasion')
+                ->addOrderBy('counter', 'DESC');
         }
 
         if (null !== $this->hospital) {

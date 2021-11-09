@@ -118,6 +118,34 @@ class StatisticsService
         return $results;
     }
 
+    public function generateAssignmentResults(object $allocations): array
+    {
+        $results = [];
+        $total = 0;
+
+        foreach ($allocations->getItems() as $allocation) {
+            $total = $total + $allocation->getCounter();
+        }
+
+        foreach ($allocations->getItems() as $allocation) {
+            if (0 === $allocation->getAssignment()) {
+                break;
+            }
+
+            // For SVG creation, only returning percentage number
+            $percent = $this->getValueInPercent($allocation->getCounter(), $total);
+
+            $results[] = [
+                'infection' => $allocation->getAssignment(),
+                'count' => $allocation->getCounter(),
+                'percent' => $percent,
+                'label' => $allocation->getAssignment(),
+            ];
+        }
+
+        return $results;
+    }
+
     public function generateInfectionResults(object $allocations): array
     {
         $results = [];
@@ -140,6 +168,34 @@ class StatisticsService
                 'count' => $allocation->getCounter(),
                 'percent' => $percent,
                 'label' => $allocation->getInfection(),
+            ];
+        }
+
+        return $results;
+    }
+
+    public function generateOccasionResults(object $allocations): array
+    {
+        $results = [];
+        $total = 0;
+
+        foreach ($allocations->getItems() as $allocation) {
+            $total = $total + $allocation->getCounter();
+        }
+
+        foreach ($allocations->getItems() as $allocation) {
+            if (0 === $allocation->getOccasion()) {
+                break;
+            }
+
+            // For SVG creation, only returning percentage number
+            $percent = $this->getValueInPercent($allocation->getCounter(), $total);
+
+            $results[] = [
+                'infection' => $allocation->getOccasion(),
+                'count' => $allocation->getCounter(),
+                'percent' => $percent,
+                'label' => $allocation->getOccasion(),
             ];
         }
 
