@@ -1853,6 +1853,38 @@
         <source>Active Filters</source>
         <target>Aktive Filter</target>
       </trans-unit>
+      <trans-unit id="lAZxpwc" resname="Occasion Statistics">
+        <source>Occasion Statistics</source>
+        <target>Statistiken nach Anlass</target>
+      </trans-unit>
+      <trans-unit id="1erHaUd" resname="Distribution of Occasions">
+        <source>Distribution of Occasions</source>
+        <target>Verteilungen der Anlässe</target>
+      </trans-unit>
+      <trans-unit id="pWWQ4lx" resname="No Occasion">
+        <source>No Occasion</source>
+        <target>Kein Anlass angegeben</target>
+      </trans-unit>
+      <trans-unit id="dhWrtl2" resname="Assignment Statistics">
+        <source>Assignment Statistics</source>
+        <target>Statistiken nach Zuweisung</target>
+      </trans-unit>
+      <trans-unit id="pBuSNdc" resname="Distribution of Assignments">
+        <source>Distribution of Assignments</source>
+        <target>Verteilung der Zuweisungen</target>
+      </trans-unit>
+      <trans-unit id="d2Clczi" resname="No Assignment">
+        <source>No Assignment</source>
+        <target>Keine Zuweisung angegeben</target>
+      </trans-unit>
+      <trans-unit id="6.V6Xx0" resname="Transport Statistics">
+        <source>Transport Statistics</source>
+        <target>Statistiken nach Transport</target>
+      </trans-unit>
+      <trans-unit id="Mchs2v6" resname="Distribution of modes of Transport">
+        <source>Distribution of modes of Transport</source>
+        <target>Verteilung der Transportarten</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

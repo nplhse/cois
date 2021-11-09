@@ -258,6 +258,34 @@ class StatisticsService
         return $results;
     }
 
+    public function generateTransportResults(object $allocations): array
+    {
+        $results = [];
+        $total = 0;
+
+        foreach ($allocations->getItems() as $allocation) {
+            $total = $total + $allocation->getCounter();
+        }
+
+        foreach ($allocations->getItems() as $allocation) {
+            if ('' === $allocation->getTransport()) {
+                $label = 'No Transport';
+            } else {
+                $label = $allocation->getTransport();
+            }
+
+            $percent = $this->getValueInPercent($allocation->getCounter(), $total);
+
+            $results[] = [
+                'label' => $label,
+                'count' => $allocation->getCounter(),
+                'percent' => $percent,
+            ];
+        }
+
+        return $results;
+    }
+
     public function generateUrgencyResults(object $allocations): array
     {
         $results = [];

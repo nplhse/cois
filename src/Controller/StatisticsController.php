@@ -56,6 +56,13 @@ class StatisticsController extends AbstractController
         ]);
     }
 
+    #[Route('/statistics/transport', name: 'app_statistics_transport')]
+    public function transport(): Response
+    {
+        return $this->render('statistics/transport.html.twig', [
+        ]);
+    }
+
     #[Route('/statistics/assignment', name: 'app_statistics_assignment')]
     public function assignment(Request $request): Response
     {

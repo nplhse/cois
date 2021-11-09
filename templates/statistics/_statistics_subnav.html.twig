@@ -154,4 +154,21 @@
             </a>
         </li>
     {% endif %}
+    {% if
+        app.request.attributes.get('_route')
+            starts with 'app_statistics_transport' %}
+        <li class="list-group-item active">
+            <i class="bi bi-cart-fill"></i>
+            <a class="text-light" href="{{ path('app_statistics_transport') }}">
+                {{ 'Transport'|trans }}
+            </a>
+        </li>
+    {% else %}
+        <li class="list-group-item">
+            <i class="bi bi-cart"></i>
+            <a href="{{ path('app_statistics_transport') }}">
+                {{ 'Transport'|trans }}
+            </a>
+        </li>
+    {% endif %}
 </ul>

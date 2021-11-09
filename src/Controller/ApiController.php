@@ -6,6 +6,7 @@ use App\DataTransferObjects\DayStatisticsDto;
 use App\DataTransferObjects\GenderStatisticsDto;
 use App\DataTransferObjects\PZCStatisticsDto;
 use App\DataTransferObjects\TimeStatisticsDto;
+use App\DataTransferObjects\TransportStatisticsDto;
 use App\DataTransferObjects\UrgencyStatisticsDto;
 use App\Query\AllocationAgeQuery;
 use App\Query\AllocationQuery;
@@ -103,6 +104,21 @@ class ApiController extends AbstractController
         $allocations = $this->allocationQuery->execute()->hydrateResultsAs(TimeStatisticsDto::class);
 
         $results = $this->statisticsService->generateTimeResults($allocations);
+
+        return new JsonResponse($results);
+    }
+
+    #[Route('/api/transport.json', name: 'app_api_transport')]
+    public function transport(Request $request): Response
+    {
+        $this->filterByHospital($request);
+
+        $this->allocationQuery->groupBy('transport');
+        $allocations = $this->allocationQuery->execute()->hydrateResultsAs(TransportStatisticsDto::class);
+
+        dump($allocations);
+
+        $results = $this->statisticsService->generateTransportResults($allocations);
 
         return new JsonResponse($results);
     }

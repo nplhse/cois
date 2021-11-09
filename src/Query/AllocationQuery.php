@@ -107,6 +107,14 @@ final class AllocationQuery
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.occasion')
                 ->addOrderBy('counter', 'DESC');
+        } elseif ('transport' === $this->property) {
+            $qb->select(
+                'allocation.modeOfTransport AS transport',
+                'COUNT(allocation.modeOfTransport) AS counter',
+            )
+                ->from(Allocation::class, 'allocation')
+                ->groupBy('allocation.modeOfTransport')
+                ->addOrderBy('counter', 'DESC');
         }
 
         if (null !== $this->hospital) {
