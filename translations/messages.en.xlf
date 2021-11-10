@@ -1862,6 +1862,10 @@
         <source>Transport</source>
         <target>Transport</target>
       </trans-unit>
+      <trans-unit id="4RpfqCt" resname="Filter by this property">
+        <source>Filter by this property</source>
+        <target>Show allocations with this property</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
