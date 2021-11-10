@@ -106,6 +106,24 @@
         </li>
     {% endif %}
     {% if
+        app.request.attributes.get('_route')
+            starts with 'app_statistics_properties' %}
+        <li class="list-group-item active">
+            <i class="bi bi-file-earmark-ruled-fill"></i>
+            <a class="text-light"
+                href="{{ path('app_statistics_properties') }}">
+                {{ 'Properties'|trans }}
+            </a>
+        </li>
+    {% else %}
+        <li class="list-group-item">
+            <i class="bi bi-file-earmark-ruled"></i>
+            <a href="{{ path('app_statistics_properties') }}">
+                {{ 'Properties'|trans }}
+            </a>
+        </li>
+    {% endif %}
+    {% if
         app.request.attributes.get('_route') starts with 'app_statistics_pzc' %}
         <li class="list-group-item active">
             <i class="bi bi-card-list"></i>

@@ -4,11 +4,14 @@ namespace App\Controller;
 
 use App\DataTransferObjects\DayStatisticsDto;
 use App\DataTransferObjects\GenderStatisticsDto;
+use App\DataTransferObjects\PropertyStatisticsDto;
 use App\DataTransferObjects\PZCStatisticsDto;
 use App\DataTransferObjects\TimeStatisticsDto;
 use App\DataTransferObjects\TransportStatisticsDto;
 use App\DataTransferObjects\UrgencyStatisticsDto;
+use App\Entity\Hospital;
 use App\Query\AllocationAgeQuery;
+use App\Query\AllocationPropertyQuery;
 use App\Query\AllocationQuery;
 use App\Repository\HospitalRepository;
 use App\Service\RequestParamService;
@@ -26,6 +29,8 @@ class ApiController extends AbstractController
     private AllocationQuery $allocationQuery;
 
     private StatisticsService $statisticsService;
+
+    private ?Hospital $hospital = null;
 
     public function __construct(HospitalRepository $hospitalRepository, AllocationQuery $allocationQuery, StatisticsService $statisticsService)
     {
@@ -147,21 +152,46 @@ class ApiController extends AbstractController
         return new JsonResponse($results);
     }
 
-    private function filterByHospital(Request $request): void
+    #[Route('/api/property/{target}.json', name: 'app_api_property')]
+    public function property(string $target, Request $request, AllocationPropertyQuery $query): Response
+    {
+        $properties = ['requiresResus', 'requiresCathlab', 'isCPR', 'isVentilated', 'isShock', 'isPregnant', 'isWithPhysician', 'isWorkAccident'];
+
+        if (!in_array($target, $properties, true)) {
+            throw $this->createNotFoundException('Cannot access this resource.');
+        }
+
+        if ($this->filterByHospital($request)) {
+            $query->filterByHospital($this->hospital);
+        }
+
+        $query->setTargetProoperty($target);
+
+        $allocations = $query->execute()->hydrateResultsAs(PropertyStatisticsDto::class);
+        $result = $this->statisticsService->generatePropertyResults($allocations, $target);
+
+        return new JsonResponse($result);
+    }
+
+    private function filterByHospital(Request $request): bool
     {
         if ($this->getUser()) {
             $paramService = new RequestParamService($request);
             $hospitalId = (int) $paramService->getHospital();
 
             if (!empty($hospitalId)) {
-                $hospital = $this->hospitalRepository->findById($hospitalId);
+                $this->hospital = $this->hospitalRepository->findById($hospitalId);
 
-                if ($this->isGranted('viewStats', $hospital)) {
-                    $this->allocationQuery->filterByHospital($hospital);
+                if ($this->isGranted('viewStats', $this->hospital)) {
+                    $this->allocationQuery->filterByHospital($this->hospital);
+
+                    return true;
                 } else {
                     throw $this->createAccessDeniedException('Cannot access this resource.');
                 }
             }
         }
+
+        return false;
     }
 }

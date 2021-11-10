@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="de" target-language="en" datatype="plaintext" original="file.ext">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -1780,35 +1780,87 @@
       </trans-unit>
       <trans-unit id="lAZxpwc" resname="Occasion Statistics">
         <source>Occasion Statistics</source>
-        <target>__Occasion Statistics</target>
+        <target>Occasion Statistics</target>
       </trans-unit>
       <trans-unit id="1erHaUd" resname="Distribution of Occasions">
         <source>Distribution of Occasions</source>
-        <target>__Distribution of Occasions</target>
+        <target>Distribution of Occasions</target>
       </trans-unit>
       <trans-unit id="pWWQ4lx" resname="No Occasion">
         <source>No Occasion</source>
-        <target>__No Occasion</target>
+        <target>No Occasion</target>
       </trans-unit>
       <trans-unit id="dhWrtl2" resname="Assignment Statistics">
         <source>Assignment Statistics</source>
-        <target>__Assignment Statistics</target>
+        <target>Assignment Statistics</target>
       </trans-unit>
       <trans-unit id="pBuSNdc" resname="Distribution of Assignments">
         <source>Distribution of Assignments</source>
-        <target>__Distribution of Assignments</target>
+        <target>Distribution of Assignments</target>
       </trans-unit>
       <trans-unit id="d2Clczi" resname="No Assignment">
         <source>No Assignment</source>
-        <target>__No Assignment</target>
+        <target>No Assignment</target>
       </trans-unit>
       <trans-unit id="6.V6Xx0" resname="Transport Statistics">
         <source>Transport Statistics</source>
-        <target>__Transport Statistics</target>
+        <target>Transport Statistics</target>
       </trans-unit>
       <trans-unit id="Mchs2v6" resname="Distribution of modes of Transport">
         <source>Distribution of modes of Transport</source>
-        <target>__Distribution of modes of Transport</target>
+        <target>Distribution of modes of Transport</target>
+      </trans-unit>
+      <trans-unit id="L6yyhYL" resname="Does not require Resuscitation">
+        <source>Does not require Resuscitation</source>
+        <target>Without Resuscitation</target>
+      </trans-unit>
+      <trans-unit id="ZLxl3Nc" resname="Does not require Cathlab">
+        <source>Does not require Cathlab</source>
+        <target>Without Cathlab</target>
+      </trans-unit>
+      <trans-unit id="Jc4zu9l" resname="Is not CPR">
+        <source>Is not CPR</source>
+        <target>No CPR</target>
+      </trans-unit>
+      <trans-unit id="9kCMWcX" resname="Is not Ventilated">
+        <source>Is not Ventilated</source>
+        <target>Not Ventilated</target>
+      </trans-unit>
+      <trans-unit id="FQnOHLB" resname="Is not Shock">
+        <source>Is not Shock</source>
+        <target>No Shock</target>
+      </trans-unit>
+      <trans-unit id="AFW2LlT" resname="Is not Pregnant">
+        <source>Is not Pregnant</source>
+        <target>Not Pregnant</target>
+      </trans-unit>
+      <trans-unit id="3Pp54NL" resname="Is not with Physician">
+        <source>Is not with Physician</source>
+        <target>Not with Physician</target>
+      </trans-unit>
+      <trans-unit id="7YnXaxt" resname="Is not Work Accident">
+        <source>Is not Work Accident</source>
+        <target>No Work Accident</target>
+      </trans-unit>
+      <trans-unit id="ENluhyi" resname="Property Statistics">
+        <source>Property Statistics</source>
+        <target>Property Statistics</target>
+      </trans-unit>
+      <trans-unit id="cvpZY6v" resname="Proportions of Allocation Properties">
+        <source>Proportions of Allocation Properties</source>
+        <target>Proportions of Allocation Properties</target>
+      </trans-unit>
+      <trans-unit id="QAQMsYH" resname="Property">
+        <source>Property</source>
+        <target>Property</target>
+      </trans-unit>
+      <trans-unit id="rkNpKyo" resname="Properties">
+        <source>Properties</source>
+        <target>Properties</target>
+      </trans-unit>
+      <trans-unit id="qurUq.X" resname="Transport">
+        <source>Transport</source>
+        <target>Transport</target>
       </trans-unit>
     </body>
   </file>

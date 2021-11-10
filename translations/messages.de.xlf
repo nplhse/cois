@@ -1885,6 +1885,58 @@
         <source>Distribution of modes of Transport</source>
         <target>Verteilung der Transportarten</target>
       </trans-unit>
+      <trans-unit id="L6yyhYL" resname="Does not require Resuscitation">
+        <source>Does not require Resuscitation</source>
+        <target>Ohne Schockraum</target>
+      </trans-unit>
+      <trans-unit id="ZLxl3Nc" resname="Does not require Cathlab">
+        <source>Does not require Cathlab</source>
+        <target>Ohne Herzkatheter</target>
+      </trans-unit>
+      <trans-unit id="Jc4zu9l" resname="Is not CPR">
+        <source>Is not CPR</source>
+        <target>Keine Reanimation</target>
+      </trans-unit>
+      <trans-unit id="9kCMWcX" resname="Is not Ventilated">
+        <source>Is not Ventilated</source>
+        <target>Keine Beatmung</target>
+      </trans-unit>
+      <trans-unit id="FQnOHLB" resname="Is not Shock">
+        <source>Is not Shock</source>
+        <target>Kein Schock</target>
+      </trans-unit>
+      <trans-unit id="AFW2LlT" resname="Is not Pregnant">
+        <source>Is not Pregnant</source>
+        <target>Keine Schwangerschaft</target>
+      </trans-unit>
+      <trans-unit id="3Pp54NL" resname="Is not with Physician">
+        <source>Is not with Physician</source>
+        <target>Ohne Notarzt</target>
+      </trans-unit>
+      <trans-unit id="7YnXaxt" resname="Is not Work Accident">
+        <source>Is not Work Accident</source>
+        <target>Kein Arbeitsunfall</target>
+      </trans-unit>
+      <trans-unit id="ENluhyi" resname="Property Statistics">
+        <source>Property Statistics</source>
+        <target>Statistiken nach Eigenschaften</target>
+      </trans-unit>
+      <trans-unit id="cvpZY6v" resname="Proportions of Allocation Properties">
+        <source>Proportions of Allocation Properties</source>
+        <target>Anteile der Eigenschaften an allen Einsätzen</target>
+      </trans-unit>
+      <trans-unit id="QAQMsYH" resname="Property">
+        <source>Property</source>
+        <target>Eigenschaft</target>
+      </trans-unit>
+      <trans-unit id="rkNpKyo" resname="Properties">
+        <source>Properties</source>
+        <target>Eigenschaften</target>
+      </trans-unit>
+      <trans-unit id="qurUq.X" resname="Transport">
+        <source>Transport</source>
+        <target>Transport</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

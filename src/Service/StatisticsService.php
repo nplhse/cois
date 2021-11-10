@@ -2,9 +2,18 @@
 
 namespace App\Service;
 
+use Symfony\Contracts\Translation\TranslatorInterface;
+
 class StatisticsService
 {
     public const VALUE_PRECISION = 2;
+
+    private TranslatorInterface $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
 
     public function generateDayResults(object $allocations): array
     {
@@ -272,6 +281,73 @@ class StatisticsService
                 $label = 'No Transport';
             } else {
                 $label = $allocation->getTransport();
+            }
+
+            $percent = $this->getValueInPercent($allocation->getCounter(), $total);
+
+            $results[] = [
+                'label' => $label,
+                'count' => $allocation->getCounter(),
+                'percent' => $percent,
+            ];
+        }
+
+        return $results;
+    }
+
+    public function generatePropertyResults(object $allocations, string $target): array
+    {
+        $results = [];
+        $total = 0;
+
+        switch ($target) {
+            case 'requiresResus':
+                $labelTrue = $this->translator->trans('Requires Resuscitation');
+                $labelFalse = $this->translator->trans('Does not require Resuscitation');
+                break;
+            case 'requiresCathlab':
+                $labelTrue = $this->translator->trans('Requires Cathlab');
+                $labelFalse = $this->translator->trans('Does not require Cathlab');
+                break;
+            case 'isCPR':
+                $labelTrue = $this->translator->trans('Is CPR');
+                $labelFalse = $this->translator->trans('Is not CPR');
+                break;
+            case 'isVentilated':
+                $labelTrue = $this->translator->trans('Is Ventilated');
+                $labelFalse = $this->translator->trans('Is not Ventilated');
+                break;
+            case 'isShock':
+                $labelTrue = $this->translator->trans('Is Shock');
+                $labelFalse = $this->translator->trans('Is not Shock');
+                break;
+            case 'isPregnant':
+                $labelTrue = $this->translator->trans('Is Pregnant');
+                $labelFalse = $this->translator->trans('Is not Pregnant');
+                break;
+            case 'isWithPhysician':
+                $labelTrue = $this->translator->trans('Is with Physician');
+                $labelFalse = $this->translator->trans('Is not with Physician');
+                break;
+            case 'isWorkAccident':
+                $labelTrue = $this->translator->trans('Is Work Accident');
+                $labelFalse = $this->translator->trans('Is not Work Accident');
+                break;
+            default:
+                $labelTrue = 'True';
+                $labelFalse = 'False';
+                break;
+        }
+
+        foreach ($allocations->getItems() as $allocation) {
+            $total = $total + $allocation->getCounter();
+        }
+
+        foreach ($allocations->getItems() as $allocation) {
+            if (true == $allocation->getProperty()) {
+                $label = $labelTrue;
+            } else {
+                $label = $labelFalse;
             }
 
             $percent = $this->getValueInPercent($allocation->getCounter(), $total);

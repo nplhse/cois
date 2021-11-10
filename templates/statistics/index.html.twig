@@ -125,6 +125,23 @@
                     <div class="col-4 mt-4">
                         <div class="card">
                             <div class="card-body text-center">
+                                <a href="{{
+                                    path(
+                                        'app_statistics_properties'
+                                    )
+                                    }}">
+                                    <i class="bi bi-file-earmark-ruled"
+                                        style="font-size: 5rem; color: cornflowerblue;">
+
+                                    </i><br />
+                                    {{ 'Properties'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 mt-4">
+                        <div class="card">
+                            <div class="card-body text-center">
                                 <a href="{{ path('app_statistics_pzc') }}">
                                     <i class="bi bi-card-list"
                                         style="font-size: 5rem; color: cornflowerblue;">

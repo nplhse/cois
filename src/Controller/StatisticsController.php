@@ -63,6 +63,13 @@ class StatisticsController extends AbstractController
         ]);
     }
 
+    #[Route('/statistics/properties', name: 'app_statistics_properties')]
+    public function properties(): Response
+    {
+        return $this->render('statistics/properties.html.twig', [
+        ]);
+    }
+
     #[Route('/statistics/assignment', name: 'app_statistics_assignment')]
     public function assignment(Request $request): Response
     {

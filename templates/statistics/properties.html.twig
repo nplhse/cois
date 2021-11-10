@@ -1,0 +1,395 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'Property Statistics'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_statistics_index'),
+                            label: 'Statistics'|trans
+                        },
+                        {
+                            label: 'Transport Statistics'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-3">
+            {{ include('statistics/_statistics_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <h1>
+                {{ 'Property Statistics'|trans }}
+            </h1>
+
+            <h2>
+                {{ 'Proportions of Allocation Properties'|trans }}
+            </h2>
+
+            <h3>
+                {{ 'Is with Physician'|trans }}
+            </h3>
+            <div class="row"
+                {{
+                stimulus_controller(
+                    'chart-property',
+                    {
+                        target: '#graph7',
+                        tableTarget: 'table7',
+                        url: url(
+                            'app_api_property',
+                            {
+                                target: 'isWithPhysician'
+                            }
+                        )
+                    }
+                )
+                }}>
+                <div class="col-4 justify-content-center">
+                    <svg id="graph7" class="m-2" width="150" height="150"></svg>
+                </div>
+                <div class="col-8">
+                    <table id="table" class="table7 table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    {{ 'Property'|trans }}
+                                </th>
+                                <th>
+                                    {{ 'Count'|trans }}
+                                </th>
+                                <th>
+                                    {{ 'Percent'|trans }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr />
+
+            <h3>
+                {{ 'Requires Resuscitation'|trans }}
+            </h3>
+            <div class="row"
+                {{
+                stimulus_controller(
+                    'chart-property',
+                    {
+                        target: '#graph1',
+                        tableTarget: 'table1',
+                        url: url(
+                            'app_api_property',
+                            {
+                                target: 'requiresResus'
+                            }
+                        )
+                    }
+                )
+                }}>
+                <div class="col-4 justify-content-center">
+                    <svg id="graph1" class="m-2" width="150" height="150"></svg>
+                </div>
+                <div class="col-8">
+                    <table id="table" class="table1 table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    {{ 'Property'|trans }}
+                                </th>
+                                <th>
+                                    {{ 'Count'|trans }}
+                                </th>
+                                <th>
+                                    {{ 'Percent'|trans }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr />
+
+            <h3>
+                {{ 'Requires Cathlab'|trans }}
+            </h3>
+            <div class="row"
+                {{
+                stimulus_controller(
+                    'chart-property',
+                    {
+                        target: '#graph2',
+                        tableTarget: 'table2',
+                        url: url(
+                            'app_api_property',
+                            {
+                                target: 'requiresCathlab'
+                            }
+                        )
+                    }
+                )
+                }}>
+                <div class="col-4 justify-content-center">
+                    <svg id="graph2" class="m-2" width="150" height="150"></svg>
+                </div>
+                <div class="col-8">
+                    <table id="table" class="table2 table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    {{ 'Property'|trans }}
+                                </th>
+                                <th>
+                                    {{ 'Count'|trans }}
+                                </th>
+                                <th>
+                                    {{ 'Percent'|trans }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr />
+
+            <h3>
+                {{ 'Is CPR'|trans }}
+            </h3>
+            <div class="row"
+                {{
+                stimulus_controller(
+                    'chart-property',
+                    {
+                        target: '#graph3',
+                        tableTarget: 'table3',
+                        url: url(
+                            'app_api_property',
+                            {
+                                target: 'isCPR'
+                            }
+                        )
+                    }
+                )
+                }}>
+                <div class="col-4 justify-content-center">
+                    <svg id="graph3" class="m-2" width="150" height="150"></svg>
+                </div>
+                <div class="col-8">
+                    <table id="table" class="table3 table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    {{ 'Property'|trans }}
+                                </th>
+                                <th>
+                                    {{ 'Count'|trans }}
+                                </th>
+                                <th>
+                                    {{ 'Percent'|trans }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr />
+
+            <h3>
+                {{ 'Is Ventilated'|trans }}
+            </h3>
+            <div class="row"
+                {{
+                stimulus_controller(
+                    'chart-property',
+                    {
+                        target: '#graph4',
+                        tableTarget: 'table4',
+                        url: url(
+                            'app_api_property',
+                            {
+                                target: 'isVentilated'
+                            }
+                        )
+                    }
+                )
+                }}>
+                <div class="col-4 justify-content-center">
+                    <svg id="graph4" class="m-2" width="150" height="150"></svg>
+                </div>
+                <div class="col-8">
+                    <table id="table" class="table4 table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    {{ 'Property'|trans }}
+                                </th>
+                                <th>
+                                    {{ 'Count'|trans }}
+                                </th>
+                                <th>
+                                    {{ 'Percent'|trans }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr />
+
+            <h3>
+                {{ 'Is Shock'|trans }}
+            </h3>
+            <div class="row"
+                {{
+                stimulus_controller(
+                    'chart-property',
+                    {
+                        target: '#graph5',
+                        tableTarget: 'table5',
+                        url: url(
+                            'app_api_property',
+                            {
+                                target: 'isShock'
+                            }
+                        )
+                    }
+                )
+                }}>
+                <div class="col-4 justify-content-center">
+                    <svg id="graph5" class="m-2" width="150" height="150"></svg>
+                </div>
+                <div class="col-8">
+                    <table id="table" class="table5 table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    {{ 'Property'|trans }}
+                                </th>
+                                <th>
+                                    {{ 'Count'|trans }}
+                                </th>
+                                <th>
+                                    {{ 'Percent'|trans }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr />
+
+            <h3>
+                {{ 'Is Pregnant'|trans }}
+            </h3>
+            <div class="row"
+                {{
+                stimulus_controller(
+                    'chart-property',
+                    {
+                        target: '#graph6',
+                        tableTarget: 'table6',
+                        url: url(
+                            'app_api_property',
+                            {
+                                target: 'isPregnant'
+                            }
+                        )
+                    }
+                )
+                }}>
+                <div class="col-4 justify-content-center">
+                    <svg id="graph6" class="m-2" width="150" height="150"></svg>
+                </div>
+                <div class="col-8">
+                    <table id="table" class="table6 table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    {{ 'Property'|trans }}
+                                </th>
+                                <th>
+                                    {{ 'Count'|trans }}
+                                </th>
+                                <th>
+                                    {{ 'Percent'|trans }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr />
+
+            <h3>
+                {{ 'Is Work Accident'|trans }}
+            </h3>
+            <div class="row"
+                {{
+                stimulus_controller(
+                    'chart-property',
+                    {
+                        target: '#graph8',
+                        tableTarget: 'table8',
+                        url: url(
+                            'app_api_property',
+                            {
+                                target: 'isWorkAccident'
+                            }
+                        )
+                    }
+                )
+                }}>
+                <div class="col-4 justify-content-center">
+                    <svg id="graph8" class="m-2" width="150" height="150"></svg>
+                </div>
+                <div class="col-8">
+                    <table id="table" class="table8 table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    {{ 'Property'|trans }}
+                                </th>
+                                <th>
+                                    {{ 'Count'|trans }}
+                                </th>
+                                <th>
+                                    {{ 'Percent'|trans }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
