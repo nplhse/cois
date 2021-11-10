@@ -106,7 +106,7 @@ class StatisticsService
             $results[] = [
                 'label' => $gender,
                 'count' => $allocation->getCounter(),
-                'percent' => $percent,
+                'percent' => $percent . "%",
             ];
         }
 
@@ -288,7 +288,7 @@ class StatisticsService
             $results[] = [
                 'label' => $label,
                 'count' => $allocation->getCounter(),
-                'percent' => $percent,
+                'percent' => $percent . "%",
             ];
         }
 
@@ -355,7 +355,7 @@ class StatisticsService
             $results[] = [
                 'label' => $label,
                 'count' => $allocation->getCounter(),
-                'percent' => $percent,
+                'percent' => $percent . "%",
             ];
         }
 
@@ -373,12 +373,12 @@ class StatisticsService
 
         foreach ($allocations->getItems() as $allocation) {
             if (preg_match('/(?P<SK>\w+)(?P<Count>\d+)/', $allocation->getUrgency())) {
-                $percent = $this->getFormattedNumber($this->getValueInPercent($allocation->getCounter(), $total)).'%';
+                $percent = $this->getFormattedNumber($this->getValueInPercent($allocation->getCounter(), $total));
 
                 $results[] = [
                     'label' => $allocation->getUrgency(),
                     'count' => $allocation->getCounter(),
-                    'percent' => $percent,
+                    'percent' => $percent . "%",
                 ];
             }
         }
