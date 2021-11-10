@@ -127,7 +127,7 @@
       </trans-unit>
       <trans-unit id="WIzt02l" resname="dashboard.imports">
         <source>dashboard.imports</source>
-        <target>Importierte Daten</target>
+        <target>Importierte Datensätze</target>
       </trans-unit>
       <trans-unit id="fj.rWWU" resname="dashboard.imports.by_you">
         <source>dashboard.imports.by_you</source>
