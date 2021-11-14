@@ -106,7 +106,7 @@ class StatisticsService
             $results[] = [
                 'label' => $gender,
                 'count' => $allocation->getCounter(),
-                'percent' => $percent . "%",
+                'percent' => $percent.'%',
             ];
         }
 
@@ -288,7 +288,7 @@ class StatisticsService
             $results[] = [
                 'label' => $label,
                 'count' => $allocation->getCounter(),
-                'percent' => $percent . "%",
+                'percent' => $percent.'%',
             ];
         }
 
@@ -355,7 +355,7 @@ class StatisticsService
             $results[] = [
                 'label' => $label,
                 'count' => $allocation->getCounter(),
-                'percent' => $percent . "%",
+                'percent' => $percent.'%',
             ];
         }
 
@@ -378,7 +378,7 @@ class StatisticsService
                 $results[] = [
                     'label' => $allocation->getUrgency(),
                     'count' => $allocation->getCounter(),
-                    'percent' => $percent . "%",
+                    'percent' => $percent.'%',
                 ];
             }
         }
