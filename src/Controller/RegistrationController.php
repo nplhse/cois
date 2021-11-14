@@ -7,6 +7,7 @@ use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use App\Security\LoginFormAuthenticator;
+use App\Service\AdminNotificationService;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,9 +25,12 @@ class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
 
-    public function __construct(EmailVerifier $emailVerifier)
+    private AdminNotificationService $adminNotifier;
+
+    public function __construct(EmailVerifier $emailVerifier, AdminNotificationService $adminNotifier)
     {
         $this->emailVerifier = $emailVerifier;
+        $this->adminNotifier = $adminNotifier;
     }
 
     #[Route('/', name: 'app_register')]
@@ -55,9 +59,10 @@ class RegistrationController extends AbstractController
                     ->from(new Address('noreply@example.com', 'Collaborative IVENA statistics'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/emails/confirmation_email.html.twig')
+                    ->htmlTemplate('emails/user/confirmation_email.inky.twig')
             );
-            // do anything else you need here, like send an email
+
+            $this->adminNotifier->sendNewUserNotification($user);
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $user,

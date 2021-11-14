@@ -1,0 +1,27 @@
+{% extends '@email/default/notification/body.html.twig' %}
+
+{% block content %}
+    <p>
+        Import: {{ import.caption }}<br />
+        User: {{ import.user }}<br />
+        Hospital: {{ import.hospital }}
+    </p>
+
+    <p>
+        {{ import.lastError }}
+    </p>
+{% endblock %}
+
+{% block action %}
+    <spacer size="16"></spacer>
+    <button href="{{
+        url(
+            'app_settings_import_show',
+            {
+                id: import.id
+            }
+        )
+        }}">
+        {{ 'Review import'|trans([], 'emails') }}
+    </button>
+{% endblock %}

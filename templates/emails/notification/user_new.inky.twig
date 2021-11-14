@@ -1,0 +1,20 @@
+{% extends '@email/default/notification/body.html.twig' %}
+
+{% block content %}
+    User: {{ user.username }}<br />
+    Email: {{ user.email }}<br />
+{% endblock %}
+
+{% block action %}
+    <spacer size="16"></spacer>
+    <button href="{{
+        url(
+            'app_settings_user_show',
+            {
+                id: user.id
+            }
+        )
+        }}">
+        {{ 'Review user'|trans([], 'emails') }}
+    </button>
+{% endblock %}

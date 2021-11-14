@@ -9,6 +9,7 @@ use App\Message\ImportDataMessage;
 use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
 use App\Repository\ImportRepository;
+use App\Service\AdminNotificationService;
 use App\Service\FileUploader;
 use App\Service\RequestParamService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,6 +27,13 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ImportController extends AbstractController
 {
+    private AdminNotificationService $adminNotifier;
+
+    public function __construct(AdminNotificationService $adminNotifier)
+    {
+        $this->adminNotifier = $adminNotifier;
+    }
+
     /**
      * @Route("/", name="app_import_index")
      */
@@ -112,6 +120,8 @@ class ImportController extends AbstractController
                 $entityManager->flush();
 
                 $this->addFlash('danger', 'Your import failed, see details for more information. We have send a notification to the admin to handle this issue.');
+
+                $this->adminNotifier->sendFailedImportNotification($import);
             }
 
             return $this->redirectToRoute('app_import_show', ['id' => $import->getId()]);

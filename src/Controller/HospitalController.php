@@ -6,6 +6,7 @@ use App\Entity\Hospital;
 use App\Form\HospitalType;
 use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
+use App\Service\AdminNotificationService;
 use App\Service\RequestParamService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,10 +19,13 @@ class HospitalController extends AbstractController
 {
     private RequestParamService $paramService;
 
+    private AdminNotificationService $adminNotifier;
+
     private Security $security;
 
-    public function __construct(Security $security)
+    public function __construct(AdminNotificationService $adminNotifier, Security $security)
     {
+        $this->adminNotifier = $adminNotifier;
         $this->security = $security;
     }
 
@@ -85,6 +89,8 @@ class HospitalController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Your hospital was successfully created.');
+
+            $this->adminNotifier->sendNewHospitalNotification($hospital);
 
             return $this->redirectToRoute('app_hospital_show', ['id' => $hospital->getId()]);
         }

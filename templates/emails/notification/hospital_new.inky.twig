@@ -1,0 +1,21 @@
+{% extends '@email/default/notification/body.html.twig' %}
+
+{% block content %}
+    Hospital: {{ hospital.name }}<br />
+    Dispatch Area: {{ hospital.dispatcharea }}<br />
+    User: {{ hospital.owner }}<br />
+{% endblock %}
+
+{% block action %}
+    <spacer size="16"></spacer>
+    <button href="{{
+        url(
+            'app_settings_hospital_show',
+            {
+                id: hospital.id
+            }
+        )
+        }}">
+        {{ 'Review hospital'|trans([], 'emails') }}
+    </button>
+{% endblock %}
