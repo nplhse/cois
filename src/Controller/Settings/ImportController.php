@@ -202,8 +202,21 @@ class ImportController extends AbstractController
 
         $command = new ImportDataMessage($import, $hospital);
 
-        $this->dispatchMessage($command);
-        $this->addFlash('success', 'Refreshed Import in database.');
+        try {
+            $this->dispatchMessage(new ImportDataMessage($import, $import->getHospital()));
+
+            $this->addFlash('success', 'Refreshed Import in database.');
+        } catch (HandlerFailedException $e) {
+            $import->setStatus('failed');
+            $import->setLastError($e->getMessage());
+            $import->setLastRun(new \DateTime('NOW'));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($import);
+            $entityManager->flush();
+
+            $this->addFlash('danger', 'Import could not be refreshed, see details for more information.');
+        }
 
         return $this->redirectToRoute('app_settings_import_show', ['id' => $import->getId()]);
     }

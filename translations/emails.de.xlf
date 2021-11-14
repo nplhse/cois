@@ -90,6 +90,30 @@
         <source>Click here to upload new data</source>
         <target>Hier klicken zum Importieren</target>
       </trans-unit>
+      <trans-unit id="33UKuZk" resname="Review import">
+        <source>Review import</source>
+        <target>Import ansehen</target>
+      </trans-unit>
+      <trans-unit id="3BfAYSJ" resname="Review hospital">
+        <source>Review hospital</source>
+        <target>Klinik ansehen</target>
+      </trans-unit>
+      <trans-unit id="vgTmT8e" resname="Review user">
+        <source>Review user</source>
+        <target>Benutzer ansehenr</target>
+      </trans-unit>
+      <trans-unit id="ZdWO1Si" resname="Welcome to Collaborative IVENA statistics">
+        <source>Welcome to Collaborative IVENA statistics</source>
+        <target>Willkommen bei den kollaborativen IVENA Statistiken</target>
+      </trans-unit>
+      <trans-unit id="5MJBGgr" resname="Please confirm your email address by clicking the following link. This link will expire in">
+        <source>Please confirm your email address by clicking the following link. This link will expire in</source>
+        <target>Bitte bestätigten Sie Ihre E-Mail Adresse indem sie auf den folgenden Link klicken. Dieser Link ist gültig für</target>
+      </trans-unit>
+      <trans-unit id="r.lBOGQ" resname="Confirm my E-Mail address">
+        <source>Confirm my E-Mail address</source>
+        <target>Meine E-Mail bestätigen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
