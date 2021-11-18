@@ -14,7 +14,7 @@
         "chart.js": "^3.6.0",
         "core-js": "^3.19.1",
         "eslint": "^7.32.0",
-        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-config-airbnb-base": "^15.0.0",
         "eslint-config-alloy": "^4.4.0",
         "eslint-plugin-import": "^2.25.3",
         "eslint-plugin-vue": "^7.20.0",
