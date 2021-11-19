@@ -1,20 +1,28 @@
-<form method="post"
-    action="{{
-    path(
-        'app_import_delete',
+<div {{
+    stimulus_controller(
+        'modal',
         {
-            id: import.id
+            formUrl: path(
+                'app_import_delete_form',
+                {
+                    id: import.id
+                }
+            ),
+            targetUrl: path('app_import_index')
         }
     )
-    }}"
-    onsubmit="return confirm({{ 'Are you sure you want to delete this item?'|trans(
-        {},
-        'forms'
-    ) }});">
-    <input type="hidden"
-        name="_token"
-        value="{{ csrf_token('delete' ~ import.id) }}" />
-    <button class="btn btn-danger">
+    }}>
+    <button class="btn btn-danger" data-action="modal#openModal">
         <i class="bi bi-trash-fill"></i> {{ 'Delete'|trans({}, 'forms') }}
     </button>
-</form>
+
+    {{
+        include(
+            '_elements/modal.html.twig',
+            {
+                modalTitle: 'Delete Import',
+                modalMessage: 'Are you sure about deleting this Import?'
+            }
+        )
+    }}
+</div>

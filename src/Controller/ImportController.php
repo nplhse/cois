@@ -172,6 +172,18 @@ class ImportController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/delete", name="app_import_delete_form", methods={"GET"})
+     */
+    public function deleteForm(Import $import): Response
+    {
+        $this->denyAccessUnlessGranted('delete', $import);
+
+        return $this->render('import/_form.html.twig', [
+            'import' => $import,
+        ]);
+    }
+
+    /**
      * @Route("/{id}/delete", name="app_import_delete", methods={"POST"})
      */
     public function delete(Import $import, AllocationRepository $allocationRepository, EntityManagerInterface $em): Response
