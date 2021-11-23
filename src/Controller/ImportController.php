@@ -178,7 +178,7 @@ class ImportController extends AbstractController
     {
         $this->denyAccessUnlessGranted('delete', $import);
 
-        return $this->render('import/_form.html.twig', [
+        return $this->render('import/_delete_form.html.twig', [
             'import' => $import,
         ]);
     }

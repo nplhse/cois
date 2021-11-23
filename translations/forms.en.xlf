@@ -509,6 +509,22 @@
         <source>Stop filtering by Infection</source>
         <target>Stop filtering by Infection</target>
       </trans-unit>
+      <trans-unit id="QfLFmLq" resname="Are you sure about deleting this Import?">
+        <source>Are you sure about deleting this Import?</source>
+        <target>Are you sure about deleting this Import?</target>
+      </trans-unit>
+      <trans-unit id="fmRuwzg" resname="Delete Import?">
+        <source>Delete Import?</source>
+        <target>Delete Import?</target>
+      </trans-unit>
+      <trans-unit id="EZtzW1w" resname="Delete Import">
+        <source>Delete Import</source>
+        <target>Delete Import</target>
+      </trans-unit>
+      <trans-unit id="GXZu1sy" resname="Cancel">
+        <source>Cancel</source>
+        <target>Cancel</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

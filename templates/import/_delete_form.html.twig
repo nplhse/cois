@@ -1,28 +1,22 @@
-<div {{
-    stimulus_controller(
-        'modal',
+<form method="post"
+    action="{{
+    path(
+        'app_import_delete',
         {
-            formUrl: path(
-                'app_import_delete_form',
-                {
-                    id: import.id
-                }
-            ),
-            targetUrl: path('app_import_index')
+            id: import.id
         }
     )
-    }}>
-    <button class="btn btn-danger" data-action="modal#openModal">
+    }}">
+    <div class="text-center">
+        <i class="bi bi-trash fs-4"></i>
+        <p>
+            {{ 'Are you sure about deleting this Import?'|trans({}, 'forms') }}
+        </p>
+    </div>
+    <input type="hidden"
+        name="_token"
+        value="{{ csrf_token('delete' ~ import.id) }}" />
+    <button type="submit" class="btn btn-danger">
         <i class="bi bi-trash-fill"></i> {{ 'Delete'|trans({}, 'forms') }}
     </button>
-
-    {{
-        include(
-            '_elements/modal.html.twig',
-            {
-                modalTitle: 'Delete Import',
-                modalMessage: 'Are you sure about deleting this Import?'
-            }
-        )
-    }}
-</div>
+</form>
