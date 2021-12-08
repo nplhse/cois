@@ -21,7 +21,7 @@
         "file-loader": "^6.0.0",
         "node-sass": "^6.0.1",
         "postcss": "^8.4.4",
-        "postcss-loader": "^6.2.0",
+        "postcss-loader": "^6.2.1",
         "prettier": "^2.4.1",
         "prettier-plugin-twig-melody": "^0.4.6",
         "regenerator-runtime": "^0.13.9",
