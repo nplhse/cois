@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b477906fd66e52116cf9ee0cb62ad70a",
+    "content-hash": "c72d4b072059cf66123a861bd8d70d4d",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -6781,33 +6781,33 @@
         },
         {
             "name": "symfony/security-bundle",
-            "version": "v5.3.12",
+            "version": "v5.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-bundle.git",
-                "reference": "be52715f4a7fd490937e4f881dc00ff5c0dcfeb3"
+                "reference": "39e7e10048a0cad8c4213603f8db173779fcf07d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/be52715f4a7fd490937e4f881dc00ff5c0dcfeb3",
-                "reference": "be52715f4a7fd490937e4f881dc00ff5c0dcfeb3",
+                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/39e7e10048a0cad8c4213603f8db173779fcf07d",
+                "reference": "39e7e10048a0cad8c4213603f8db173779fcf07d",
                 "shasum": ""
             },
             "require": {
                 "ext-xml": "*",
                 "php": ">=7.2.5",
-                "symfony/config": "^4.4|^5.0",
-                "symfony/dependency-injection": "^5.3",
-                "symfony/deprecation-contracts": "^2.1",
-                "symfony/event-dispatcher": "^5.1",
-                "symfony/http-foundation": "^5.3",
-                "symfony/http-kernel": "^5.3",
-                "symfony/password-hasher": "^5.3",
+                "symfony/config": "^4.4|^5.0|^6.0",
+                "symfony/dependency-injection": "^5.3|^6.0",
+                "symfony/deprecation-contracts": "^2.1|^3",
+                "symfony/event-dispatcher": "^5.1|^6.0",
+                "symfony/http-foundation": "^5.3|^6.0",
+                "symfony/http-kernel": "^5.3|^6.0",
+                "symfony/password-hasher": "^5.3|^6.0",
                 "symfony/polyfill-php80": "^1.16",
-                "symfony/security-core": "^5.3",
-                "symfony/security-csrf": "^4.4|^5.0",
+                "symfony/security-core": "^5.4|^6.0",
+                "symfony/security-csrf": "^4.4|^5.0|^6.0",
                 "symfony/security-guard": "^5.3",
-                "symfony/security-http": "^5.3.2"
+                "symfony/security-http": "^5.4|^6.0"
             },
             "conflict": {
                 "symfony/browser-kit": "<4.4",
@@ -6818,23 +6818,23 @@
             },
             "require-dev": {
                 "doctrine/annotations": "^1.10.4",
-                "symfony/asset": "^4.4|^5.0",
-                "symfony/browser-kit": "^4.4|^5.0",
-                "symfony/console": "^4.4|^5.0",
-                "symfony/css-selector": "^4.4|^5.0",
-                "symfony/dom-crawler": "^4.4|^5.0",
-                "symfony/expression-language": "^4.4|^5.0",
-                "symfony/form": "^4.4|^5.0",
-                "symfony/framework-bundle": "^5.3",
-                "symfony/ldap": "^5.3",
-                "symfony/process": "^4.4|^5.0",
-                "symfony/rate-limiter": "^5.2",
-                "symfony/serializer": "^4.4|^5.0",
-                "symfony/translation": "^4.4|^5.0",
-                "symfony/twig-bridge": "^4.4|^5.0",
-                "symfony/twig-bundle": "^4.4|^5.0",
-                "symfony/validator": "^4.4|^5.0",
-                "symfony/yaml": "^4.4|^5.0",
+                "symfony/asset": "^4.4|^5.0|^6.0",
+                "symfony/browser-kit": "^4.4|^5.0|^6.0",
+                "symfony/console": "^4.4|^5.0|^6.0",
+                "symfony/css-selector": "^4.4|^5.0|^6.0",
+                "symfony/dom-crawler": "^4.4|^5.0|^6.0",
+                "symfony/expression-language": "^4.4|^5.0|^6.0",
+                "symfony/form": "^4.4|^5.0|^6.0",
+                "symfony/framework-bundle": "^5.3|^6.0",
+                "symfony/ldap": "^5.3|^6.0",
+                "symfony/process": "^4.4|^5.0|^6.0",
+                "symfony/rate-limiter": "^5.2|^6.0",
+                "symfony/serializer": "^4.4|^5.0|^6.0",
+                "symfony/translation": "^4.4|^5.0|^6.0",
+                "symfony/twig-bridge": "^4.4|^5.0|^6.0",
+                "symfony/twig-bundle": "^4.4|^5.0|^6.0",
+                "symfony/validator": "^4.4|^5.0|^6.0",
+                "symfony/yaml": "^4.4|^5.0|^6.0",
                 "twig/twig": "^2.13|^3.0.4"
             },
             "type": "symfony-bundle",
@@ -6863,7 +6863,7 @@
             "description": "Provides a tight integration of the Security component into the Symfony full-stack framework",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-bundle/tree/v5.3.12"
+                "source": "https://github.com/symfony/security-bundle/tree/v5.4.1"
             },
             "funding": [
                 {
@@ -6879,7 +6879,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-24T08:15:08+00:00"
+            "time": "2021-12-04T17:10:39+00:00"
         },
         {
             "name": "symfony/security-core",
