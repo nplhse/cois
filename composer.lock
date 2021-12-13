@@ -8636,23 +8636,23 @@
         },
         {
             "name": "symfonycasts/verify-email-bundle",
-            "version": "v1.6.0",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SymfonyCasts/verify-email-bundle.git",
-                "reference": "55487a5e55ab67ad77a84eefd1c92b0fab47e6ce"
+                "reference": "7b17b150c39d115141cb462862baac9c281a3de9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SymfonyCasts/verify-email-bundle/zipball/55487a5e55ab67ad77a84eefd1c92b0fab47e6ce",
-                "reference": "55487a5e55ab67ad77a84eefd1c92b0fab47e6ce",
+                "url": "https://api.github.com/repos/SymfonyCasts/verify-email-bundle/zipball/7b17b150c39d115141cb462862baac9c281a3de9",
+                "reference": "7b17b150c39d115141cb462862baac9c281a3de9",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5",
                 "symfony/config": "^4.4 | ^5.0 | ^6.0",
                 "symfony/dependency-injection": "^4.4 | ^5.0 | ^6.0",
-                "symfony/deprecation-contracts": "^2.2",
+                "symfony/deprecation-contracts": "^2.2 | ^3.0",
                 "symfony/http-kernel": "^4.4 | ^5.0 | ^6.0",
                 "symfony/routing": "^4.4 | ^5.0 | ^6.0"
             },
@@ -8679,9 +8679,9 @@
             "description": "Simple, stylish Email Verification for Symfony",
             "support": {
                 "issues": "https://github.com/SymfonyCasts/verify-email-bundle/issues",
-                "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.6.0"
+                "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.7.0"
             },
-            "time": "2021-11-19T00:41:41+00:00"
+            "time": "2021-11-30T17:26:37+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
