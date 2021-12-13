@@ -60,7 +60,7 @@
         "symfony/string": "5.3.*",
         "symfony/translation": "5.4.*",
         "symfony/twig-bundle": "^5.2",
-        "symfony/ux-chartjs": "^1.2",
+        "symfony/ux-chartjs": "^2.0",
         "symfony/ux-dropzone": "^1.2",
         "symfony/validator": "5.3.*",
         "symfony/web-link": "5.3.*",
