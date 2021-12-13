@@ -7,7 +7,7 @@
         "@symfony/stimulus-bridge": "^2.1.0",
         "@symfony/ux-chartjs": "file:vendor/symfony/ux-chartjs/Resources/assets",
         "@symfony/ux-dropzone": "file:vendor/symfony/ux-dropzone/Resources/assets",
-        "@symfony/webpack-encore": "^1.6.1",
+        "@symfony/webpack-encore": "^1.7.0",
         "autoprefixer": "^10.4.0",
         "babel-loader": "^8.2.3",
         "bootstrap": "^5.1.3",
