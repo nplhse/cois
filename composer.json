@@ -63,7 +63,7 @@
         "symfony/ux-chartjs": "^2.0",
         "symfony/ux-dropzone": "^1.2",
         "symfony/validator": "5.3.*",
-        "symfony/web-link": "5.3.*",
+        "symfony/web-link": "5.4.*",
         "symfony/webpack-encore-bundle": "^1.9",
         "symfony/yaml": "5.3.*",
         "symfonycasts/reset-password-bundle": "^1.4",
