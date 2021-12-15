@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Rector\Core\Configuration\Option;
 use Rector\Php74\Rector\Property\TypedPropertyRector;
+use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\Symfony\Set\SymfonySetList;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -17,13 +18,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__.'/src',
     ]);
 
-    // region Symfony Container
-    $parameters = $containerConfigurator->parameters();
+    $parameters->set(Option::SKIP, [
+        ClassPropertyAssignToConstructorPromotionRector::class,
+    ]);
+
     $parameters->set(
         Option::SYMFONY_CONTAINER_XML_PATH_PARAMETER,
         __DIR__.'/var/cache/dev/App_KernelDevDebugContainer.xml'
     );
-    // endregion
 
     // Define what rule sets will be applied
     $containerConfigurator->import(LevelSetList::UP_TO_PHP_80);
