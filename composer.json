@@ -1,7 +1,6 @@
 {
     "name": "nplhse/cois",
     "description": "A tool for collaborative IVENA statistics",
-    "version": "0.2.0-alpha",
     "type": "project",
     "homepage": "https://github.com/nplhse/cois/",
     "license": "MIT",
@@ -22,7 +21,7 @@
         "php": ">=8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "composer/package-versions-deprecated": "1.11.99.4",
+        "composer/package-versions-deprecated": "1.*",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.2",
         "doctrine/doctrine-migrations-bundle": "^3.0",
