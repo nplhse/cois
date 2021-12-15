@@ -11,7 +11,7 @@ parameters:
     paths:
     	- src
     	- tests
-    excludes_analyse:
+    excludePaths:
         - assets
         - build
         - node_modules
