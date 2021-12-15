@@ -10,13 +10,10 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class ImportDataMessageHandler implements MessageHandlerInterface
 {
-    private EntityManagerInterface $em;
-
     private ImportService $service;
 
-    public function __construct(EntityManagerInterface $entityManager, ImportService $service)
+    public function __construct(ImportService $service)
     {
-        $this->em = $entityManager;
         $this->service = $service;
     }
 

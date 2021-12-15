@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=HospitalRepository::class)
  */
-class Hospital
+class Hospital implements \Stringable
 {
     public const SMALL_HOSPITAL = 250;
 

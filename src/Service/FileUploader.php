@@ -33,7 +33,7 @@ class FileUploader
 
         try {
             $this->storage->write($path, $file->getContent());
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             throw new \Exception(sprintf('Could not write uploaded file "%s"', $uniqueName));
         }
 

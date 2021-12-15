@@ -49,15 +49,11 @@ class HospitalVoter extends Voter
         /** @var Hospital $hospital */
         $hospital = $subject;
 
-        switch ($attribute) {
-            case self::EDIT:
-                return $this->canEdit($hospital, $user);
-
-            case self::VIEWSTATS:
-                return $this->canViewStats($hospital, $user);
-        }
-
-        throw new \LogicException('This code should not be reached!');
+        return match ($attribute) {
+            self::EDIT => $this->canEdit($hospital, $user),
+            self::VIEWSTATS => $this->canViewStats($hospital, $user),
+            default => throw new \LogicException('This code should not be reached!'),
+        };
     }
 
     private function canEdit(Hospital $hospital, User $user): bool

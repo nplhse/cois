@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\File\File;
 /**
  * @ORM\Entity(repositoryClass=ImportRepository::class)
  */
-class Import
+class Import implements \Stringable
 {
     /**
      * @ORM\Id
@@ -47,7 +47,7 @@ class Import
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?File $file;
+    private ?File $file = null;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -82,7 +82,7 @@ class Import
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private ?float $duration;
+    private ?float $duration = null;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -97,17 +97,17 @@ class Import
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private ?int $itemCount;
+    private ?int $itemCount = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $lastError;
+    private ?string $lastError = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Hospital::class, inversedBy="imports")
      */
-    private ?Hospital $hospital;
+    private ?Hospital $hospital = null;
 
     public function __construct()
     {

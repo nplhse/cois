@@ -17,7 +17,7 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $date = Carbon::create(rand(2019, 2021), rand(1, 12), rand(1, 31), rand(0, 23), rand(0, 59), rand(0, 59), 'Europe/Berlin');
+        $date = Carbon::create(random_int(2019, 2021), random_int(1, 12), random_int(1, 31), random_int(0, 23), random_int(0, 59), random_int(0, 59), 'Europe/Berlin');
 
         $hospital = new Hospital();
         $hospital->setName('Sacred Heart Hospital');
@@ -25,7 +25,7 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
         $hospital->setDispatchArea('Test Area');
         $hospital->setSupplyArea('Test Area');
         $hospital->setOwner($this->getReference(UserFixtures::BASE_USER_REFERENCE));
-        $hospital->setBeds(rand(100, 1250));
+        $hospital->setBeds(random_int(100, 1250));
         $hospital->setLocation($this->array_random(['rural', 'urban'], 1));
         $hospital->setCreatedAt($date);
         $hospital->setUpdatedAt($date);
@@ -44,7 +44,7 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
         $import1->setCaption('Demo Import');
         $import1->setContents('allocation');
         $import1->setStatus('finished');
-        $import1->setCreatedAt($date->addMinutes(rand(10, 150)));
+        $import1->setCreatedAt($date->addMinutes(random_int(10, 150)));
 
         $manager->persist($import1);
 
@@ -60,12 +60,12 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
         $import2->setCaption('Demo Import');
         $import2->setContents('allocation');
         $import2->setStatus('finished');
-        $import2->setCreatedAt($date->addMinutes(rand(10, 150)));
+        $import2->setCreatedAt($date->addMinutes(random_int(10, 150)));
 
         $manager->persist($import2);
 
         for ($i = 1; $i <= 100; ++$i) {
-            $date = Carbon::create(rand(2019, 2021), rand(1, 12), rand(1, 31), rand(0, 23), rand(0, 59), rand(0, 59), 'Europe/Berlin');
+            $date = Carbon::create(random_int(2019, 2021), random_int(1, 12), random_int(1, 31), random_int(0, 23), random_int(0, 59), random_int(0, 59), 'Europe/Berlin');
 
             $allocation = new Allocation();
             $allocation->setHospital($hospital);
@@ -89,7 +89,7 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             $allocation->setCreationHour($date->hour);
             $allocation->setCreationMinute($date->minute);
 
-            $date->addMinutes(rand(1, 42));
+            $date->addMinutes(random_int(1, 42));
 
             $allocation->setArrivalAt($date);
             $allocation->setArrivalDate($date->toDateString());
@@ -106,7 +106,7 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
 
             $allocation->setOccasion($this->array_random(['Häuslicher Einsatz', 'Verkehrsunfall', 'Sonstiger Einsatz', 'aus Arztpraxis', 'Öffentlicher Raum', ''], 1));
             $allocation->setGender($this->array_random(['M', 'M', 'M', 'W', 'W', 'W', 'D'], 1));
-            $allocation->setAge(rand(1, 100));
+            $allocation->setAge(random_int(1, 100));
             $allocation->setIsCPR($this->array_random([true, false, false, false, false]));
             $allocation->setIsVentilated($this->array_random([true, false, false, false, false]));
             $allocation->setIsShock($this->array_random([true, false, false, false, false]));
@@ -125,7 +125,7 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             $allocation->setHandoverPoint('ZNA');
             $allocation->setSpecialityWasClosed($this->array_random([true, false, false, false, false]));
 
-            $allocation->setPZC(rand(111111, 999999));
+            $allocation->setPZC(random_int(111111, 999999));
             $allocation->setPZCText('Noch kein Text');
 
             $allocation->setSecondaryPZC(123456);

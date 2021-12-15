@@ -22,9 +22,9 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/import")
  * @IsGranted("ROLE_USER")
  */
+#[Route(path: '/import')]
 class ImportController extends AbstractController
 {
     private AdminNotificationService $adminNotifier;
@@ -34,9 +34,7 @@ class ImportController extends AbstractController
         $this->adminNotifier = $adminNotifier;
     }
 
-    /**
-     * @Route("/", name="app_import_index")
-     */
+    #[Route(path: '/', name: 'app_import_index')]
     public function index(Request $request, FileUploader $fileUploader, ImportRepository $importRepository, HospitalRepository $hospitalRepository): Response
     {
         $hospital = $hospitalRepository->findOneBy(['owner' => $this->getUser()->getId()]);
@@ -47,10 +45,8 @@ class ImportController extends AbstractController
         $filters['search'] = $paramService->getSearch();
         $filters['page'] = $paramService->getPage();
         $filters['show'] = $paramService->getShow();
-
         $filters['user'] = $this->getUser();
         $filters['hospital'] = $this->getUser()->getHospital();
-
         $filters['sortBy'] = $paramService->getSortBy();
         $filters['orderBy'] = $paramService->getOrderBy();
 
@@ -64,9 +60,7 @@ class ImportController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="app_import_new")
-     */
+    #[Route(path: '/new', name: 'app_import_new')]
     public function new(Request $request, FileUploader $fileUploader, ImportRepository $importRepository): Response
     {
         $hospital = $this->getUser()->getHospital();
@@ -76,8 +70,8 @@ class ImportController extends AbstractController
         }
 
         $import = new Import();
-        $user = $this->getUser();
 
+        $user = $this->getUser();
         $form = $this->createForm(UploadType::class);
         $form->handleRequest($request);
 
@@ -132,9 +126,7 @@ class ImportController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/edit/{id}", name="app_import_edit")
-     */
+    #[Route(path: '/edit/{id}', name: 'app_import_edit')]
     public function edit(Import $import, Request $request, ImportRepository $importRepository): Response
     {
         $this->denyAccessUnlessGranted('delete', $import);
@@ -158,9 +150,7 @@ class ImportController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="app_import_show", methods={"GET"})
-     */
+    #[Route(path: '/{id}', name: 'app_import_show', methods: ['GET'])]
     public function show(Import $import): Response
     {
         $userIsOwner = $import->getUser() == $this->getUser();
@@ -171,9 +161,7 @@ class ImportController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/delete", name="app_import_delete_form", methods={"GET"})
-     */
+    #[Route(path: '/{id}/delete', name: 'app_import_delete_form', methods: ['GET'])]
     public function deleteForm(Import $import): Response
     {
         $this->denyAccessUnlessGranted('delete', $import);
@@ -183,9 +171,7 @@ class ImportController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/delete", name="app_import_delete", methods={"POST"})
-     */
+    #[Route(path: '/{id}/delete', name: 'app_import_delete', methods: ['POST'])]
     public function delete(Import $import, AllocationRepository $allocationRepository, EntityManagerInterface $em): Response
     {
         $this->denyAccessUnlessGranted('delete', $import);

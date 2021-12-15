@@ -60,7 +60,7 @@ class ChangeEmailController extends AbstractController
 
             try {
                 $this->mailer->sendVerificationEmail($user, $signatureComponents->getSignedUrl(), 3600);
-            } catch (ExceptionInterface $e) {
+            } catch (ExceptionInterface) {
                 $this->addFlash('warning', $this->translator->trans('Failed to send verification E-Mail. Please try again later.'));
 
                 return $this->redirectToRoute('app_settings_email');
@@ -129,7 +129,7 @@ class ChangeEmailController extends AbstractController
 
         try {
             $this->mailer->sendVerificationEmail($user, $signatureComponents->getSignedUrl(), 3600);
-        } catch (ExceptionInterface $e) {
+        } catch (ExceptionInterface) {
             $this->addFlash('danger', $this->translator->trans('Failed to send verification E-Mail. Please try again later.'));
 
             return $this->redirectToRoute('app_settings_email');

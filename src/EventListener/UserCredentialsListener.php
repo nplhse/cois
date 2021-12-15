@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class UserCredentialsListener
+class UserCredentialsListener implements \Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     private TokenStorageInterface $security;
 
@@ -26,11 +26,12 @@ class UserCredentialsListener
         $this->router = $router;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public static function getSubscribedEvents(): array
     {
-        return [
-            RequestEvent::class => 'onKernelRequest',
-        ];
+        return [\Symfony\Component\HttpKernel\KernelEvents::REQUEST => 'onKernelRequest'];
     }
 
     public function onKernelRequest(RequestEvent $event): void

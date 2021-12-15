@@ -11,14 +11,12 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/_files")
  * @IsGranted("ROLE_ADMIN")
  */
+#[Route(path: '/_files')]
 class FileController extends AbstractController
 {
-    /**
-     * @Route("/alloc/{id}", name="app_files_allocations")
-     */
+    #[Route(path: '/alloc/{id}', name: 'app_files_allocations')]
     public function index(Import $import, FileUploader $fileUploader): Response
     {
         $path = $import->getPath();

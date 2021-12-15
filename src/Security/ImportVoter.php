@@ -49,15 +49,11 @@ class ImportVoter extends Voter
         /** @var Import $import */
         $import = $subject;
 
-        switch ($attribute) {
-            case self::DELETE:
-                return $this->canDelete($import, $user);
-
-            case self::EDIT:
-                return $this->canEdit($import, $user);
-        }
-
-        throw new \LogicException('This code should not be reached!');
+        return match ($attribute) {
+            self::DELETE => $this->canDelete($import, $user),
+            self::EDIT => $this->canEdit($import, $user),
+            default => throw new \LogicException('This code should not be reached!'),
+        };
     }
 
     private function canDelete(Import $import, User $user): bool

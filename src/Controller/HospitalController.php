@@ -17,8 +17,6 @@ use Symfony\Component\Security\Core\Security;
 #[Route('/hospitals')]
 class HospitalController extends AbstractController
 {
-    private RequestParamService $paramService;
-
     private AdminNotificationService $adminNotifier;
 
     private Security $security;
@@ -65,9 +63,7 @@ class HospitalController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="app_hospital_new", methods={"GET","POST"})
-     */
+    #[Route(path: '/new', name: 'app_hospital_new', methods: ['GET', 'POST'])]
     public function new(Request $request, HospitalRepository $hospitalRepository): Response
     {
         if (null !== $this->getUser()->getHospital()) {
@@ -101,9 +97,7 @@ class HospitalController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/edit/{id}", name="app_hospital_edit", methods={"GET","POST"})
-     */
+    #[Route(path: '/edit/{id}', name: 'app_hospital_edit', methods: ['GET', 'POST'])]
     public function edit(Hospital $hospital, Request $request, HospitalRepository $hospitalRepository): Response
     {
         $this->denyAccessUnlessGranted('edit', $hospital);
@@ -127,9 +121,7 @@ class HospitalController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="app_hospital_show", methods={"GET"})
-     */
+    #[Route(path: '/{id}', name: 'app_hospital_show', methods: ['GET'])]
     public function show(Hospital $hospital, AllocationRepository $allocationRepository): Response
     {
         $userIsOwner = $hospital->getOwner() == $this->getUser();

@@ -18,9 +18,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
-/**
- * @Route("register")
- */
+#[Route(path: 'register')]
 class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;

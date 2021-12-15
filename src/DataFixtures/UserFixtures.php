@@ -15,10 +15,7 @@ class UserFixtures extends Fixture
 
     public const OTHER_USER_REFERENCE = 'other-user';
 
-    /**
-     * @var UserPasswordHasherInterface
-     */
-    private $passwordHasher;
+    private \Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface $passwordHasher;
 
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {

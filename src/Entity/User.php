@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  */
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable
 {
     /**
      * @ORM\Id
@@ -68,12 +68,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private ?bool $allowsEmail;
+    private ?bool $allowsEmail = null;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private ?bool $allowsEmailReminder;
+    private ?bool $allowsEmailReminder = null;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)

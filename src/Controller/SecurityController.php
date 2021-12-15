@@ -22,17 +22,15 @@ class SecurityController extends AbstractController
         $this->verifyEmailHelper = $verifyEmailHelper;
     }
 
-    /**
-     * @Route("login", name="app_login")
-     */
+    #[Route(path: 'login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-
         // create login form
+
         $form = $this->createForm(
             SecurityLoginType::class,
             [
@@ -49,17 +47,13 @@ class SecurityController extends AbstractController
         );
     }
 
-    /**
-     * @Route("logout", name="app_logout")
-     */
+    #[Route(path: 'logout', name: 'app_logout')]
     public function logout(): Response
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    /**
-     * @Route("verify", name="app_confirm_email")
-     */
+    #[Route(path: 'verify', name: 'app_confirm_email')]
     public function verifyUserEmail(Request $request, UserRepository $userRepository, TranslatorInterface $translator): Response
     {
         $user = $this->getUser();
@@ -88,7 +82,7 @@ class SecurityController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-        } catch (VerifyEmailExceptionInterface $e) {
+        } catch (VerifyEmailExceptionInterface) {
             $this->addFlash('danger', $translator->trans('Your E-Mail address could not be verified.'));
 
             return $this->redirectToRoute('app_dashboard');

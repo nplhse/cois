@@ -18,10 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/settings/user')]
 class UserController extends AbstractController
 {
-    /**
-     * @var UserPasswordHasherInterface
-     */
-    private $passwordHasher;
+    private \Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface $passwordHasher;
 
     private MailerService $mailer;
 
