@@ -4,7 +4,6 @@ namespace App\MessageHandler;
 
 use App\Message\ImportDataMessage;
 use App\Service\ImportService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 

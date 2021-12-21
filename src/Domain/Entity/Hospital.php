@@ -186,9 +186,9 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
 
         if ($beds <= self::BEDS_SMALL_HOSPITAL) {
             $this->size = self::SIZE_SMALL;
-        } elseif ($beds > self::BEDS_SMALL_HOSPITAL && $beds < self::BEDS_LARGE_HOSPITAL) {
+        } elseif ($beds < self::BEDS_LARGE_HOSPITAL) {
             $this->size = self::SIZE_MEDIUM;
-        } elseif ($beds >= self::BEDS_LARGE_HOSPITAL) {
+        } else {
             $this->size = self::SIZE_LARGE;
         }
 

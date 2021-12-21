@@ -5,9 +5,6 @@ namespace App\Tests\Unit\Domain\Entity;
 use _PHPStan_c862bb974\Nette\Utils\DateTime;
 use App\Domain\Contracts\StateInterface;
 use App\Domain\Entity\DispatchArea;
-use App\Domain\Entity\State;
-use App\Domain\Entity\SupplyArea;
-use App\Domain\Entity\User;
 use PHPUnit\Framework\TestCase;
 
 class DispatchAreaTest extends TestCase

@@ -9,10 +9,7 @@ use App\Domain\Contracts\IdentifierInterface;
 use App\Domain\Contracts\ImportInterface;
 use App\Domain\Contracts\StateInterface;
 use App\Domain\Contracts\SupplyAreaInterface;
-use App\Domain\Contracts\TimestampableInterface;
 use App\Domain\Entity\Traits\IdentifierTrait;
-use App\Domain\Entity\Traits\TimestampableTrait;
-use phpDocumentor\Reflection\Types\Self_;
 
 class Allocation implements AllocationInterface, IdentifierInterface
 {
@@ -134,9 +131,9 @@ class Allocation implements AllocationInterface, IdentifierInterface
 
     public function setImport(ImportInterface $import): self
     {
-       $this->import = $import;
+        $this->import = $import;
 
-       return $this;
+        return $this;
     }
 
     public function getImport(): ImportInterface
@@ -186,12 +183,12 @@ class Allocation implements AllocationInterface, IdentifierInterface
 
         $this->creationDate = $createdAt->format('d.m.Y');
         $this->creationTime = $createdAt->format('H:s');
-        $this->creationYear = $createdAt->format('Y');
-        $this->creationMonth = $createdAt->format('m');
-        $this->creationDay = $createdAt->format('d');
-        $this->creationWeekday = $createdAt->format('l');
-        $this->creationHour = $createdAt->format('H');
-        $this->creationMinute = $createdAt->format('i');
+        $this->creationYear = (int) $createdAt->format('Y');
+        $this->creationMonth = (int) $createdAt->format('m');
+        $this->creationDay = (int) $createdAt->format('d');
+        $this->creationWeekday = (int) $createdAt->format('N');
+        $this->creationHour = (int) $createdAt->format('H');
+        $this->creationMinute = (int) $createdAt->format('i');
 
         return $this;
     }
@@ -247,12 +244,12 @@ class Allocation implements AllocationInterface, IdentifierInterface
 
         $this->arrivalDate = $arrivalAt->format('d.m.Y');
         $this->arrivalTime = $arrivalAt->format('H:s');
-        $this->arrivalYear = $arrivalAt->format('Y');
-        $this->arrivalMonth = $arrivalAt->format('m');
-        $this->arrivalDay = $arrivalAt->format('d');
-        $this->arrivalWeekday = $arrivalAt->format('l');
-        $this->arrivalHour = $arrivalAt->format('H');
-        $this->arrivalMinute = $arrivalAt->format('i');
+        $this->arrivalYear = (int) $arrivalAt->format('Y');
+        $this->arrivalMonth = (int) $arrivalAt->format('m');
+        $this->arrivalDay = (int) $arrivalAt->format('d');
+        $this->arrivalWeekday = (int) $arrivalAt->format('N');
+        $this->arrivalHour = (int) $arrivalAt->format('H');
+        $this->arrivalMinute = (int) $arrivalAt->format('i');
 
         return $this;
     }
@@ -284,28 +281,29 @@ class Allocation implements AllocationInterface, IdentifierInterface
 
     public function getArrivalDay(): int
     {
-        return $this->arrivalAt->format('d');
+        return $this->arrivalDay;
     }
 
     public function getArrivalWeekday(): int
     {
-        return $this->arrivalAt->format('l');
+        return $this->arrivalWeekday;
     }
 
     public function getArrivalHour(): int
     {
-        return $this->arrivalAt->format('H');
+        return $this->arrivalHour;
     }
 
     public function getArrivalMinute(): int
     {
-        return $this->arrivalAt->format('i');
+        return $this->arrivalMinute;
     }
 
     public function setUrgency(int $urgency): self
     {
-        if ($urgency <= 1 && $urgency >= 3) {
+        if ($urgency >= 0 && $urgency <= 3) {
             $this->urgency = $urgency;
+
             return $this;
         }
 
@@ -385,6 +383,7 @@ class Allocation implements AllocationInterface, IdentifierInterface
     {
         if ($age <= 0) {
             $this->age = $age;
+
             return $this;
         }
 

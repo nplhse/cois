@@ -6,9 +6,6 @@ use _PHPStan_c862bb974\Nette\Utils\DateTime;
 use App\Domain\Contracts\HospitalInterface;
 use App\Domain\Contracts\UserInterface;
 use App\Domain\Entity\Import;
-use App\Domain\Entity\State;
-use App\Domain\Entity\SupplyArea;
-use App\Domain\Entity\User;
 use PHPUnit\Framework\TestCase;
 
 class ImportTest extends TestCase

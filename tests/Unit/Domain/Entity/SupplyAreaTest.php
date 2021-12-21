@@ -4,7 +4,6 @@ namespace App\Tests\Unit\Domain\Entity;
 
 use _PHPStan_c862bb974\Nette\Utils\DateTime;
 use App\Domain\Entity\SupplyArea;
-use App\Domain\Entity\User;
 use PHPUnit\Framework\TestCase;
 
 class SupplyAreaTest extends TestCase

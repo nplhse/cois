@@ -4,7 +4,7 @@ namespace App\Domain\Contracts;
 
 interface BlameableInterface
 {
-    public function createdBy();
+    public function createdBy(): UserInterface;
 
-    public function updatedBy();
+    public function updatedBy(): UserInterface;
 }
