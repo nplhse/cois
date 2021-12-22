@@ -75,13 +75,12 @@ class HospitalTest extends TestCase
     public function testState(): void
     {
         $stateName = 'Test State';
+        $hospital = new Hospital();
 
         $state = $this->createMock(StateInterface::class);
         $state->expects($this->exactly(1))
             ->method('getName')
             ->willReturn($stateName);
-
-        $hospital = new Hospital();
 
         $hospital->setState($state);
         $this->assertEquals($stateName, $hospital->getState()->getName());
@@ -89,30 +88,32 @@ class HospitalTest extends TestCase
 
     public function testDispatchArea(): void
     {
-        $name = 'Test State';
+        $areaName = 'Test Area';
         $hospital = new Hospital();
 
         $dispatchArea = $this->createMock(DispatchAreaInterface::class);
         $dispatchArea->expects($this->exactly(1))
             ->method('getName')
-            ->willReturn($name);
+            ->willReturn($areaName);
 
         $hospital->setDispatchArea($dispatchArea);
-        $this->assertEquals($name, $hospital->getDispatchArea()->getName());
+        $this->assertEquals($areaName, $hospital->getDispatchArea()->getName());
     }
 
     public function testSupplyArea(): void
     {
-        $name = 'Test Area';
+        $areaName = 'Test Area';
         $hospital = new Hospital();
 
         $supplyArea = $this->createMock(SupplyAreaInterface::class);
         $supplyArea->expects($this->exactly(1))
             ->method('getName')
-            ->willReturn($name);
+            ->willReturn($areaName);
+
+        $this->assertNull($hospital->getSupplyArea());
 
         $hospital->setSupplyArea($supplyArea);
-        $this->assertEquals($name, $hospital->getSupplyArea()->getName());
+        $this->assertEquals($areaName, $hospital->getSupplyArea()->getName());
     }
 
     public function testSize(): void

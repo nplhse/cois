@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Contracts;
 
 use App\Domain\Adapter\ArrayCollection;
@@ -32,9 +34,9 @@ interface HospitalInterface
 
     public function getDispatchArea(): DispatchAreaInterface;
 
-    public function setSupplyArea(SupplyAreaInterface $supplyArea): self;
+    public function setSupplyArea(?SupplyAreaInterface $supplyArea): self;
 
-    public function getSupplyArea(): SupplyAreaInterface;
+    public function getSupplyArea(): ?SupplyAreaInterface;
 
     public function setSize(string $size): self;
 

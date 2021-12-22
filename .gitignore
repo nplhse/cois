@@ -28,3 +28,8 @@ yarn-error.log
 ###< friendsofphp/php-cs-fixer ###
 
 /build/
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###

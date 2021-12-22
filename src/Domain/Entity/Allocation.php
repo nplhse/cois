@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Entity;
 
 use App\Domain\Contracts\AllocationInterface;
@@ -117,6 +119,12 @@ class Allocation implements AllocationInterface, IdentifierInterface
 
     private ?int $secondaryIndicationCode;
 
+    public function __construct()
+    {
+        $this->secondaryIndication = null;
+        $this->secondaryIndicationCode = null;
+    }
+
     public function setHospital(HospitalInterface $hospital): self
     {
         $this->hospital = $hospital;
@@ -182,7 +190,7 @@ class Allocation implements AllocationInterface, IdentifierInterface
         $this->createdAt = $createdAt;
 
         $this->creationDate = $createdAt->format('d.m.Y');
-        $this->creationTime = $createdAt->format('H:s');
+        $this->creationTime = $createdAt->format('H:i');
         $this->creationYear = (int) $createdAt->format('Y');
         $this->creationMonth = (int) $createdAt->format('m');
         $this->creationDay = (int) $createdAt->format('d');
@@ -243,7 +251,7 @@ class Allocation implements AllocationInterface, IdentifierInterface
         $this->arrivalAt = $arrivalAt;
 
         $this->arrivalDate = $arrivalAt->format('d.m.Y');
-        $this->arrivalTime = $arrivalAt->format('H:s');
+        $this->arrivalTime = $arrivalAt->format('H:i');
         $this->arrivalYear = (int) $arrivalAt->format('Y');
         $this->arrivalMonth = (int) $arrivalAt->format('m');
         $this->arrivalDay = (int) $arrivalAt->format('d');
@@ -381,13 +389,13 @@ class Allocation implements AllocationInterface, IdentifierInterface
 
     public function setAge(int $age): self
     {
-        if ($age <= 0) {
+        if ($age >= 0) {
             $this->age = $age;
 
             return $this;
         }
 
-        throw new \InvalidArgumentException(sprintf('Age must not be below 0'));
+        throw new \InvalidArgumentException('Age must not be below 0');
     }
 
     public function getAge(): int

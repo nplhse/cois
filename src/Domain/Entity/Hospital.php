@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Entity;
 
 use App\Domain\Adapter\ArrayCollection;
@@ -44,7 +46,7 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
 
     private DispatchAreaInterface $dispatchArea;
 
-    private SupplyAreaInterface $supplyArea;
+    private ?SupplyAreaInterface $supplyArea;
 
     private array $sizes = [self::SIZE_SMALL, self::SIZE_MEDIUM, self::SIZE_LARGE];
 
@@ -60,6 +62,7 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
     {
         $this->createdAt = new \DateTime('NOW');
         $this->associatedUsers = new ArrayCollection();
+        $this->supplyArea = null;
     }
 
     public function __toString(): string
@@ -148,14 +151,14 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
         return $this->dispatchArea;
     }
 
-    public function setSupplyArea(SupplyAreaInterface $supplyArea): self
+    public function setSupplyArea(?SupplyAreaInterface $supplyArea): self
     {
         $this->supplyArea = $supplyArea;
 
         return $this;
     }
 
-    public function getSupplyArea(): SupplyAreaInterface
+    public function getSupplyArea(): ?SupplyAreaInterface
     {
         return $this->supplyArea;
     }

@@ -66,16 +66,16 @@ class ImportTest extends TestCase
 
     public function testHospital(): void
     {
-        $name = 'Test Hospital';
+        $hospitalName = 'Test Hospital';
         $import = new Import();
 
         $hospital = $this->createMock(HospitalInterface::class);
         $hospital->expects($this->exactly(1))
             ->method('getName')
-            ->willReturn($name);
+            ->willReturn($hospitalName);
 
         $import->setHospital($hospital);
-        $this->assertEquals($name, $import->getHospital()->getName());
+        $this->assertEquals($hospitalName, $import->getHospital()->getName());
     }
 
     public function testFilePath(): void
