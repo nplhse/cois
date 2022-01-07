@@ -42,9 +42,8 @@ workers:
             memory_ratio: 128
         commands:
             # Don't forget to update your receiver name(s)
-            start: sleep 3
-#            start: symfony console messenger:consume --time-limit=60 --memory-limit=128M
-#
+            start: symfony console messenger:consume --time-limit=60 --memory-limit=128M
+
 mounts:
     "/var": { source: local, source_path: var }
 
@@ -60,5 +59,7 @@ hooks:
         set -x -e
 
         (>&2 symfony-deploy)
+
+
 
 
