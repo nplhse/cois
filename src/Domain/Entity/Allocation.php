@@ -121,6 +121,7 @@ class Allocation implements AllocationInterface, IdentifierInterface
 
     public function __construct()
     {
+        $this->comment = null;
         $this->secondaryIndication = null;
         $this->secondaryIndicationCode = null;
     }

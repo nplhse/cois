@@ -15,7 +15,7 @@ use App\Domain\Contracts\UserInterface;
 use App\Domain\Entity\Traits\IdentifierTrait;
 use App\Domain\Entity\Traits\TimestampableTrait;
 
-class Hospital implements HospitalInterface, IdentifierInterface, TimestampableInterface
+class Hospital implements HospitalInterface, IdentifierInterface, TimestampableInterface, \Stringable
 {
     use IdentifierTrait;
     use TimestampableTrait;
