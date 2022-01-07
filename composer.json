@@ -57,7 +57,7 @@
         "symfony/security-bundle": "5.4.*",
         "symfony/serializer": "6.0.*",
         "symfony/string": "5.4.*",
-        "symfony/translation": "5.4.*",
+        "symfony/translation": "6.0.*",
         "symfony/twig-bundle": "^6.0",
         "symfony/ux-chartjs": "^2.0",
         "symfony/ux-dropzone": "^2.0",
