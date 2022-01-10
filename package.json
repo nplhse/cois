@@ -9,7 +9,7 @@
         "@symfony/ux-chartjs": "file:vendor/symfony/ux-chartjs/Resources/assets",
         "@symfony/ux-dropzone": "file:vendor/symfony/ux-dropzone/Resources/assets",
         "@symfony/webpack-encore": "^1.7.0",
-        "autoprefixer": "^10.4.0",
+        "autoprefixer": "^10.4.2",
         "babel-loader": "^8.2.3",
         "bootstrap": "^5.1.3",
         "chart.js": "^3.4.1",
