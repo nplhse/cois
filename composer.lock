@@ -1826,20 +1826,20 @@
         },
         {
             "name": "league/flysystem-bundle",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem-bundle.git",
-                "reference": "983a908d469b3ff8d7f8858ff4b390588312a69b"
+                "reference": "7af5732b79827e25c8c9dd967f0a5448292c11cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem-bundle/zipball/983a908d469b3ff8d7f8858ff4b390588312a69b",
-                "reference": "983a908d469b3ff8d7f8858ff4b390588312a69b",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-bundle/zipball/7af5732b79827e25c8c9dd967f0a5448292c11cf",
+                "reference": "7af5732b79827e25c8c9dd967f0a5448292c11cf",
                 "shasum": ""
             },
             "require": {
-                "league/flysystem": "^2.0",
+                "league/flysystem": "^2.0|^3.0",
                 "php": ">=7.2",
                 "symfony/config": "^4.2|^5.0|^6.0",
                 "symfony/dependency-injection": "^4.2|^5.0|^6.0",
@@ -1850,12 +1850,12 @@
                 "league/flysystem-cached-adapter": "<1.0.9"
             },
             "require-dev": {
-                "league/flysystem-async-aws-s3": "^2.0",
-                "league/flysystem-aws-s3-v3": "^2.0",
-                "league/flysystem-ftp": "^2.0",
-                "league/flysystem-google-cloud-storage": "^2.0",
-                "league/flysystem-memory": "^2.0",
-                "league/flysystem-sftp": "^2.0",
+                "league/flysystem-async-aws-s3": "^2.0|^3.0",
+                "league/flysystem-aws-s3-v3": "^2.0|^3.0",
+                "league/flysystem-ftp": "^2.0|^3.0",
+                "league/flysystem-google-cloud-storage": "^2.0|^3.0",
+                "league/flysystem-memory": "^2.0|^3.0",
+                "league/flysystem-sftp": "^2.0|^3.0",
                 "symfony/dotenv": "^4.2|^5.0|^6.0",
                 "symfony/framework-bundle": "^4.2|^5.0|^6.0",
                 "symfony/phpunit-bridge": "^5.2",
@@ -1881,9 +1881,9 @@
             "description": "Symfony bundle integrating Flysystem into Symfony 4.2+ applications",
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem-bundle/issues",
-                "source": "https://github.com/thephpleague/flysystem-bundle/tree/2.1.0"
+                "source": "https://github.com/thephpleague/flysystem-bundle/tree/2.2.0"
             },
-            "time": "2021-12-14T12:21:39+00:00"
+            "time": "2022-01-13T22:04:41+00:00"
         },
         {
             "name": "league/mime-type-detection",
@@ -9990,16 +9990,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.4.0",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "72b04d97b5e6e60a081f17c416fef35bd521120b"
+                "reference": "1dd8f3e40bf7aa30031a75c65cece99220a161b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/72b04d97b5e6e60a081f17c416fef35bd521120b",
-                "reference": "72b04d97b5e6e60a081f17c416fef35bd521120b",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/1dd8f3e40bf7aa30031a75c65cece99220a161b8",
+                "reference": "1dd8f3e40bf7aa30031a75c65cece99220a161b8",
                 "shasum": ""
             },
             "require": {
@@ -10030,7 +10030,7 @@
             "description": "PHPStan - PHP Static Analysis Tool",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.4.0"
+                "source": "https://github.com/phpstan/phpstan/tree/1.4.2"
             },
             "funding": [
                 {
@@ -10050,7 +10050,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-14T15:58:47+00:00"
+            "time": "2022-01-18T16:09:11+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
