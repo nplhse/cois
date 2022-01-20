@@ -183,7 +183,7 @@ class ImportTest extends TestCase
 
     public function testTimestamps(): void
     {
-        $time = new DateTime('NOW');
+        $time = new \DateTime('NOW');
         $import = new Import();
 
         $this->assertInstanceOf(\DateTimeInterface::class, $import->getCreatedAt());

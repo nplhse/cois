@@ -2,7 +2,6 @@
 
 namespace App\Tests\Unit\Domain\Entity;
 
-use _PHPStan_c862bb974\Nette\Utils\DateTime;
 use App\Domain\Contracts\StateInterface;
 use App\Domain\Entity\DispatchArea;
 use PHPUnit\Framework\TestCase;
@@ -45,7 +44,7 @@ class DispatchAreaTest extends TestCase
 
     public function testTimestamps(): void
     {
-        $time = new DateTime('NOW');
+        $time = new \DateTime('NOW');
         $dispatchArea = new DispatchArea();
 
         $this->assertInstanceOf(\DateTimeInterface::class, $dispatchArea->getCreatedAt());

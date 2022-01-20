@@ -29,7 +29,7 @@ class SupplyAreaTest extends TestCase
 
     public function testTimestamps(): void
     {
-        $time = new DateTime('NOW');
+        $time = new \DateTime('NOW');
         $supplyArea = new SupplyArea();
 
         $this->assertInstanceOf(\DateTimeInterface::class, $supplyArea->getCreatedAt());

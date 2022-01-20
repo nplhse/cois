@@ -2,7 +2,6 @@
 
 namespace App\Tests\Unit\Domain\Entity;
 
-use _PHPStan_c862bb974\Nette\Utils\DateTime;
 use App\Domain\Contracts\DispatchAreaInterface;
 use App\Domain\Contracts\StateInterface;
 use App\Domain\Contracts\SupplyAreaInterface;
@@ -191,7 +190,7 @@ class HospitalTest extends TestCase
 
     public function testTimestamps(): void
     {
-        $time = new DateTime('NOW');
+        $time = new \DateTime('NOW');
         $user = new User();
 
         $this->assertInstanceOf(\DateTimeInterface::class, $user->getCreatedAt());

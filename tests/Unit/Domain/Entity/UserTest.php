@@ -61,7 +61,7 @@ class UserTest extends TestCase
 
     public function testTimestamps(): void
     {
-        $time = new DateTime('NOW');
+        $time = new \DateTime('NOW');
         $user = new User();
 
         $this->assertInstanceOf(\DateTimeInterface::class, $user->getCreatedAt());

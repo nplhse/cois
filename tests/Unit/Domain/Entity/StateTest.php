@@ -29,7 +29,7 @@ class StateTest extends TestCase
 
     public function testTimestamps(): void
     {
-        $time = new DateTime('NOW');
+        $time = new \DateTime('NOW');
         $state = new State();
 
         $this->assertInstanceOf(\DateTimeInterface::class, $state->getCreatedAt());
