@@ -7,9 +7,6 @@ use App\Domain\Contracts\HospitalInterface;
 use App\Domain\Contracts\ImportInterface;
 use App\Domain\Contracts\StateInterface;
 use App\Domain\Contracts\SupplyAreaInterface;
-use App\Domain\Contracts\UserInterface;
-use App\Domain\Entity\Hospital;
-use App\Domain\Entity\User;
 use App\Domain\Entity\Allocation;
 use PHPUnit\Framework\TestCase;
 
@@ -52,7 +49,6 @@ class AllocationTest extends TestCase
         $state->expects($this->exactly(1))
             ->method('getName')
             ->willReturn($stateName);
-
 
         $allocation->setState($state);
         $this->assertEquals($stateName, $allocation->getState()->getName());
