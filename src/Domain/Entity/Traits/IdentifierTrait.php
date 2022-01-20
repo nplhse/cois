@@ -6,7 +6,7 @@ namespace App\Domain\Entity\Traits;
 
 trait IdentifierTrait
 {
-    private int $id;
+    protected int $id;
 
     public function setId(int $id): self
     {

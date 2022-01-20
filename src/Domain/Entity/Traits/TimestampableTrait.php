@@ -6,9 +6,9 @@ namespace App\Domain\Entity\Traits;
 
 trait TimestampableTrait
 {
-    private \DateTimeInterface $createdAt;
+    protected \DateTimeInterface $createdAt;
 
-    private ?\DateTimeInterface $updatedAt = null;
+    protected ?\DateTimeInterface $updatedAt = null;
 
     public function getCreatedAt(): \DateTimeInterface
     {

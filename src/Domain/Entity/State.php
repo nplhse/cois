@@ -13,7 +13,7 @@ class State implements StateInterface, \Stringable
     use IdentifierTrait;
     use TimestampableTrait;
 
-    private string $name;
+    protected string $name;
 
     public function __construct()
     {
