@@ -655,7 +655,7 @@
       </trans-unit>
       <trans-unit id="ywixQwm" resname="security.requestResetSend.message">
         <source>security.requestResetSend.message</source>
-        <target>Wir haben eine E-Mail verschickt, die einen Link zum zurücksetzen Ihres Passworts enthält. Sie bleibt gültig für:</target>
+        <target>Wir haben eine E-Mail verschickt, die einen Link zum zurücksetzen Ihres Passworts enthält. Der Link bleibt gültig für:</target>
       </trans-unit>
       <trans-unit id="m229.Ug" resname="security.requestResetSend.failure">
         <source>security.requestResetSend.failure</source>

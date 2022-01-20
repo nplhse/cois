@@ -37,7 +37,7 @@
       </trans-unit>
       <trans-unit id="WfpDeb4" resname="Reset your password">
         <source>Reset your password</source>
-        <target>__Reset your password</target>
+        <target>Passwort zurücksetzen</target>
       </trans-unit>
       <trans-unit id="O2yhjLQ" resname="A reset of your password has been requested. To proceed click on the link below, or copy and paste it to your browser. If you didn´t request it by yourself, please ignore this e-mail.">
         <source>A reset of your password has been requested. To proceed click on the link below, or copy and paste it to your browser. If you didn´t request it by yourself, please ignore this e-mail.</source>

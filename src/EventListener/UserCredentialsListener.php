@@ -36,7 +36,7 @@ class UserCredentialsListener implements \Symfony\Component\EventDispatcher\Even
 
     public function onKernelRequest(RequestEvent $event): void
     {
-        if (false === $event->isMasterRequest()) {
+        if (false === $event->isMainRequest()) {
             return;
         }
 

@@ -664,7 +664,7 @@
       </trans-unit>
       <trans-unit id="RCgIeOi" resname="security.requestResetSend.tryAgain">
         <source>security.requestResetSend.tryAgain</source>
-        <target>Try again.</target>
+        <target>Click here to try again.</target>
       </trans-unit>
       <trans-unit id="SEv2eG_" resname="security.requestMail.title">
         <source>security.requestMail.title</source>
