@@ -82,6 +82,7 @@
         "phpstan/phpstan-doctrine": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
         "phpstan/phpstan-symfony": "^1.0",
+        "phpunit/phpunit": "^9",
         "psalm/plugin-symfony": "^3.0",
         "rector/rector": "^0.12.8",
         "symfony/browser-kit": "^6.0",
@@ -93,6 +94,7 @@
         "symfony/stopwatch": "^5.2",
         "symfony/var-dumper": "^5.2",
         "symfony/web-profiler-bundle": "^6.0",
+        "symplify/easy-coding-standard": "^10.0",
         "vimeo/psalm": "^4.7",
         "weirdan/doctrine-psalm-plugin": "^2.0"
     },
@@ -152,6 +154,9 @@
             "vendor/bin/php-cs-fixer fix",
             "vendor/bin/psalm",
             "vendor/bin/phpstan analyse"
+        ],
+        "run-tests": [
+            "vendor/bin/simple-phpunit"
         ],
         "setup": [
             "@setup-db",
