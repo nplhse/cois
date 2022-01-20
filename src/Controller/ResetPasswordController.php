@@ -6,11 +6,14 @@ use App\Entity\User;
 use App\Form\ChangePasswordFormType;
 use App\Form\ResetPasswordRequestFormType;
 use App\Service\MailerService;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
@@ -22,14 +25,17 @@ class ResetPasswordController extends AbstractController
 {
     use ResetPasswordControllerTrait;
 
+    private EntityManagerInterface $em;
+
     private ResetPasswordHelperInterface  $resetPasswordHelper;
 
     private MailerService $mailer;
 
-    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper, MailerService $mailer)
+    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper, EntityManagerInterface $em, MailerService $mailer)
     {
         $this->resetPasswordHelper = $resetPasswordHelper;
         $this->mailer = $mailer;
+        $this->em = $em;
     }
 
     /**
@@ -48,7 +54,7 @@ class ResetPasswordController extends AbstractController
             );
         }
 
-        return $this->render('security/reset_password/request.html.åtwig', [
+        return $this->render('security/reset_password/request.html.twig', [
             'requestForm' => $form->createView(),
         ]);
     }
@@ -73,7 +79,7 @@ class ResetPasswordController extends AbstractController
      * Validates and process the reset URL that the user clicked in their email.
      */
     #[Route(path: '/reset/{token}', name: 'app_reset_password')]
-    public function reset(Request $request, UserPasswordEncoderInterface $passwordEncoder, string $token = null): Response
+    public function reset(Request $request, UserPasswordHasherInterface $passwordEncoder, string $token = null): Response
     {
         if ($token) {
             // We store the token in session and remove it from the URL, to avoid the URL being
@@ -109,13 +115,13 @@ class ResetPasswordController extends AbstractController
             $this->resetPasswordHelper->removeResetRequest($token);
 
             // Encode the plain password, and set it.
-            $encodedPassword = $passwordEncoder->encodePassword(
+            $encodedPassword = $passwordEncoder->hashPassword(
                 $user,
                 $form->get('plainPassword')->getData()
             );
 
             $user->setPassword($encodedPassword);
-            $this->getDoctrine()->getManager()->flush();
+            $this->em->flush();
 
             // The session is cleaned up after the password has been changed.
             $this->cleanSessionAfterReset();
@@ -136,7 +142,7 @@ class ResetPasswordController extends AbstractController
      * Reset invalid credentials.
      */
     #[Route(path: '/reset-credentials', name: 'app_reset_credentials')]
-    public function resetCredentials(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function resetCredentials(Request $request, UserPasswordHasherInterface $passwordEncoder): Response
     {
         $user = $this->getUser();
         // The token is valid; allow the user to change their password.
@@ -145,7 +151,7 @@ class ResetPasswordController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Encode the plain password, and set it.
-            $encodedPassword = $passwordEncoder->encodePassword(
+            $encodedPassword = $passwordEncoder->hashPassword(
                 $user,
                 $form->get('plainPassword')->getData()
             );
@@ -153,7 +159,7 @@ class ResetPasswordController extends AbstractController
             $user->setPassword($encodedPassword);
             $user->setIsCredentialsExpired(false);
 
-            $this->getDoctrine()->getManager()->flush();
+            $this->em->flush();
 
             // The session is cleaned up after the password has been changed.
             $this->cleanSessionAfterReset();
@@ -172,7 +178,7 @@ class ResetPasswordController extends AbstractController
 
     private function processSendingPasswordResetEmail(string $emailFormData, MailerInterface $mailer): RedirectResponse
     {
-        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy([
+        $user = $this->em->getRepository(User::class)->findOneBy([
             'email' => $emailFormData,
         ]);
 
