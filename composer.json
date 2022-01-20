@@ -155,6 +155,9 @@
             "vendor/bin/psalm",
             "vendor/bin/phpstan analyse"
         ],
+        "run-tests": [
+            "vendor/bin/simple-phpunit"
+        ],
         "setup": [
             "@setup-db",
             "@setup-frontend"
