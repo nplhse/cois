@@ -14,9 +14,9 @@ class DispatchArea implements DispatchAreaInterface, \Stringable
     use IdentifierTrait;
     use TimestampableTrait;
 
-    private string $name;
+    protected string $name;
 
-    private StateInterface $state;
+    protected StateInterface $state;
 
     public function __construct()
     {
