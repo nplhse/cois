@@ -78,7 +78,7 @@ class AreaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $command = new UpdateStateCommand($state->getName());
+            $command = new UpdateStateCommand($state->getId(), $state->getName());
 
             $this->messageBus->dispatch($command);
 

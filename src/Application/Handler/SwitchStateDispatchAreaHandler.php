@@ -39,8 +39,10 @@ class SwitchStateDispatchAreaHandler implements HandlerInterface
         $state = $this->stateRepository->getById($command->getStateId());
 
         $area->setState($state);
+        $state->removeDispatchArea($area);
 
         $this->dispatchAreaRepository->save();
+        $this->stateRepository->save();
 
         $event = new DispatchAreaSwitchedState($area, $state);
 
