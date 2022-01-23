@@ -19,4 +19,10 @@ interface StateInterface
     public function addDispatchArea(DispatchAreaInterface $dispatchArea): self;
 
     public function removeDispatchArea(DispatchAreaInterface $dispatchArea): self;
+
+    public function getSupplyAreas(): Collection;
+
+    public function addSupplyArea(SupplyAreaInterface $supplyArea): self;
+
+    public function removeSupplyArea(SupplyAreaInterface $supplyArea): self;
 }

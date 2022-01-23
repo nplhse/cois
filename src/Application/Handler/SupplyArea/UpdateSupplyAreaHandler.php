@@ -27,7 +27,7 @@ class UpdateSupplyAreaHandler implements HandlerInterface
 
         $area->setName($command->getName());
 
-        $this->supplyAreaRepository->save($area);
+        $this->supplyAreaRepository->save();
 
         $event = new SupplyAreaUpdated($area);
 

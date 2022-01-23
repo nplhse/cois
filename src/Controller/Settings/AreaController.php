@@ -74,7 +74,7 @@ class AreaController extends AbstractController
     }
 
     #[Route('/state/{id}/edit', name: 'app_settings_area_state_edit')]
-    public function state_edit($id, Request $request, StateRepository $stateRepository): Response
+    public function state_edit(int $id, Request $request, StateRepository $stateRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 

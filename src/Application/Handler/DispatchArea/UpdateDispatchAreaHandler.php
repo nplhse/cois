@@ -4,6 +4,7 @@ namespace App\Application\Handler\DispatchArea;
 
 use App\Application\Contract\HandlerInterface;
 use App\Domain\Command\DispatchArea\UpdateDispatchAreaCommand;
+use App\Domain\Event\DispatchArea\DispatchAreaUpdated;
 use App\Domain\Event\SupplyArea\SupplyAreaUpdated;
 use App\Repository\DispatchAreaRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -27,9 +28,9 @@ class UpdateDispatchAreaHandler implements HandlerInterface
 
         $area->setName($command->getName());
 
-        $this->dispatchAreaRepository->save($area);
+        $this->dispatchAreaRepository->save();
 
-        $event = new SupplyAreaUpdated($area);
+        $event = new DispatchAreaUpdated($area);
 
         $this->dispatcher->dispatch($event, SupplyAreaUpdated::NAME);
     }
