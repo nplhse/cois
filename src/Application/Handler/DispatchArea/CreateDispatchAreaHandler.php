@@ -1,15 +1,11 @@
 <?php
 
-namespace App\Application\Handler;
+namespace App\Application\Handler\DispatchArea;
 
 use App\Application\Contract\HandlerInterface;
-use App\Domain\Command\CreateDispatchAreaCommand;
-use App\Domain\Command\CreateStateCommand;
-use App\Domain\Event\DispatchAreaCreated;
-use App\Domain\Event\StateCreated;
-use App\Domain\Repository\StateRepositoryInterface;
+use App\Domain\Command\DispatchArea\CreateDispatchAreaCommand;
+use App\Domain\Event\DispatchArea\DispatchAreaCreated;
 use App\Entity\DispatchArea;
-use App\Entity\State;
 use App\Repository\DispatchAreaRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

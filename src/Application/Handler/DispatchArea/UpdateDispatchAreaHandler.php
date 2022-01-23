@@ -1,16 +1,10 @@
 <?php
 
-namespace App\Application\Handler;
+namespace App\Application\Handler\DispatchArea;
 
 use App\Application\Contract\HandlerInterface;
-use App\Application\Exception\StateNotEmptyException;
-use App\Domain\Command\DeleteDispatchAreaCommand;
-use App\Domain\Command\DeleteStateCommand;
-use App\Domain\Command\UpdateDispatchAreaCommand;
-use App\Domain\Event\DispatchAreaDeleted;
-use App\Domain\Event\SupplyAreaUpdated;
-use App\Domain\Event\StateDeleted;
-use App\Domain\Repository\StateRepositoryInterface;
+use App\Domain\Command\DispatchArea\UpdateDispatchAreaCommand;
+use App\Domain\Event\SupplyArea\SupplyAreaUpdated;
 use App\Repository\DispatchAreaRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

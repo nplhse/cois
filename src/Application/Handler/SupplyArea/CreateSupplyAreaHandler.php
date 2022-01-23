@@ -3,18 +3,9 @@
 namespace App\Application\Handler\SupplyArea;
 
 use App\Application\Contract\HandlerInterface;
-use App\Application\Exception\StateNotFoundException;
-use App\Domain\Command\CreateDispatchAreaCommand;
-use App\Domain\Command\CreateStateCommand;
 use App\Domain\Command\SupplyArea\CreateSupplyAreaCommand;
-use App\Domain\Event\DispatchAreaCreated;
-use App\Domain\Event\StateCreated;
 use App\Domain\Event\SupplyArea\SupplyAreaCreated;
-use App\Domain\Repository\StateRepositoryInterface;
-use App\Entity\DispatchArea;
-use App\Entity\State;
 use App\Entity\SupplyArea;
-use App\Repository\DispatchAreaRepository;
 use App\Repository\StateRepository;
 use App\Repository\SupplyAreaRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

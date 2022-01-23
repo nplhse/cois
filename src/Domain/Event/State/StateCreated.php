@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Event;
+namespace App\Domain\Event\State;
 
 use App\Domain\Contracts\DomainEventInterface;
 use App\Domain\Contracts\StateInterface;
 use App\Domain\Event\Traits\NamedEventTrait;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class StateDeleted extends Event implements DomainEventInterface
+class StateCreated extends Event implements DomainEventInterface
 {
     use NamedEventTrait;
 
-    public const NAME = 'state.deleted';
+    public const NAME = 'state.created';
 
     private StateInterface $state;
 

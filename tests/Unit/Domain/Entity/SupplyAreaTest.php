@@ -2,7 +2,6 @@
 
 namespace App\Tests\Unit\Domain\Entity;
 
-use _PHPStan_c862bb974\Nette\Utils\DateTime;
 use App\Domain\Entity\SupplyArea;
 use PHPUnit\Framework\TestCase;
 

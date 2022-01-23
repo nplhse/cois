@@ -3,7 +3,6 @@
 namespace App\Domain\Repository;
 
 use App\Domain\Contracts\DispatchAreaInterface;
-use App\Domain\Contracts\StateInterface;
 
 interface DispatchAreaRepositoryInterface
 {

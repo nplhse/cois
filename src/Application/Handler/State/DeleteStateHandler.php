@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Application\Handler;
+namespace App\Application\Handler\State;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Exception\StateNotEmptyException;
-use App\Domain\Command\DeleteStateCommand;
-use App\Domain\Event\StateDeleted;
+use App\Domain\Command\State\DeleteStateCommand;
+use App\Domain\Event\State\StateDeleted;
 use App\Domain\Repository\StateRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Application\Handler;
+namespace App\Application\Handler\State;
 
 use App\Application\Contract\HandlerInterface;
-use App\Domain\Command\CreateStateCommand;
-use App\Domain\Event\StateCreated;
+use App\Domain\Command\State\UpdateStateCommand;
+use App\Domain\Event\State\StateUpdated;
 use App\Domain\Repository\StateRepositoryInterface;
-use App\Entity\State;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class CreateStateHandler implements HandlerInterface
+class UpdateStateHandler implements HandlerInterface
 {
     private StateRepositoryInterface $stateRepository;
 
@@ -22,15 +21,15 @@ class CreateStateHandler implements HandlerInterface
         $this->dispatcher = $dispatcher;
     }
 
-    public function __invoke(CreateStateCommand $command): void
+    public function __invoke(UpdateStateCommand $command): void
     {
-        $state = new State();
+        $state = $this->stateRepository->getById($command->getId());
         $state->setName($command->getName());
 
-        $this->stateRepository->add($state);
+        $this->stateRepository->save();
 
-        $event = new StateCreated($state);
+        $event = new StateUpdated($state);
 
-        $this->dispatcher->dispatch($event, StateCreated::NAME);
+        $this->dispatcher->dispatch($event, StateUpdated::NAME);
     }
 }

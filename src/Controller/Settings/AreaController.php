@@ -2,18 +2,17 @@
 
 namespace App\Controller\Settings;
 
-use App\Application\Exception\StateNotEmptyException;
-use App\Domain\Command\CreateDispatchAreaCommand;
-use App\Domain\Command\CreateStateCommand;
-use App\Domain\Command\DeleteDispatchAreaCommand;
-use App\Domain\Command\DeleteStateCommand;
+use App\Domain\Command\DispatchArea\CreateDispatchAreaCommand;
+use App\Domain\Command\DispatchArea\DeleteDispatchAreaCommand;
+use App\Domain\Command\DispatchArea\SwitchStateDispatchAreaCommand;
+use App\Domain\Command\DispatchArea\UpdateDispatchAreaCommand;
+use App\Domain\Command\State\CreateStateCommand;
+use App\Domain\Command\State\DeleteStateCommand;
+use App\Domain\Command\State\UpdateStateCommand;
 use App\Domain\Command\SupplyArea\CreateSupplyAreaCommand;
 use App\Domain\Command\SupplyArea\DeleteSupplyAreaCommand;
 use App\Domain\Command\SupplyArea\SwitchStateSupplyAreaCommand;
 use App\Domain\Command\SupplyArea\UpdateSupplyAreaCommand;
-use App\Domain\Command\SwitchStateDispatchAreaCommand;
-use App\Domain\Command\UpdateDispatchAreaCommand;
-use App\Domain\Command\UpdateStateCommand;
 use App\Entity\DispatchArea;
 use App\Entity\State;
 use App\Entity\SupplyArea;

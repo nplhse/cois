@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Domain\Command;
+namespace App\Domain\Command\State;
 
-use App\Domain\Contracts\StateInterface;
-
-class DeleteDispatchAreaCommand
+class DeleteStateCommand
 {
     private int $id;
 

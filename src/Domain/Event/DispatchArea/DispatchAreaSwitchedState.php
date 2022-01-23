@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Event;
+namespace App\Domain\Event\DispatchArea;
 
 use App\Domain\Contracts\DispatchAreaInterface;
 use App\Domain\Contracts\DomainEventInterface;

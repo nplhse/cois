@@ -2,10 +2,7 @@
 
 namespace App\Domain\Repository;
 
-use App\Domain\Contracts\DispatchAreaInterface;
-use App\Domain\Contracts\StateInterface;
 use App\Domain\Contracts\SupplyAreaInterface;
-use App\Domain\Entity\SupplyArea;
 
 interface SupplyAreaRepositoryInterface
 {

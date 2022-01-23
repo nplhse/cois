@@ -1,18 +1,10 @@
 <?php
 
-namespace App\Application\Handler;
+namespace App\Application\Handler\DispatchArea;
 
 use App\Application\Contract\HandlerInterface;
-use App\Application\Exception\StateNotEmptyException;
-use App\Domain\Command\DeleteDispatchAreaCommand;
-use App\Domain\Command\DeleteStateCommand;
-use App\Domain\Command\SwitchStateDispatchAreaCommand;
-use App\Domain\Command\UpdateDispatchAreaCommand;
-use App\Domain\Event\DispatchAreaDeleted;
-use App\Domain\Event\DispatchAreaSwitchedState;
-use App\Domain\Event\SupplyAreaUpdated;
-use App\Domain\Event\StateDeleted;
-use App\Domain\Repository\StateRepositoryInterface;
+use App\Domain\Command\DispatchArea\SwitchStateDispatchAreaCommand;
+use App\Domain\Event\DispatchArea\DispatchAreaSwitchedState;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\StateRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -36,15 +28,19 @@ class SwitchStateDispatchAreaHandler implements HandlerInterface
     public function __invoke(SwitchStateDispatchAreaCommand $command): void
     {
         $area = $this->dispatchAreaRepository->getById($command->getAreaId());
-        $state = $this->stateRepository->getById($command->getStateId());
 
-        $area->setState($state);
-        $state->removeDispatchArea($area);
+        $oldState = $area->getState();
+        $newState = $this->stateRepository->getById($command->getStateId());
+
+        $area->setState($newState);
+
+        $oldState->removeDispatchArea($area);
+        $newState->addDispatchArea($area);
 
         $this->dispatchAreaRepository->save();
         $this->stateRepository->save();
 
-        $event = new DispatchAreaSwitchedState($area, $state);
+        $event = new DispatchAreaSwitchedState($area, $newState);
 
         $this->dispatcher->dispatch($event, DispatchAreaSwitchedState::NAME);
     }

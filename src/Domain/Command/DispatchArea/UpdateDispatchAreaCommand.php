@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Command;
+namespace App\Domain\Command\DispatchArea;
 
 class UpdateDispatchAreaCommand
 {

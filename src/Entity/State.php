@@ -2,10 +2,8 @@
 
 namespace App\Entity;
 
-use App\Domain\Adapter\ArrayCollection;
 use App\Domain\Entity\State as DomainState;
 use App\Repository\StateRepository;
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
