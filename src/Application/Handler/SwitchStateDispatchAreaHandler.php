@@ -10,7 +10,7 @@ use App\Domain\Command\SwitchStateDispatchAreaCommand;
 use App\Domain\Command\UpdateDispatchAreaCommand;
 use App\Domain\Event\DispatchAreaDeleted;
 use App\Domain\Event\DispatchAreaSwitchedState;
-use App\Domain\Event\DispatchAreaUpdated;
+use App\Domain\Event\SupplyAreaUpdated;
 use App\Domain\Event\StateDeleted;
 use App\Domain\Repository\StateRepositoryInterface;
 use App\Repository\DispatchAreaRepository;

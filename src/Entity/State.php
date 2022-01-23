@@ -30,6 +30,11 @@ class State extends DomainState
      */
     protected \Doctrine\Common\Collections\Collection $dispatchAreas;
 
+    /**
+     * @ORM\OneToMany(targetEntity=SupplyArea::class, mappedBy="state")
+     */
+    protected \Doctrine\Common\Collections\Collection $supplyAreas;
+
     public function __construct()
     {
         parent::__construct();

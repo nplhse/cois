@@ -7,15 +7,22 @@ use App\Domain\Command\CreateDispatchAreaCommand;
 use App\Domain\Command\CreateStateCommand;
 use App\Domain\Command\DeleteDispatchAreaCommand;
 use App\Domain\Command\DeleteStateCommand;
+use App\Domain\Command\SupplyArea\CreateSupplyAreaCommand;
+use App\Domain\Command\SupplyArea\DeleteSupplyAreaCommand;
+use App\Domain\Command\SupplyArea\SwitchStateSupplyAreaCommand;
+use App\Domain\Command\SupplyArea\UpdateSupplyAreaCommand;
 use App\Domain\Command\SwitchStateDispatchAreaCommand;
 use App\Domain\Command\UpdateDispatchAreaCommand;
 use App\Domain\Command\UpdateStateCommand;
 use App\Entity\DispatchArea;
 use App\Entity\State;
+use App\Entity\SupplyArea;
 use App\Form\DispatchAreaType;
 use App\Form\StateType;
+use App\Form\SupplyAreaType;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\StateRepository;
+use App\Repository\SupplyAreaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -132,7 +139,7 @@ class AreaController extends AbstractController
     }
 
     #[Route('/dispatch_area/{id}/edit', name: 'app_settings_area_dispatch_edit')]
-    public function dispatch_edit($id, Request $request, DispatchAreaRepository $dispatchAreaRepository): Response
+    public function dispatch_edit(int $id, Request $request, DispatchAreaRepository $dispatchAreaRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
@@ -175,5 +182,73 @@ class AreaController extends AbstractController
         $this->messageBus->dispatch($command);
 
         return $this->redirectToRoute('app_settings_area_index');
+    }
+
+    #[Route('/supply_area/new', name: 'app_settings_area_supply_new')]
+    public function supply_new(Request $request): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $area = new SupplyArea();
+        $form = $this->createForm(SupplyAreaType::class, $area);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = new CreateSupplyAreaCommand($area->getName(), $area->getState()->getId());
+
+            $this->messageBus->dispatch($command);
+
+            return $this->redirectToRoute('app_settings_area_index');
+        }
+
+        return $this->render('settings/area/supply_area/new.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/supply_area/{id}/delete', name: 'app_settings_area_supply_delete')]
+    public function supply_delete(int $id, SupplyAreaRepository $supplyAreaRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $area = $supplyAreaRepository->getById($id);
+
+        $command = new DeleteSupplyAreaCommand($id);
+
+        $this->messageBus->dispatch($command);
+
+        return $this->redirectToRoute('app_settings_area_index');
+    }
+
+    #[Route('/supply_area/{id}/edit', name: 'app_settings_area_supply_edit')]
+    public function supply_edit(int $id, Request $request, SupplyAreaRepository $supplyAreaRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $area = $supplyAreaRepository->getById($id);
+
+        $previousState = $area->getState();
+
+        $form = $this->createForm(SupplyAreaType::class, $area);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = new UpdateSupplyAreaCommand($area->getId(), $area->getName());
+
+            $this->messageBus->dispatch($command);
+
+            if ($previousState !== $area->getState()) {
+                $command = new SwitchStateSupplyAreaCommand($area->getId(), $area->getState()->getId());
+
+                $this->messageBus->dispatch($command);
+            }
+
+            return $this->redirectToRoute('app_settings_area_index');
+        }
+
+        return $this->render('settings/area/supply_area/edit.html.twig', [
+            'area' => $area,
+            'form' => $form->createView(),
+        ]);
     }
 }

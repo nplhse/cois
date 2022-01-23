@@ -37,14 +37,57 @@
         </div>
         <div class="col">
             <div class="float-end">
-                <a class="btn btn-primary"
-                    href="{{ path('app_settings_area_state_new') }}">
-                    {{ 'Create new State'|trans({}, 'forms') }}
-                </a>
-                <a class="btn btn-primary"
-                    href="{{ path('app_settings_area_dispatch_new') }}">
-                    {{ 'Create new Dispatch Area'|trans({}, 'forms') }}
-                </a>
+                <div class="dropdown">
+                    <a class="btn btn-primary dropdown-toggle"
+                        href="#"
+                        role="button"
+                        id="dropdownMenuLink"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Create new Element
+                    </a>
+
+                    <ul class="dropdown-menu"
+                        aria-labelledby="dropdownMenuLink">
+                        <li>
+                            <a class="dropdown-item"
+                                href="{{
+                                path(
+                                    'app_settings_area_state_new'
+                                )
+                                }}">
+                                {{ 'Create new State'|trans({}, 'forms') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                                href="{{
+                                path(
+                                    'app_settings_area_dispatch_new'
+                                )
+                                }}">
+                                {{
+                                    'Create new Dispatch Area'|trans(
+                                        {},
+                                        'forms'
+                                    )
+                                }}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                                href="{{
+                                path(
+                                    'app_settings_area_supply_new'
+                                )
+                                }}">
+                                {{
+                                    'Create new Supply Area'|trans({}, 'forms')
+                                }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <h1>
@@ -124,7 +167,33 @@
                                     No dispatch areas found.
                                 {% endfor %}
                             </td>
-                            <td></td>
+                            <td>
+                                {% for area in state.supplyAreas %}
+                                    {{ area.name }}
+                                    <a href="{{
+                                        path(
+                                            'app_settings_area_supply_edit',
+                                            {
+                                                id: area.id
+                                            }
+                                        )
+                                        }}">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a href="{{
+                                        path(
+                                            'app_settings_area_supply_delete',
+                                            {
+                                                id: area.id
+                                            }
+                                        )
+                                        }}">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                {% else %}
+                                    No supply areas found.
+                                {% endfor %}
+                            </td>
                         </tr>
                     {% else %}
                         <tr>

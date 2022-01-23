@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
+use App\Domain\Contracts\StateInterface;
 use App\Domain\Contracts\SupplyAreaInterface;
 use App\Domain\Entity\Traits\IdentifierTrait;
 use App\Domain\Entity\Traits\TimestampableTrait;
@@ -13,7 +14,9 @@ class SupplyArea implements SupplyAreaInterface, \Stringable
     use IdentifierTrait;
     use TimestampableTrait;
 
-    private string $name;
+    protected string $name;
+
+    protected StateInterface $state;
 
     public function __construct()
     {
@@ -35,5 +38,17 @@ class SupplyArea implements SupplyAreaInterface, \Stringable
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function setState(StateInterface $state): self
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    public function getState(): StateInterface
+    {
+        return $this->state;
     }
 }

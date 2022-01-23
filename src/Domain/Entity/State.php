@@ -7,6 +7,7 @@ namespace App\Domain\Entity;
 use App\Domain\Adapter\ArrayCollection;
 use App\Domain\Contracts\DispatchAreaInterface;
 use App\Domain\Contracts\StateInterface;
+use App\Domain\Contracts\SupplyAreaInterface;
 use App\Domain\Entity\Traits\IdentifierTrait;
 use App\Domain\Entity\Traits\TimestampableTrait;
 
@@ -19,10 +20,13 @@ class State implements StateInterface, \Stringable
 
     protected \Doctrine\Common\Collections\Collection $dispatchAreas;
 
+    protected \Doctrine\Common\Collections\Collection $supplyAreas;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('NOW');
         $this->dispatchAreas = new ArrayCollection();
+        $this->supplyAreas = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -63,5 +67,28 @@ class State implements StateInterface, \Stringable
     public function getDispatchAreas(): \Doctrine\Common\Collections\Collection
     {
         return $this->dispatchAreas;
+    }
+
+    public function addSupplyArea(SupplyAreaInterface $supplyArea): self
+    {
+        if (!$this->supplyAreas->contains($supplyArea)) {
+            $this->supplyAreas[] = $supplyArea;
+
+            $supplyArea->setState($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSupplyArea(SupplyAreaInterface $supplyArea): self
+    {
+        $this->supplyAreas->removeElement($supplyArea);
+
+        return $this;
+    }
+
+    public function getSupplyAreas(): \Doctrine\Common\Collections\Collection
+    {
+        return $this->supplyAreas;
     }
 }
