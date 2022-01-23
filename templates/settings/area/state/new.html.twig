@@ -10,25 +10,25 @@
     <div class="row">
         <div class="col">
             {{
-            breadcrumbs.render(
-                [
-                    {
-                        url: url('app_dashboard'),
-                        label: 'Home'|trans
-                    },
-                    {
-                        url: url('app_settings'),
-                        label: 'Settings'|trans
-                    },
-                    {
-                        url: url('app_settings_area_index'),
-                        label: 'Areas'|trans
-                    },
-                    {
-                        label: 'Create new State'|trans
-                    }
-                ]
-            )
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_settings'),
+                            label: 'Settings'|trans
+                        },
+                        {
+                            url: url('app_settings_area_index'),
+                            label: 'Areas'|trans
+                        },
+                        {
+                            label: 'Create new State'|trans
+                        }
+                    ]
+                )
             }}
         </div>
     </div>
@@ -41,7 +41,6 @@
             <h1>
                 {{ 'Create new State'|trans }}
             </h1>
-
 
             {{ form(form) }}
         </div>

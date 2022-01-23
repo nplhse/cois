@@ -5,7 +5,10 @@ namespace App\Controller\Settings;
 use App\Application\Exception\StateNotEmptyException;
 use App\Domain\Command\CreateDispatchAreaCommand;
 use App\Domain\Command\CreateStateCommand;
+use App\Domain\Command\DeleteDispatchAreaCommand;
 use App\Domain\Command\DeleteStateCommand;
+use App\Domain\Command\SwitchStateDispatchAreaCommand;
+use App\Domain\Command\UpdateDispatchAreaCommand;
 use App\Domain\Command\UpdateStateCommand;
 use App\Entity\DispatchArea;
 use App\Entity\State;
@@ -128,6 +131,38 @@ class AreaController extends AbstractController
         ]);
     }
 
+    #[Route('/dispatch_area/{id}/edit', name: 'app_settings_area_dispatch_edit')]
+    public function dispatch_edit($id, Request $request, DispatchAreaRepository $dispatchAreaRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $area = $dispatchAreaRepository->getById($id);
+
+        $previousState = $area->getState();
+
+        $form = $this->createForm(DispatchAreaType::class, $area);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = new UpdateDispatchAreaCommand($area->getId(), $area->getName());
+
+            $this->messageBus->dispatch($command);
+
+            if ($previousState !== $area->getState()) {
+                $command = new SwitchStateDispatchAreaCommand($area->getId(), $area->getState()->getId());
+
+                $this->messageBus->dispatch($command);
+            }
+
+            return $this->redirectToRoute('app_settings_area_index');
+        }
+
+        return $this->render('settings/area/dispatch_area/edit.html.twig', [
+            'area' => $area,
+            'form' => $form->createView(),
+        ]);
+    }
+
     #[Route('/dispatch_area/{id}/delete', name: 'app_settings_area_dispatch_delete')]
     public function dispatch_delete(int $id, DispatchAreaRepository $dispatchAreaRepository): Response
     {
@@ -135,13 +170,9 @@ class AreaController extends AbstractController
 
         $area = $dispatchAreaRepository->getById($id);
 
-        $command = new DeleteStateCommand($id);
+        $command = new DeleteDispatchAreaCommand($id);
 
-        try {
-            $this->messageBus->dispatch($command);
-        } catch (HandlerFailedException $exception) {
-            $this->addFlash('danger', 'Could not delete State: '.$state->getName().'. Maybe it still contains Dispatch Areas?');
-        }
+        $this->messageBus->dispatch($command);
 
         return $this->redirectToRoute('app_settings_area_index');
     }

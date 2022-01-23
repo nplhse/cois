@@ -12,21 +12,21 @@
     <div class="row">
         <div class="col">
             {{
-            breadcrumbs.render(
-                [
-                    {
-                        url: url('app_dashboard'),
-                        label: 'Home'|trans
-                    },
-                    {
-                        url: url('app_settings'),
-                        label: 'Settings'|trans
-                    },
-                    {
-                        label: 'Areas'|trans
-                    }
-                ]
-            )
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_settings'),
+                            label: 'Settings'|trans
+                        },
+                        {
+                            label: 'Areas'|trans
+                        }
+                    ]
+                )
             }}
         </div>
     </div>
@@ -38,11 +38,11 @@
         <div class="col">
             <div class="float-end">
                 <a class="btn btn-primary"
-                   href="{{ path('app_settings_area_state_new') }}">
+                    href="{{ path('app_settings_area_state_new') }}">
                     {{ 'Create new State'|trans({}, 'forms') }}
                 </a>
                 <a class="btn btn-primary"
-                   href="{{ path('app_settings_area_dispatch_new') }}">
+                    href="{{ path('app_settings_area_dispatch_new') }}">
                     {{ 'Create new Dispatch Area'|trans({}, 'forms') }}
                 </a>
             </div>
@@ -53,52 +53,86 @@
 
             <table class="table">
                 <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">State</th>
-                    <th scope="col">Dispatch Areas</th>
-                    <th scope="col">Supply Areas</th>
-                </tr>
+                    <tr>
+                        <th scope="col">
+                            #
+                        </th>
+                        <th scope="col">
+                            State
+                        </th>
+                        <th scope="col">
+                            Dispatch Areas
+                        </th>
+                        <th scope="col">
+                            Supply Areas
+                        </th>
+                    </tr>
                 </thead>
                 <tbody>
-                {% for state in states %}
-                    <tr>
-                        <th scope="row">{{ loop.index }}</th>
-                        <td>
-                            {{ state.name }} (<a href="{{
-                            path(
-                                'app_settings_area_state_edit',
-                                {
-                                    id: state.id
-                                }
-                            )
-                            }}">
-                                edit
-                            </a>, <a href="{{
-                            path(
-                                'app_settings_area_state_delete',
-                                {
-                                    id: state.id
-                                }
-                            )
-                            }}">
-                                X
-                            </a>)
-                        </td>
-                        <td>
-                            {% for area in state.dispatchAreas %}
-                                {{ area.name }}
-                            {% else %}
-                                No dispatch areas found.
-                            {% endfor %}
-                        </td>
-                        <td></td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="4">No states found</td>
-                    </tr>
-                {% endfor %}
+                    {% for state in states %}
+                        <tr>
+                            <th scope="row">
+                                {{ loop.index }}
+                            </th>
+                            <td>
+                                {{ state.name }}
+                                <a href="{{
+                                    path(
+                                        'app_settings_area_state_edit',
+                                        {
+                                            id: state.id
+                                        }
+                                    )
+                                    }}">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="{{
+                                    path(
+                                        'app_settings_area_state_delete',
+                                        {
+                                            id: state.id
+                                        }
+                                    )
+                                    }}">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                            <td>
+                                {% for area in state.dispatchAreas %}
+                                    {{ area.name }}
+                                    <a href="{{
+                                        path(
+                                            'app_settings_area_dispatch_edit',
+                                            {
+                                                id: area.id
+                                            }
+                                        )
+                                        }}">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a href="{{
+                                        path(
+                                            'app_settings_area_dispatch_delete',
+                                            {
+                                                id: area.id
+                                            }
+                                        )
+                                        }}">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                {% else %}
+                                    No dispatch areas found.
+                                {% endfor %}
+                            </td>
+                            <td></td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">
+                                No states found
+                            </td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
