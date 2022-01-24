@@ -108,7 +108,7 @@ class AreaController extends AbstractController
 
         try {
             $this->messageBus->dispatch($command);
-        } catch (HandlerFailedException $exception) {
+        } catch (HandlerFailedException) {
             $this->addFlash('danger', 'Could not delete State: '.$state->getName().'. Maybe it still contains Dispatch Areas?');
         }
 

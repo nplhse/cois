@@ -42,7 +42,21 @@
                 {{ 'Create new Supply Area'|trans }}
             </h1>
 
-            {{ form(form) }}
+            {{ form_start(form) }}
+
+            {{ form_widget(form) }}
+
+            <div class="btn-group" role="group">
+                <button class="btn btn-primary">
+                    {{ 'Create Supply Area'|trans({}, 'forms') }}
+                </button>
+                <a class="btn btn-outline-secondary"
+                    href="{{ path('app_settings_area_index') }}">
+                    {{ 'Back to list'|trans({}, 'forms') }}
+                </a>
+            </div>
+
+            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}

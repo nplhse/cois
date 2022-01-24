@@ -44,7 +44,7 @@
                         id="dropdownMenuLink"
                         data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        Create new Element
+                        {{ 'Create new Element'|trans }}
                     </a>
 
                     <ul class="dropdown-menu"
@@ -101,13 +101,13 @@
                             #
                         </th>
                         <th scope="col">
-                            State
+                            {{ 'State'|trans }}
                         </th>
                         <th scope="col">
-                            Dispatch Areas
+                            {{ 'Dispatch Areas'|trans }}
                         </th>
                         <th scope="col">
-                            Supply Areas
+                            {{ 'Supply Areas'|trans }}
                         </th>
                     </tr>
                 </thead>
@@ -164,7 +164,7 @@
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 {% else %}
-                                    No dispatch areas found.
+                                    {{ 'No DispatchAreas found'|trans }}
                                 {% endfor %}
                             </td>
                             <td>
@@ -191,14 +191,14 @@
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 {% else %}
-                                    No supply areas found.
+                                    {{ 'No SupplyAreas found'|trans }}
                                 {% endfor %}
                             </td>
                         </tr>
                     {% else %}
                         <tr>
                             <td colspan="4">
-                                No states found
+                                {{ 'No States found'|trans }}
                             </td>
                         </tr>
                     {% endfor %}
