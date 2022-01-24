@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity\Traits;
 
+use Doctrine\ORM\Mapping as ORM;
+
 trait TimestampableTrait
 {
-    private \DateTimeInterface $createdAt;
+    protected \DateTimeInterface $createdAt;
 
-    private ?\DateTimeInterface $updatedAt = null;
+    protected ?\DateTimeInterface $updatedAt = null;
 
     public function getCreatedAt(): \DateTimeInterface
     {
@@ -27,10 +29,20 @@ trait TimestampableTrait
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function updateTimestamps(): void
+    {
+        $now = new \DateTime();
+
+        $this->setUpdatedAt($now);
     }
 }

@@ -210,10 +210,6 @@ class AllocationTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Gender X is not a valid option');
         $allocation->setGender('X');
-
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Gender 10 is not a valid option');
-        $allocation->setGender(10);
     }
 
     public function testAge(): void

@@ -525,6 +525,66 @@
         <source>Cancel</source>
         <target>Abbrechen</target>
       </trans-unit>
+      <trans-unit id="SD65KHC" resname="Create new State">
+        <source>Create new State</source>
+        <target>Bundesland erstellen</target>
+      </trans-unit>
+      <trans-unit id="RluThw." resname="Create new Dispatch Area">
+        <source>Create new Dispatch Area</source>
+        <target>Leitstelle erstellen</target>
+      </trans-unit>
+      <trans-unit id="uPgL9LK" resname="Create new Supply Area">
+        <source>Create new Supply Area</source>
+        <target>Versorgungsgebiet erstellen</target>
+      </trans-unit>
+      <trans-unit id="VAwSpFS" resname="Update State">
+        <source>Update State</source>
+        <target>Bundesland aktualisieren</target>
+      </trans-unit>
+      <trans-unit id="GKoq2Ox" resname="Create State">
+        <source>Create State</source>
+        <target>Bundesland erstellen</target>
+      </trans-unit>
+      <trans-unit id="TkJwcKc" resname="Update Dispatch Area">
+        <source>Update Dispatch Area</source>
+        <target>Leitstelle aktualisieren</target>
+      </trans-unit>
+      <trans-unit id="NOM9QZM" resname="Create Dispatch Area">
+        <source>Create Dispatch Area</source>
+        <target>Leitstelle erstellen</target>
+      </trans-unit>
+      <trans-unit id="j4a0Lm8" resname="Update Supply Area">
+        <source>Update Supply Area</source>
+        <target>Versorgungsgebiet aktualisieren</target>
+      </trans-unit>
+      <trans-unit id="DlHjniA" resname="Create Supply Area">
+        <source>Create Supply Area</source>
+        <target>Versorgungsgebiet erstellen</target>
+      </trans-unit>
+      <trans-unit id="iW9o6EF" resname="Edit State">
+        <source>Edit State</source>
+        <target>Bundesland bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="SP76JP3" resname="Delete State">
+        <source>Delete State</source>
+        <target>Bundesland löschen</target>
+      </trans-unit>
+      <trans-unit id="leQuqFb" resname="Edit DispatchArea">
+        <source>Edit DispatchArea</source>
+        <target>Leitstelle bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="seJP_zi" resname="Delete DispatchArea">
+        <source>Delete DispatchArea</source>
+        <target>Leitstelle löschen</target>
+      </trans-unit>
+      <trans-unit id="VLc44K7" resname="Edit SupplyArea">
+        <source>Edit SupplyArea</source>
+        <target>Versorgungsgebiet bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="cE_1qpg" resname="Delete SupplyArea">
+        <source>Delete SupplyArea</source>
+        <target>Versorgungsgebiet löschen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

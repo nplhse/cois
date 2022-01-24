@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Domain\Repository;
+
+use App\Domain\Contracts\StateInterface;
+
+interface StateRepositoryInterface
+{
+    public function add(StateInterface $state): void;
+
+    public function save(): void;
+
+    public function delete(StateInterface $state): void;
+
+    public function getById(int $id): StateInterface;
+}

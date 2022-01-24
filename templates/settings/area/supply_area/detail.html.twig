@@ -1,0 +1,143 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'View SupplyArea'|trans }}: {{ area.name }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_settings'),
+                            label: 'Settings'|trans
+                        },
+                        {
+                            url: url('app_settings_area_index'),
+                            label: 'Areas'|trans
+                        },
+                        {
+                            label: 'View SupplyArea'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            {{ include('settings/_settings_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <h1>
+                {{ 'View SupplyArea'|trans }}: {{ area.name }}
+            </h1>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" class="w-25">
+                            {{ 'Parameter'|trans }}
+                        </th>
+                        <th scope="col" class="w-75">
+                            {{ 'Value'|trans }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            {{ 'Name'|trans }}
+                        </th>
+                        <td>
+                            {{ area.name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            {{ 'State'|trans }}
+                        </th>
+                        <td>
+                            <a href="{{
+                                path(
+                                    'app_settings_area_state_detail',
+                                    {
+                                        id: area.state.id
+                                    }
+                                )
+                                }}">
+                                {{ area.state.name }}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            {{ 'Created at'|trans }}
+                        </th>
+                        <td>
+                            {{
+                                area.createdAt|date(
+                                    'd.m.Y H:i',
+                                    'Europe/Berlin'
+                                )
+                            }}
+                        </td>
+                    </tr>
+                    {% if area.updatedAt %}
+                        <tr>
+                            <th scope="row">
+                                {{ 'Updated at'|trans }}
+                            </th>
+                            <td>
+                                {{
+                                    area.updatedAt|date(
+                                        'd.m.Y H:i',
+                                        'Europe/Berlin'
+                                    )
+                                }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+
+            <div class="btn-group" role="group">
+                <a class="btn btn-primary"
+                    href="{{
+                    path(
+                        'app_settings_area_supply_edit',
+                        {
+                            id: area.id
+                        }
+                    )
+                    }}">
+                    {{ 'Edit SupplyArea'|trans({}, 'forms') }}
+                </a>
+                <a class="btn btn-outline-danger"
+                    href="{{
+                    path(
+                        'app_settings_area_supply_delete',
+                        {
+                            id: area.id
+                        }
+                    )
+                    }}">
+                    {{ 'Delete SupplyArea'|trans({}, 'forms') }}
+                </a>
+                <a class="btn btn-outline-secondary"
+                    href="{{ path('app_settings_area_index') }}">
+                    {{ 'Back to list'|trans({}, 'forms') }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

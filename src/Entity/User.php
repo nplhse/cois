@@ -10,8 +10,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  */
+#[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable
 {
     /**
@@ -20,61 +20,49 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
      * @ORM\Column(type="integer")
      */
     private ?int $id = null;
-
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private string $username;
-
     /**
      * @ORM\Column(type="json")
      *
      * @var array<string>
      */
     private array $roles = [];
-
     /**
      * @ORM\Column(type="string")
      */
     private string $password;
-
     private ?string $plainPassword = null;
-
     /**
      * @ORM\Column(type="string", length=255)
      */
     private string $email;
-
     /**
      * @ORM\OneToOne(targetEntity=Hospital::class, mappedBy="owner")
      */
     private ?Hospital $hospital = null;
-
     /**
      * @ORM\Column(type="boolean")
      */
     private bool $isVerified = false;
-
     /**
      * @ORM\Column(type="boolean")
      */
     private bool $isCredentialsExpired = false;
-
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private ?bool $isParticipant = false;
-
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private ?bool $allowsEmail = null;
-
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private ?bool $allowsEmailReminder = null;
-
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */

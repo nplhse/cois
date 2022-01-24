@@ -1,0 +1,188 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+{% import '_elements/macro/pagination.html.twig' as pagination %}
+{% import '_elements/macro/filters.html.twig' as filter %}
+
+{% block title %}
+    {{ 'Areas'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_settings'),
+                            label: 'Settings'|trans
+                        },
+                        {
+                            label: 'Areas'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            {{ include('settings/_settings_subnav.html.twig') }}
+        </div>
+        <div class="col">
+            <div class="float-end">
+                <div class="dropdown">
+                    <a class="btn btn-primary dropdown-toggle"
+                        href="#"
+                        role="button"
+                        id="dropdownMenuLink"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{ 'Create new Element'|trans }}
+                    </a>
+
+                    <ul class="dropdown-menu"
+                        aria-labelledby="dropdownMenuLink">
+                        <li>
+                            <a class="dropdown-item"
+                                href="{{
+                                path(
+                                    'app_settings_area_state_new'
+                                )
+                                }}">
+                                {{ 'Create new State'|trans({}, 'forms') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                                href="{{
+                                path(
+                                    'app_settings_area_dispatch_new'
+                                )
+                                }}">
+                                {{
+                                    'Create new Dispatch Area'|trans(
+                                        {},
+                                        'forms'
+                                    )
+                                }}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                                href="{{
+                                path(
+                                    'app_settings_area_supply_new'
+                                )
+                                }}">
+                                {{
+                                    'Create new Supply Area'|trans({}, 'forms')
+                                }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <h1>
+                {{ 'Areas'|trans }}
+            </h1>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            #
+                        </th>
+                        <th scope="col">
+                            {{ 'State'|trans }}
+                        </th>
+                        <th scope="col">
+                            {{ 'Dispatch Areas'|trans }}
+                        </th>
+                        <th scope="col">
+                            {{ 'Supply Areas'|trans }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for state in states %}
+                        <tr>
+                            <th scope="row">
+                                {{ loop.index }}
+                            </th>
+                            <td>
+                                <a href="{{
+                                    path(
+                                        'app_settings_area_state_detail',
+                                        {
+                                            id: state.id
+                                        }
+                                    )
+                                    }}">
+                                    {{ state.name }}
+                                </a>
+                            </td>
+                            <td>
+                                {% if state.dispatchAreas.empty != true %}
+                                    <ul>
+                                        {% for area in state.dispatchAreas %}
+                                            <li>
+                                                <a href="{{
+                                                    path(
+                                                        'app_settings_area_dispatch_detail',
+                                                        {
+                                                            id: area.id
+                                                        }
+                                                    )
+                                                    }}">
+                                                    {{ area.name }}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    {{ 'No DispatchAreas found'|trans }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if state.supplyAreas.empty != true %}
+                                    <ul>
+                                        {% for area in state.supplyAreas %}
+                                            <li>
+                                                <a href="{{
+                                                    path(
+                                                        'app_settings_area_supply_detail',
+                                                        {
+                                                            id: area.id
+                                                        }
+                                                    )
+                                                    }}">
+                                                    {{ area.name }}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    {{ 'No SupplyAreas found'|trans }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">
+                                {{ 'No States found'|trans }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

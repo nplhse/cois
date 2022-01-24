@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+  <file source-language="de" target-language="en" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -1865,6 +1865,74 @@
       <trans-unit id="4RpfqCt" resname="Filter by this property">
         <source>Filter by this property</source>
         <target>Show allocations with this property</target>
+      </trans-unit>
+      <trans-unit id="LTZxWmz" resname="Areas">
+        <source>Areas</source>
+        <target>Areas</target>
+      </trans-unit>
+      <trans-unit id="BFNuiOJ" resname="Create new Element">
+        <source>Create new Element</source>
+        <target>Create new Area</target>
+      </trans-unit>
+      <trans-unit id="o7UMR2c" resname="State">
+        <source>State</source>
+        <target>State</target>
+      </trans-unit>
+      <trans-unit id="e_m1ryj" resname="Dispatch Areas">
+        <source>Dispatch Areas</source>
+        <target>Dispatch Areas</target>
+      </trans-unit>
+      <trans-unit id="4hFNisH" resname="Supply Areas">
+        <source>Supply Areas</source>
+        <target>Supply Areas</target>
+      </trans-unit>
+      <trans-unit id="aqxE_M3" resname="No States found">
+        <source>No States found</source>
+        <target>No States found.</target>
+      </trans-unit>
+      <trans-unit id="iW9o6EF" resname="Edit State">
+        <source>Edit State</source>
+        <target>Edit State</target>
+      </trans-unit>
+      <trans-unit id="SD65KHC" resname="Create new State">
+        <source>Create new State</source>
+        <target>Create new State</target>
+      </trans-unit>
+      <trans-unit id="E.iROce" resname="Edit Dispatch Area">
+        <source>Edit Dispatch Area</source>
+        <target>Edit Dispatch Area</target>
+      </trans-unit>
+      <trans-unit id="RluThw." resname="Create new Dispatch Area">
+        <source>Create new Dispatch Area</source>
+        <target>Create new Dispatch Area</target>
+      </trans-unit>
+      <trans-unit id="dlznkxI" resname="Edit Supply Area">
+        <source>Edit Supply Area</source>
+        <target>Edit Supply Area</target>
+      </trans-unit>
+      <trans-unit id="uPgL9LK" resname="Create new Supply Area">
+        <source>Create new Supply Area</source>
+        <target>Create new Supply Area</target>
+      </trans-unit>
+      <trans-unit id=".yw6AQG" resname="View State">
+        <source>View State</source>
+        <target>View State</target>
+      </trans-unit>
+      <trans-unit id="3QZuwb8" resname="Parameter">
+        <source>Parameter</source>
+        <target>Parameter</target>
+      </trans-unit>
+      <trans-unit id="jjeVPSP" resname="Value">
+        <source>Value</source>
+        <target>Value</target>
+      </trans-unit>
+      <trans-unit id="WhglyT." resname="View DispatchArea">
+        <source>View DispatchArea</source>
+        <target>View Dispatch Area</target>
+      </trans-unit>
+      <trans-unit id="gl7aQDe" resname="View SupplyArea">
+        <source>View SupplyArea</source>
+        <target>View Supply Area</target>
       </trans-unit>
     </body>
   </file>

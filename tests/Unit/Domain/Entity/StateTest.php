@@ -2,7 +2,8 @@
 
 namespace App\Tests\Unit\Domain\Entity;
 
-use _PHPStan_c862bb974\Nette\Utils\DateTime;
+use App\Domain\Contracts\DispatchAreaInterface;
+use App\Domain\Contracts\SupplyAreaInterface;
 use App\Domain\Entity\State;
 use PHPUnit\Framework\TestCase;
 
@@ -40,5 +41,57 @@ class StateTest extends TestCase
 
         $state->setUpdatedAt($time);
         $this->assertEquals($time, $state->getUpdatedAt());
+    }
+
+    public function testDispatchAreas(): void
+    {
+        $areaName1 = 'Test Area';
+        $areaName2 = 'Demo Area';
+        $state = new State();
+
+        $area1 = $this->createMock(DispatchAreaInterface::class);
+        $area1->expects($this->exactly(2))
+            ->method('getName')
+            ->willReturn($areaName1);
+
+        $area2 = $this->createMock(DispatchAreaInterface::class);
+        $area2->expects($this->exactly(1))
+            ->method('getName')
+            ->willReturn($areaName2);
+
+        $state->addDispatchArea($area1);
+        $this->assertEquals($areaName1, $state->getDispatchAreas()->first()->getName());
+
+        $state->addDispatchArea($area2);
+        $this->assertEquals($areaName2, $state->getDispatchAreas()->last()->getName());
+
+        $state->removeDispatchArea($area2);
+        $this->assertEquals($areaName1, $state->getDispatchAreas()->last()->getName());
+    }
+
+    public function testSupplyAreas(): void
+    {
+        $areaName1 = 'Test Area';
+        $areaName2 = 'Demo Area';
+        $state = new State();
+
+        $area1 = $this->createMock(SupplyAreaInterface::class);
+        $area1->expects($this->exactly(2))
+            ->method('getName')
+            ->willReturn($areaName1);
+
+        $area2 = $this->createMock(SupplyAreaInterface::class);
+        $area2->expects($this->exactly(1))
+            ->method('getName')
+            ->willReturn($areaName2);
+
+        $state->addSupplyArea($area1);
+        $this->assertEquals($areaName1, $state->getSupplyAreas()->first()->getName());
+
+        $state->addSupplyArea($area2);
+        $this->assertEquals($areaName2, $state->getSupplyAreas()->last()->getName());
+
+        $state->removeSupplyArea($area2);
+        $this->assertEquals($areaName1, $state->getSupplyAreas()->last()->getName());
     }
 }

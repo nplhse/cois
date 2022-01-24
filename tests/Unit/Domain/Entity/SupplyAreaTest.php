@@ -2,7 +2,7 @@
 
 namespace App\Tests\Unit\Domain\Entity;
 
-use _PHPStan_c862bb974\Nette\Utils\DateTime;
+use App\Domain\Contracts\StateInterface;
 use App\Domain\Entity\SupplyArea;
 use PHPUnit\Framework\TestCase;
 
@@ -16,6 +16,21 @@ class SupplyAreaTest extends TestCase
         $supplyArea->setName($name);
         $this->assertEquals($name, $supplyArea->getName());
         $this->assertEquals($name, (string) $supplyArea);
+    }
+
+    public function testState(): void
+    {
+        $stateName = 'Test State';
+
+        $state = $this->createMock(StateInterface::class);
+        $state->expects($this->exactly(1))
+            ->method('getName')
+            ->willReturn($stateName);
+
+        $supplyArea = new SupplyArea();
+
+        $supplyArea->setState($state);
+        $this->assertEquals($stateName, $supplyArea->getState()->getName());
     }
 
     public function testId(): void
