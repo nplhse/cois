@@ -36,6 +36,10 @@ class CreateSupplyAreaHandler implements HandlerInterface
 
         $this->supplyAreaRepository->add($area);
 
+        $state->addSupplyArea($area);
+
+        $this->stateRepository->save();
+
         $event = new SupplyAreaCreated($area);
 
         $this->dispatcher->dispatch($event, SupplyAreaCreated::NAME);

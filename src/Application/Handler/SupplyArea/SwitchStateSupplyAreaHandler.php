@@ -29,8 +29,8 @@ class SwitchStateSupplyAreaHandler implements HandlerInterface
     {
         $area = $this->supplyAreaRepository->getById($command->getAreaId());
 
+        $oldState = $this->stateRepository->getById($area->getState()->getId());
         $newState = $this->stateRepository->getById($command->getStateId());
-        $oldState = $area->getState();
 
         $area->setState($newState);
 

@@ -5,6 +5,7 @@ namespace App\Application\Handler\SupplyArea;
 use App\Application\Contract\HandlerInterface;
 use App\Domain\Command\SupplyArea\DeleteSupplyAreaCommand;
 use App\Domain\Event\SupplyArea\SupplyAreaDeleted;
+use App\Repository\StateRepository;
 use App\Repository\SupplyAreaRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -12,11 +13,14 @@ class DeleteSupplyAreaHandler implements HandlerInterface
 {
     private SupplyAreaRepository $supplyAreaRepository;
 
+    private StateRepository $stateRepository;
+
     private EventDispatcherInterface $dispatcher;
 
-    public function __construct(SupplyAreaRepository $supplyAreaRepository, EventDispatcherInterface $dispatcher)
+    public function __construct(SupplyAreaRepository $supplyAreaRepository, StateRepository $stateRepository, EventDispatcherInterface $dispatcher)
     {
         $this->supplyAreaRepository = $supplyAreaRepository;
+        $this->stateRepository = $stateRepository;
 
         $this->dispatcher = $dispatcher;
     }
@@ -28,6 +32,11 @@ class DeleteSupplyAreaHandler implements HandlerInterface
         // @TODO Check if SupplyArea includes any hospitals!
 
         $this->supplyAreaRepository->delete($area);
+
+        $state = $this->stateRepository->getById($area->getState()->getId());
+        $state->removeSupplyArea($area);
+
+        $this->stateRepository->save();
 
         $event = new SupplyAreaDeleted($area);
 
