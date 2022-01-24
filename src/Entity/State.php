@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=StateRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class State extends DomainState
 {
@@ -32,6 +33,16 @@ class State extends DomainState
      * @ORM\OneToMany(targetEntity=SupplyArea::class, mappedBy="state")
      */
     protected \Doctrine\Common\Collections\Collection $supplyAreas;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected \DateTimeInterface $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected ?\DateTimeInterface $updatedAt = null;
 
     public function __construct()
     {

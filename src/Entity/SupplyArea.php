@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=SupplyAreaRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class SupplyArea extends DomainSupplyArea
 {
@@ -29,4 +30,14 @@ class SupplyArea extends DomainSupplyArea
      * @ORM\JoinColumn(nullable=false)
      */
     protected StateInterface $state;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected \DateTimeInterface $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected ?\DateTimeInterface $updatedAt = null;
 }
