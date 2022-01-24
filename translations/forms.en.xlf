@@ -525,6 +525,42 @@
         <source>Cancel</source>
         <target>Cancel</target>
       </trans-unit>
+      <trans-unit id="SD65KHC" resname="Create new State">
+        <source>Create new State</source>
+        <target>Create new State</target>
+      </trans-unit>
+      <trans-unit id="RluThw." resname="Create new Dispatch Area">
+        <source>Create new Dispatch Area</source>
+        <target>Create new Dispatch Area</target>
+      </trans-unit>
+      <trans-unit id="uPgL9LK" resname="Create new Supply Area">
+        <source>Create new Supply Area</source>
+        <target>Create new Supply Area</target>
+      </trans-unit>
+      <trans-unit id="VAwSpFS" resname="Update State">
+        <source>Update State</source>
+        <target>Update State</target>
+      </trans-unit>
+      <trans-unit id="GKoq2Ox" resname="Create State">
+        <source>Create State</source>
+        <target>Create State</target>
+      </trans-unit>
+      <trans-unit id="TkJwcKc" resname="Update Dispatch Area">
+        <source>Update Dispatch Area</source>
+        <target>Update Dispatch Area</target>
+      </trans-unit>
+      <trans-unit id="NOM9QZM" resname="Create Dispatch Area">
+        <source>Create Dispatch Area</source>
+        <target>Create Dispatch Area</target>
+      </trans-unit>
+      <trans-unit id="j4a0Lm8" resname="Update Supply Area">
+        <source>Update Supply Area</source>
+        <target>Update Supply Area</target>
+      </trans-unit>
+      <trans-unit id="DlHjniA" resname="Create Supply Area">
+        <source>Create Supply Area</source>
+        <target>Create Supply Area</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

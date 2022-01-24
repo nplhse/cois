@@ -1941,6 +1941,54 @@
         <source>Filter by this property</source>
         <target>Einsätze mit dieser Eigenschaft anzeigen</target>
       </trans-unit>
+      <trans-unit id="LTZxWmz" resname="Areas">
+        <source>Areas</source>
+        <target>Gebiete</target>
+      </trans-unit>
+      <trans-unit id="BFNuiOJ" resname="Create new Element">
+        <source>Create new Element</source>
+        <target>Neues Gebiet erstellen</target>
+      </trans-unit>
+      <trans-unit id="o7UMR2c" resname="State">
+        <source>State</source>
+        <target>Bundesland</target>
+      </trans-unit>
+      <trans-unit id="e_m1ryj" resname="Dispatch Areas">
+        <source>Dispatch Areas</source>
+        <target>Leitstellen</target>
+      </trans-unit>
+      <trans-unit id="4hFNisH" resname="Supply Areas">
+        <source>Supply Areas</source>
+        <target>Versorgungsgebiete</target>
+      </trans-unit>
+      <trans-unit id="aqxE_M3" resname="No States found">
+        <source>No States found</source>
+        <target>Keine Bundesländer gefunden.</target>
+      </trans-unit>
+      <trans-unit id="iW9o6EF" resname="Edit State">
+        <source>Edit State</source>
+        <target>Bundesland bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="SD65KHC" resname="Create new State">
+        <source>Create new State</source>
+        <target>Neues Bundseland erstellen</target>
+      </trans-unit>
+      <trans-unit id="E.iROce" resname="Edit Dispatch Area">
+        <source>Edit Dispatch Area</source>
+        <target>Leitstelle bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="RluThw." resname="Create new Dispatch Area">
+        <source>Create new Dispatch Area</source>
+        <target>Neue Leitstelle erstellen</target>
+      </trans-unit>
+      <trans-unit id="dlznkxI" resname="Edit Supply Area">
+        <source>Edit Supply Area</source>
+        <target>Versorgugnsgebiet bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="uPgL9LK" resname="Create new Supply Area">
+        <source>Create new Supply Area</source>
+        <target>Neues Versorgungsgebiet erstellen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
