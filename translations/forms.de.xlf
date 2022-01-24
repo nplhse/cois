@@ -527,15 +527,15 @@
       </trans-unit>
       <trans-unit id="SD65KHC" resname="Create new State">
         <source>Create new State</source>
-        <target>Neues Bundesland erstellen</target>
+        <target>Bundesland erstellen</target>
       </trans-unit>
       <trans-unit id="RluThw." resname="Create new Dispatch Area">
         <source>Create new Dispatch Area</source>
-        <target>Neue Leistelle erstellen</target>
+        <target>Leitstelle erstellen</target>
       </trans-unit>
       <trans-unit id="uPgL9LK" resname="Create new Supply Area">
         <source>Create new Supply Area</source>
-        <target>Neues Versorgungsgebiet erstellen</target>
+        <target>Versorgungsgebiet erstellen</target>
       </trans-unit>
       <trans-unit id="VAwSpFS" resname="Update State">
         <source>Update State</source>
