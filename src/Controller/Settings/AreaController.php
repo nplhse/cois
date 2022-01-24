@@ -73,6 +73,18 @@ class AreaController extends AbstractController
         ]);
     }
 
+    #[Route('/state/{id}', name: 'app_settings_area_state_detail')]
+    public function state_detail(int $id, Request $request, StateRepository $stateRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $state = $stateRepository->getById($id);
+
+        return $this->render('settings/area/state/detail.html.twig', [
+            'state' => $state,
+        ]);
+    }
+
     #[Route('/state/{id}/edit', name: 'app_settings_area_state_edit')]
     public function state_edit(int $id, Request $request, StateRepository $stateRepository): Response
     {
@@ -134,6 +146,18 @@ class AreaController extends AbstractController
 
         return $this->render('settings/area/dispatch_area/new.html.twig', [
             'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/dispatch_area/{id}', name: 'app_settings_area_dispatch_detail')]
+    public function dispatch_detail(int $id, Request $request, DispatchAreaRepository $dispatchAreaRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $area = $dispatchAreaRepository->getById($id);
+
+        return $this->render('settings/area/dispatch_area/detail.html.twig', [
+            'area' => $area,
         ]);
     }
 
@@ -205,18 +229,16 @@ class AreaController extends AbstractController
         ]);
     }
 
-    #[Route('/supply_area/{id}/delete', name: 'app_settings_area_supply_delete')]
-    public function supply_delete(int $id, SupplyAreaRepository $supplyAreaRepository): Response
+    #[Route('/supply_area/{id}', name: 'app_settings_area_supply_detail')]
+    public function supply_detail(int $id, Request $request, SupplyAreaRepository $supplyAreaRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         $area = $supplyAreaRepository->getById($id);
 
-        $command = new DeleteSupplyAreaCommand($id);
-
-        $this->messageBus->dispatch($command);
-
-        return $this->redirectToRoute('app_settings_area_index');
+        return $this->render('settings/area/supply_area/detail.html.twig', [
+            'area' => $area,
+        ]);
     }
 
     #[Route('/supply_area/{id}/edit', name: 'app_settings_area_supply_edit')]
@@ -249,5 +271,19 @@ class AreaController extends AbstractController
             'area' => $area,
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/supply_area/{id}/delete', name: 'app_settings_area_supply_delete')]
+    public function supply_delete(int $id, SupplyAreaRepository $supplyAreaRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        $area = $supplyAreaRepository->getById($id);
+
+        $command = new DeleteSupplyAreaCommand($id);
+
+        $this->messageBus->dispatch($command);
+
+        return $this->redirectToRoute('app_settings_area_index');
     }
 }

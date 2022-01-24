@@ -561,6 +561,30 @@
         <source>Create Supply Area</source>
         <target>Versorgungsgebiet erstellen</target>
       </trans-unit>
+      <trans-unit id="iW9o6EF" resname="Edit State">
+        <source>Edit State</source>
+        <target>Bundesland bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="SP76JP3" resname="Delete State">
+        <source>Delete State</source>
+        <target>Bundesland löschen</target>
+      </trans-unit>
+      <trans-unit id="leQuqFb" resname="Edit DispatchArea">
+        <source>Edit DispatchArea</source>
+        <target>Leitstelle bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="seJP_zi" resname="Delete DispatchArea">
+        <source>Delete DispatchArea</source>
+        <target>Leitstelle löschen</target>
+      </trans-unit>
+      <trans-unit id="VLc44K7" resname="Edit SupplyArea">
+        <source>Edit SupplyArea</source>
+        <target>Versorgungsgebiet bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="cE_1qpg" resname="Delete SupplyArea">
+        <source>Delete SupplyArea</source>
+        <target>Versorgungsgebiet löschen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1989,6 +1989,26 @@
         <source>Create new Supply Area</source>
         <target>Neues Versorgungsgebiet erstellen</target>
       </trans-unit>
+      <trans-unit id=".yw6AQG" resname="View State">
+        <source>View State</source>
+        <target>Bundesland ansehen</target>
+      </trans-unit>
+      <trans-unit id="3QZuwb8" resname="Parameter">
+        <source>Parameter</source>
+        <target>Parameter</target>
+      </trans-unit>
+      <trans-unit id="jjeVPSP" resname="Value">
+        <source>Value</source>
+        <target>Wert</target>
+      </trans-unit>
+      <trans-unit id="WhglyT." resname="View DispatchArea">
+        <source>View DispatchArea</source>
+        <target>Leitstelle ansehen</target>
+      </trans-unit>
+      <trans-unit id="gl7aQDe" resname="View SupplyArea">
+        <source>View SupplyArea</source>
+        <target>Versorgungsgebiet ansehen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

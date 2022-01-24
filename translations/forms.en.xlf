@@ -561,6 +561,30 @@
         <source>Create Supply Area</source>
         <target>Create Supply Area</target>
       </trans-unit>
+      <trans-unit id="iW9o6EF" resname="Edit State">
+        <source>Edit State</source>
+        <target>Edit State</target>
+      </trans-unit>
+      <trans-unit id="SP76JP3" resname="Delete State">
+        <source>Delete State</source>
+        <target>Delete State</target>
+      </trans-unit>
+      <trans-unit id="leQuqFb" resname="Edit DispatchArea">
+        <source>Edit DispatchArea</source>
+        <target>Edit Dispatch Area</target>
+      </trans-unit>
+      <trans-unit id="seJP_zi" resname="Delete DispatchArea">
+        <source>Delete DispatchArea</source>
+        <target>Delete Dispatch Area</target>
+      </trans-unit>
+      <trans-unit id="VLc44K7" resname="Edit SupplyArea">
+        <source>Edit SupplyArea</source>
+        <target>Edit Supply Area</target>
+      </trans-unit>
+      <trans-unit id="cE_1qpg" resname="Delete SupplyArea">
+        <source>Delete SupplyArea</source>
+        <target>Delete Supply Area</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

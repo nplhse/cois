@@ -94,7 +94,7 @@
                 {{ 'Areas'|trans }}
             </h1>
 
-            <table class="table">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">
@@ -118,81 +118,60 @@
                                 {{ loop.index }}
                             </th>
                             <td>
-                                {{ state.name }}
                                 <a href="{{
                                     path(
-                                        'app_settings_area_state_edit',
+                                        'app_settings_area_state_detail',
                                         {
                                             id: state.id
                                         }
                                     )
                                     }}">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <a href="{{
-                                    path(
-                                        'app_settings_area_state_delete',
-                                        {
-                                            id: state.id
-                                        }
-                                    )
-                                    }}">
-                                    <i class="bi bi-trash"></i>
+                                    {{ state.name }}
                                 </a>
                             </td>
                             <td>
-                                {% for area in state.dispatchAreas %}
-                                    {{ area.name }}
-                                    <a href="{{
-                                        path(
-                                            'app_settings_area_dispatch_edit',
-                                            {
-                                                id: area.id
-                                            }
-                                        )
-                                        }}">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <a href="{{
-                                        path(
-                                            'app_settings_area_dispatch_delete',
-                                            {
-                                                id: area.id
-                                            }
-                                        )
-                                        }}">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
+                                {% if state.dispatchAreas.empty != true %}
+                                    <ul>
+                                        {% for area in state.dispatchAreas %}
+                                            <li>
+                                                <a href="{{
+                                                    path(
+                                                        'app_settings_area_dispatch_detail',
+                                                        {
+                                                            id: area.id
+                                                        }
+                                                    )
+                                                    }}">
+                                                    {{ area.name }}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
                                 {% else %}
                                     {{ 'No DispatchAreas found'|trans }}
-                                {% endfor %}
+                                {% endif %}
                             </td>
                             <td>
-                                {% for area in state.supplyAreas %}
-                                    {{ area.name }}
-                                    <a href="{{
-                                        path(
-                                            'app_settings_area_supply_edit',
-                                            {
-                                                id: area.id
-                                            }
-                                        )
-                                        }}">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <a href="{{
-                                        path(
-                                            'app_settings_area_supply_delete',
-                                            {
-                                                id: area.id
-                                            }
-                                        )
-                                        }}">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
+                                {% if state.supplyAreas.empty != true %}
+                                    <ul>
+                                        {% for area in state.supplyAreas %}
+                                            <li>
+                                                <a href="{{
+                                                    path(
+                                                        'app_settings_area_supply_detail',
+                                                        {
+                                                            id: area.id
+                                                        }
+                                                    )
+                                                    }}">
+                                                    {{ area.name }}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
                                 {% else %}
                                     {{ 'No SupplyAreas found'|trans }}
-                                {% endfor %}
+                                {% endif %}
                             </td>
                         </tr>
                     {% else %}
