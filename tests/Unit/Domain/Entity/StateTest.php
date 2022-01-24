@@ -3,6 +3,7 @@
 namespace App\Tests\Unit\Domain\Entity;
 
 use App\Domain\Contracts\DispatchAreaInterface;
+use App\Domain\Contracts\SupplyAreaInterface;
 use App\Domain\Entity\State;
 use PHPUnit\Framework\TestCase;
 
@@ -66,5 +67,31 @@ class StateTest extends TestCase
 
         $state->removeDispatchArea($area2);
         $this->assertEquals($areaName1, $state->getDispatchAreas()->last()->getName());
+    }
+
+    public function testSupplyAreas(): void
+    {
+        $areaName1 = 'Test Area';
+        $areaName2 = 'Demo Area';
+        $state = new State();
+
+        $area1 = $this->createMock(SupplyAreaInterface::class);
+        $area1->expects($this->exactly(2))
+            ->method('getName')
+            ->willReturn($areaName1);
+
+        $area2 = $this->createMock(SupplyAreaInterface::class);
+        $area2->expects($this->exactly(1))
+            ->method('getName')
+            ->willReturn($areaName2);
+
+        $state->addSupplyArea($area1);
+        $this->assertEquals($areaName1, $state->getSupplyAreas()->first()->getName());
+
+        $state->addSupplyArea($area2);
+        $this->assertEquals($areaName2, $state->getSupplyAreas()->last()->getName());
+
+        $state->removeSupplyArea($area2);
+        $this->assertEquals($areaName1, $state->getSupplyAreas()->last()->getName());
     }
 }

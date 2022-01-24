@@ -27,7 +27,11 @@ class DeleteStateHandler implements HandlerInterface
         $state = $this->stateRepository->getById($command->getId());
 
         if (!$state->getDispatchAreas()->isEmpty()) {
-            throw new StateNotEmptyException('Cannot delete Area as it is not empty');
+            throw new StateNotEmptyException('Cannot delete Area as it still contains Dispatch Areas');
+        }
+
+        if (!$state->getSupplyAreas()->isEmpty()) {
+            throw new StateNotEmptyException('Cannot delete Area as it still contains Supply Areas');
         }
 
         $this->stateRepository->delete($state);

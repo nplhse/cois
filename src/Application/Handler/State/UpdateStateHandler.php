@@ -24,6 +24,7 @@ class UpdateStateHandler implements HandlerInterface
     public function __invoke(UpdateStateCommand $command): void
     {
         $state = $this->stateRepository->getById($command->getId());
+
         $state->setName($command->getName());
 
         $this->stateRepository->save();
