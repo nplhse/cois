@@ -26,11 +26,13 @@ class State extends DomainState
 
     /**
      * @ORM\OneToMany(targetEntity=DispatchArea::class, mappedBy="state")
+     * @ORM\OrderBy({"name" = "ASC"})
      */
     protected \Doctrine\Common\Collections\Collection $dispatchAreas;
 
     /**
      * @ORM\OneToMany(targetEntity=SupplyArea::class, mappedBy="state")
+     * @ORM\OrderBy({"name" = "ASC"})
      */
     protected \Doctrine\Common\Collections\Collection $supplyAreas;
 
