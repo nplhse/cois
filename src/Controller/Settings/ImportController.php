@@ -9,16 +9,28 @@ use App\Repository\AllocationRepository;
 use App\Repository\ImportRepository;
 use App\Service\FileUploader;
 use App\Service\RequestParamService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/settings/import')]
 class ImportController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+
+    private MessageBusInterface $messageBus;
+
+    public function __construct(EntityManagerInterface $entityManager, MessageBusInterface $messageBus)
+    {
+        $this->entityManager = $entityManager;
+        $this->messageBus = $messageBus;
+    }
+
     #[Route('/', name: 'app_settings_import_index', methods: ['GET'])]
     public function index(Request $request, ImportRepository $importRepository): Response
     {
@@ -70,12 +82,11 @@ class ImportController extends AbstractController
             $import->setFile(null);
             $import->setStatus('pending');
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($import);
-            $entityManager->flush();
+            $this->entityManager->persist($import);
+            $this->entityManager->flush();
 
             try {
-                $this->dispatchMessage(new ImportDataMessage($import, $import->getHospital()));
+                $this->messageBus->dispatch(new ImportDataMessage($import, $import->getHospital()));
 
                 $this->addFlash('success', 'Your import was successfully created.');
             } catch (HandlerFailedException $e) {
@@ -83,9 +94,8 @@ class ImportController extends AbstractController
                 $import->setLastError($e->getMessage());
                 $import->setLastRun(new \DateTime('NOW'));
 
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($import);
-                $entityManager->flush();
+                $this->entityManager->persist($import);
+                $this->entityManager->flush();
 
                 $this->addFlash('danger', 'Your import failed, see details for more information. We have send a notification to the admin to handle this issue.');
             }
@@ -136,7 +146,7 @@ class ImportController extends AbstractController
                 $import->setStatus('pending');
 
                 try {
-                    $this->dispatchMessage(new ImportDataMessage($import, $import->getHospital()));
+                    $this->messageBus->dispatch(new ImportDataMessage($import, $import->getHospital()));
 
                     $this->addFlash('success', 'Your import was successfully edited.');
                 } catch (HandlerFailedException $e) {
@@ -144,17 +154,15 @@ class ImportController extends AbstractController
                     $import->setLastError($e->getMessage());
                     $import->setLastRun(new \DateTime('NOW'));
 
-                    $entityManager = $this->getDoctrine()->getManager();
-                    $entityManager->persist($import);
-                    $entityManager->flush();
+                    $this->entityManager->persist($import);
+                    $this->entityManager->flush();
 
                     $this->addFlash('danger', 'Your import failed, see details for more information. We have send a notification to the admin to handle this issue.');
                 }
             }
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($import);
-            $entityManager->flush();
+            $this->entityManager->persist($import);
+            $this->entityManager->flush();
 
             if (null === $file) {
                 $this->addFlash('success', 'Your import was successfully edited.');
@@ -177,9 +185,8 @@ class ImportController extends AbstractController
         $CsrfToken = $request->request->get('_token');
 
         if ($this->isCsrfTokenValid('delete'.$import->getId(), $CsrfToken)) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($import);
-            $entityManager->flush();
+            $this->entityManager->remove($import);
+            $this->entityManager->flush();
         }
 
         return $this->redirectToRoute('app_settings_import_index', [], Response::HTTP_SEE_OTHER);
@@ -203,7 +210,7 @@ class ImportController extends AbstractController
         $command = new ImportDataMessage($import, $hospital);
 
         try {
-            $this->dispatchMessage(new ImportDataMessage($import, $import->getHospital()));
+            $this->messageBus->dispatch(new ImportDataMessage($import, $import->getHospital()));
 
             $this->addFlash('success', 'Refreshed Import in database.');
         } catch (HandlerFailedException $e) {
@@ -211,9 +218,8 @@ class ImportController extends AbstractController
             $import->setLastError($e->getMessage());
             $import->setLastRun(new \DateTime('NOW'));
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($import);
-            $entityManager->flush();
+            $this->entityManager->persist($import);
+            $this->entityManager->flush();
 
             $this->addFlash('danger', 'Import could not be refreshed, see details for more information.');
         }

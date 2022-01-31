@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use App\Service\MailerService;
 use App\Service\RequestParamService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,10 +25,13 @@ class UserController extends AbstractController
 
     private MailerService $mailer;
 
-    public function __construct(UserPasswordHasherInterface $passwordHasher, MailerService $mailer)
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher, MailerService $mailer, EntityManagerInterface $entityManager)
     {
         $this->passwordHasher = $passwordHasher;
         $this->mailer = $mailer;
+        $this->entityManager = $entityManager;
     }
 
     #[Route('/', name: 'app_settings_user_index', methods: ['GET'])]
@@ -100,6 +104,8 @@ class UserController extends AbstractController
             }
 
             $userRepository->save();
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('app_settings_user_index', [], Response::HTTP_SEE_OTHER);
         }
