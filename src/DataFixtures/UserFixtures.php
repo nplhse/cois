@@ -49,12 +49,12 @@ class UserFixtures extends Fixture
         $manager->persist($user1);
 
         $user2 = new User();
-        $user2->setEmail('foo@bar.dev');
+        $user2->setEmail('user123@bar.dev');
         $user2->setUsername('user123');
-        $user2->setPassword($this->passwordHasher->hashPassword($user2, 'foobar'));
-        $user2->setIsCredentialsExpired(false);
-        $user2->setIsParticipant(true);
-        $user2->setIsVerified(true);
+        $user2->setPassword($this->passwordHasher->hashPassword($user2, 'user123'));
+        $user2->setIsCredentialsExpired(true);
+        $user2->setIsParticipant(false);
+        $user2->setIsVerified(false);
 
         $manager->persist($user2);
 

@@ -69,43 +69,6 @@
                     {{ form_end(form_email) }}
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-header">
-                    {{ 'Manage your notification settings'|trans }}
-                </div>
-                <div class="card-body">
-                    {{ form_start(form_settings) }}
-
-                    {{
-                        form_row(
-                            form_settings.allowsEmail,
-                            {
-                                label_attr: {
-                                    class: 'switch-custom'
-                                }
-                            }
-                        )
-                    }}
-
-                    {{
-                        form_row(
-                            form_settings.allowsEmailReminder,
-                            {
-                                label_attr: {
-                                    class: 'switch-custom'
-                                }
-                            }
-                        )
-                    }}
-
-                    <div class="float-end">
-                        {{ form_row(form_settings.submit) }}
-                    </div>
-
-                    {{ form_end(form_settings) }}
-                </div>
-            </div>
         </div>
     </div>
 {% endblock %}

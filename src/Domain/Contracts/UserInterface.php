@@ -24,6 +24,16 @@ interface UserInterface
 
     public function getRoles(): array;
 
+    public function setPassword(string $password): self;
+
+    public function getPassword(): string;
+
+    public function setPlainPassword(?string $plainPassword): self;
+
+    public function getPlainPassword(): ?string;
+
+    public function eraseCredentials(): void;
+
     public function isVerified(): bool;
 
     public function verify(): self;
@@ -35,4 +45,8 @@ interface UserInterface
     public function enableParticipation(): self;
 
     public function disableParticipation(): self;
+
+    public function hasCredentialsExpired(): bool;
+
+    public function expireCredentials(): self;
 }

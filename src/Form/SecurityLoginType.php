@@ -2,14 +2,26 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Security;
 
 class SecurityLoginType extends AbstractType
 {
+    private Security $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     /**
      * @param FormBuilderInterface<mixed> $builder
      * @param array<mixed>                $options
@@ -20,6 +32,20 @@ class SecurityLoginType extends AbstractType
             ->add('username', TextType::class)
             ->add('password', PasswordType::class)
         ;
+
+        if ($this->security->isGranted('IS_REMEMBERED')) {
+            /** @var User $user */
+            $user = $this->security->getUser();
+
+            $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($user) {
+                $form = $event->getForm();
+
+                $form->remove('username');
+                $form->add('username', HiddenType::class, [
+                    'data' => $user->getUsername(),
+                ]);
+            });
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void

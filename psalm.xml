@@ -23,6 +23,7 @@
     <issueHandlers>
         <LessSpecificImplementedReturnType>
             <errorLevel type="suppress">
+                <directory name="src/EventSubscriber" />
                 <directory name="src/Repository" />
             </errorLevel>
         </LessSpecificImplementedReturnType>

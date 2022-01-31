@@ -11,26 +11,49 @@
         </h1>
 
         {% if app.user %}
-            <div class="mb-3">
-                {{
-                    'security.login.alreadyLoggedIn'|trans({
-                        '%name%': app.user.username
-                    })
-                }}
-                <a href="{{ path('app_logout') }}">
-                    {{ 'security.link.logout'|trans }}
-                </a>
-            </div>
+            <div class="card">
+                <div class="card-body">
+                    {% if error %}
+                        <div class="alert alert-danger">
+                            {{
+                                error.messageKey|trans(
+                                    error.messageData,
+                                    'security'
+                                )
+                            }}
+                        </div>
+                    {% endif %}
 
-            {% for label, messages in app.flashes(
-                ['warning', 'error', 'success', 'notice']
-            ) %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ label }}">
-                        {{ message|trans }}
+                    <p>
+                        {{
+                            'Please confirm your login by entering your password.'|trans
+                        }}
+                    </p>
+
+                    {{ form_start(form) }}
+
+                    {{ form_row(form.username) }}
+                    {{ form_row(form.password) }}
+
+                    <input type="hidden"
+                        name="_csrf_token"
+                        value="{{ csrf_token('authenticate') }}" />
+
+                    <input type="hidden"
+                        id="remember_me"
+                        name="_remember_me"
+                        value="on" />
+
+                    <div class="float-end">
+                        <button type="submit" class="btn btn-success">
+                            {{ 'security.login.button'|trans }}
+                            <span class="fa fa-lock"></span>
+                        </button>
                     </div>
-                {% endfor %}
-            {% endfor %}
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
         {% else %}
             <div class="card">
                 <div class="card-body">

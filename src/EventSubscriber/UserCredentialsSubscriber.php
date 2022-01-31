@@ -1,6 +1,6 @@
 <?php
 
-namespace App\EventListener;
+namespace App\EventSubscriber;
 
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class UserCredentialsListener implements \Symfony\Component\EventDispatcher\EventSubscriberInterface
+class UserCredentialsSubscriber implements \Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
     private TokenStorageInterface $security;
 
@@ -44,7 +44,7 @@ class UserCredentialsListener implements \Symfony\Component\EventDispatcher\Even
             return;
         }
 
-        $currentRoute = $event->getRequest()->get('_route');
+        $currentRoute = $event->getRequest()->attributes->get('_route');
         if (\in_array($currentRoute, $this->excludedRoutes, true)) {
             return;
         }
@@ -57,7 +57,7 @@ class UserCredentialsListener implements \Symfony\Component\EventDispatcher\Even
 
         $user = $token->getUser();
 
-        if ($user instanceof User && $user->getIsCredentialsExpired()) {
+        if ($user instanceof User && $user->hasCredentialsExpired()) {
             $response = new RedirectResponse($this->router->generate('app_reset_credentials'));
             $event->setResponse($response);
         }

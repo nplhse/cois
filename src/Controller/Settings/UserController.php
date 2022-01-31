@@ -3,11 +3,12 @@
 namespace App\Controller\Settings;
 
 use App\Entity\User;
-use App\Form\UserCreateType;
-use App\Form\UserType;
+use App\Form\User\UserCreateType;
+use App\Form\User\UserType;
 use App\Repository\UserRepository;
 use App\Service\MailerService;
 use App\Service\RequestParamService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[IsGranted('ROLE_ADMIN')]
 #[Route('/settings/user')]
 class UserController extends AbstractController
 {
@@ -54,7 +56,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/new', name: 'app_settings_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, UserRepository $userRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
@@ -66,8 +68,7 @@ class UserController extends AbstractController
             $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPlainPassword()));
             $user->eraseCredentials();
 
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
+            $userRepository->add($user);
 
             return $this->redirectToRoute('app_settings_user_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -89,7 +90,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_settings_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
@@ -102,6 +103,7 @@ class UserController extends AbstractController
                 $user->eraseCredentials();
             }
 
+            $userRepository->save();
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
@@ -115,15 +117,14 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_settings_user_delete', methods: ['POST'])]
-    public function delete(Request $request, User $user): Response
+    public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         $CsrfToken = $request->request->get('_token');
 
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $CsrfToken)) {
-            $this->entityManager->remove($user);
-            $this->entityManager->flush();
+            $userRepository->delete($user);
         }
 
         return $this->redirectToRoute('app_settings_user_index', [], Response::HTTP_SEE_OTHER);
@@ -141,6 +142,7 @@ class UserController extends AbstractController
         return $this->redirectToRoute('app_settings_user_show', ['id' => $user->getId()]);
     }
 
+    // Todo: REMOVE AFTER REFACTORING
     #[Route('/{id}/toggle', name: 'app_settings_user_toggle')]
     public function toggleOption(User $user): Response
     {
