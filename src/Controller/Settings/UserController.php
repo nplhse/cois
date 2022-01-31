@@ -3,11 +3,12 @@
 namespace App\Controller\Settings;
 
 use App\Entity\User;
-use App\Form\UserCreateType;
-use App\Form\UserType;
+use App\Form\User\UserCreateType;
+use App\Form\User\UserType;
 use App\Repository\UserRepository;
 use App\Service\MailerService;
 use App\Service\RequestParamService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[IsGranted('ROLE_ADMIN')]
 #[Route('/settings/user')]
 class UserController extends AbstractController
 {

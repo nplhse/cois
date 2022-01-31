@@ -4,7 +4,7 @@ namespace App\Controller\User;
 
 use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
-use App\Form\ChangePasswordFormType;
+use App\Form\User\ChangePasswordFormType;
 use App\Form\User\ResetPasswordRequestFormType;
 use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

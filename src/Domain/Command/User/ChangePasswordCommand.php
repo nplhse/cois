@@ -2,7 +2,7 @@
 
 namespace App\Domain\Command\User;
 
-class ResetCredentialsCommand
+class ChangePasswordCommand
 {
     private int $id;
 

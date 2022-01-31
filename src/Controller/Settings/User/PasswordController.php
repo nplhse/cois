@@ -2,9 +2,9 @@
 
 namespace App\Controller\Settings\User;
 
-use App\Domain\Command\User\ChangeUsernameCommand;
+use App\Domain\Command\User\ChangePasswordCommand;
 use App\Entity\User;
-use App\Form\User\ProfileChangeType;
+use App\Form\User\ChangePasswordType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,11 +12,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
 
 #[IsGranted('ROLE_USER')]
-class ProfileController extends AbstractController
+class PasswordController extends AbstractController
 {
+    use ResetPasswordControllerTrait;
+
     private MessageBusInterface $messageBus;
 
     public function __construct(MessageBusInterface $messageBus)
@@ -24,34 +26,34 @@ class ProfileController extends AbstractController
         $this->messageBus = $messageBus;
     }
 
-    #[Route('/settings/profile', name: 'app_settings_profile', )]
-    public function profile(Request $request, TranslatorInterface $translator): Response
+    #[Route('/settings/password', name: 'app_settings_password', )]
+    public function changePassword(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         /** @var User $user */
         $user = $this->getUser();
 
-        $form = $this->createForm(ProfileChangeType::class);
+        $form = $this->createForm(ChangePasswordType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $command = new ChangeUsernameCommand($user->getId(), $form->get('username')->getData());
+            $command = new ChangePasswordCommand($user->getId(), $form->get('plainPassword')->getData());
 
             try {
                 $this->messageBus->dispatch($command);
+                $this->cleanSessionAfterReset();
             } catch (HandlerFailedException) {
                 $this->addFlash('danger', 'Sorry, something went wrong. Please try again later!');
-
-                return $this->redirectToRoute('app_settings_profile');
             }
 
-            $this->addFlash('success', $translator->trans('msg.user.profile.updated'));
+            $this->addFlash('success', 'Your password has been changed successfully.');
 
-            return $this->redirectToRoute('app_settings_profile');
+            return $this->redirectToRoute('app_settings_password');
         }
 
-        return $this->render('settings/profile/index.html.twig', [
-            'user' => $user,
-            'form_profile' => $form->createView(),
+        return $this->render('settings/password/index.html.twig', [
+            'form' => $form->createView(),
             'errors' => $form->getErrors(true, false),
         ]);
     }

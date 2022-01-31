@@ -6,7 +6,7 @@ use App\Domain\Contracts\DomainEventInterface;
 use App\Domain\Event\Traits\NamedEventTrait;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class UserResetCredentialsEvent extends Event implements DomainEventInterface
+class UserChangedPasswordEvent extends Event implements DomainEventInterface
 {
     use NamedEventTrait;
 

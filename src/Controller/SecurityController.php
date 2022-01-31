@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Form\SecurityLoginType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +16,15 @@ class SecurityController extends AbstractController
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
+
         // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-        // create login form
+        if (!$this->getUser()) {
+            $lastUsername = $authenticationUtils->getLastUsername();
+        } else {
+            /** @var User $user */
+            $user = $this->getUser();
+            $lastUsername = $user->getUsername();
+        }
 
         $form = $this->createForm(
             SecurityLoginType::class,

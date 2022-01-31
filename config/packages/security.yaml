@@ -28,6 +28,7 @@ security:
 
             remember_me:
                 secret: "%kernel.secret%"
+                signature_properties: [password]
                 lifetime: 604800
                 path: /
                 token_provider: Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider

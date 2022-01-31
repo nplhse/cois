@@ -2,9 +2,9 @@
 
 namespace App\Controller\User;
 
-use App\Domain\Command\User\ResetCredentialsCommand;
+use App\Domain\Command\User\ChangePasswordCommand;
 use App\Domain\Contracts\UserInterface;
-use App\Form\ChangePasswordFormType;
+use App\Form\User\ChangePasswordFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,7 +38,7 @@ class ResetCredentialsController extends AbstractController
             /** @var UserInterface $user */
             $user = $this->getUser();
 
-            $command = new ResetCredentialsCommand($user->getId(), $form->get('plainPassword')->getData());
+            $command = new ChangePasswordCommand($user->getId(), $form->get('plainPassword')->getData());
 
             try {
                 $this->messageBus->dispatch($command);

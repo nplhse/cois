@@ -10,7 +10,6 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Event\CheckPassportEvent;
 use Symfony\Component\Security\Http\Event\LoginFailureEvent;
-use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 
 class CheckCredentialsUserSubscriber implements EventSubscriberInterface
 {
@@ -41,11 +40,11 @@ class CheckCredentialsUserSubscriber implements EventSubscriberInterface
     /**
      * @return void
      */
-    public function onLoginFailure(LoginSuccessEvent $event)
+    public function onLoginFailure(LoginFailureEvent $event)
     {
-        //if (!$event->getException() instanceof AccountCredentialsExpiredException) {
-        //    return;
-        //}
+        if (!$event->getException() instanceof AccountCredentialsExpiredException) {
+            return;
+        }
 
         $response = new RedirectResponse(
             $this->router->generate('app_reset_credentials')

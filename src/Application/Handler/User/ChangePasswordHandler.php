@@ -3,14 +3,14 @@
 namespace App\Application\Handler\User;
 
 use App\Application\Contract\HandlerInterface;
-use App\Domain\Command\User\ResetCredentialsCommand;
-use App\Domain\Event\User\UserResetCredentialsEvent;
+use App\Domain\Command\User\ChangePasswordCommand;
+use App\Domain\Event\User\UserChangedPasswordEvent;
 use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class ResetCredentialsHandler implements HandlerInterface
+class ChangePasswordHandler implements HandlerInterface
 {
     private UserRepositoryInterface $userRepository;
 
@@ -26,7 +26,7 @@ class ResetCredentialsHandler implements HandlerInterface
         $this->dispatcher = $dispatcher;
     }
 
-    public function __invoke(ResetCredentialsCommand $command): void
+    public function __invoke(ChangePasswordCommand $command): void
     {
         /** @var User $user */
         $user = $this->userRepository->findOneById($command->getId());
@@ -37,7 +37,7 @@ class ResetCredentialsHandler implements HandlerInterface
 
         $this->userRepository->save();
 
-        $event = new UserResetCredentialsEvent($user->getId());
-        $this->dispatcher->dispatch($event, UserResetCredentialsEvent::NAME);
+        $event = new UserChangedPasswordEvent($user->getId());
+        $this->dispatcher->dispatch($event, UserChangedPasswordEvent::NAME);
     }
 }
