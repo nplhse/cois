@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\User;
 
+use App\Domain\Command\User\RegisterUserCommand;
+use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
-use App\Form\RegistrationFormType;
+use App\Form\User\RegistrationFormType;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use App\Security\LoginFormAuthenticator;
 use App\Service\AdminNotificationService;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mime\Address;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
@@ -28,42 +29,37 @@ class RegistrationController extends AbstractController
 
     private EntityManagerInterface $entityManager;
 
-    public function __construct(EmailVerifier $emailVerifier, AdminNotificationService $adminNotifier, EntityManagerInterface $entityManager)
+    private MessageBusInterface $messageBus;
+
+    public function __construct(EmailVerifier $emailVerifier, AdminNotificationService $adminNotifier, EntityManagerInterface $entityManager, MessageBusInterface $messageBus)
     {
         $this->emailVerifier = $emailVerifier;
         $this->adminNotifier = $adminNotifier;
         $this->entityManager = $entityManager;
+        $this->messageBus = $messageBus;
     }
 
     #[Route('/', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $passwordEncoder, UserAuthenticatorInterface $userAuthenticator, LoginFormAuthenticator $authenticator): ?Response
+    public function register(Request $request, UserRepositoryInterface $userRepository, UserPasswordHasherInterface $passwordEncoder, UserAuthenticatorInterface $userAuthenticator, LoginFormAuthenticator $authenticator): ?Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $passwordEncoder->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
+            $command = new RegisterUserCommand(
+                $user->getUsername(),
+                $user->getEmail(),
+                $form->get('plainPassword')->getData()
             );
 
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
+            //try {
+            $this->messageBus->dispatch($command);
+            //} catch (HandlerFailedException $e) {
+            //    $this->addFlash('danger', 'Sorry, something went wrong. Please try again later!');
+            //}
 
-            // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('noreply@example.com', 'Collaborative IVENA statistics'))
-                    ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('emails/user/confirmation_email.inky.twig')
-            );
-
-            $this->adminNotifier->sendNewUserNotification($user);
+            $user = $userRepository->findOneByUsername($user->getUsername());
 
             return $userAuthenticator->authenticateUser(
                 $user,

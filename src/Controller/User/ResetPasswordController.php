@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\User;
 
-use App\Entity\User;
+use App\Domain\Repository\UserRepositoryInterface;
 use App\Form\ChangePasswordFormType;
-use App\Form\ResetPasswordRequestFormType;
+use App\Form\User\ResetPasswordRequestFormType;
 use App\Service\MailerService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,17 +22,17 @@ class ResetPasswordController extends AbstractController
 {
     use ResetPasswordControllerTrait;
 
-    private EntityManagerInterface $em;
+    private UserRepositoryInterface $userRepository;
 
     private ResetPasswordHelperInterface  $resetPasswordHelper;
 
     private MailerService $mailer;
 
-    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper, EntityManagerInterface $em, MailerService $mailer)
+    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper, MailerService $mailer, UserRepositoryInterface $userRepository)
     {
         $this->resetPasswordHelper = $resetPasswordHelper;
         $this->mailer = $mailer;
-        $this->em = $em;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -52,7 +51,7 @@ class ResetPasswordController extends AbstractController
             );
         }
 
-        return $this->render('security/reset_password/request.html.twig', [
+        return $this->render('user/reset_password/request.html.twig', [
             'requestForm' => $form->createView(),
         ]);
     }
@@ -68,7 +67,7 @@ class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('app_forgot_password_request');
         }
 
-        return $this->render('security/reset_password/check_email.html.twig', [
+        return $this->render('user/reset_password/check_email.html.twig', [
             'resetToken' => $resetToken,
         ]);
     }
@@ -119,7 +118,7 @@ class ResetPasswordController extends AbstractController
             );
 
             $user->setPassword($encodedPassword);
-            $this->em->flush();
+            $this->userRepository->save();
 
             // The session is cleaned up after the password has been changed.
             $this->cleanSessionAfterReset();
@@ -129,54 +128,16 @@ class ResetPasswordController extends AbstractController
             return $this->redirectToRoute('app_default');
         }
 
-        return $this->render('security/reset_password/reset.html.twig', [
+        return $this->render('user/reset_password/reset.html.twig', [
             'message' => 'Set a new password for your account.',
             'button' => 'Reset password',
             'resetForm' => $form->createView(),
         ]);
     }
 
-    /**
-     * Reset invalid credentials.
-     */
-    #[Route(path: '/reset-credentials', name: 'app_reset_credentials')]
-    public function resetCredentials(Request $request, UserPasswordHasherInterface $passwordEncoder): Response
-    {
-        $user = $this->getUser();
-        // The token is valid; allow the user to change their password.
-        $form = $this->createForm(ChangePasswordFormType::class);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Encode the plain password, and set it.
-            $encodedPassword = $passwordEncoder->hashPassword(
-                $user,
-                $form->get('plainPassword')->getData()
-            );
-
-            $user->setPassword($encodedPassword);
-            $user->setIsCredentialsExpired(false);
-
-            $this->em->flush();
-
-            // The session is cleaned up after the password has been changed.
-            $this->cleanSessionAfterReset();
-
-            $this->addFlash('success', 'Your password has been changed successfully.');
-
-            return $this->redirectToRoute('app_dashboard');
-        }
-
-        return $this->render('security/reset_password/reset.html.twig', [
-            'message' => 'You have to set a new password for your account.',
-            'button' => 'Save new password',
-            'resetForm' => $form->createView(),
-        ]);
-    }
-
     private function processSendingPasswordResetEmail(string $emailFormData, MailerInterface $mailer): RedirectResponse
     {
-        $user = $this->em->getRepository(User::class)->findOneBy([
+        $user = $this->userRepository->findOneBy([
             'email' => $emailFormData,
         ]);
 

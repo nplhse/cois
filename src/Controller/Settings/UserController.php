@@ -50,7 +50,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/new', name: 'app_settings_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, UserRepository $userRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
@@ -62,9 +62,7 @@ class UserController extends AbstractController
             $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPlainPassword()));
             $user->eraseCredentials();
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $userRepository->add($user);
 
             return $this->redirectToRoute('app_settings_user_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -86,7 +84,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_settings_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
@@ -99,9 +97,7 @@ class UserController extends AbstractController
                 $user->eraseCredentials();
             }
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $userRepository->save();
 
             return $this->redirectToRoute('app_settings_user_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -113,16 +109,14 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_settings_user_delete', methods: ['POST'])]
-    public function delete(Request $request, User $user): Response
+    public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         $CsrfToken = $request->request->get('_token');
 
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $CsrfToken)) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
+            $userRepository->delete($user);
         }
 
         return $this->redirectToRoute('app_settings_user_index', [], Response::HTTP_SEE_OTHER);
@@ -140,6 +134,7 @@ class UserController extends AbstractController
         return $this->redirectToRoute('app_settings_user_show', ['id' => $user->getId()]);
     }
 
+    // Todo: REMOVE AFTER REFACTORING
     #[Route('/{id}/toggle', name: 'app_settings_user_toggle')]
     public function toggleOption(User $user): Response
     {

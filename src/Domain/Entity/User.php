@@ -14,15 +14,21 @@ class User implements UserInterface, TimestampableInterface, \Stringable
     use IdentifierTrait;
     use TimestampableTrait;
 
-    private string $username;
+    protected string $username;
 
-    private string $email;
+    protected string $email;
 
-    private array $roles;
+    protected array $roles;
 
-    private bool $isVerified = false;
+    protected string $password;
 
-    private bool $isParticipant = false;
+    protected ?string $plainPassword = null;
+
+    protected bool $isVerified = false;
+
+    protected bool $isParticipant = false;
+
+    protected bool $hasCredentialsExpired = false;
 
     public function __construct()
     {
@@ -99,6 +105,43 @@ class User implements UserInterface, TimestampableInterface, \Stringable
         return array_unique($roles);
     }
 
+    public function setPassword(string $password): UserInterface
+    {
+        $this->password = $password;
+        $this->hasCredentialsExpired = false;
+
+        return $this;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPlainPassword(?string $plainPassword): UserInterface
+    {
+        if (null !== $plainPassword) {
+            $this->plainPassword = $plainPassword;
+            $this->password = '';
+
+            return $this;
+        }
+
+        $this->plainPassword = null;
+
+        return $this;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function eraseCredentials(): void
+    {
+        $this->plainPassword = null;
+    }
+
     public function isVerified(): bool
     {
         return $this->isVerified;
@@ -133,6 +176,18 @@ class User implements UserInterface, TimestampableInterface, \Stringable
     public function disableParticipation(): UserInterface
     {
         $this->isParticipant = false;
+
+        return $this;
+    }
+
+    public function hasCredentialsExpired(): bool
+    {
+        return $this->hasCredentialsExpired;
+    }
+
+    public function expireCredentials(): self
+    {
+        $this->hasCredentialsExpired = true;
 
         return $this;
     }

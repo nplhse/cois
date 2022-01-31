@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Domain\Entity\User as DomainUser;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -11,101 +12,85 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-#[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable
+#[UniqueEntity(fields: ['username'], message: 'Please choose a different username')]
+#[UniqueEntity(fields: ['email'], message: 'Please choose a different email address')]
+class User extends DomainUser implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id = null;
+    protected int $id;
+
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private string $username;
+    protected string $username;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    protected string $email;
+
     /**
      * @ORM\Column(type="json")
      *
      * @var array<string>
      */
-    private array $roles = [];
+    protected array $roles = [];
+
     /**
      * @ORM\Column(type="string")
      */
-    private string $password;
-    private ?string $plainPassword = null;
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $email;
+    protected string $password;
+
+    protected ?string $plainPassword = null;
+
+    // TODO: REMOVE AFTER REFACTORING
     /**
      * @ORM\OneToOne(targetEntity=Hospital::class, mappedBy="owner")
      */
     private ?Hospital $hospital = null;
+
     /**
      * @ORM\Column(type="boolean")
      */
-    private bool $isVerified = false;
+    protected bool $isVerified = false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected bool $isParticipant = false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected bool $hasCredentialsExpired = false;
+
+    // TODO: REMOVE AFTER REFACTORING
     /**
      * @ORM\Column(type="boolean")
      */
     private bool $isCredentialsExpired = false;
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private ?bool $isParticipant = false;
+
+    // TODO: REMOVE AFTER REFACTORING
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private ?bool $allowsEmail = null;
+
+    // TODO: REMOVE AFTER REFACTORING
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private ?bool $allowsEmailReminder = null;
+
+    // TODO: REMOVE AFTER REFACTORING
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private ?bool $toggleAllocSidebar = null;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    public function getUserIdentifier(): string
-    {
-        return $this->username;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }
 
     /**
      * @param array<string> $roles
@@ -119,51 +104,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    public function getPlainPassword(): ?string
-    {
-        return $this->plainPassword;
-    }
-
-    public function setPlainPassword(?string $plainPassword): self
-    {
-        $this->plainPassword = $plainPassword;
-        $this->password = '';
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
+    // TODO: REMOVE AFTER REFACTORING
     public function getHospital(): ?Hospital
     {
         return $this->hospital;
     }
 
+    // TODO: REMOVE AFTER REFACTORING
     public function setHospital(Hospital $hospital): self
     {
         // set the owning side of the relation if necessary
@@ -176,11 +123,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         return $this;
     }
 
+    // TODO: REMOVE AFTER REFACTORING
     public function getIsVerified(): ?bool
     {
         return $this->isVerified;
     }
 
+    // TODO: REMOVE AFTER REFACTORING
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
@@ -188,11 +137,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         return $this;
     }
 
+    // TODO: REMOVE AFTER REFACTORING
     public function getIsCredentialsExpired(): ?bool
     {
         return $this->isCredentialsExpired;
     }
 
+    // TODO: REMOVE AFTER REFACTORING
     public function setIsCredentialsExpired(bool $isCredentialsExpired): self
     {
         $this->isCredentialsExpired = $isCredentialsExpired;
@@ -211,29 +162,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         return null;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials(): void
-    {
-        $this->plainPassword = null;
-    }
-
-    public function __toString(): string
-    {
-        return $this->getUsername();
-    }
-
-    public function isVerified(): bool
-    {
-        return $this->isVerified;
-    }
-
+    // TODO: REMOVE AFTER REFACTORING
     public function getIsParticipant(): ?bool
     {
         return $this->isParticipant;
     }
 
+    // TODO: REMOVE AFTER REFACTORING
     public function setIsParticipant(?bool $isParticipant): self
     {
         $this->isParticipant = $isParticipant;
@@ -241,6 +176,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         return $this;
     }
 
+    // TODO: REMOVE AFTER REFACTORING
     public function canImport(): bool
     {
         if ($this->hospital) {
@@ -250,11 +186,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         return false;
     }
 
+    // TODO: REMOVE AFTER REFACTORING
     public function getAllowsEmail(): ?bool
     {
         return $this->allowsEmail;
     }
 
+    // TODO: REMOVE AFTER REFACTORING
     public function setAllowsEmail(?bool $allowsEmail): self
     {
         $this->allowsEmail = $allowsEmail;
@@ -262,11 +200,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         return $this;
     }
 
+    // TODO: REMOVE AFTER REFACTORING
     public function getAllowsEmailReminder(): ?bool
     {
         return $this->allowsEmailReminder;
     }
 
+    // TODO: REMOVE AFTER REFACTORING
     public function setAllowsEmailReminder(?bool $allowsEmailReminder): self
     {
         $this->allowsEmailReminder = $allowsEmailReminder;
@@ -274,11 +214,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         return $this;
     }
 
+    // TODO: REMOVE AFTER REFACTORING
     public function getToggleAllocSidebar(): ?bool
     {
         return $this->toggleAllocSidebar;
     }
 
+    // TODO: REMOVE AFTER REFACTORING
     public function setToggleAllocSidebar(?bool $toggleAllocSidebar): self
     {
         $this->toggleAllocSidebar = $toggleAllocSidebar;
@@ -286,6 +228,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         return $this;
     }
 
+    // TODO: REMOVE AFTER REFACTORING
     public function switchAllocSidebar(): self
     {
         if ($this->toggleAllocSidebar) {

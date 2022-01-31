@@ -77,11 +77,10 @@ class SecurityController extends AbstractController
         try {
             $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
 
-            $user->setIsVerified(true);
+            $user->verify();
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $userRepository->persist($user);
+            $userRepository->flush();
         } catch (VerifyEmailExceptionInterface) {
             $this->addFlash('danger', $translator->trans('Your E-Mail address could not be verified.'));
 
