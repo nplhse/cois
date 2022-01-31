@@ -8,6 +8,7 @@ use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
 use App\Service\AdminNotificationService;
 use App\Service\RequestParamService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,10 +22,13 @@ class HospitalController extends AbstractController
 
     private Security $security;
 
-    public function __construct(AdminNotificationService $adminNotifier, Security $security)
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(AdminNotificationService $adminNotifier, Security $security, EntityManagerInterface $entityManager)
     {
         $this->adminNotifier = $adminNotifier;
         $this->security = $security;
+        $this->entityManager = $entityManager;
     }
 
     #[Route('/', name: 'app_hospital_index')]
@@ -80,9 +84,8 @@ class HospitalController extends AbstractController
             $hospital->setUpdatedAt(new \DateTime('NOW'));
             $hospital->setOwner($this->getUser());
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($hospital);
-            $entityManager->flush();
+            $this->entityManager->persist($hospital);
+            $this->entityManager->flush();
 
             $this->addFlash('success', 'Your hospital was successfully created.');
 
@@ -108,7 +111,7 @@ class HospitalController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $hospital->setUpdatedAt(new \DateTime('NOW'));
 
-            $this->getDoctrine()->getManager()->flush();
+            $this->entityManager->flush();
 
             $this->addFlash('success', 'Hospital was successfully edited.');
 
