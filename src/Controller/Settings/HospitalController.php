@@ -6,6 +6,7 @@ use App\Entity\Hospital;
 use App\Form\HospitalType;
 use App\Repository\HospitalRepository;
 use App\Service\RequestParamService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,13 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/settings/hospital')]
 class HospitalController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     #[Route('/', name: 'app_settings_hospital_index', methods: ['GET'])]
     public function index(Request $request, HospitalRepository $hospitalRepository): Response
     {
@@ -54,9 +62,8 @@ class HospitalController extends AbstractController
             $hospital->setCreatedAt(new \DateTime('NOW'));
             $hospital->setUpdatedAt(new \DateTime('NOW'));
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($hospital);
-            $entityManager->flush();
+            $this->entityManager->persist($hospital);
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('app_settings_hospital_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -86,7 +93,7 @@ class HospitalController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('app_settings_hospital_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -105,9 +112,8 @@ class HospitalController extends AbstractController
         $CsrfToken = $request->request->get('_token');
 
         if ($this->isCsrfTokenValid('delete'.$hospital->getId(), $CsrfToken)) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($hospital);
-            $entityManager->flush();
+            $this->entityManager->remove($hospital);
+            $this->entityManager->flush();
         }
 
         return $this->redirectToRoute('app_settings_hospital_index', [], Response::HTTP_SEE_OTHER);

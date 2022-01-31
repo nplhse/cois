@@ -7,6 +7,7 @@ use App\Form\AllocationType;
 use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
 use App\Service\RequestParamService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,13 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/settings/allocation')]
 class AllocationController extends AbstractController
 {
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     #[Route('/', name: 'app_settings_allocation_index', methods: ['GET'])]
     public function index(Request $request, AllocationRepository $allocationRepository, HospitalRepository $hospitalRepository): Response
     {
@@ -64,7 +72,7 @@ class AllocationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('app_settings_allocation_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -83,9 +91,8 @@ class AllocationController extends AbstractController
         $CsrfToken = $request->request->get('_token');
 
         if ($this->isCsrfTokenValid('delete'.$allocation->getId(), $CsrfToken)) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($allocation);
-            $entityManager->flush();
+            $this->entityManager->remove($allocation);
+            $this->entityManager->flush();
         }
 
         return $this->redirectToRoute('app_settings_allocation_index', [], Response::HTTP_SEE_OTHER);

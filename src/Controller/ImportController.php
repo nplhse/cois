@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -29,9 +30,15 @@ class ImportController extends AbstractController
 {
     private AdminNotificationService $adminNotifier;
 
-    public function __construct(AdminNotificationService $adminNotifier)
+    private EntityManagerInterface $entityManager;
+
+    private MessageBusInterface $messageBus;
+
+    public function __construct(AdminNotificationService $adminNotifier, EntityManagerInterface $entityManager, MessageBusInterface $messageBus)
     {
         $this->adminNotifier = $adminNotifier;
+        $this->entityManager = $entityManager;
+        $this->messageBus = $messageBus;
     }
 
     #[Route(path: '/', name: 'app_import_index')]
@@ -96,12 +103,11 @@ class ImportController extends AbstractController
 
             $import->setStatus('pending');
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($import);
-            $entityManager->flush();
+            $this->entityManager->persist($import);
+            $this->entityManager->flush();
 
             try {
-                $this->dispatchMessage(new ImportDataMessage($import, $hospital));
+                $this->messageBus->dispatch(new ImportDataMessage($import, $hospital));
 
                 $this->addFlash('success', 'Your import was successfully created.');
             } catch (HandlerFailedException $e) {
@@ -109,9 +115,8 @@ class ImportController extends AbstractController
                 $import->setLastError($e->getMessage());
                 $import->setLastRun(new \DateTime('NOW'));
 
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($import);
-                $entityManager->flush();
+                $this->entityManager->persist($import);
+                $this->entityManager->flush();
 
                 $this->addFlash('danger', 'Your import failed, see details for more information. We have send a notification to the admin to handle this issue.');
 
@@ -135,9 +140,8 @@ class ImportController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($import);
-            $entityManager->flush();
+            $this->entityManager->persist($import);
+            $this->entityManager->flush();
 
             $this->addFlash('success', 'Your import was successfully updated.');
 
