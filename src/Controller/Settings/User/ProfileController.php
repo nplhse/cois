@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Controller\Settings;
+namespace App\Controller\Settings\User;
 
+use App\Domain\Repository\UserRepositoryInterface;
 use App\Form\ProfileChangeType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,6 +16,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ProfileController extends AbstractController
 {
+    private UserRepositoryInterface $userRepository;
+
+    public function __construct(UserRepositoryInterface $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     #[Route('/settings/profile', name: 'app_settings_profile', )]
     public function profile(Request $request, TranslatorInterface $translator): Response
     {
@@ -30,9 +38,7 @@ class ProfileController extends AbstractController
                 $user->setUsername($data['username']);
             }
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $this->userRepository->save();
 
             $this->addFlash('success', $translator->trans('msg.user.profile.updated'));
 

@@ -29,7 +29,7 @@ class AdminNotificationService
         $this->mailerSender = $mailerSender;
         $this->mailerFrom = $mailerFrom;
 
-        $this->admins = $this->userRepository->getAdmins();
+        $this->admins = $this->userRepository->findAdmins();
     }
 
     public function sendNewUserNotification(User $context): void

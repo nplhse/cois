@@ -31,7 +31,7 @@ class NotifyAdminSubscriber implements EventSubscriberInterface
     {
         $user = $event->getUser();
 
-        foreach ($this->userRepository->getAdmins() as $admin) {
+        foreach ($this->userRepository->findAdmins() as $admin) {
             $email = (new NotificationEmail())
                 ->from(new Address($this->mailerSender, $this->mailerFrom))
                 ->to(new Address($admin->getEmail()))

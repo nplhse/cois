@@ -2,7 +2,7 @@
 
 namespace App\Tests\Unit\Application\Handler\State;
 
-use App\Application\Handler\State\RegisterUserHandler;
+use App\Application\Handler\State\CreateStateHandler;
 use App\Domain\Command\State\CreateStateCommand;
 use App\Domain\Contracts\StateInterface;
 use App\Domain\Event\State\StateCreated;
@@ -26,7 +26,7 @@ class CreateStateHandlerTest extends TestCase
 
         $command = new CreateStateCommand('Test State');
 
-        $handler = new RegisterUserHandler($stateRepository, $eventDispatcher);
+        $handler = new CreateStateHandler($stateRepository, $eventDispatcher);
         $handler->__invoke($command);
     }
 }

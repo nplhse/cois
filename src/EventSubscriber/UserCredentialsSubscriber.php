@@ -17,7 +17,7 @@ class UserCredentialsSubscriber implements \Symfony\Component\EventDispatcher\Ev
     private array $excludedRoutes = [
         'app_logout',
         'app_logout',
-        'app_validate_credentials',
+        'app_reset_credentials',
     ];
 
     public function __construct(TokenStorageInterface $security, RouterInterface $router)

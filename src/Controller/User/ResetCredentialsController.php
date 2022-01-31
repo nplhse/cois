@@ -2,13 +2,15 @@
 
 namespace App\Controller\User;
 
-use App\Domain\Repository\UserRepositoryInterface;
+use App\Domain\Command\User\ResetCredentialsCommand;
+use App\Domain\Contracts\UserInterface;
 use App\Form\ChangePasswordFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
@@ -18,39 +20,32 @@ class ResetCredentialsController extends AbstractController
 {
     use ResetPasswordControllerTrait;
 
-    private UserRepositoryInterface $userRepository;
+    private MessageBusInterface $messageBus;
 
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(MessageBusInterface $messageBus)
     {
-        $this->userRepository = $userRepository;
+        $this->messageBus = $messageBus;
     }
 
     #[Route(path: '/reset-credentials', name: 'app_reset_credentials')]
     public function resetCredentials(Request $request, UserPasswordHasherInterface $passwordEncoder): Response
     {
-        $user = $this->getUser();
-
-        if (null === $user) {
-            throw new AccessDeniedHttpException('Cannot reset Credentials if not logged in.');
-        }
-
         // The token is valid; allow the user to change their password.
         $form = $this->createForm(ChangePasswordFormType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Encode the plain password, and set it.
-            $encodedPassword = $passwordEncoder->hashPassword(
-                $user,
-                $form->get('plainPassword')->getData()
-            );
+            /** @var UserInterface $user */
+            $user = $this->getUser();
 
-            $user->setPassword($encodedPassword);
+            $command = new ResetCredentialsCommand($user->getId(), $form->get('plainPassword')->getData());
 
-            $this->userRepository->save();
-
-            // The session is cleaned up after the password has been changed.
-            $this->cleanSessionAfterReset();
+            try {
+                $this->messageBus->dispatch($command);
+                $this->cleanSessionAfterReset();
+            } catch (HandlerFailedException) {
+                $this->addFlash('danger', 'Sorry, something went wrong. Please try again later!');
+            }
 
             $this->addFlash('success', 'Your password has been changed successfully.');
 

@@ -3,6 +3,7 @@
 namespace App\Controller\User;
 
 use App\Domain\Repository\UserRepositoryInterface;
+use App\Entity\User;
 use App\Form\ChangePasswordFormType;
 use App\Form\User\ResetPasswordRequestFormType;
 use App\Service\MailerService;
@@ -93,6 +94,7 @@ class ResetPasswordController extends AbstractController
         }
 
         try {
+            /** @var User $user */
             $user = $this->resetPasswordHelper->validateTokenAndFetchUser($token);
         } catch (ResetPasswordExceptionInterface $e) {
             $this->addFlash('reset_password_error', sprintf(
@@ -137,9 +139,8 @@ class ResetPasswordController extends AbstractController
 
     private function processSendingPasswordResetEmail(string $emailFormData, MailerInterface $mailer): RedirectResponse
     {
-        $user = $this->userRepository->findOneBy([
-            'email' => $emailFormData,
-        ]);
+        /** @var ?User $user */
+        $user = $this->userRepository->findOneByEmail($emailFormData);
 
         // Do not reveal whether a user account was found or not.
         if (!$user) {

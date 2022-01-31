@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Settings;
+namespace App\Controller\Settings\User;
 
 use App\Form\EmailChangeType;
 use App\Form\EmailSettingsType;

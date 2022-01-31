@@ -58,22 +58,41 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    public function findOneById(int $id): UserInterface
+    public function findOneById(int $id): ?UserInterface
     {
         $qb = $this->createQueryBuilder('u')
             ->where('u.id = :id')
             ->setParameter('id', $id);
 
-        return $qb->getQuery()->getSingleResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getOneByUsername(string $username): UserInterface
+    public function findOneByUsername(string $username): ?UserInterface
     {
         $qb = $this->createQueryBuilder('u')
             ->where('u.username = :username')
             ->setParameter('username', $username);
 
-        return $qb->getQuery()->getSingleResult();
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function findOneByEmail(string $email): ?UserInterface
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->where('u.email = :email')
+            ->setParameter('email', $email);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function findAdmins(): array
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->where('u.roles LIKE :role')
+            ->setParameter('role', '%ROLE_ADMIN%')
+            ->orderBy('u.id', 'ASC');
+
+        return $qb->getQuery()->execute();
     }
 
     public function countUsers(): string
@@ -111,18 +130,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $qb = $this->createQueryBuilder('u')
             ->leftJoin('u.hospital', 'h')
             ->where('h.owner is NOT NULL')
-            ->orderBy('u.id', 'ASC')
-            ->getQuery()
-            ->execute();
-
-        return $qb;
-    }
-
-    public function getAdmins(): array
-    {
-        $qb = $this->createQueryBuilder('u')
-            ->where('u.roles LIKE :role')
-            ->setParameter('role', '%ROLE_ADMIN%')
             ->orderBy('u.id', 'ASC')
             ->getQuery()
             ->execute();

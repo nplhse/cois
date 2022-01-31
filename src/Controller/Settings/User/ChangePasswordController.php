@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Settings;
+namespace App\Controller\Settings\User;
 
 use App\Form\ChangePasswordType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
