@@ -6,10 +6,14 @@ use App\Entity\User;
 use App\Form\User\UserCreateType;
 use App\Form\User\UserType;
 use App\Repository\UserRepository;
+use App\Service\Filters\OrderFilter;
+use App\Service\Filters\PageFilter;
+use App\Service\Filters\SearchFilter;
+use App\Service\FilterService;
 use App\Service\MailerService;
-use App\Service\RequestParamService;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Service\PaginationFactory;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,45 +25,38 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/settings/user')]
 class UserController extends AbstractController
 {
-    private \Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface $passwordHasher;
-
-    private MailerService $mailer;
+    private UserPasswordHasherInterface $passwordHasher;
 
     private EntityManagerInterface $entityManager;
 
-    public function __construct(UserPasswordHasherInterface $passwordHasher, MailerService $mailer, EntityManagerInterface $entityManager)
+    private FilterService $filterService;
+
+    public function __construct(FilterService $filterService, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager)
     {
         $this->passwordHasher = $passwordHasher;
-        $this->mailer = $mailer;
         $this->entityManager = $entityManager;
+        $this->filterService = $filterService;
     }
 
     #[Route('/', name: 'app_settings_user_index', methods: ['GET'])]
     public function index(Request $request, UserRepository $userRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->filterService->setRequest($request);
+        $this->filterService->configureFilters([PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
 
-        $paramService = new RequestParamService($request);
-
-        $filters = [];
-        $filters['search'] = $paramService->getSearch();
-        $filters['page'] = $paramService->getPage();
-
-        $paginator = $userRepository->getUserPaginator($paramService->getPage(), $filters);
+        $paginator = $userRepository->getUserPaginator($this->filterService);
 
         return $this->render('settings/user/index.html.twig', [
+            'filters' => $this->filterService->getFilterDto(),
+            'search' => $this->filterService->getValue(SearchFilter::Param),
             'users' => $paginator,
-            'search' => $filters['search'],
-            'filters' => $filters,
-            'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), UserRepository::PAGINATOR_PER_PAGE),
+            'pages' => PaginationFactory::create($this->filterService->getValue(PageFilter::Param), count($paginator), UserRepository::PER_PAGE),
         ]);
     }
 
     #[Route('/new', name: 'app_settings_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $user = new User();
         $form = $this->createForm(UserCreateType::class, $user);
         $form->handleRequest($request);
@@ -82,8 +79,6 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'app_settings_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         return $this->render('settings/user/show.html.twig', [
             'user' => $user,
         ]);
@@ -92,8 +87,6 @@ class UserController extends AbstractController
     #[Route('/{id}/edit', name: 'app_settings_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -119,8 +112,6 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'app_settings_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $CsrfToken = $request->request->get('_token');
 
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $CsrfToken)) {
@@ -131,11 +122,14 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/welcome', name: 'app_settings_user_welcome')]
-    public function sendWelcomeEmail(User $user): Response
+    public function sendWelcomeEmail(User $user, MailerService $mailer): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
-        $this->mailer->sendWelcomeEmail($user);
+        try {
+            $mailer->sendWelcomeEmail($user);
+        } catch (\Exception $e) {
+            $this->addFlash('danger', 'Could not send welcome E-Mail to '.$user->getUsername().'.');
+            return $this->redirectToRoute('app_settings_user_show', ['id' => $user->getId()]);
+        }
 
         $this->addFlash('success', 'Welcome E-Mail was successfully sent to '.$user->getUsername().'.');
 
@@ -146,8 +140,6 @@ class UserController extends AbstractController
     #[Route('/{id}/toggle', name: 'app_settings_user_toggle')]
     public function toggleOption(User $user): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
-
         return new JsonResponse([]);
     }
 }

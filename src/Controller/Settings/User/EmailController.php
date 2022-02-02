@@ -20,23 +20,13 @@ use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 #[IsGranted('ROLE_USER')]
 class EmailController extends AbstractController
 {
-    private UserRepositoryInterface $userRepository;
-
     private MessageBusInterface $messageBus;
-
-    private MailerService $mailer;
-
-    private VerifyEmailHelperInterface $verifyEmailHelper;
 
     private TranslatorInterface $translator;
 
-    public function __construct(UserRepositoryInterface $userRepository, MessageBusInterface $messageBus, MailerService $mailer, VerifyEmailHelperInterface $verifyEmailHelper, TranslatorInterface $translator)
+    public function __construct(MessageBusInterface $messageBus, TranslatorInterface $translator)
     {
-        $this->userRepository = $userRepository;
         $this->messageBus = $messageBus;
-
-        $this->mailer = $mailer;
-        $this->verifyEmailHelper = $verifyEmailHelper;
         $this->translator = $translator;
     }
 
