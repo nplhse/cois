@@ -4,6 +4,7 @@ namespace App\Form\User;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -34,11 +35,16 @@ class UserType extends AbstractType
                 'first_options' => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
                 'required' => false,
-            ])
-            ->add('isCredentialsExpired')
-            ->add('isVerified')
-            ->add('isParticipant')
-        ;
+            ]);
+
+        if ($options['creation']) {
+            $builder
+                ->add('hasCredentialsExpired', CheckboxType::class, [
+                    'mapped' => false,
+                ])
+                ->add('isVerified')
+                ->add('isParticipant');
+        }
     }
 
     /**
@@ -49,6 +55,7 @@ class UserType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             'validation' => ['Default'],
+            'creation' => false,
         ]);
     }
 }

@@ -3,9 +3,10 @@
 namespace App\Service;
 
 use App\Application\Contract\FilterInterface;
+use App\Application\Exception\FilterDoesNotSupportForms;
 use App\Application\Exception\FilterMissingArgumentException;
-use App\DataTransferObjects\FilterDto;
 use App\Application\Exception\FilterNotFoundException;
+use App\DataTransferObjects\FilterDto;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -15,7 +16,7 @@ class FilterService
 
     private Request $request;
 
-    /** @var iterable|array<FilterInterface>  */
+    /** @var iterable|array<FilterInterface> */
     private iterable $filters;
 
     private array $availableFilters;
@@ -49,6 +50,19 @@ class FilterService
         }
 
         return null;
+    }
+
+    public function buildForm(string $filter, array $arguments): mixed
+    {
+        if (!in_array($filter, $this->availableFilters, true)) {
+            throw new FilterNotFoundException('Could not find filter: '.$filter);
+        }
+
+        if (!$this->filters[$filter]->supportsForm()) {
+            throw new FilterDoesNotSupportForms('Filter '.$filter.' does not support building forms.');
+        }
+
+        return $this->filters[$filter]->buildForm($arguments);
     }
 
     public function processQuery(QueryBuilder $qb, array $arguments): mixed

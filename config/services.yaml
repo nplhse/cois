@@ -24,7 +24,7 @@ services:
             tags: ["messenger.message_handler"]
 
         App\Application\Contract\FilterInterface:
-            tags: [ "app.filters" ]
+            tags: ["app.filters"]
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -49,4 +49,7 @@ services:
     App\Service\FilterService:
         class: 'App\Service\FilterService'
         arguments:
-            - !tagged_iterator { tag: 'app.filters', default_index_method: 'getParam' }
+            - !tagged_iterator {
+                  tag: "app.filters",
+                  default_index_method: "getParam",
+              }

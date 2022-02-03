@@ -26,7 +26,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 {
     public const PER_PAGE = 10;
 
-    public const DEFAULT_ORDER = 'asc';
+    public const DEFAULT_ORDER = 'desc';
 
     public const DEFAULT_SORT = 'id';
 

@@ -56,6 +56,41 @@
                 }}
             </p>
 
+            <div class="card mb-3">
+                <div class="card-header">
+                    <a data-toggle="collapse"
+                        href="#collapse-example"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapse-example"
+                        aria-expanded="false"
+                        class="collapsible d-block">
+                        <i class="bi bi-chevron-bar-down float-end collapsed">
+
+                        </i>
+                        {{ 'Filters'|trans({}, 'forms') }}
+                    </a>
+                </div>
+                <div id="collapse-example"
+                    class="collapse"
+                    aria-labelledby="heading-example">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                {{ form_start(sortForm) }}
+
+                                {{ form_row(sortForm.sortBy) }}
+                                {{ form_row(sortForm.orderBy) }}
+
+                                {{ form_end(sortForm) }}
+                            </div>
+                            <div class="col">
+                                {{ form(searchForm) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -78,7 +113,21 @@
                 </thead>
                 <tbody>
                     {% for user in users %}
-                        <tr>
+                        {% set class = '' %}
+
+                        {% if user.hasCredentialsExpired %}
+                            {% set class = 'table-info' %}
+                        {% endif %}
+
+                        {% if user.isParticipant == false %}
+                            {% set class = 'table-warning' %}
+                        {% endif %}
+
+                        {% if user.isVerified == false %}
+                            {% set class = 'table-danger' %}
+                        {% endif %}
+
+                        <tr class="{{ class }}">
                             <td>
                                 {{ user.id }}
                             </td>
@@ -165,7 +214,7 @@
                     }}
                 </div>
                 <div class="col-2">
-                    {{ pagination.goTo('app_hospital_index') }}
+                    {{ pagination.goTo('app_settings_user_index') }}
                 </div>
             </div>
         </div>

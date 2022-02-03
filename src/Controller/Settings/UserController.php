@@ -2,8 +2,9 @@
 
 namespace App\Controller\Settings;
 
+use App\Domain\Command\User\CreateUserCommand;
+use App\Domain\Command\User\EditUserCommand;
 use App\Entity\User;
-use App\Form\User\UserCreateType;
 use App\Form\User\UserType;
 use App\Repository\UserRepository;
 use App\Service\Filters\OrderFilter;
@@ -12,30 +13,27 @@ use App\Service\Filters\SearchFilter;
 use App\Service\FilterService;
 use App\Service\MailerService;
 use App\Service\PaginationFactory;
-use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[IsGranted('ROLE_ADMIN')]
 #[Route('/settings/user')]
 class UserController extends AbstractController
 {
-    private UserPasswordHasherInterface $passwordHasher;
-
-    private EntityManagerInterface $entityManager;
-
     private FilterService $filterService;
 
-    public function __construct(FilterService $filterService, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager)
+    private MessageBusInterface $messageBus;
+
+    public function __construct(FilterService $filterService, MessageBusInterface $messageBus)
     {
-        $this->passwordHasher = $passwordHasher;
-        $this->entityManager = $entityManager;
         $this->filterService = $filterService;
+        $this->messageBus = $messageBus;
     }
 
     #[Route('/', name: 'app_settings_user_index', methods: ['GET'])]
@@ -46,9 +44,33 @@ class UserController extends AbstractController
 
         $paginator = $userRepository->getUserPaginator($this->filterService);
 
-        return $this->render('settings/user/index.html.twig', [
+        $sortArguments = [
+            'action' => $this->generateUrl('app_settings_user_index'),
+            'method' => 'GET',
+            'sortable' => UserRepository::SORTABLE,
+            'hidden' => [
+                SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
+            ],
+        ];
+
+        $sortForm = $this->filterService->buildForm(OrderFilter::Param, $sortArguments);
+        $sortForm->handleRequest($request);
+
+        $searchArguments = [
+            'action' => $this->generateUrl('app_settings_user_index'),
+            'method' => 'GET',
+            'hidden' => [
+                OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
+            ],
+        ];
+
+        $searchForm = $this->filterService->buildForm(SearchFilter::Param, $searchArguments);
+        $searchForm->handleRequest($request);
+
+        return $this->renderForm('settings/user/index.html.twig', [
             'filters' => $this->filterService->getFilterDto(),
-            'search' => $this->filterService->getValue(SearchFilter::Param),
+            'sortForm' => $sortForm,
+            'searchForm' => $searchForm,
             'users' => $paginator,
             'pages' => PaginationFactory::create($this->filterService->getValue(PageFilter::Param), count($paginator), UserRepository::PER_PAGE),
         ]);
@@ -58,16 +80,36 @@ class UserController extends AbstractController
     public function new(Request $request, UserRepository $userRepository): Response
     {
         $user = new User();
-        $form = $this->createForm(UserCreateType::class, $user);
+        $form = $this->createForm(UserType::class, $user, [
+            'creation' => true,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPlainPassword()));
-            $user->eraseCredentials();
+            $command = new CreateUserCommand(
+                $user->getUsername(),
+                $user->getEmail(),
+                $user->getPlainPassword(),
+                $user->getRoles(),
+                $form->get('hasCredentialsExpired')->getData(),
+                $user->isVerified(),
+                $user->isParticipant()
+            );
 
-            $userRepository->add($user);
+            try {
+                $this->messageBus->dispatch($command);
+            } catch (HandlerFailedException) {
+                $this->addFlash('danger', 'Sorry, something went wrong. Please try again later!');
 
-            return $this->redirectToRoute('app_settings_user_index', [], Response::HTTP_SEE_OTHER);
+                return $this->renderForm('settings/user/new.html.twig', [
+                    'user' => $user,
+                    'form' => $form,
+                ]);
+            }
+
+            $this->addFlash('success', 'New user has been created!');
+
+            return $this->redirectToRoute('app_settings_user_index');
         }
 
         return $this->renderForm('settings/user/new.html.twig', [
@@ -85,22 +127,34 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_settings_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, UserRepository $userRepository): Response
+    public function edit(Request $request, User $user): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($user->getPlainPassword()) {
-                $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPlainPassword()));
-                $user->eraseCredentials();
+            $command = new EditUserCommand(
+                $user->getId(),
+                $user->getUsername(),
+                $user->getEmail(),
+                $user->getPlainPassword(),
+                $user->getRoles()
+            );
+
+            try {
+                $this->messageBus->dispatch($command);
+            } catch (HandlerFailedException) {
+                $this->addFlash('danger', 'Sorry, something went wrong. Please try again later!');
+
+                return $this->renderForm('settings/user/edit.html.twig', [
+                    'user' => $user,
+                    'form' => $form,
+                ]);
             }
 
-            $userRepository->save();
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
+            $this->addFlash('success', 'New user has been created!');
 
-            return $this->redirectToRoute('app_settings_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_settings_user_show', ['id' => $user->getId()]);
         }
 
         return $this->renderForm('settings/user/edit.html.twig', [
@@ -126,8 +180,9 @@ class UserController extends AbstractController
     {
         try {
             $mailer->sendWelcomeEmail($user);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             $this->addFlash('danger', 'Could not send welcome E-Mail to '.$user->getUsername().'.');
+
             return $this->redirectToRoute('app_settings_user_show', ['id' => $user->getId()]);
         }
 

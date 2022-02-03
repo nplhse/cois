@@ -3,9 +3,14 @@
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
+use App\Form\OrderType;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class OrderFilter implements FilterInterface
@@ -21,6 +26,13 @@ class OrderFilter implements FilterInterface
     public const DEFAULT_SORT = 'default_sort';
 
     public const SORTABLE = 'sortable';
+
+    private FormFactoryInterface $formFactory;
+
+    public function __construct(FormFactoryInterface $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
 
     public function getValue(Request $request): mixed
     {
@@ -43,6 +55,37 @@ class OrderFilter implements FilterInterface
         }
 
         return $this->setCacheValue($value);
+    }
+
+    public function supportsForm(): bool
+    {
+        return true;
+    }
+
+    public function buildForm(array $arguments): FormInterface
+    {
+        $form = $this->formFactory->create(OrderType::class, null, [
+            'action' => $arguments['action'],
+            'method' => $arguments['method'],
+        ]);
+
+        $orderChoices = [];
+
+        foreach ($arguments['sortable'] as $key => $value) {
+            $orderChoices[ucfirst($value)] = $value;
+        }
+
+        $form->add('sortBy', ChoiceType::class, [
+            'choices' => $orderChoices,
+        ]);
+
+        if ($arguments['hidden'][SearchFilter::Param]) {
+            $form->add('search', HiddenType::class, [
+                'data' => $arguments['hidden'][SearchFilter::Param],
+            ]);
+        }
+
+        return $form;
     }
 
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder

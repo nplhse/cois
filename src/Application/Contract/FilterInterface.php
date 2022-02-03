@@ -13,5 +13,7 @@ interface FilterInterface
 
     public function getValue(Request $request): mixed;
 
+    public function supportsForm(): bool;
+
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder;
 }
