@@ -107,27 +107,13 @@
                             {{ 'Hospital'|trans({}, 'forms') }}
                         </th>
                         <th style="width: 10%">
-                            {{ 'Actions'|trans({}, 'forms') }}
+                            {{ 'Attributes'|trans({}, 'forms') }}
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for user in users %}
-                        {% set class = '' %}
-
-                        {% if user.hasCredentialsExpired %}
-                            {% set class = 'table-info' %}
-                        {% endif %}
-
-                        {% if user.isParticipant == false %}
-                            {% set class = 'table-warning' %}
-                        {% endif %}
-
-                        {% if user.isVerified == false %}
-                            {% set class = 'table-danger' %}
-                        {% endif %}
-
-                        <tr class="{{ class }}">
+                        <tr>
                             <td>
                                 {{ user.id }}
                             </td>
@@ -169,17 +155,36 @@
                                 {% endif %}
                             </td>
                             <td>
-                                <a class="btn btn-outline-primary"
-                                    href="{{
-                                    path(
-                                        'app_settings_user_edit',
-                                        {
-                                            id: user.id
-                                        }
-                                    )
-                                    }}">
-                                    {{ 'Edit'|trans({}, 'forms') }}
-                                </a>
+                                {% if user.hasCredentialsExpired %}
+                                    <i class="bi bi-dash-circle-fill text-warning"
+                                        title="{{ 'Credentials are Expired'|trans }}">
+
+                                    </i>
+                                {% endif %}
+
+                                {% if user.isVerified == true %}
+                                    <i class="bi bi-check-circle-fill text-success"
+                                        title="{{ 'User is verified'|trans }}">
+
+                                    </i>
+                                {% else %}
+                                    <i class="bi bi-x-circle-fill text-danger"
+                                        title="{{ 'User is not verified'|trans }}">
+
+                                    </i>
+                                {% endif %}
+
+                                {% if user.isParticipant == true %}
+                                    <i class="bi bi-unlock-fill text-success"
+                                        title="{{ 'User is participant'|trans }}">
+
+                                    </i>
+                                {% else %}
+                                    <i class="bi bi-lock-fill text-danger"
+                                        title="{{ 'User no participant'|trans }}">
+
+                                    </i>
+                                {% endif %}
                             </td>
                         </tr>
                     {% else %}

@@ -4,6 +4,7 @@ namespace App\Controller\Settings;
 
 use App\Domain\Command\User\CreateUserCommand;
 use App\Domain\Command\User\EditUserCommand;
+use App\Domain\Command\User\PromoteUserCommand;
 use App\Entity\User;
 use App\Form\User\UserType;
 use App\Repository\UserRepository;
@@ -173,6 +174,43 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('app_settings_user_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/promote/{action}', name: 'app_settings_user_verify')]
+    public function promote(User $user, string $action): Response
+    {
+        if ('verify' === $action) {
+            $isVerified = true;
+            $isParticipant = $user->isParticipant();
+        } elseif ('unverify' === $action) {
+            $isVerified = false;
+            $isParticipant = $user->isParticipant();
+        } elseif ('enable' === $action) {
+            $isVerified = $user->isVerified();
+            $isParticipant = true;
+        } elseif ('disable' === $action) {
+            $isVerified = $user->isVerified();
+            $isParticipant = false;
+        } else {
+            $isVerified = $user->isVerified();
+            $isParticipant = $user->isParticipant();
+        }
+
+        $command = new PromoteUserCommand(
+            $user->getId(),
+            $isVerified,
+            $isParticipant
+        );
+
+        try {
+            $this->messageBus->dispatch($command);
+        } catch (HandlerFailedException) {
+            $this->addFlash('danger', 'Sorry, something went wrong. Please try again later!');
+        }
+
+        $this->addFlash('success', 'User has been promoted.');
+
+        return $this->redirectToRoute('app_settings_user_show', ['id' => $user->getId()]);
     }
 
     #[Route('/{id}/welcome', name: 'app_settings_user_welcome')]

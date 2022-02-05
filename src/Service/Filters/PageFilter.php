@@ -5,6 +5,7 @@ namespace App\Service\Filters;
 use App\Application\Contract\FilterInterface;
 use App\Service\Filters\Traits\FilterTrait;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class PageFilter implements FilterInterface
@@ -31,6 +32,11 @@ class PageFilter implements FilterInterface
     public function supportsForm(): bool
     {
         return false;
+    }
+
+    public function buildForm(array $arguments): ?FormInterface
+    {
+        return null;
     }
 
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder

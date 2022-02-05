@@ -585,6 +585,22 @@
         <source>Delete SupplyArea</source>
         <target>Versorgungsgebiet löschen</target>
       </trans-unit>
+      <trans-unit id="YbGNicV" resname="Unverify User">
+        <source>Unverify User</source>
+        <target>Benutzer entverifizieren</target>
+      </trans-unit>
+      <trans-unit id="FImuI9J" resname="Verify User">
+        <source>Verify User</source>
+        <target>Benutzer verifizieren</target>
+      </trans-unit>
+      <trans-unit id="M7VsZrP" resname="Disable Participation">
+        <source>Disable Participation</source>
+        <target>Teilnahme deaktivieren</target>
+      </trans-unit>
+      <trans-unit id="0Tnultq" resname="Enable Participation">
+        <source>Enable Participation</source>
+        <target>Teilnahme aktivieren</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

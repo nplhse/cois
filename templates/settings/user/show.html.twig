@@ -198,9 +198,86 @@
                                     }
                                 )
                                 }}">
+                                <i class="bi bi-send"></i>
                                 {{ 'Send Welcome E-Mail'|trans({}, 'forms') }}
                             </a>
-                            <a class="btn btn-secondary"
+                            {% if user.isVerified == true %}
+                                <a class="btn btn-danger"
+                                    href="{{
+                                    path(
+                                        'app_settings_user_verify',
+                                        {
+                                            id: user.id,
+                                            action: 'unverify'
+                                        }
+                                    )
+                                    }}">
+                                    <i class="bi bi-x-circle-fill"></i>
+                                    {{ 'Unverify User'|trans({}, 'forms') }}
+                                </a>
+                            {% else %}
+                                <a class="btn btn-success"
+                                    href="{{
+                                    path(
+                                        'app_settings_user_verify',
+                                        {
+                                            id: user.id,
+                                            action: 'verify'
+                                        }
+                                    )
+                                    }}">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    {{ 'Verify User'|trans({}, 'forms') }}
+                                </a>
+                            {% endif %}
+
+                            {% if user.isParticipant == true %}
+                                <a class="btn btn-danger"
+                                    href="{{
+                                    path(
+                                        'app_settings_user_verify',
+                                        {
+                                            id: user.id,
+                                            action: 'disable'
+                                        }
+                                    )
+                                    }}">
+                                    <i class="bi bi-lock-fill"></i>
+                                    {{
+                                        'Disable Participation'|trans(
+                                            {},
+                                            'forms'
+                                        )
+                                    }}
+                                </a>
+                            {% else %}
+                                <a class="btn btn-success"
+                                    href="{{
+                                    path(
+                                        'app_settings_user_verify',
+                                        {
+                                            id: user.id,
+                                            action: 'enable'
+                                        }
+                                    )
+                                    }}">
+                                    <i class="bi bi-unlock-fill"></i>
+                                    {{
+                                        'Enable Participation'|trans(
+                                            {},
+                                            'forms'
+                                        )
+                                    }}
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ 'Special'|trans }}
+                        </th>
+                        <td>
+                            <a class="btn btn-outline-info"
                                 href="{{
                                 path(
                                     'app_settings',

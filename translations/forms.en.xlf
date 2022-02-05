@@ -585,6 +585,22 @@
         <source>Delete SupplyArea</source>
         <target>Delete Supply Area</target>
       </trans-unit>
+      <trans-unit id="YbGNicV" resname="Unverify User">
+        <source>Unverify User</source>
+        <target>Unverify User</target>
+      </trans-unit>
+      <trans-unit id="FImuI9J" resname="Verify User">
+        <source>Verify User</source>
+        <target>Verify User</target>
+      </trans-unit>
+      <trans-unit id="M7VsZrP" resname="Disable Participation">
+        <source>Disable Participation</source>
+        <target>Disable Participation</target>
+      </trans-unit>
+      <trans-unit id="0Tnultq" resname="Enable Participation">
+        <source>Enable Participation</source>
+        <target>Enable Participation</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

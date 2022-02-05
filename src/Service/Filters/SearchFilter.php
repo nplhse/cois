@@ -45,7 +45,7 @@ class SearchFilter implements FilterInterface
         return true;
     }
 
-    public function buildForm(array $arguments): FormInterface
+    public function buildForm(array $arguments): ?FormInterface
     {
         $form = $this->formFactory->create(SearchType::class, null, [
             'action' => $arguments['action'],

@@ -49,7 +49,4 @@ services:
     App\Service\FilterService:
         class: 'App\Service\FilterService'
         arguments:
-            - !tagged_iterator {
-                  tag: "app.filters",
-                  default_index_method: "getParam",
-              }
+            - !tagged_iterator { tag: "app.filters", default_index_method: "getParam" }

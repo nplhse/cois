@@ -4,7 +4,7 @@ namespace App\Domain\Command\User;
 
 class EditUserCommand
 {
-    private string $id;
+    private int $id;
 
     private string $username;
 
