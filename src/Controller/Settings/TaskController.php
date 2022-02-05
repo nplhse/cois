@@ -6,10 +6,18 @@ use App\Message\SendImportReminderMessage;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TaskController extends AbstractController
 {
+    private MessageBusInterface $messageBus;
+
+    public function __construct(MessageBusInterface $messageBus)
+    {
+        $this->messageBus = $messageBus;
+    }
+
     #[Route('/settings/task/', name: 'app_settings_task_index')]
     public function index(): Response
     {
@@ -23,7 +31,7 @@ class TaskController extends AbstractController
 
         $message = new SendImportReminderMessage($recipients);
 
-        $this->dispatchMessage($message);
+        $this->messageBus->dispatch($message);
 
         $this->addFlash('success', 'Import Reminder successfully sent to Hospital owners.');
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="de" target-language="en" datatype="plaintext" original="file.ext">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -1933,6 +1933,26 @@
       <trans-unit id="gl7aQDe" resname="View SupplyArea">
         <source>View SupplyArea</source>
         <target>View Supply Area</target>
+      </trans-unit>
+      <trans-unit id="TpIMycx" resname="Delete User">
+        <source>Delete User</source>
+        <target>Delete User</target>
+      </trans-unit>
+      <trans-unit id="mXxUTxv" resname="Special">
+        <source>Special</source>
+        <target>Special</target>
+      </trans-unit>
+      <trans-unit id="MWha6Oa" resname="Please confirm your login by entering your password.">
+        <source>Please confirm your login by entering your password.</source>
+        <target>Please confirm your login by entering your password.</target>
+      </trans-unit>
+      <trans-unit id="l1hbt4e" resname="To proceed you have to set a new password for your account.">
+        <source>To proceed you have to set a new password for your account.</source>
+        <target>To proceed you have to set a new password for your account.</target>
+      </trans-unit>
+      <trans-unit id="bubZ20J" resname="Set new password">
+        <source>Set new password</source>
+        <target>Set new password</target>
       </trans-unit>
     </body>
   </file>

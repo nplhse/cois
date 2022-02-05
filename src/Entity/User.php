@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 #[UniqueEntity(fields: ['username'], message: 'Please choose a different username')]
 #[UniqueEntity(fields: ['email'], message: 'Please choose a different email address')]
@@ -46,6 +47,16 @@ class User extends DomainUser implements UserInterface, PasswordAuthenticatedUse
     protected string $password;
 
     protected ?string $plainPassword = null;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected \DateTimeInterface $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected ?\DateTimeInterface $updatedAt = null;
 
     // TODO: REMOVE AFTER REFACTORING
     /**

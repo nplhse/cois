@@ -3,10 +3,8 @@
 namespace App\Controller\Settings\User;
 
 use App\Domain\Command\User\ChangeEmailCommand;
-use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
 use App\Form\User\EmailChangeType;
-use App\Service\MailerService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,28 +13,17 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 #[IsGranted('ROLE_USER')]
 class EmailController extends AbstractController
 {
-    private UserRepositoryInterface $userRepository;
-
     private MessageBusInterface $messageBus;
-
-    private MailerService $mailer;
-
-    private VerifyEmailHelperInterface $verifyEmailHelper;
 
     private TranslatorInterface $translator;
 
-    public function __construct(UserRepositoryInterface $userRepository, MessageBusInterface $messageBus, MailerService $mailer, VerifyEmailHelperInterface $verifyEmailHelper, TranslatorInterface $translator)
+    public function __construct(MessageBusInterface $messageBus, TranslatorInterface $translator)
     {
-        $this->userRepository = $userRepository;
         $this->messageBus = $messageBus;
-
-        $this->mailer = $mailer;
-        $this->verifyEmailHelper = $verifyEmailHelper;
         $this->translator = $translator;
     }
 

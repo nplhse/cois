@@ -5,6 +5,10 @@ namespace App\Repository;
 use App\Domain\Contracts\UserInterface;
 use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
+use App\Service\Filters\OrderFilter;
+use App\Service\Filters\PageFilter;
+use App\Service\Filters\SearchFilter;
+use App\Service\FilterService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,7 +24,17 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface, UserRepositoryInterface
 {
-    public const PAGINATOR_PER_PAGE = 10;
+    public const PER_PAGE = 10;
+
+    public const DEFAULT_ORDER = 'desc';
+
+    public const DEFAULT_SORT = 'id';
+
+    public const SORTABLE = ['id', 'username', 'createdAt'];
+
+    public const SEARCHABLE = ['username', 'email'];
+
+    public const ENTITY_ALIAS = 'u.';
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -105,24 +119,22 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $qb;
     }
 
-    public function getUserPaginator(int $page, array $filter): Paginator
+    public function getUserPaginator(FilterService $filterService): Paginator
     {
-        if (1 != $page) {
-            $offset = $page * self::PAGINATOR_PER_PAGE;
-        } else {
-            $offset = 0;
-        }
+        $qb = $this->createQueryBuilder('u');
 
-        $query = $this->createQueryBuilder('u');
+        $arguments = [
+            PageFilter::PER_PAGE => self::PER_PAGE,
+            FilterService::ENTITY_ALIAS => self::ENTITY_ALIAS,
+            OrderFilter::DEFAULT_ORDER => self::DEFAULT_ORDER,
+            OrderFilter::DEFAULT_SORT => self::DEFAULT_SORT,
+            OrderFilter::SORTABLE => self::SORTABLE,
+            SearchFilter::SEARCHABLE => self::SEARCHABLE,
+        ];
 
-        $query
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(self::PAGINATOR_PER_PAGE)
-            ->setFirstResult($offset)
-            ->getQuery()
-        ;
+        $qb = $filterService->processQuery($qb, $arguments);
 
-        return new Paginator($query);
+        return new Paginator($qb->getQuery());
     }
 
     public function getHospitalOwnerRecipients(): array

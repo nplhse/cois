@@ -2009,6 +2009,26 @@
         <source>View SupplyArea</source>
         <target>Versorgungsgebiet ansehen</target>
       </trans-unit>
+      <trans-unit id="TpIMycx" resname="Delete User">
+        <source>Delete User</source>
+        <target>Benutzer löschen</target>
+      </trans-unit>
+      <trans-unit id="mXxUTxv" resname="Special">
+        <source>Special</source>
+        <target>Besonderes</target>
+      </trans-unit>
+      <trans-unit id="MWha6Oa" resname="Please confirm your login by entering your password.">
+        <source>Please confirm your login by entering your password.</source>
+        <target>Bitte bestätigen Sie ihre Anmeldung durch die Eingabe Ihres Passworts.</target>
+      </trans-unit>
+      <trans-unit id="l1hbt4e" resname="To proceed you have to set a new password for your account.">
+        <source>To proceed you have to set a new password for your account.</source>
+        <target>Um fortzufahren müssen Sie ein neues Passwort angeben.</target>
+      </trans-unit>
+      <trans-unit id="bubZ20J" resname="Set new password">
+        <source>Set new password</source>
+        <target>Neues Passwort bestätigen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
