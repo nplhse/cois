@@ -14,6 +14,9 @@ package.json
 symfony.lock
 yarn.lock
 
+# Ignore services.yaml because of tagged iterators
+/config/services.yaml
+
 # Ignore Twig Macros
 /templates/_elements/macro/
 /templates/import/index.html.twig

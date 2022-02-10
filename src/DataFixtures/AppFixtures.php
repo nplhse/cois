@@ -5,10 +5,17 @@ namespace App\DataFixtures;
 use App\Entity\Allocation;
 use App\Entity\Hospital;
 use App\Entity\Import;
+use App\Factory\DispatchAreaFactory;
+use App\Factory\HospitalFactory;
+use App\Factory\StateFactory;
+use App\Factory\SupplyAreaFactory;
+use App\Factory\UserFactory;
 use Carbon\Carbon;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use PhpCsFixer\Fixer\Operator\NewWithBracesFixer;
+use Zenstruck\Foundry\Proxy;
 
 class AppFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -17,20 +24,34 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
+        StateFactory::createMany(5);
+
+        DispatchAreaFactory::createMany(5, [
+            'state' => StateFactory::random(),
+        ]);
+
+        SupplyAreaFactory::createMany(3, [
+            'state' => StateFactory::random(),
+        ]);
+
+        HospitalFactory::createMany(12, [
+            'owner' => UserFactory::random(),
+            'state' => StateFactory::random(),
+            'dispatchArea' => DispatchAreaFactory::random(),
+            'supplyArea' => SupplyAreaFactory::random(),
+        ]);
+
+        $hospital = HospitalFactory::new([
+            'owner' => UserFactory::random(),
+            'state' => StateFactory::random(),
+            'dispatchArea' => DispatchAreaFactory::random(),
+            'supplyArea' => SupplyAreaFactory::random(),
+        ])->create();
+
+        $manager->flush();
+
+        /**
         $date = Carbon::create(random_int(2019, 2021), random_int(1, 12), random_int(1, 31), random_int(0, 23), random_int(0, 59), random_int(0, 59), 'Europe/Berlin');
-
-        $hospital = new Hospital();
-        $hospital->setName('Sacred Heart Hospital');
-        $hospital->setAddress('123 Fake Street');
-        $hospital->setDispatchArea('Test Area');
-        $hospital->setSupplyArea('Test Area');
-        $hospital->setOwner($this->getReference(UserFixtures::BASE_USER_REFERENCE));
-        $hospital->setBeds(random_int(100, 1250));
-        $hospital->setLocation($this->array_random(['rural', 'urban'], 1));
-        $hospital->setCreatedAt($date);
-        $hospital->setUpdatedAt($date);
-
-        $manager->persist($hospital);
 
         $import1 = new Import();
         $import1->setName('DemoImport');
@@ -39,7 +60,7 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
         $import1->setMimeType('CSV');
         $import1->setSize(1234);
         $import1->setUser($this->getReference(UserFixtures::OTHER_USER_REFERENCE));
-        $import1->setHospital($hospital);
+        $import1->setHospital(HospitalFactory::random());
         $import1->setIsFixture(true);
         $import1->setCaption('Demo Import');
         $import1->setContents('allocation');
@@ -135,6 +156,7 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
         }
 
         $manager->flush();
+         * **/
     }
 
     public function getDependencies()

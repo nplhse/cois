@@ -154,20 +154,16 @@
                                 </a>
                             </td>
                             <td>
-                                {% if hospital.owner %}
-                                    <a href="{{
-                                        path(
-                                            'app_settings_user_show',
-                                            {
-                                                id: hospital.owner.id
-                                            }
-                                        )
-                                        }}">
-                                        {{ hospital.owner }}
-                                    </a>
-                                {% else %}
-                                    {{ 'Hospital has no Onwer'|trans }}
-                                {% endif %}
+                                <a href="{{
+                                    path(
+                                        'app_settings_user_show',
+                                        {
+                                            id: hospital.owner.id
+                                        }
+                                    )
+                                    }}">
+                                    {{ hospital.owner }}
+                                </a>
                             </td>
                             <td>
                                 <a class="btn btn-outline-primary"

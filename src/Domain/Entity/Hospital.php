@@ -34,29 +34,29 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
 
     public const LOCATION_URBAN = 'urban';
 
-    private string $name;
+    protected string $name;
 
-    private UserInterface $owner;
+    protected UserInterface $owner;
 
     private ArrayCollection $associatedUsers;
 
-    private string $address;
+    protected string $address;
 
-    private StateInterface $state;
+    protected ?StateInterface $state = null;
 
-    private DispatchAreaInterface $dispatchArea;
+    protected ?DispatchAreaInterface $dispatchArea = null;
 
-    private ?SupplyAreaInterface $supplyArea;
+    protected ?SupplyAreaInterface $supplyArea = null;
 
     private array $sizes = [self::SIZE_SMALL, self::SIZE_MEDIUM, self::SIZE_LARGE];
 
-    private string $size;
+    protected string $size;
 
-    private int $beds;
+    protected int $beds;
 
     private array $locations = [self::LOCATION_RURAL, self::LOCATION_URBAN];
 
-    private string $location;
+    protected string $location;
 
     public function __construct()
     {
@@ -134,7 +134,7 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
         return $this;
     }
 
-    public function getState(): StateInterface
+    public function getState(): ?StateInterface
     {
         return $this->state;
     }
@@ -146,7 +146,7 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
         return $this;
     }
 
-    public function getDispatchArea(): DispatchAreaInterface
+    public function getDispatchArea(): ?DispatchAreaInterface
     {
         return $this->dispatchArea;
     }

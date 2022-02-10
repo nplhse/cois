@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Domain\Contracts\HospitalInterface;
+use App\Domain\Repository\HospitalRepositoryInterface;
 use App\Entity\Hospital;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -14,13 +16,44 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Hospital[]    findAll()
  * @method Hospital[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class HospitalRepository extends ServiceEntityRepository
+class HospitalRepository extends ServiceEntityRepository implements HospitalRepositoryInterface
 {
     public const PAGINATOR_PER_PAGE = 10;
 
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Hospital::class);
+    }
+
+    public function add(HospitalInterface $hospital): void
+    {
+        $this->_em->persist($hospital);
+        $this->_em->flush();
+    }
+
+    public function save(): void
+    {
+        $this->_em->flush();
+    }
+
+    public function delete(HospitalInterface $hospital): void
+    {
+        $this->_em->remove($hospital);
+        $this->_em->flush();
+    }
+
+    public function findOneByTriplet(string $name, string $location, int $beds): ?Hospital
+    {
+        return $this->createQueryBuilder('h')
+            ->andWhere('h.name = :name')
+            ->setParameter(':name', $name)
+            ->andWhere('h.location = :location')
+            ->setParameter(':location', $location)
+            ->andWhere('h.beds = :beds')
+            ->setParameter(':beds', $beds)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
     }
 
     public function findOneByUser(User $user): ?Hospital
@@ -33,7 +66,7 @@ class HospitalRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findById(int $id): ?Hospital
+    public function findOneById(int $id): ?Hospital
     {
         return $this->createQueryBuilder('h')
             ->andWhere('h.id = :id')

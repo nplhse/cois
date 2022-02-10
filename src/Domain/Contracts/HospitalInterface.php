@@ -28,11 +28,11 @@ interface HospitalInterface
 
     public function setState(StateInterface $state): self;
 
-    public function getState(): StateInterface;
+    public function getState(): ?StateInterface;
 
     public function setDispatchArea(DispatchAreaInterface $dispatchArea): self;
 
-    public function getDispatchArea(): DispatchAreaInterface;
+    public function getDispatchArea(): ?DispatchAreaInterface;
 
     public function setSupplyArea(?SupplyAreaInterface $supplyArea): self;
 

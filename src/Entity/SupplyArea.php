@@ -32,6 +32,12 @@ class SupplyArea extends DomainSupplyArea
     protected StateInterface $state;
 
     /**
+     * @ORM\OneToMany(targetEntity=Hospital::class, mappedBy="supplyArea")
+     * @ORM\OrderBy({"name" = "ASC"})
+     */
+    protected \Doctrine\Common\Collections\Collection $hospitals;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     protected \DateTimeInterface $createdAt;

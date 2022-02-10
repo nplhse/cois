@@ -2,37 +2,46 @@
 
 namespace App\Controller;
 
+use App\Domain\Command\Hospital\CreateHospitalCommand;
+use App\Domain\Contracts\HospitalInterface;
 use App\Entity\Hospital;
 use App\Form\HospitalType;
 use App\Repository\AllocationRepository;
+use App\Repository\DispatchAreaRepository;
 use App\Repository\HospitalRepository;
+use App\Repository\SupplyAreaRepository;
 use App\Service\AdminNotificationService;
 use App\Service\RequestParamService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 
 #[Route('/hospitals')]
 class HospitalController extends AbstractController
 {
+    private MessageBusInterface $messageBus;
+
     private AdminNotificationService $adminNotifier;
 
     private Security $security;
 
     private EntityManagerInterface $entityManager;
 
-    public function __construct(AdminNotificationService $adminNotifier, Security $security, EntityManagerInterface $entityManager)
+    public function __construct(MessageBusInterface $messageBus, AdminNotificationService $adminNotifier, Security $security, EntityManagerInterface $entityManager)
     {
+        $this->messageBus = $messageBus;
         $this->adminNotifier = $adminNotifier;
         $this->security = $security;
         $this->entityManager = $entityManager;
     }
 
     #[Route('/', name: 'app_hospital_index')]
-    public function index(Request $request, HospitalRepository $hospitalRepository): Response
+    public function index(Request $request, HospitalRepository $hospitalRepository, SupplyAreaRepository $supplyAreaRepository, DispatchAreaRepository $dispatchAreaRepository): Response
     {
         $paramService = new RequestParamService($request);
 
@@ -62,32 +71,44 @@ class HospitalController extends AbstractController
             'filterIsSet' => $paramService->isFilterIsSet(),
             'locations' => $this->getLocations(),
             'sizes' => $this->getSizes(),
-            'supplyAreas' => $hospitalRepository->getSupplyAreas(),
-            'dispatchAreas' => $hospitalRepository->getDispatchAreas(),
+            'supplyAreas' => $supplyAreaRepository->findAll(),
+            'dispatchAreas' => $dispatchAreaRepository->findAll(),
         ]);
     }
 
     #[Route(path: '/new', name: 'app_hospital_new', methods: ['GET', 'POST'])]
     public function new(Request $request, HospitalRepository $hospitalRepository): Response
     {
-        if (null !== $this->getUser()->getHospital()) {
-            throw $this->createAccessDeniedException('You cannot create another hospital.');
-        }
-
         $hospital = new Hospital();
 
         $form = $this->createForm(HospitalType::class, $hospital);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $hospital->setCreatedAt(new \DateTime('NOW'));
-            $hospital->setUpdatedAt(new \DateTime('NOW'));
-            $hospital->setOwner($this->getUser());
+            $command = new CreateHospitalCommand(
+                $this->getUser(),
+                $hospital->getName(),
+                $hospital->getAddress(),
+                $hospital->getState(),
+                $hospital->getDispatchArea(),
+                $hospital->getSupplyArea(),
+                $hospital->getLocation(),
+                $hospital->getBeds(),
+                $hospital->getSize()
+            );
 
-            $this->entityManager->persist($hospital);
-            $this->entityManager->flush();
+            try {
+                $this->messageBus->dispatch($command);
+            } catch (HandlerFailedException) {
+                $this->addFlash('danger', 'Sorry, something went wrong. Please try again later!');
+            }
 
-            $this->addFlash('success', 'Your hospital was successfully created.');
+            /** @var ?HospitalInterface $hospital */
+            $hospital = $hospitalRepository->findOneByTriplet($command->getName(), $command->getLocation(), $command->getBeds());
+
+            if (null === $hospital) {
+                throw new \RuntimeException('Sorry, something went wrong. Please try again later.');
+            }
 
             $this->adminNotifier->sendNewHospitalNotification($hospital);
 

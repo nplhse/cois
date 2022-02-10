@@ -32,6 +32,12 @@ class DispatchArea extends DomainDispatchArea
     protected StateInterface $state;
 
     /**
+     * @ORM\OneToMany(targetEntity=Hospital::class, mappedBy="dispatchArea")
+     * @ORM\OrderBy({"name" = "ASC"})
+     */
+    protected \Doctrine\Common\Collections\Collection $hospitals;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     protected \DateTimeInterface $createdAt;

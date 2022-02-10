@@ -95,7 +95,8 @@
         "symfony/web-profiler-bundle": "^6.0",
         "symplify/easy-coding-standard": "^10.0",
         "vimeo/psalm": "^4.7",
-        "weirdan/doctrine-psalm-plugin": "^2.0"
+        "weirdan/doctrine-psalm-plugin": "^2.0",
+        "zenstruck/foundry": "^1.16"
     },
     "config": {
         "optimize-autoloader": true,
