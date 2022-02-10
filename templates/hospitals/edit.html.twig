@@ -46,9 +46,19 @@
 
                 {{ form_row(form.address) }}
 
+                {% if is_granted('ROLE_ADMIN') %}
+                    <h3>
+                        {{ 'Hospital owner'|trans }}
+                    </h3>
+
+                    {{ form_row(form.owner) }}
+                {% endif %}
+
                 <h3>
                     {{ 'Hospital location'|trans }}
                 </h3>
+
+                {{ form_row(form.state) }}
 
                 {{ form_row(form.dispatchArea) }}
 

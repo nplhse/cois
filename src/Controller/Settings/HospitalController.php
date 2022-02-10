@@ -3,6 +3,8 @@
 namespace App\Controller\Settings;
 
 use App\Domain\Command\Hospital\CreateHospitalCommand;
+use App\Domain\Command\Hospital\DeleteHospitalCommand;
+use App\Domain\Command\Hospital\EditHospitalCommand;
 use App\Domain\Contracts\HospitalInterface;
 use App\Entity\Hospital;
 use App\Form\HospitalType;
@@ -62,7 +64,7 @@ class HospitalController extends AbstractController
         $hospital = new Hospital();
 
         $form = $this->createForm(HospitalType::class, $hospital, [
-            'backend' => true
+            'backend' => true,
         ]);
         $form->handleRequest($request);
 
@@ -116,10 +118,34 @@ class HospitalController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->flush();
+            $command = new EditHospitalCommand(
+                $hospital->getId(),
+                $hospital->getOwner(),
+                $hospital->getName(),
+                $hospital->getAddress(),
+                $hospital->getState(),
+                $hospital->getDispatchArea(),
+                $hospital->getSupplyArea(),
+                $hospital->getLocation(),
+                $hospital->getBeds(),
+                $hospital->getSize()
+            );
 
-            return $this->redirectToRoute('app_settings_hospital_index', [], Response::HTTP_SEE_OTHER);
+            try {
+                $this->messageBus->dispatch($command);
+            } catch (HandlerFailedException) {
+                $this->addFlash('danger', 'Sorry, something went wrong. Please try again later!');
+
+                return $this->renderForm('settings/hospital/edit.html.twig', [
+                    'hospital' => $hospital,
+                    'form' => $form,
+                ]);
+            }
+
+            return $this->redirectToRoute('app_settings_hospital_edit', ['id' => $hospital->getId()], Response::HTTP_SEE_OTHER);
         }
+
+        $this->addFlash('success', 'Hospital '.$hospital->getName().' has been edited.');
 
         return $this->renderForm('settings/hospital/edit.html.twig', [
             'hospital' => $hospital,
@@ -133,8 +159,15 @@ class HospitalController extends AbstractController
         $CsrfToken = $request->request->get('_token');
 
         if ($this->isCsrfTokenValid('delete'.$hospital->getId(), $CsrfToken)) {
-            $this->entityManager->remove($hospital);
-            $this->entityManager->flush();
+            $command = new DeleteHospitalCommand($hospital->getId());
+
+            try {
+                $this->messageBus->dispatch($command);
+            } catch (HandlerFailedException) {
+                $this->addFlash('danger', 'Sorry, something went wrong. Please try again later!');
+            }
+
+            $this->addFlash('success', 'Hospital '.$hospital->getName().' has been deleted.');
         }
 
         return $this->redirectToRoute('app_settings_hospital_index', [], Response::HTTP_SEE_OTHER);

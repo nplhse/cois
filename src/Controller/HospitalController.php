@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Domain\Command\Hospital\CreateHospitalCommand;
+use App\Domain\Command\Hospital\EditHospitalCommand;
 use App\Domain\Contracts\HospitalInterface;
 use App\Domain\Contracts\UserInterface;
 use App\Entity\Hospital;
@@ -87,7 +88,9 @@ class HospitalController extends AbstractController
 
         $hospital = new Hospital();
 
-        $form = $this->createForm(HospitalType::class, $hospital);
+        $form = $this->createForm(HospitalType::class, $hospital, [
+            'backend' => $this->security->isGranted('ROLE_ADMIN'),
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -132,13 +135,38 @@ class HospitalController extends AbstractController
     {
         $this->denyAccessUnlessGranted('edit', $hospital);
 
-        $form = $this->createForm(HospitalType::class, $hospital);
+        $form = $this->createForm(HospitalType::class, $hospital, [
+            'backend' => $this->security->isGranted('ROLE_ADMIN'),
+        ]);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $hospital->setUpdatedAt(new \DateTime('NOW'));
+        /** @var UserInterface $user */
+        $user = $this->getUser();
 
-            $this->entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = new EditHospitalCommand(
+                $hospital->getId(),
+                $hospital->getOwner(),
+                $hospital->getName(),
+                $hospital->getAddress(),
+                $hospital->getState(),
+                $hospital->getDispatchArea(),
+                $hospital->getSupplyArea(),
+                $hospital->getLocation(),
+                $hospital->getBeds(),
+                $hospital->getSize()
+            );
+
+            try {
+                $this->messageBus->dispatch($command);
+            } catch (HandlerFailedException) {
+                $this->addFlash('danger', 'Sorry, something went wrong. Please try again later!');
+
+                return $this->renderForm('hospital/edit.html.twig', [
+                    'hospital' => $hospital,
+                    'form' => $form,
+                ]);
+            }
 
             $this->addFlash('success', 'Hospital was successfully edited.');
 
