@@ -5,7 +5,7 @@ namespace App\Tests\Unit\Application\Handler\SupplyArea;
 use App\Application\Handler\SupplyArea\UpdateSupplyAreaHandler;
 use App\Domain\Command\SupplyArea\UpdateSupplyAreaCommand;
 use App\Domain\Contracts\SupplyAreaInterface;
-use App\Domain\Event\SupplyArea\SupplyAreaUpdated;
+use App\Domain\Event\SupplyArea\SupplyAreaUpdatedEvent;
 use App\Repository\SupplyAreaRepository;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -28,7 +28,7 @@ class UpdateSupplyAreaHandlerTest extends TestCase
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $eventDispatcher->expects($this->exactly(1))
             ->method('dispatch')
-            ->with($this->isInstanceOf(SupplyAreaUpdated::class), $this->stringContains('supply_area.updated'));
+            ->with($this->isInstanceOf(SupplyAreaUpdatedEvent::class), $this->stringContains('supply_area.updated'));
 
         $command = new UpdateSupplyAreaCommand(1, 'Test Name');
 

@@ -5,7 +5,7 @@ namespace App\Tests\Unit\Application\Handler\State;
 use App\Application\Handler\State\UpdateStateHandler;
 use App\Domain\Command\State\UpdateStateCommand;
 use App\Domain\Contracts\StateInterface;
-use App\Domain\Event\State\StateUpdated;
+use App\Domain\Event\State\StateUpdatedEvent;
 use App\Repository\StateRepository;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -30,7 +30,7 @@ class UpdateStateHandlerTest extends TestCase
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $eventDispatcher->expects($this->exactly(1))
             ->method('dispatch')
-            ->with($this->isInstanceOf(StateUpdated::class), $this->stringContains('state.updated'));
+            ->with($this->isInstanceOf(StateUpdatedEvent::class), $this->stringContains('state.updated'));
 
         $command = new UpdateStateCommand(1, 'Updated Name');
 

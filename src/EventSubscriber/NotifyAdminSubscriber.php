@@ -2,7 +2,7 @@
 
 namespace App\EventSubscriber;
 
-use App\Domain\Event\User\UserRegistered;
+use App\Domain\Event\User\UserRegisteredEvent;
 use App\Domain\Repository\UserRepositoryInterface;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -27,7 +27,7 @@ class NotifyAdminSubscriber implements EventSubscriberInterface
         $this->mailerFrom = $mailerFrom;
     }
 
-    public function sendNewUserNotification(UserRegistered $event): void
+    public function sendNewUserNotification(UserRegisteredEvent $event): void
     {
         $user = $event->getUser();
 
@@ -47,7 +47,7 @@ class NotifyAdminSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            UserRegistered::NAME => ['sendNewUserNotification', -10],
+            UserRegisteredEvent::NAME => ['sendNewUserNotification', -10],
         ];
     }
 }

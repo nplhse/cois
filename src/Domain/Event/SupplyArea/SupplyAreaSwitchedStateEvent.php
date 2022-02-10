@@ -7,10 +7,10 @@ namespace App\Domain\Event\SupplyArea;
 use App\Domain\Contracts\DomainEventInterface;
 use App\Domain\Contracts\StateInterface;
 use App\Domain\Contracts\SupplyAreaInterface;
-use App\Domain\Event\Traits\NamedEventTrait;
+use App\Domain\Event\NamedEventTrait;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class SupplyAreaSwitchedState extends Event implements DomainEventInterface
+class SupplyAreaSwitchedStateEvent extends Event implements DomainEventInterface
 {
     use NamedEventTrait;
 

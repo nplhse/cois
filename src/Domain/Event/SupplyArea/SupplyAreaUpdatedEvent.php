@@ -6,14 +6,14 @@ namespace App\Domain\Event\SupplyArea;
 
 use App\Domain\Contracts\DomainEventInterface;
 use App\Domain\Contracts\SupplyAreaInterface;
-use App\Domain\Event\Traits\NamedEventTrait;
+use App\Domain\Event\NamedEventTrait;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class SupplyAreaDeleted extends Event implements DomainEventInterface
+class SupplyAreaUpdatedEvent extends Event implements DomainEventInterface
 {
     use NamedEventTrait;
 
-    public const NAME = 'supply_area.deleted';
+    public const NAME = 'supply_area.updated';
 
     private SupplyAreaInterface $area;
 

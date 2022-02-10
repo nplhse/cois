@@ -4,7 +4,7 @@ namespace App\Application\Handler\SupplyArea;
 
 use App\Application\Contract\HandlerInterface;
 use App\Domain\Command\SupplyArea\CreateSupplyAreaCommand;
-use App\Domain\Event\SupplyArea\SupplyAreaCreated;
+use App\Domain\Event\SupplyArea\SupplyAreaCreatedEvent;
 use App\Entity\SupplyArea;
 use App\Repository\StateRepository;
 use App\Repository\SupplyAreaRepository;
@@ -40,8 +40,8 @@ class CreateSupplyAreaHandler implements HandlerInterface
 
         $this->stateRepository->save();
 
-        $event = new SupplyAreaCreated($area);
+        $event = new SupplyAreaCreatedEvent($area);
 
-        $this->dispatcher->dispatch($event, SupplyAreaCreated::NAME);
+        $this->dispatcher->dispatch($event, SupplyAreaCreatedEvent::NAME);
     }
 }

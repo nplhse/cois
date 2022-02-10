@@ -6,7 +6,7 @@ use App\Application\Handler\State\DeleteStateHandler;
 use App\Domain\Command\State\DeleteStateCommand;
 use App\Domain\Contracts\StateInterface;
 use App\Domain\Entity\State;
-use App\Domain\Event\State\StateDeleted;
+use App\Domain\Event\State\StateDeletedEvent;
 use App\Repository\StateRepository;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -29,7 +29,7 @@ class DeleteStateHandlerTest extends TestCase
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $eventDispatcher->expects($this->exactly(1))
             ->method('dispatch')
-            ->with($this->isInstanceOf(StateDeleted::class), $this->stringContains('state.deleted'));
+            ->with($this->isInstanceOf(StateDeletedEvent::class), $this->stringContains('state.deleted'));
 
         $command = new DeleteStateCommand(1);
 

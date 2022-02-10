@@ -6,7 +6,7 @@ use App\Application\Handler\DispatchArea\DeleteDispatchAreaHandler;
 use App\Domain\Command\DispatchArea\DeleteDispatchAreaCommand;
 use App\Domain\Contracts\DispatchAreaInterface;
 use App\Domain\Contracts\StateInterface;
-use App\Domain\Event\DispatchArea\DispatchAreaDeleted;
+use App\Domain\Event\DispatchArea\DispatchAreaDeletedEvent;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\StateRepository;
 use PHPUnit\Framework\TestCase;
@@ -47,7 +47,7 @@ class DeleteDispatchAreaHandlerTest extends TestCase
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $eventDispatcher->expects($this->exactly(1))
             ->method('dispatch')
-            ->with($this->isInstanceOf(DispatchAreaDeleted::class), $this->stringContains('dispatch_area.deleted'));
+            ->with($this->isInstanceOf(DispatchAreaDeletedEvent::class), $this->stringContains('dispatch_area.deleted'));
 
         $command = new DeleteDispatchAreaCommand(1);
 

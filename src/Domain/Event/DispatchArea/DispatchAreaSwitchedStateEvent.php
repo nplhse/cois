@@ -7,10 +7,10 @@ namespace App\Domain\Event\DispatchArea;
 use App\Domain\Contracts\DispatchAreaInterface;
 use App\Domain\Contracts\DomainEventInterface;
 use App\Domain\Contracts\StateInterface;
-use App\Domain\Event\Traits\NamedEventTrait;
+use App\Domain\Event\NamedEventTrait;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class DispatchAreaSwitchedState extends Event implements DomainEventInterface
+class DispatchAreaSwitchedStateEvent extends Event implements DomainEventInterface
 {
     use NamedEventTrait;
 

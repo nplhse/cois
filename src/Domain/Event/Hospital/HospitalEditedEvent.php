@@ -6,7 +6,7 @@ namespace App\Domain\Event\Hospital;
 
 use App\Domain\Contracts\DomainEventInterface;
 use App\Domain\Contracts\HospitalInterface;
-use App\Domain\Event\Traits\NamedEventTrait;
+use App\Domain\Event\NamedEventTrait;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class HospitalEditedEvent extends Event implements DomainEventInterface

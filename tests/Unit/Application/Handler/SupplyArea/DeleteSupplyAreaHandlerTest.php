@@ -6,7 +6,7 @@ use App\Application\Handler\SupplyArea\DeleteSupplyAreaHandler;
 use App\Domain\Command\SupplyArea\DeleteSupplyAreaCommand;
 use App\Domain\Contracts\StateInterface;
 use App\Domain\Contracts\SupplyAreaInterface;
-use App\Domain\Event\SupplyArea\SupplyAreaDeleted;
+use App\Domain\Event\SupplyArea\SupplyAreaDeletedEvent;
 use App\Repository\StateRepository;
 use App\Repository\SupplyAreaRepository;
 use PHPUnit\Framework\TestCase;
@@ -47,7 +47,7 @@ class DeleteSupplyAreaHandlerTest extends TestCase
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $eventDispatcher->expects($this->exactly(1))
             ->method('dispatch')
-            ->with($this->isInstanceOf(SupplyAreaDeleted::class), $this->stringContains('supply_area.deleted'));
+            ->with($this->isInstanceOf(SupplyAreaDeletedEvent::class), $this->stringContains('supply_area.deleted'));
 
         $command = new DeleteSupplyAreaCommand(1);
 

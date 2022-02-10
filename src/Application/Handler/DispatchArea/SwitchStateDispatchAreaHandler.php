@@ -4,7 +4,7 @@ namespace App\Application\Handler\DispatchArea;
 
 use App\Application\Contract\HandlerInterface;
 use App\Domain\Command\DispatchArea\SwitchStateDispatchAreaCommand;
-use App\Domain\Event\DispatchArea\DispatchAreaSwitchedState;
+use App\Domain\Event\DispatchArea\DispatchAreaSwitchedStateEvent;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\StateRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -40,8 +40,8 @@ class SwitchStateDispatchAreaHandler implements HandlerInterface
         $this->dispatchAreaRepository->save();
         $this->stateRepository->save();
 
-        $event = new DispatchAreaSwitchedState($area, $newState);
+        $event = new DispatchAreaSwitchedStateEvent($area, $newState);
 
-        $this->dispatcher->dispatch($event, DispatchAreaSwitchedState::NAME);
+        $this->dispatcher->dispatch($event, DispatchAreaSwitchedStateEvent::NAME);
     }
 }

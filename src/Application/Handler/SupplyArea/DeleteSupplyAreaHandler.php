@@ -4,7 +4,7 @@ namespace App\Application\Handler\SupplyArea;
 
 use App\Application\Contract\HandlerInterface;
 use App\Domain\Command\SupplyArea\DeleteSupplyAreaCommand;
-use App\Domain\Event\SupplyArea\SupplyAreaDeleted;
+use App\Domain\Event\SupplyArea\SupplyAreaDeletedEvent;
 use App\Repository\StateRepository;
 use App\Repository\SupplyAreaRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -38,8 +38,8 @@ class DeleteSupplyAreaHandler implements HandlerInterface
 
         $this->stateRepository->save();
 
-        $event = new SupplyAreaDeleted($area);
+        $event = new SupplyAreaDeletedEvent($area);
 
-        $this->dispatcher->dispatch($event, SupplyAreaDeleted::NAME);
+        $this->dispatcher->dispatch($event, SupplyAreaDeletedEvent::NAME);
     }
 }

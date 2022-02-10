@@ -6,10 +6,10 @@ namespace App\Domain\Event\State;
 
 use App\Domain\Contracts\DomainEventInterface;
 use App\Domain\Contracts\StateInterface;
-use App\Domain\Event\Traits\NamedEventTrait;
+use App\Domain\Event\NamedEventTrait;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class StateDeleted extends Event implements DomainEventInterface
+class StateDeletedEvent extends Event implements DomainEventInterface
 {
     use NamedEventTrait;
 

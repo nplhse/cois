@@ -4,7 +4,7 @@ namespace App\Application\Handler\SupplyArea;
 
 use App\Application\Contract\HandlerInterface;
 use App\Domain\Command\SupplyArea\SwitchStateSupplyAreaCommand;
-use App\Domain\Event\SupplyArea\SupplyAreaSwitchedState;
+use App\Domain\Event\SupplyArea\SupplyAreaSwitchedStateEvent;
 use App\Repository\StateRepository;
 use App\Repository\SupplyAreaRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -40,8 +40,8 @@ class SwitchStateSupplyAreaHandler implements HandlerInterface
         $this->supplyAreaRepository->save();
         $this->stateRepository->save();
 
-        $event = new SupplyAreaSwitchedState($area, $newState);
+        $event = new SupplyAreaSwitchedStateEvent($area, $newState);
 
-        $this->dispatcher->dispatch($event, SupplyAreaSwitchedState::NAME);
+        $this->dispatcher->dispatch($event, SupplyAreaSwitchedStateEvent::NAME);
     }
 }

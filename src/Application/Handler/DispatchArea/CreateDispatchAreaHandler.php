@@ -4,7 +4,7 @@ namespace App\Application\Handler\DispatchArea;
 
 use App\Application\Contract\HandlerInterface;
 use App\Domain\Command\DispatchArea\CreateDispatchAreaCommand;
-use App\Domain\Event\DispatchArea\DispatchAreaCreated;
+use App\Domain\Event\DispatchArea\DispatchAreaCreatedEvent;
 use App\Entity\DispatchArea;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\StateRepository;
@@ -39,8 +39,8 @@ class CreateDispatchAreaHandler implements HandlerInterface
 
         $this->stateRepository->save();
 
-        $event = new DispatchAreaCreated($area);
+        $event = new DispatchAreaCreatedEvent($area);
 
-        $this->dispatcher->dispatch($event, DispatchAreaCreated::NAME);
+        $this->dispatcher->dispatch($event, DispatchAreaCreatedEvent::NAME);
     }
 }

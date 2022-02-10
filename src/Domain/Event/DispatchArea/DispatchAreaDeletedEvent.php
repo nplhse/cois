@@ -6,14 +6,14 @@ namespace App\Domain\Event\DispatchArea;
 
 use App\Domain\Contracts\DispatchAreaInterface;
 use App\Domain\Contracts\DomainEventInterface;
-use App\Domain\Event\Traits\NamedEventTrait;
+use App\Domain\Event\NamedEventTrait;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class DispatchAreaCreated extends Event implements DomainEventInterface
+class DispatchAreaDeletedEvent extends Event implements DomainEventInterface
 {
     use NamedEventTrait;
 
-    public const NAME = 'dispatch_area.created';
+    public const NAME = 'dispatch_area.deleted';
 
     private DispatchAreaInterface $area;
 

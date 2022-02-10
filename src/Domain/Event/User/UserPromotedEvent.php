@@ -3,7 +3,7 @@
 namespace App\Domain\Event\User;
 
 use App\Domain\Contracts\DomainEventInterface;
-use App\Domain\Event\Traits\NamedEventTrait;
+use App\Domain\Event\NamedEventTrait;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class UserPromotedEvent extends Event implements DomainEventInterface

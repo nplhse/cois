@@ -6,7 +6,7 @@ use App\Application\Handler\DispatchArea\CreateDispatchAreaHandler;
 use App\Domain\Command\DispatchArea\CreateDispatchAreaCommand;
 use App\Domain\Contracts\DispatchAreaInterface;
 use App\Domain\Contracts\StateInterface;
-use App\Domain\Event\DispatchArea\DispatchAreaCreated;
+use App\Domain\Event\DispatchArea\DispatchAreaCreatedEvent;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\StateRepository;
 use PHPUnit\Framework\TestCase;
@@ -36,7 +36,7 @@ class CreateDispatchAreaHandlerTest extends TestCase
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $eventDispatcher->expects($this->exactly(1))
             ->method('dispatch')
-            ->with($this->isInstanceOf(DispatchAreaCreated::class), $this->stringContains('dispatch_area.created'));
+            ->with($this->isInstanceOf(DispatchAreaCreatedEvent::class), $this->stringContains('dispatch_area.created'));
 
         $command = new CreateDispatchAreaCommand('Test State', $state);
 

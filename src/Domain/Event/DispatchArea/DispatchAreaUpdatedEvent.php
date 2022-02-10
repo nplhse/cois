@@ -6,10 +6,10 @@ namespace App\Domain\Event\DispatchArea;
 
 use App\Domain\Contracts\DispatchAreaInterface;
 use App\Domain\Contracts\DomainEventInterface;
-use App\Domain\Event\Traits\NamedEventTrait;
+use App\Domain\Event\NamedEventTrait;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class DispatchAreaUpdated extends Event implements DomainEventInterface
+class DispatchAreaUpdatedEvent extends Event implements DomainEventInterface
 {
     use NamedEventTrait;
 

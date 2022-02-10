@@ -6,7 +6,7 @@ use App\Application\Handler\SupplyArea\CreateSupplyAreaHandler;
 use App\Domain\Command\SupplyArea\CreateSupplyAreaCommand;
 use App\Domain\Contracts\StateInterface;
 use App\Domain\Contracts\SupplyAreaInterface;
-use App\Domain\Event\SupplyArea\SupplyAreaCreated;
+use App\Domain\Event\SupplyArea\SupplyAreaCreatedEvent;
 use App\Repository\StateRepository;
 use App\Repository\SupplyAreaRepository;
 use PHPUnit\Framework\TestCase;
@@ -36,7 +36,7 @@ class CreateSupplyAreaHandlerTest extends TestCase
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $eventDispatcher->expects($this->exactly(1))
             ->method('dispatch')
-            ->with($this->isInstanceOf(SupplyAreaCreated::class), $this->stringContains('supply_area.created'));
+            ->with($this->isInstanceOf(SupplyAreaCreatedEvent::class), $this->stringContains('supply_area.created'));
 
         $command = new CreateSupplyAreaCommand('Test Area', 1);
 
