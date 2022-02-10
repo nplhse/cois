@@ -186,7 +186,7 @@
         </div>
 
         <div class="col-3">
-            {% if app.user.isParticipant %}
+            {% if is_granted('create_hospital', app.request.user) %}
                 <p>
                     <a href="{{ path('app_hospital_new') }}"
                         class="btn btn-success"

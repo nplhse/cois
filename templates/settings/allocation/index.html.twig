@@ -97,8 +97,7 @@
                         </h5>
                         <p>
                             {% for supplyArea in supplyAreas %}
-                                {% if
-                                    supplyArea.name == filters.supplyArea %}
+                                {% if supplyArea.name == filters.supplyArea %}
                                     <span class="badge bg-warning">
                                         <i class="bi bi-tag"></i>
                                         <a class="link-light"
@@ -142,8 +141,7 @@
                         <p>
                             {% for dispatchArea in dispatchAreas %}
                                 {% if
-                                    dispatchArea.name
-                                        == filters.dispatchArea %}
+                                    dispatchArea.name == filters.dispatchArea %}
                                     <span class="badge bg-warning">
                                         <i class="bi bi-tag"></i>
                                         <a class="link-light"

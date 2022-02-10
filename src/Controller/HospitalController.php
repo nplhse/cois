@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Domain\Command\Hospital\CreateHospitalCommand;
 use App\Domain\Contracts\HospitalInterface;
+use App\Domain\Contracts\UserInterface;
 use App\Entity\Hospital;
 use App\Form\HospitalType;
 use App\Repository\AllocationRepository;
@@ -79,6 +80,11 @@ class HospitalController extends AbstractController
     #[Route(path: '/new', name: 'app_hospital_new', methods: ['GET', 'POST'])]
     public function new(Request $request, HospitalRepository $hospitalRepository): Response
     {
+        $this->denyAccessUnlessGranted('create_hospital', $this->getUser());
+
+        /** @var UserInterface $user */
+        $user = $this->getUser();
+
         $hospital = new Hospital();
 
         $form = $this->createForm(HospitalType::class, $hospital);
@@ -86,7 +92,7 @@ class HospitalController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $command = new CreateHospitalCommand(
-                $this->getUser(),
+                $user,
                 $hospital->getName(),
                 $hospital->getAddress(),
                 $hospital->getState(),

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Security;
+namespace App\Security\Voter;
 
 use App\Entity\Hospital;
 use App\Entity\User;
@@ -11,6 +11,8 @@ use Symfony\Component\Security\Core\Security;
 class HospitalVoter extends Voter
 {
     private const EDIT = 'edit';
+
+    private const DELETE = 'delete';
 
     private const VIEWSTATS = 'viewStats';
 
@@ -24,7 +26,7 @@ class HospitalVoter extends Voter
     protected function supports(string $attribute, $subject): bool
     {
         // if the attribute isn't one we support, return false
-        if (!in_array($attribute, [self::EDIT, self::VIEWSTATS])) {
+        if (!in_array($attribute, [self::EDIT, self::DELETE, self::VIEWSTATS])) {
             return false;
         }
 
@@ -51,12 +53,22 @@ class HospitalVoter extends Voter
 
         return match ($attribute) {
             self::EDIT => $this->canEdit($hospital, $user),
+            self::DELETE => $this->canDelete($hospital, $user),
             self::VIEWSTATS => $this->canViewStats($hospital, $user),
             default => throw new \LogicException('This code should not be reached!'),
         };
     }
 
     private function canEdit(Hospital $hospital, User $user): bool
+    {
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            return true;
+        }
+
+        return $user === $hospital->getOwner();
+    }
+
+    private function canDelete(Hospital $hospital, User $user): bool
     {
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;
@@ -72,6 +84,10 @@ class HospitalVoter extends Voter
         }
 
         if ($user === $hospital->getOwner()) {
+            return true;
+        }
+
+        if ($hospital->getAssociatedUsers()->contains($user)) {
             return true;
         }
 

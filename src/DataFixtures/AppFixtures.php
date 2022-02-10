@@ -22,23 +22,23 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
     {
         StateFactory::createMany(3);
 
-        DispatchAreaFactory::createMany(8, static fn() => ['state' => StateFactory::random()]);
+        DispatchAreaFactory::createMany(8, static fn () => ['state' => StateFactory::random()]);
 
-        SupplyAreaFactory::createMany(3, static fn() => ['state' => StateFactory::random()]);
+        SupplyAreaFactory::createMany(3, static fn () => ['state' => StateFactory::random()]);
 
-        HospitalFactory::createMany(random_int(3, 10), static fn() => [
+        HospitalFactory::createMany(random_int(3, 10), static fn () => [
             'owner' => UserFactory::random(),
             'state' => StateFactory::random(),
             'dispatchArea' => DispatchAreaFactory::random(),
             'supplyArea' => SupplyAreaFactory::random(),
         ]);
 
-        ImportFactory::createMany(random_int(3, 5), static fn() => [
+        ImportFactory::createMany(random_int(3, 5), static fn () => [
             'user' => UserFactory::random(),
             'hospital' => HospitalFactory::random(),
         ]);
 
-        AllocationFactory::createMany(random_int(128, 256), static fn() => [
+        AllocationFactory::createMany(random_int(128, 256), static fn () => [
             'hospital' => HospitalFactory::random(),
             'import' => ImportFactory::random(),
             'dispatchArea' => DispatchAreaFactory::random()->getName(),
