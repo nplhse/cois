@@ -101,6 +101,9 @@ class User implements UserInterface, TimestampableInterface, \Stringable
         throw new \InvalidArgumentException(sprintf('User has no Role %s', $role));
     }
 
+    /**
+     * @return array<array-key, string>
+     */
     public function getRoles(): array
     {
         // Every user at least has ROLE_USER

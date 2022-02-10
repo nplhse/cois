@@ -97,31 +97,9 @@ class HospitalRepository extends ServiceEntityRepository implements HospitalRepo
             ;
     }
 
-    public function getSupplyAreas(): array
-    {
-        return $this->createQueryBuilder('h')
-            ->select('h.supplyArea as element')
-            ->distinct(true)
-            ->orderBy('h.supplyArea', 'ASC')
-            ->getQuery()
-            ->getArrayResult()
-            ;
-    }
-
-    public function getDispatchAreas(): array
-    {
-        return $this->createQueryBuilder('h')
-            ->select('h.dispatchArea as element')
-            ->distinct(true)
-            ->orderBy('h.dispatchArea', 'ASC')
-            ->getQuery()
-            ->getArrayResult()
-            ;
-    }
-
     public function getHospitalPaginator(int $page, array $filter): Paginator
     {
-        if (1 != $page) {
+        if (1 !== $page) {
             $offset = $page * self::PAGINATOR_PER_PAGE;
         } else {
             $offset = 0;

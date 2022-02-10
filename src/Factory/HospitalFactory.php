@@ -4,26 +4,26 @@ namespace App\Factory;
 
 use App\Entity\Hospital;
 use App\Repository\HospitalRepository;
-use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
+use Zenstruck\Foundry\RepositoryProxy;
 
 /**
  * @extends ModelFactory<Hospital>
  *
- * @method static Hospital|Proxy createOne(array $attributes = [])
- * @method static Hospital[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static Hospital|Proxy find(object|array|mixed $criteria)
- * @method static Hospital|Proxy findOrCreate(array $attributes)
- * @method static Hospital|Proxy first(string $sortedField = 'id')
- * @method static Hospital|Proxy last(string $sortedField = 'id')
- * @method static Hospital|Proxy random(array $attributes = [])
- * @method static Hospital|Proxy randomOrCreate(array $attributes = [])
- * @method static Hospital[]|Proxy[] all()
- * @method static Hospital[]|Proxy[] findBy(array $attributes)
- * @method static Hospital[]|Proxy[] randomSet(int $number, array $attributes = [])
- * @method static Hospital[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static HospitalRepository|RepositoryProxy repository()
+ * @method static         Hospital|Proxy createOne(array $attributes = [])
+ * @method static         Hospital[]|Proxy[] createMany(int $number, array|callable $attributes = [])
+ * @method static         Hospital|Proxy find(object|array|mixed $criteria)
+ * @method static         Hospital|Proxy findOrCreate(array $attributes)
+ * @method static         Hospital|Proxy first(string $sortedField = 'id')
+ * @method static         Hospital|Proxy last(string $sortedField = 'id')
+ * @method static         Hospital|Proxy random(array $attributes = [])
+ * @method static         Hospital|Proxy randomOrCreate(array $attributes = [])
+ * @method static         Hospital[]|Proxy[] all()
+ * @method static         Hospital[]|Proxy[] findBy(array $attributes)
+ * @method static         Hospital[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static         Hospital[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
+ * @method static         HospitalRepository|RepositoryProxy repository()
  * @method Hospital|Proxy create(array|callable $attributes = [])
  */
 final class HospitalFactory extends ModelFactory
@@ -31,7 +31,6 @@ final class HospitalFactory extends ModelFactory
     public function __construct()
     {
         parent::__construct();
-
     }
 
     protected function getDefaults(): array

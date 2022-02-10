@@ -118,7 +118,11 @@ class User extends DomainUser implements UserInterface, PasswordAuthenticatedUse
     // TODO: REMOVE AFTER REFACTORING
     public function getHospital(): ?Hospital
     {
-        return $this->hospitals->first();
+        if ($this->hospitals->first()) {
+            return $this->hospitals->first();
+        }
+
+        return null;
     }
 
     // TODO: REMOVE AFTER REFACTORING
