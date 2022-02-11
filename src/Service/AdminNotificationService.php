@@ -2,9 +2,7 @@
 
 namespace App\Service;
 
-use App\Entity\Hospital;
 use App\Entity\Import;
-use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Component\Mailer\MailerInterface;
@@ -30,36 +28,6 @@ class AdminNotificationService
         $this->mailerFrom = $mailerFrom;
 
         $this->admins = $this->userRepository->findAdmins();
-    }
-
-    public function sendNewUserNotification(User $context): void
-    {
-        foreach ($this->admins as $user) {
-            $email = (new NotificationEmail())
-                ->from(new Address($this->mailerSender, $this->mailerFrom))
-                ->to(new Address($user->getEmail()))
-                ->importance(NotificationEmail::IMPORTANCE_MEDIUM)
-                ->subject('A new User has been created')
-                ->htmlTemplate('emails/notification/user_new.inky.twig')
-                ->context(['user' => $context]);
-
-            $this->mailer->send($email);
-        }
-    }
-
-    public function sendNewHospitalNotification(Hospital $context): void
-    {
-        foreach ($this->admins as $user) {
-            $email = (new NotificationEmail())
-                ->from(new Address($this->mailerSender, $this->mailerFrom))
-                ->to(new Address($user->getEmail()))
-                ->importance(NotificationEmail::IMPORTANCE_MEDIUM)
-                ->subject('A new Hospital has been created')
-                ->htmlTemplate('emails/notification/hospital_new.inky.twig')
-                ->context(['hospital' => $context]);
-
-            $this->mailer->send($email);
-        }
     }
 
     public function sendFailedImportNotification(Import $context): void

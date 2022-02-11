@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" target-language="de" datatype="plaintext" original="file.ext">
+  <file source-language="de" target-language="de" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -2028,6 +2028,34 @@
       <trans-unit id="bubZ20J" resname="Set new password">
         <source>Set new password</source>
         <target>Neues Passwort bestätigen</target>
+      </trans-unit>
+      <trans-unit id="JuoJT9X" resname="All Locations">
+        <source>All Locations</source>
+        <target>Alle Lagen</target>
+      </trans-unit>
+      <trans-unit id="j6H10q1" resname="All Sizes">
+        <source>All Sizes</source>
+        <target>Alle Größen</target>
+      </trans-unit>
+      <trans-unit id="6HKIRFJ" resname="Filter Hospitals">
+        <source>Filter Hospitals</source>
+        <target>Kliniken filtern</target>
+      </trans-unit>
+      <trans-unit id="yRKQJb0" resname="Sort by">
+        <source>Sort by</source>
+        <target>Sortieren nach</target>
+      </trans-unit>
+      <trans-unit id="_NU_9fk" resname="CreatedAt">
+        <source>CreatedAt</source>
+        <target>Erstellungsdatum</target>
+      </trans-unit>
+      <trans-unit id="ijel8Hr" resname="Order by">
+        <source>Order by</source>
+        <target>Reihenfolge</target>
+      </trans-unit>
+      <trans-unit id=".BiJ3MG" resname="Sort items">
+        <source>Sort items</source>
+        <target>Einträge sortieren</target>
       </trans-unit>
     </body>
   </file>

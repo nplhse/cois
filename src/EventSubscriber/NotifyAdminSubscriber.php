@@ -2,6 +2,7 @@
 
 namespace App\EventSubscriber;
 
+use App\Domain\Event\Hospital\HospitalCreatedEvent;
 use App\Domain\Event\User\UserRegisteredEvent;
 use App\Domain\Repository\UserRepositoryInterface;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
@@ -27,6 +28,23 @@ class NotifyAdminSubscriber implements EventSubscriberInterface
         $this->mailerFrom = $mailerFrom;
     }
 
+    public function sendNewHospitalNotification(HospitalCreatedEvent $event): void
+    {
+        $hospital = $event->getHospital();
+
+        foreach ($this->userRepository->findAdmins() as $admin) {
+            $email = (new NotificationEmail())
+                ->from(new Address($this->mailerSender, $this->mailerFrom))
+                ->to(new Address($admin->getEmail()))
+                ->importance(NotificationEmail::IMPORTANCE_MEDIUM)
+                ->subject('A new Hospital has been created')
+                ->htmlTemplate('emails/notification/hospital_new.inky.twig')
+                ->context(['hospital' => $hospital]);
+
+            $this->mailer->send($email);
+        }
+    }
+
     public function sendNewUserNotification(UserRegisteredEvent $event): void
     {
         $user = $event->getUser();
@@ -48,6 +66,7 @@ class NotifyAdminSubscriber implements EventSubscriberInterface
     {
         return [
             UserRegisteredEvent::NAME => ['sendNewUserNotification', -10],
+            HospitalCreatedEvent::NAME => ['sendNewHospitalNotification', -10],
         ];
     }
 }

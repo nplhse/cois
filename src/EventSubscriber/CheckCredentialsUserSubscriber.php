@@ -3,7 +3,6 @@
 namespace App\EventSubscriber;
 
 use App\Entity\User;
-use App\Security\AccountCredentialsExpiredException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\RouterInterface;
@@ -31,10 +30,6 @@ class CheckCredentialsUserSubscriber implements EventSubscriberInterface
         if (!$user instanceof User) {
             throw new \Exception('Unexpected user type');
         }
-
-        if ($user->hasCredentialsExpired()) {
-            //throw new AccountCredentialsExpiredException();
-        }
     }
 
     /**
@@ -42,10 +37,6 @@ class CheckCredentialsUserSubscriber implements EventSubscriberInterface
      */
     public function onLoginFailure(LoginFailureEvent $event)
     {
-        if (!$event->getException() instanceof AccountCredentialsExpiredException) {
-            return;
-        }
-
         $response = new RedirectResponse(
             $this->router->generate('app_reset_credentials')
         );

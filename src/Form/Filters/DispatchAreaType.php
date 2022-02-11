@@ -2,13 +2,10 @@
 
 namespace App\Form\Filters;
 
-use App\Domain\Entity\Hospital;
 use App\Entity\DispatchArea;
-use App\Entity\State;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DispatchAreaType extends AbstractType
@@ -18,10 +15,8 @@ class DispatchAreaType extends AbstractType
         $resolver->setDefaults([
             'required' => false,
             'class' => DispatchArea::class,
-            'query_builder' => function (EntityRepository $er) {
-                return $er->createQueryBuilder('s')
-                    ->orderBy('s.name', 'ASC');
-            },
+            'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('s')
+                ->orderBy('s.name', 'ASC'),
             'choice_label' => 'name',
         ]);
     }

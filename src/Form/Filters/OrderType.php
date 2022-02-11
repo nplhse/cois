@@ -38,7 +38,7 @@ class OrderType extends AbstractType
         }
 
         $builder->add('submit', SubmitType::class, [
-            'label' => 'Sort items'
+            'label' => 'Sort items',
         ]);
     }
 

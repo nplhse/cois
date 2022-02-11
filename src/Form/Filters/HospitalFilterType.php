@@ -23,7 +23,7 @@ class HospitalFilterType extends AbstractType
             ->add('supplyArea', SupplyAreaType::class)
             ->add('dispatchArea', DispatchAreaType::class)
             ->add('submit', SubmitType::class, [
-                'label' => 'Filter Hospitals'
+                'label' => 'Filter Hospitals',
             ])
         ;
     }

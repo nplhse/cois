@@ -54,16 +54,4 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             UserFixtures::class,
         ];
     }
-
-    private function array_random(array $arr, int $num = 1): mixed
-    {
-        shuffle($arr);
-
-        $r = [];
-        for ($i = 0; $i < $num; ++$i) {
-            $r[] = $arr[$i];
-        }
-
-        return 1 == $num ? $r[0] : $r;
-    }
 }

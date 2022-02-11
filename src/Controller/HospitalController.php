@@ -12,8 +12,6 @@ use App\Repository\AllocationRepository;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\HospitalRepository;
 use App\Repository\SupplyAreaRepository;
-use App\Repository\UserRepository;
-use App\Service\AdminNotificationService;
 use App\Service\Filters\DispatchAreaFilter;
 use App\Service\Filters\HospitalFilter;
 use App\Service\Filters\LocationFilter;
@@ -39,13 +37,10 @@ class HospitalController extends AbstractController
 
     private MessageBusInterface $messageBus;
 
-    private AdminNotificationService $adminNotifier;
-
-    public function __construct(FilterService $filterService, MessageBusInterface $messageBus, AdminNotificationService $adminNotifier)
+    public function __construct(FilterService $filterService, MessageBusInterface $messageBus)
     {
         $this->filterService = $filterService;
         $this->messageBus = $messageBus;
-        $this->adminNotifier = $adminNotifier;
     }
 
     #[Route('/', name: 'app_hospital_index')]
@@ -100,7 +95,7 @@ class HospitalController extends AbstractController
             'searchForm' => $searchForm,
             'hospitalForm' => $hospitalForm,
             'hospitals' => $paginator,
-            'pages' => PaginationFactory::create($this->filterService->getValue(PageFilter::Param), count($paginator), UserRepository::PER_PAGE),
+            'pages' => PaginationFactory::create($this->filterService->getValue(PageFilter::Param), count($paginator), HospitalRepository::PER_PAGE),
         ]);
     }
 
@@ -108,9 +103,6 @@ class HospitalController extends AbstractController
     public function new(Request $request, HospitalRepository $hospitalRepository): Response
     {
         $this->denyAccessUnlessGranted('create_hospital', $this->getUser());
-
-        /** @var UserInterface $user */
-        $user = $this->getUser();
 
         $hospital = new Hospital();
 
@@ -120,6 +112,13 @@ class HospitalController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($this->isGranted('ROLE_ADMIN')) {
+                $user = $hospital->getOwner();
+            } else {
+                /** @var UserInterface $user */
+                $user = $this->getUser();
+            }
+
             $command = new CreateHospitalCommand(
                 $user,
                 $hospital->getName(),
@@ -144,8 +143,6 @@ class HospitalController extends AbstractController
             if (null === $hospital) {
                 throw new \RuntimeException('Sorry, something went wrong. Please try again later.');
             }
-
-            $this->adminNotifier->sendNewHospitalNotification($hospital);
 
             return $this->redirectToRoute('app_hospital_show', ['id' => $hospital->getId()]);
         }
