@@ -8,6 +8,8 @@ use App\Domain\Adapter\ArrayCollection;
 
 interface HospitalInterface
 {
+    public function getId(): int;
+
     public function setName(string $name): self;
 
     public function getName(): string;
@@ -28,11 +30,11 @@ interface HospitalInterface
 
     public function setState(StateInterface $state): self;
 
-    public function getState(): StateInterface;
+    public function getState(): ?StateInterface;
 
     public function setDispatchArea(DispatchAreaInterface $dispatchArea): self;
 
-    public function getDispatchArea(): DispatchAreaInterface;
+    public function getDispatchArea(): ?DispatchAreaInterface;
 
     public function setSupplyArea(?SupplyAreaInterface $supplyArea): self;
 

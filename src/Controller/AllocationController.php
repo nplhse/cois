@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Domain\Repository\DispatchAreaRepositoryInterface;
+use App\Domain\Repository\StateRepositoryInterface;
+use App\Domain\Repository\SupplyAreaRepositoryInterface;
 use App\Entity\Allocation;
 use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
@@ -18,6 +21,19 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AllocationController extends AbstractController
 {
+    private StateRepositoryInterface $stateRepository;
+
+    private SupplyAreaRepositoryInterface $supplyAreaRepository;
+
+    private DispatchAreaRepositoryInterface $dispatchAreaRepository;
+
+    public function __construct(StateRepositoryInterface $stateRepository, SupplyAreaRepositoryInterface $supplyAreaRepository, DispatchAreaRepositoryInterface $dispatchAreaRepository)
+    {
+        $this->stateRepository = $stateRepository;
+        $this->supplyAreaRepository = $supplyAreaRepository;
+        $this->dispatchAreaRepository = $dispatchAreaRepository;
+    }
+
     #[Route('/allocations/', name: 'app_allocation_index', methods: ['GET'])]
     public function index_new(Request $request, AllocationRepository $allocationRepository, HospitalRepository $hospitalRepository): Response
     {
@@ -74,8 +90,8 @@ class AllocationController extends AbstractController
             'filterIsSet' => $paramService->isFilterIsSet(),
             'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), AllocationRepository::PAGINATOR_PER_PAGE),
             'hospitals' => $hospitalRepository->getHospitals(),
-            'supplyAreas' => $hospitalRepository->getSupplyAreas(),
-            'dispatchAreas' => $hospitalRepository->getDispatchAreas(),
+            'supplyAreas' => $this->supplyAreaRepository->findAll(),
+            'dispatchAreas' => $this->dispatchAreaRepository->findAll(),
             'assignments' => $allocationRepository->getAllAssignments(),
             'occasions' => $allocationRepository->getAllOccasions(),
             'transports' => $allocationRepository->getAllTransportModes(),

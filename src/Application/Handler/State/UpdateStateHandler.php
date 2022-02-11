@@ -4,7 +4,7 @@ namespace App\Application\Handler\State;
 
 use App\Application\Contract\HandlerInterface;
 use App\Domain\Command\State\UpdateStateCommand;
-use App\Domain\Event\State\StateUpdated;
+use App\Domain\Event\State\StateUpdatedEvent;
 use App\Domain\Repository\StateRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -29,8 +29,8 @@ class UpdateStateHandler implements HandlerInterface
 
         $this->stateRepository->save();
 
-        $event = new StateUpdated($state);
+        $event = new StateUpdatedEvent($state);
 
-        $this->dispatcher->dispatch($event, StateUpdated::NAME);
+        $this->dispatcher->dispatch($event, StateUpdatedEvent::NAME);
     }
 }

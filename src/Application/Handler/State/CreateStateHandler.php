@@ -4,7 +4,7 @@ namespace App\Application\Handler\State;
 
 use App\Application\Contract\HandlerInterface;
 use App\Domain\Command\State\CreateStateCommand;
-use App\Domain\Event\State\StateCreated;
+use App\Domain\Event\State\StateCreatedEvent;
 use App\Domain\Repository\StateRepositoryInterface;
 use App\Entity\State;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -29,8 +29,8 @@ class CreateStateHandler implements HandlerInterface
 
         $this->stateRepository->add($state);
 
-        $event = new StateCreated($state);
+        $event = new StateCreatedEvent($state);
 
-        $this->dispatcher->dispatch($event, StateCreated::NAME);
+        $this->dispatcher->dispatch($event, StateCreatedEvent::NAME);
     }
 }

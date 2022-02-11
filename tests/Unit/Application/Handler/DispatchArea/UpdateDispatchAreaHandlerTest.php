@@ -5,7 +5,7 @@ namespace App\Tests\Unit\Application\Handler\DispatchArea;
 use App\Application\Handler\DispatchArea\UpdateDispatchAreaHandler;
 use App\Domain\Command\DispatchArea\UpdateDispatchAreaCommand;
 use App\Domain\Contracts\DispatchAreaInterface;
-use App\Domain\Event\DispatchArea\DispatchAreaUpdated;
+use App\Domain\Event\DispatchArea\DispatchAreaUpdatedEvent;
 use App\Repository\DispatchAreaRepository;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -28,7 +28,7 @@ class UpdateDispatchAreaHandlerTest extends TestCase
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $eventDispatcher->expects($this->exactly(1))
             ->method('dispatch')
-            ->with($this->isInstanceOf(DispatchAreaUpdated::class), $this->stringContains('dispatch_area.updated'));
+            ->with($this->isInstanceOf(DispatchAreaUpdatedEvent::class), $this->stringContains('dispatch_area.updated'));
 
         $command = new UpdateDispatchAreaCommand(1, 'Test Name');
 

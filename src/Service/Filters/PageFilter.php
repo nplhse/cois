@@ -46,7 +46,7 @@ class PageFilter implements FilterInterface
         $this->checkArguments($arguments, [self::PER_PAGE]);
 
         if (1 !== $page) {
-            $offset = $page * $arguments[self::PER_PAGE];
+            $offset = $page * $arguments[self::PER_PAGE] - $arguments[self::PER_PAGE];
         } else {
             $offset = 0;
         }

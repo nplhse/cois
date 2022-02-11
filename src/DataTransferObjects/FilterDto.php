@@ -6,6 +6,8 @@ class FilterDto
 {
     private array $filters;
 
+    private bool $active = false;
+
     public function __construct(array $filters)
     {
         $this->filters = $filters;
@@ -24,5 +26,15 @@ class FilterDto
     public function getAll(): array
     {
         return $this->filters;
+    }
+
+    public function activate(): void
+    {
+        $this->active = true;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->active;
     }
 }

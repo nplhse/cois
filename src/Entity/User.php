@@ -58,11 +58,11 @@ class User extends DomainUser implements UserInterface, PasswordAuthenticatedUse
      */
     protected ?\DateTimeInterface $updatedAt = null;
 
-    // TODO: REMOVE AFTER REFACTORING
     /**
-     * @ORM\OneToOne(targetEntity=Hospital::class, mappedBy="owner")
+     * @ORM\OneToMany(targetEntity=Hospital::class, mappedBy="owner")
+     * @ORM\OrderBy({"name" = "ASC"})
      */
-    private ?Hospital $hospital = null;
+    protected \Doctrine\Common\Collections\Collection $hospitals;
 
     /**
      * @ORM\Column(type="boolean")
@@ -118,20 +118,11 @@ class User extends DomainUser implements UserInterface, PasswordAuthenticatedUse
     // TODO: REMOVE AFTER REFACTORING
     public function getHospital(): ?Hospital
     {
-        return $this->hospital;
-    }
-
-    // TODO: REMOVE AFTER REFACTORING
-    public function setHospital(Hospital $hospital): self
-    {
-        // set the owning side of the relation if necessary
-        if ($hospital->getOwner() !== $this) {
-            $hospital->setOwner($this);
+        if ($this->hospitals->first()) {
+            return $this->hospitals->first();
         }
 
-        $this->hospital = $hospital;
-
-        return $this;
+        return null;
     }
 
     // TODO: REMOVE AFTER REFACTORING
@@ -190,11 +181,11 @@ class User extends DomainUser implements UserInterface, PasswordAuthenticatedUse
     // TODO: REMOVE AFTER REFACTORING
     public function canImport(): bool
     {
-        if ($this->hospital) {
-            return true;
+        if ($this->hospitals->isEmpty()) {
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     // TODO: REMOVE AFTER REFACTORING

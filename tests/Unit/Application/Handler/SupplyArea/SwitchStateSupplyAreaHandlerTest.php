@@ -6,7 +6,7 @@ use App\Application\Handler\SupplyArea\SwitchStateSupplyAreaHandler;
 use App\Domain\Command\SupplyArea\SwitchStateSupplyAreaCommand;
 use App\Domain\Contracts\StateInterface;
 use App\Domain\Contracts\SupplyAreaInterface;
-use App\Domain\Event\SupplyArea\SupplyAreaSwitchedState;
+use App\Domain\Event\SupplyArea\SupplyAreaSwitchedStateEvent;
 use App\Repository\StateRepository;
 use App\Repository\SupplyAreaRepository;
 use PHPUnit\Framework\TestCase;
@@ -57,7 +57,7 @@ class SwitchStateSupplyAreaHandlerTest extends TestCase
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $eventDispatcher->expects($this->exactly(1))
             ->method('dispatch')
-            ->with($this->isInstanceOf(SupplyAreaSwitchedState::class), $this->stringContains('supply_area.switched_state'));
+            ->with($this->isInstanceOf(SupplyAreaSwitchedStateEvent::class), $this->stringContains('supply_area.switched_state'));
 
         $command = new SwitchStateSupplyAreaCommand(1, 2);
 

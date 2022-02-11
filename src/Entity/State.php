@@ -37,6 +37,12 @@ class State extends DomainState
     protected \Doctrine\Common\Collections\Collection $supplyAreas;
 
     /**
+     * @ORM\OneToMany(targetEntity=Hospital::class, mappedBy="state")
+     * @ORM\OrderBy({"name" = "ASC"})
+     */
+    protected \Doctrine\Common\Collections\Collection $hospitals;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     protected \DateTimeInterface $createdAt;

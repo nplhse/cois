@@ -1954,6 +1954,34 @@
         <source>Set new password</source>
         <target>Set new password</target>
       </trans-unit>
+      <trans-unit id="JuoJT9X" resname="All Locations">
+        <source>All Locations</source>
+        <target>All Locations</target>
+      </trans-unit>
+      <trans-unit id="j6H10q1" resname="All Sizes">
+        <source>All Sizes</source>
+        <target>All Sizes</target>
+      </trans-unit>
+      <trans-unit id="6HKIRFJ" resname="Filter Hospitals">
+        <source>Filter Hospitals</source>
+        <target>Filter Hospitals</target>
+      </trans-unit>
+      <trans-unit id="yRKQJb0" resname="Sort by">
+        <source>Sort by</source>
+        <target>Sort by</target>
+      </trans-unit>
+      <trans-unit id="_NU_9fk" resname="CreatedAt">
+        <source>CreatedAt</source>
+        <target>CreatedAt</target>
+      </trans-unit>
+      <trans-unit id="ijel8Hr" resname="Order by">
+        <source>Order by</source>
+        <target>Order by</target>
+      </trans-unit>
+      <trans-unit id=".BiJ3MG" resname="Sort items">
+        <source>Sort items</source>
+        <target>Sort items</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

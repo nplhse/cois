@@ -5,7 +5,7 @@ namespace App\Application\Handler\User;
 use App\Application\Contract\HandlerInterface;
 use App\Domain\Command\User\CreateUserCommand;
 use App\Domain\Event\User\UserCreatedEvent;
-use App\Domain\Event\User\UserRegistered;
+use App\Domain\Event\User\UserRegisteredEvent;
 use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -62,7 +62,7 @@ class CreateUserHandler implements HandlerInterface
         // Refresh entity from database
         $user = $this->userRepository->findOneByUsername($command->getUsername());
 
-        $event = new UserRegistered($user);
+        $event = new UserRegisteredEvent($user);
         $this->dispatcher->dispatch($event, UserCreatedEvent::NAME);
     }
 }

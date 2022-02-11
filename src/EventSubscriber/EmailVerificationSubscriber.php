@@ -3,7 +3,7 @@
 namespace App\EventSubscriber;
 
 use App\Domain\Event\User\UserChangedEmailEvent;
-use App\Domain\Event\User\UserRegistered;
+use App\Domain\Event\User\UserRegisteredEvent;
 use App\Entity\User;
 use App\Security\EmailVerifier;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -19,7 +19,7 @@ class EmailVerificationSubscriber implements EventSubscriberInterface
         $this->emailVerifier = $emailVerifier;
     }
 
-    public function onUserRegistered(UserRegistered $event): void
+    public function onUserRegistered(UserRegisteredEvent $event): void
     {
         $user = $event->getUser();
 
@@ -50,7 +50,7 @@ class EmailVerificationSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            UserRegistered::NAME => ['onUserRegistered', 0],
+            UserRegisteredEvent::NAME => ['onUserRegistered', 0],
             UserChangedEmailEvent::NAME => ['onUserChangedEmail', 0],
         ];
     }

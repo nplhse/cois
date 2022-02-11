@@ -37,7 +37,7 @@ class PaginationFactory
 
     private static function getLast(int $count, int $perPage): int
     {
-        $last = (int) floor($count / $perPage);
+        $last = (int) ceil($count / $perPage);
 
         if (0 === $count % 10) {
             return --$last;

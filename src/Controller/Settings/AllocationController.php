@@ -2,6 +2,8 @@
 
 namespace App\Controller\Settings;
 
+use App\Domain\Repository\DispatchAreaRepositoryInterface;
+use App\Domain\Repository\SupplyAreaRepositoryInterface;
 use App\Entity\Allocation;
 use App\Form\AllocationType;
 use App\Repository\AllocationRepository;
@@ -18,9 +20,15 @@ class AllocationController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    private SupplyAreaRepositoryInterface $supplyAreaRepository;
+
+    private DispatchAreaRepositoryInterface $dispatchAreaRepository;
+
+    public function __construct(EntityManagerInterface $entityManager, SupplyAreaRepositoryInterface $supplyAreaRepository, DispatchAreaRepositoryInterface $dispatchAreaRepository)
     {
         $this->entityManager = $entityManager;
+        $this->supplyAreaRepository = $supplyAreaRepository;
+        $this->dispatchAreaRepository = $dispatchAreaRepository;
     }
 
     #[Route('/', name: 'app_settings_allocation_index', methods: ['GET'])]
@@ -47,9 +55,9 @@ class AllocationController extends AbstractController
             'search' => $filters['search'],
             'filters' => $filters,
             'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), AllocationRepository::PAGINATOR_PER_PAGE),
-            'hospitals' => $hospitalRepository->getHospitals(),
-            'supplyAreas' => $hospitalRepository->getSupplyAreas(),
-            'dispatchAreas' => $hospitalRepository->getDispatchAreas(),
+            'supplyAreas' => $this->supplyAreaRepository->findAll(),
+            'dispatchAreas' => $this->dispatchAreaRepository->findAll(),
+            'hospitals' => $hospitalRepository->findAll(),
         ]);
     }
 

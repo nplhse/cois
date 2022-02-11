@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Entity;
 
+use App\Domain\Adapter\ArrayCollection;
+use App\Domain\Contracts\HospitalInterface;
 use App\Domain\Contracts\TimestampableInterface;
 use App\Domain\Contracts\UserInterface;
 use App\Domain\Entity\Traits\IdentifierTrait;
@@ -24,6 +26,8 @@ class User implements UserInterface, TimestampableInterface, \Stringable
 
     protected ?string $plainPassword = null;
 
+    protected \Doctrine\Common\Collections\Collection $hospitals;
+
     protected bool $isVerified = false;
 
     protected bool $isParticipant = false;
@@ -34,6 +38,7 @@ class User implements UserInterface, TimestampableInterface, \Stringable
     {
         $this->createdAt = new \DateTime('NOW');
         $this->roles = ['ROLE_USER'];
+        $this->hospitals = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -96,6 +101,9 @@ class User implements UserInterface, TimestampableInterface, \Stringable
         throw new \InvalidArgumentException(sprintf('User has no Role %s', $role));
     }
 
+    /**
+     * @return array<array-key, string>
+     */
     public function getRoles(): array
     {
         // Every user at least has ROLE_USER
@@ -140,6 +148,29 @@ class User implements UserInterface, TimestampableInterface, \Stringable
     public function eraseCredentials(): void
     {
         $this->plainPassword = null;
+    }
+
+    public function addHospital(HospitalInterface $hospital): self
+    {
+        if (!$this->hospitals->contains($hospital)) {
+            $this->hospitals[] = $hospital;
+
+            $hospital->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHospital(HospitalInterface $hospital): self
+    {
+        $this->hospitals->removeElement($hospital);
+
+        return $this;
+    }
+
+    public function getHospitals(): \Doctrine\Common\Collections\Collection
+    {
+        return $this->hospitals;
     }
 
     public function isVerified(): bool

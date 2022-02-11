@@ -6,7 +6,7 @@ use App\Application\Handler\DispatchArea\SwitchStateDispatchAreaHandler;
 use App\Domain\Command\DispatchArea\SwitchStateDispatchAreaCommand;
 use App\Domain\Contracts\DispatchAreaInterface;
 use App\Domain\Contracts\StateInterface;
-use App\Domain\Event\DispatchArea\DispatchAreaSwitchedState;
+use App\Domain\Event\DispatchArea\DispatchAreaSwitchedStateEvent;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\StateRepository;
 use PHPUnit\Framework\TestCase;
@@ -57,7 +57,7 @@ class SwitchStateDispatchAreaHandlerTest extends TestCase
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $eventDispatcher->expects($this->exactly(1))
             ->method('dispatch')
-            ->with($this->isInstanceOf(DispatchAreaSwitchedState::class), $this->stringContains('dispatch_area.switched_state'));
+            ->with($this->isInstanceOf(DispatchAreaSwitchedStateEvent::class), $this->stringContains('dispatch_area.switched_state'));
 
         $command = new SwitchStateDispatchAreaCommand(1, 2);
 

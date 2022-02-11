@@ -97,8 +97,7 @@
                         </h5>
                         <p>
                             {% for supplyArea in supplyAreas %}
-                                {% if
-                                    supplyArea.element == filters.supplyArea %}
+                                {% if supplyArea.name == filters.supplyArea %}
                                     <span class="badge bg-warning">
                                         <i class="bi bi-tag"></i>
                                         <a class="link-light"
@@ -111,7 +110,7 @@
                                                 })
                                             )
                                             }}">
-                                            {{ supplyArea.element }}
+                                            {{ supplyArea.name }}
                                         </a>
                                     </span>
                                 {% else %}
@@ -122,12 +121,12 @@
                                             path(
                                                 'app_settings_allocation_index',
                                                 app.request.query.all|merge({
-                                                    supplyArea: supplyArea.element,
+                                                    supplyArea: supplyArea.name,
                                                     offset: '0'
                                                 })
                                             )
                                             }}">
-                                            {{ supplyArea.element }}
+                                            {{ supplyArea.name }}
                                         </a>
                                     </span>
                                 {% endif %}
@@ -142,8 +141,7 @@
                         <p>
                             {% for dispatchArea in dispatchAreas %}
                                 {% if
-                                    dispatchArea.element
-                                        == filters.dispatchArea %}
+                                    dispatchArea.name == filters.dispatchArea %}
                                     <span class="badge bg-warning">
                                         <i class="bi bi-tag"></i>
                                         <a class="link-light"
@@ -156,7 +154,7 @@
                                                 })
                                             )
                                             }}">
-                                            {{ dispatchArea.element }}
+                                            {{ dispatchArea.name }}
                                         </a>
                                     </span>
                                 {% else %}
@@ -167,12 +165,12 @@
                                             path(
                                                 'app_settings_allocation_index',
                                                 app.request.query.all|merge({
-                                                    dispatchArea: dispatchArea.element,
+                                                    dispatchArea: dispatchArea.name,
                                                     offset: '0'
                                                 })
                                             )
                                             }}">
-                                            {{ dispatchArea.element }}
+                                            {{ dispatchArea.name }}
                                         </a>
                                     </span>
                                 {% endif %}

@@ -3,12 +3,12 @@
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
-use App\Form\OrderType;
+use App\Form\Filters\OrderType;
 use App\Service\Filters\Traits\FilterTrait;
+use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 class OrderFilter implements FilterInterface
 {
     use FilterTrait;
+    use HiddenFieldTrait;
 
     public const Param = 'order';
 
@@ -79,13 +80,7 @@ class OrderFilter implements FilterInterface
             'choices' => $orderChoices,
         ]);
 
-        if ($arguments['hidden'][SearchFilter::Param]) {
-            $form->add('search', HiddenType::class, [
-                'data' => $arguments['hidden'][SearchFilter::Param],
-            ]);
-        }
-
-        return $form;
+        return $this->addHiddenFields($arguments['hidden'], $form);
     }
 
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder

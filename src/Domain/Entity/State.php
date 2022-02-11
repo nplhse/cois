@@ -6,6 +6,7 @@ namespace App\Domain\Entity;
 
 use App\Domain\Adapter\ArrayCollection;
 use App\Domain\Contracts\DispatchAreaInterface;
+use App\Domain\Contracts\HospitalInterface;
 use App\Domain\Contracts\StateInterface;
 use App\Domain\Contracts\SupplyAreaInterface;
 use App\Domain\Entity\Traits\IdentifierTrait;
@@ -22,11 +23,14 @@ class State implements StateInterface, \Stringable
 
     protected \Doctrine\Common\Collections\Collection $supplyAreas;
 
+    protected \Doctrine\Common\Collections\Collection $hospitals;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('NOW');
         $this->dispatchAreas = new ArrayCollection();
         $this->supplyAreas = new ArrayCollection();
+        $this->hospitals = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -90,5 +94,28 @@ class State implements StateInterface, \Stringable
     public function getSupplyAreas(): \Doctrine\Common\Collections\Collection
     {
         return $this->supplyAreas;
+    }
+
+    public function addHospital(HospitalInterface $hospital): self
+    {
+        if (!$this->hospitals->contains($hospital)) {
+            $this->hospitals[] = $hospital;
+
+            $hospital->setState($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHospital(HospitalInterface $hospital): self
+    {
+        $this->hospitals->removeElement($hospital);
+
+        return $this;
+    }
+
+    public function getHospitals(): \Doctrine\Common\Collections\Collection
+    {
+        return $this->hospitals;
     }
 }

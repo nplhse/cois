@@ -3,11 +3,11 @@
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
-use App\Form\SearchType;
+use App\Form\Filters\SearchType;
 use App\Service\Filters\Traits\FilterTrait;
+use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 class SearchFilter implements FilterInterface
 {
     use FilterTrait;
+    use HiddenFieldTrait;
 
     public const Param = 'search';
 
@@ -52,16 +53,7 @@ class SearchFilter implements FilterInterface
             'method' => $arguments['method'],
         ]);
 
-        if ($arguments['hidden'][OrderFilter::Param]) {
-            $form->add('sortBy', HiddenType::class, [
-                'data' => $arguments['hidden'][OrderFilter::Param]['sortBy'],
-            ]);
-            $form->add('orderBy', HiddenType::class, [
-                'data' => $arguments['hidden'][OrderFilter::Param]['orderBy'],
-            ]);
-        }
-
-        return $form;
+        return $this->addHiddenFields($arguments['hidden'], $form);
     }
 
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder

@@ -74,49 +74,24 @@
                     class="collapse"
                     aria-labelledby="heading-example">
                     <div class="card-body">
-                        <h5 class="card-title">
-                            Search
-                        </h5>
-                        <form>
-                            <div class="input-group mb-3">
-                                {% if filters.search %}
-                                    <input type="text"
-                                        name="search"
-                                        class="form-control"
-                                        placeholder="{{ filters.search }}"
-                                        aria-label="Search" />
-                                {% else %}
-                                    <input type="text"
-                                        name="search"
-                                        class="form-control"
-                                        placeholder="Search..."
-                                        aria-label="Search" />
-                                {% endif %}
-                                <button type="submit"
-                                    class="btn btn-outline-secondary">
-                                    <i class="bi bi-search"></i>
-                                </button>
+                        <div class="row">
+                            <div class="col">
+                                {{ form(searchForm) }}
+
+                                {{ form_start(sortForm) }}
+
+                                {{ form_row(sortForm.sortBy) }}
+                                {{ form_row(sortForm.orderBy) }}
+
+                                {{ form_end(sortForm) }}
                             </div>
-                        </form>
+                            <div class="col">
+                                {{ form(hospitalForm) }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            {% if filters.search %}
-                <div class="alert alert-info" role="alert">
-                    {{ 'Searching for'|trans }}: "<i>{{ search }}</i>" | <a href="{{
-                        path(
-                            'app_settings_hospital_index',
-                            app.request.query.all|merge({
-                                search: '',
-                                offset: '0'
-                            })
-                        )
-                        }}">
-                        {{ 'Click here to end search'|trans }}
-                    </a>
-                </div>
-            {% endif %}
 
             <table class="table table-hover">
                 <thead>
@@ -154,20 +129,16 @@
                                 </a>
                             </td>
                             <td>
-                                {% if hospital.owner %}
-                                    <a href="{{
-                                        path(
-                                            'app_settings_user_show',
-                                            {
-                                                id: hospital.owner.id
-                                            }
-                                        )
-                                        }}">
-                                        {{ hospital.owner }}
-                                    </a>
-                                {% else %}
-                                    {{ 'Hospital has no Onwer'|trans }}
-                                {% endif %}
+                                <a href="{{
+                                    path(
+                                        'app_settings_user_show',
+                                        {
+                                            id: hospital.owner.id
+                                        }
+                                    )
+                                    }}">
+                                    {{ hospital.owner }}
+                                </a>
                             </td>
                             <td>
                                 <a class="btn btn-outline-primary"

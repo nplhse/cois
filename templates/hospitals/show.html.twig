@@ -57,45 +57,74 @@
                         <div class="row">
                             <div class="col-6">
                                 <h6 class="card-subtitle text-muted">
+                                    {{ 'State'|trans }}
+                                </h6>
+                                {% if hospital.state %}
+                                    <p>
+                                        <span class="badge bg-secondary">
+                                            <i class="bi bi-collection"></i>
+                                            <a class="link-light"
+                                                href="{{
+                                                path(
+                                                    'app_hospital_index',
+                                                    app.request.query.all|merge({
+                                                        state: hospital.state.id
+                                                    })
+                                                )
+                                                }}">
+                                                {{ hospital.state.name }}
+                                            </a>
+                                        </span>
+                                    </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 class="card-subtitle text-muted">
                                     {{ 'SupplyArea'|trans }}
                                 </h6>
-                                <p>
-                                    <span class="badge bg-secondary">
-                                        <i class="bi bi-collection"></i>
-                                        <a class="link-light"
-                                            href="{{
-                                            path(
-                                                'app_hospital_index',
-                                                app.request.query.all|merge({
-                                                    supplyArea: hospital.supplyArea
-                                                })
-                                            )
-                                            }}">
-                                            {{ hospital.supplyArea }}
-                                        </a>
-                                    </span>
-                                </p>
+                                {% if hospital.supplyArea %}
+                                    <p>
+                                        <span class="badge bg-secondary">
+                                            <i class="bi bi-collection"></i>
+                                            <a class="link-light"
+                                                href="{{
+                                                path(
+                                                    'app_hospital_index',
+                                                    app.request.query.all|merge({
+                                                        supplyArea: hospital.supplyArea.id
+                                                    })
+                                                )
+                                                }}">
+                                                {{ hospital.supplyArea.name }}
+                                            </a>
+                                        </span>
+                                    </p>
+                                {% endif %}
                             </div>
                             <div class="col-6">
                                 <h6 class="card-subtitle text-muted">
                                     {{ 'DispatchArea'|trans }}
                                 </h6>
-                                <p>
-                                    <span class="badge bg-secondary">
-                                        <i class="bi bi-collection"></i>
-                                        <a class="link-light"
-                                            href="{{
-                                            path(
-                                                'app_hospital_index',
-                                                app.request.query.all|merge({
-                                                    dispatchArea: hospital.dispatchArea
-                                                })
-                                            )
-                                            }}">
-                                            {{ hospital.dispatchArea }}
-                                        </a>
-                                    </span>
-                                </p>
+                                {% if hospital.dispatchArea %}
+                                    <p>
+                                        <span class="badge bg-secondary">
+                                            <i class="bi bi-collection"></i>
+                                            <a class="link-light"
+                                                href="{{
+                                                path(
+                                                    'app_hospital_index',
+                                                    app.request.query.all|merge({
+                                                        dispatchArea: hospital.dispatchArea.id
+                                                    })
+                                                )
+                                                }}">
+                                                {{ hospital.dispatchArea.name }}
+                                            </a>
+                                        </span>
+                                    </p>
+                                {% endif %}
                             </div>
                         </div>
 

@@ -15,6 +15,7 @@ class HospitalType extends AbstractType
         $builder
             ->add('name')
             ->add('address')
+            ->add('state')
             ->add('supplyArea')
             ->add('dispatchArea')
             ->add('size', ChoiceType::class, [

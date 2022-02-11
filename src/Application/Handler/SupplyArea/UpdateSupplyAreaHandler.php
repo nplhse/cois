@@ -4,7 +4,7 @@ namespace App\Application\Handler\SupplyArea;
 
 use App\Application\Contract\HandlerInterface;
 use App\Domain\Command\SupplyArea\UpdateSupplyAreaCommand;
-use App\Domain\Event\SupplyArea\SupplyAreaUpdated;
+use App\Domain\Event\SupplyArea\SupplyAreaUpdatedEvent;
 use App\Repository\SupplyAreaRepository;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -29,8 +29,8 @@ class UpdateSupplyAreaHandler implements HandlerInterface
 
         $this->supplyAreaRepository->save();
 
-        $event = new SupplyAreaUpdated($area);
+        $event = new SupplyAreaUpdatedEvent($area);
 
-        $this->dispatcher->dispatch($event, SupplyAreaUpdated::NAME);
+        $this->dispatcher->dispatch($event, SupplyAreaUpdatedEvent::NAME);
     }
 }

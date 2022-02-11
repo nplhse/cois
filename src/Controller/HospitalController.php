@@ -2,94 +2,147 @@
 
 namespace App\Controller;
 
+use App\Domain\Command\Hospital\CreateHospitalCommand;
+use App\Domain\Command\Hospital\EditHospitalCommand;
+use App\Domain\Contracts\HospitalInterface;
+use App\Domain\Contracts\UserInterface;
 use App\Entity\Hospital;
 use App\Form\HospitalType;
 use App\Repository\AllocationRepository;
+use App\Repository\DispatchAreaRepository;
 use App\Repository\HospitalRepository;
-use App\Service\AdminNotificationService;
-use App\Service\RequestParamService;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\SupplyAreaRepository;
+use App\Service\Filters\DispatchAreaFilter;
+use App\Service\Filters\HospitalFilter;
+use App\Service\Filters\LocationFilter;
+use App\Service\Filters\OrderFilter;
+use App\Service\Filters\PageFilter;
+use App\Service\Filters\SearchFilter;
+use App\Service\Filters\SizeFilter;
+use App\Service\Filters\StateFilter;
+use App\Service\Filters\SupplyAreaFilter;
+use App\Service\FilterService;
+use App\Service\PaginationFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Security;
 
 #[Route('/hospitals')]
 class HospitalController extends AbstractController
 {
-    private AdminNotificationService $adminNotifier;
+    private FilterService $filterService;
 
-    private Security $security;
+    private MessageBusInterface $messageBus;
 
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(AdminNotificationService $adminNotifier, Security $security, EntityManagerInterface $entityManager)
+    public function __construct(FilterService $filterService, MessageBusInterface $messageBus)
     {
-        $this->adminNotifier = $adminNotifier;
-        $this->security = $security;
-        $this->entityManager = $entityManager;
+        $this->filterService = $filterService;
+        $this->messageBus = $messageBus;
     }
 
     #[Route('/', name: 'app_hospital_index')]
-    public function index(Request $request, HospitalRepository $hospitalRepository): Response
+    public function index(Request $request, HospitalRepository $hospitalRepository, SupplyAreaRepository $supplyAreaRepository, DispatchAreaRepository $dispatchAreaRepository): Response
     {
-        $paramService = new RequestParamService($request);
+        $this->filterService->setRequest($request);
+        $this->filterService->configureFilters([LocationFilter::Param, SizeFilter::Param, StateFilter::Param, DispatchAreaFilter::Param, SupplyAreaFilter::Param, HospitalFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
 
-        $filters = [];
-        $filters['search'] = $paramService->getSearch();
-        $filters['page'] = $paramService->getPage();
+        $paginator = $hospitalRepository->getHospitalPaginator($this->filterService);
 
-        $filters['location'] = $paramService->getLocation();
-        $filters['size'] = $paramService->getSize();
-        $filters['supplyArea'] = $paramService->getSupplyArea();
-        $filters['dispatchArea'] = $paramService->getDispatchArea();
+        $args = [
+            'action' => $this->generateUrl('app_hospital_index'),
+            'method' => 'GET',
+        ];
 
-        $filters['sortBy'] = $paramService->getSortBy();
+        $hospitalArguments = [
+            'hidden' => [
+                SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
+                OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
+            ],
+        ];
 
-        if (!$paramService->getSortBy()) {
-            $filters['orderBy'] = 'asc';
-        } else {
-            $filters['orderBy'] = $paramService->getOrderBy();
-        }
+        $hospitalForm = $this->filterService->buildForm(HospitalFilter::Param, array_merge($hospitalArguments, $args));
+        $hospitalForm->handleRequest($request);
 
-        $paginator = $hospitalRepository->getHospitalPaginator($paramService->getPage(), $filters);
+        $sortArguments = [
+            'sortable' => HospitalRepository::SORTABLE,
+            'hidden' => [
+                LocationFilter::Param => $this->filterService->getValue(LocationFilter::Param),
+                StateFilter::Param => $this->filterService->getValue(StateFilter::Param),
+                SupplyAreaFilter::Param => $this->filterService->getValue(SupplyAreaFilter::Param),
+                DispatchAreaFilter::Param => $this->filterService->getValue(DispatchAreaFilter::Param),
+                SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
+            ],
+        ];
 
-        return $this->render('hospitals/index.html.twig', [
+        $sortForm = $this->filterService->buildForm(OrderFilter::Param, array_merge($sortArguments, $args));
+        $sortForm->handleRequest($request);
+
+        $searchArguments = [
+            'hidden' => [
+                OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
+            ],
+        ];
+
+        $searchForm = $this->filterService->buildForm(SearchFilter::Param, array_merge($searchArguments, $args));
+        $searchForm->handleRequest($request);
+
+        return $this->renderForm('hospitals/index.html.twig', [
+            'filters' => $this->filterService->getFilterDto(),
+            'sortForm' => $sortForm,
+            'searchForm' => $searchForm,
+            'hospitalForm' => $hospitalForm,
             'hospitals' => $paginator,
-            'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), HospitalRepository::PAGINATOR_PER_PAGE),
-            'filters' => $filters,
-            'filterIsSet' => $paramService->isFilterIsSet(),
-            'locations' => $this->getLocations(),
-            'sizes' => $this->getSizes(),
-            'supplyAreas' => $hospitalRepository->getSupplyAreas(),
-            'dispatchAreas' => $hospitalRepository->getDispatchAreas(),
+            'pages' => PaginationFactory::create($this->filterService->getValue(PageFilter::Param), count($paginator), HospitalRepository::PER_PAGE),
         ]);
     }
 
     #[Route(path: '/new', name: 'app_hospital_new', methods: ['GET', 'POST'])]
     public function new(Request $request, HospitalRepository $hospitalRepository): Response
     {
-        if (null !== $this->getUser()->getHospital()) {
-            throw $this->createAccessDeniedException('You cannot create another hospital.');
-        }
+        $this->denyAccessUnlessGranted('create_hospital', $this->getUser());
 
         $hospital = new Hospital();
 
-        $form = $this->createForm(HospitalType::class, $hospital);
+        $form = $this->createForm(HospitalType::class, $hospital, [
+            'backend' => $this->isGranted('ROLE_ADMIN'),
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $hospital->setCreatedAt(new \DateTime('NOW'));
-            $hospital->setUpdatedAt(new \DateTime('NOW'));
-            $hospital->setOwner($this->getUser());
+            if ($this->isGranted('ROLE_ADMIN')) {
+                $user = $hospital->getOwner();
+            } else {
+                /** @var UserInterface $user */
+                $user = $this->getUser();
+            }
 
-            $this->entityManager->persist($hospital);
-            $this->entityManager->flush();
+            $command = new CreateHospitalCommand(
+                $user,
+                $hospital->getName(),
+                $hospital->getAddress(),
+                $hospital->getState(),
+                $hospital->getDispatchArea(),
+                $hospital->getSupplyArea(),
+                $hospital->getLocation(),
+                $hospital->getBeds(),
+                $hospital->getSize()
+            );
 
-            $this->addFlash('success', 'Your hospital was successfully created.');
+            try {
+                $this->messageBus->dispatch($command);
+            } catch (HandlerFailedException) {
+                $this->addFlash('danger', 'Sorry, something went wrong. Please try again later!');
+            }
 
-            $this->adminNotifier->sendNewHospitalNotification($hospital);
+            /** @var ?HospitalInterface $hospital */
+            $hospital = $hospitalRepository->findOneByTriplet($command->getName(), $command->getLocation(), $command->getBeds());
+
+            if (null === $hospital) {
+                throw new \RuntimeException('Sorry, something went wrong. Please try again later.');
+            }
 
             return $this->redirectToRoute('app_hospital_show', ['id' => $hospital->getId()]);
         }
@@ -105,13 +158,38 @@ class HospitalController extends AbstractController
     {
         $this->denyAccessUnlessGranted('edit', $hospital);
 
-        $form = $this->createForm(HospitalType::class, $hospital);
+        $form = $this->createForm(HospitalType::class, $hospital, [
+            'backend' => $this->isGranted('ROLE_ADMIN'),
+        ]);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $hospital->setUpdatedAt(new \DateTime('NOW'));
+        /** @var UserInterface $user */
+        $user = $this->getUser();
 
-            $this->entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $command = new EditHospitalCommand(
+                $hospital->getId(),
+                $hospital->getOwner(),
+                $hospital->getName(),
+                $hospital->getAddress(),
+                $hospital->getState(),
+                $hospital->getDispatchArea(),
+                $hospital->getSupplyArea(),
+                $hospital->getLocation(),
+                $hospital->getBeds(),
+                $hospital->getSize()
+            );
+
+            try {
+                $this->messageBus->dispatch($command);
+            } catch (HandlerFailedException) {
+                $this->addFlash('danger', 'Sorry, something went wrong. Please try again later!');
+
+                return $this->renderForm('hospital/edit.html.twig', [
+                    'hospital' => $hospital,
+                    'form' => $form,
+                ]);
+            }
 
             $this->addFlash('success', 'Hospital was successfully edited.');
 
@@ -129,7 +207,7 @@ class HospitalController extends AbstractController
     {
         $userIsOwner = $hospital->getOwner() == $this->getUser();
 
-        if ($this->security->isGranted('ROLE_ADMIN')) {
+        if ($this->isGranted('ROLE_ADMIN')) {
             $userIsOwner = true;
         }
 
@@ -138,32 +216,5 @@ class HospitalController extends AbstractController
             'hospital_allocations' => $allocationRepository->countAllocations($hospital),
             'user_can_edit' => true,
         ]);
-    }
-
-    private function getLocations(): array
-    {
-        return [
-            [
-                'element' => 'rural',
-            ],
-            [
-                'element' => 'urban',
-            ],
-        ];
-    }
-
-    private function getSizes(): array
-    {
-        return [
-            [
-                'element' => 'small',
-            ],
-            [
-                'element' => 'medium',
-            ],
-            [
-                'element' => 'large',
-            ],
-        ];
     }
 }

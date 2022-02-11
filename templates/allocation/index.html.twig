@@ -763,19 +763,18 @@
                                 {% endif %}
                                 {% for item in supplyAreas %}
                                     {% if
-                                        item.element == filters.supplyArea
-                                            and item.element != '' %}
-                                        <option value="{{ item.element }}"
+                                        item.name == filters.supplyArea
+                                            and item.name != '' %}
+                                        <option value="{{ item.name }}"
                                             selected>
-                                            {{ item.element }}
+                                            {{ item.name }}
                                         </option>
                                     {% elseif
-                                        item.element == ''
-                                            or item.element == null %}
+                                        item.name == '' or item.name == null %}
                                         <!-- empty -->
                                     {% else %}
-                                        <option value="{{ item.element }}">
-                                            {{ item.element }}
+                                        <option value="{{ item.name }}">
+                                            {{ item.name }}
                                         </option>
                                     {% endif %}
                                 {% endfor %}
@@ -810,19 +809,18 @@
                                 {% endif %}
                                 {% for item in dispatchAreas %}
                                     {% if
-                                        item.element == filters.dispatchArea
-                                            and item.element != '' %}
-                                        <option value="{{ item.element }}"
+                                        item.name == filters.dispatchArea
+                                            and item.name != '' %}
+                                        <option value="{{ item.name }}"
                                             selected>
-                                            {{ item.element }}
+                                            {{ item.name }}
                                         </option>
                                     {% elseif
-                                        item.element == ''
-                                            or item.element == null %}
+                                        item.name == '' or item.name == null %}
                                         <!-- empty -->
                                     {% else %}
-                                        <option value="{{ item.element }}">
-                                            {{ item.element }}
+                                        <option value="{{ item.name }}">
+                                            {{ item.name }}
                                         </option>
                                     {% endif %}
                                 {% endfor %}
