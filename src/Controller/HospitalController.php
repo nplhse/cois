@@ -12,69 +12,95 @@ use App\Repository\AllocationRepository;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\HospitalRepository;
 use App\Repository\SupplyAreaRepository;
+use App\Repository\UserRepository;
 use App\Service\AdminNotificationService;
-use App\Service\RequestParamService;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\Filters\DispatchAreaFilter;
+use App\Service\Filters\HospitalFilter;
+use App\Service\Filters\LocationFilter;
+use App\Service\Filters\OrderFilter;
+use App\Service\Filters\PageFilter;
+use App\Service\Filters\SearchFilter;
+use App\Service\Filters\SizeFilter;
+use App\Service\Filters\StateFilter;
+use App\Service\Filters\SupplyAreaFilter;
+use App\Service\FilterService;
+use App\Service\PaginationFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Security;
 
 #[Route('/hospitals')]
 class HospitalController extends AbstractController
 {
+    private FilterService $filterService;
+
     private MessageBusInterface $messageBus;
 
     private AdminNotificationService $adminNotifier;
 
-    private Security $security;
-
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(MessageBusInterface $messageBus, AdminNotificationService $adminNotifier, Security $security, EntityManagerInterface $entityManager)
+    public function __construct(FilterService $filterService, MessageBusInterface $messageBus, AdminNotificationService $adminNotifier)
     {
+        $this->filterService = $filterService;
         $this->messageBus = $messageBus;
         $this->adminNotifier = $adminNotifier;
-        $this->security = $security;
-        $this->entityManager = $entityManager;
     }
 
     #[Route('/', name: 'app_hospital_index')]
     public function index(Request $request, HospitalRepository $hospitalRepository, SupplyAreaRepository $supplyAreaRepository, DispatchAreaRepository $dispatchAreaRepository): Response
     {
-        $paramService = new RequestParamService($request);
+        $this->filterService->setRequest($request);
+        $this->filterService->configureFilters([LocationFilter::Param, SizeFilter::Param, StateFilter::Param, DispatchAreaFilter::Param, SupplyAreaFilter::Param, HospitalFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
 
-        $filters = [];
-        $filters['search'] = $paramService->getSearch();
-        $filters['page'] = $paramService->getPage();
+        $paginator = $hospitalRepository->getHospitalPaginator($this->filterService);
 
-        $filters['location'] = $paramService->getLocation();
-        $filters['size'] = $paramService->getSize();
-        $filters['supplyArea'] = $paramService->getSupplyArea();
-        $filters['dispatchArea'] = $paramService->getDispatchArea();
+        $args = [
+            'action' => $this->generateUrl('app_hospital_index'),
+            'method' => 'GET',
+        ];
 
-        $filters['sortBy'] = $paramService->getSortBy();
+        $hospitalArguments = [
+            'hidden' => [
+                SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
+                OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
+            ],
+        ];
 
-        if (!$paramService->getSortBy()) {
-            $filters['orderBy'] = 'asc';
-        } else {
-            $filters['orderBy'] = $paramService->getOrderBy();
-        }
+        $hospitalForm = $this->filterService->buildForm(HospitalFilter::Param, array_merge($hospitalArguments, $args));
+        $hospitalForm->handleRequest($request);
 
-        $paginator = $hospitalRepository->getHospitalPaginator($paramService->getPage(), $filters);
+        $sortArguments = [
+            'sortable' => HospitalRepository::SORTABLE,
+            'hidden' => [
+                LocationFilter::Param => $this->filterService->getValue(LocationFilter::Param),
+                StateFilter::Param => $this->filterService->getValue(StateFilter::Param),
+                SupplyAreaFilter::Param => $this->filterService->getValue(SupplyAreaFilter::Param),
+                DispatchAreaFilter::Param => $this->filterService->getValue(DispatchAreaFilter::Param),
+                SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
+            ],
+        ];
 
-        return $this->render('hospitals/index.html.twig', [
+        $sortForm = $this->filterService->buildForm(OrderFilter::Param, array_merge($sortArguments, $args));
+        $sortForm->handleRequest($request);
+
+        $searchArguments = [
+            'hidden' => [
+                OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
+            ],
+        ];
+
+        $searchForm = $this->filterService->buildForm(SearchFilter::Param, array_merge($searchArguments, $args));
+        $searchForm->handleRequest($request);
+
+        return $this->renderForm('hospitals/index.html.twig', [
+            'filters' => $this->filterService->getFilterDto(),
+            'sortForm' => $sortForm,
+            'searchForm' => $searchForm,
+            'hospitalForm' => $hospitalForm,
             'hospitals' => $paginator,
-            'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), HospitalRepository::PAGINATOR_PER_PAGE),
-            'filters' => $filters,
-            'filterIsSet' => $paramService->isFilterIsSet(),
-            'locations' => $this->getLocations(),
-            'sizes' => $this->getSizes(),
-            'supplyAreas' => $supplyAreaRepository->findAll(),
-            'dispatchAreas' => $dispatchAreaRepository->findAll(),
+            'pages' => PaginationFactory::create($this->filterService->getValue(PageFilter::Param), count($paginator), UserRepository::PER_PAGE),
         ]);
     }
 
@@ -89,7 +115,7 @@ class HospitalController extends AbstractController
         $hospital = new Hospital();
 
         $form = $this->createForm(HospitalType::class, $hospital, [
-            'backend' => $this->security->isGranted('ROLE_ADMIN'),
+            'backend' => $this->isGranted('ROLE_ADMIN'),
         ]);
         $form->handleRequest($request);
 
@@ -136,7 +162,7 @@ class HospitalController extends AbstractController
         $this->denyAccessUnlessGranted('edit', $hospital);
 
         $form = $this->createForm(HospitalType::class, $hospital, [
-            'backend' => $this->security->isGranted('ROLE_ADMIN'),
+            'backend' => $this->isGranted('ROLE_ADMIN'),
         ]);
         $form->handleRequest($request);
 
@@ -184,7 +210,7 @@ class HospitalController extends AbstractController
     {
         $userIsOwner = $hospital->getOwner() == $this->getUser();
 
-        if ($this->security->isGranted('ROLE_ADMIN')) {
+        if ($this->isGranted('ROLE_ADMIN')) {
             $userIsOwner = true;
         }
 
@@ -193,32 +219,5 @@ class HospitalController extends AbstractController
             'hospital_allocations' => $allocationRepository->countAllocations($hospital),
             'user_can_edit' => true,
         ]);
-    }
-
-    private function getLocations(): array
-    {
-        return [
-            [
-                'element' => 'rural',
-            ],
-            [
-                'element' => 'urban',
-            ],
-        ];
-    }
-
-    private function getSizes(): array
-    {
-        return [
-            [
-                'element' => 'small',
-            ],
-            [
-                'element' => 'medium',
-            ],
-            [
-                'element' => 'large',
-            ],
-        ];
     }
 }

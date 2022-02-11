@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Filters;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -37,7 +37,9 @@ class OrderType extends AbstractType
             ;
         }
 
-        $builder->add('submit', SubmitType::class);
+        $builder->add('submit', SubmitType::class, [
+            'label' => 'Sort items'
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -45,6 +47,7 @@ class OrderType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => false,
             'default_orderBy' => 'asc',
+            'allow_extra_fields' => true,
         ]);
     }
 }

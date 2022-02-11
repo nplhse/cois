@@ -3,7 +3,8 @@
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
-use App\Form\Filters\SearchType;
+use App\Domain\Entity\Hospital;
+use App\Form\Filters\SizeType;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
@@ -12,14 +13,14 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class SearchFilter implements FilterInterface
+class SizeFilter implements FilterInterface
 {
     use FilterTrait;
     use HiddenFieldTrait;
 
-    public const Param = 'search';
+    public const Param = 'size';
 
-    public const SEARCHABLE = 'searchable';
+    public const Sizes = [Hospital::SIZE_SMALL, Hospital::SIZE_MEDIUM, Hospital::SIZE_LARGE];
 
     private FormFactoryInterface $formFactory;
 
@@ -30,12 +31,16 @@ class SearchFilter implements FilterInterface
 
     public function getValue(Request $request): mixed
     {
-        $search = $request->query->get('search');
+        $size = $request->query->get('size');
 
-        if (empty($search)) {
+        if (empty($size)) {
             $value = null;
         } else {
-            $value = urldecode($search);
+            $value = urldecode($size);
+        }
+
+        if (!in_array($value, self::Sizes, true)) {
+            $value = null;
         }
 
         return $this->setCacheValue($value);
@@ -48,7 +53,7 @@ class SearchFilter implements FilterInterface
 
     public function buildForm(array $arguments): ?FormInterface
     {
-        $form = $this->formFactory->create(SearchType::class, null, [
+        $form = $this->formFactory->create(SizeType::class, null, [
             'action' => $arguments['action'],
             'method' => $arguments['method'],
         ]);
@@ -58,19 +63,15 @@ class SearchFilter implements FilterInterface
 
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder
     {
-        $search = $this->cacheValue ?? $this->getValue($request);
+        $size = $this->cacheValue ?? $this->getValue($request);
 
-        $this->checkArguments($arguments, [self::SEARCHABLE]);
-
-        if (!isset($search)) {
+        if (!isset($size)) {
             return $qb;
         }
 
-        foreach ($arguments[self::SEARCHABLE] as $key) {
-            $qb->orWhere($arguments[FilterService::ENTITY_ALIAS].$key.' LIKE :search')
-                ->setParameter('search', '%'.$search.'%')
+        $qb->orWhere($arguments[FilterService::ENTITY_ALIAS].'size = :size')
+                ->setParameter('size', $size)
             ;
-        }
 
         return $qb;
     }

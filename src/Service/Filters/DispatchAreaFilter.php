@@ -3,7 +3,8 @@
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
-use App\Form\Filters\SearchType;
+use App\Domain\Entity\Hospital;
+use App\Form\Filters\LocationType;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
@@ -12,14 +13,12 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class SearchFilter implements FilterInterface
+class DispatchAreaFilter implements FilterInterface
 {
     use FilterTrait;
     use HiddenFieldTrait;
 
-    public const Param = 'search';
-
-    public const SEARCHABLE = 'searchable';
+    public const Param = 'dispatchArea';
 
     private FormFactoryInterface $formFactory;
 
@@ -30,12 +29,12 @@ class SearchFilter implements FilterInterface
 
     public function getValue(Request $request): mixed
     {
-        $search = $request->query->get('search');
+        $area = $request->query->get('dispatchArea');
 
-        if (empty($search)) {
+        if (empty($area)) {
             $value = null;
         } else {
-            $value = urldecode($search);
+            $value = urldecode($area);
         }
 
         return $this->setCacheValue($value);
@@ -48,7 +47,7 @@ class SearchFilter implements FilterInterface
 
     public function buildForm(array $arguments): ?FormInterface
     {
-        $form = $this->formFactory->create(SearchType::class, null, [
+        $form = $this->formFactory->create(LocationType::class, null, [
             'action' => $arguments['action'],
             'method' => $arguments['method'],
         ]);
@@ -58,19 +57,16 @@ class SearchFilter implements FilterInterface
 
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder
     {
-        $search = $this->cacheValue ?? $this->getValue($request);
+        $area = $this->cacheValue ?? $this->getValue($request);
 
-        $this->checkArguments($arguments, [self::SEARCHABLE]);
-
-        if (!isset($search)) {
+        if (!isset($area)) {
             return $qb;
         }
 
-        foreach ($arguments[self::SEARCHABLE] as $key) {
-            $qb->orWhere($arguments[FilterService::ENTITY_ALIAS].$key.' LIKE :search')
-                ->setParameter('search', '%'.$search.'%')
+        $qb->leftJoin($arguments[FilterService::ENTITY_ALIAS].'dispatchArea', 'dispatchArea')
+            ->orWhere('dispatchArea.id = :dispatchArea')
+                ->setParameter('dispatchArea', $area)
             ;
-        }
 
         return $qb;
     }

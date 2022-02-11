@@ -6,6 +6,10 @@ use App\Domain\Contracts\HospitalInterface;
 use App\Domain\Repository\HospitalRepositoryInterface;
 use App\Entity\Hospital;
 use App\Entity\User;
+use App\Service\Filters\OrderFilter;
+use App\Service\Filters\PageFilter;
+use App\Service\Filters\SearchFilter;
+use App\Service\FilterService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
@@ -18,7 +22,17 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class HospitalRepository extends ServiceEntityRepository implements HospitalRepositoryInterface
 {
-    public const PAGINATOR_PER_PAGE = 10;
+    public const PER_PAGE = 10;
+
+    public const DEFAULT_ORDER = 'asc';
+
+    public const DEFAULT_SORT = 'name';
+
+    public const SORTABLE = ['name', 'createdAt'];
+
+    public const SEARCHABLE = ['name'];
+
+    public const ENTITY_ALIAS = 'h.';
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -97,16 +111,24 @@ class HospitalRepository extends ServiceEntityRepository implements HospitalRepo
             ;
     }
 
-    public function getHospitalPaginator(int $page, array $filter): Paginator
+    public function getHospitalPaginator(FilterService $filterService): Paginator
     {
-        if (1 !== $page) {
-            $offset = $page * self::PAGINATOR_PER_PAGE;
-        } else {
-            $offset = 0;
-        }
+        $qb = $this->createQueryBuilder('h');
 
-        $query = $this->createQueryBuilder('h');
+        $arguments = [
+            PageFilter::PER_PAGE => self::PER_PAGE,
+            FilterService::ENTITY_ALIAS => self::ENTITY_ALIAS,
+            OrderFilter::DEFAULT_ORDER => self::DEFAULT_ORDER,
+            OrderFilter::DEFAULT_SORT => self::DEFAULT_SORT,
+            OrderFilter::SORTABLE => self::SORTABLE,
+            SearchFilter::SEARCHABLE => self::SEARCHABLE,
+        ];
 
+        $qb = $filterService->processQuery($qb, $arguments);
+
+        return new Paginator($qb->getQuery());
+
+        /***
         if ($filter['search']) {
             $query->where('h.name LIKE :search')
                 ->setParameter('search', '%'.$filter['search'].'%')
@@ -190,6 +212,6 @@ class HospitalRepository extends ServiceEntityRepository implements HospitalRepo
             ->getQuery()
         ;
 
-        return new Paginator($query);
+        return new Paginator($query);*/
     }
 }

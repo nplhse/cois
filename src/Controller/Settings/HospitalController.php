@@ -48,7 +48,7 @@ class HospitalController extends AbstractController
         $filters['location'] = $paramService->getLocation();
         $filters['size'] = $paramService->getSize();
 
-        $paginator = $hospitalRepository->getHospitalPaginator($paramService->getPage(), $filters);
+        $paginator = $hospitalRepository->getHospitalPaginator($paramService->getPage());
 
         return $this->render('settings/hospital/index.html.twig', [
             'hospitals' => $paginator,

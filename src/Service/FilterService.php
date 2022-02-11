@@ -83,6 +83,10 @@ class FilterService
         $filterDto = new FilterDto([]);
 
         foreach ($this->availableFilters as $filter) {
+            if ($this->filters[$filter]->getValue($this->request)) {
+                $filterDto->activate();
+            }
+
             $filterDto->set($this->filters[$filter]->getParam(), $this->filters[$filter]->getValue($this->request));
         }
 

@@ -66,13 +66,20 @@
                                     </h6>
 
                                     <p class="m-0">
-                                        {% if hospital.supplyArea %}
+                                        {% if hospital.state %}
                                             <span class="badge bg-secondary">
                                                 <i class="bi bi-tag"></i>
-                                                <a class="link-light" href="#">
-                                                    {{
-                                                        hospital.supplyArea.name
-                                                    }}
+                                                <a class="link-light"
+                                                    href="{{
+                                                    path(
+                                                        'app_hospital_index',
+                                                        app.request.query.all|merge({
+                                                            state: hospital.state.id,
+                                                            page: 1
+                                                        })
+                                                    )
+                                                    }}">
+                                                    {{ hospital.state.name }}
                                                 </a>
                                             </span>
                                         {% endif %}
@@ -80,9 +87,38 @@
                                         {% if hospital.dispatchArea %}
                                             <span class="badge bg-secondary">
                                                 <i class="bi bi-tag"></i>
-                                                <a class="link-light" href="#">
+                                                <a class="link-light"
+                                                    href="{{
+                                                    path(
+                                                        'app_hospital_index',
+                                                        app.request.query.all|merge({
+                                                            state: hospital.dispatchArea.id,
+                                                            page: 1
+                                                        })
+                                                    )
+                                                    }}">
                                                     {{
                                                         hospital.dispatchArea.name
+                                                    }}
+                                                </a>
+                                            </span>
+                                        {% endif %}
+
+                                        {% if hospital.supplyArea %}
+                                            <span class="badge bg-secondary">
+                                                <i class="bi bi-tag"></i>
+                                                <a class="link-light"
+                                                    href="{{
+                                                    path(
+                                                        'app_hospital_index',
+                                                        app.request.query.all|merge({
+                                                            state: hospital.supplyArea.id,
+                                                            page: 1
+                                                        })
+                                                    )
+                                                    }}">
+                                                    {{
+                                                        hospital.supplyArea.name
                                                     }}
                                                 </a>
                                             </span>
@@ -180,7 +216,7 @@
                     }}
                 </div>
                 <div class="col-2">
-                    {{ pagination.goTo('app_hospital_index') }}
+                    {{ pagination.goTo('app_settings_user_index') }}
                 </div>
             </div>
         </div>
@@ -203,112 +239,9 @@
                     {{ 'Filters'|trans({}, 'forms') }}
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">
-                        {{ 'Search'|trans }}
-                    </h5>
+                    {{ form(searchForm) }}
 
-                    {{ filter.search(filters.search) }}
-
-                    <form>
-                        <h5 class="card-title">
-                            {{ 'Filter by Location'|trans }}
-                        </h5>
-                        <p class="mb-2">
-                            <select class="form-select"
-                                name="location"
-                                aria-label="filterLocation">
-                                {% if filters.location == null %}
-                                    <option value="" selected>
-                                        {{
-                                            'Filter by Location'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% else %}
-                                    <option value="">
-                                        {{
-                                            'Stop filtering by Location'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% endif %}
-                                {% for item in locations %}
-                                    {% if
-                                        item.element == filters.location
-                                            and item.element != '' %}
-                                        <option value="{{ item.element }}"
-                                            selected>
-                                            {{ item.element|trans }}
-                                        </option>
-                                    {% elseif
-                                        item.element == ''
-                                            or item.element == null %}
-                                        <!-- empty -->
-                                    {% else %}
-                                        <option value="{{ item.element }}">
-                                            {{ item.element|trans }}
-                                        </option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </p>
-
-                        <h5 class="card-title">
-                            {{ 'Filter by Size'|trans }}
-                        </h5>
-                        <p class="mb-2">
-                            <select class="form-select"
-                                name="size"
-                                aria-label="filterSize">
-                                {% if filters.size == null %}
-                                    <option value="" selected>
-                                        {{
-                                            'Filter by Size'|trans({}, 'forms')
-                                        }}
-                                    </option>
-                                {% else %}
-                                    <option value="">
-                                        {{
-                                            'Stop filtering by Size'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% endif %}
-                                {% for item in sizes %}
-                                    {% if
-                                        item.element == filters.size
-                                            and item.element != '' %}
-                                        <option value="{{ item.element }}"
-                                            selected>
-                                            {{ item.element|trans }}
-                                        </option>
-                                    {% elseif
-                                        item.element == ''
-                                            or item.element == null %}
-                                        <!-- empty -->
-                                    {% else %}
-                                        <option value="{{ item.element }}">
-                                            {{ item.element|trans }}
-                                        </option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </p>
-
-                        <div class="float-end">
-                            <button type="submit"
-                                class="btn btn-outline-primary">
-                                {{ 'Apply filters'|trans({}, 'forms') }}
-                                <i class="bi bi-arrow-right-square"></i>
-                            </button>
-                        </div>
-                    </form>
+                    {{ form(hospitalForm) }}
                 </div>
             </div>
 
@@ -317,108 +250,12 @@
                     <i class="bi bi-sort-down"></i> {{ 'Sorting'|trans }}
                 </div>
                 <div class="card-body">
-                    <form>
-                        <div class="form-floating mb-2">
-                            <select id="sortBy"
-                                name="sortBy"
-                                class="form-select"
-                                aria-label="sortBy">
-                                {% if filters.sortBy == 'name' %}
-                                    <option value="name" selected="selected">
-                                        {{ 'Name'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="name">
-                                        {{ 'Name'|trans }}
-                                    </option>
-                                {% endif %}
-                                {% if filters.sortBy == 'supplyArea' %}
-                                    <option value="supplyArea"
-                                        selected="selected">
-                                        {{ 'SupplyArea'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="supplyArea">
-                                        {{ 'Supply Area'|trans }}
-                                    </option>
-                                {% endif %}
-                                {% if filters.sortBy == 'dispatchArea' %}
-                                    <option value="dispatchArea"
-                                        selected="selected">
-                                        {{ 'DispatchArea'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="dispatchArea">
-                                        {{ 'DispatchArea'|trans }}
-                                    </option>
-                                {% endif %}
-                                {% if filters.sortBy == 'size' %}
-                                    <option value="size" selected="selected">
-                                        {{ 'Size'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="size">
-                                        {{ 'Size'|trans }}
-                                    </option>
-                                {% endif %}
-                                {% if filters.sortBy == 'location' %}
-                                    <option value="location"
-                                        selected="selected">
-                                        {{ 'Location'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="status">
-                                        {{ 'Location'|trans }}
-                                    </option>
-                                {% endif %}
-                            </select>
-                            <label for="sortBy">
-                                {{ 'Sort by'|trans({}, 'forms') }}
-                            </label>
-                        </div>
-                        <div class="form-floating mb-2">
-                            <select id="orderBy"
-                                name="orderBy"
-                                class="form-select"
-                                aria-label="sortorder">
-                                {% if filters.orderBy == 'asc' %}
-                                    <option value="asc" selected="selected">
-                                        {{ 'Ascending'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="asc">
-                                        {{ 'Ascending'|trans }}
-                                    </option>
-                                {% endif %}
-                                {% if filters.orderBy == 'desc' %}
-                                    <option value="desc" selected="selected">
-                                        {{ 'Descending'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="desc">
-                                        {{ 'Descending'|trans }}
-                                    </option>
-                                {% endif %}
-                            </select>
-                            <label for="sortorder">
-                                {{ 'Order by'|trans({}, 'forms') }}
-                            </label>
-                        </div>
+                    {{ form_start(sortForm) }}
 
-                        {% if filters.search %}
-                            <input type="hidden"
-                                id="search"
-                                name="search"
-                                value="{{ filters.search }}" />
-                        {% endif %}
+                    {{ form_row(sortForm.sortBy) }}
+                    {{ form_row(sortForm.orderBy) }}
 
-                        <div class="float-end">
-                            <button type="submit"
-                                class="btn btn-outline-primary">
-                                {{ 'Sort hospitals'|trans }}
-                            </button>
-                        </div>
-                    </form>
+                    {{ form_end(sortForm) }}
                 </div>
             </div>
         </div>

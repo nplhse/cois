@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Filters;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SearchType extends AbstractType
+class HospitalFilterType extends AbstractType
 {
     public function getBlockPrefix(): string
     {
@@ -18,8 +17,14 @@ class SearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('search', TextType::class)
-            ->add('submit', SubmitType::class)
+            ->add('location', LocationType::class)
+            ->add('size', SizeType::class)
+            ->add('state', StateType::class)
+            ->add('supplyArea', SupplyAreaType::class)
+            ->add('dispatchArea', DispatchAreaType::class)
+            ->add('submit', SubmitType::class, [
+                'label' => 'Filter Hospitals'
+            ])
         ;
     }
 
