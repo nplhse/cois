@@ -27,7 +27,9 @@ class Import implements ImportInterface, IdentifierInterface, TimestampableInter
 
     public const MIME_CSV = 'text/csv';
 
-    public const EXT_CSV = '.csv';
+    public const MIME_PLAIN = 'text/plain';
+
+    public const EXT_CSV = 'csv';
 
     protected string $name;
 
@@ -45,7 +47,7 @@ class Import implements ImportInterface, IdentifierInterface, TimestampableInter
 
     protected string $filePath;
 
-    protected array $mimeTypes = [self::MIME_CSV];
+    protected array $mimeTypes = [self::MIME_PLAIN, self::MIME_CSV];
 
     protected string $fileMimeType;
 
@@ -185,7 +187,7 @@ class Import implements ImportInterface, IdentifierInterface, TimestampableInter
 
     public function setFileSize(int $size): self
     {
-        if ($size > 0) {
+        if ($size >= 0) {
             $this->fileSize = $size;
 
             return $this;
@@ -201,7 +203,7 @@ class Import implements ImportInterface, IdentifierInterface, TimestampableInter
 
     public function setRowCount(int $rowCount): self
     {
-        if ($rowCount > 0) {
+        if ($rowCount >= 0) {
             $this->rowCount = $rowCount;
 
             return $this;
@@ -229,7 +231,7 @@ class Import implements ImportInterface, IdentifierInterface, TimestampableInter
 
     public function setRuntime(int $runtime): self
     {
-        if ($runtime > 0) {
+        if ($runtime >= 0) {
             $this->runtime = $runtime;
 
             return $this;

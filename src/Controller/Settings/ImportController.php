@@ -7,8 +7,8 @@ use App\Form\ImportType;
 use App\Message\ImportDataMessage;
 use App\Repository\AllocationRepository;
 use App\Repository\ImportRepository;
-use App\Service\FileUploader;
 use App\Service\RequestParamService;
+use App\Service\UploadService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -57,7 +57,7 @@ class ImportController extends AbstractController
     }
 
     #[Route('/new', name: 'app_settings_import_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, FileUploader $fileUploader): Response
+    public function new(Request $request, UploadService $fileUploader): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
@@ -120,7 +120,7 @@ class ImportController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_settings_import_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Import $import, FileUploader $fileUploader): Response
+    public function edit(Request $request, Import $import, UploadService $fileUploader): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 

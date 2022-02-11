@@ -2,19 +2,19 @@
 
 namespace App\Controller;
 
+use App\Domain\Command\Import\CreateImportCommand;
+use App\Domain\Event\Import\ImportFailedEvent;
 use App\Entity\Import;
 use App\Form\ImportType;
-use App\Form\UploadType;
-use App\Message\ImportDataMessage;
 use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
 use App\Repository\ImportRepository;
-use App\Service\AdminNotificationService;
-use App\Service\FileUploader;
 use App\Service\RequestParamService;
+use App\Service\UploadService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,21 +28,18 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route(path: '/import')]
 class ImportController extends AbstractController
 {
-    private AdminNotificationService $adminNotifier;
-
     private EntityManagerInterface $entityManager;
 
     private MessageBusInterface $messageBus;
 
-    public function __construct(AdminNotificationService $adminNotifier, EntityManagerInterface $entityManager, MessageBusInterface $messageBus)
+    public function __construct(EntityManagerInterface $entityManager, MessageBusInterface $messageBus)
     {
-        $this->adminNotifier = $adminNotifier;
         $this->entityManager = $entityManager;
         $this->messageBus = $messageBus;
     }
 
     #[Route(path: '/', name: 'app_import_index')]
-    public function index(Request $request, FileUploader $fileUploader, ImportRepository $importRepository, HospitalRepository $hospitalRepository): Response
+    public function index(Request $request, UploadService $fileUploader, ImportRepository $importRepository, HospitalRepository $hospitalRepository): Response
     {
         $hospital = $hospitalRepository->findOneBy(['owner' => $this->getUser()->getId()]);
 
@@ -68,60 +65,43 @@ class ImportController extends AbstractController
     }
 
     #[Route(path: '/new', name: 'app_import_new')]
-    public function new(Request $request, FileUploader $fileUploader, ImportRepository $importRepository): Response
+    public function new(Request $request, UploadService $fileUploader, ImportRepository $importRepository, EventDispatcherInterface $eventDispatcher): Response
     {
-        $hospital = $this->getUser()->getHospital();
-
-        if (!isset($hospital)) {
-            return $this->redirectToRoute('app_import_index');
-        }
+        $this->denyAccessUnlessGranted('create_import', $this->getUser());
 
         $import = new Import();
 
-        $user = $this->getUser();
-        $form = $this->createForm(UploadType::class);
+        $form = $this->createForm(ImportType::class, $import);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $import = $form->getData();
+            if (!$this->isGranted('ROLE_ADMIN')) {
+                $import->setUser($this->getUser());
+            }
 
             /** @var UploadedFile $file */
             $file = $form->get('file')->getData();
-            $fileData = $fileUploader->uploadFile($file);
+            $filePath = $fileUploader->uploadFile($file);
 
-            $import->setName($fileData['uniqueName']);
-            $import->setExtension($file->getClientOriginalExtension());
-            $import->setPath($fileData['path']);
-            $import->setMimeType($file->getMimeType());
-            $import->setSize($file->getSize());
-            $import->setCreatedAt(new \DateTime('NOW'));
-            $import->setIsFixture(false);
-            $import->setFile(null);
-
-            $import->setUser($user);
-            $import->setHospital($hospital);
-
-            $import->setStatus('pending');
-
-            $this->entityManager->persist($import);
-            $this->entityManager->flush();
+            $command = new CreateImportCommand(
+                $import->getName(),
+                $import->getType(),
+                $import->getUser(),
+                $import->getHospital(),
+                $filePath,
+                $file->getMimeType(),
+                $file->getClientOriginalExtension(),
+                $file->getSize()
+            );
 
             try {
-                $this->messageBus->dispatch(new ImportDataMessage($import, $hospital));
-
-                $this->addFlash('success', 'Your import was successfully created.');
+                $this->messageBus->dispatch($command);
             } catch (HandlerFailedException $e) {
-                $import->setStatus('failed');
-                $import->setLastError($e->getMessage());
-                $import->setLastRun(new \DateTime('NOW'));
-
-                $this->entityManager->persist($import);
-                $this->entityManager->flush();
-
-                $this->addFlash('danger', 'Your import failed, see details for more information. We have send a notification to the admin to handle this issue.');
-
-                $this->adminNotifier->sendFailedImportNotification($import);
+                $eventDispatcher->dispatch(new ImportFailedEvent($import, $e), ImportFailedEvent::NAME);
+                $this->addFlash('danger', 'Your import failed. We have send a notification to the admin to handle this issue.');
             }
+
+            $import = $importRepository->findOneBy(['name' => $import->getName(), 'filePath' => $filePath]);
 
             return $this->redirectToRoute('app_import_show', ['id' => $import->getId()]);
         }

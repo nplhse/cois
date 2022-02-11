@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Domain\Contracts\ImportInterface;
+use App\Domain\Repository\ImportRepositoryInterface;
 use App\Entity\Import;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -14,13 +16,43 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Import[]    findAll()
  * @method Import[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ImportRepository extends ServiceEntityRepository
+class ImportRepository extends ServiceEntityRepository implements ImportRepositoryInterface
 {
+    // TODO: Remove after refactoring
     public const PAGINATOR_PER_PAGE = 10;
+
+    public const PER_PAGE = 10;
+
+    public const DEFAULT_ORDER = 'asc';
+
+    public const DEFAULT_SORT = 'name';
+
+    public const SORTABLE = ['name', 'createdAt'];
+
+    public const SEARCHABLE = ['name'];
+
+    public const ENTITY_ALIAS = 'h.';
 
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Import::class);
+    }
+
+    public function add(ImportInterface $import): void
+    {
+        $this->_em->persist($import);
+        $this->_em->flush();
+    }
+
+    public function save(): void
+    {
+        $this->_em->flush();
+    }
+
+    public function delete(ImportInterface $import): void
+    {
+        $this->_em->remove($import);
+        $this->_em->flush();
     }
 
     public function findByUser(User $user): array

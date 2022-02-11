@@ -3,6 +3,7 @@
 namespace App\EventSubscriber;
 
 use App\Domain\Event\Hospital\HospitalCreatedEvent;
+use App\Domain\Event\Import\ImportFailedEvent;
 use App\Domain\Event\User\UserRegisteredEvent;
 use App\Domain\Repository\UserRepositoryInterface;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
@@ -28,7 +29,7 @@ class NotifyAdminSubscriber implements EventSubscriberInterface
         $this->mailerFrom = $mailerFrom;
     }
 
-    public function sendNewHospitalNotification(HospitalCreatedEvent $event): void
+    public function sendHospitalCreatedNotification(HospitalCreatedEvent $event): void
     {
         $hospital = $event->getHospital();
 
@@ -40,6 +41,27 @@ class NotifyAdminSubscriber implements EventSubscriberInterface
                 ->subject('A new Hospital has been created')
                 ->htmlTemplate('emails/notification/hospital_new.inky.twig')
                 ->context(['hospital' => $hospital]);
+
+            $this->mailer->send($email);
+        }
+    }
+
+    public function sendImportFailedNotification(ImportFailedEvent $event): void
+    {
+        $import = $event->getImport();
+        $exception = $event->getException();
+
+        foreach ($this->userRepository->findAdmins() as $admin) {
+            $email = (new NotificationEmail())
+                ->from(new Address($this->mailerSender, $this->mailerFrom))
+                ->to(new Address($admin->getEmail()))
+                ->importance(NotificationEmail::IMPORTANCE_HIGH)
+                ->subject('A new Import has failed')
+                ->htmlTemplate('emails/notification/import_failed.inky.twig')
+                ->context([
+                    'import' => $import,
+                    'exception' => $exception,
+                ]);
 
             $this->mailer->send($email);
         }
@@ -65,8 +87,9 @@ class NotifyAdminSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
+            HospitalCreatedEvent::NAME => ['sendHospitalCreatedNotification', -10],
+            ImportFailedEvent::NAME => ['sendImportFailedNotification', -10],
             UserRegisteredEvent::NAME => ['sendNewUserNotification', -10],
-            HospitalCreatedEvent::NAME => ['sendNewHospitalNotification', -10],
         ];
     }
 }

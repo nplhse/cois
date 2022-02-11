@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Import;
-use App\Service\FileUploader;
+use App\Service\UploadService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class FileController extends AbstractController
 {
     #[Route(path: '/alloc/{id}', name: 'app_files_allocations')]
-    public function index(Import $import, FileUploader $fileUploader): Response
+    public function index(Import $import, UploadService $fileUploader): Response
     {
         $path = $import->getPath();
 

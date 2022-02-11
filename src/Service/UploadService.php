@@ -5,7 +5,7 @@ namespace App\Service;
 use League\Flysystem\FilesystemOperator;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class FileUploader
+class UploadService
 {
     private FilesystemOperator $storage;
 
@@ -14,34 +14,20 @@ class FileUploader
         $this->storage = $defaultStorage;
     }
 
-    /**
-     * @return array<array-key, string>
-     *
-     * @throws \Exception
-     */
-    public function uploadFile(UploadedFile $file): array
+    public function uploadFile(UploadedFile $file): string
     {
-        $uniqueName = $this->generateRandomName($file);
-
-        $time = time();
-        $dir = date('Y', $time).'/'.date('m', $time).'/'.date('d', time()).'/';
-
         $extension = $file->getClientOriginalExtension();
         $extension = preg_replace('/[^\w-]/', '', $extension);
 
-        $path = $dir.$uniqueName.'.'.$extension;
+        $path = $this->generateDirectory(time()).$this->generateRandomName($file).'.'.$extension;
 
         try {
             $this->storage->write($path, $file->getContent());
         } catch (\Exception) {
-            throw new \Exception(sprintf('Could not write uploaded file "%s"', $uniqueName));
+            throw new \Exception(sprintf('Could not upload file "%s"', $path));
         }
 
-        return [
-            'file' => (string) $file,
-            'uniqueName' => $uniqueName,
-            'path' => $path,
-        ];
+        return $path;
     }
 
     public function streamFile(string $path): mixed
@@ -58,5 +44,10 @@ class FileUploader
     private function generateRandomName(UploadedFile $file): string
     {
         return bin2hex(random_bytes(24));
+    }
+
+    private function generateDirectory(int $timestamp): string
+    {
+        return date('Y', $timestamp).'/'.date('m', $timestamp).'/'.date('d', $timestamp).'/';
     }
 }

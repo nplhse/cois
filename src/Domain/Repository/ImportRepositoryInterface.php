@@ -3,7 +3,6 @@
 namespace App\Domain\Repository;
 
 use App\Domain\Contracts\ImportInterface;
-use App\Domain\Contracts\UserInterface;
 
 interface ImportRepositoryInterface
 {

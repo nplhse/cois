@@ -2,26 +2,34 @@
 
 {% block content %}
     <p>
-        Import: {{ import.caption }}<br />
-        User: {{ import.user }}<br />
-        Hospital: {{ import.hospital }}
+        <strong>Import:</strong> {{ import.name }}<br />
+        <strong>User:</strong> {{ import.user }}<br />
+        <strong>Hospital:</strong> {{ import.hospital }}
     </p>
 
-    <p>
-        {{ import.lastError }}
-    </p>
+    {% if exception is defined %}
+        <p>
+            {{ exception.message }}
+        </p>
+    {% endif %}
 {% endblock %}
 
 {% block action %}
-    <spacer size="16"></spacer>
-    <button href="{{
-        url(
-            'app_settings_import_show',
-            {
-                id: import.id
-            }
-        )
-        }}">
-        {{ 'Review import'|trans([], 'emails') }}
-    </button>
+    {% if exception is defined %}
+        <p>
+            No actions available.
+        </p>
+    {% else %}
+        <spacer size="16"></spacer>
+        <button href="{{
+            url(
+                'app_settings_import_show',
+                {
+                    id: import.id
+                }
+            )
+            }}">
+            {{ 'Review import'|trans([], 'emails') }}
+        </button>
+    {% endif %}
 {% endblock %}
