@@ -72,9 +72,9 @@ class Allocation extends DomainAllocation
     protected int $creationDay;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="integer")
      */
-    protected string $creationWeekday;
+    protected int $creationWeekday;
 
     /**
      * @ORM\Column(type="integer")
@@ -117,9 +117,9 @@ class Allocation extends DomainAllocation
     protected int $arrivalDay;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="integer")
      */
-    protected string $arrivalWeekday;
+    protected int $arrivalWeekday;
 
     /**
      * @ORM\Column(type="integer")
@@ -244,22 +244,22 @@ class Allocation extends DomainAllocation
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private string $indication;
+    protected string $indication;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private int $indicationCode;
+    protected int $indicationCode;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private ?string $secondaryIndication = null;
+    protected ?string $secondaryIndication = null;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private ?int $secondaryIndicationCode = null;
+    protected ?int $secondaryIndicationCode = null;
 
     /**
      * TODO: REMOVE after refactoring.
@@ -302,4 +302,64 @@ class Allocation extends DomainAllocation
      * @ORM\Column(type="integer", nullable=true)
      */
     private ?int $RMI = null;
+
+    public function getPZC(): int
+    {
+        return $this->PZC;
+    }
+
+    public function setPZC(int $PZC): void
+    {
+        $this->PZC = $PZC;
+    }
+
+    public function getPZCText(): string
+    {
+        return $this->PZCText;
+    }
+
+    public function setPZCText(string $PZCText): void
+    {
+        $this->PZCText = $PZCText;
+    }
+
+    public function getSecondaryPZC(): ?int
+    {
+        return $this->SecondaryPZC;
+    }
+
+    public function setSecondaryPZC(?int $SecondaryPZC): void
+    {
+        $this->SecondaryPZC = $SecondaryPZC;
+    }
+
+    public function getSecondaryPZCText(): string
+    {
+        return $this->SecondaryPZCText;
+    }
+
+    public function setSecondaryPZCText(string $SecondaryPZCText): void
+    {
+        $this->SecondaryPZCText = $SecondaryPZCText;
+    }
+
+    public function getSK(): ?string
+    {
+        return $this->SK;
+    }
+
+    public function setSK(?string $SK): void
+    {
+        $this->SK = $SK;
+    }
+
+    public function getRMI(): ?int
+    {
+        return $this->RMI;
+    }
+
+    public function setRMI(?int $RMI): void
+    {
+        $this->RMI = $RMI;
+    }
 }

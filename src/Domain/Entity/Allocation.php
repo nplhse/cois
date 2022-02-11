@@ -37,87 +37,87 @@ class Allocation implements AllocationInterface, IdentifierInterface
 
     protected string $creationDate;
 
-    private string $creationTime;
+    protected string $creationTime;
 
-    private int $creationYear;
+    protected int $creationYear;
 
-    private int $creationMonth;
+    protected int $creationMonth;
 
-    private int $creationDay;
+    protected int $creationDay;
 
-    private int $creationWeekday;
+    protected int $creationWeekday;
 
-    private int $creationHour;
+    protected int $creationHour;
 
-    private int $creationMinute;
+    protected int $creationMinute;
 
-    private \DateTimeInterface $arrivalAt;
+    protected \DateTimeInterface $arrivalAt;
 
-    private string $arrivalDate;
+    protected string $arrivalDate;
 
-    private string $arrivalTime;
+    protected string $arrivalTime;
 
-    private int $arrivalYear;
+    protected int $arrivalYear;
 
-    private int $arrivalMonth;
+    protected int $arrivalMonth;
 
-    private int $arrivalDay;
+    protected int $arrivalDay;
 
-    private int $arrivalWeekday;
+    protected int $arrivalWeekday;
 
-    private int $arrivalHour;
+    protected int $arrivalHour;
 
-    private int $arrivalMinute;
+    protected int $arrivalMinute;
 
-    private int $urgency;
+    protected int $urgency;
 
-    private string $occasion;
+    protected string $occasion;
 
-    private string $assignment;
+    protected string $assignment;
 
-    private bool $requiresResus;
+    protected bool $requiresResus;
 
-    private bool $requiresCathlab;
+    protected bool $requiresCathlab;
 
     private array $genders = [self::GENDER_MALE, self::GENDER_FEMALE, self::GENDER_OTHER];
 
-    private string $gender;
+    protected string $gender;
 
-    private int $age;
+    protected int $age;
 
-    private bool $isCPR;
+    protected bool $isCPR;
 
-    private bool $isVentilated;
+    protected bool $isVentilated;
 
-    private bool $isShock;
+    protected bool $isShock;
 
-    private string $isInfectious;
+    protected string $isInfectious;
 
-    private bool $isPregnant;
+    protected bool $isPregnant;
 
-    private bool $isWorkAccident;
+    protected bool $isWorkAccident;
 
-    private bool $isWithPhysician;
+    protected bool $isWithPhysician;
 
-    private string $modeOfTransport;
+    protected string $modeOfTransport;
 
-    private string $speciality;
+    protected string $speciality;
 
-    private string $specialityDetail;
+    protected string $specialityDetail;
 
-    private bool $specialityWasClosed;
+    protected bool $specialityWasClosed;
 
-    private string $handoverPoint;
+    protected string $handoverPoint;
 
-    private ?string $comment;
+    protected ?string $comment;
 
-    private string $indication;
+    protected string $indication;
 
-    private int $indicationCode;
+    protected int $indicationCode;
 
-    private ?string $secondaryIndication;
+    protected ?string $secondaryIndication;
 
-    private ?int $secondaryIndicationCode;
+    protected ?int $secondaryIndicationCode;
 
     public function __construct()
     {
