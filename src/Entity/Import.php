@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Domain\Entity\Import as DomainImport;
 use App\Repository\ImportRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -9,40 +10,50 @@ use Symfony\Component\HttpFoundation\File\File;
 /**
  * @ORM\Entity(repositoryClass=ImportRepository::class)
  */
-class Import implements \Stringable
+class Import extends DomainImport
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id = null;
+    protected int $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected string $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected string $type;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected string $status;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private User $user;
+    protected User $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Hospital::class, inversedBy="imports")
+     */
+    protected Hospital $hospital;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private \DateTimeInterface $createdAt;
+    protected \DateTimeInterface $createdAt;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    private int $size;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $path;
+    protected ?\DateTimeInterface $updatedAt;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -52,49 +63,111 @@ class Import implements \Stringable
     /**
      * @ORM\Column(type="string", length=255)
      */
+    protected string $filePath;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected string $fileMimeType;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected string $fileExtension;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected int $fileSize;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected int $rowCount = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected int $runCount = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected int $runtime = 0;
+
+    /**
+     * TODO: REMOVE after refactoring.
+     *
+     * @ORM\Column(type="integer")
+     */
+    private int $size;
+
+    /**
+     * TODO: REMOVE after refactoring.
+     *
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $path;
+
+    /**
+     * TODO: REMOVE after refactoring.
+     *
+     * @ORM\Column(type="string", length=255)
+     */
     private string $extension;
 
     /**
+     * TODO: REMOVE after refactoring.
+     *
      * @ORM\Column(type="string", length=255)
      */
     private string $mimeType;
 
     /**
+     * TODO: REMOVE after refactoring.
+     *
      * @ORM\Column(type="boolean")
      */
     private bool $isFixture;
 
     /**
+     * TODO: REMOVE after refactoring.
+     *
      * @ORM\Column(type="string", length=255)
      */
     private string $caption;
 
     /**
+     * TODO: REMOVE after refactoring.
+     *
      * @ORM\Column(type="string", length=255)
      */
     private string $contents;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $status;
-
-    /**
+     * TODO: REMOVE after refactoring.
+     *
      * @ORM\Column(type="float", nullable=true)
      */
     private ?float $duration = null;
 
     /**
+     * TODO: REMOVE after refactoring.
+     *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private \DateTimeInterface $lastRun;
 
     /**
+     * TODO: REMOVE after refactoring.
+     *
      * @ORM\Column(type="integer", nullable=true)
      */
     private ?int $timesRun;
 
     /**
+     * TODO: REMOVE after refactoring.
+     *
      * @ORM\Column(type="integer", nullable=true)
      */
     private ?int $itemCount = null;
@@ -104,44 +177,13 @@ class Import implements \Stringable
      */
     private ?string $lastError = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Hospital::class, inversedBy="imports")
-     */
-    private ?Hospital $hospital = null;
-
     public function __construct()
     {
+        parent::__construct();
+
+        // TODO: Remove after Refactoring
         $this->lastRun = new \DateTime('NOW');
         $this->timesRun = 0;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     public function getSize(): ?int
@@ -152,18 +194,6 @@ class Import implements \Stringable
     public function setSize(int $size): self
     {
         $this->size = $size;
-
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
 
         return $this;
     }
@@ -252,23 +282,6 @@ class Import implements \Stringable
         return $this;
     }
 
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    public function __toString(): string
-    {
-        return '('.$this->id.') '.$this->caption;
-    }
-
     public function getDuration(): ?float
     {
         return $this->duration;
@@ -325,18 +338,6 @@ class Import implements \Stringable
     public function setLastError(?string $lastError): self
     {
         $this->lastError = $lastError;
-
-        return $this;
-    }
-
-    public function getHospital(): ?Hospital
-    {
-        return $this->hospital;
-    }
-
-    public function setHospital(?Hospital $hospital): self
-    {
-        $this->hospital = $hospital;
 
         return $this;
     }
