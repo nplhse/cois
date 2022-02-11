@@ -1982,6 +1982,10 @@
         <source>Sort items</source>
         <target>Sort items</target>
       </trans-unit>
+      <trans-unit id=".BiJ3GG" resname="Reset filters">
+        <source>Reset filters</source>
+        <target>Reset filters</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

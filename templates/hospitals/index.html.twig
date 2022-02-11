@@ -241,7 +241,30 @@
                 <div class="card-body">
                     {{ form(searchForm) }}
 
-                    {{ form(hospitalForm) }}
+                    {{ form_start(hospitalForm) }}
+
+                    {{ form_row(hospitalForm.location) }}
+
+                    {{ form_row(hospitalForm.size) }}
+
+                    {{ form_row(hospitalForm.state) }}
+
+                    {{ form_row(hospitalForm.dispatchArea) }}
+
+                    {{ form_row(hospitalForm.supplyArea) }}
+
+                    <div class="row">
+                        <div class="col">
+                            {{ form_row(hospitalForm.submit) }}
+                        </div>
+                        <div class="col">
+                            <div class="float-end">
+                                {{ form_row(hospitalForm.reset) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    {{ form_end(hospitalForm) }}
                 </div>
             </div>
 

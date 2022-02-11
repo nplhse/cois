@@ -3,6 +3,7 @@
 namespace App\Form\Filters;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,6 +23,9 @@ class HospitalFilterType extends AbstractType
             ->add('state', StateType::class)
             ->add('supplyArea', SupplyAreaType::class)
             ->add('dispatchArea', DispatchAreaType::class)
+            ->add('reset', ResetType::class, [
+                'label' => 'Reset filters',
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Filter Hospitals',
             ])

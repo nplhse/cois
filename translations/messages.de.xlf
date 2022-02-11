@@ -2057,6 +2057,10 @@
         <source>Sort items</source>
         <target>Einträge sortieren</target>
       </trans-unit>
+      <trans-unit id=".BiT3MG" resname="Reset filters">
+        <source>Reset filters</source>
+        <target>Zurücksetzen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
