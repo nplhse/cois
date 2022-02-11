@@ -23,19 +23,19 @@ class Allocation implements AllocationInterface, IdentifierInterface
 
     public const GENDER_OTHER = 'D';
 
-    private HospitalInterface $hospital;
+    protected HospitalInterface $hospital;
 
-    private ImportInterface $import;
+    protected ImportInterface $import;
 
-    private StateInterface $state;
+    protected ?StateInterface $state = null;
 
-    private DispatchAreaInterface $dispatchArea;
+    protected ?DispatchAreaInterface $dispatchArea = null;
 
-    private ?SupplyAreaInterface $supplyArea = null;
+    protected ?SupplyAreaInterface $supplyArea = null;
 
-    private \DateTimeInterface $createdAt;
+    protected \DateTimeInterface $createdAt;
 
-    private string $creationDate;
+    protected string $creationDate;
 
     private string $creationTime;
 
@@ -87,7 +87,7 @@ class Allocation implements AllocationInterface, IdentifierInterface
 
     private bool $isCPR;
 
-    private bool $isVentilted;
+    private bool $isVentilated;
 
     private bool $isShock;
 
@@ -157,7 +157,7 @@ class Allocation implements AllocationInterface, IdentifierInterface
         return $this;
     }
 
-    public function getState(): StateInterface
+    public function getState(): ?StateInterface
     {
         return $this->state;
     }
@@ -169,7 +169,7 @@ class Allocation implements AllocationInterface, IdentifierInterface
         return $this;
     }
 
-    public function getDispatchArea(): DispatchAreaInterface
+    public function getDispatchArea(): ?DispatchAreaInterface
     {
         return $this->dispatchArea;
     }
@@ -418,14 +418,14 @@ class Allocation implements AllocationInterface, IdentifierInterface
 
     public function setIsVentilated(bool $isVentilated): self
     {
-        $this->isVentilted = $isVentilated;
+        $this->isVentilated = $isVentilated;
 
         return $this;
     }
 
     public function getIsVentilated(): bool
     {
-        return $this->isVentilted;
+        return $this->isVentilated;
     }
 
     public function setIsShock(bool $isShock): self

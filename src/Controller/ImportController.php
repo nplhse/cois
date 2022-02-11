@@ -61,7 +61,7 @@ class ImportController extends AbstractController
 
         return $this->render('import/index.html.twig', [
             'imports' => $paginator,
-            'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), HospitalRepository::PAGINATOR_PER_PAGE),
+            'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), ImportRepository::PAGINATOR_PER_PAGE),
             'filters' => $filters,
             'filterIsSet' => $paramService->isFilterIsSet(),
         ]);
