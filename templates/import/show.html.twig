@@ -3,7 +3,7 @@
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
 
 {% block title %}
-    {{ 'View Import'|trans }}: {{ import.caption }} (#{{ import.id }}) - {{
+    {{ 'View Import'|trans }}: {{ import.name }} (#{{ import.id }}) - {{
         parent()
     }}
 {% endblock %}
@@ -38,7 +38,7 @@
     {% endif %}
 
     <h1>
-        {{ import.caption }}
+        {{ 'View Import'|trans }}
         <small class="text-muted">(<i>#{{ import.id }}</i>)</small>
     </h1>
 
@@ -53,7 +53,7 @@
                         {{ 'Caption'|trans }}
                     </h5>
                     <p>
-                        {{ import.caption }}
+                        {{ import.name }}
                     </p>
 
                     <div class="row">
@@ -70,7 +70,7 @@
                                 {{ 'Status'|trans }}
                             </h5>
                             <p>
-                                {% if import.status == 'finished' %}
+                                {% if import.status == 'success' %}
                                     <i class="bi bi-check-circle-fill text-success">
 
                                     </i>
@@ -81,14 +81,7 @@
                                             {{ 'import.field.loading'|trans }}
                                         </span>
                                     </div>
-                                {% elseif import.status == 'processing' %}
-                                    <div class="spinner-border text-primary spinner-border-sm"
-                                        role="status">
-                                        <span class="visually-hidden">
-                                            {{ 'import.field.loading'|trans }}
-                                        </span>
-                                    </div>
-                                {% elseif import.status == 'failed' %}
+                                {% elseif import.status == 'failure' %}
                                     <i class="bi bi-exclamation-circle-fill text-danger">
 
                                     </i>
@@ -106,16 +99,14 @@
                     {{ 'Import details'|trans }}
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">
-                        {{ 'Errors'|trans }}
-                    </h5>
-                    <p>
-                        {% if import.lastError %}
+                    {% if import.lastError %}
+                        <h5 class="card-title">
+                            {{ 'Errors'|trans }}
+                        </h5>
+                        <p>
                             {{ import.lastError }}
-                        {% else %}
-                            {{ 'No errors occured.'|trans }}
-                        {% endif %}
-                    </p>
+                        </p>
+                    {% endif %}
 
                     <h5 class="card-title">
                         {{ 'Statistics'|trans }}
@@ -126,7 +117,7 @@
                                 {{ 'Item count'|trans }}
                             </h6>
                             <p>
-                                {{ import.itemCount }}
+                                {{ import.rowCount }}
                             </p>
                         </div>
                         <div class="col-6">
@@ -134,7 +125,7 @@
                                 {{ 'Runtime'|trans }}
                             </h6>
                             <p>
-                                {{ import.duration|number_format(5, '.', ',') }}s
+                                {{ import.runtime|number_format(5, '.', ',') }}s
                             </p>
                         </div>
                     </div>
@@ -144,7 +135,7 @@
                                 {{ 'Times run'|trans }}
                             </h6>
                             <p>
-                                {{ import.timesRun }}
+                                {{ import.runCount }}
                             </p>
                         </div>
                     </div>

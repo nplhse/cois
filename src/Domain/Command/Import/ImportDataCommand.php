@@ -2,19 +2,17 @@
 
 namespace App\Domain\Command\Import;
 
-use App\Domain\Contracts\ImportInterface;
-
 class ImportDataCommand
 {
-    private ImportInterface $import;
+    private int $importId;
 
-    public function __construct(ImportInterface $import)
+    public function __construct(int $importId)
     {
-        $this->import = $import;
+        $this->importId = $importId;
     }
 
-    public function getImport(): ImportInterface
+    public function getImportId(): int
     {
-        return $this->import;
+        return $this->importId;
     }
 }

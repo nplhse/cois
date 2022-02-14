@@ -257,7 +257,7 @@ class Allocation extends DomainAllocation
     protected ?string $secondaryIndication = null;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected ?int $secondaryIndicationCode = null;
 

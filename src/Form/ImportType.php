@@ -61,23 +61,23 @@ class ImportType extends AbstractType
                         ]),
                     ],
                 ]);
-        }
 
-        if ($this->security->isGranted('ROLE_ADMIN')) {
-            $builder->add('user', EntityType::class, [
-                'class' => User::class,
+            if ($this->security->isGranted('ROLE_ADMIN')) {
+                $builder->add('user', EntityType::class, [
+                    'class' => User::class,
                 ])
-                ->add('hospital', EntityType::class, [
+                    ->add('hospital', EntityType::class, [
+                        'class' => Hospital::class,
+                    ]);
+            } else {
+                $builder->add('hospital', EntityType::class, [
                     'class' => Hospital::class,
-            ]);
-        } else {
-            $builder->add('hospital', EntityType::class, [
-                'class' => Hospital::class,
-                'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('h')
-                    ->where('h.owner = :user')
-                    ->setParameter('user', $this->security->getUser())
-                    ->orderBy('h.name', 'ASC'),
-            ]);
+                    'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('h')
+                        ->where('h.owner = :user')
+                        ->setParameter('user', $this->security->getUser())
+                        ->orderBy('h.name', 'ASC'),
+                ]);
+            }
         }
     }
 

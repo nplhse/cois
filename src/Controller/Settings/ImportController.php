@@ -2,6 +2,7 @@
 
 namespace App\Controller\Settings;
 
+use App\Domain\Command\Import\ImportDataCommand;
 use App\Entity\Import;
 use App\Form\ImportType;
 use App\Message\ImportDataMessage;
@@ -207,14 +208,12 @@ class ImportController extends AbstractController
             $hospital = $import->getHospital();
         }
 
-        $command = new ImportDataMessage($import, $hospital);
+        $command = new ImportDataCommand($import->getId());
 
         try {
-            $this->messageBus->dispatch(new ImportDataMessage($import, $import->getHospital()));
-
-            $this->addFlash('success', 'Refreshed Import in database.');
+            $this->messageBus->dispatch($command);
         } catch (HandlerFailedException $e) {
-            $import->setStatus('failed');
+            $import->setStatus(Import::STATUS_FAILURE);
             $import->setLastError($e->getMessage());
             $import->setLastRun(new \DateTime('NOW'));
 
@@ -222,6 +221,12 @@ class ImportController extends AbstractController
             $this->entityManager->flush();
 
             $this->addFlash('danger', 'Import could not be refreshed, see details for more information.');
+        }
+
+        if (Import::STATUS_FAILURE === $import->getStatus()) {
+            $this->addFlash('danger', 'Import could not be refreshed, see details for more information.');
+        } elseif (Import::STATUS_SUCCESS === $import->getStatus()) {
+            $this->addFlash('success', 'Refreshed Import in database.');
         }
 
         return $this->redirectToRoute('app_settings_import_show', ['id' => $import->getId()]);

@@ -54,7 +54,7 @@ final class ImportFactory extends ModelFactory
             'filePath' => 'dummy/path',
             'fileSize' => self::faker()->randomNumber(),
             'fileMimeType' => 'text/csv',
-            'fileExtension' => '.csv',
+            'fileExtension' => 'csv',
         ];
 
         return array_merge($old, $new);

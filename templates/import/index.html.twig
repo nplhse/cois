@@ -302,7 +302,7 @@
                                             }
                                         )
                                         }}">
-                                        {{ import.caption }}
+                                        {{ import.name }}
                                     </a>
                                 </td>
                                 <td>
@@ -328,7 +328,7 @@
                                     {{ import.createdAt|date('d.m.Y H:i') }}
                                 </td>
                                 <td>
-                                    {% if import.status == 'finished' %}
+                                    {% if import.status == 'success' %}
                                         <i class="bi bi-check-circle-fill text-success">
 
                                         </i>
@@ -339,14 +339,7 @@
                                                 {{ 'import.fields.loading'|trans }}
                                             </span>
                                         </div>
-                                    {% elseif import.status == 'processing' %}
-                                        <div class="spinner-border text-primary spinner-border-sm"
-                                            role="status">
-                                            <span class="visually-hidden">
-                                                {{ 'import.fields.loading'|trans }}
-                                            </span>
-                                        </div>
-                                    {% elseif import.status == 'failed' %}
+                                    {% elseif import.status == 'failure' %}
                                         <i class="bi bi-exclamation-circle-fill text-danger">
 
                                         </i>

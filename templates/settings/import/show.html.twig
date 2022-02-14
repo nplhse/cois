@@ -166,12 +166,12 @@
                             <ul>
                                 <li>
                                     {{ 'Item count'|trans }}: {{
-                                        import.itemCount
+                                        import.rowCount
                                     }}
                                 </li>
                                 <li>
                                     {{ 'Duration'|trans }}: {{
-                                        import.duration|number_format(
+                                        import.runtime|number_format(
                                             5,
                                             '.',
                                             ','
@@ -180,7 +180,7 @@
                                 </li>
                                 <li>
                                     {{ 'Times run'|trans }}: {{
-                                        import.timesRun
+                                        import.runCount
                                     }}
                                 </li>
                             </ul>

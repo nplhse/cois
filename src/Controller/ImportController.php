@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Domain\Command\Import\CreateImportCommand;
+use App\Domain\Command\Import\EditImportCommand;
+use App\Domain\Command\Import\ImportDataCommand;
+use App\Domain\Contracts\UserInterface;
 use App\Domain\Event\Import\ImportFailedEvent;
 use App\Entity\Import;
 use App\Form\ImportType;
@@ -76,7 +79,9 @@ class ImportController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (!$this->isGranted('ROLE_ADMIN')) {
-                $import->setUser($this->getUser());
+                /** @var UserInterface $user */
+                $user = $this->getUser();
+                $import->setUser($user);
             }
 
             /** @var UploadedFile $file */
@@ -99,9 +104,16 @@ class ImportController extends AbstractController
             } catch (HandlerFailedException $e) {
                 $eventDispatcher->dispatch(new ImportFailedEvent($import, $e), ImportFailedEvent::NAME);
                 $this->addFlash('danger', 'Your import failed. We have send a notification to the admin to handle this issue.');
+
+                return $this->render('import/new.html.twig', [
+                    'form' => $form->createView(),
+                ]);
             }
 
+            // Refresh Import entity from database
             $import = $importRepository->findOneBy(['name' => $import->getName(), 'filePath' => $filePath]);
+
+            $this->messageBus->dispatch(new ImportDataCommand($import->getId()));
 
             return $this->redirectToRoute('app_import_show', ['id' => $import->getId()]);
         }
@@ -114,14 +126,27 @@ class ImportController extends AbstractController
     #[Route(path: '/edit/{id}', name: 'app_import_edit')]
     public function edit(Import $import, Request $request, ImportRepository $importRepository): Response
     {
-        $this->denyAccessUnlessGranted('delete', $import);
+        $this->denyAccessUnlessGranted('edit', $import);
 
         $form = $this->createForm(ImportType::class, $import, ['create' => false]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->persist($import);
-            $this->entityManager->flush();
+            $command = new EditImportCommand(
+                $import->getId(),
+                $import->getName(),
+            );
+
+            try {
+                $this->messageBus->dispatch($command);
+            } catch (HandlerFailedException) {
+                $this->addFlash('danger', 'Editing your import failed. Please try again later.');
+
+                return $this->render('import/edit.html.twig', [
+                    'import' => $import,
+                    'form' => $form->createView(),
+                ]);
+            }
 
             $this->addFlash('success', 'Your import was successfully updated.');
 
@@ -156,14 +181,12 @@ class ImportController extends AbstractController
     }
 
     #[Route(path: '/{id}/delete', name: 'app_import_delete', methods: ['POST'])]
-    public function delete(Import $import, AllocationRepository $allocationRepository, EntityManagerInterface $em): Response
+    public function delete(Import $import, AllocationRepository $allocationRepository, ImportRepository $importRepository): Response
     {
         $this->denyAccessUnlessGranted('delete', $import);
 
         $allocationRepository->deleteByImport($import);
-
-        $em->remove($import);
-        $em->flush();
+        $importRepository->delete($import);
 
         $this->addFlash('danger', 'Your import was successfully deleted.');
 
