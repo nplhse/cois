@@ -71,6 +71,11 @@ class ImportService
             if ($writer::getDataType() === $import->getType()) {
                 $activeWriters[] = $writer;
             }
+
+            // Legacy
+            if ($writer::getDataType() === $import->getContents()) {
+                $activeWriters[] = $writer;
+            }
         }
 
         $this->startTime();
