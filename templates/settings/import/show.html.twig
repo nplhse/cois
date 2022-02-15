@@ -61,7 +61,11 @@
                             {{ 'Name'|trans({}) }}
                         </th>
                         <td>
-                            {{ import.caption }}
+                            {% if import.caption %}
+                                {{ import.caption }}
+                            {% else %}
+                                {{ import.name }}
+                            {% endif %}
                         </td>
                     </tr>
                     <tr>

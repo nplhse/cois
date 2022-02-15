@@ -97,7 +97,11 @@
                                         }
                                     )
                                     }}">
-                                    {{ import.caption }}
+                                    {% if import.caption %}
+                                        {{ import.caption }}
+                                    {% else %}
+                                        {{ import.name }}
+                                    {% endif %}
                                 </a>
                             </td>
                             <td>
