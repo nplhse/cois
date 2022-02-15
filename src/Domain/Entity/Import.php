@@ -27,39 +27,41 @@ class Import implements ImportInterface, IdentifierInterface, TimestampableInter
 
     public const MIME_CSV = 'text/csv';
 
-    public const EXT_CSV = '.csv';
+    public const MIME_PLAIN = 'text/plain';
 
-    private string $name;
+    public const EXT_CSV = 'csv';
+
+    protected string $name;
 
     private array $types = [self::TYPE_ALLOCATION];
 
-    private string $type;
+    protected string $type;
 
     private array $statuses = [self::STATUS_PENDING, self::STATUS_FAILURE, self::STATUS_SUCCESS];
 
-    private string $status;
+    protected string $status;
 
-    private UserInterface $user;
+    protected UserInterface $user;
 
-    private HospitalInterface $hospital;
+    protected HospitalInterface $hospital;
 
-    private string $filePath;
+    protected string $filePath;
 
-    private array $mimeTypes = [self::MIME_CSV];
+    protected array $mimeTypes = [self::MIME_PLAIN, self::MIME_CSV];
 
-    private string $fileMimeType;
+    protected string $fileMimeType;
 
-    private array $extensions = [self::EXT_CSV];
+    protected array $extensions = [self::EXT_CSV];
 
-    private string $fileExtension;
+    protected string $fileExtension;
 
-    private int $fileSize;
+    protected int $fileSize;
 
-    private int $rowCount = 0;
+    protected int $rowCount = 0;
 
-    private int $runCount = 0;
+    protected int $runCount = 0;
 
-    private int $runtime = 0;
+    protected int $runtime = 0;
 
     public function __construct()
     {
@@ -185,7 +187,7 @@ class Import implements ImportInterface, IdentifierInterface, TimestampableInter
 
     public function setFileSize(int $size): self
     {
-        if ($size > 0) {
+        if ($size >= 0) {
             $this->fileSize = $size;
 
             return $this;
@@ -201,7 +203,7 @@ class Import implements ImportInterface, IdentifierInterface, TimestampableInter
 
     public function setRowCount(int $rowCount): self
     {
-        if ($rowCount > 0) {
+        if ($rowCount >= 0) {
             $this->rowCount = $rowCount;
 
             return $this;
@@ -229,7 +231,7 @@ class Import implements ImportInterface, IdentifierInterface, TimestampableInter
 
     public function setRuntime(int $runtime): self
     {
-        if ($runtime > 0) {
+        if ($runtime >= 0) {
             $this->runtime = $runtime;
 
             return $this;

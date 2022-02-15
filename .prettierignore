@@ -20,3 +20,5 @@ yarn.lock
 # Ignore Twig Macros
 /templates/_elements/macro/
 /templates/import/index.html.twig
+/templates/components/import_polling.html.twig
+/templates/components/status_polling.html.twig

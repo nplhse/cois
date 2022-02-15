@@ -11,6 +11,8 @@ class ParticipationVoter extends Voter
 {
     private const CREATE_HOSPITAL = 'create_hospital';
 
+    private const CREATE_IMPORT = 'create_import';
+
     private Security $security;
 
     public function __construct(Security $security)
@@ -21,7 +23,7 @@ class ParticipationVoter extends Voter
     protected function supports(string $attribute, mixed $subject): bool
     {
         // if the attribute isn't one we support, return false
-        if (self::CREATE_HOSPITAL !== $attribute) {
+        if (!in_array($attribute, [self::CREATE_HOSPITAL, self::CREATE_IMPORT])) {
             return false;
         }
 
@@ -44,6 +46,7 @@ class ParticipationVoter extends Voter
 
         return match ($attribute) {
             self::CREATE_HOSPITAL => $this->canCreateHospital($subject),
+            self::CREATE_IMPORT => $this->canCreateImport($subject),
             default => throw new \LogicException('This code should not be reached!'),
         };
     }
@@ -55,5 +58,22 @@ class ParticipationVoter extends Voter
         }
 
         return $user->isParticipant();
+    }
+
+    private function canCreateImport(User $user): bool
+    {
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            return true;
+        }
+
+        if (!$user->isParticipant()) {
+            return false;
+        }
+
+        if ($user->getHospitals()->isEmpty()) {
+            return false;
+        }
+
+        return true;
     }
 }

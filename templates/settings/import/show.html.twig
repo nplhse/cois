@@ -107,31 +107,14 @@
                             {{ 'Status'|trans({}) }}
                         </th>
                         <td>
-                            {% if import.status == 'finished' %}
-                                <i class="bi bi-check-circle-fill text-success">
-
-                                </i>
-                            {% elseif import.status == 'pending' %}
-                                <div class="spinner-border text-secondary spinner-border-sm"
-                                    role="status">
-                                    <span class="visually-hidden">
-                                        {{ 'import.field.loading'|trans }}
-                                    </span>
-                                </div>
-                            {% elseif import.status == 'processing' %}
-                                <div class="spinner-border text-primary spinner-border-sm"
-                                    role="status">
-                                    <span class="visually-hidden">
-                                        {{ 'import.field.loading'|trans }}
-                                    </span>
-                                </div>
-                            {% elseif import.status == 'failed' %}
-                                <i class="bi bi-exclamation-circle-fill text-danger">
-
-                                </i>
-                            {% endif %}
-
-                            {{ import.status }}
+                            {{
+                                component(
+                                    'status_polling',
+                                    {
+                                        importId: import.id
+                                    }
+                                )
+                            }}
                         </td>
                     </tr>
                     {% if import.isFixture %}
@@ -166,12 +149,12 @@
                             <ul>
                                 <li>
                                     {{ 'Item count'|trans }}: {{
-                                        import.itemCount
+                                        import.rowCount
                                     }}
                                 </li>
                                 <li>
                                     {{ 'Duration'|trans }}: {{
-                                        import.duration|number_format(
+                                        import.runtime|number_format(
                                             5,
                                             '.',
                                             ','
@@ -180,7 +163,7 @@
                                 </li>
                                 <li>
                                     {{ 'Times run'|trans }}: {{
-                                        import.timesRun
+                                        import.runCount
                                     }}
                                 </li>
                             </ul>

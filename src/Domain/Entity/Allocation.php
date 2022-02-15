@@ -23,101 +23,101 @@ class Allocation implements AllocationInterface, IdentifierInterface
 
     public const GENDER_OTHER = 'D';
 
-    private HospitalInterface $hospital;
+    protected HospitalInterface $hospital;
 
-    private ImportInterface $import;
+    protected ImportInterface $import;
 
-    private StateInterface $state;
+    protected ?StateInterface $state = null;
 
-    private DispatchAreaInterface $dispatchArea;
+    protected ?DispatchAreaInterface $dispatchArea = null;
 
-    private ?SupplyAreaInterface $supplyArea = null;
+    protected ?SupplyAreaInterface $supplyArea = null;
 
-    private \DateTimeInterface $createdAt;
+    protected \DateTimeInterface $createdAt;
 
-    private string $creationDate;
+    protected string $creationDate;
 
-    private string $creationTime;
+    protected string $creationTime;
 
-    private int $creationYear;
+    protected int $creationYear;
 
-    private int $creationMonth;
+    protected int $creationMonth;
 
-    private int $creationDay;
+    protected int $creationDay;
 
-    private int $creationWeekday;
+    protected int $creationWeekday;
 
-    private int $creationHour;
+    protected int $creationHour;
 
-    private int $creationMinute;
+    protected int $creationMinute;
 
-    private \DateTimeInterface $arrivalAt;
+    protected \DateTimeInterface $arrivalAt;
 
-    private string $arrivalDate;
+    protected string $arrivalDate;
 
-    private string $arrivalTime;
+    protected string $arrivalTime;
 
-    private int $arrivalYear;
+    protected int $arrivalYear;
 
-    private int $arrivalMonth;
+    protected int $arrivalMonth;
 
-    private int $arrivalDay;
+    protected int $arrivalDay;
 
-    private int $arrivalWeekday;
+    protected int $arrivalWeekday;
 
-    private int $arrivalHour;
+    protected int $arrivalHour;
 
-    private int $arrivalMinute;
+    protected int $arrivalMinute;
 
-    private int $urgency;
+    protected int $urgency;
 
-    private string $occasion;
+    protected string $occasion;
 
-    private string $assignment;
+    protected string $assignment;
 
-    private bool $requiresResus;
+    protected bool $requiresResus;
 
-    private bool $requiresCathlab;
+    protected bool $requiresCathlab;
 
     private array $genders = [self::GENDER_MALE, self::GENDER_FEMALE, self::GENDER_OTHER];
 
-    private string $gender;
+    protected string $gender;
 
-    private int $age;
+    protected int $age;
 
-    private bool $isCPR;
+    protected bool $isCPR;
 
-    private bool $isVentilted;
+    protected bool $isVentilated;
 
-    private bool $isShock;
+    protected bool $isShock;
 
-    private string $isInfectious;
+    protected string $isInfectious;
 
-    private bool $isPregnant;
+    protected bool $isPregnant;
 
-    private bool $isWorkAccident;
+    protected bool $isWorkAccident;
 
-    private bool $isWithPhysician;
+    protected bool $isWithPhysician;
 
-    private string $modeOfTransport;
+    protected string $modeOfTransport;
 
-    private string $speciality;
+    protected string $speciality;
 
-    private string $specialityDetail;
+    protected string $specialityDetail;
 
-    private bool $specialityWasClosed;
+    protected bool $specialityWasClosed;
 
-    private string $handoverPoint;
+    protected string $handoverPoint;
 
-    private ?string $comment;
+    protected ?string $comment;
 
-    private string $indication;
+    protected string $indication;
 
-    private int $indicationCode;
+    protected int $indicationCode;
 
-    private ?string $secondaryIndication;
+    protected ?string $secondaryIndication;
 
-    private ?int $secondaryIndicationCode;
+    protected ?int $secondaryIndicationCode;
 
     public function __construct()
     {
@@ -157,7 +157,7 @@ class Allocation implements AllocationInterface, IdentifierInterface
         return $this;
     }
 
-    public function getState(): StateInterface
+    public function getState(): ?StateInterface
     {
         return $this->state;
     }
@@ -169,7 +169,7 @@ class Allocation implements AllocationInterface, IdentifierInterface
         return $this;
     }
 
-    public function getDispatchArea(): DispatchAreaInterface
+    public function getDispatchArea(): ?DispatchAreaInterface
     {
         return $this->dispatchArea;
     }
@@ -418,14 +418,14 @@ class Allocation implements AllocationInterface, IdentifierInterface
 
     public function setIsVentilated(bool $isVentilated): self
     {
-        $this->isVentilted = $isVentilated;
+        $this->isVentilated = $isVentilated;
 
         return $this;
     }
 
     public function getIsVentilated(): bool
     {
-        return $this->isVentilted;
+        return $this->isVentilated;
     }
 
     public function setIsShock(bool $isShock): self

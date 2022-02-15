@@ -41,8 +41,9 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
         AllocationFactory::createMany(random_int(128, 256), static fn () => [
             'hospital' => HospitalFactory::random(),
             'import' => ImportFactory::random(),
-            'dispatchArea' => DispatchAreaFactory::random()->getName(),
-            'supplyArea' => SupplyAreaFactory::random()->getName(),
+            'state' => StateFactory::random(),
+            'dispatchArea' => DispatchAreaFactory::random(),
+            'supplyArea' => SupplyAreaFactory::random(),
         ]);
 
         $manager->flush();

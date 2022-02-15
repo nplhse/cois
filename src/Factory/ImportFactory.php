@@ -35,18 +35,29 @@ final class ImportFactory extends ModelFactory
 
     protected function getDefaults(): array
     {
-        return [
-            'createdAt' => self::faker()->dateTimeThisDecade(),
+        $old = [
             'size' => self::faker()->randomNumber(),
-            'name' => self::faker()->text(),
-            'extension' => '.csv',
-            'mimeType' => 'CSV',
+            'extension' => 'csv',
+            'mimeType' => 'text/plain',
             'path' => 'dummy/path',
             'isFixture' => true,
             'caption' => self::faker()->sentence(),
             'contents' => 'allocation',
             'status' => 'finished',
         ];
+
+        $new = [
+            'name' => self::faker()->sentence(3),
+            'type' => 'allocation',
+            'status' => 'success',
+            'createdAt' => self::faker()->dateTimeThisDecade(),
+            'filePath' => 'dummy/path',
+            'fileSize' => self::faker()->randomNumber(),
+            'fileMimeType' => 'text/csv',
+            'fileExtension' => 'csv',
+        ];
+
+        return array_merge($old, $new);
     }
 
     protected function initialize(): self

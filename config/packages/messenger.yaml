@@ -10,6 +10,4 @@ framework:
             sync: "sync://"
 
         routing:
-            'App\Message\ImportDataMessage': sync
-            'Symfony\Component\Mailer\Messenger\SendEmailMessage': sync
-            App\Message\SendImportReminderMessage: sync
+            'App\Application\Handler\Import\ImportDataHandler': async

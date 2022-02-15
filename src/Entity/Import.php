@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use App\Domain\Contracts\HospitalInterface;
+use App\Domain\Contracts\UserInterface;
+use App\Domain\Entity\Import as DomainImport;
 use App\Repository\ImportRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -9,40 +12,50 @@ use Symfony\Component\HttpFoundation\File\File;
 /**
  * @ORM\Entity(repositoryClass=ImportRepository::class)
  */
-class Import implements \Stringable
+class Import extends DomainImport
 {
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id = null;
+    protected int $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected string $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected string $type;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected string $status;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private User $user;
+    protected UserInterface $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Hospital::class, inversedBy="imports")
+     */
+    protected HospitalInterface $hospital;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private \DateTimeInterface $createdAt;
+    protected \DateTimeInterface $createdAt;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    private int $size;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $path;
+    protected ?\DateTimeInterface $updatedAt = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -52,49 +65,111 @@ class Import implements \Stringable
     /**
      * @ORM\Column(type="string", length=255)
      */
+    protected string $filePath;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected string $fileMimeType;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected string $fileExtension;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected int $fileSize;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected int $rowCount = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected int $runCount = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected int $runtime = 0;
+
+    /**
+     * TODO: REMOVE after refactoring.
+     *
+     * @ORM\Column(type="integer")
+     */
+    private int $size;
+
+    /**
+     * TODO: REMOVE after refactoring.
+     *
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $path;
+
+    /**
+     * TODO: REMOVE after refactoring.
+     *
+     * @ORM\Column(type="string", length=255)
+     */
     private string $extension;
 
     /**
+     * TODO: REMOVE after refactoring.
+     *
      * @ORM\Column(type="string", length=255)
      */
     private string $mimeType;
 
     /**
+     * TODO: REMOVE after refactoring.
+     *
      * @ORM\Column(type="boolean")
      */
     private bool $isFixture;
 
     /**
+     * TODO: REMOVE after refactoring.
+     *
      * @ORM\Column(type="string", length=255)
      */
     private string $caption;
 
     /**
+     * TODO: REMOVE after refactoring.
+     *
      * @ORM\Column(type="string", length=255)
      */
     private string $contents;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private string $status;
-
-    /**
+     * TODO: REMOVE after refactoring.
+     *
      * @ORM\Column(type="float", nullable=true)
      */
     private ?float $duration = null;
 
     /**
+     * TODO: REMOVE after refactoring.
+     *
      * @ORM\Column(type="datetime", nullable=true)
      */
     private \DateTimeInterface $lastRun;
 
     /**
+     * TODO: REMOVE after refactoring.
+     *
      * @ORM\Column(type="integer", nullable=true)
      */
     private ?int $timesRun;
 
     /**
+     * TODO: REMOVE after refactoring.
+     *
      * @ORM\Column(type="integer", nullable=true)
      */
     private ?int $itemCount = null;
@@ -104,169 +179,92 @@ class Import implements \Stringable
      */
     private ?string $lastError = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Hospital::class, inversedBy="imports")
-     */
-    private ?Hospital $hospital = null;
-
-    public function __construct()
-    {
-        $this->lastRun = new \DateTime('NOW');
-        $this->timesRun = 0;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getSize(): ?int
-    {
-        return $this->size;
-    }
-
-    public function setSize(int $size): self
-    {
-        $this->size = $size;
-
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getPath(): ?string
-    {
-        return $this->path;
-    }
-
-    public function setPath(string $path): self
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
     public function getFile(): ?File
     {
         return $this->file;
     }
 
-    public function setFile(?File $file): self
+    public function setFile(?File $file): void
     {
         $this->file = $file;
-
-        return $this;
     }
 
-    public function getExtension(): ?string
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->lastRun = new \DateTime('NOW');
+        $this->timesRun = 0;
+    }
+
+    public function getSize(): int
+    {
+        return $this->size;
+    }
+
+    public function setSize(int $size): void
+    {
+        $this->size = $size;
+    }
+
+    public function getPath(): string
+    {
+        return $this->path;
+    }
+
+    public function setPath(string $path): void
+    {
+        $this->path = $path;
+    }
+
+    public function getExtension(): string
     {
         return $this->extension;
     }
 
-    public function setExtension(string $extension): self
+    public function setExtension(string $extension): void
     {
         $this->extension = $extension;
-
-        return $this;
     }
 
-    public function getMimeType(): ?string
+    public function getMimeType(): string
     {
         return $this->mimeType;
     }
 
-    public function setMimeType(string $mimeType): self
+    public function setMimeType(string $mimeType): void
     {
         $this->mimeType = $mimeType;
-
-        return $this;
     }
 
-    public function getIsFixture(): ?bool
+    public function isFixture(): bool
     {
         return $this->isFixture;
     }
 
-    public function setIsFixture(bool $isFixture): self
+    public function setIsFixture(bool $isFixture): void
     {
         $this->isFixture = $isFixture;
-
-        return $this;
     }
 
-    public function getCaption(): ?string
+    public function getCaption(): string
     {
         return $this->caption;
     }
 
-    public function setCaption(string $caption): self
+    public function setCaption(string $caption): void
     {
         $this->caption = $caption;
-
-        return $this;
     }
 
-    public function getContents(): ?string
+    public function getContents(): string
     {
         return $this->contents;
     }
 
-    public function setContents(string $contents): self
+    public function setContents(string $contents): void
     {
         $this->contents = $contents;
-
-        return $this;
-    }
-
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    public function __toString(): string
-    {
-        return '('.$this->id.') '.$this->caption;
     }
 
     public function getDuration(): ?float
@@ -274,23 +272,19 @@ class Import implements \Stringable
         return $this->duration;
     }
 
-    public function setDuration(?float $duration): self
+    public function setDuration(?float $duration): void
     {
         $this->duration = $duration;
-
-        return $this;
     }
 
-    public function getLastRun(): ?\DateTimeInterface
+    public function getLastRun(): \DateTimeInterface
     {
         return $this->lastRun;
     }
 
-    public function setLastRun(?\DateTimeInterface $lastRun): self
+    public function setLastRun(\DateTimeInterface $lastRun): void
     {
         $this->lastRun = $lastRun;
-
-        return $this;
     }
 
     public function getTimesRun(): ?int
@@ -298,11 +292,9 @@ class Import implements \Stringable
         return $this->timesRun;
     }
 
-    public function setTimesRun(?int $timesRun): self
+    public function setTimesRun(?int $timesRun): void
     {
         $this->timesRun = $timesRun;
-
-        return $this;
     }
 
     public function getItemCount(): ?int
@@ -310,11 +302,9 @@ class Import implements \Stringable
         return $this->itemCount;
     }
 
-    public function setItemCount(?int $itemCount): self
+    public function setItemCount(?int $itemCount): void
     {
         $this->itemCount = $itemCount;
-
-        return $this;
     }
 
     public function getLastError(): ?string
@@ -322,22 +312,8 @@ class Import implements \Stringable
         return $this->lastError;
     }
 
-    public function setLastError(?string $lastError): self
+    public function setLastError(?string $lastError): void
     {
         $this->lastError = $lastError;
-
-        return $this;
-    }
-
-    public function getHospital(): ?Hospital
-    {
-        return $this->hospital;
-    }
-
-    public function setHospital(?Hospital $hospital): self
-    {
-        $this->hospital = $hospital;
-
-        return $this;
     }
 }
