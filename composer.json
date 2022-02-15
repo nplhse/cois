@@ -61,6 +61,7 @@
         "symfony/twig-bundle": "^6.0",
         "symfony/ux-chartjs": "^2.0",
         "symfony/ux-dropzone": "^2.0",
+        "symfony/ux-live-component": "^2.0",
         "symfony/validator": "6.0.*",
         "symfony/web-link": "6.0.*",
         "symfony/webpack-encore-bundle": "^1.9",

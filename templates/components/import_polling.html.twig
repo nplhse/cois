@@ -1,0 +1,55 @@
+<div {{ init_live_component(this) }}
+        {% set import = this.import %}
+
+        {% if import.status == 'pending' %}
+            data-poll
+        {% endif %}
+>
+    <div class="card mb-3">
+        <div class="card-header">
+            {{ 'Import details'|trans }}
+        </div>
+        <div class="card-body">
+            {% if import.lastError %}
+                <h5 class="card-title">
+                    {{ 'Errors'|trans }}
+                </h5>
+                <p>
+                    {{ import.lastError }}
+                </p>
+            {% endif %}
+
+            <h5 class="card-title">
+                {{ 'Statistics'|trans }}
+            </h5>
+            <div class="row">
+                <div class="col-6">
+                    <h6 class="card-subtitle text-muted">
+                        {{ 'Item count'|trans }}
+                    </h6>
+                    <p>
+                        {{ import.rowCount }}
+                    </p>
+                </div>
+                <div class="col-6">
+                    <h6 class="card-subtitle text-muted">
+                        {{ 'Runtime'|trans }}
+                    </h6>
+                    <p>
+                        {{ import.runtime|number_format(5, '.', ',') }}s
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <h6 class="card-subtitle text-muted">
+                        {{ 'Times run'|trans }}
+                    </h6>
+                    <p>
+                        {{ import.runCount }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

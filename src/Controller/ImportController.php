@@ -3,13 +3,13 @@
 namespace App\Controller;
 
 use App\Domain\Command\Import\CreateImportCommand;
+use App\Domain\Command\Import\DeleteImportCommand;
 use App\Domain\Command\Import\EditImportCommand;
 use App\Domain\Command\Import\ImportDataCommand;
 use App\Domain\Contracts\UserInterface;
 use App\Domain\Event\Import\ImportFailedEvent;
 use App\Entity\Import;
 use App\Form\ImportType;
-use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
 use App\Repository\ImportRepository;
 use App\Service\RequestParamService;
@@ -181,12 +181,23 @@ class ImportController extends AbstractController
     }
 
     #[Route(path: '/{id}/delete', name: 'app_import_delete', methods: ['POST'])]
-    public function delete(Import $import, AllocationRepository $allocationRepository, ImportRepository $importRepository): Response
+    public function delete(Import $import, Request $request): Response
     {
         $this->denyAccessUnlessGranted('delete', $import);
 
-        $allocationRepository->deleteByImport($import);
-        $importRepository->delete($import);
+        $CsrfToken = $request->get('_token');
+
+        if ($this->isCsrfTokenValid('delete'.$import->getId(), $CsrfToken)) {
+            $command = new DeleteImportCommand($import->getId());
+
+            try {
+                $this->messageBus->dispatch($command);
+            } catch (HandlerFailedException) {
+                $this->addFlash('danger', 'Sorry! Could not delete Import: '.$import->getName());
+
+                return $this->redirectToRoute('app_import_index');
+            }
+        }
 
         $this->addFlash('danger', 'Your import was successfully deleted.');
 

@@ -1,0 +1,22 @@
+<div {{ init_live_component(this) }}
+        {% if this.status == 'pending' %}
+            data-poll
+        {% endif %}
+>
+    {% if this.status == 'success' %}
+        <i class="bi bi-check-circle-fill text-success">
+
+        </i>
+    {% elseif this.status == 'pending' %}
+        <div class="spinner-border text-secondary spinner-border-sm"
+             role="status">
+            <span class="visually-hidden">
+                {{ 'import.field.loading'|trans }}
+            </span>
+        </div>
+    {% elseif this.status == 'failure' %}
+        <i class="bi bi-exclamation-circle-fill text-danger">
+
+        </i>
+    {% endif %} {{ this.status }}
+</div>

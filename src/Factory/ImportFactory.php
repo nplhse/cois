@@ -37,8 +37,8 @@ final class ImportFactory extends ModelFactory
     {
         $old = [
             'size' => self::faker()->randomNumber(),
-            'extension' => '.csv',
-            'mimeType' => 'CSV',
+            'extension' => 'csv',
+            'mimeType' => 'text/plain',
             'path' => 'dummy/path',
             'isFixture' => true,
             'caption' => self::faker()->sentence(),

@@ -2,16 +2,20 @@
 
 namespace App\Controller\Settings;
 
+use App\Domain\Command\Import\CreateImportCommand;
+use App\Domain\Command\Import\DeleteImportCommand;
 use App\Domain\Command\Import\ImportDataCommand;
+use App\Domain\Command\Import\UpdateImportCommand;
+use App\Domain\Event\Import\ImportFailedEvent;
 use App\Entity\Import;
 use App\Form\ImportType;
-use App\Message\ImportDataMessage;
 use App\Repository\AllocationRepository;
 use App\Repository\ImportRepository;
 use App\Service\RequestParamService;
 use App\Service\UploadService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,7 +62,7 @@ class ImportController extends AbstractController
     }
 
     #[Route('/new', name: 'app_settings_import_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UploadService $fileUploader): Response
+    public function new(Request $request, UploadService $fileUploader, ImportRepository $importRepository, EventDispatcherInterface $eventDispatcher): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
@@ -67,41 +71,38 @@ class ImportController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $import = $form->getData();
-
             /** @var UploadedFile $file */
             $file = $form->get('file')->getData();
-            $fileData = $fileUploader->uploadFile($file);
+            $filePath = $fileUploader->uploadFile($file);
 
-            $import->setName($fileData['uniqueName']);
-            $import->setExtension($file->getClientOriginalExtension());
-            $import->setPath($fileData['path']);
-            $import->setMimeType($file->getMimeType());
-            $import->setSize($file->getSize());
-            $import->setCreatedAt(new \DateTime('NOW'));
-            $import->setIsFixture(false);
-            $import->setFile(null);
-            $import->setStatus('pending');
-
-            $this->entityManager->persist($import);
-            $this->entityManager->flush();
+            $command = new CreateImportCommand(
+                $import->getName(),
+                $import->getType(),
+                $import->getUser(),
+                $import->getHospital(),
+                $filePath,
+                $file->getMimeType(),
+                $file->getClientOriginalExtension(),
+                $file->getSize()
+            );
 
             try {
-                $this->messageBus->dispatch(new ImportDataMessage($import, $import->getHospital()));
-
-                $this->addFlash('success', 'Your import was successfully created.');
+                $this->messageBus->dispatch($command);
             } catch (HandlerFailedException $e) {
-                $import->setStatus('failed');
-                $import->setLastError($e->getMessage());
-                $import->setLastRun(new \DateTime('NOW'));
+                $eventDispatcher->dispatch(new ImportFailedEvent($import, $e), ImportFailedEvent::NAME);
+                $this->addFlash('danger', 'Your import failed. We have send a notification to the admin to handle this issue.');
 
-                $this->entityManager->persist($import);
-                $this->entityManager->flush();
-
-                $this->addFlash('danger', 'Your import failed, see details for more information. We have send a notification to the admin to handle this issue.');
+                return $this->render('settings/import/new.html.twig', [
+                    'form' => $form->createView(),
+                ]);
             }
 
-            return $this->redirectToRoute('app_settings_import_index', [], Response::HTTP_SEE_OTHER);
+            // Refresh Import entity from database
+            $import = $importRepository->findOneBy(['name' => $import->getName(), 'filePath' => $filePath]);
+
+            $this->messageBus->dispatch(new ImportDataCommand($import->getId()));
+
+            return $this->redirectToRoute('app_settings_import_show', ['id' => $import->getId()]);
         }
 
         return $this->renderForm('settings/import/new.html.twig', [
@@ -121,7 +122,7 @@ class ImportController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_settings_import_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Import $import, UploadService $fileUploader): Response
+    public function edit(Request $request, Import $import, UploadService $fileUploader, EventDispatcherInterface $eventDispatcher): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
@@ -131,43 +132,57 @@ class ImportController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $import = $form->getData();
 
-            /** @var UploadedFile|null $file */
+            /** @var ?UploadedFile $file */
             $file = $form->get('file')->getData();
 
-            if ($file) {
-                $fileData = $fileUploader->uploadFile($file);
+            if (null !== $file) {
+                $filePath = $fileUploader->uploadFile($file);
 
-                $import->setName($fileData['uniqueName']);
-                $import->setExtension($file->getClientOriginalExtension());
-                $import->setPath($fileData['path']);
-                $import->setMimeType($file->getMimeType());
-                $import->setSize($file->getSize());
-                $import->setCreatedAt(new \DateTime('NOW'));
-                $import->setFile(null);
-                $import->setStatus('pending');
+                $command = new UpdateImportCommand(
+                    $import->getId(),
+                    $import->getName(),
+                    $import->getType(),
+                    $import->getUser(),
+                    $import->getHospital(),
+                    true,
+                    $filePath,
+                    $file->getMimeType(),
+                    $file->getClientOriginalExtension(),
+                    $file->getSize()
+                );
 
-                try {
-                    $this->messageBus->dispatch(new ImportDataMessage($import, $import->getHospital()));
-
-                    $this->addFlash('success', 'Your import was successfully edited.');
-                } catch (HandlerFailedException $e) {
-                    $import->setStatus('failed');
-                    $import->setLastError($e->getMessage());
-                    $import->setLastRun(new \DateTime('NOW'));
-
-                    $this->entityManager->persist($import);
-                    $this->entityManager->flush();
-
-                    $this->addFlash('danger', 'Your import failed, see details for more information. We have send a notification to the admin to handle this issue.');
-                }
+                $file = null;
+            } else {
+                $command = new UpdateImportCommand(
+                    $import->getId(),
+                    $import->getName(),
+                    $import->getType(),
+                    $import->getUser(),
+                    $import->getHospital(),
+                    false,
+                    $import->getFilePath(),
+                    $import->getMimeType(),
+                    $import->getFileExtension(),
+                    $import->getSize()
+                );
             }
 
-            $this->entityManager->persist($import);
-            $this->entityManager->flush();
+            try {
+                $this->messageBus->dispatch($command);
+            } catch (HandlerFailedException $e) {
+                $eventDispatcher->dispatch(new ImportFailedEvent($import, $e), ImportFailedEvent::NAME);
+                $this->addFlash('danger', 'Your import failed. We have send a notification to the admin to handle this issue.');
 
-            if (null === $file) {
-                $this->addFlash('success', 'Your import was successfully edited.');
+                return $this->render('import/new.html.twig', [
+                    'form' => $form->createView(),
+                ]);
             }
+
+            if ($command->getUpdateFile()) {
+                $this->messageBus->dispatch(new ImportDataCommand($import->getId()));
+            }
+
+            $this->addFlash('success', 'Your import was successfully edited.');
 
             return $this->redirectToRoute('app_settings_import_show', ['id' => $import->getId()], Response::HTTP_SEE_OTHER);
         }
@@ -186,8 +201,15 @@ class ImportController extends AbstractController
         $CsrfToken = $request->request->get('_token');
 
         if ($this->isCsrfTokenValid('delete'.$import->getId(), $CsrfToken)) {
-            $this->entityManager->remove($import);
-            $this->entityManager->flush();
+            $command = new DeleteImportCommand($import->getId());
+
+            try {
+                $this->messageBus->dispatch($command);
+            } catch (HandlerFailedException) {
+                $this->addFlash('danger', 'Sorry! Could not delete Import: '.$import->getName());
+
+                return $this->redirectToRoute('app_import_index');
+            }
         }
 
         return $this->redirectToRoute('app_settings_import_index', [], Response::HTTP_SEE_OTHER);
@@ -198,36 +220,9 @@ class ImportController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $allocationRepository->deleteByImport($import);
+        $this->messageBus->dispatch(new ImportDataCommand($import->getId()));
 
-        $user = $import->getUser();
-
-        if (!$import->getHospital()) {
-            $hospital = $user->getHospital();
-        } else {
-            $hospital = $import->getHospital();
-        }
-
-        $command = new ImportDataCommand($import->getId());
-
-        try {
-            $this->messageBus->dispatch($command);
-        } catch (HandlerFailedException $e) {
-            $import->setStatus(Import::STATUS_FAILURE);
-            $import->setLastError($e->getMessage());
-            $import->setLastRun(new \DateTime('NOW'));
-
-            $this->entityManager->persist($import);
-            $this->entityManager->flush();
-
-            $this->addFlash('danger', 'Import could not be refreshed, see details for more information.');
-        }
-
-        if (Import::STATUS_FAILURE === $import->getStatus()) {
-            $this->addFlash('danger', 'Import could not be refreshed, see details for more information.');
-        } elseif (Import::STATUS_SUCCESS === $import->getStatus()) {
-            $this->addFlash('success', 'Refreshed Import in database.');
-        }
+        $this->addFlash('success', 'Your import was successfully refreshed.');
 
         return $this->redirectToRoute('app_settings_import_show', ['id' => $import->getId()]);
     }

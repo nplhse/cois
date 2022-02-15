@@ -70,77 +70,28 @@
                                 {{ 'Status'|trans }}
                             </h5>
                             <p>
-                                {% if import.status == 'success' %}
-                                    <i class="bi bi-check-circle-fill text-success">
-
-                                    </i>
-                                {% elseif import.status == 'pending' %}
-                                    <div class="spinner-border text-secondary spinner-border-sm"
-                                        role="status">
-                                        <span class="visually-hidden">
-                                            {{ 'import.field.loading'|trans }}
-                                        </span>
-                                    </div>
-                                {% elseif import.status == 'failure' %}
-                                    <i class="bi bi-exclamation-circle-fill text-danger">
-
-                                    </i>
-                                {% endif %}
-
-                                {{ import.status }}
+                                {{
+                                    component(
+                                        'status_polling',
+                                        {
+                                            importId: import.id
+                                        }
+                                    )
+                                }}
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card mb-3">
-                <div class="card-header">
-                    {{ 'Import details'|trans }}
-                </div>
-                <div class="card-body">
-                    {% if import.lastError %}
-                        <h5 class="card-title">
-                            {{ 'Errors'|trans }}
-                        </h5>
-                        <p>
-                            {{ import.lastError }}
-                        </p>
-                    {% endif %}
-
-                    <h5 class="card-title">
-                        {{ 'Statistics'|trans }}
-                    </h5>
-                    <div class="row">
-                        <div class="col-6">
-                            <h6 class="card-subtitle text-muted">
-                                {{ 'Item count'|trans }}
-                            </h6>
-                            <p>
-                                {{ import.rowCount }}
-                            </p>
-                        </div>
-                        <div class="col-6">
-                            <h6 class="card-subtitle text-muted">
-                                {{ 'Runtime'|trans }}
-                            </h6>
-                            <p>
-                                {{ import.runtime|number_format(5, '.', ',') }}s
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <h6 class="card-subtitle text-muted">
-                                {{ 'Times run'|trans }}
-                            </h6>
-                            <p>
-                                {{ import.runCount }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {{
+                component(
+                    'import_polling',
+                    {
+                        importId: import.id
+                    }
+                )
+            }}
         </div>
 
         <div class="col-md-4">
