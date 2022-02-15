@@ -7,6 +7,7 @@ use App\Application\Contract\ImportWriterInterface;
 use App\Application\Exception\ImportReaderNotFoundException;
 use App\Application\Exception\ImportWriteException;
 use App\Entity\Import;
+use App\Service\Import\Reader\CsvImportReader;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ImportService
@@ -46,6 +47,10 @@ class ImportService
     {
         if (array_key_exists('$fileType', $this->importReader)) {
             return $this->importReader[$fileType]->importData($path);
+        }
+
+        if (empty($fileType)) {
+            return $this->importReader[CsvImportReader::File_Type]->importData($path);
         }
 
         foreach ($this->importReader as $reader) {
