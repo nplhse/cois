@@ -1,0 +1,33 @@
+{% extends '@email/default/notification/body.html.twig' %}
+
+{% block content %}
+    <p>
+        <strong>Import:</strong> {{ import.name }}<br />
+        <strong>User:</strong> {{ import.user }}<br />
+        <strong>Hospital:</strong> {{ import.hospital }}
+    </p>
+
+    {% if exception is defined %}
+        <p>
+            {{ exception.message }}
+        </p>
+        <p>
+            {{ exception.file }}: {{ exception.line }}<br />
+        </p>
+        <small>{{ exception.traceAsString }}</small>
+    {% endif %}
+{% endblock %}
+
+{% block action %}
+    <spacer size="16"></spacer>
+    <button href="{{
+        url(
+            'app_settings_import_show',
+            {
+                id: import.id
+            }
+        )
+        }}">
+        {{ 'View import'|trans([], 'emails') }}
+    </button>
+{% endblock %}

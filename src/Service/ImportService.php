@@ -6,9 +6,11 @@ use App\Application\Contract\ImportReaderInterface;
 use App\Application\Contract\ImportWriterInterface;
 use App\Application\Exception\ImportReaderNotFoundException;
 use App\Application\Exception\ImportWriteException;
+use App\Domain\Event\Import\ImportSkippedRowEvent;
 use App\Entity\Import;
 use App\Service\Import\Reader\CsvImportReader;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ImportService
 {
@@ -28,11 +30,15 @@ class ImportService
 
     private EntityManagerInterface $em;
 
-    public function __construct(EntityManagerInterface $entityManager, iterable $importReader, iterable $importWriter)
+    private EventDispatcherInterface $eventDispatcher;
+
+    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher, iterable $importReader, iterable $importWriter)
     {
         // Important: Disable SQL logging!
         $this->em = $entityManager;
         $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
+
+        $this->eventDispatcher = $eventDispatcher;
 
         $this->importReader = $importReader instanceof \Traversable ? iterator_to_array($importReader) : $importReader;
         $this->importWriter = $importWriter instanceof \Traversable ? iterator_to_array($importWriter) : $importWriter;
@@ -85,8 +91,13 @@ class ImportService
                 ++$iteration;
                 $entity = null;
 
-                foreach ($activeWriters as $writer) {
-                    $entity = $writer->processData($entity, $row, $import);
+                try {
+                    foreach ($activeWriters as $writer) {
+                        $entity = $writer->processData($entity, $row, $import);
+                    }
+                } catch (\InvalidArgumentException $e) {
+                    $this->eventDispatcher->dispatch(new ImportSkippedRowEvent($import, $e), ImportSkippedRowEvent::NAME);
+                    continue;
                 }
 
                 $this->em->persist($entity);
