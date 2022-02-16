@@ -4,6 +4,7 @@ namespace App\EventSubscriber;
 
 use App\Domain\Event\Hospital\HospitalCreatedEvent;
 use App\Domain\Event\Import\ImportFailedEvent;
+use App\Domain\Event\Import\ImportSkippedRowEvent;
 use App\Domain\Event\User\UserRegisteredEvent;
 use App\Domain\Repository\UserRepositoryInterface;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
@@ -67,6 +68,27 @@ class NotifyAdminSubscriber implements EventSubscriberInterface
         }
     }
 
+    public function sendImportSkippedRowNotification(ImportSkippedRowEvent $event): void
+    {
+        $import = $event->getImport();
+        $exception = $event->getException();
+
+        foreach ($this->userRepository->findAdmins() as $admin) {
+            $email = (new NotificationEmail())
+                ->from(new Address($this->mailerSender, $this->mailerFrom))
+                ->to(new Address($admin->getEmail()))
+                ->importance(NotificationEmail::IMPORTANCE_LOW)
+                ->subject('Skipped row in Import')
+                ->htmlTemplate('emails/notification/import_skipped.inky.twig')
+                ->context([
+                    'import' => $import,
+                    'exception' => $exception,
+                ]);
+
+            $this->mailer->send($email);
+        }
+    }
+
     public function sendNewUserNotification(UserRegisteredEvent $event): void
     {
         $user = $event->getUser();
@@ -89,6 +111,7 @@ class NotifyAdminSubscriber implements EventSubscriberInterface
         return [
             HospitalCreatedEvent::NAME => ['sendHospitalCreatedNotification', -10],
             ImportFailedEvent::NAME => ['sendImportFailedNotification', -10],
+            ImportSkippedRowEvent::NAME => ['sendImportSkippedRowNotification', 0],
             UserRegisteredEvent::NAME => ['sendNewUserNotification', -10],
         ];
     }
