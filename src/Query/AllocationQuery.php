@@ -51,13 +51,13 @@ final class AllocationQuery
                 ->addOrderBy('allocation.creationHour', 'ASC');
         } elseif ('urgency' === $this->property) {
             $qb->select(
-                'allocation.SK AS urgency',
-                'COUNT(allocation.SK) AS counter'
+                'allocation.urgency AS urgency',
+                'COUNT(allocation.urgency) AS counter'
             )
-                ->where('allocation.SK IS NOT NULL')
+                ->where('allocation.urgency IS NOT NULL')
                 ->from(Allocation::class, 'allocation')
-                ->groupBy('allocation.SK')
-                ->addOrderBy('allocation.SK', 'ASC');
+                ->groupBy('allocation.urgency')
+                ->addOrderBy('allocation.urgency', 'ASC');
         } elseif ('pzc' === $this->property) {
             $qb->select(
                 'allocation.RMI AS PZC',

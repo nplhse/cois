@@ -372,15 +372,13 @@ class StatisticsService
         }
 
         foreach ($allocations->getItems() as $allocation) {
-            if (preg_match('/(?P<SK>\w+)(?P<Count>\d+)/', $allocation->getUrgency())) {
-                $percent = $this->getFormattedNumber($this->getValueInPercent($allocation->getCounter(), $total));
+            $percent = $this->getFormattedNumber($this->getValueInPercent($allocation->getCounter(), $total));
 
-                $results[] = [
-                    'label' => $allocation->getUrgency(),
-                    'count' => $allocation->getCounter(),
-                    'percent' => $percent.'%',
-                ];
-            }
+            $results[] = [
+                'label' => 'SK'.$allocation->getUrgency(),
+                'count' => $allocation->getCounter(),
+                'percent' => $percent.'%',
+            ];
         }
 
         return $results;
