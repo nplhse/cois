@@ -19,7 +19,7 @@ class AllocationBaseWriter implements \App\Application\Contract\ImportWriterInte
         return 100;
     }
 
-    public function processData(?object $entity, array $row, ImportInterface $import): object
+    public function processData(?object $entity, array $row, ImportInterface $import): ?object
     {
         if (!$entity) {
             /** @var Allocation $entity */

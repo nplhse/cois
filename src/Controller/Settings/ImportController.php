@@ -13,7 +13,6 @@ use App\Repository\AllocationRepository;
 use App\Repository\ImportRepository;
 use App\Service\RequestParamService;
 use App\Service\UploadService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -26,13 +25,10 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/settings/import')]
 class ImportController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-
     private MessageBusInterface $messageBus;
 
-    public function __construct(EntityManagerInterface $entityManager, MessageBusInterface $messageBus)
+    public function __construct(MessageBusInterface $messageBus)
     {
-        $this->entityManager = $entityManager;
         $this->messageBus = $messageBus;
     }
 

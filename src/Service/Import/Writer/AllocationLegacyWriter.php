@@ -18,7 +18,7 @@ class AllocationLegacyWriter implements \App\Application\Contract\ImportWriterIn
         return 0;
     }
 
-    public function processData(?object $entity, array $row, ImportInterface $import): object
+    public function processData(?object $entity, array $row, ImportInterface $import): ?object
     {
         $entity->setPZC((int) $row['PZC']);
         $entity->setPZCText($row['PZC-Text']);
