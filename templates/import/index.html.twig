@@ -42,245 +42,33 @@
                 }}
             </p>
 
-            {% if filterIsSet %}
-                <div class="alert alert-info" role="alert">
-                    <p class="float-end">
-                        <a href="{{ path('app_hospital_index') }}">
-                            {{ 'Clear all filters'|trans }}
-                        </a>
-                    </p>
-                    <span class="float-start fw-bold">
-                        {{ 'Active Filters'|trans }}:&nbsp;
-                    </span>
-                    {% if filters.search %}
-                        <a href="{{
-                        path(
-                            'app_hospital_index',
-                            app.request.query.all|merge({
-                            search: '',
-                            page: ''
-                        })
-                        )
-                        }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>{{ 'Search'|trans }}:</u> {{ filters.search }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.show %}
-                        <a href="{{
-                        path(
-                            'app_hospital_index',
-                            app.request.query.all|merge({
-                            show: '',
-                            page: ''
-                        })
-                        )
-                        }}">
-                            {% if filters.show == "user" %}
-                                <span class="badge rounded-pill bg-primary">
-                                    {{ 'By Yourself'|trans }}
-                                    <i class="bi bi-x-lg"></i>
-                                </span>
-                            {% elseif filters.show == "hospital" %}
-                                <span class="badge rounded-pill bg-primary">
-                                    {{ 'By your Hospital'|trans }}
-                                    <i class="bi bi-x-lg"></i>
-                                </span>
-                            {% endif %}
-                        </a>
-                    {% endif %}
-                </div>
-            {% endif %}
-
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>
                             {{ 'Id'|trans({}, 'forms') }}
                         </th>
-                        {% if
-                            filters.sortBy == 'caption'
-                            and filters.orderBy == 'desc' %}
                             <th class="table-light">
-                                <a href="{{
-                                path(
-                                    'app_import_index',
-                                    app.request.query.all|merge({
-                                    sortBy: 'caption',
-                                    orderBy: 'asc'
-                                })
-                                )
-                                }}">
-                                    <em>
-                                        {{ 'Caption'|trans({}, 'forms') }}
-                                    </em>
-                                </a>
-
-                                <i class="bi bi-chevron-double-down"></i>
-                            </th>
-                        {% elseif
-                            filters.sortBy == 'caption'
-                            and filters.orderBy == 'asc' %}
-                            <th class="table-light">
-                                <a href="{{
-                                path(
-                                    'app_import_index',
-                                    app.request.query.all|merge({
-                                    sortBy: 'caption',
-                                    orderBy: 'desc'
-                                })
-                                )
-                                }}">
-                                    <em>
-                                        {{ 'Caption'|trans({}, 'forms') }}
-                                    </em>
-                                </a>
-
-                                <i class="bi bi-chevron-double-up"></i>
-                            </th>
-                        {% else %}
-                            <th>
-                                <a href="{{
-                                path(
-                                    'app_import_index',
-                                    app.request.query.all|merge({
-                                    sortBy: 'caption',
-                                    orderBy: 'desc'
-                                })
-                                )
-                                }}">
+                                <em>
                                     {{ 'Caption'|trans({}, 'forms') }}
-                                </a>
+                                </em>
                             </th>
-                        {% endif %}
                         <th>
                             {{ 'User'|trans({}, 'forms') }}
                         </th>
                         <th>
                             {{ 'Hospital'|trans({}, 'forms') }}
                         </th>
-                        {% if
-                            filters.sortBy == 'times'
-                            and filters.orderBy == 'desc' %}
-                            <th class="table-light">
-                                <a href="{{
-                                path(
-                                    'app_import_index',
-                                    app.request.query.all|merge({
-                                    orderBy: 'asc'
-                                })
-                                )
-                                }}">
-                                    <em>{{ 'Created at'|trans({}, 'forms') }}</em>
-                                </a>
-
-                                <i class="bi bi-chevron-double-down"></i>
-                            </th>
-                        {% elseif
-                            filters.sortBy == 'times'
-                            and filters.orderBy == 'asc' %}
-                            <th class="table-light">
-                                <a href="{{
-                                path(
-                                    'app_import_index',
-                                    app.request.query.all|merge({
-                                    orderBy: 'desc'
-                                })
-                                )
-                                }}">
-                                    <em>{{ 'Created at'|trans({}, 'forms') }}</em>
-                                </a>
-
-                                <i class="bi bi-chevron-double-up"></i>
-                            </th>
-                        {% elseif filters.sortBy == null %}
-                            <th class="table-light">
-                                <a href="{{
-                                path(
-                                    'app_import_index',
-                                    app.request.query.all|merge({
-                                    sortBy: 'times',
-                                    orderBy: 'asc'
-                                })
-                                )
-                                }}">
-                                    <em>{{ 'Created at'|trans({}, 'forms') }}</em>
-                                </a>
-
-                                <i class="bi bi-chevron-double-down"></i>
-                            </th>
-                        {% else %}
-                            <th>
-                                <a href="{{
-                                path(
-                                    'app_import_index',
-                                    app.request.query.all|merge({
-                                    sortBy: 'times',
-                                    orderBy: 'desc'
-                                })
-                                )
-                                }}">
-                                    {{ 'Created at'|trans({}, 'forms') }}
-                                </a>
-                            </th>
-                        {% endif %}
-                        {% if
-                            filters.sortBy == 'status'
-                            and filters.orderBy == 'desc' %}
-                            <th class="table-light">
-                                <a href="{{
-                                path(
-                                    'app_import_index',
-                                    app.request.query.all|merge({
-                                    sortBy: 'status',
-                                    orderBy: 'asc'
-                                })
-                                )
-                                }}">
-                                    <em>
-                                        {{ 'Status'|trans({}, 'forms') }}
-                                    </em>
-                                </a>
-
-                                <i class="bi bi-chevron-double-down"></i>
-                            </th>
-                        {% elseif
-                            filters.sortBy == 'status'
-                            and filters.orderBy == 'asc' %}
-                            <th class="table-light">
-                                <a href="{{
-                                path(
-                                    'app_import_index',
-                                    app.request.query.all|merge({
-                                    sortBy: 'status',
-                                    orderBy: 'desc'
-                                })
-                                )
-                                }}">
-                                    <em>
-                                        {{ 'Status'|trans({}, 'forms') }}
-                                    </em>
-                                </a>
-
-                                <i class="bi bi-chevron-double-up"></i>
-                            </th>
-                        {% else %}
-                            <th>
-                                <a href="{{
-                                path(
-                                    'app_import_index',
-                                    app.request.query.all|merge({
-                                    sortBy: 'status',
-                                    orderBy: 'desc'
-                                })
-                                )
-                                }}">
-                                    {{ 'Status'|trans({}, 'forms') }}
-                                </a>
-                            </th>
-                        {% endif %}
+                        <th class="table-light">
+                            <em>{{ 'Created at'|trans({}, 'forms') }}</em>
+                            <i class="bi bi-chevron-double-down"></i>
+                        </th>
+                        <th>
+                            <em>
+                                {{ 'Status'|trans({}, 'forms') }}
+                            </em>
+                            <i class="bi bi-chevron-double-down"></i>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -368,7 +156,7 @@
             </div>
         </div>
         <div class="col-3">
-            {% if app.user.hospital %}
+            {% if is_granted('create_import', app.user) %}
                 <p>
                     <a class="btn btn-primary" href="{{ path('app_import_new') }}">
                         <i class="bi bi-plus-circle-fill"></i>
@@ -383,147 +171,21 @@
                     {{ 'Filters'|trans({}, 'forms') }}
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">
-                        {{ 'Search'|trans }}
-                    </h5>
-
-                    {{ filter.search(filters.search) }}
-
-                    <h5 class="card-title">
-                        {{ 'Filter by Properties'|trans }}
-                    </h5>
-
-                    <form>
-                        <select class="form-select" name="show" aria-label="Default select example">
-                            {% if filters.show == null %}
-                                <option value="" selected>{{ 'Filter by Properties'|trans }}</option>
-                            {% else %}
-                                <option value="">{{ 'Stop filtering by Properties'|trans }}</option>
-                            {% endif %}
-                            {% if filters.show == 'user' %}
-                                <option value="user" selected>{{ 'By Yourself'|trans }}</option>
-                            {% else %}
-                                <option value="user">{{ 'By Yourself'|trans }}</option>
-                            {% endif %}
-                            {% if app.user.hospital %}
-                                {% if filters.show != 'hospital' %}
-                                    <option value="hospital">{{ 'By your Hospital'|trans }}</option>
-                                {% elseif app.user.hospital and filters.show == 'hospital' %}
-                                    <option value="hospital" selected>{{ 'By your Hospital'|trans }}</option>
-                                {% endif %}
-                            {% endif %}
-                        </select>
-
-                        {% if filters.sortBy %}
-                            <input type="hidden"
-                                   id="sortBy"
-                                   name="sortBy"
-                                   value="{{ filters.sortBy }}" />
-                        {% endif %}
-                        {% if filters.orderBy %}
-                            <input type="hidden"
-                                   id="orderBy"
-                                   name="orderBy"
-                                   value="{{ filters.orderBy }}" />
-                        {% endif %}
-
-                        <div class="float-end mt-2">
-                            <button type="submit"
-                                    class="btn btn-outline-primary">
-                                {{ "Apply filters"|trans({}, 'forms') }} <i class="bi bi-arrow-right-square"></i>
-                            </button>
-                        </div>
-                    </form>
+                    {{ form(searchForm) }}
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-header">
-                    <i class="bi bi-sort-down"></i> {{ "Sorting"|trans }}
+                    <i class="bi bi-sort-down"></i> {{ 'Sorting'|trans }}
                 </div>
                 <div class="card-body">
-                    <form>
-                        <div class="form-floating mb-2">
-                            <select id="sortBy"
-                                    name="sortBy"
-                                    class="form-select"
-                                    aria-label="sortBy">
-                                {% if filters.sortBy == 'time' %}
-                                    <option value="time" selected="selected">
-                                        {{ 'Time'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="time">
-                                        {{ 'Time'|trans }}
-                                    </option>
-                                {% endif %}
-                                {% if filters.sortBy == 'caption' %}
-                                    <option value="caption" selected="selected">
-                                        {{ 'Caption'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="caption">
-                                        {{ 'Caption'|trans }}
-                                    </option>
-                                {% endif %}
-                                {% if filters.sortBy == 'status' %}
-                                    <option value="status" selected="selected">
-                                        {{ 'Status'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="status">
-                                        {{ 'Status'|trans }}
-                                    </option>
-                                {% endif %}
-                            </select>
-                            <label for="sortBy">{{ "Sort by"|trans({}, 'forms') }}</label>
-                        </div>
-                        <div class="form-floating mb-2">
-                            <select id="orderBy"
-                                    name="orderBy"
-                                    class="form-select"
-                                    aria-label="sortorder">
-                                {% if filters.orderBy == 'asc' %}
-                                    <option value="asc" selected="selected">
-                                        {{ 'Ascending'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="asc">
-                                        {{ 'Ascending'|trans }}
-                                    </option>
-                                {% endif %}
-                                {% if filters.orderBy == 'desc' %}
-                                    <option value="desc" selected="selected">
-                                        {{ 'Descending'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="desc">
-                                        {{ 'Descending'|trans }}
-                                    </option>
-                                {% endif %}
-                            </select>
-                            <label for="sortorder">{{ "Order by"|trans({}, 'forms') }}</label>
-                        </div>
+                    {{ form_start(sortForm) }}
 
-                        {% if filters.search %}
-                            <input type="hidden"
-                                   id="search"
-                                   name="search"
-                                   value="{{ filters.search }}" />
-                        {% endif %}
-                        {% if filters.show %}
-                            <input type="hidden"
-                                   id="show"
-                                   name="show"
-                                   value="{{ filters.show }}" />
-                        {% endif %}
+                    {{ form_row(sortForm.sortBy) }}
+                    {{ form_row(sortForm.orderBy) }}
 
-                        <div class="float-end">
-                            <button type="submit" class="btn btn-outline-primary">
-                                {{ "Sort imports"|trans }}
-                            </button>
-                        </div>
-                    </form>
+                    {{ form_end(sortForm) }}
                 </div>
             </div>
         </div>

@@ -6,6 +6,10 @@ use App\Domain\Contracts\ImportInterface;
 use App\Domain\Repository\ImportRepositoryInterface;
 use App\Entity\Import;
 use App\Entity\User;
+use App\Service\Filters\OrderFilter;
+use App\Service\Filters\PageFilter;
+use App\Service\Filters\SearchFilter;
+use App\Service\FilterService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
@@ -31,7 +35,7 @@ class ImportRepository extends ServiceEntityRepository implements ImportReposito
 
     public const SEARCHABLE = ['name'];
 
-    public const ENTITY_ALIAS = 'h.';
+    public const ENTITY_ALIAS = 'i.';
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -90,71 +94,21 @@ class ImportRepository extends ServiceEntityRepository implements ImportReposito
         return $this->findBy([], ['name' => 'ASC']);
     }
 
-    public function getImportPaginator(int $page, array $filter): Paginator
+    public function getImportPaginator(FilterService $filterService): Paginator
     {
-        if (1 != $page) {
-            $offset = $page * self::PAGINATOR_PER_PAGE;
-        } else {
-            $offset = 0;
-        }
+        $qb = $this->createQueryBuilder('i');
 
-        $query = $this->createQueryBuilder('i');
+        $arguments = [
+            PageFilter::PER_PAGE => self::PER_PAGE,
+            FilterService::ENTITY_ALIAS => self::ENTITY_ALIAS,
+            OrderFilter::DEFAULT_ORDER => self::DEFAULT_ORDER,
+            OrderFilter::DEFAULT_SORT => self::DEFAULT_SORT,
+            OrderFilter::SORTABLE => self::SORTABLE,
+            SearchFilter::SEARCHABLE => self::SEARCHABLE,
+        ];
 
-        if ($filter['search']) {
-            $query->where('i.caption LIKE :search')
-                ->setParameter('search', '%'.$filter['search'].'%')
-            ;
-        }
+        $qb = $filterService->processQuery($qb, $arguments);
 
-        if ('user' == $filter['show']) {
-            $query->andWhere('i.user = :user')
-                ->setParameter(':user', $filter['user'])
-                ;
-        } elseif ('hospital' == $filter['show']) {
-            $query->andWhere('i.hospital = :hospital')
-                ->setParameter(':hospital', $filter['hospital'])
-            ;
-        } elseif ('all' == $filter['show']) {
-            // do nothing
-        }
-
-        if (empty($filter['show'])) {
-            $query->andWhere('i.user = :user')
-                ->setParameter(':user', $filter['user'])
-                ->orWhere('i.hospital = :hospital')
-                ->setParameter(':hospital', $filter['hospital'])
-            ;
-        }
-
-        if (isset($filter['sortBy'])) {
-            $sortBy = match ($filter['sortBy']) {
-                'status' => 'i.status',
-                'caption' => 'i.caption',
-                default => 'i.createdAt',
-            };
-        } else {
-            $sortBy = 'i.createdAt';
-        }
-
-        if (isset($filter['orderBy'])) {
-            if ('desc' === $filter['orderBy']) {
-                $order = 'DESC';
-            } elseif ('asc' === $filter['orderBy']) {
-                $order = 'ASC';
-            } else {
-                $order = 'DESC';
-            }
-        } else {
-            $order = 'DESC';
-        }
-
-        $query
-            ->orderBy($sortBy, $order)
-            ->setMaxResults(self::PAGINATOR_PER_PAGE)
-            ->setFirstResult($offset)
-            ->getQuery()
-        ;
-
-        return new Paginator($query);
+        return new Paginator($qb->getQuery());
     }
 }

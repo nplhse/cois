@@ -10,9 +10,14 @@ use App\Domain\Contracts\UserInterface;
 use App\Domain\Event\Import\ImportFailedEvent;
 use App\Entity\Import;
 use App\Form\ImportType;
-use App\Repository\HospitalRepository;
 use App\Repository\ImportRepository;
-use App\Service\RequestParamService;
+use App\Service\Filters\HospitalOwnerFilter;
+use App\Service\Filters\OrderFilter;
+use App\Service\Filters\OwnHospitalFilter;
+use App\Service\Filters\PageFilter;
+use App\Service\Filters\SearchFilter;
+use App\Service\FilterService;
+use App\Service\PaginationFactory;
 use App\Service\UploadService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,36 +35,54 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route(path: '/import')]
 class ImportController extends AbstractController
 {
+    private FilterService $filterService;
+
     private MessageBusInterface $messageBus;
 
-    public function __construct(MessageBusInterface $messageBus)
+    public function __construct(FilterService $filterService, MessageBusInterface $messageBus)
     {
+        $this->filterService = $filterService;
         $this->messageBus = $messageBus;
     }
 
     #[Route(path: '/', name: 'app_import_index')]
-    public function index(Request $request, UploadService $fileUploader, ImportRepository $importRepository, HospitalRepository $hospitalRepository): Response
+    public function index(Request $request, ImportRepository $importRepository): Response
     {
-        $hospital = $hospitalRepository->findOneBy(['owner' => $this->getUser()->getId()]);
+        $this->filterService->setRequest($request);
+        $this->filterService->configureFilters([OwnHospitalFilter::Param, HospitalOwnerFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
 
-        $paramService = new RequestParamService($request);
+        $paginator = $importRepository->getImportPaginator($this->filterService);
 
-        $filters = [];
-        $filters['search'] = $paramService->getSearch();
-        $filters['page'] = $paramService->getPage();
-        $filters['show'] = $paramService->getShow();
-        $filters['user'] = $this->getUser();
-        $filters['hospital'] = $this->getUser()->getHospital();
-        $filters['sortBy'] = $paramService->getSortBy();
-        $filters['orderBy'] = $paramService->getOrderBy();
+        $args = [
+            'action' => $this->generateUrl('app_import_index'),
+            'method' => 'GET',
+        ];
 
-        $paginator = $importRepository->getImportPaginator($paramService->getPage(), $filters);
+        $sortArguments = [
+            'sortable' => ImportRepository::SORTABLE,
+            'hidden' => [
+                SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
+            ],
+        ];
 
-        return $this->render('import/index.html.twig', [
+        $sortForm = $this->filterService->buildForm(OrderFilter::Param, array_merge($sortArguments, $args));
+        $sortForm->handleRequest($request);
+
+        $searchArguments = [
+            'hidden' => [
+                OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
+            ],
+        ];
+
+        $searchForm = $this->filterService->buildForm(SearchFilter::Param, array_merge($searchArguments, $args));
+        $searchForm->handleRequest($request);
+
+        return $this->renderForm('import/index.html.twig', [
+            'filters' => $this->filterService->getFilterDto(),
+            'sortForm' => $sortForm,
+            'searchForm' => $searchForm,
             'imports' => $paginator,
-            'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), ImportRepository::PAGINATOR_PER_PAGE),
-            'filters' => $filters,
-            'filterIsSet' => $paramService->isFilterIsSet(),
+            'pages' => PaginationFactory::create($this->filterService->getValue(PageFilter::Param), count($paginator), ImportRepository::PER_PAGE),
         ]);
     }
 
