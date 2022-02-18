@@ -17,8 +17,6 @@ class ImportSuccessEvent extends Event implements DomainEventInterface
 
     private ImportInterface $import;
 
-    private \Exception $exception;
-
     public function __construct(ImportInterface $import)
     {
         $this->import = $import;
@@ -27,10 +25,5 @@ class ImportSuccessEvent extends Event implements DomainEventInterface
     public function getImport(): ImportInterface
     {
         return $this->import;
-    }
-
-    public function getException(): ?\Exception
-    {
-        return $this->exception;
     }
 }

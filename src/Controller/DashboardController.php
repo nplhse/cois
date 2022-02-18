@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Domain\Contracts\UserInterface;
 use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
 use App\Repository\ImportRepository;
@@ -15,16 +16,17 @@ class DashboardController extends AbstractController
     #[Route('/dashboard/', name: 'app_dashboard')]
     public function index(AllocationRepository $allocationRepository, HospitalRepository $hospitalRepository, UserRepository $userRepository, ImportRepository $importRepository): Response
     {
+        /** @var UserInterface $user */
         $user = $this->getUser();
 
-        if (null === $user) {
+        if (null === $this->getUser()) {
             return $this->redirectToRoute('app_default');
         }
 
-        if (null == $user->getHospital()) {
+        if ($user->getHospitals()->isEmpty()) {
             $allocationCount = 0;
         } else {
-            $allocationCount = $allocationRepository->countAllocations($user->getHospital());
+            $allocationCount = $allocationRepository->countAllocationsByUser($user);
         }
 
         return $this->render('dashboard/index.html.twig', [

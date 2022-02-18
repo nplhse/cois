@@ -2,11 +2,13 @@
 
 namespace App\Repository;
 
+use App\Domain\Contracts\UserInterface;
 use App\Entity\Allocation;
 use App\Entity\Hospital;
 use App\Entity\Import;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -25,21 +27,24 @@ class AllocationRepository extends ServiceEntityRepository
         parent::__construct($registry, Allocation::class);
     }
 
-    public function countAllocations(Hospital $hospital = null): string
+    public function countAllocations(): string
     {
-        if ($hospital) {
-            $qb = $this->createQueryBuilder('a')
-                ->select('COUNT(a.id)')
-                ->andWhere('a.hospital = :hospital')
-                ->setParameter('hospital', $hospital->getId(), Types::INTEGER)
-                ->getQuery()
-                ->getSingleScalarResult();
-        } else {
-            $qb = $this->createQueryBuilder('a')
+        $qb = $this->createQueryBuilder('a')
                 ->select('COUNT(a.id)')
                 ->getQuery()
                 ->getSingleScalarResult();
-        }
+
+        return $qb;
+    }
+
+    public function countAllocationsByUser(UserInterface $user): string
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('COUNT(a.id)')
+            ->leftJoin('a.hospital', 'h', Expr\Join::WITH, 'h.owner = :user')
+            ->setParameter('user', $user->getId())
+            ->getQuery()
+            ->getSingleScalarResult();
 
         return $qb;
     }
