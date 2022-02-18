@@ -243,6 +243,12 @@
 
                     {{ form_start(hospitalForm) }}
 
+                    {{ form_row(hospitalForm.ownHospitals) }}
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        {{ form_row(hospitalForm.owner) }}
+                    {% endif %}
+
                     {{ form_row(hospitalForm.location) }}
 
                     {{ form_row(hospitalForm.size) }}

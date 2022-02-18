@@ -7,9 +7,17 @@ use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Security;
 
 class HospitalFilterType extends AbstractType
 {
+    private Security $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     public function getBlockPrefix(): string
     {
         return '';
@@ -23,6 +31,14 @@ class HospitalFilterType extends AbstractType
             ->add('state', StateType::class)
             ->add('supplyArea', SupplyAreaType::class)
             ->add('dispatchArea', DispatchAreaType::class)
+            ->add('ownHospitals', OwnHospitalFilterType::class);
+
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            $builder
+                ->add('owner', HospitalOwnerFilterType::class);
+        }
+
+        $builder
             ->add('reset', ResetType::class, [
                 'label' => 'Reset filters',
             ])

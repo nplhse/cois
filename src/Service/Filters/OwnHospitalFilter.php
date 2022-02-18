@@ -3,51 +3,53 @@
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
-use App\Form\Filters\HospitalFilterType;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 
-class HospitalFilter implements FilterInterface
+class OwnHospitalFilter implements FilterInterface
 {
     use FilterTrait;
     use HiddenFieldTrait;
 
-    public const Param = 'hospital';
-
-    private FormFactoryInterface $formFactory;
+    public const Param = 'own-hospital';
 
     private Security $security;
 
-    public function __construct(FormFactoryInterface $formFactory, Security $security)
+    public function __construct(Security $security)
     {
-        $this->formFactory = $formFactory;
         $this->security = $security;
     }
 
     public function getValue(Request $request): mixed
     {
-        return null;
+        $ownHospitals = $request->query->get('ownHospitals');
+
+        if (empty($ownHospitals)) {
+            $value = null;
+        }
+
+        if (1 === (int) $ownHospitals) {
+            $value = 1;
+        } else {
+            $value = null;
+        }
+
+        return $this->setCacheValue($value);
     }
 
     public function supportsForm(): bool
     {
-        return true;
+        return false;
     }
 
     public function buildForm(array $arguments): ?FormInterface
     {
-        $form = $this->formFactory->create(HospitalFilterType::class, null, [
-            'action' => $arguments['action'],
-            'method' => $arguments['method'],
-        ]);
-
-        return $this->addHiddenFields($arguments['hidden'], $form);
+        return null;
     }
 
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder

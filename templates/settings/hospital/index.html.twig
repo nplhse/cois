@@ -88,6 +88,10 @@
                             <div class="col">
                                 {{ form_start(hospitalForm) }}
 
+                                {{ form_row(hospitalForm.owner) }}
+
+                                {{ form_row(hospitalForm.ownHospitals) }}
+
                                 {{ form_row(hospitalForm.location) }}
 
                                 {{ form_row(hospitalForm.size) }}

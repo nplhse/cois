@@ -118,12 +118,7 @@ class Hospital extends DomainHospital
 
     public function removeImport(Import $import): self
     {
-        if ($this->imports->removeElement($import)) {
-            // set the owning side to null (unless already changed)
-            if ($import->getHospital() === $this) {
-                $import->setHospital(null);
-            }
-        }
+        $this->imports->removeElement($import);
 
         return $this;
     }

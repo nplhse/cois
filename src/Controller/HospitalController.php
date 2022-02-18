@@ -14,8 +14,10 @@ use App\Repository\HospitalRepository;
 use App\Repository\SupplyAreaRepository;
 use App\Service\Filters\DispatchAreaFilter;
 use App\Service\Filters\HospitalFilter;
+use App\Service\Filters\HospitalOwnerFilter;
 use App\Service\Filters\LocationFilter;
 use App\Service\Filters\OrderFilter;
+use App\Service\Filters\OwnHospitalFilter;
 use App\Service\Filters\PageFilter;
 use App\Service\Filters\SearchFilter;
 use App\Service\Filters\SizeFilter;
@@ -47,7 +49,7 @@ class HospitalController extends AbstractController
     public function index(Request $request, HospitalRepository $hospitalRepository, SupplyAreaRepository $supplyAreaRepository, DispatchAreaRepository $dispatchAreaRepository): Response
     {
         $this->filterService->setRequest($request);
-        $this->filterService->configureFilters([LocationFilter::Param, SizeFilter::Param, StateFilter::Param, DispatchAreaFilter::Param, SupplyAreaFilter::Param, HospitalFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
+        $this->filterService->configureFilters([LocationFilter::Param, SizeFilter::Param, StateFilter::Param, DispatchAreaFilter::Param, SupplyAreaFilter::Param, HospitalFilter::Param, OwnHospitalFilter::Param, HospitalOwnerFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
 
         $paginator = $hospitalRepository->getHospitalPaginator($this->filterService);
 
@@ -213,7 +215,7 @@ class HospitalController extends AbstractController
 
         return $this->render('hospitals/show.html.twig', [
             'hospital' => $hospital,
-            'hospital_allocations' => $allocationRepository->countAllocations($hospital),
+            'hospital_allocations' => $allocationRepository->countAllocations(),
             'user_can_edit' => true,
         ]);
     }
