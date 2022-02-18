@@ -32,7 +32,9 @@ class UpdateDispatchAreaHandlerTest extends TestCase
 
         $command = new UpdateDispatchAreaCommand(1, 'Test Name');
 
-        $handler = new UpdateDispatchAreaHandler($dispatchAreaRespository, $eventDispatcher);
+        $handler = new UpdateDispatchAreaHandler($dispatchAreaRespository);
+        $handler->setEventDispatcher($eventDispatcher);
+
         $handler->__invoke($command);
     }
 }

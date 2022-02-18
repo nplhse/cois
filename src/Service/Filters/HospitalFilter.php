@@ -6,10 +6,12 @@ use App\Application\Contract\FilterInterface;
 use App\Form\Filters\HospitalFilterType;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\Filters\Traits\HiddenFieldTrait;
+use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 
 class HospitalFilter implements FilterInterface
 {
@@ -20,9 +22,12 @@ class HospitalFilter implements FilterInterface
 
     private FormFactoryInterface $formFactory;
 
-    public function __construct(FormFactoryInterface $formFactory)
+    private Security $security;
+
+    public function __construct(FormFactoryInterface $formFactory, Security $security)
     {
         $this->formFactory = $formFactory;
+        $this->security = $security;
     }
 
     public function getValue(Request $request): mixed
@@ -47,6 +52,14 @@ class HospitalFilter implements FilterInterface
 
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder
     {
-        return $qb;
+        $ownHospitals = $this->cacheValue ?? $this->getValue($request);
+
+        if (!isset($ownHospitals)) {
+            return $qb;
+        }
+
+        return $qb->orWhere($arguments[FilterService::ENTITY_ALIAS].'owner = :owner')
+            ->setParameter('owner', $this->security->getUser())
+        ;
     }
 }

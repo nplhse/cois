@@ -3,22 +3,20 @@
 namespace App\Application\Handler\SupplyArea;
 
 use App\Application\Contract\HandlerInterface;
+use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Command\SupplyArea\UpdateSupplyAreaCommand;
 use App\Domain\Event\SupplyArea\SupplyAreaUpdatedEvent;
 use App\Repository\SupplyAreaRepository;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class UpdateSupplyAreaHandler implements HandlerInterface
 {
+    use EventDispatcherTrait;
+
     private SupplyAreaRepository $supplyAreaRepository;
 
-    private EventDispatcherInterface $dispatcher;
-
-    public function __construct(SupplyAreaRepository $supplyAreaRepository, EventDispatcherInterface $dispatcher)
+    public function __construct(SupplyAreaRepository $supplyAreaRepository)
     {
         $this->supplyAreaRepository = $supplyAreaRepository;
-
-        $this->dispatcher = $dispatcher;
     }
 
     public function __invoke(UpdateSupplyAreaCommand $command): void
@@ -29,8 +27,6 @@ class UpdateSupplyAreaHandler implements HandlerInterface
 
         $this->supplyAreaRepository->save();
 
-        $event = new SupplyAreaUpdatedEvent($area);
-
-        $this->dispatcher->dispatch($event, SupplyAreaUpdatedEvent::NAME);
+        $this->dispatchEvent(new SupplyAreaUpdatedEvent($area));
     }
 }

@@ -40,7 +40,9 @@ class CreateDispatchAreaHandlerTest extends TestCase
 
         $command = new CreateDispatchAreaCommand('Test State', $state);
 
-        $handler = new CreateDispatchAreaHandler($dispatchAreaRepository, $stateRepository, $eventDispatcher);
+        $handler = new CreateDispatchAreaHandler($dispatchAreaRepository, $stateRepository);
+        $handler->setEventDispatcher($eventDispatcher);
+
         $handler->__invoke($command);
     }
 }

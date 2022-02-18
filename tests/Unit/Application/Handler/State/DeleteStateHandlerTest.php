@@ -33,7 +33,9 @@ class DeleteStateHandlerTest extends TestCase
 
         $command = new DeleteStateCommand(1);
 
-        $handler = new DeleteStateHandler($stateRepository, $eventDispatcher);
+        $handler = new DeleteStateHandler($stateRepository);
+        $handler->setEventDispatcher($eventDispatcher);
+
         $handler->__invoke($command);
     }
 }

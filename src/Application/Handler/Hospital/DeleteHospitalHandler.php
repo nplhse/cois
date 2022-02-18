@@ -3,22 +3,20 @@
 namespace App\Application\Handler\Hospital;
 
 use App\Application\Contract\HandlerInterface;
+use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Command\Hospital\DeleteHospitalCommand;
 use App\Domain\Event\Hospital\HospitalDeletedEvent;
 use App\Domain\Repository\HospitalRepositoryInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DeleteHospitalHandler implements HandlerInterface
 {
+    use EventDispatcherTrait;
+
     private HospitalRepositoryInterface $hospitalRepository;
 
-    private EventDispatcherInterface $dispatcher;
-
-    public function __construct(HospitalRepositoryInterface $hospitalRepository, EventDispatcherInterface $dispatcher)
+    public function __construct(HospitalRepositoryInterface $hospitalRepository)
     {
         $this->hospitalRepository = $hospitalRepository;
-
-        $this->dispatcher = $dispatcher;
     }
 
     public function __invoke(DeleteHospitalCommand $command): void
@@ -27,8 +25,6 @@ class DeleteHospitalHandler implements HandlerInterface
 
         $this->hospitalRepository->delete($hospital);
 
-        $event = new HospitalDeletedEvent($hospital);
-
-        $this->dispatcher->dispatch($event, HospitalDeletedEvent::NAME);
+        $this->dispatchEvent(new HospitalDeletedEvent($hospital));
     }
 }

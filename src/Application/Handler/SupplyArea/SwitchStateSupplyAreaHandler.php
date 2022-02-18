@@ -3,26 +3,24 @@
 namespace App\Application\Handler\SupplyArea;
 
 use App\Application\Contract\HandlerInterface;
+use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Command\SupplyArea\SwitchStateSupplyAreaCommand;
 use App\Domain\Event\SupplyArea\SupplyAreaSwitchedStateEvent;
 use App\Repository\StateRepository;
 use App\Repository\SupplyAreaRepository;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class SwitchStateSupplyAreaHandler implements HandlerInterface
 {
+    use EventDispatcherTrait;
+
     private SupplyAreaRepository $supplyAreaRepository;
 
     private StateRepository $stateRepository;
 
-    private EventDispatcherInterface $dispatcher;
-
-    public function __construct(SupplyAreaRepository $supplyAreaRepository, StateRepository $stateRepository, EventDispatcherInterface $dispatcher)
+    public function __construct(SupplyAreaRepository $supplyAreaRepository, StateRepository $stateRepository)
     {
         $this->supplyAreaRepository = $supplyAreaRepository;
         $this->stateRepository = $stateRepository;
-
-        $this->dispatcher = $dispatcher;
     }
 
     public function __invoke(SwitchStateSupplyAreaCommand $command): void
@@ -40,8 +38,6 @@ class SwitchStateSupplyAreaHandler implements HandlerInterface
         $this->supplyAreaRepository->save();
         $this->stateRepository->save();
 
-        $event = new SupplyAreaSwitchedStateEvent($area, $newState);
-
-        $this->dispatcher->dispatch($event, SupplyAreaSwitchedStateEvent::NAME);
+        $this->dispatchEvent(new SupplyAreaSwitchedStateEvent($area, $newState));
     }
 }

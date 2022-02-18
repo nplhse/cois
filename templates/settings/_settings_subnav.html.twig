@@ -131,24 +131,6 @@
         {% endif %}
         {% if
             app.request.attributes.get('_route')
-                starts with 'app_settings_task' %}
-            <li class="list-group-item active">
-                <i class="bi bi-list-check"></i>
-                <a class="text-light"
-                    href="{{ path('app_settings_task_index') }}">
-                    {{ 'Tasks'|trans }}
-                </a>
-            </li>
-        {% else %}
-            <li class="list-group-item">
-                <i class="bi bi-list-check"></i>
-                <a href="{{ path('app_settings_task_index') }}">
-                    {{ 'Tasks'|trans }}
-                </a>
-            </li>
-        {% endif %}
-        {% if
-            app.request.attributes.get('_route')
                 starts with 'app_settings_user' %}
             <li class="list-group-item active">
                 <i class="bi bi-people-fill"></i>
@@ -162,6 +144,24 @@
                 <i class="bi bi-people"></i>
                 <a href="{{ path('app_settings_user_index') }}">
                     {{ 'Users'|trans }}
+                </a>
+            </li>
+        {% endif %}
+        {% if
+            app.request.attributes.get('_route')
+                starts with 'app_settings_task' %}
+            <li class="list-group-item active">
+                <i class="bi bi-list-check"></i>
+                <a class="text-light"
+                    href="{{ path('app_settings_task_index') }}">
+                    {{ 'Tasks'|trans }}
+                </a>
+            </li>
+        {% else %}
+            <li class="list-group-item">
+                <i class="bi bi-list-check"></i>
+                <a href="{{ path('app_settings_task_index') }}">
+                    {{ 'Tasks'|trans }}
                 </a>
             </li>
         {% endif %}

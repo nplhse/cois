@@ -3,27 +3,25 @@
 namespace App\Application\Handler\DispatchArea;
 
 use App\Application\Contract\HandlerInterface;
+use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Command\DispatchArea\CreateDispatchAreaCommand;
 use App\Domain\Event\DispatchArea\DispatchAreaCreatedEvent;
 use App\Entity\DispatchArea;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\StateRepository;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CreateDispatchAreaHandler implements HandlerInterface
 {
+    use EventDispatcherTrait;
+
     private DispatchAreaRepository $dispatchAreaRepository;
 
     private StateRepository $stateRepository;
 
-    private EventDispatcherInterface $dispatcher;
-
-    public function __construct(DispatchAreaRepository $dispatchAreaRepository, StateRepository $stateRepository, EventDispatcherInterface $dispatcher)
+    public function __construct(DispatchAreaRepository $dispatchAreaRepository, StateRepository $stateRepository)
     {
         $this->dispatchAreaRepository = $dispatchAreaRepository;
         $this->stateRepository = $stateRepository;
-
-        $this->dispatcher = $dispatcher;
     }
 
     public function __invoke(CreateDispatchAreaCommand $command): void
@@ -39,8 +37,6 @@ class CreateDispatchAreaHandler implements HandlerInterface
 
         $this->stateRepository->save();
 
-        $event = new DispatchAreaCreatedEvent($area);
-
-        $this->dispatcher->dispatch($event, DispatchAreaCreatedEvent::NAME);
+        $this->dispatchEvent(new DispatchAreaCreatedEvent($area));
     }
 }

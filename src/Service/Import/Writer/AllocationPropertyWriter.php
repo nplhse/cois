@@ -18,7 +18,7 @@ class AllocationPropertyWriter implements \App\Application\Contract\ImportWriter
         return 50;
     }
 
-    public function processData(?object $entity, array $row, ImportInterface $import): object
+    public function processData(?object $entity, array $row, ImportInterface $import): ?object
     {
         if ('S+' === $row['Schockraum']) {
             $entity->setRequiresResus(true);

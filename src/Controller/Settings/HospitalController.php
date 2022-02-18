@@ -11,8 +11,10 @@ use App\Form\HospitalType;
 use App\Repository\HospitalRepository;
 use App\Service\Filters\DispatchAreaFilter;
 use App\Service\Filters\HospitalFilter;
+use App\Service\Filters\HospitalOwnerFilter;
 use App\Service\Filters\LocationFilter;
 use App\Service\Filters\OrderFilter;
+use App\Service\Filters\OwnHospitalFilter;
 use App\Service\Filters\PageFilter;
 use App\Service\Filters\SearchFilter;
 use App\Service\Filters\SizeFilter;
@@ -46,7 +48,7 @@ class HospitalController extends AbstractController
     public function index(Request $request, HospitalRepository $hospitalRepository): Response
     {
         $this->filterService->setRequest($request);
-        $this->filterService->configureFilters([LocationFilter::Param, SizeFilter::Param, StateFilter::Param, DispatchAreaFilter::Param, SupplyAreaFilter::Param, HospitalFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
+        $this->filterService->configureFilters([LocationFilter::Param, SizeFilter::Param, StateFilter::Param, DispatchAreaFilter::Param, SupplyAreaFilter::Param, HospitalFilter::Param, OwnHospitalFilter::Param, HospitalOwnerFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
 
         $paginator = $hospitalRepository->getHospitalPaginator($this->filterService);
 

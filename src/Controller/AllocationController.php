@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Domain\Repository\DispatchAreaRepositoryInterface;
-use App\Domain\Repository\StateRepositoryInterface;
 use App\Domain\Repository\SupplyAreaRepositoryInterface;
 use App\Entity\Allocation;
 use App\Repository\AllocationRepository;
@@ -21,15 +20,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AllocationController extends AbstractController
 {
-    private StateRepositoryInterface $stateRepository;
-
     private SupplyAreaRepositoryInterface $supplyAreaRepository;
 
     private DispatchAreaRepositoryInterface $dispatchAreaRepository;
 
-    public function __construct(StateRepositoryInterface $stateRepository, SupplyAreaRepositoryInterface $supplyAreaRepository, DispatchAreaRepositoryInterface $dispatchAreaRepository)
+    public function __construct(SupplyAreaRepositoryInterface $supplyAreaRepository, DispatchAreaRepositoryInterface $dispatchAreaRepository)
     {
-        $this->stateRepository = $stateRepository;
         $this->supplyAreaRepository = $supplyAreaRepository;
         $this->dispatchAreaRepository = $dispatchAreaRepository;
     }

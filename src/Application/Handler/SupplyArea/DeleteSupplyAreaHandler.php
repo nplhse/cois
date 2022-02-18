@@ -3,26 +3,24 @@
 namespace App\Application\Handler\SupplyArea;
 
 use App\Application\Contract\HandlerInterface;
+use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Command\SupplyArea\DeleteSupplyAreaCommand;
 use App\Domain\Event\SupplyArea\SupplyAreaDeletedEvent;
 use App\Repository\StateRepository;
 use App\Repository\SupplyAreaRepository;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DeleteSupplyAreaHandler implements HandlerInterface
 {
+    use EventDispatcherTrait;
+
     private SupplyAreaRepository $supplyAreaRepository;
 
     private StateRepository $stateRepository;
 
-    private EventDispatcherInterface $dispatcher;
-
-    public function __construct(SupplyAreaRepository $supplyAreaRepository, StateRepository $stateRepository, EventDispatcherInterface $dispatcher)
+    public function __construct(SupplyAreaRepository $supplyAreaRepository, StateRepository $stateRepository)
     {
         $this->supplyAreaRepository = $supplyAreaRepository;
         $this->stateRepository = $stateRepository;
-
-        $this->dispatcher = $dispatcher;
     }
 
     public function __invoke(DeleteSupplyAreaCommand $command): void
@@ -38,8 +36,6 @@ class DeleteSupplyAreaHandler implements HandlerInterface
 
         $this->stateRepository->save();
 
-        $event = new SupplyAreaDeletedEvent($area);
-
-        $this->dispatcher->dispatch($event, SupplyAreaDeletedEvent::NAME);
+        $this->dispatchEvent(new SupplyAreaDeletedEvent($area));
     }
 }

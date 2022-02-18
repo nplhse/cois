@@ -22,6 +22,7 @@ use App\Form\SupplyAreaType;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\StateRepository;
 use App\Repository\SupplyAreaRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +30,7 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[IsGranted('ROLE_ADMIN')]
 #[Route('/settings/area')]
 class AreaController extends AbstractController
 {
@@ -42,8 +44,6 @@ class AreaController extends AbstractController
     #[Route('/', name: 'app_settings_area_index')]
     public function index(Request $request, StateRepository $stateRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $states = $stateRepository->findAll();
 
         return $this->render('settings/area/index.html.twig', [
@@ -54,8 +54,6 @@ class AreaController extends AbstractController
     #[Route('/state/new', name: 'app_settings_area_state_new')]
     public function state_new(Request $request, StateRepository $stateRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $state = new State();
         $form = $this->createForm(StateType::class, $state);
         $form->handleRequest($request);
@@ -76,8 +74,6 @@ class AreaController extends AbstractController
     #[Route('/state/{id}', name: 'app_settings_area_state_detail')]
     public function state_detail(int $id, Request $request, StateRepository $stateRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $state = $stateRepository->getById($id);
 
         return $this->render('settings/area/state/detail.html.twig', [
@@ -88,8 +84,6 @@ class AreaController extends AbstractController
     #[Route('/state/{id}/edit', name: 'app_settings_area_state_edit')]
     public function state_edit(int $id, Request $request, StateRepository $stateRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $state = $stateRepository->getById($id);
 
         $form = $this->createForm(StateType::class, $state);
@@ -112,8 +106,6 @@ class AreaController extends AbstractController
     #[Route('/state/{id}/delete', name: 'app_settings_area_state_delete')]
     public function state_delete(int $id, StateRepository $stateRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $state = $stateRepository->getById($id);
 
         $command = new DeleteStateCommand($id);
@@ -130,8 +122,6 @@ class AreaController extends AbstractController
     #[Route('/dispatch_area/new', name: 'app_settings_area_dispatch_new')]
     public function dispatch_new(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $area = new DispatchArea();
         $form = $this->createForm(DispatchAreaType::class, $area);
         $form->handleRequest($request);
@@ -152,8 +142,6 @@ class AreaController extends AbstractController
     #[Route('/dispatch_area/{id}', name: 'app_settings_area_dispatch_detail')]
     public function dispatch_detail(int $id, Request $request, DispatchAreaRepository $dispatchAreaRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $area = $dispatchAreaRepository->getById($id);
 
         return $this->render('settings/area/dispatch_area/detail.html.twig', [
@@ -164,8 +152,6 @@ class AreaController extends AbstractController
     #[Route('/dispatch_area/{id}/edit', name: 'app_settings_area_dispatch_edit')]
     public function dispatch_edit(int $id, Request $request, DispatchAreaRepository $dispatchAreaRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $area = $dispatchAreaRepository->getById($id);
 
         $previousState = $area->getState();
@@ -196,8 +182,6 @@ class AreaController extends AbstractController
     #[Route('/dispatch_area/{id}/delete', name: 'app_settings_area_dispatch_delete')]
     public function dispatch_delete(int $id, DispatchAreaRepository $dispatchAreaRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $area = $dispatchAreaRepository->getById($id);
 
         $command = new DeleteDispatchAreaCommand($id);
@@ -210,8 +194,6 @@ class AreaController extends AbstractController
     #[Route('/supply_area/new', name: 'app_settings_area_supply_new')]
     public function supply_new(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $area = new SupplyArea();
         $form = $this->createForm(SupplyAreaType::class, $area);
         $form->handleRequest($request);
@@ -232,8 +214,6 @@ class AreaController extends AbstractController
     #[Route('/supply_area/{id}', name: 'app_settings_area_supply_detail')]
     public function supply_detail(int $id, Request $request, SupplyAreaRepository $supplyAreaRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $area = $supplyAreaRepository->getById($id);
 
         return $this->render('settings/area/supply_area/detail.html.twig', [
@@ -244,8 +224,6 @@ class AreaController extends AbstractController
     #[Route('/supply_area/{id}/edit', name: 'app_settings_area_supply_edit')]
     public function supply_edit(int $id, Request $request, SupplyAreaRepository $supplyAreaRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $area = $supplyAreaRepository->getById($id);
 
         $previousState = $area->getState();
@@ -276,8 +254,6 @@ class AreaController extends AbstractController
     #[Route('/supply_area/{id}/delete', name: 'app_settings_area_supply_delete')]
     public function supply_delete(int $id, SupplyAreaRepository $supplyAreaRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
         $area = $supplyAreaRepository->getById($id);
 
         $command = new DeleteSupplyAreaCommand($id);

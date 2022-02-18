@@ -14,8 +14,6 @@ class ImportPollingComponent
 
     public int $importId;
 
-    private ?Import $import = null;
-
     private ImportRepository $importRepository;
 
     public function __construct(ImportRepository $importRepository)
@@ -23,7 +21,7 @@ class ImportPollingComponent
         $this->importRepository = $importRepository;
     }
 
-    public function getImport(): Import
+    public function getImport(): ?Import
     {
         return $this->importRepository->findOneBy(['id' => $this->importId]);
     }

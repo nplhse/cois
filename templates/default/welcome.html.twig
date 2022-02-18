@@ -72,9 +72,21 @@
                     <p>
                         {{
                             'default.stats.text'|trans({
-                                '%imports%': importCount,
-                                '%hospitals%': hospitalCount,
-                                '%allocations%': allocationCount
+                                '%imports%': importCount|number_format(
+                                    0,
+                                    '',
+                                    '.'
+                                ),
+                                '%hospitals%': hospitalCount|number_format(
+                                    0,
+                                    '',
+                                    '.'
+                                ),
+                                '%allocations%': allocationCount|number_format(
+                                    0,
+                                    '',
+                                    '.'
+                                )
                             })
                         }}
                     </p>

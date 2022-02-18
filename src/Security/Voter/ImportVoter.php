@@ -21,7 +21,7 @@ class ImportVoter extends Voter
         $this->security = $security;
     }
 
-    protected function supports(string $attribute, $subject): bool
+    protected function supports(string $attribute, mixed $subject): bool
     {
         // if the attribute isn't one we support, return false
         if (!in_array($attribute, [self::EDIT, self::DELETE])) {
@@ -36,7 +36,7 @@ class ImportVoter extends Voter
         return true;
     }
 
-    protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
+    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
 
@@ -62,17 +62,7 @@ class ImportVoter extends Voter
             return true;
         }
 
-        if ($import->getHospital()) {
-            $hospitalOwner = $import->getHospital()->getOwner();
-        } else {
-            $hospitalOwner = null;
-        }
-
-        if ($hospitalOwner) {
-            return $user === $hospitalOwner;
-        } else {
-            return $user === $import->getUser();
-        }
+        return $import->getHospital()->getOwner() === $import->getUser();
     }
 
     private function canEdit(Import $import, User $user): bool
@@ -81,16 +71,6 @@ class ImportVoter extends Voter
             return true;
         }
 
-        if ($import->getHospital()) {
-            $hospitalOwner = $import->getHospital()->getOwner();
-        } else {
-            $hospitalOwner = null;
-        }
-
-        if ($hospitalOwner) {
-            return $user === $hospitalOwner;
-        } else {
-            return $user === $import->getUser();
-        }
+        return $import->getHospital()->getOwner() === $import->getUser();
     }
 }

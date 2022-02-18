@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Message;
+namespace App\Domain\Command\Task;
 
-final class SendImportReminderMessage
+class ImportReminderCommand
 {
     private array $recipients;
 

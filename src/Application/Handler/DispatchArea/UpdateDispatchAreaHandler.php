@@ -3,22 +3,20 @@
 namespace App\Application\Handler\DispatchArea;
 
 use App\Application\Contract\HandlerInterface;
+use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Command\DispatchArea\UpdateDispatchAreaCommand;
 use App\Domain\Event\DispatchArea\DispatchAreaUpdatedEvent;
 use App\Repository\DispatchAreaRepository;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class UpdateDispatchAreaHandler implements HandlerInterface
 {
+    use EventDispatcherTrait;
+
     private DispatchAreaRepository $dispatchAreaRepository;
 
-    private EventDispatcherInterface $dispatcher;
-
-    public function __construct(DispatchAreaRepository $dispatchAreaRepository, EventDispatcherInterface $dispatcher)
+    public function __construct(DispatchAreaRepository $dispatchAreaRepository)
     {
         $this->dispatchAreaRepository = $dispatchAreaRepository;
-
-        $this->dispatcher = $dispatcher;
     }
 
     public function __invoke(UpdateDispatchAreaCommand $command): void
@@ -29,8 +27,6 @@ class UpdateDispatchAreaHandler implements HandlerInterface
 
         $this->dispatchAreaRepository->save();
 
-        $event = new DispatchAreaUpdatedEvent($area);
-
-        $this->dispatcher->dispatch($event, DispatchAreaUpdatedEvent::NAME);
+        $this->dispatchEvent(new DispatchAreaUpdatedEvent($area));
     }
 }

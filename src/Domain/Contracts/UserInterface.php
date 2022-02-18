@@ -34,6 +34,12 @@ interface UserInterface
 
     public function eraseCredentials(): void;
 
+    public function addHospital(HospitalInterface $hospital): self;
+
+    public function removeHospital(HospitalInterface $hospital): self;
+
+    public function getHospitals(): \Doctrine\Common\Collections\Collection;
+
     public function isVerified(): bool;
 
     public function verify(): self;

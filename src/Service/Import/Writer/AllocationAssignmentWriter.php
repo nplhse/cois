@@ -18,7 +18,7 @@ class AllocationAssignmentWriter implements \App\Application\Contract\ImportWrit
         return 45;
     }
 
-    public function processData(?object $entity, array $row, ImportInterface $import): object
+    public function processData(?object $entity, array $row, ImportInterface $import): ?object
     {
         $entity->setUrgency((int) substr($row['PZC'], 5, 1));
         $entity->setAssignment($row['Grund']);
