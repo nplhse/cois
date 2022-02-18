@@ -114,6 +114,10 @@
         <source>Confirm my E-Mail address</source>
         <target>Meine E-Mail bestätigen</target>
       </trans-unit>
+      <trans-unit id="8JP8GWq" resname="View import">
+        <source>View import</source>
+        <target>Import ansehen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

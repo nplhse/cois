@@ -1982,9 +1982,29 @@
         <source>Sort items</source>
         <target>Sort items</target>
       </trans-unit>
-      <trans-unit id=".BiJ3GG" resname="Reset filters">
+      <trans-unit id="EK_phID" resname="Reset filters">
         <source>Reset filters</source>
         <target>Reset filters</target>
+      </trans-unit>
+      <trans-unit id="KSwG8AR" resname="Category">
+        <source>Category</source>
+        <target>Category</target>
+      </trans-unit>
+      <trans-unit id=".4BZ3Gd" resname="Actions">
+        <source>Actions</source>
+        <target>Actions</target>
+      </trans-unit>
+      <trans-unit id="KMgSDY1" resname="Monthly reminder to import data for Hospital owners.">
+        <source>Monthly reminder to import data for Hospital owners.</source>
+        <target>Monthly reminder to import data for Hospital owners.</target>
+      </trans-unit>
+      <trans-unit id="9vRoj.I" resname="Send">
+        <source>Send</source>
+        <target>Send</target>
+      </trans-unit>
+      <trans-unit id="vNRvSTY" resname="View your Hospitals">
+        <source>View your Hospitals</source>
+        <target>View your Hospitals</target>
       </trans-unit>
     </body>
   </file>

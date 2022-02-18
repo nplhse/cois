@@ -19,4 +19,6 @@ interface UserRepositoryInterface
     public function findOneByEmail(string $email): ?UserInterface;
 
     public function findAdmins(): array;
+
+    public function findHospitalOwners(): array;
 }

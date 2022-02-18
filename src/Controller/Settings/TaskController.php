@@ -2,10 +2,13 @@
 
 namespace App\Controller\Settings;
 
-use App\Message\SendImportReminderMessage;
+use App\Domain\Command\Task\ImportReminderCommand;
+use App\Domain\Event\Task\TaskFailedEvent;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,14 +27,21 @@ class TaskController extends AbstractController
         return $this->render('settings/task/index.html.twig');
     }
 
-    #[Route('/settings/task/run/1', name: 'app_settings_task_run1')]
-    public function run1(UserRepository $userRepository): Response
+    #[Route('/settings/task/run/importReminder', name: 'app_settings_task_import_reminder')]
+    public function importReminder(UserRepository $userRepository, EventDispatcherInterface $eventDispatcher): Response
     {
-        $recipients = $userRepository->getHospitalOwnerRecipients();
+        $recipients = $userRepository->findHospitalOwners();
 
-        $message = new SendImportReminderMessage($recipients);
+        $command = new ImportReminderCommand($recipients);
 
-        $this->messageBus->dispatch($message);
+        try {
+            $this->messageBus->dispatch($command);
+        } catch (HandlerFailedException $e) {
+            $eventDispatcher->dispatch(new TaskFailedEvent($e), TaskFailedEvent::NAME);
+            $this->addFlash('danger', 'Something went wrong! We have send a notification to the admin to handle this issue.');
+
+            return $this->redirectToRoute('app_settings_task_index');
+        }
 
         $this->addFlash('success', 'Import Reminder successfully sent to Hospital owners.');
 

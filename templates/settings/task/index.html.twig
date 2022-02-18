@@ -41,27 +41,35 @@
             <table class="table table-hover">
                 <thead>
                     <th>
-                        Category
+                        {{ 'Category'|trans }}
                     </th>
                     <th>
-                        Name
+                        {{ 'Name'|trans }}
                     </th>
                     <th>
-                        Actions
+                        {{ 'Actions'|trans }}
                     </th>
                 </thead>
                 <tbody>
                     <tr>
                         <td>
-                            <i class="bi bi-envelope-open"></i> E-Mail
+                            <i class="bi bi-envelope-open"></i>
+                            {{ 'E-Mail'|trans }}
                         </td>
                         <td>
-                            Monthly reminder to import data for Hospital owners.
+                            {{
+                                'Monthly reminder to import data for Hospital owners.'|trans
+                            }}
                         </td>
                         <td>
                             <a class="btn btn-primary"
-                                href="{{ path('app_settings_task_run1') }}">
-                                <i class="bi bi-arrow-right-circle-fill"></i> Send
+                                href="{{
+                                path(
+                                    'app_settings_task_import_reminder'
+                                )
+                                }}">
+                                <i class="bi bi-arrow-right-circle-fill"></i>
+                                {{ 'Send'|trans }}
                             </a>
                         </td>
                     </tr>
