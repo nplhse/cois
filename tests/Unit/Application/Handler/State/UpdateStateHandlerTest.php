@@ -34,7 +34,9 @@ class UpdateStateHandlerTest extends TestCase
 
         $command = new UpdateStateCommand(1, 'Updated Name');
 
-        $handler = new UpdateStateHandler($stateRepository, $eventDispatcher);
+        $handler = new UpdateStateHandler($stateRepository);
+        $handler->setEventDispatcher($eventDispatcher);
+
         $handler->__invoke($command);
     }
 }

@@ -61,7 +61,9 @@ class SwitchStateSupplyAreaHandlerTest extends TestCase
 
         $command = new SwitchStateSupplyAreaCommand(1, 2);
 
-        $handler = new SwitchStateSupplyAreaHandler($supplyAreaRepository, $stateRepository, $eventDispatcher);
+        $handler = new SwitchStateSupplyAreaHandler($supplyAreaRepository, $stateRepository);
+        $handler->setEventDispatcher($eventDispatcher);
+
         $handler->__invoke($command);
     }
 }

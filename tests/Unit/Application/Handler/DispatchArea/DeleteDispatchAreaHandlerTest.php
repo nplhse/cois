@@ -51,7 +51,9 @@ class DeleteDispatchAreaHandlerTest extends TestCase
 
         $command = new DeleteDispatchAreaCommand(1);
 
-        $handler = new DeleteDispatchAreaHandler($dispatchAreaRespository, $stateRepository, $eventDispatcher);
+        $handler = new DeleteDispatchAreaHandler($dispatchAreaRespository, $stateRepository);
+        $handler->setEventDispatcher($eventDispatcher);
+
         $handler->__invoke($command);
     }
 }

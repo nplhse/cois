@@ -51,7 +51,9 @@ class DeleteSupplyAreaHandlerTest extends TestCase
 
         $command = new DeleteSupplyAreaCommand(1);
 
-        $handler = new DeleteSupplyAreaHandler($supplyAreaRespository, $stateRepository, $eventDispatcher);
+        $handler = new DeleteSupplyAreaHandler($supplyAreaRespository, $stateRepository);
+        $handler->setEventDispatcher($eventDispatcher);
+
         $handler->__invoke($command);
     }
 }

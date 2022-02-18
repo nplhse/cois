@@ -26,7 +26,9 @@ class CreateStateHandlerTest extends TestCase
 
         $command = new CreateStateCommand('Test State');
 
-        $handler = new CreateStateHandler($stateRepository, $eventDispatcher);
+        $handler = new CreateStateHandler($stateRepository);
+        $handler->setEventDispatcher($eventDispatcher);
+
         $handler->__invoke($command);
     }
 }

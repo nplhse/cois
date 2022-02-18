@@ -40,7 +40,9 @@ class CreateSupplyAreaHandlerTest extends TestCase
 
         $command = new CreateSupplyAreaCommand('Test Area', 1);
 
-        $handler = new CreateSupplyAreaHandler($supplyAreaRepository, $stateRepository, $eventDispatcher);
+        $handler = new CreateSupplyAreaHandler($supplyAreaRepository, $stateRepository);
+        $handler->setEventDispatcher($eventDispatcher);
+
         $handler->__invoke($command);
     }
 }

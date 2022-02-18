@@ -32,7 +32,9 @@ class UpdateSupplyAreaHandlerTest extends TestCase
 
         $command = new UpdateSupplyAreaCommand(1, 'Test Name');
 
-        $handler = new UpdateSupplyAreaHandler($supplyAreaRespository, $eventDispatcher);
+        $handler = new UpdateSupplyAreaHandler($supplyAreaRespository);
+        $handler->setEventDispatcher($eventDispatcher);
+
         $handler->__invoke($command);
     }
 }

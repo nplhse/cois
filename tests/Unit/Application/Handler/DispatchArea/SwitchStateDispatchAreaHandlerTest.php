@@ -61,7 +61,9 @@ class SwitchStateDispatchAreaHandlerTest extends TestCase
 
         $command = new SwitchStateDispatchAreaCommand(1, 2);
 
-        $handler = new SwitchStateDispatchAreaHandler($dispatchAreaRepository, $stateRepository, $eventDispatcher);
+        $handler = new SwitchStateDispatchAreaHandler($dispatchAreaRepository, $stateRepository);
+        $handler->setEventDispatcher($eventDispatcher);
+
         $handler->__invoke($command);
     }
 }
