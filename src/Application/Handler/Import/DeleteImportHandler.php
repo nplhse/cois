@@ -4,26 +4,24 @@ namespace App\Application\Handler\Import;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Exception\ImportNotFoundException;
+use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Command\Import\DeleteImportCommand;
 use App\Domain\Event\Import\ImportDeletedEvent;
 use App\Domain\Repository\ImportRepositoryInterface;
 use App\Repository\AllocationRepository;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DeleteImportHandler implements HandlerInterface
 {
+    use EventDispatcherTrait;
+
     private ImportRepositoryInterface $importRepository;
 
     private AllocationRepository $allocationRepository;
 
-    private EventDispatcherInterface $dispatcher;
-
-    public function __construct(ImportRepositoryInterface $importRepository, AllocationRepository $allocationRepository, EventDispatcherInterface $dispatcher)
+    public function __construct(ImportRepositoryInterface $importRepository, AllocationRepository $allocationRepository)
     {
         $this->importRepository = $importRepository;
         $this->allocationRepository = $allocationRepository;
-
-        $this->dispatcher = $dispatcher;
     }
 
     public function __invoke(DeleteImportCommand $command): void
@@ -37,8 +35,6 @@ class DeleteImportHandler implements HandlerInterface
         $this->allocationRepository->deleteByImport($import);
         $this->importRepository->delete($import);
 
-        $event = new ImportDeletedEvent($import);
-
-        $this->dispatcher->dispatch($event, ImportDeletedEvent::NAME);
+        $this->dispatchEvent(new ImportDeletedEvent($import));
     }
 }

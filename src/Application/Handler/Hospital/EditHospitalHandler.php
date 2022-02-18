@@ -3,22 +3,20 @@
 namespace App\Application\Handler\Hospital;
 
 use App\Application\Contract\HandlerInterface;
+use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Command\Hospital\EditHospitalCommand;
 use App\Domain\Event\Hospital\HospitalEditedEvent;
 use App\Repository\HospitalRepository;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class EditHospitalHandler implements HandlerInterface
 {
+    use EventDispatcherTrait;
+
     private HospitalRepository $hospitalRepository;
 
-    private EventDispatcherInterface $dispatcher;
-
-    public function __construct(HospitalRepository $hospitalRepository, EventDispatcherInterface $dispatcher)
+    public function __construct(HospitalRepository $hospitalRepository)
     {
         $this->hospitalRepository = $hospitalRepository;
-
-        $this->dispatcher = $dispatcher;
     }
 
     public function __invoke(EditHospitalCommand $command): void
@@ -43,8 +41,6 @@ class EditHospitalHandler implements HandlerInterface
 
         $this->hospitalRepository->save();
 
-        $event = new HospitalEditedEvent($hospital);
-
-        $this->dispatcher->dispatch($event, HospitalEditedEvent::NAME);
+        $this->dispatchEvent(new HospitalEditedEvent($hospital));
     }
 }

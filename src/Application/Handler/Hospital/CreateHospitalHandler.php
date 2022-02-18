@@ -3,23 +3,21 @@
 namespace App\Application\Handler\Hospital;
 
 use App\Application\Contract\HandlerInterface;
+use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Command\Hospital\CreateHospitalCommand;
 use App\Domain\Event\Hospital\HospitalCreatedEvent;
 use App\Entity\Hospital;
 use App\Repository\HospitalRepository;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CreateHospitalHandler implements HandlerInterface
 {
+    use EventDispatcherTrait;
+
     private HospitalRepository $hospitalRepository;
 
-    private EventDispatcherInterface $dispatcher;
-
-    public function __construct(HospitalRepository $hospitalRepository, EventDispatcherInterface $dispatcher)
+    public function __construct(HospitalRepository $hospitalRepository)
     {
         $this->hospitalRepository = $hospitalRepository;
-
-        $this->dispatcher = $dispatcher;
     }
 
     public function __invoke(CreateHospitalCommand $command): void
@@ -41,12 +39,8 @@ class CreateHospitalHandler implements HandlerInterface
         $hospital->setSize($command->getSize());
         $hospital->setBeds($command->getBeds());
 
-        dump($hospital);
-
         $this->hospitalRepository->add($hospital);
 
-        $event = new HospitalCreatedEvent($hospital);
-
-        $this->dispatcher->dispatch($event, HospitalCreatedEvent::NAME);
+        $this->dispatchEvent(new HospitalCreatedEvent($hospital));
     }
 }

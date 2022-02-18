@@ -3,23 +3,21 @@
 namespace App\Application\Handler\Import;
 
 use App\Application\Contract\HandlerInterface;
+use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Command\Import\UpdateImportCommand;
 use App\Domain\Event\Import\ImportUpdatedEvent;
 use App\Domain\Repository\ImportRepositoryInterface;
 use App\Entity\Import;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class UpdateImportHandler implements HandlerInterface
 {
+    use EventDispatcherTrait;
+
     private ImportRepositoryInterface $importRepository;
 
-    private EventDispatcherInterface $dispatcher;
-
-    public function __construct(ImportRepositoryInterface $importRepository, EventDispatcherInterface $dispatcher)
+    public function __construct(ImportRepositoryInterface $importRepository)
     {
         $this->importRepository = $importRepository;
-
-        $this->dispatcher = $dispatcher;
     }
 
     public function __invoke(UpdateImportCommand $command): void
@@ -58,8 +56,6 @@ class UpdateImportHandler implements HandlerInterface
 
         $this->importRepository->save();
 
-        $event = new ImportUpdatedEvent($import);
-
-        $this->dispatcher->dispatch($event, ImportUpdatedEvent::NAME);
+        $this->dispatchEvent(new ImportUpdatedEvent($import));
     }
 }

@@ -3,22 +3,20 @@
 namespace App\Application\Handler\State;
 
 use App\Application\Contract\HandlerInterface;
+use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Command\State\UpdateStateCommand;
 use App\Domain\Event\State\StateUpdatedEvent;
 use App\Domain\Repository\StateRepositoryInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class UpdateStateHandler implements HandlerInterface
 {
+    use EventDispatcherTrait;
+
     private StateRepositoryInterface $stateRepository;
 
-    private EventDispatcherInterface $dispatcher;
-
-    public function __construct(StateRepositoryInterface $stateRepository, EventDispatcherInterface $dispatcher)
+    public function __construct(StateRepositoryInterface $stateRepository)
     {
         $this->stateRepository = $stateRepository;
-
-        $this->dispatcher = $dispatcher;
     }
 
     public function __invoke(UpdateStateCommand $command): void
@@ -29,8 +27,6 @@ class UpdateStateHandler implements HandlerInterface
 
         $this->stateRepository->save();
 
-        $event = new StateUpdatedEvent($state);
-
-        $this->dispatcher->dispatch($event, StateUpdatedEvent::NAME);
+        $this->dispatchEvent(new StateUpdatedEvent($state));
     }
 }
