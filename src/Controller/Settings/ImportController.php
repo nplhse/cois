@@ -11,9 +11,12 @@ use App\Entity\Import;
 use App\Form\ImportType;
 use App\Repository\AllocationRepository;
 use App\Repository\ImportRepository;
-use App\Service\Filters\HospitalOwnerFilter;
+use App\Service\Filters\HospitalFilter;
+use App\Service\Filters\ImportFilter;
+use App\Service\Filters\ImportOwnerFilter;
 use App\Service\Filters\OrderFilter;
 use App\Service\Filters\OwnHospitalFilter;
+use App\Service\Filters\OwnImportFilter;
 use App\Service\Filters\PageFilter;
 use App\Service\Filters\SearchFilter;
 use App\Service\FilterService;
@@ -47,7 +50,7 @@ class ImportController extends AbstractController
     public function index(Request $request, ImportRepository $importRepository): Response
     {
         $this->filterService->setRequest($request);
-        $this->filterService->configureFilters([OwnHospitalFilter::Param, HospitalOwnerFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
+        $this->filterService->configureFilters([ImportFilter::Param, OwnImportFilter::Param, ImportOwnerFilter::Param, HospitalFilter::Param, OwnHospitalFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
 
         $paginator = $importRepository->getImportPaginator($this->filterService);
 
@@ -55,6 +58,16 @@ class ImportController extends AbstractController
             'action' => $this->generateUrl('app_settings_import_index'),
             'method' => 'GET',
         ];
+
+        $importArguments = [
+            'hidden' => [
+                SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
+                OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
+            ],
+        ];
+
+        $importForm = $this->filterService->buildForm(ImportFilter::Param, array_merge($importArguments, $args));
+        $importForm->handleRequest($request);
 
         $sortArguments = [
             'sortable' => ImportRepository::SORTABLE,
@@ -79,6 +92,7 @@ class ImportController extends AbstractController
             'filters' => $this->filterService->getFilterDto(),
             'sortForm' => $sortForm,
             'searchForm' => $searchForm,
+            'importForm' => $importForm,
             'imports' => $paginator,
             'pages' => PaginationFactory::create($this->filterService->getValue(PageFilter::Param), count($paginator), ImportRepository::PER_PAGE),
         ]);

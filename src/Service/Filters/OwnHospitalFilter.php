@@ -3,6 +3,7 @@
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
+use App\Repository\ImportRepository;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
@@ -56,6 +57,10 @@ class OwnHospitalFilter implements FilterInterface
     {
         $ownHospitals = $this->cacheValue ?? $this->getValue($request);
 
+        if (ImportRepository::ENTITY_ALIAS === $arguments[FilterService::ENTITY_ALIAS]) {
+            return $this->processImportQuery($qb, $arguments, $request);
+        }
+
         if (!isset($ownHospitals)) {
             return $qb;
         }
@@ -63,5 +68,31 @@ class OwnHospitalFilter implements FilterInterface
         return $qb->orWhere($arguments[FilterService::ENTITY_ALIAS].'owner = :owner')
             ->setParameter('owner', $this->security->getUser())
         ;
+    }
+
+    public function processImportQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder
+    {
+        $ownHospitals = $this->cacheValue ?? $this->getValue($request);
+
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            if (!isset($ownHospitals)) {
+                return $qb;
+            }
+
+            return $qb->leftJoin($arguments[FilterService::ENTITY_ALIAS].'hospital', 'hospital')
+                ->orWhere('hospital.owner = :owner')
+                ->setParameter('owner', $this->security->getUser())
+                ;
+        }
+
+        if (!isset($ownHospitals)) {
+            return $qb->leftJoin($arguments[FilterService::ENTITY_ALIAS].'hospital', 'hospital')
+                ->orWhere('hospital.owner = :owner')
+                ->setParameter('owner', $this->security->getUser());
+        }
+
+        return $qb->leftJoin($arguments[FilterService::ENTITY_ALIAS].'hospital', 'hospital')
+            ->andWhere('hospital.owner = :owner')
+            ->setParameter('owner', $this->security->getUser());
     }
 }

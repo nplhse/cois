@@ -23,11 +23,11 @@ use Doctrine\Persistence\ManagerRegistry;
 class ImportRepository extends ServiceEntityRepository implements ImportRepositoryInterface
 {
     // TODO: Remove after refactoring
-    public const PAGINATOR_PER_PAGE = 10;
+    public const PAGINATOR_PER_PAGE = 20;
 
-    public const PER_PAGE = 10;
+    public const PER_PAGE = 20;
 
-    public const DEFAULT_ORDER = 'asc';
+    public const DEFAULT_ORDER = 'desc';
 
     public const DEFAULT_SORT = 'name';
 
@@ -99,6 +99,7 @@ class ImportRepository extends ServiceEntityRepository implements ImportReposito
         $qb = $this->createQueryBuilder('i');
 
         $arguments = [
+            'joinOwner' => true,
             PageFilter::PER_PAGE => self::PER_PAGE,
             FilterService::ENTITY_ALIAS => self::ENTITY_ALIAS,
             OrderFilter::DEFAULT_ORDER => self::DEFAULT_ORDER,

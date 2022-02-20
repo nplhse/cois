@@ -48,32 +48,28 @@
                         <th>
                             {{ 'Id'|trans({}, 'forms') }}
                         </th>
-                            <th class="table-light">
-                                <em>
-                                    {{ 'Caption'|trans({}, 'forms') }}
-                                </em>
-                            </th>
+                        <th>
+                            {{ 'Caption'|trans({}, 'forms') }}
+                        </th>
                         <th>
                             {{ 'User'|trans({}, 'forms') }}
                         </th>
                         <th>
                             {{ 'Hospital'|trans({}, 'forms') }}
                         </th>
-                        <th class="table-light">
-                            <em>{{ 'Created at'|trans({}, 'forms') }}</em>
-                            <i class="bi bi-chevron-double-down"></i>
+                        <th>
+                            {{ 'Created at'|trans({}, 'forms') }}
                         </th>
                         <th>
-                            <em>
-                                {{ 'Status'|trans({}, 'forms') }}
-                            </em>
-                            <i class="bi bi-chevron-double-down"></i>
+                            {{ 'Status'|trans({}, 'forms') }}
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for import in imports %}
-                        {% if import.hospital != app.user.hospital %}
+                        {% if import.user.id != app.user.id %}
+                            <tr class="table-secondary text-muted">
+                        {% elseif not is_granted('edit', import) %}
                             <tr class="table-secondary text-muted">
                         {% else %}
                             <tr>
@@ -172,6 +168,31 @@
                 </div>
                 <div class="card-body">
                     {{ form(searchForm) }}
+
+                    {{ form_start(importForm) }}
+
+                    {{ form_row(importForm.ownImports) }}
+
+                    {{ form_row(importForm.ownHospitals) }}
+
+                    {{ form_row(importForm.hospital) }}
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        {{ form_row(importForm.owner) }}
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col">
+                            {{ form_row(importForm.submit) }}
+                        </div>
+                        <div class="col">
+                            <div class="float-end">
+                                {{ form_row(importForm.reset) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    {{ form_end(importForm) }}
                 </div>
             </div>
 
