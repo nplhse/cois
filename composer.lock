@@ -7351,16 +7351,16 @@
         },
         {
             "name": "symfony/twig-bridge",
-            "version": "v6.0.2",
+            "version": "v6.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bridge.git",
-                "reference": "52217ee6ca95a94177f7cfc584d8171784623209"
+                "reference": "31a4ec953c20299cc828eb6a1ccdf86d7ecbe22c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/52217ee6ca95a94177f7cfc584d8171784623209",
-                "reference": "52217ee6ca95a94177f7cfc584d8171784623209",
+                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/31a4ec953c20299cc828eb6a1ccdf86d7ecbe22c",
+                "reference": "31a4ec953c20299cc828eb6a1ccdf86d7ecbe22c",
                 "shasum": ""
             },
             "require": {
@@ -7451,7 +7451,7 @@
             "description": "Provides integration for Twig with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/twig-bridge/tree/v6.0.2"
+                "source": "https://github.com/symfony/twig-bridge/tree/v6.0.3"
             },
             "funding": [
                 {
@@ -7467,7 +7467,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-16T22:13:01+00:00"
+            "time": "2022-01-02T09:55:41+00:00"
         },
         {
             "name": "symfony/twig-bundle",
@@ -12151,16 +12151,16 @@
         },
         {
             "name": "symfony/debug-bundle",
-            "version": "v6.0.2",
+            "version": "v6.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug-bundle.git",
-                "reference": "c8693af8ee284407590925883515690d681d925e"
+                "reference": "880317aa3b2962cc2e7af67b8a6ed69db84ed848"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug-bundle/zipball/c8693af8ee284407590925883515690d681d925e",
-                "reference": "c8693af8ee284407590925883515690d681d925e",
+                "url": "https://api.github.com/repos/symfony/debug-bundle/zipball/880317aa3b2962cc2e7af67b8a6ed69db84ed848",
+                "reference": "880317aa3b2962cc2e7af67b8a6ed69db84ed848",
                 "shasum": ""
             },
             "require": {
@@ -12209,7 +12209,7 @@
             "description": "Provides a tight integration of the Symfony VarDumper component and the ServerLogCommand from MonologBridge into the Symfony full-stack framework",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/debug-bundle/tree/v6.0.2"
+                "source": "https://github.com/symfony/debug-bundle/tree/v6.0.3"
             },
             "funding": [
                 {
@@ -12225,7 +12225,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-11T13:54:31+00:00"
+            "time": "2022-01-02T09:55:41+00:00"
         },
         {
             "name": "symfony/dom-crawler",
