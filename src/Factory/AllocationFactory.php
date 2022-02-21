@@ -36,12 +36,19 @@ final class AllocationFactory extends ModelFactory
 
     protected function getDefaults(): array
     {
-        $creationDate = Carbon::create(random_int(2019, 2021), random_int(1, 12), random_int(1, 31), random_int(0, 23), random_int(0, 59), random_int(0, 59), 'Europe/Berlin');
-        $arrivalDate = $creationDate->addMinutes(random_int(1, 42));
+        $year = random_int(2019, 2021);
+        $month = random_int(1, 12);
+        $day = random_int(1, 31);
+        $hour = random_int(0, 23);
+        $minute = random_int(0, 59);
+        $seconds = random_int(0, 59);
+
+        $createdAt = Carbon::create($year, $month, $day, $hour, $minute, $seconds, 'Europe/Berlin');
+        $arrivalAt = Carbon::create($year, $month, $day, $hour, $minute, $seconds, 'Europe/Berlin')->addMinutes(random_int(1, 23));
 
         return [
-            'createdAt' => $creationDate,
-            'arrivalAt' => $arrivalDate,
+            'createdAt' => $createdAt,
+            'arrivalAt' => $arrivalAt,
             'requiresResus' => self::faker()->boolean(),
             'requiresCathlab' => self::faker()->boolean(),
             'gender' => self::faker()->randomElement(['M', 'W', 'D']),
@@ -60,10 +67,10 @@ final class AllocationFactory extends ModelFactory
             'specialityDetail' => self::faker()->randomElement(['Allgemein Innere Medizin', 'Gastroenterologie', 'Allgemein- und Viszeralchirurgie', 'Urologie']),
             'handoverPoint' => 'ZNA',
             'specialityWasClosed' => self::faker()->boolean(),
-            'indication' => self::faker()->sentence(3),
-            'indicationCode' => self::faker()->randomNumber(6),
-            'secondaryIndication' => self::faker()->sentence(3),
-            'secondaryIndicationCode' => self::faker()->randomNumber(6),
+            'indication' => self::faker()->sentence(2),
+            'indicationCode' => self::faker()->randomNumber(3),
+            'secondaryIndication' => self::faker()->sentence(2),
+            'secondaryIndicationCode' => self::faker()->randomNumber(3),
             'PZC' => self::faker()->randomNumber(6),
             'PZCText' => self::faker()->sentence(3),
             'SecondaryPZC' => self::faker()->randomNumber(6),

@@ -40,7 +40,7 @@ final class HospitalFactory extends ModelFactory
             'address' => self::faker()->address(),
             'createdAt' => self::faker()->dateTimeThisDecade(),
             'beds' => self::faker()->numberBetween(100, 1500),
-            'location' => self::faker()->randomElement(['urban', 'rural']),
+            'location' => self::faker()->randomElement([Hospital::LOCATION_URBAN, Hospital::LOCATION_RURAL]),
         ];
     }
 

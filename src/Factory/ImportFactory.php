@@ -48,13 +48,13 @@ final class ImportFactory extends ModelFactory
 
         $new = [
             'name' => self::faker()->sentence(3),
-            'type' => 'allocation',
-            'status' => 'success',
+            'type' => Import::TYPE_ALLOCATION,
+            'status' => Import::STATUS_SUCCESS,
             'createdAt' => self::faker()->dateTimeThisDecade(),
             'filePath' => 'dummy/path',
             'fileSize' => self::faker()->randomNumber(),
-            'fileMimeType' => 'text/csv',
-            'fileExtension' => 'csv',
+            'fileMimeType' => Import::MIME_PLAIN,
+            'fileExtension' => Import::EXT_CSV,
         ];
 
         return array_merge($old, $new);
