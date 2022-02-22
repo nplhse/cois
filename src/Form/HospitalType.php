@@ -5,10 +5,10 @@ namespace App\Form;
 use App\Entity\Hospital;
 use App\Form\Filters\DispatchAreaType;
 use App\Form\Filters\LocationType;
+use App\Form\Filters\SizeType;
 use App\Form\Filters\StateType;
 use App\Form\Filters\SupplyAreaType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,21 +19,18 @@ class HospitalType extends AbstractType
         $builder
             ->add('name')
             ->add('address')
-            ->add('state', StateType::class)
+            ->add('state', StateType::class, [
+                'required' => true,
+            ])
             ->add('supplyArea', SupplyAreaType::class)
-            ->add('dispatchArea', DispatchAreaType::class)
-            ->add('size', ChoiceType::class, [
-                'choices' => [
-                    'large' => 'large',
-                    'medium' => 'medium',
-                    'small' => 'small',
-                ],
+            ->add('dispatchArea', DispatchAreaType::class, [
+                'required' => true,
+            ])
+            ->add('size', SizeType::class, [
+                'required' => true,
             ])
             ->add('location', LocationType::class, [
-                'choices' => [
-                    'urban' => 'large',
-                    'rural' => 'medium',
-                ],
+                'required' => true,
             ])
             ->add('beds')
         ;

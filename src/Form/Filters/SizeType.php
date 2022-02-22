@@ -14,7 +14,7 @@ class SizeType extends AbstractType
         $resolver->setDefaults([
             'required' => false,
             'choices' => [
-                'All Sizes' => '',
+                'All sizes' => '',
                 'small' => Hospital::SIZE_SMALL,
                 'medium' => Hospital::SIZE_MEDIUM,
                 'large' => Hospital::SIZE_LARGE,

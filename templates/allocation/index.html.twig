@@ -4,6 +4,7 @@
 {% import '_elements/macro/pagination.html.twig' as pagination %}
 {% import '_elements/macro/filters.html.twig' as filter %}
 {% import '_elements/macro/table.html.twig' as table %}
+{% import '_elements/macro/active_filters.html.twig' as active_filters %}
 
 {% block title %}
     {{ 'Allocations'|trans }} - {{ parent() }}
@@ -58,496 +59,25 @@
                 }}
             </p>
 
-            {% if filterIsSet %}
-                <div class="alert alert-info" role="alert">
-                    <p class="float-end">
-                        <a href="{{ path('app_allocation_index') }}">
-                            {{ 'Clear all filters'|trans }}
-                        </a>
-                    </p>
-                    <span class="float-start fw-bold">
-                        {{ 'Active Filters'|trans }}:&nbsp;
-                    </span>
-                    {% if filters.search %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    search: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Search'|trans }}:
-                                </u> {{ filters.search }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.hospital %}
-                        {% for hospital in hospitals %}
-                            {% if hospital.id == filters.hospital %}
-                                <a href="{{
-                                    path(
-                                        'app_allocation_index',
-                                        app.request.query.all|merge({
-                                            hospital: '',
-                                            page: ''
-                                        })
-                                    )
-                                    }}">
-                                    <span class="badge rounded-pill bg-primary">
-                                        <u>
-                                            {{ 'Hospital'|trans }}:
-                                        </u> {{ hospital.name }}
-                                        <i class="bi bi-x-lg"></i>
-                                    </span>
-                                </a>
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                    {% if filters.supplyArea %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    supplyArea: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Supply Area'|trans }}:
-                                </u> {{ filters.supplyArea }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.dispatchArea %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    dispatchArea: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Dispatch area'|trans }}:
-                                </u> {{ filters.dispatchArea }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.startDate %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    startDate: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Start Date'|trans }}:
-                                </u> {{
-                                    filters.startDate|date(
-                                        'd.m.Y',
-                                        'Europe/Berlin'
-                                    )
-                                }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.endDate %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    endDate: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'End Date'|trans }}:
-                                </u> {{
-                                    filters.endDate|date(
-                                        'd.m.Y',
-                                        'Europe/Berlin'
-                                    )
-                                }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.pzc %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    pzc: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'PZC'|trans }}:
-                                </u> {{ filters.pzc }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.speciality %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    speciality: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Speciality'|trans }}:
-                                </u> {{ filters.speciality }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.specialityDetail %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    specialityDetail: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Speciality Detail'|trans }}:
-                                </u> {{ filters.specialityDetail }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.infection %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    infection: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Infection'|trans }}:
-                                </u> {{ filters.infection }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.urgency %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    urgency: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Urgency'|trans }}:
-                                </u> {{ filters.urgency }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.assignment %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    assignment: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Assignment'|trans }}:
-                                </u> {{ filters.assignment }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.occasion %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    occasion: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Occasion'|trans }}:
-                                </u> {{ filters.occasion }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.modeOfTransport %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    transport: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Mode of Transport'|trans }}:
-                                </u> {{ filters.modeOfTransport }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.reqResus %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    reqResus: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Requires Resuscitation'|trans }}:
-                                </u> {{ 'Ja'|trans }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.reqCath %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    reqCath: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Requires Cathlab'|trans }}:
-                                </u> {{ 'Ja'|trans }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.isCPR %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    isCPR: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Is CPR'|trans }}:
-                                </u> {{ 'Ja'|trans }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.isVent %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    isVent: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Is Ventilated'|trans }}:
-                                </u> {{ 'Ja'|trans }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.isShock %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    isShock: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Is Shock'|trans }}:
-                                </u> {{ 'Ja'|trans }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.isWithDoc %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    isWithDoc: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Is with Physician'|trans }}:
-                                </u> {{ 'Ja'|trans }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.isPreg %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    isPreg: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Is Pregnant'|trans }}:
-                                </u> {{ 'Ja'|trans }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                    {% if filters.isWork %}
-                        <a href="{{
-                            path(
-                                'app_allocation_index',
-                                app.request.query.all|merge({
-                                    isWork: '',
-                                    page: ''
-                                })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>
-                                    {{ 'Is Work Accident'|trans }}:
-                                </u> {{ 'Ja'|trans }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                        </a>
-                    {% endif %}
-                </div>
-            {% endif %}
+            {{ active_filters.render(filters, 'app_allocation_index') }}
 
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th></th>
-                        {{
-                            table.sortableThead(
-                                'dispatchArea',
-                                filters.sortBy,
-                                filters.orderBy,
-                                'app_allocation_index',
-                                'Dispatch Area'|trans({}, 'forms')
-                            )
-                        }}
+                        <th>
+                            {{ 'Dispatch Area'|trans({}, 'forms') }}
+                        </th>
                         <th>
                             {{ 'Hospital'|trans({}, 'forms') }}
                         </th>
-                        {{
-                            table.sortableThead(
-                                'time',
-                                filters.sortBy,
-                                filters.orderBy,
-                                'app_allocation_index',
-                                'Times'|trans({}, 'forms'),
-                                true
-                            )
-                        }}
-                        {% if
-                            filters.sortBy == 'age' or filters.sortBy == null %}
-                            {{
-                                table.sortableThead(
-                                    'age',
-                                    filters.sortBy,
-                                    filters.orderBy,
-                                    'app_allocation_index',
-                                    'Age'|trans({}, 'forms')
-                                )
-                            }}
-                        {% elseif filters.sortBy == 'gender' %}
-                            {{
-                                table.sortableThead(
-                                    'gender',
-                                    filters.sortBy,
-                                    filters.orderBy,
-                                    'app_allocation_index',
-                                    'Gender'|trans({}, 'forms')
-                                )
-                            }}
-                        {% else %}
-                            {{
-                                table.sortableThead(
-                                    'age',
-                                    filters.sortBy,
-                                    filters.orderBy,
-                                    'app_allocation_index',
-                                    'Age'|trans({}, 'forms')
-                                )
-                            }}
-                        {% endif %}
-                        {{
-                            table.sortableThead(
-                                'urgency',
-                                filters.sortBy,
-                                filters.orderBy,
-                                'app_allocation_index',
-                                'Urgency'|trans({}, 'forms')
-                            )
-                        }}
+                        <th>
+                            {{ 'Time'|trans({}, 'forms') }}
+                        </th>
+                        <th></th>
+                        <th>
+                            {{ 'Urgency'|trans({}, 'forms') }}
+                        </th>
                         <th>
                             {{ 'Dispatch'|trans({}, 'forms') }}
                         </th>
@@ -558,13 +88,7 @@
                 </thead>
                 <tbody>
                     {% for allocation in allocations %}
-                        {% if allocation.specialityWasClosed == false %}
-                            {% set class = '' %}
-                        {% else %}
-                            {% set class = 'table-warning' %}
-                        {% endif %}
-
-                        <tr class="{{ class }}">
+                        <tr>
                             <td>
                                 <a href="{{
                                     path(
@@ -622,24 +146,24 @@
                                 </p>
                             </td>
                             <td>
-                                {% if allocation.SK == '1' %}
+                                {% if allocation.urgency == '1' %}
                                     <p class="text-danger fw-bold">
-                                        {{ allocation.SK }}
+                                        SK{{ allocation.urgency }}
                                     </p>
-                                {% elseif allocation.SK == '2' %}
+                                {% elseif allocation.urgency == '2' %}
                                     <p class="text-warning fw-bold">
-                                        {{ allocation.SK }}
+                                        SK{{ allocation.urgency }}
                                     </p>
                                 {% else %}
                                     <p class="text-success fw-bold">
-                                        {{ allocation.SK }}
+                                        SK{{ allocation.urgency }}
                                     </p>
                                 {% endif %}
                             </td>
                             <td>
                                 <p>
                                     <strong>{{ allocation.speciality }}</strong><br />
-                                    {{ allocation.RMI }} {{ allocation.PZCText }}
+                                    {{ allocation.indicationCode }} {{ allocation.indication }}
                                 </p>
                             </td>
                             <td>
@@ -728,706 +252,211 @@
                     {{ 'Filters'|trans({}, 'forms') }}
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">
-                        {{ 'Search'|trans }}
+                    {{ form(searchForm) }}
+
+                    <hr />
+
+                    {{ form_row(allocationForm.ownHospitals) }}
+
+                    {{ form_start(allocationForm) }}
+
+                    <h5>
+                        {{ 'Filter by Location'|trans }}
                     </h5>
 
-                    {{ filter.search(filters.search) }}
+                    {{
+                        form_row(
+                            allocationForm.state,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
 
-                    <form>
-                        <h5 class="card-title">
-                            {{ 'Filter by SupplyArea'|trans }}
-                        </h5>
-                        <p>
-                            <select class="form-select"
-                                name="supplyArea"
-                                aria-label="filterSupplyArea">
-                                {% if filters.supplyArea == null %}
-                                    <option value="" selected>
-                                        {{
-                                            'Filter by Supply Area'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% else %}
-                                    <option value="">
-                                        {{
-                                            'Stop filtering by Supply Area'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% endif %}
-                                {% for item in supplyAreas %}
-                                    {% if
-                                        item.name == filters.supplyArea
-                                            and item.name != '' %}
-                                        <option value="{{ item.name }}"
-                                            selected>
-                                            {{ item.name }}
-                                        </option>
-                                    {% elseif
-                                        item.name == '' or item.name == null %}
-                                        <!-- empty -->
-                                    {% else %}
-                                        <option value="{{ item.name }}">
-                                            {{ item.name }}
-                                        </option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </p>
+                    {{
+                        form_row(
+                            allocationForm.dispatchArea,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
 
-                        <h5 class="card-title">
-                            {{ 'Filter by DispatchArea'|trans }}
-                        </h5>
-                        <p>
-                            <select class="form-select"
-                                name="dispatchArea"
-                                aria-label="filterDispatchArea">
-                                {% if filters.dispatchArea == null %}
-                                    <option value="" selected>
-                                        {{
-                                            'Filter by Dispatch Area'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% else %}
-                                    <option value="">
-                                        {{
-                                            'Stop filtering by Dispatch Area'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% endif %}
-                                {% for item in dispatchAreas %}
-                                    {% if
-                                        item.name == filters.dispatchArea
-                                            and item.name != '' %}
-                                        <option value="{{ item.name }}"
-                                            selected>
-                                            {{ item.name }}
-                                        </option>
-                                    {% elseif
-                                        item.name == '' or item.name == null %}
-                                        <!-- empty -->
-                                    {% else %}
-                                        <option value="{{ item.name }}">
-                                            {{ item.name }}
-                                        </option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </p>
+                    {{
+                        form_row(
+                            allocationForm.supplyArea,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
 
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <h5 class="card-title">
-                                {{ 'Filter by Hospital'|trans }}
-                            </h5>
-                            <p class="mb-2">
-                                <select class="form-select"
-                                    name="hospital"
-                                    aria-label="filterHospital">
-                                    {% if filters.hospital == null %}
-                                        <option value="" selected>
-                                            {{
-                                                'Filter by Hospital'|trans(
-                                                    {},
-                                                    'forms'
-                                                )
-                                            }}
-                                        </option>
-                                    {% else %}
-                                        <option value="">
-                                            {{
-                                                'Stop filtering by Hospital'|trans(
-                                                    {},
-                                                    'forms'
-                                                )
-                                            }}
-                                        </option>
-                                    {% endif %}
-                                    {% for hospital in hospitals %}
-                                        {% if hospital.id == filters.hospital %}
-                                            <option value="{{ hospital.id }}"
-                                                selected>
-                                                {{ hospital.name }}
-                                            </option>
-                                        {% else %}
-                                            <option value="{{ hospital.id }}">
-                                                {{ hospital.name }}
-                                            </option>
-                                        {% endif %}
-                                    {% endfor %}
-                                </select>
-                            </p>
-                        {% elseif app.user.hospital %}
-                            <h5 class="card-title">
-                                {{ 'Filter by Hospital'|trans }}
-                            </h5>
-                            <p class="mb-2">
-                                {% if
-                                    app.user.hospital.id == filters.hospital %}
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input"
-                                            type="checkbox"
-                                            name="hospital"
-                                            checked="checked"
-                                            value="" />
-                                        <label class="form-check-label"
-                                            for="flexSwitchCheckDefault">
-                                            {{
-                                                'Show only Allocations from your hospital'|trans
-                                            }}
-                                        </label>
-                                    </div>
-                                {% else %}
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input"
-                                            type="checkbox"
-                                            name="hospital"
-                                            value="{{
-                                            app.user.hospital.id
-                                            }}" />
-                                        <label class="form-check-label"
-                                            for="flexSwitchCheckDefault">
-                                            {{
-                                                'Show only Allocations from your hospital'|trans
-                                            }}
-                                        </label>
-                                    </div>
-                                {% endif %}
-                            </p>
-                        {% endif %}
+                    <h5>
+                        {{ 'Filter by Dates'|trans }}
+                    </h5>
 
-                        <h5 class="card-title">
-                            {{ 'Filter by Dates'|trans }}
-                        </h5>
-                        <div class="input-group mb-3">
-                            <input type="date"
-                                name="startDate"
-                                class="form-control"
-                                value="{{ filters.startDate }}"
-                                aria-label="{{ 'Start Date'|trans }}" />
-                            <input type="date"
-                                name="endDate"
-                                class="form-control"
-                                value="{{ filters.endDate }}"
-                                aria-label="{{ 'End Date'|trans }}" />
+                    <div class="input-group mb-3">
+                        {{
+                            form_widget(
+                                allocationForm.startDate,
+                                {
+                                    label: false
+                                }
+                            )
+                        }}
+
+                        {{
+                            form_widget(
+                                allocationForm.endDate,
+                                {
+                                    label: false
+                                }
+                            )
+                        }}
+                    </div>
+
+                    <h5>
+                        {{ 'Filter by Properties'|trans }}
+                    </h5>
+
+                    {{
+                        form_row(
+                            allocationForm.indication,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    {{
+                        form_row(
+                            allocationForm.speciality,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    {{
+                        form_row(
+                            allocationForm.specialityDetail,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    {{
+                        form_row(
+                            allocationForm.urgency,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    {{
+                        form_row(
+                            allocationForm.infection,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            {{ form_widget(allocationForm.requiresResus) }}
                         </div>
-
-                        <h5 class="card-title">
-                            {{ 'Filter by Speciality'|trans }}
-                        </h5>
-                        <p>
-                            <select class="form-select"
-                                name="speciality"
-                                aria-label="filterSpeciality">
-                                {% if filters.speciality == null %}
-                                    <option value="" selected>
-                                        {{
-                                            'Filter by Speciality'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% else %}
-                                    <option value="">
-                                        {{
-                                            'Stop filtering by Speciality'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% endif %}
-                                {% for item in specialities %}
-                                    {% if
-                                        item.speciality == filters.speciality
-                                            and item.speciality != '' %}
-                                        <option value="{{ item.speciality|url_encode }}"
-                                            selected>
-                                            {{ item.speciality }}
-                                        </option>
-                                    {% elseif
-                                        item.speciality == ''
-                                            or item.speciality == null %}
-                                        <!-- empty -->
-                                    {% else %}
-                                        <option value="{{ item.speciality|url_encode }}">
-                                            {{ item.speciality }}
-                                        </option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </p>
-                        <p>
-                            <select class="form-select"
-                                name="specialityDetail"
-                                aria-label="filterSpecialityDetail">
-                                {% if filters.specialityDetail == null %}
-                                    <option value="" selected>
-                                        {{
-                                            'Filter by Speciality Detail'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% else %}
-                                    <option value="">
-                                        {{
-                                            'Stop filtering by Speciality Detail'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% endif %}
-                                {% for item in specialityDetails %}
-                                    {% if
-                                        item.specialityDetail
-                                            == filters.specialityDetail
-                                            and item.specialityDetail != '' %}
-                                        <option value="{{ item.specialityDetail|url_encode }}"
-                                            selected>
-                                            {{ item.specialityDetail }}
-                                        </option>
-                                    {% elseif
-                                        item.specialityDetail == ''
-                                            or item.specialityDetail == null %}
-                                        <!-- empty -->
-                                    {% else %}
-                                        <option value="{{ item.specialityDetail|url_encode }}">
-                                            {{ item.specialityDetail }}
-                                        </option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </p>
-
-                        <h5 class="card-title">
-                            {{ 'Filter by Properties'|trans }}
-                        </h5>
-                        <p>
-                            <select class="form-select"
-                                name="pzc"
-                                aria-label="filterPZC">
-                                {% if filters.pzc == null %}
-                                    <option value="" selected>
-                                        {{ 'Filter by PZC'|trans({}, 'forms') }}
-                                    </option>
-                                {% else %}
-                                    <option value="">
-                                        {{
-                                            'Stop filtering by PZC'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% endif %}
-                                {% for item in PZCs %}
-                                    {% if item.PZC == filters.pzc %}
-                                        <option value="{{ item.PZC }}" selected>
-                                            {{ item.PZC }}
-                                            {{ item.PZCText }}
-                                        </option>
-                                    {% elseif
-                                        item.PZC == 0 or item.PZCText == null %}
-                                        <!-- empty -->
-                                    {% else %}
-                                        <option value="{{ item.PZC }}">
-                                            {{ item.PZC }}
-                                            {{ item.PZCText }}
-                                        </option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </p>
-
-                        <p>
-                            <select class="form-select"
-                                name="urgency"
-                                aria-label="filterUrgency">
-                                {% if filters.urgency == null %}
-                                    <option value="" selected>
-                                        {{
-                                            'Filter by Urgency'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% else %}
-                                    <option value="">
-                                        {{
-                                            'Stop filtering by Urgency'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% endif %}
-                                {% for item in urgencies %}
-                                    {% if
-                                        item.urgency == filters.urgency
-                                            and item.urgency != '' %}
-                                        <option value="{{ item.urgency|url_encode }}"
-                                            selected>
-                                            {{ item.urgency }}
-                                        </option>
-                                    {% elseif
-                                        item.urgency == 'SK'
-                                            or item.urgency == null %}
-                                        <!-- empty -->
-                                    {% else %}
-                                        <option value="{{ item.urgency|url_encode }}">
-                                            {{ item.urgency }}
-                                        </option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </p>
-
-                        <p>
-                            <select class="form-select"
-                                name="infection"
-                                aria-label="filterInfectiony">
-                                {% if filters.urgency == null %}
-                                    <option value="" selected>
-                                        {{
-                                            'Filter by Infection'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% else %}
-                                    <option value="">
-                                        {{
-                                            'Stop filtering by Infection'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% endif %}
-                                {% for item in infections %}
-                                    {% if
-                                        item.infection == filters.infection
-                                            and item.infection != '' %}
-                                        <option value="{{ item.infection|url_encode }}"
-                                            selected>
-                                            {{ item.infection }}
-                                        </option>
-                                    {% elseif
-                                        item.infection == ''
-                                            or item.infection == null %}
-                                        <!-- empty -->
-                                    {% else %}
-                                        <option value="{{ item.infection|url_encode }}">
-                                            {{ item.infection }}
-                                        </option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </p>
-
-                        <p>
-                            <div class="form-check form-switch">
-                                {% if filters.reqResus %}
-                                    <input class="form-check-input"
-                                        type="checkbox"
-                                        name="reqResus"
-                                        checked="checked" />
-                                {% else %}
-                                    <input class="form-check-input"
-                                        type="checkbox"
-                                        name="reqResus" />
-                                {% endif %}
-                                <label class="form-check-label"
-                                    for="flexSwitchCheckDefault">
-                                    {{ 'Requires Resuscitation'|trans }}
-                                </label>
-                            </div>
-                            <div class="form-check form-switch">
-                                {% if filters.reqCath %}
-                                    <input class="form-check-input"
-                                        type="checkbox"
-                                        name="reqCath"
-                                        checked="checked" />
-                                {% else %}
-                                    <input class="form-check-input"
-                                        type="checkbox"
-                                        name="reqCath" />
-                                {% endif %}
-                                <label class="form-check-label"
-                                    for="flexSwitchCheckDefault">
-                                    {{ 'Requires Cathlab'|trans }}
-                                </label>
-                            </div>
-                            <div class="form-check form-switch">
-                                {% if filters.isCPR %}
-                                    <input class="form-check-input"
-                                        type="checkbox"
-                                        name="isCPR"
-                                        checked="checked" />
-                                {% else %}
-                                    <input class="form-check-input"
-                                        type="checkbox"
-                                        name="isCPR" />
-                                {% endif %}
-                                <label class="form-check-label"
-                                    for="flexSwitchCheckDefault">
-                                    {{ 'Is CPR'|trans }}
-                                </label>
-                            </div>
-                            <div class="form-check form-switch">
-                                {% if filters.isVent %}
-                                    <input class="form-check-input"
-                                        type="checkbox"
-                                        name="isVent"
-                                        checked="checked" />
-                                {% else %}
-                                    <input class="form-check-input"
-                                        type="checkbox"
-                                        name="isVent" />
-                                {% endif %}
-                                <label class="form-check-label"
-                                    for="flexSwitchCheckDefault">
-                                    {{ 'Is Ventilated'|trans }}
-                                </label>
-                            </div>
-                            <div class="form-check form-switch">
-                                {% if filters.isShock %}
-                                    <input class="form-check-input"
-                                        type="checkbox"
-                                        name="isShock"
-                                        checked="checked" />
-                                {% else %}
-                                    <input class="form-check-input"
-                                        type="checkbox"
-                                        name="isShock" />
-                                {% endif %}
-                                <label class="form-check-label"
-                                    for="flexSwitchCheckDefault">
-                                    {{ 'Is Shock'|trans }}
-                                </label>
-                            </div>
-                            <div class="form-check form-switch">
-                                {% if filters.isWithDoc %}
-                                    <input class="form-check-input"
-                                        type="checkbox"
-                                        name="isWithDoc"
-                                        checked="checked" />
-                                {% else %}
-                                    <input class="form-check-input"
-                                        type="checkbox"
-                                        name="isWithDoc" />
-                                {% endif %}
-                                <label class="form-check-label"
-                                    for="flexSwitchCheckDefault">
-                                    {{ 'Is with Physician'|trans }}
-                                </label>
-                            </div>
-                            <div class="form-check form-switch">
-                                {% if filters.isPreg %}
-                                    <input class="form-check-input"
-                                        type="checkbox"
-                                        name="isPreg"
-                                        checked="checked" />
-                                {% else %}
-                                    <input class="form-check-input"
-                                        type="checkbox"
-                                        name="isPreg" />
-                                {% endif %}
-                                <label class="form-check-label"
-                                    for="flexSwitchCheckDefault">
-                                    {{ 'Is Pregnant'|trans }}
-                                </label>
-                            </div>
-                            <div class="form-check form-switch">
-                                {% if filters.isWork %}
-                                    <input class="form-check-input"
-                                        type="checkbox"
-                                        name="isWork"
-                                        checked="checked" />
-                                {% else %}
-                                    <input class="form-check-input"
-                                        type="checkbox"
-                                        name="isWork" />
-                                {% endif %}
-                                <label class="form-check-label"
-                                    for="flexSwitchCheckDefault">
-                                    {{ 'Is Work Accident'|trans }}
-                                </label>
-                            </div>
-                        </p>
-
-                        {% if filters.sortBy %}
-                            <input type="hidden"
-                                id="sortBy"
-                                name="sortBy"
-                                value="{{ filters.sortBy }}" />
-                        {% endif %}
-                        {% if filters.orderBy %}
-                            <input type="hidden"
-                                id="orderBy"
-                                name="orderBy"
-                                value="{{ filters.orderBy }}" />
-                        {% endif %}
-
-                        <h5 class="card-title">
-                            {{ 'Filter by Transport'|trans }}
-                        </h5>
-                        <p>
-                            <select class="form-select"
-                                name="assignment"
-                                aria-label="filterAssignment">
-                                {% if filters.assignment == null %}
-                                    <option value="" selected>
-                                        {{
-                                            'Filter by Assignment'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% else %}
-                                    <option value="">
-                                        {{
-                                            'Stop filtering by Assignment'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% endif %}
-                                {% for item in assignments %}
-                                    {% if
-                                        item.assignment == filters.assignment
-                                            and item.assignment != '' %}
-                                        <option value="{{ item.assignment|url_encode }}"
-                                            selected>
-                                            {{ item.assignment }}
-                                        </option>
-                                    {% elseif
-                                        item.assignment == 0
-                                            or item.assignment == null %}
-                                        <!-- empty -->
-                                    {% else %}
-                                        <option value="{{ item.assignment|url_encode }}">
-                                            {{ item.assignment }}
-                                        </option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </p>
-                        <p>
-                            <select class="form-select"
-                                name="occasion"
-                                aria-label="filterOccasion">
-                                {% if filters.occasion == null %}
-                                    <option value="" selected>
-                                        {{
-                                            'Filter by Occasion'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% else %}
-                                    <option value="">
-                                        {{
-                                            'Stop filtering by Occasion'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% endif %}
-                                {% for item in occasions %}
-                                    {% if
-                                        item.occasion == filters.occasion
-                                            and item.occasion != '' %}
-                                        <option value="{{ item.occasion|url_encode }}"
-                                            selected>
-                                            {{ item.occasion }}
-                                        </option>
-                                    {% elseif
-                                        item.occasion == ''
-                                            or item.occasion == null %}
-                                        <!-- empty -->
-                                    {% else %}
-                                        <option value="{{ item.occasion|url_encode }}">
-                                            {{ item.occasion }}
-                                        </option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </p>
-                        <p>
-                            <select class="form-select"
-                                name="transport"
-                                aria-label="filterTransport">
-                                {% if filters.modeOfTransport == null %}
-                                    <option value="" selected>
-                                        {{
-                                            'Filter by mode of Transport'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% else %}
-                                    <option value="">
-                                        {{
-                                            'Stop filtering by mode of Transport'|trans(
-                                                {},
-                                                'forms'
-                                            )
-                                        }}
-                                    </option>
-                                {% endif %}
-                                {% for item in transports %}
-                                    {% if
-                                        item.modeOfTransport
-                                            == filters.modeOfTransport
-                                            and item.modeOfTransport != '' %}
-                                        <option value="{{ item.modeOfTransport|url_encode }}"
-                                            selected>
-                                            {{ item.modeOfTransport }}
-                                        </option>
-                                    {% elseif
-                                        item.modeOfTransport == ''
-                                            or item.modeOfTransport == null %}
-                                        <!-- empty -->
-                                    {% else %}
-                                        <option value="{{ item.modeOfTransport|url_encode }}">
-                                            {{ item.modeOfTransport }}
-                                        </option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
-                        </p>
-
-                        <div class="float-end">
-                            <button type="submit"
-                                class="btn btn-outline-primary">
-                                {{ 'Apply filters'|trans({}, 'forms') }}
-                                <i class="bi bi-arrow-right-square"></i>
-                            </button>
+                        <div class="col-6">
+                            {{ form_widget(allocationForm.requiresCathlab) }}
                         </div>
-                    </form>
+                        <div class="col-6">
+                            {{ form_widget(allocationForm.isCPR) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_widget(allocationForm.isVentilated) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_widget(allocationForm.isShock) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_widget(allocationForm.isWithPhysician) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_widget(allocationForm.isPregnant) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_widget(allocationForm.isWorkAccident) }}
+                        </div>
+                    </div>
+
+                    <h5>
+                        {{ 'Filter by Transport'|trans }}
+                    </h5>
+
+                    {{
+                        form_row(
+                            allocationForm.assignment,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    {{
+                        form_row(
+                            allocationForm.occasion,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    {{
+                        form_row(
+                            allocationForm.modeOfTransport,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    <h5>
+                        {{ 'Admin filters'|trans }}
+                    </h5>
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        {{
+                            form_row(
+                                allocationForm.owner,
+                                {
+                                    label: false
+                                }
+                            )
+                        }}
+                        {{
+                            form_row(
+                                allocationForm.hospital,
+                                {
+                                    label: false
+                                }
+                            )
+                        }}
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col">
+                            {{ form_row(allocationForm.submit) }}
+                        </div>
+                        <div class="col">
+                            <div class="float-end">
+                                {{ form_row(allocationForm.reset) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    {{ form_end(allocationForm) }}
                 </div>
             </div>
 
@@ -1436,211 +465,12 @@
                     <i class="bi bi-sort-down"></i> {{ 'Sorting'|trans }}
                 </div>
                 <div class="card-body">
-                    <form>
-                        <div class="form-floating mb-2">
-                            <select id="sortBy"
-                                name="sortBy"
-                                class="form-select"
-                                aria-label="sortBy">
-                                {% if filters.sortBy == 'time' %}
-                                    <option value="time" selected="selected">
-                                        {{ 'Time'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="time">
-                                        {{ 'Time'|trans }}
-                                    </option>
-                                {% endif %}
-                                {% if filters.sortBy == 'urgency' %}
-                                    <option value="urgency" selected="selected">
-                                        {{ 'Urgency'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="urgency">
-                                        {{ 'Urgency'|trans }}
-                                    </option>
-                                {% endif %}
+                    {{ form_start(sortForm) }}
 
-                                {% if filters.sortBy == 'dispatchArea' %}
-                                    <option value="dispatchArea"
-                                        selected="selected">
-                                        {{ 'DispatchArea'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="dispatchArea">
-                                        {{ 'DispatchArea'|trans }}
-                                    </option>
-                                {% endif %}
-                                {% if filters.sortBy == 'age' %}
-                                    <option value="age" selected="selected">
-                                        {{ 'Age'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="age">
-                                        {{ 'Age'|trans }}
-                                    </option>
-                                {% endif %}
-                                {% if filters.sortBy == 'gender' %}
-                                    <option value="gender" selected="selected">
-                                        {{ 'Gender'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="gender">
-                                        {{ 'Gender'|trans }}
-                                    </option>
-                                {% endif %}
-                            </select>
-                            <label for="sortBy">
-                                {{ 'Sort by'|trans({}, 'forms') }}
-                            </label>
-                        </div>
-                        <div class="form-floating mb-2">
-                            <select id="orderBy"
-                                name="orderBy"
-                                class="form-select"
-                                aria-label="sortorder">
-                                {% if filters.orderBy == 'asc' %}
-                                    <option value="asc" selected="selected">
-                                        {{ 'Ascending'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="asc">
-                                        {{ 'Ascending'|trans }}
-                                    </option>
-                                {% endif %}
+                    {{ form_row(sortForm.sortBy) }}
+                    {{ form_row(sortForm.orderBy) }}
 
-                                {% if filters.orderBy == 'desc' %}
-                                    <option value="desc" selected="selected">
-                                        {{ 'Descending'|trans }}
-                                    </option>
-                                {% else %}
-                                    <option value="desc">
-                                        {{ 'Descending'|trans }}
-                                    </option>
-                                {% endif %}
-                            </select>
-                            <label for="sortorder">
-                                {{ 'Order by'|trans({}, 'forms') }}
-                            </label>
-                        </div>
-
-                        {% if filters.search %}
-                            <input type="hidden"
-                                id="search"
-                                name="search"
-                                value="{{ filters.search }}" />
-                        {% endif %}
-                        {% if filters.hospital %}
-                            <input type="hidden"
-                                id="hospital"
-                                name="hospital"
-                                value="{{ filters.hospital }}" />
-                        {% endif %}
-                        {% if filters.supplyArea %}
-                            <input type="hidden"
-                                id="supplyArea"
-                                name="supplyArea"
-                                value="{{ filters.supplyArea }}" />
-                        {% endif %}
-                        {% if filters.dispatchArea %}
-                            <input type="hidden"
-                                id="dispatchArea"
-                                name="dispatchArea"
-                                value="{{ filters.dispatchArea }}" />
-                        {% endif %}
-                        {% if filters.startDate %}
-                            <input type="hidden"
-                                id="startDate"
-                                name="startDate"
-                                value="{{ filters.startDate }}" />
-                        {% endif %}
-                        {% if filters.endDate %}
-                            <input type="hidden"
-                                id="endDate"
-                                name="endDate"
-                                value="{{ filters.endDate }}" />
-                        {% endif %}
-                        {% if filters.pzc %}
-                            <input type="hidden"
-                                id="pzc"
-                                name="pzc"
-                                value="{{ filters.pzc }}" />
-                        {% endif %}
-                        {% if filters.reqResus %}
-                            <input type="hidden"
-                                id="reqResus"
-                                name="reqResus"
-                                value="{{ filters.reqResus }}" />
-                        {% endif %}
-                        {% if filters.reqCath %}
-                            <input type="hidden"
-                                id="reqCath"
-                                name="reqCath"
-                                value="{{ filters.reqCath }}" />
-                        {% endif %}
-                        {% if filters.isCPR %}
-                            <input type="hidden"
-                                id="isCPR"
-                                name="isCPR"
-                                value="{{ filters.isCPR }}" />
-                        {% endif %}
-                        {% if filters.isVent %}
-                            <input type="hidden"
-                                id="isVent"
-                                name="isVent"
-                                value="{{ filters.isVent }}" />
-                        {% endif %}
-                        {% if filters.isShock %}
-                            <input type="hidden"
-                                id="isShock"
-                                name="isShock"
-                                value="{{ filters.isShock }}" />
-                        {% endif %}
-                        {% if filters.isWithDoc %}
-                            <input type="hidden"
-                                id="isWithDoc"
-                                name="isWithDoc"
-                                value="{{ filters.isWithDoc }}" />
-                        {% endif %}
-                        {% if filters.isPreg %}
-                            <input type="hidden"
-                                id="isPreg"
-                                name="isPreg"
-                                value="{{ filters.isPreg }}" />
-                        {% endif %}
-                        {% if filters.isWork %}
-                            <input type="hidden"
-                                id="isWork"
-                                name="isWork"
-                                value="{{ filters.isWork }}" />
-                        {% endif %}
-                        {% if filters.speciality %}
-                            <input type="hidden"
-                                id="speciality"
-                                name="speciality"
-                                value="{{ filters.speciality }}" />
-                        {% endif %}
-                        {% if filters.specialityDetail %}
-                            <input type="hidden"
-                                id="specialityDetail"
-                                name="specialityDetail"
-                                value="{{ filters.specialityDetail }}" />
-                        {% endif %}
-                        {% if filters.infection %}
-                            <input type="hidden"
-                                id="infection"
-                                name="infection"
-                                value="{{ filters.infection }}" />
-                        {% endif %}
-
-                        <div class="float-end">
-                            <button type="submit"
-                                class="btn btn-outline-primary">
-                                {{ 'Sort allocations'|trans }}
-                                <i class="bi bi-arrow-right-square"></i>
-                            </button>
-                        </div>
-                    </form>
+                    {{ form_end(sortForm) }}
                 </div>
             </div>
         </div>

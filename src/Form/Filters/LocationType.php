@@ -14,7 +14,7 @@ class LocationType extends AbstractType
         $resolver->setDefaults([
             'required' => false,
             'choices' => [
-                'All Locations' => '',
+                'All locations' => '',
                 'urban' => Hospital::LOCATION_URBAN,
                 'rural' => Hospital::LOCATION_RURAL,
             ],

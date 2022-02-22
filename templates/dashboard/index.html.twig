@@ -123,7 +123,9 @@
                                 'Explore the participating hospitals, add or edit your own hospital.'|trans
                             }}
                         </p>
-                        {% if (app.user.hospitals|length) < 2 %}
+                        {% if
+                            (app.user.hospitals|length) < 2
+                                and (app.user.hospitals|length) > 1 %}
                             <a href="{{
                                 path(
                                     'app_hospital_edit',

@@ -67,7 +67,7 @@ class SearchFilter implements FilterInterface
         }
 
         foreach ($arguments[self::SEARCHABLE] as $key) {
-            $qb->orWhere($arguments[FilterService::ENTITY_ALIAS].$key.' LIKE :search')
+            $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].$key.' LIKE :search')
                 ->setParameter('search', '%'.$search.'%')
             ;
         }

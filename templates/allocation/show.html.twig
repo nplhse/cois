@@ -154,17 +154,17 @@
                             <h6 class="card-subtitle text-muted">
                                 {{ 'allocations.field.SK'|trans }}
                             </h6>
-                            {% if allocation.SK == '1' %}
+                            {% if allocation.urgency == '1' %}
                                 <p class="text-danger text-center fw-bold fs-1">
-                                    {{ allocation.SK }}
+                                    SK{{ allocation.urgency }}
                                 </p>
-                            {% elseif allocation.SK == '2' %}
+                            {% elseif allocation.urgency == '2' %}
                                 <p class="text-warning text-center fw-bold fs-1">
-                                    {{ allocation.SK }}
+                                    SK{{ allocation.urgency }}
                                 </p>
                             {% else %}
                                 <p class="text-success text-center fw-bold fs-1">
-                                    {{ allocation.SK }}
+                                    SK{{ allocation.urgency }}
                                 </p>
                             {% endif %}
                         </div>
@@ -173,14 +173,16 @@
                                 {{ 'allocations.field.RMIText'|trans }}
                             </h6>
                             <p>
-                                {{ allocation.RMI }} {{ allocation.pZCText }}
+                                {{ allocation.indicationCode }}
+                                {{ allocation.indication }}
                             </p>
                             <h6 class="card-subtitle text-muted">
                                 {{ 'allocations.field.secondaryRMIText'|trans }}
                             </h6>
                             <p class="text-muted">
-                                {% if allocation.secondaryPZCText %}
-                                    {{ allocation.secondaryPZCText }}
+                                {% if allocation.secondaryIndication %}
+                                    {{ allocation.secondaryIndicationCode }}
+                                    {{ allocation.secondaryIndication }}
                                 {% else %}
                                     {{
                                         'allocations.field.noSecondaryRMI'|trans
@@ -314,7 +316,7 @@
                     </h5>
                     <p>
                         <i class="bi bi-clock"></i>
-                        {{ allocation.creationWeekday }}, {{
+                        {{ allocation.createdAt.format('D')|trans }}, {{
                             allocation.createdAt|date(
                                 'd.m.Y H:i',
                                 'Europe/Berlin'
@@ -327,7 +329,7 @@
                     </h5>
                     <p>
                         <i class="bi bi-clock-history"></i>
-                        {{ allocation.arrivalWeekday }}, {{
+                        {{ allocation.arrivalAt.format('D')|trans }}, {{
                             allocation.arrivalAt|date(
                                 'd.m.Y H:i',
                                 'Europe/Berlin'

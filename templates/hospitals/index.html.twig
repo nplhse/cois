@@ -3,6 +3,7 @@
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
 {% import '_elements/macro/pagination.html.twig' as pagination %}
 {% import '_elements/macro/filters.html.twig' as filter %}
+{% import '_elements/macro/active_filters.html.twig' as active_filters %}
 
 {% block title %}
     {{ 'Hospitals'|trans }} - {{ parent() }}
@@ -41,6 +42,8 @@
                     })
                 }}
             </p>
+
+            {{ active_filters.render(filters, 'app_hospital_index') }}
 
             {% for row in hospitals|batch(2, null) %}
                 <div class="row">
@@ -241,23 +244,67 @@
                 <div class="card-body">
                     {{ form(searchForm) }}
 
+                    <hr />
+
                     {{ form_start(hospitalForm) }}
 
                     {{ form_row(hospitalForm.ownHospitals) }}
 
                     {% if is_granted('ROLE_ADMIN') %}
-                        {{ form_row(hospitalForm.owner) }}
+                        {{
+                            form_row(
+                                hospitalForm.owner,
+                                {
+                                    label: false
+                                }
+                            )
+                        }}
                     {% endif %}
 
-                    {{ form_row(hospitalForm.location) }}
+                    {{
+                        form_row(
+                            hospitalForm.location,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
 
-                    {{ form_row(hospitalForm.size) }}
+                    {{
+                        form_row(
+                            hospitalForm.size,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
 
-                    {{ form_row(hospitalForm.state) }}
+                    {{
+                        form_row(
+                            hospitalForm.state,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
 
-                    {{ form_row(hospitalForm.dispatchArea) }}
+                    {{
+                        form_row(
+                            hospitalForm.dispatchArea,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
 
-                    {{ form_row(hospitalForm.supplyArea) }}
+                    {{
+                        form_row(
+                            hospitalForm.supplyArea,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
 
                     <div class="row">
                         <div class="col">

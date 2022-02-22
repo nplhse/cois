@@ -6,6 +6,10 @@ use App\Domain\Contracts\UserInterface;
 use App\Entity\Allocation;
 use App\Entity\Hospital;
 use App\Entity\Import;
+use App\Service\Filters\OrderFilter;
+use App\Service\Filters\PageFilter;
+use App\Service\Filters\SearchFilter;
+use App\Service\FilterService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Query\Expr;
@@ -20,7 +24,20 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AllocationRepository extends ServiceEntityRepository
 {
+    // ToDo: Remove after refactoring
     public const PAGINATOR_PER_PAGE = 10;
+
+    public const PER_PAGE = 10;
+
+    public const DEFAULT_ORDER = 'desc';
+
+    public const DEFAULT_SORT = 'createdAt';
+
+    public const SORTABLE = ['createdAt', 'age', 'urgency'];
+
+    public const SEARCHABLE = ['indication'];
+
+    public const ENTITY_ALIAS = 'a.';
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -309,159 +326,154 @@ class AllocationRepository extends ServiceEntityRepository
         return $query->getQuery()->getArrayResult();
     }
 
-    public function getAllocationPaginator(int $page, array $filter): Paginator
+    public function getAllocationPaginator(FilterService $filterService): Paginator
     {
-        if (1 != $page) {
-            $offset = $page * self::PAGINATOR_PER_PAGE;
-        } else {
-            $offset = 0;
-        }
+        $qb = $this->createQueryBuilder('a');
 
-        $query = $this->createQueryBuilder('a');
+        $arguments = [
+            'joinOwner' => true,
+            PageFilter::PER_PAGE => self::PER_PAGE,
+            FilterService::ENTITY_ALIAS => self::ENTITY_ALIAS,
+            OrderFilter::DEFAULT_ORDER => self::DEFAULT_ORDER,
+            OrderFilter::DEFAULT_SORT => self::DEFAULT_SORT,
+            OrderFilter::SORTABLE => self::SORTABLE,
+            SearchFilter::SEARCHABLE => self::SEARCHABLE,
+        ];
 
-        if ($filter['search']) {
-            $query->where('a.PZCText LIKE :search')
-                ->setParameter('search', '%'.$filter['search'].'%')
-            ;
-        }
+        $qb = $filterService->processQuery($qb, $arguments);
 
-        if ($filter['hospital']) {
-            $query->andWhere('a.hospital = :location')
-                ->setParameter('location', $filter['hospital'], Types::INTEGER)
-            ;
-        }
+        return new Paginator($qb->getQuery());
+    }
 
-        if ($filter['supplyArea']) {
-            $query->andWhere('a.supplyArea = :supplyArea')
-                ->setParameter('supplyArea', $filter['supplyArea'])
-            ;
-        }
+    public function getIndicationsArray(): array
+    {
+        $indications = [];
 
-        if ($filter['dispatchArea']) {
-            $query->andWhere('a.dispatchArea = :dispatchArea')
-                ->setParameter('dispatchArea', $filter['dispatchArea'])
-            ;
-        }
-
-        if ($filter['startDate']) {
-            $date = \DateTime::createFromFormat('Y-m-d G:i', $filter['startDate'].'00:00');
-
-            $query->andWhere('a.createdAt >= :startDate')
-                ->setParameter('startDate', $date, Types::DATETIME_MUTABLE)
-            ;
-        }
-
-        if ($filter['endDate']) {
-            $date = \DateTime::createFromFormat('Y-m-d G:i', $filter['endDate'].'23:59');
-
-            $query->andWhere('a.createdAt <= :endDate')
-                ->setParameter('endDate', $date, Types::DATETIME_MUTABLE)
-            ;
-        }
-
-        if (isset($filter['pzc'])) {
-            $query->andWhere('a.RMI = :pzc')
-                ->setParameter('pzc', $filter['pzc']);
-        }
-
-        if (isset($filter['urgency'])) {
-            $query->andWhere('a.SK = :urgency')
-                ->setParameter('urgency', $filter['urgency']);
-        }
-
-        if (isset($filter['reqResus'])) {
-            $query->andWhere('a.requiresResus = TRUE');
-        }
-
-        if (isset($filter['reqCath'])) {
-            $query->andWhere('a.requiresCathlab = TRUE');
-        }
-
-        if (isset($filter['isCPR'])) {
-            $query->andWhere('a.isCPR = TRUE');
-        }
-
-        if (isset($filter['isVent'])) {
-            $query->andWhere('a.isVentilated = TRUE');
-        }
-
-        if (isset($filter['isShock'])) {
-            $query->andWhere('a.isShock = TRUE');
-        }
-
-        if (isset($filter['isWithDoc'])) {
-            $query->andWhere('a.isWithPhysician = TRUE');
-        }
-
-        if (isset($filter['isPreg'])) {
-            $query->andWhere('a.isPregnant = TRUE');
-        }
-
-        if (isset($filter['isWork'])) {
-            $query->andWhere('a.isWorkAccident = TRUE');
-        }
-
-        if (isset($filter['assignment'])) {
-            $query->andWhere('a.assignment = :assignment')
-                ->setParameter('assignment', $filter['assignment'])
-            ;
-        }
-
-        if (isset($filter['occasion'])) {
-            $query->andWhere('a.occasion = :occasion')
-                ->setParameter('occasion', $filter['occasion'])
-            ;
-        }
-
-        if (isset($filter['modeOfTransport'])) {
-            $query->andWhere('a.modeOfTransport = :modeOfTransport')
-                ->setParameter('modeOfTransport', $filter['modeOfTransport'])
-            ;
-        }
-
-        if (isset($filter['speciality'])) {
-            $query->andWhere('a.speciality = :speciality')
-                ->setParameter('speciality', $filter['speciality'])
-            ;
-        }
-
-        if (isset($filter['specialityDetail'])) {
-            $query->andWhere('a.specialityDetail = :specialityDetail')
-                ->setParameter('specialityDetail', $filter['specialityDetail'])
-            ;
-        }
-
-        if (isset($filter['sortBy'])) {
-            $sortBy = match ($filter['sortBy']) {
-                'dispatchArea' => 'a.dispatchArea',
-                'urgency' => 'a.SK',
-                'age' => 'a.age',
-                'gender' => 'a.gender',
-                default => 'a.createdAt',
-            };
-        } else {
-            $sortBy = 'a.createdAt';
-        }
-
-        if (isset($filter['orderBy'])) {
-            if ('desc' === $filter['orderBy']) {
-                $order = 'DESC';
-            } elseif ('asc' === $filter['orderBy']) {
-                $order = 'ASC';
-            } else {
-                $order = 'DESC';
-            }
-        } else {
-            $order = 'DESC';
-        }
-
-        $query
-            ->orderBy($sortBy, $order)
-            ->setMaxResults(self::PAGINATOR_PER_PAGE)
-            ->setFirstResult($offset)
+        $results = $this->createQueryBuilder('a')
+            ->select('a.indicationCode, a.indication')
+            ->orderBy('a.indicationCode', 'ASC')
+            ->distinct()
             ->getQuery()
-        ;
+            ->getArrayResult();
 
-        return new Paginator($query);
+        foreach ($results as $result) {
+            if (0 === $result['indicationCode']) {
+                continue;
+            }
+
+            if (!in_array($result['indicationCode'], $indications, true)) {
+                $indications[$result['indicationCode']] = $result['indicationCode'].' '.$result['indication'];
+            }
+        }
+
+        return $indications;
+    }
+
+    public function getAssignmentsArray(): array
+    {
+        $assignments = [];
+
+        $results = $this->createQueryBuilder('a')
+            ->select('a.assignment')
+            ->addOrderBy('a.assignment', 'ASC')
+            ->distinct()
+            ->getQuery()
+            ->getArrayResult();
+
+        foreach ($results as $result) {
+            if (!in_array($result['assignment'], $assignments, true)) {
+                $assignments[$result['assignment']] = $result['assignment'];
+            }
+        }
+
+        return $assignments;
+    }
+
+    public function getOccasionsArray(): array
+    {
+        $occasions = [];
+
+        $results = $this->createQueryBuilder('a')
+            ->select('a.occasion')
+            ->addOrderBy('a.occasion', 'ASC')
+            ->distinct()
+            ->getQuery()
+            ->getArrayResult();
+
+        foreach ($results as $result) {
+            if (empty($result['occasion'])) {
+                $result['occasion'] = 'No occasion';
+            }
+
+            if (!in_array($result['occasion'], $occasions, true)) {
+                $occasions[$result['occasion']] = $result['occasion'];
+            }
+        }
+
+        return $occasions;
+    }
+
+    public function getInfectionsArray(): array
+    {
+        $infections = [];
+
+        $results = $this->createQueryBuilder('a')
+            ->select('a.isInfectious')
+            ->addOrderBy('a.isInfectious', 'ASC')
+            ->distinct()
+            ->getQuery()
+            ->getArrayResult();
+
+        foreach ($results as $result) {
+            if (!in_array($result['isInfectious'], $infections, true)) {
+                $infections[$result['isInfectious']] = $result['isInfectious'];
+            }
+        }
+
+        return $infections;
+    }
+
+    public function getSpecialityArray(): array
+    {
+        $speciality = [];
+
+        $results = $this->createQueryBuilder('a')
+            ->select('a.speciality')
+            ->addOrderBy('a.speciality', 'ASC')
+            ->distinct()
+            ->getQuery()
+            ->getArrayResult();
+
+        foreach ($results as $result) {
+            if (empty($result['speciality'])) {
+                continue;
+            }
+
+            if (!in_array($result['speciality'], $speciality, true)) {
+                $speciality[$result['speciality']] = $result['speciality'];
+            }
+        }
+
+        return $speciality;
+    }
+
+    public function getSpecialityDetailArray(): array
+    {
+        $speciality = [];
+
+        $results = $this->createQueryBuilder('a')
+            ->select('a.specialityDetail')
+            ->addOrderBy('a.specialityDetail', 'ASC')
+            ->distinct()
+            ->getQuery()
+            ->getArrayResult();
+
+        foreach ($results as $result) {
+            if (!in_array($result['specialityDetail'], $speciality, true)) {
+                $speciality[$result['specialityDetail']] = $result['specialityDetail'];
+            }
+        }
+
+        return $speciality;
     }
 }

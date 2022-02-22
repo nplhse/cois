@@ -4,6 +4,7 @@ namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
 use App\Form\Filters\LocationType;
+use App\Repository\SupplyAreaRepository;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
@@ -21,9 +22,12 @@ class SupplyAreaFilter implements FilterInterface
 
     private FormFactoryInterface $formFactory;
 
-    public function __construct(FormFactoryInterface $formFactory)
+    private SupplyAreaRepository $supplyAreaRepository;
+
+    public function __construct(FormFactoryInterface $formFactory, SupplyAreaRepository $supplyAreaRepository)
     {
         $this->formFactory = $formFactory;
+        $this->supplyAreaRepository = $supplyAreaRepository;
     }
 
     public function getValue(Request $request): mixed
@@ -33,10 +37,23 @@ class SupplyAreaFilter implements FilterInterface
         if (empty($area)) {
             $value = null;
         } else {
-            $value = urldecode($area);
+            $value = (int) urldecode($area);
         }
 
         return $this->setCacheValue($value);
+    }
+
+    public function getAltValue(Request $request): mixed
+    {
+        $areaId = $this->cacheValue ?? $this->getValue($request);
+
+        if (isset($areaId)) {
+            $area = $this->supplyAreaRepository->findOneBy(['id' => $areaId]);
+
+            return $area->getName();
+        }
+
+        return null;
     }
 
     public function supportsForm(): bool

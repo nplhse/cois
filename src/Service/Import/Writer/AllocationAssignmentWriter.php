@@ -45,7 +45,7 @@ class AllocationAssignmentWriter implements \App\Application\Contract\ImportWrit
         }
 
         $entity->setIndication($row['PZC-Text']);
-        $entity->setIndicationCode((int) $row['PZC']);
+        $entity->setIndicationCode((int) substr($row['PZC'], 0, 3));
         $entity->setSecondaryIndication(null);
         $entity->setSecondaryIndicationCode(null);
 

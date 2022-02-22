@@ -76,6 +76,8 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
+                                {{ form(searchForm) }}
+
                                 {{ form_start(sortForm) }}
 
                                 {{ form_row(sortForm.sortBy) }}
@@ -84,7 +86,28 @@
                                 {{ form_end(sortForm) }}
                             </div>
                             <div class="col">
-                                {{ form(searchForm) }}
+                                {{ form_start(importForm) }}
+
+                                {{ form_row(importForm.ownImports) }}
+
+                                {{ form_row(importForm.ownHospitals) }}
+
+                                {{ form_row(importForm.hospital) }}
+
+                                {{ form_row(importForm.owner) }}
+
+                                <div class="row">
+                                    <div class="col">
+                                        {{ form_row(importForm.submit) }}
+                                    </div>
+                                    <div class="col">
+                                        <div class="float-end">
+                                            {{ form_row(importForm.reset) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{ form_end(importForm) }}
                             </div>
                         </div>
                     </div>

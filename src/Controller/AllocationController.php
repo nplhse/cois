@@ -2,13 +2,39 @@
 
 namespace App\Controller;
 
-use App\Domain\Repository\DispatchAreaRepositoryInterface;
-use App\Domain\Repository\SupplyAreaRepositoryInterface;
 use App\Entity\Allocation;
 use App\Repository\AllocationRepository;
-use App\Repository\HospitalRepository;
 use App\Repository\ImportRepository;
-use App\Service\RequestParamService;
+use App\Service\Filters\AllocationFilterSet;
+use App\Service\Filters\AssignmentFilter;
+use App\Service\Filters\DateFilter;
+use App\Service\Filters\DispatchAreaFilter;
+use App\Service\Filters\HospitalFilter;
+use App\Service\Filters\HospitalOwnerFilter;
+use App\Service\Filters\IndicationFilter;
+use App\Service\Filters\InfectionFilter;
+use App\Service\Filters\IsCPRFilter;
+use App\Service\Filters\IsPregnantFilter;
+use App\Service\Filters\IsShockFilter;
+use App\Service\Filters\IsVentilatedFilter;
+use App\Service\Filters\IsWithPhysicianFilter;
+use App\Service\Filters\IsWorkAccidentFilter;
+use App\Service\Filters\LocationFilter;
+use App\Service\Filters\ModeOfTransportFilter;
+use App\Service\Filters\OccasionFilter;
+use App\Service\Filters\OrderFilter;
+use App\Service\Filters\OwnHospitalFilter;
+use App\Service\Filters\PageFilter;
+use App\Service\Filters\RequiresCathlabFilter;
+use App\Service\Filters\RequiresResusFilter;
+use App\Service\Filters\SearchFilter;
+use App\Service\Filters\SpecialityDetailFilter;
+use App\Service\Filters\SpecialityFilter;
+use App\Service\Filters\StateFilter;
+use App\Service\Filters\SupplyAreaFilter;
+use App\Service\Filters\UrgencyFilter;
+use App\Service\FilterService;
+use App\Service\PaginationFactory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,82 +46,66 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AllocationController extends AbstractController
 {
-    private SupplyAreaRepositoryInterface $supplyAreaRepository;
+    private FilterService $filterService;
 
-    private DispatchAreaRepositoryInterface $dispatchAreaRepository;
-
-    public function __construct(SupplyAreaRepositoryInterface $supplyAreaRepository, DispatchAreaRepositoryInterface $dispatchAreaRepository)
+    public function __construct(FilterService $filterService)
     {
-        $this->supplyAreaRepository = $supplyAreaRepository;
-        $this->dispatchAreaRepository = $dispatchAreaRepository;
+        $this->filterService = $filterService;
     }
 
     #[Route('/allocations/', name: 'app_allocation_index', methods: ['GET'])]
-    public function index_new(Request $request, AllocationRepository $allocationRepository, HospitalRepository $hospitalRepository): Response
+    public function index(Request $request, AllocationRepository $allocationRepository): Response
     {
-        $paramService = new RequestParamService($request);
+        $this->filterService->setRequest($request);
+        $this->filterService->configureFilters([AllocationFilterSet::Param, HospitalFilter::Param, DateFilter::Param, IndicationFilter::Param, AssignmentFilter::Param, IndicationFilter::Param, InfectionFilter::Param, ModeOfTransportFilter::Param, OccasionFilter::Param, RequiresResusFilter::Param, RequiresCathlabFilter::Param, SpecialityFilter::Param, SpecialityDetailFilter::Param, UrgencyFilter::Param, IsCPRFilter::Param, IsPregnantFilter::Param, IsShockFilter::Param, IsVentilatedFilter::Param, IsWithPhysicianFilter::Param, IsWorkAccidentFilter::Param, StateFilter::Param, DispatchAreaFilter::Param, SupplyAreaFilter::Param, OwnHospitalFilter::Param, HospitalOwnerFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
 
-        $filters = [];
-        $filters['search'] = $paramService->getSearch();
-        $filters['page'] = $paramService->getPage();
+        $paginator = $allocationRepository->getAllocationPaginator($this->filterService);
 
-        $filters['supplyArea'] = $paramService->getSupplyArea();
-        $filters['dispatchArea'] = $paramService->getDispatchArea();
-        $filters['assignment'] = $paramService->getAssignment();
-        $filters['occasion'] = $paramService->getOccasion();
-        $filters['modeOfTransport'] = $paramService->getTransport();
-        $filters['pzc'] = $paramService->getPZC();
-        $filters['urgency'] = $paramService->getUrgency();
-        $filters['speciality'] = $paramService->getSpeciality();
-        $filters['specialityDetail'] = $paramService->getSpecialityDetail();
-        $filters['infection'] = $paramService->getInfection();
+        $args = [
+            'action' => $this->generateUrl('app_allocation_index'),
+            'method' => 'GET',
+        ];
 
-        $filters['reqResus'] = $paramService->getReqResus();
-        $filters['reqCath'] = $paramService->getReqCath();
-        $filters['isCPR'] = $paramService->getIsCPR();
-        $filters['isVent'] = $paramService->getIsVentilated();
-        $filters['isShock'] = $paramService->getIsShock();
-        $filters['isWithDoc'] = $paramService->getIsWithDoctor();
-        $filters['isPreg'] = $paramService->getIsPregnant();
-        $filters['isWork'] = $paramService->getIsWorkAccident();
+        $allocationArguments = [
+            'hidden' => [
+                SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
+                OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
+            ],
+        ];
 
-        $filters['startDate'] = $paramService->getStartDate();
-        $filters['endDate'] = $paramService->getEndDate();
-        $filters['sortBy'] = $paramService->getSortBy();
-        $filters['orderBy'] = $paramService->getOrderBy();
+        $allocationForm = $this->filterService->buildForm(AllocationFilterSet::Param, array_merge($allocationArguments, $args));
+        $allocationForm->handleRequest($request);
 
-        if ($paramService->getHospital()) {
-            if ($this->isGranted('ROLE_ADMIN')) {
-                $filters['hospital'] = $paramService->getHospital();
-            } else {
-                if ($paramService->getHospital() != $this->getUser()->getHospital()->getId()) {
-                    $this->createAccessDeniedException('Cannot filter by this hospital.');
-                }
+        $sortArguments = [
+            'sortable' => AllocationRepository::SORTABLE,
+            'hidden' => [
+                LocationFilter::Param => $this->filterService->getValue(LocationFilter::Param),
+                StateFilter::Param => $this->filterService->getValue(StateFilter::Param),
+                SupplyAreaFilter::Param => $this->filterService->getValue(SupplyAreaFilter::Param),
+                DispatchAreaFilter::Param => $this->filterService->getValue(DispatchAreaFilter::Param),
+                SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
+            ],
+        ];
 
-                $filters['hospital'] = $paramService->getHospital();
-            }
-        } else {
-            $filters['hospital'] = null;
-        }
+        $sortForm = $this->filterService->buildForm(OrderFilter::Param, array_merge($sortArguments, $args));
+        $sortForm->handleRequest($request);
 
-        $paginator = $allocationRepository->getAllocationPaginator($paramService->getPage(), $filters);
+        $searchArguments = [
+            'hidden' => [
+                OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
+            ],
+        ];
 
-        return $this->render('allocation/index.html.twig', [
+        $searchForm = $this->filterService->buildForm(SearchFilter::Param, array_merge($searchArguments, $args));
+        $searchForm->handleRequest($request);
+
+        return $this->renderForm('allocation/index.html.twig', [
             'allocations' => $paginator,
-            'filters' => $filters,
-            'filterIsSet' => $paramService->isFilterIsSet(),
-            'pages' => $paramService->getPagination(count($paginator), $paramService->getPage(), AllocationRepository::PAGINATOR_PER_PAGE),
-            'hospitals' => $hospitalRepository->getHospitals(),
-            'supplyAreas' => $this->supplyAreaRepository->findAll(),
-            'dispatchAreas' => $this->dispatchAreaRepository->findAll(),
-            'assignments' => $allocationRepository->getAllAssignments(),
-            'occasions' => $allocationRepository->getAllOccasions(),
-            'transports' => $allocationRepository->getAllTransportModes(),
-            'urgencies' => $allocationRepository->getAllUrgencies(),
-            'infections' => $allocationRepository->getAllInfections(),
-            'PZCs' => $this->getAllPZCs($allocationRepository),
-            'specialities' => $allocationRepository->getAllSpecialities(),
-            'specialityDetails' => $allocationRepository->getAllSpecialityDetails(),
+            'sortForm' => $sortForm,
+            'searchForm' => $searchForm,
+            'allocationForm' => $allocationForm,
+            'filters' => $this->filterService->getFilterDto(),
+            'pages' => PaginationFactory::create($this->filterService->getValue(PageFilter::Param), count($paginator), AllocationRepository::PER_PAGE),
         ]);
     }
 
@@ -109,15 +119,5 @@ class AllocationController extends AbstractController
             'allocation' => $allocation,
             'importUser' => $importUser,
         ]);
-    }
-
-    private function getAllPZCs(AllocationRepository $allocationRepository): array
-    {
-        $PZCs = $allocationRepository->getPZCs();
-
-        $col = array_column($PZCs, 'PZC');
-        array_multisort($col, SORT_ASC, $PZCs);
-
-        return $PZCs;
     }
 }
