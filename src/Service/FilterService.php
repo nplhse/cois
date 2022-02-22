@@ -100,8 +100,6 @@ class FilterService
                     default:
                         $filterDto->activate();
                 }
-
-                dump($this->filters[$filter]->getValue($this->request));
             }
 
             if (method_exists($this->filters[$filter], 'getAltValue')) {
