@@ -1,0 +1,63 @@
+{% macro render(filters, targetPath) %}
+    {% if filters.active %}
+        <div class="alert alert-info" role="alert">
+            <p class="float-end">
+                <a href="{{ path(targetPath) }}">
+                    {{ 'Clear all filters'|trans }}
+                </a>
+            </p>
+            <span class="float-start fw-bold">
+                {{ 'Active Filters'|trans }}:&nbsp;
+            </span>
+
+            {% for key, filter in filters.all %}
+                {% if is_type(filter, 'string') %}
+                    {% if key != "order" %}
+                        <a href="{{
+                        path(
+                            targetPath,
+                            app.request.query.all|merge({
+                            (key): '',
+                            page: ''
+                        })
+                        )
+                        }}">
+                            <span class="badge rounded-pill bg-primary">
+                                <u>{{ key|capitalize }}:</u>
+                                {{ filter|capitalize }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                {% endif %}
+                {% if is_type(filter, 'integer') %}
+                    {% if key != "page" %}
+                        <a href="{{
+                        path(
+                            targetPath,
+                            app.request.query.all|merge({
+                            (key): '',
+                            page: ''
+                        })
+                        )
+                        }}">
+                            {% if filters.altValue(key) %}
+                                <span class="badge rounded-pill bg-primary">
+                                <u>{{ key|capitalize }}:</u>
+                                {{ filters.altValue(key)|capitalize }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                            {% else %}
+                                <span class="badge rounded-pill bg-primary">
+                                <u>{{ key|capitalize }}:</u>
+                                {{ filter|capitalize }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endmacro %}

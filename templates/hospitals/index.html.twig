@@ -3,6 +3,7 @@
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
 {% import '_elements/macro/pagination.html.twig' as pagination %}
 {% import '_elements/macro/filters.html.twig' as filter %}
+{% import '_elements/macro/active_filters.html.twig' as active_filters %}
 
 {% block title %}
     {{ 'Hospitals'|trans }} - {{ parent() }}
@@ -41,6 +42,8 @@
                     })
                 }}
             </p>
+
+            {{ active_filters.render(filters, 'app_hospital_index') }}
 
             {% for row in hospitals|batch(2, null) %}
                 <div class="row">

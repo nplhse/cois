@@ -3,6 +3,7 @@
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
+use App\Repository\HospitalRepository;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
@@ -16,6 +17,13 @@ class HospitalFilter implements FilterInterface
     use HiddenFieldTrait;
 
     public const Param = 'hospital';
+
+    private HospitalRepository $hospitalRepository;
+
+    public function __construct(HospitalRepository $hospitalRepository)
+    {
+        $this->hospitalRepository = $hospitalRepository;
+    }
 
     public function getValue(Request $request): mixed
     {
@@ -32,6 +40,19 @@ class HospitalFilter implements FilterInterface
         }
 
         return $this->setCacheValue($value);
+    }
+
+    public function getAltValue(Request $request): mixed
+    {
+        $hospitalId = $this->cacheValue ?? $this->getValue($request);
+
+        if (isset($hospitalId)) {
+            $hospital = $this->hospitalRepository->findOneBy(['id' => $hospitalId]);
+
+            return $hospital->getName();
+        }
+
+        return null;
     }
 
     public function supportsForm(): bool
