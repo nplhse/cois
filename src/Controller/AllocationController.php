@@ -2,11 +2,8 @@
 
 namespace App\Controller;
 
-use App\Domain\Repository\DispatchAreaRepositoryInterface;
-use App\Domain\Repository\SupplyAreaRepositoryInterface;
 use App\Entity\Allocation;
 use App\Repository\AllocationRepository;
-use App\Repository\HospitalRepository;
 use App\Repository\ImportRepository;
 use App\Service\Filters\DispatchAreaFilter;
 use App\Service\Filters\HospitalFilter;
@@ -21,7 +18,6 @@ use App\Service\Filters\StateFilter;
 use App\Service\Filters\SupplyAreaFilter;
 use App\Service\FilterService;
 use App\Service\PaginationFactory;
-use App\Service\RequestParamService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

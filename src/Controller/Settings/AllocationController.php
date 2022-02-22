@@ -48,7 +48,7 @@ class AllocationController extends AbstractController
         $filters['startDate'] = $paramService->getStartDate();
         $filters['endDate'] = $paramService->getEndDate();
 
-        $paginator = $allocationRepository->getAllocationPaginator($paramService->getPage(), $filters);
+        $paginator = $allocationRepository->getAllocationPaginator($paramService->getPage());
 
         return $this->render('settings/allocation/index.html.twig', [
             'allocations' => $paginator,

@@ -249,7 +249,14 @@ class ImportController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $this->messageBus->dispatch(new ImportDataCommand($import->getId()));
+        try {
+            $allocationRepository->deleteByImport($import);
+            $this->messageBus->dispatch(new ImportDataCommand($import->getId()));
+        } catch (HandlerFailedException $e) {
+            $this->addFlash('danger', sprintf('Something went wrong! Failed to reload import %d: %s.', $import->getId(), $e->getMessage()));
+
+            return $this->redirectToRoute('app_settings_import_show', ['id' => $import->getId()]);
+        }
 
         $this->addFlash('success', 'Your import was successfully refreshed.');
 
