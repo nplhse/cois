@@ -18,6 +18,8 @@ class DispatchAreaType extends AbstractType
             'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('s')
                 ->orderBy('s.name', 'ASC'),
             'choice_label' => 'name',
+            'placeholder' => 'All DispatchAreas',
+            'empty_data' => '',
         ]);
     }
 

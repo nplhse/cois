@@ -29,7 +29,7 @@ class ImportRepository extends ServiceEntityRepository implements ImportReposito
 
     public const DEFAULT_ORDER = 'desc';
 
-    public const DEFAULT_SORT = 'name';
+    public const DEFAULT_SORT = 'createdAt';
 
     public const SORTABLE = ['name', 'createdAt'];
 

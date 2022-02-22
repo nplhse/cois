@@ -3,50 +3,55 @@
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
-use App\Form\Filters\HospitalFilterSetType;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\Filters\Traits\HiddenFieldTrait;
+use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class HospitalFilterSet implements FilterInterface
+class OccasionFilter implements FilterInterface
 {
     use FilterTrait;
     use HiddenFieldTrait;
 
-    public const Param = 'hospital-set';
-
-    private FormFactoryInterface $formFactory;
-
-    public function __construct(FormFactoryInterface $formFactory)
-    {
-        $this->formFactory = $formFactory;
-    }
+    public const Param = 'occasion';
 
     public function getValue(Request $request): mixed
     {
-        return null;
+        $occasion = $request->query->get('occasion');
+
+        if (empty($occasion)) {
+            $value = null;
+        } else {
+            $value = urldecode($occasion);
+        }
+
+        return $this->setCacheValue($value);
     }
 
     public function supportsForm(): bool
     {
-        return true;
+        return false;
     }
 
     public function buildForm(array $arguments): ?FormInterface
     {
-        $form = $this->formFactory->create(HospitalFilterSetType::class, null, [
-            'action' => $arguments['action'],
-            'method' => $arguments['method'],
-        ]);
-
-        return $this->addHiddenFields($arguments['hidden'], $form);
+        return null;
     }
 
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder
     {
+        $occasion = $this->cacheValue ?? $this->getValue($request);
+
+        if (!isset($occasion)) {
+            return $qb;
+        }
+
+        $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'occasion = :occasion')
+                ->setParameter('occasion', $occasion)
+            ;
+
         return $qb;
     }
 }

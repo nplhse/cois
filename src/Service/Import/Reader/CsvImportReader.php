@@ -61,6 +61,12 @@ class CsvImportReader implements ImportReaderInterface
                 $idx = ($this->defaults['hasFieldNames']) ? $keys[$i] : $i;
                 $id8 = Encoding::fixUTF8($idx);
                 $val = Encoding::fixUTF8($row[$i]);
+
+                // Fixing inconsistent naming of Schockraum in Marburg-Biedenkopf
+                if ('Schockraum' === $id8 && isset($res['Schockraum'])) {
+                    $id8 = 'Schockraum Art';
+                }
+
                 $res[$id8] = $val;
             }
 

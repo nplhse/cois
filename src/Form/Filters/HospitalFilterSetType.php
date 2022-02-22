@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Security;
 
-class AllocationFilterSetType extends AbstractType
+class HospitalFilterSetType extends AbstractType
 {
     private Security $security;
 
@@ -26,33 +26,15 @@ class AllocationFilterSetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('location', LocationType::class)
+            ->add('size', SizeType::class)
             ->add('state', StateType::class)
             ->add('supplyArea', SupplyAreaType::class)
             ->add('dispatchArea', DispatchAreaType::class)
-            ->add('ownHospitals', OwnHospitalFilterType::class)
-            ->add('indication', IndicationType::class)
-            ->add('urgency', UrgencyType::class)
-            ->add('assignment', AssignmentType::class)
-            ->add('occasion', OccasionType::class)
-            ->add('infection', InfectionType::class)
-            ->add('modeOfTransport', ModeOfTransportType::class)
-            ->add('startDate', DateFilterType::class)
-            ->add('endDate', DateFilterType::class)
-            ->add('requiresResus', RequiresResusFilterType::class)
-            ->add('requiresCathlab', RequiresCathlabFilterType::class)
-            ->add('isCPR', IsCPRFilterType::class)
-            ->add('isVentilated', IsVentilatedFilterType::class)
-            ->add('isShock', IsShockFilterType::class)
-            ->add('isWithPhysician', IsWithPhysicianFilterType::class)
-            ->add('isPregnant', IsPregnantFilterType::class)
-            ->add('isWorkAccident', IsWorkAccidentFilterType::class)
-            ->add('speciality', SpecialityType::class)
-            ->add('specialityDetail', SpecialityDetailType::class)
-        ;
+            ->add('ownHospitals', OwnHospitalFilterType::class);
 
         if ($this->security->isGranted('ROLE_ADMIN')) {
             $builder
-                ->add('hospital', HospitalFilterType::class)
                 ->add('owner', HospitalOwnerFilterType::class);
         }
 

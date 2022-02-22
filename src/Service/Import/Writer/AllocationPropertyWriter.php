@@ -27,7 +27,7 @@ class AllocationPropertyWriter implements \App\Application\Contract\ImportWriter
         } elseif ('' === $row['Schockraum']) {
             $entity->setRequiresResus(false);
         } else {
-            $entity->setRequiresResus(true);
+            $entity->setRequiresResus(false);
         }
         if ('H+' === $row['Herzkatheter']) {
             $entity->setRequiresCathlab(true);

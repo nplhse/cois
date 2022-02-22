@@ -251,18 +251,195 @@
                 <div class="card-body">
                     {{ form(searchForm) }}
 
-                    {{ form_start(allocationForm) }}
-
-                    {{ form_row(allocationForm.state) }}
-
-                    {{ form_row(allocationForm.dispatchArea) }}
-
-                    {{ form_row(allocationForm.supplyArea) }}
+                    <hr />
 
                     {{ form_row(allocationForm.ownHospitals) }}
 
+                    {{ form_start(allocationForm) }}
+
+                    <h5>
+                        {{ 'Filter by Location'|trans }}
+                    </h5>
+
+                    {{
+                        form_row(
+                            allocationForm.state,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    {{
+                        form_row(
+                            allocationForm.dispatchArea,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    {{
+                        form_row(
+                            allocationForm.supplyArea,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    <h5>
+                        {{ 'Filter by Dates'|trans }}
+                    </h5>
+
+                    <div class="input-group mb-3">
+                        {{
+                            form_widget(
+                                allocationForm.startDate,
+                                {
+                                    label: false
+                                }
+                            )
+                        }}
+
+                        {{
+                            form_widget(
+                                allocationForm.endDate,
+                                {
+                                    label: false
+                                }
+                            )
+                        }}
+                    </div>
+
+                    <h5>
+                        {{ 'Filter by Properties'|trans }}
+                    </h5>
+
+                    {{
+                        form_row(
+                            allocationForm.indication,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    {{
+                        form_row(
+                            allocationForm.speciality,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    {{
+                        form_row(
+                            allocationForm.specialityDetail,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    {{
+                        form_row(
+                            allocationForm.urgency,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    {{
+                        form_row(
+                            allocationForm.infection,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            {{ form_widget(allocationForm.requiresResus) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_widget(allocationForm.requiresCathlab) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_widget(allocationForm.isCPR) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_widget(allocationForm.isVentilated) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_widget(allocationForm.isShock) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_widget(allocationForm.isWithPhysician) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_widget(allocationForm.isPregnant) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_widget(allocationForm.isWorkAccident) }}
+                        </div>
+                    </div>
+
+                    <h5>
+                        {{ 'Filter by Transport'|trans }}
+                    </h5>
+
+                    {{
+                        form_row(
+                            allocationForm.assignment,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    {{
+                        form_row(
+                            allocationForm.occasion,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    {{
+                        form_row(
+                            allocationForm.modeOfTransport,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    <h5>
+                        {{ 'Admin filters'|trans }}
+                    </h5>
+
                     {% if is_granted('ROLE_ADMIN') %}
-                        {{ form_row(allocationForm.owner) }}
+                        {{
+                            form_row(
+                                allocationForm.owner,
+                                {
+                                    label: false
+                                }
+                            )
+                        }}
+                        {{
+                            form_row(
+                                allocationForm.hospital,
+                                {
+                                    label: false
+                                }
+                            )
+                        }}
                     {% endif %}
 
                     <div class="row">

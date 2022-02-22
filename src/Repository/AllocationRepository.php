@@ -29,7 +29,7 @@ class AllocationRepository extends ServiceEntityRepository
 
     public const PER_PAGE = 10;
 
-    public const DEFAULT_ORDER = 'asc';
+    public const DEFAULT_ORDER = 'desc';
 
     public const DEFAULT_SORT = 'createdAt';
 
@@ -343,5 +343,137 @@ class AllocationRepository extends ServiceEntityRepository
         $qb = $filterService->processQuery($qb, $arguments);
 
         return new Paginator($qb->getQuery());
+    }
+
+    public function getIndicationsArray(): array
+    {
+        $indications = [];
+
+        $results = $this->createQueryBuilder('a')
+            ->select('a.indicationCode, a.indication')
+            ->orderBy('a.indicationCode', 'ASC')
+            ->distinct()
+            ->getQuery()
+            ->getArrayResult();
+
+        foreach ($results as $result) {
+            if (0 === $result['indicationCode']) {
+                continue;
+            }
+
+            if (!in_array($result['indicationCode'], $indications, true)) {
+                $indications[$result['indicationCode']] = $result['indicationCode'].' '.$result['indication'];
+            }
+        }
+
+        return $indications;
+    }
+
+    public function getAssignmentsArray(): array
+    {
+        $assignments = [];
+
+        $results = $this->createQueryBuilder('a')
+            ->select('a.assignment')
+            ->addOrderBy('a.assignment', 'ASC')
+            ->distinct()
+            ->getQuery()
+            ->getArrayResult();
+
+        foreach ($results as $result) {
+            if (!in_array($result['assignment'], $assignments, true)) {
+                $assignments[$result['assignment']] = $result['assignment'];
+            }
+        }
+
+        return $assignments;
+    }
+
+    public function getOccasionsArray(): array
+    {
+        $occasions = [];
+
+        $results = $this->createQueryBuilder('a')
+            ->select('a.occasion')
+            ->addOrderBy('a.occasion', 'ASC')
+            ->distinct()
+            ->getQuery()
+            ->getArrayResult();
+
+        foreach ($results as $result) {
+            if (empty($result['occasion'])) {
+                $result['occasion'] = 'No occasion';
+            }
+
+            if (!in_array($result['occasion'], $occasions, true)) {
+                $occasions[$result['occasion']] = $result['occasion'];
+            }
+        }
+
+        return $occasions;
+    }
+
+    public function getInfectionsArray(): array
+    {
+        $infections = [];
+
+        $results = $this->createQueryBuilder('a')
+            ->select('a.isInfectious')
+            ->addOrderBy('a.isInfectious', 'ASC')
+            ->distinct()
+            ->getQuery()
+            ->getArrayResult();
+
+        foreach ($results as $result) {
+            if (!in_array($result['isInfectious'], $infections, true)) {
+                $infections[$result['isInfectious']] = $result['isInfectious'];
+            }
+        }
+
+        return $infections;
+    }
+
+    public function getSpecialityArray(): array
+    {
+        $speciality = [];
+
+        $results = $this->createQueryBuilder('a')
+            ->select('a.speciality')
+            ->addOrderBy('a.speciality', 'ASC')
+            ->distinct()
+            ->getQuery()
+            ->getArrayResult();
+
+        foreach ($results as $result) {
+            if (empty($result['speciality'])) {
+                continue;
+            }
+
+            if (!in_array($result['speciality'], $speciality, true)) {
+                $speciality[$result['speciality']] = $result['speciality'];
+            }
+        }
+
+        return $speciality;
+    }
+
+    public function getSpecialityDetailArray(): array
+    {
+        $speciality = [];
+
+        $results = $this->createQueryBuilder('a')
+            ->select('a.specialityDetail')
+            ->addOrderBy('a.specialityDetail', 'ASC')
+            ->distinct()
+            ->getQuery()
+            ->getArrayResult();
+
+        foreach ($results as $result) {
+            if (!in_array($result['specialityDetail'], $speciality, true)) {
+                $speciality[$result['specialityDetail']] = $result['specialityDetail'];
+            }
+        }
+
+        return $speciality;
     }
 }
