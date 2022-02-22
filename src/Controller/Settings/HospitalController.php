@@ -10,7 +10,7 @@ use App\Entity\Hospital;
 use App\Form\HospitalType;
 use App\Repository\HospitalRepository;
 use App\Service\Filters\DispatchAreaFilter;
-use App\Service\Filters\HospitalFilter;
+use App\Service\Filters\HospitalFilterSet;
 use App\Service\Filters\HospitalOwnerFilter;
 use App\Service\Filters\LocationFilter;
 use App\Service\Filters\OrderFilter;
@@ -48,7 +48,7 @@ class HospitalController extends AbstractController
     public function index(Request $request, HospitalRepository $hospitalRepository): Response
     {
         $this->filterService->setRequest($request);
-        $this->filterService->configureFilters([LocationFilter::Param, SizeFilter::Param, StateFilter::Param, DispatchAreaFilter::Param, SupplyAreaFilter::Param, HospitalFilter::Param, OwnHospitalFilter::Param, HospitalOwnerFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
+        $this->filterService->configureFilters([LocationFilter::Param, SizeFilter::Param, StateFilter::Param, DispatchAreaFilter::Param, SupplyAreaFilter::Param, HospitalFilterSet::Param, OwnHospitalFilter::Param, HospitalOwnerFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
 
         $paginator = $hospitalRepository->getHospitalPaginator($this->filterService);
 
@@ -64,7 +64,7 @@ class HospitalController extends AbstractController
             ],
         ];
 
-        $hospitalForm = $this->filterService->buildForm(HospitalFilter::Param, array_merge($hospitalArguments, $args));
+        $hospitalForm = $this->filterService->buildForm(HospitalFilterSet::Param, array_merge($hospitalArguments, $args));
         $hospitalForm->handleRequest($request);
 
         $sortArguments = [

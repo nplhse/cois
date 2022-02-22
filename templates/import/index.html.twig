@@ -178,7 +178,7 @@
                     {{ form_row(importForm.hospital) }}
 
                     {% if is_granted('ROLE_ADMIN') %}
-                        {{ form_row(importForm.owner) }}
+                        {{ form_row(importForm.user) }}
                     {% endif %}
 
                     <div class="row">

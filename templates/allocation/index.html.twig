@@ -71,8 +71,7 @@
                         <th>
                             {{ 'Time'|trans({}, 'forms') }}
                         </th>
-                        <th>
-                        </th>
+                        <th></th>
                         <th>
                             {{ 'Urgency'|trans({}, 'forms') }}
                         </th>
@@ -251,6 +250,33 @@
                 </div>
                 <div class="card-body">
                     {{ form(searchForm) }}
+
+                    {{ form_start(allocationForm) }}
+
+                    {{ form_row(allocationForm.state) }}
+
+                    {{ form_row(allocationForm.dispatchArea) }}
+
+                    {{ form_row(allocationForm.supplyArea) }}
+
+                    {{ form_row(allocationForm.ownHospitals) }}
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        {{ form_row(allocationForm.owner) }}
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col">
+                            {{ form_row(allocationForm.submit) }}
+                        </div>
+                        <div class="col">
+                            <div class="float-end">
+                                {{ form_row(allocationForm.reset) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    {{ form_end(allocationForm) }}
                 </div>
             </div>
 

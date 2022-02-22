@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Security;
 
-class ImportFilterType extends AbstractType
+class ImportFilterSetType extends AbstractType
 {
     private Security $security;
 
@@ -41,7 +41,7 @@ class ImportFilterType extends AbstractType
 
         if ($this->security->isGranted('ROLE_ADMIN')) {
             $builder
-                ->add('owner', HospitalOwnerFilterType::class)
+                ->add('user', UserFilterType::class)
                 ->add('hospital', EntityType::class, [
                     'required' => false,
                     'class' => Hospital::class,

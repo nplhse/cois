@@ -173,14 +173,16 @@
                                 {{ 'allocations.field.RMIText'|trans }}
                             </h6>
                             <p>
-                                {{ allocation.indicationCode }} {{ allocation.indication }}
+                                {{ allocation.indicationCode }}
+                                {{ allocation.indication }}
                             </p>
                             <h6 class="card-subtitle text-muted">
                                 {{ 'allocations.field.secondaryRMIText'|trans }}
                             </h6>
                             <p class="text-muted">
                                 {% if allocation.secondaryIndication %}
-                                    {{ allocation.secondaryIndicationCode }} {{ allocation.secondaryIndication }}
+                                    {{ allocation.secondaryIndicationCode }}
+                                    {{ allocation.secondaryIndication }}
                                 {% else %}
                                     {{
                                         'allocations.field.noSecondaryRMI'|trans

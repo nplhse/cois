@@ -11,12 +11,12 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 
-class ImportOwnerFilter implements FilterInterface
+class UserFilter implements FilterInterface
 {
     use FilterTrait;
     use HiddenFieldTrait;
 
-    public const Param = 'import-owner';
+    public const Param = 'user';
 
     private Security $security;
 
@@ -27,14 +27,14 @@ class ImportOwnerFilter implements FilterInterface
 
     public function getValue(Request $request): mixed
     {
-        $owner = (int) $request->query->get('owner');
+        $user = (int) $request->query->get('user');
 
-        if (empty($owner)) {
+        if (empty($user)) {
             $value = null;
         }
 
-        if ($owner > 0) {
-            $value = $owner;
+        if ($user > 0) {
+            $value = $user;
         } else {
             $value = null;
         }
@@ -54,19 +54,19 @@ class ImportOwnerFilter implements FilterInterface
 
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder
     {
-        $owner = $this->cacheValue ?? $this->getValue($request);
+        $user = $this->cacheValue ?? $this->getValue($request);
 
         if ($this->security->isGranted('ROLE_ADMIN')) {
-            if (!isset($owner)) {
+            if (!isset($user)) {
                 return $qb;
             }
 
-            return $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'user = :owner')
-                ->setParameter('owner', $owner)
+            return $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'user = :user')
+                ->setParameter('user', $user)
                 ;
         }
 
-        if (!isset($owner)) {
+        if (!isset($user)) {
             return $qb->orWhere($arguments[FilterService::ENTITY_ALIAS].'user = :user')
                 ->setParameter('user', $this->security->getUser())
                 ;

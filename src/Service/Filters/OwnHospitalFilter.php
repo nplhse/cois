@@ -3,7 +3,7 @@
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
-use App\Repository\ImportRepository;
+use App\Repository\HospitalRepository;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
@@ -57,8 +57,8 @@ class OwnHospitalFilter implements FilterInterface
     {
         $ownHospitals = $this->cacheValue ?? $this->getValue($request);
 
-        if (ImportRepository::ENTITY_ALIAS === $arguments[FilterService::ENTITY_ALIAS]) {
-            return $this->processImportQuery($qb, $arguments, $request);
+        if (HospitalRepository::ENTITY_ALIAS !== $arguments[FilterService::ENTITY_ALIAS]) {
+            return $this->processJoinQuery($qb, $arguments, $request);
         }
 
         if (!isset($ownHospitals)) {
@@ -70,7 +70,7 @@ class OwnHospitalFilter implements FilterInterface
         ;
     }
 
-    public function processImportQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder
+    public function processJoinQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder
     {
         $ownHospitals = $this->cacheValue ?? $this->getValue($request);
 

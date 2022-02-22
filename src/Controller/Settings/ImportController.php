@@ -13,12 +13,12 @@ use App\Repository\AllocationRepository;
 use App\Repository\ImportRepository;
 use App\Service\Filters\HospitalFilter;
 use App\Service\Filters\ImportFilter;
-use App\Service\Filters\ImportOwnerFilter;
 use App\Service\Filters\OrderFilter;
 use App\Service\Filters\OwnHospitalFilter;
 use App\Service\Filters\OwnImportFilter;
 use App\Service\Filters\PageFilter;
 use App\Service\Filters\SearchFilter;
+use App\Service\Filters\UserFilter;
 use App\Service\FilterService;
 use App\Service\PaginationFactory;
 use App\Service\UploadService;
@@ -50,7 +50,7 @@ class ImportController extends AbstractController
     public function index(Request $request, ImportRepository $importRepository): Response
     {
         $this->filterService->setRequest($request);
-        $this->filterService->configureFilters([ImportFilter::Param, OwnImportFilter::Param, ImportOwnerFilter::Param, HospitalFilter::Param, OwnHospitalFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
+        $this->filterService->configureFilters([ImportFilter::Param, OwnImportFilter::Param, UserFilter::Param, HospitalFilter::Param, OwnHospitalFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
 
         $paginator = $importRepository->getImportPaginator($this->filterService);
 
