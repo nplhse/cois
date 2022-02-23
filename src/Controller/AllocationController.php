@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Allocation;
+use App\Factory\PaginationFactory;
 use App\Repository\AllocationRepository;
 use App\Repository\ImportRepository;
 use App\Service\Filters\AllocationFilterSet;
@@ -34,7 +35,6 @@ use App\Service\Filters\StateFilter;
 use App\Service\Filters\SupplyAreaFilter;
 use App\Service\Filters\UrgencyFilter;
 use App\Service\FilterService;
-use App\Service\PaginationFactory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
