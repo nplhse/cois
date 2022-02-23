@@ -86,9 +86,7 @@ class OwnHospitalFilter implements FilterInterface
         }
 
         if (!isset($ownHospitals)) {
-            return $qb->leftJoin($arguments[FilterService::ENTITY_ALIAS].'hospital', 'hospital')
-                ->orWhere('hospital.owner = :owner')
-                ->setParameter('owner', $this->security->getUser());
+            return $qb;
         }
 
         return $qb->leftJoin($arguments[FilterService::ENTITY_ALIAS].'hospital', 'hospital')
