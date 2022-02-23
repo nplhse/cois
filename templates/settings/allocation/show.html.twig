@@ -38,10 +38,6 @@
             {{ include('settings/_settings_subnav.html.twig') }}
         </div>
         <div class="col">
-            <div class="float-end">
-                {{ include('settings/allocation/_delete_form.html.twig') }}
-            </div>
-
             <h1>
                 {{ 'View Allocation'|trans }}
             </h1>
@@ -330,33 +326,28 @@
                         <td>
                             <p>
                                 {{ 'Urgency'|trans({}, 'forms') }}: {{
-                                    allocation.sK
-                                }}
-                            </p>
-                            <p>
-                                {{ 'RMI'|trans({}, 'forms') }}: {{
-                                    allocation.rMI
+                                    allocation.urgency
                                 }}
                             </p>
                             <p>
                                 {{ 'PZC'|trans({}, 'forms') }}: {{
-                                    allocation.pZC
+                                    allocation.indicationCode
                                 }}
                             </p>
                             <p>
                                 {{ 'PZC with text'|trans({}, 'forms') }}: {{
-                                    allocation.pZCText
+                                    allocation.indication
                                 }}
                             </p>
                             <p>
                                 {{ 'Secondary PZC'|trans({}, 'forms') }}: {{
-                                    allocation.secondaryPZC
+                                    allocation.secondaryIndicationCode
                                 }}
                             </p>
                             <p>
                                 {{
                                     'Secondary PZC with text'|trans({}, 'forms')
-                                }}: {{ allocation.secondaryPZCText }}
+                                }}: {{ allocation.secondaryIndication }}
                             </p>
                         </td>
                     </tr>
@@ -374,17 +365,6 @@
             </table>
 
             <div class="btn-group" role="group">
-                <a class="btn btn-primary"
-                    href="{{
-                    path(
-                        'app_settings_allocation_edit',
-                        {
-                            id: allocation.id
-                        }
-                    )
-                    }}">
-                    {{ 'Edit Allocation'|trans({}, 'forms') }}
-                </a>
                 <a class="btn btn-outline-secondary"
                     href="{{ path('app_settings_allocation_index') }}">
                     {{ 'Back to list'|trans({}, 'forms') }}

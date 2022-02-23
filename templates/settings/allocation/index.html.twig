@@ -67,160 +67,243 @@
                     class="collapse"
                     aria-labelledby="heading-example">
                     <div class="card-body">
-                        <h5 class="card-title">
-                            Search
-                        </h5>
-                        <form>
-                            <div class="input-group mb-3">
-                                {% if filters.search %}
-                                    <input type="text"
-                                        name="search"
-                                        class="form-control"
-                                        placeholder="{{ filters.search }}"
-                                        aria-label="Search" />
-                                {% else %}
-                                    <input type="text"
-                                        name="search"
-                                        class="form-control"
-                                        placeholder="Search..."
-                                        aria-label="Search" />
-                                {% endif %}
-                                <button type="submit"
-                                    class="btn btn-outline-secondary">
-                                    <i class="bi bi-search"></i>
-                                </button>
+                        <div class="row">
+                            <div class="col">
+                                {{ form(searchForm) }}
+
+                                <hr />
+
+                                {{ form_start(sortForm) }}
+
+                                {{ form_row(sortForm.sortBy) }}
+                                {{ form_row(sortForm.orderBy) }}
+
+                                {{ form_end(sortForm) }}
+
+                                {{ form_start(allocationForm) }}
+
+                                {{ form_row(allocationForm.ownHospitals) }}
                             </div>
-                        </form>
+                            <div class="col">
+                                <h5>
+                                    {{ 'Filter by Location'|trans }}
+                                </h5>
 
-                        <h5 class="card-title">
-                            {{ 'Filter by SupplyArea'|trans }}
-                        </h5>
-                        <p>
-                            {% for supplyArea in supplyAreas %}
-                                {% if supplyArea.name == filters.supplyArea %}
-                                    <span class="badge bg-warning">
-                                        <i class="bi bi-tag"></i>
-                                        <a class="link-light"
-                                            href="{{
-                                            path(
-                                                'app_settings_allocation_index',
-                                                app.request.query.all|merge({
-                                                    supplyArea: '',
-                                                    offset: '0'
-                                                })
-                                            )
-                                            }}">
-                                            {{ supplyArea.name }}
-                                        </a>
-                                    </span>
-                                {% else %}
-                                    <span class="badge bg-primary">
-                                        <i class="bi bi-tag"></i>
-                                        <a class="link-light"
-                                            href="{{
-                                            path(
-                                                'app_settings_allocation_index',
-                                                app.request.query.all|merge({
-                                                    supplyArea: supplyArea.name,
-                                                    offset: '0'
-                                                })
-                                            )
-                                            }}">
-                                            {{ supplyArea.name }}
-                                        </a>
-                                    </span>
-                                {% endif %}
-                            {% else %}
-                                {{ 'No SupplyAreas found'|trans }}
-                            {% endfor %}
-                        </p>
+                                {{
+                                    form_row(
+                                        allocationForm.state,
+                                        {
+                                            label: false
+                                        }
+                                    )
+                                }}
 
-                        <h5 class="card-title">
-                            {{ 'Filter by DispatchArea'|trans }}
-                        </h5>
-                        <p>
-                            {% for dispatchArea in dispatchAreas %}
-                                {% if
-                                    dispatchArea.name == filters.dispatchArea %}
-                                    <span class="badge bg-warning">
-                                        <i class="bi bi-tag"></i>
-                                        <a class="link-light"
-                                            href="{{
-                                            path(
-                                                'app_settings_allocation_index',
-                                                app.request.query.all|merge({
-                                                    dispatchArea: '',
-                                                    offset: '0'
-                                                })
-                                            )
-                                            }}">
-                                            {{ dispatchArea.name }}
-                                        </a>
-                                    </span>
-                                {% else %}
-                                    <span class="badge bg-primary">
-                                        <i class="bi bi-tag"></i>
-                                        <a class="link-light"
-                                            href="{{
-                                            path(
-                                                'app_settings_allocation_index',
-                                                app.request.query.all|merge({
-                                                    dispatchArea: dispatchArea.name,
-                                                    offset: '0'
-                                                })
-                                            )
-                                            }}">
-                                            {{ dispatchArea.name }}
-                                        </a>
-                                    </span>
-                                {% endif %}
-                            {% else %}
-                                {{ 'No DispatchAreas found'|trans }}
-                            {% endfor %}
-                        </p>
+                                {{
+                                    form_row(
+                                        allocationForm.dispatchArea,
+                                        {
+                                            label: false
+                                        }
+                                    )
+                                }}
 
-                        <h5 class="card-title">
-                            {{ 'Filter by Hospital'|trans }}
-                        </h5>
-                        <p class="mb-2">
-                            {% for hospital in hospitals %}
-                                {% if hospital.id == filters.hospital %}
-                                    <span class="badge bg-warning">
-                                        <i class="bi bi-tag"></i>
-                                        <a class="link-light"
-                                            href="{{
-                                            path(
-                                                'app_settings_allocation_index',
-                                                app.request.query.all|merge({
-                                                    hospital: '',
-                                                    offset: '0'
-                                                })
+                                {{
+                                    form_row(
+                                        allocationForm.supplyArea,
+                                        {
+                                            label: false
+                                        }
+                                    )
+                                }}
+
+                                <h5>
+                                    {{ 'Filter by Dates'|trans }}
+                                </h5>
+
+                                <div class="input-group mb-3">
+                                    {{
+                                        form_widget(
+                                            allocationForm.startDate,
+                                            {
+                                                label: false
+                                            }
+                                        )
+                                    }}
+
+                                    {{
+                                        form_widget(
+                                            allocationForm.endDate,
+                                            {
+                                                label: false
+                                            }
+                                        )
+                                    }}
+                                </div>
+                                <h5>
+                                    {{ 'Filter by Properties'|trans }}
+                                </h5>
+
+                                {{
+                                    form_row(
+                                        allocationForm.indication,
+                                        {
+                                            label: false
+                                        }
+                                    )
+                                }}
+
+                                {{
+                                    form_row(
+                                        allocationForm.speciality,
+                                        {
+                                            label: false
+                                        }
+                                    )
+                                }}
+
+                                {{
+                                    form_row(
+                                        allocationForm.specialityDetail,
+                                        {
+                                            label: false
+                                        }
+                                    )
+                                }}
+
+                                {{
+                                    form_row(
+                                        allocationForm.urgency,
+                                        {
+                                            label: false
+                                        }
+                                    )
+                                }}
+
+                                {{
+                                    form_row(
+                                        allocationForm.infection,
+                                        {
+                                            label: false
+                                        }
+                                    )
+                                }}
+
+                                <div class="row mb-3">
+                                    <div class="col-6">
+                                        {{
+                                            form_widget(
+                                                allocationForm.requiresResus
                                             )
-                                            }}">
-                                            {{ hospital.name }}
-                                        </a>
-                                    </span>
-                                {% else %}
-                                    <span class="badge bg-primary">
-                                        <i class="bi bi-tag"></i>
-                                        <a class="link-light"
-                                            href="{{
-                                            path(
-                                                'app_settings_allocation_index',
-                                                app.request.query.all|merge({
-                                                    hospital: hospital.id,
-                                                    offset: '0'
-                                                })
+                                        }}
+                                    </div>
+                                    <div class="col-6">
+                                        {{
+                                            form_widget(
+                                                allocationForm.requiresCathlab
                                             )
-                                            }}">
-                                            {{ hospital.name }}
-                                        </a>
-                                    </span>
-                                {% endif %}
-                            {% else %}
-                                {{ 'No Hospitals found'|trans }}
-                            {% endfor %}
-                        </p>
+                                        }}
+                                    </div>
+                                    <div class="col-6">
+                                        {{ form_widget(allocationForm.isCPR) }}
+                                    </div>
+                                    <div class="col-6">
+                                        {{
+                                            form_widget(
+                                                allocationForm.isVentilated
+                                            )
+                                        }}
+                                    </div>
+                                    <div class="col-6">
+                                        {{
+                                            form_widget(allocationForm.isShock)
+                                        }}
+                                    </div>
+                                    <div class="col-6">
+                                        {{
+                                            form_widget(
+                                                allocationForm.isWithPhysician
+                                            )
+                                        }}
+                                    </div>
+                                    <div class="col-6">
+                                        {{
+                                            form_widget(
+                                                allocationForm.isPregnant
+                                            )
+                                        }}
+                                    </div>
+                                    <div class="col-6">
+                                        {{
+                                            form_widget(
+                                                allocationForm.isWorkAccident
+                                            )
+                                        }}
+                                    </div>
+                                </div>
+
+                                <h5>
+                                    {{ 'Filter by Transport'|trans }}
+                                </h5>
+
+                                {{
+                                    form_row(
+                                        allocationForm.assignment,
+                                        {
+                                            label: false
+                                        }
+                                    )
+                                }}
+
+                                {{
+                                    form_row(
+                                        allocationForm.occasion,
+                                        {
+                                            label: false
+                                        }
+                                    )
+                                }}
+
+                                {{
+                                    form_row(
+                                        allocationForm.modeOfTransport,
+                                        {
+                                            label: false
+                                        }
+                                    )
+                                }}
+
+                                <h5>
+                                    {{ 'Admin filters'|trans }}
+                                </h5>
+                                {{
+                                    form_row(
+                                        allocationForm.owner,
+                                        {
+                                            label: false
+                                        }
+                                    )
+                                }}
+                                {{
+                                    form_row(
+                                        allocationForm.hospital,
+                                        {
+                                            label: false
+                                        }
+                                    )
+                                }}
+
+                                <div class="row">
+                                    <div class="col">
+                                        {{ form_row(allocationForm.submit) }}
+                                    </div>
+                                    <div class="col">
+                                        <div class="float-end">
+                                            {{ form_row(allocationForm.reset) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -291,13 +374,13 @@
                                 <a class="btn btn-outline-primary"
                                     href="{{
                                     path(
-                                        'app_settings_allocation_edit',
+                                        'app_settings_allocation_show',
                                         {
                                             id: allocation.id
                                         }
                                     )
                                     }}">
-                                    {{ 'Edit'|trans({}, 'forms') }}
+                                    {{ 'Show'|trans({}, 'forms') }}
                                 </a>
                             </td>
                         </tr>
