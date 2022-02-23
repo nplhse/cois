@@ -59,7 +59,6 @@
         "symfony/string": "6.0.*",
         "symfony/translation": "6.0.*",
         "symfony/twig-bundle": "^6.0",
-        "symfony/ux-chartjs": "^2.0",
         "symfony/ux-dropzone": "^2.0",
         "symfony/ux-live-component": "^2.0",
         "symfony/validator": "6.0.*",
