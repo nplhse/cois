@@ -256,9 +256,9 @@
 
                     <hr />
 
-                    {{ form_row(allocationForm.ownHospitals) }}
-
                     {{ form_start(allocationForm) }}
+
+                    {{ form_row(allocationForm.ownHospitals) }}
 
                     <h5>
                         {{ 'Filter by Location'|trans }}
@@ -422,11 +422,10 @@
                         )
                     }}
 
+                    {% if is_granted('ROLE_ADMIN') %}
                     <h5>
                         {{ 'Admin filters'|trans }}
                     </h5>
-
-                    {% if is_granted('ROLE_ADMIN') %}
                         {{
                             form_row(
                                 allocationForm.owner,
