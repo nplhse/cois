@@ -12,6 +12,7 @@ use App\Factory\PaginationFactory;
 use App\Form\ImportType;
 use App\Repository\AllocationRepository;
 use App\Repository\ImportRepository;
+use App\Repository\SkippedRowRepository;
 use App\Service\Filters\HospitalFilter;
 use App\Service\Filters\ImportFilter;
 use App\Service\Filters\OrderFilter;
@@ -151,6 +152,19 @@ class ImportController extends AbstractController
     {
         return $this->render('settings/import/show.html.twig', [
             'import' => $import,
+        ]);
+    }
+
+    #[Route(path: '/{id}/skipped', name: 'app_settings_import_show_skipped', methods: ['GET'])]
+    public function showSkipped(Import $import, SkippedRowRepository $skippedRowRepository): Response
+    {
+        $this->denyAccessUnlessGranted('delete', $import);
+
+        $results = $skippedRowRepository->findBy(['import' => $import]);
+
+        return $this->render('settings/import/show_skipped.html.twig', [
+            'import' => $import,
+            'results' => $results,
         ]);
     }
 

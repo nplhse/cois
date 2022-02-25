@@ -55,6 +55,7 @@
         "symfony/proxy-manager-bridge": "6.0.*",
         "symfony/security-bundle": "6.0.*",
         "symfony/serializer": "6.0.*",
+        "symfony/stopwatch": "^5.2",
         "symfony/string": "6.0.*",
         "symfony/translation": "6.0.*",
         "symfony/twig-bundle": "^6.0",
@@ -89,7 +90,6 @@
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^6.0",
         "symfony/requirements-checker": "^2.0",
-        "symfony/stopwatch": "^5.2",
         "symfony/var-dumper": "^5.2",
         "symfony/web-profiler-bundle": "^6.0",
         "symplify/easy-coding-standard": "^10.0",
@@ -139,7 +139,7 @@
             "@composer install",
             "bin/console doctrine:database:drop --force",
             "bin/console doctrine:database:create",
-            "@setup"
+            "@setup-dev"
         ],
         "run-checks": [
             "@run-checks-js",
@@ -162,8 +162,12 @@
             "@setup-frontend"
         ],
         "setup-db": [
-            "bin/console doctrine:migrations:migrate --no-interaction",
-            "bin/console doctrine:fixtures:load --no-interaction"
+            "bin/console doctrine:migrations:migrate --no-interaction"
+        ],
+        "setup-dev": [
+            "@setup-db",
+            "bin/console doctrine:fixtures:load --no-interaction",
+            "@setup-frontend"
         ],
         "setup-frontend": [
             "yarn install",

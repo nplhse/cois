@@ -26,18 +26,17 @@ class AllocationBaseWriter implements \App\Application\Contract\ImportWriterInte
             $entity = new Allocation();
         }
 
-        $entity->setImport($import);
-        $entity->setState($import->getHospital()->getState());
-        $entity->setDispatchArea($import->getHospital()->getDispatchArea());
-        $entity->setSupplyArea($import->getHospital()->getSupplyArea());
-        $entity->setHospital($import->getHospital());
+        return $this->setDataFromImport($entity, $row, $import);
+    }
 
-        $entity->setGender($row['Geschlecht']);
-        $entity->setAge((int) $row['Alter']);
+    private function setDataFromImport(Allocation $allocation, array $row, ImportInterface $import): Allocation
+    {
+        $allocation->setImport($import);
+        $allocation->setState($import->getHospital()->getState());
+        $allocation->setDispatchArea($import->getHospital()->getDispatchArea());
+        $allocation->setSupplyArea($import->getHospital()->getSupplyArea());
+        $allocation->setHospital($import->getHospital());
 
-        $entity->setCreatedAt(new \DateTime($row['Erstellungsdatum']));
-        $entity->setArrivalAt(new \DateTime($row['Datum (Eintreffzeit)'].' '.$row['Uhrzeit (Eintreffzeit)']));
-
-        return $entity;
+        return $allocation;
     }
 }

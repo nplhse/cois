@@ -148,11 +148,21 @@
                                 {% endfor %}
                             </td>
                             <td>
-                                {% if user.hospital %}
+                                {% for hospital in user.hospitals %}
                                     <span class="badge bg-info">
-                                        {{ user.hospital }}
+                                        <a class="text-white"
+                                            href="{{
+                                            path(
+                                                'app_settings_hospital_show',
+                                                {
+                                                    id: hospital.id
+                                                }
+                                            )
+                                            }}">
+                                            {{ hospital }}
+                                        </a>
                                     </span>
-                                {% endif %}
+                                {% endfor %}
                             </td>
                             <td>
                                 {% if user.hasCredentialsExpired %}

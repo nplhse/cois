@@ -62,6 +62,7 @@ services:
         class: 'App\Service\ImportService'
         arguments:
             - '@doctrine.orm.entity_manager'
-            - '@event_dispatcher'
+            - '@debug.stopwatch'
+            - '@validator'
             - !tagged_iterator { tag: "app.import_reader", default_index_method: "getFileType" }
             - !tagged_iterator { tag: "app.import_writer", default_priority_method: "getPriority" }

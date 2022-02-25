@@ -6,17 +6,19 @@ use App\Application\Contract\ImportReaderInterface;
 use App\Application\Contract\ImportWriterInterface;
 use App\Application\Exception\ImportReaderNotFoundException;
 use App\Application\Exception\ImportWriteException;
-use App\Domain\Event\Import\ImportSkippedRowEvent;
+use App\Application\Traits\EventDispatcherTrait;
+use App\Domain\Event\Import\ImportFailedEvent;
 use App\Entity\Import;
+use App\Entity\SkippedRow;
 use App\Service\Import\Reader\CsvImportReader;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
+use Symfony\Component\Validator\ConstraintViolationList;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ImportService
 {
-    private array $result = [];
-
-    private float $runtime;
+    use EventDispatcherTrait;
 
     /**
      * @var iterable|array<ImportReaderInterface>
@@ -30,23 +32,21 @@ class ImportService
 
     private EntityManagerInterface $em;
 
-    private EventDispatcherInterface $eventDispatcher;
+    private Stopwatch $stopwatch;
 
-    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher, iterable $importReader, iterable $importWriter)
+    private ValidatorInterface $validator;
+
+    public function __construct(EntityManagerInterface $entityManager, Stopwatch $stopwatch, ValidatorInterface $validator, iterable $importReader, iterable $importWriter)
     {
         // Important: Disable SQL logging!
         $this->em = $entityManager;
         $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
 
-        $this->eventDispatcher = $eventDispatcher;
+        $this->stopwatch = $stopwatch;
+        $this->validator = $validator;
 
         $this->importReader = $importReader instanceof \Traversable ? iterator_to_array($importReader) : $importReader;
         $this->importWriter = $importWriter instanceof \Traversable ? iterator_to_array($importWriter) : $importWriter;
-    }
-
-    public function getResult(): array
-    {
-        return $this->result;
     }
 
     public function import(string $path, string $fileType): iterable
@@ -80,7 +80,7 @@ class ImportService
             }
         }
 
-        $this->startTime();
+        $this->stopwatch->start('import-data');
 
         try {
             foreach ($result as $row) {
@@ -91,13 +91,39 @@ class ImportService
                     foreach ($activeWriters as $writer) {
                         $entity = $writer->processData($entity, $row, $import);
                     }
+
+                    $errors = $this->validator->validate($entity);
+
+                    if (count($errors) > 0) {
+                        foreach ($errors as $error) {
+                            $errorMessage = $error->getMessage().'\n';
+                        }
+
+                        $skippedRow = new SkippedRow();
+                        $skippedRow->setImport($import);
+                        $skippedRow->setErrors($errorMessage);
+                        $skippedRow->setData($row);
+
+                        $this->em->persist($skippedRow);
+
+                        $import->addSkippedRow();
+                        continue;
+                    }
                 } catch (\InvalidArgumentException $e) {
-                    $this->eventDispatcher->dispatch(new ImportSkippedRowEvent($import, $e), ImportSkippedRowEvent::NAME);
+                    $skippedRow = new SkippedRow();
+                    $skippedRow->setImport($import);
+                    $skippedRow->setErrors($e->getMessage());
+                    $skippedRow->setData($row);
+
+                    $this->em->persist($skippedRow);
+
+                    $import->addSkippedRow();
                     continue;
                 }
 
                 $this->em->persist($entity);
 
+                // Persist flush only 500 entities at once via $entityStore
                 $entityStore[] = $entity;
 
                 if (0 === $iteration % 500) {
@@ -115,25 +141,30 @@ class ImportService
             }
 
             $import->setStatus(Import::STATUS_SUCCESS);
-        } catch (ImportWriteException $e) {
-            $import->setLastError($e->getMessage());
+        } catch (ImportWriteException) {
+            $import->setStatus(Import::STATUS_FAILURE);
+        }
+
+        if ($this->getPercentage($iteration, $import->getSkippedRows()) > 0.25 && $this->getPercentage($iteration, $import->getSkippedRows()) < 5) {
+            $import->setStatus(Import::STATUS_INCOMPLETE);
+        } elseif ($this->getPercentage($iteration, $import->getSkippedRows()) > 5) {
+            $this->dispatchEvent(new ImportFailedEvent($import, new ImportWriteException('Too many skipped rows in import.')));
             $import->setStatus(Import::STATUS_FAILURE);
         }
 
         $import->bumpRunCount();
         $import->setRowCount($iteration);
-        $import->setRuntime((int) $this->stopTime());
+        $import->setRuntime((int) $this->stopwatch->stop('import-data')->getDuration());
 
         $this->em->flush();
     }
 
-    private function startTime(): void
+    private function getPercentage(int $total, int $number): float
     {
-        $this->runtime = microtime(true);
-    }
+        if ($total > 0) {
+            return round(($number * 100) / $total, 2);
+        }
 
-    private function stopTime(): float
-    {
-        return microtime(true) - $this->runtime;
+        return 0;
     }
 }

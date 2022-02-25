@@ -95,14 +95,26 @@
                             {{ 'Hospital'|trans({}, 'forms') }}
                         </th>
                         <td>
-                            {% if user.hospital %}
-                                <span class="badge bg-info">
-                                    {{ user.hospital }}
-                                </span>
-                            {% else %}
+                            {% if user.hospitals.empty %}
                                 <p>
                                     {{ 'No hospital linked to User'|trans }}
                                 </p>
+                            {% else %}
+                                {% for hospital in user.hospitals %}
+                                    <span class="badge bg-info">
+                                        <a class="text-white"
+                                            href="{{
+                                            path(
+                                                'app_settings_hospital_show',
+                                                {
+                                                    id: hospital.id
+                                                }
+                                            )
+                                            }}">
+                                            {{ hospital }}
+                                        </a>
+                                    </span>
+                                {% endfor %}
                             {% endif %}
                         </td>
                     </tr>

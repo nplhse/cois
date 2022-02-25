@@ -98,6 +98,11 @@ class Import extends DomainImport
      */
     private ?string $lastError = null;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    protected ?int $skippedRows = 0;
+
     private ?File $file = null;
 
     public function getFile(): ?File
