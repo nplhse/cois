@@ -39,10 +39,6 @@ class PaginationFactory
     {
         $last = (int) ceil($count / $perPage);
 
-        if (0 === $count % 10) {
-            return --$last;
-        }
-
         if (0 === $last) {
             return 1;
         }
