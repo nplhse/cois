@@ -24,9 +24,6 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AllocationRepository extends ServiceEntityRepository
 {
-    // ToDo: Remove after refactoring
-    public const PAGINATOR_PER_PAGE = 10;
-
     public const PER_PAGE = 10;
 
     public const DEFAULT_ORDER = 'desc';

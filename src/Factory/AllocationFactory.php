@@ -59,6 +59,7 @@ final class AllocationFactory extends ModelFactory
             'isInfectious' => self::faker()->randomElement(['Keine', 'MRSA', '3MRGN', '4MRGN/CRE', 'Sonstiges']),
             'isPregnant' => self::faker()->boolean(),
             'isWithPhysician' => self::faker()->boolean(),
+            'isWorkAccident' => self::faker()->boolean(),
             'modeOfTransport' => self::faker()->randomElement(['Boden', 'Luft']),
             'urgency' => random_int(1, 3),
             'assignment' => self::faker()->randomElement(['RD', 'Arzt/Arzt', 'Patient', 'ZLST']),
@@ -71,11 +72,6 @@ final class AllocationFactory extends ModelFactory
             'indicationCode' => self::faker()->randomNumber(3),
             'secondaryIndication' => self::faker()->sentence(2),
             'secondaryIndicationCode' => self::faker()->randomNumber(3),
-            'PZC' => self::faker()->randomNumber(6),
-            'PZCText' => self::faker()->sentence(3),
-            'SecondaryPZC' => self::faker()->randomNumber(6),
-            'SecondaryPZCText' => self::faker()->sentence(3),
-            'isWorkAccident' => self::faker()->boolean(),
         ];
     }
 

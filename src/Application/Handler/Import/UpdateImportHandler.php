@@ -45,15 +45,6 @@ class UpdateImportHandler implements HandlerInterface
             $import->setRuntime(0);
         }
 
-        // LEGACY stuff
-        $import->setContents($command->getType());
-        $import->setPath($command->getFilePath());
-        $import->setMimeType($command->getFileMimeType());
-        $import->setSize($command->getFileSize());
-        $import->setExtension($command->getFileExtension());
-        $import->setCaption($command->getName());
-        $import->setIsFixture(false);
-
         $this->importRepository->save();
 
         $this->dispatchEvent(new ImportUpdatedEvent($import));

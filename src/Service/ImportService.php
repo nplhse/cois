@@ -55,6 +55,7 @@ class ImportService
             return $this->importReader[$fileType]->importData($path);
         }
 
+        // If there is no fileType, just assume it can be parsed as CSV
         if (empty($fileType)) {
             return $this->importReader[CsvImportReader::File_Type]->importData($path);
         }
@@ -75,11 +76,6 @@ class ImportService
 
         foreach ($this->importWriter as $writer) {
             if ($writer::getDataType() === $import->getType()) {
-                $activeWriters[] = $writer;
-            }
-
-            // Legacy
-            if ($writer::getDataType() === $import->getContents()) {
                 $activeWriters[] = $writer;
             }
         }

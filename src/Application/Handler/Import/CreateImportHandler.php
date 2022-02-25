@@ -35,19 +35,6 @@ class CreateImportHandler implements HandlerInterface
         $import->setFileExtension($command->getFileExtension());
         $import->setFileSize($command->getFileSize());
 
-        // LEGACY stuff
-        $import->setContents($command->getType());
-        $import->setPath($command->getFilePath());
-        $import->setMimeType($command->getFileMimeType());
-        $import->setSize($command->getFileSize());
-        $import->setCaption($command->getName());
-        $import->setExtension($command->getFileExtension());
-        $import->setIsFixture(false);
-        $import->setLastError(null);
-        $import->setTimesRun(0);
-        $import->setRowCount(0);
-        $import->setRuntime(0);
-
         $this->importRepository->add($import);
 
         $this->dispatchEvent(new ImportCreatedEvent($import));

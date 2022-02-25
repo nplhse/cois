@@ -80,42 +80,6 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <h2 class="card-title">
-                            {{ 'Allocations'|trans }}
-                        </h2>
-                        <p class="card-text">
-                            {{
-                                'Browse trough all the data, filter it and explore what IVENA got for us.'|trans
-                            }}
-                        </p>
-                        <a href="{{ path('app_allocation_index') }}"
-                            class="btn btn-primary">
-                            <i class="bi bi-search"></i>
-                            {{ 'View all Allocations'|trans }}
-                        </a>
-                    </div>
-                </div>
-
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h2 class="card-title">
-                            {{ 'Statistics'|trans }}
-                        </h2>
-                        <p class="card-text">
-                            {{
-                                'Explore the statistics that we already generated from our IVENA data.'|trans
-                            }}
-                        </p>
-                        <a href="{{ path('app_statistics_index') }}"
-                            class="btn btn-primary">
-                            <i class="bi bi-search"></i>
-                            {{ 'View Statistics'|trans }}
-                        </a>
-                    </div>
-                </div>
-
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h2 class="card-title">
                             {{ 'Hospitals'|trans }}
                         </h2>
                         <p class="card-text">
@@ -123,37 +87,7 @@
                                 'Explore the participating hospitals, add or edit your own hospital.'|trans
                             }}
                         </p>
-                        {% if
-                            (app.user.hospitals|length) < 2
-                                and (app.user.hospitals|length) > 1 %}
-                            <a href="{{
-                                path(
-                                    'app_hospital_edit',
-                                    {
-                                        id: app.user.hospital.id
-                                    }
-                                )
-                                }}"
-                                class="btn btn-primary">
-                                <i class="bi bi-pencil"></i>
-                                {{ 'Edit your Hospital'|trans }}
-                            </a>
-                        {% elseif (app.user.hospitals|length) > 1 %}
-                            <a href="{{
-                                path(
-                                    'app_hospital_index',
-                                    {
-                                        ownHospitals: 1
-                                    }
-                                )
-                                }}"
-                                class="btn btn-primary">
-                                <i class="bi bi-pencil"></i>
-                                {{ 'View your Hospitals'|trans }}
-                            </a>
-                        {% elseif
-                            app.user.hospital == null
-                                and app.user.isParticipant %}
+                        {% if is_granted('create_hospital', app.user) %}
                             <a href="{{ path('app_hospital_new') }}"
                                 class="btn btn-success"
                                 disabled>
@@ -166,6 +100,74 @@
                             <i class="bi bi-search"></i>
                             {{ 'View all hospitals'|trans }}
                         </a>
+                        {% if (app.user.hospitals|length) == 1 %}
+                            <a href="{{
+                                path(
+                                    'app_hospital_edit',
+                                    {
+                                        id: app.user.hospitals.first.id
+                                    }
+                                )
+                                }}"
+                                class="btn btn-secondary">
+                                <i class="bi bi-pencil"></i>
+                                {{ 'Edit your Hospital'|trans }}
+                            </a>
+                        {% elseif (app.user.hospitals|length) > 1 %}
+                            <a href="{{
+                                path(
+                                    'app_hospital_index',
+                                    {
+                                        ownHospitals: 1
+                                    }
+                                )
+                                }}"
+                                class="btn btn-secondary">
+                                <i class="bi bi-pencil"></i>
+                                {{ 'View your Hospitals'|trans }}
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    {{ 'Allocations'|trans }}
+                                </h2>
+                                <p class="card-text">
+                                    {{
+                                        'Browse trough all the data, filter it and explore what IVENA got for us.'|trans
+                                    }}
+                                </p>
+                                <a href="{{ path('app_allocation_index') }}"
+                                    class="btn btn-primary">
+                                    <i class="bi bi-search"></i>
+                                    {{ 'View all Allocations'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    {{ 'Statistics'|trans }}
+                                </h2>
+                                <p class="card-text">
+                                    {{
+                                        'Explore the statistics that we already generated from our IVENA data.'|trans
+                                    }}
+                                </p>
+                                <a href="{{ path('app_statistics_index') }}"
+                                    class="btn btn-primary">
+                                    <i class="bi bi-search"></i>
+                                    {{ 'View Statistics'|trans }}
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -177,9 +179,9 @@
                         <p class="card-text">
                             {{ 'Add some of your data to the database.'|trans }}
                         </p>
-                        {% if app.user.hospital %}
+                        {% if app.user.hospitals is not empty %}
                             <a href="{{ path('app_import_new') }}"
-                                class="btn btn-primary">
+                                class="btn btn-success">
                                 <i class="bi bi-plus-circle"></i>
                                 {{ 'Import data'|trans }}
                             </a>
@@ -241,7 +243,7 @@
                             {% endif %}
                         </small>
                     </h3>
-                    {% if app.user.hospital %}
+                    {% if app.user.hospitals is not empty %}
                         <p>
                             {{
                                 'dashboard.allocations.by_your_hospital'|trans({
@@ -263,7 +265,7 @@
                         <i class="bi bi-file-earmark-arrow-up-fill"></i>
                         {{ imports|number_format(0, '', '.') }}
                         <small class="text-muted">
-                            {% if app.user.canImport %}
+                            {% if is_granted('create_import', app.user) %}
                                 <a class="text-muted"
                                     href="{{ path('app_import_index') }}">
                                     {{ 'dashboard.imports'|trans }}

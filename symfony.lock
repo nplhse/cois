@@ -5,9 +5,6 @@
     "amphp/byte-stream": {
         "version": "v1.8.1"
     },
-    "api-platform/api-pack": {
-        "version": "v1.3.0"
-    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
@@ -147,14 +144,8 @@
     "laminas/laminas-code": {
         "version": "4.0.0"
     },
-    "laminas/laminas-eventmanager": {
-        "version": "3.3.0"
-    },
-    "laminas/laminas-zendframework-bridge": {
-        "version": "1.1.1"
-    },
     "league/csv": {
-        "version": "9.6.2"
+        "version": "9.8.0"
     },
     "league/flysystem": {
         "version": "2.0.0"
@@ -190,18 +181,6 @@
     "neitanod/forceutf8": {
         "version": "v2.0.4"
     },
-    "nelmio/cors-bundle": {
-        "version": "1.5",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.5",
-            "ref": "6bea22e6c564fba3a1391615cada1437d0bde39c"
-        },
-        "files": [
-            "config/packages/nelmio_cors.yaml"
-        ]
-    },
     "nesbot/carbon": {
         "version": "2.53.1"
     },
@@ -219,9 +198,6 @@
     },
     "phar-io/version": {
         "version": "3.1.0"
-    },
-    "php": {
-        "version": "7.4"
     },
     "php-cs-fixer/diff": {
         "version": "v1.3.1"
@@ -360,9 +336,6 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
-    "symfony/amqp-messenger": {
-        "version": "v5.2.3"
-    },
     "symfony/asset": {
         "version": "v5.2.1"
     },
@@ -404,9 +377,6 @@
         "files": [
             "config/packages/dev/debug.yaml"
         ]
-    },
-    "symfony/debug-pack": {
-        "version": "v1.0.9"
     },
     "symfony/dependency-injection": {
         "version": "v5.2.1"
@@ -563,9 +533,6 @@
     "symfony/options-resolver": {
         "version": "v5.2.1"
     },
-    "symfony/orm-pack": {
-        "version": "v2.1.0"
-    },
     "symfony/password-hasher": {
         "version": "v5.3.0"
     },
@@ -611,9 +578,6 @@
     "symfony/process": {
         "version": "v5.2.1"
     },
-    "symfony/profiler-pack": {
-        "version": "v1.0.5"
-    },
     "symfony/property-access": {
         "version": "v5.2.1"
     },
@@ -622,9 +586,6 @@
     },
     "symfony/proxy-manager-bridge": {
         "version": "v5.2.1"
-    },
-    "symfony/redis-messenger": {
-        "version": "v5.2.3"
     },
     "symfony/requirements-checker": {
         "version": "2.0",
@@ -667,17 +628,11 @@
     "symfony/security-csrf": {
         "version": "v5.2.1"
     },
-    "symfony/security-guard": {
-        "version": "v5.2.1"
-    },
     "symfony/security-http": {
         "version": "v5.2.1"
     },
     "symfony/serializer": {
         "version": "v5.2.1"
-    },
-    "symfony/serializer-pack": {
-        "version": "v1.0.4"
     },
     "symfony/service-contracts": {
         "version": "v2.2.0"
@@ -687,9 +642,6 @@
     },
     "symfony/string": {
         "version": "v5.2.1"
-    },
-    "symfony/test-pack": {
-        "version": "v1.0.7"
     },
     "symfony/translation": {
         "version": "3.3",
@@ -723,12 +675,6 @@
             "config/packages/twig.yaml",
             "templates/base.html.twig"
         ]
-    },
-    "symfony/twig-pack": {
-        "version": "v1.0.1"
-    },
-    "symfony/ux-chartjs": {
-        "version": "v1.2.0"
     },
     "symfony/ux-dropzone": {
         "version": "v1.2.0"

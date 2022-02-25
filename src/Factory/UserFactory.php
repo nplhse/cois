@@ -45,8 +45,6 @@ final class UserFactory extends ModelFactory
             'email' => self::faker()->safeEmail(),
             'roles' => ['ROLE_USER'],
             'plainPassword' => 'password',
-            'isVerified' => self::faker()->boolean(),
-            'isParticipant' => self::faker()->boolean(),
             'createdAt' => self::faker()->dateTimeThisDecade(),
         ];
     }
@@ -54,27 +52,10 @@ final class UserFactory extends ModelFactory
     protected function initialize(): self
     {
         return $this
-            ->withFullAccess()
             ->afterInstantiate(function (User $user) {
                 $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPlainPassword()));
             })
         ;
-    }
-
-    public function withFullAccess(): self
-    {
-        return $this->addState([
-            'isVerified' => true,
-            'isParticipant' => true,
-        ]);
-    }
-
-    public function withNoAccess(): self
-    {
-        return $this->addState([
-            'isVerified' => false,
-            'isParticipant' => false,
-        ]);
     }
 
     public function asAdmin(): self

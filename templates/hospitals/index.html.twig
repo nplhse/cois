@@ -50,7 +50,11 @@
                     {% for hospital in row %}
                         <div class="col-md-6">
                             <div class="card mb-3">
-                                <div class="card-header"></div>
+                                {% if hospital.owner == app.user %}
+                                    <div class="card-header bg-primary"></div>
+                                {% else %}
+                                    <div class="card-header"></div>
+                                {% endif %}
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         <a href="{{

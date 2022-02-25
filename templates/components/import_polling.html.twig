@@ -10,15 +10,6 @@
             {{ 'Import details'|trans }}
         </div>
         <div class="card-body">
-            {% if import.lastError %}
-                <h5 class="card-title">
-                    {{ 'Errors'|trans }}
-                </h5>
-                <p>
-                    {{ import.lastError }}
-                </p>
-            {% endif %}
-
             <h5 class="card-title">
                 {{ 'Statistics'|trans }}
             </h5>

@@ -31,18 +31,15 @@
 
     <div class="row">
         <div class="col">
-            <div class="float-end"
-                data-controller="toggle"
-                data-toggle-target-value="alloc-sidebar"
-                data-toggle-url-value="{{ path('app_api_toggle') }}">
+            <div class="float-end">
                 <a class="btn btn-primary"
                     data-bs-toggle="collapse"
                     data-action="toggle#switch"
                     href="#collapseFilters"
                     role="button"
-                    aria-expanded="{{ app.user.ToggleAllocSidebar }}"
+                    aria-expanded="false"
                     aria-controls="collapseFilters">
-                    <i class="bi bi-sliders"></i> {{ 'Toggle Options'|trans }}
+                    <i class="bi bi-sliders"></i> {{ 'Show Filters'|trans }}
                 </a>
             </div>
 
@@ -239,13 +236,7 @@
             </div>
         </div>
 
-        {% if app.user.ToggleAllocSidebar %}
-            {% set class = 'col-3 collapse show' %}
-        {% else %}
-            {% set class = 'col-3 collapse' %}
-        {% endif %}
-
-        <div class="{{ class }}" id="collapseFilters">
+        <div class="col-3 collapse" id="collapseFilters">
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="bi bi-funnel"></i>
@@ -423,9 +414,9 @@
                     }}
 
                     {% if is_granted('ROLE_ADMIN') %}
-                    <h5>
-                        {{ 'Admin filters'|trans }}
-                    </h5>
+                        <h5>
+                            {{ 'Admin filters'|trans }}
+                        </h5>
                         {{
                             form_row(
                                 allocationForm.owner,

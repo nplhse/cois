@@ -79,30 +79,6 @@ class User extends DomainUser implements UserInterface, PasswordAuthenticatedUse
      */
     protected bool $hasCredentialsExpired = false;
 
-    // TODO: REMOVE AFTER REFACTORING
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private bool $isCredentialsExpired = false;
-
-    // TODO: REMOVE AFTER REFACTORING
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private ?bool $allowsEmail = null;
-
-    // TODO: REMOVE AFTER REFACTORING
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private ?bool $allowsEmailReminder = null;
-
-    // TODO: REMOVE AFTER REFACTORING
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private ?bool $toggleAllocSidebar = null;
-
     /**
      * @param array<string> $roles
      *
@@ -111,44 +87,6 @@ class User extends DomainUser implements UserInterface, PasswordAuthenticatedUse
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
-        return $this;
-    }
-
-    // TODO: REMOVE AFTER REFACTORING
-    public function getHospital(): ?Hospital
-    {
-        if ($this->hospitals->first()) {
-            return $this->hospitals->first();
-        }
-
-        return null;
-    }
-
-    // TODO: REMOVE AFTER REFACTORING
-    public function getIsVerified(): ?bool
-    {
-        return $this->isVerified;
-    }
-
-    // TODO: REMOVE AFTER REFACTORING
-    public function setIsVerified(bool $isVerified): self
-    {
-        $this->isVerified = $isVerified;
-
-        return $this;
-    }
-
-    // TODO: REMOVE AFTER REFACTORING
-    public function getIsCredentialsExpired(): ?bool
-    {
-        return $this->isCredentialsExpired;
-    }
-
-    // TODO: REMOVE AFTER REFACTORING
-    public function setIsCredentialsExpired(bool $isCredentialsExpired): self
-    {
-        $this->isCredentialsExpired = $isCredentialsExpired;
 
         return $this;
     }
@@ -162,83 +100,5 @@ class User extends DomainUser implements UserInterface, PasswordAuthenticatedUse
     public function getSalt(): ?string
     {
         return null;
-    }
-
-    // TODO: REMOVE AFTER REFACTORING
-    public function getIsParticipant(): ?bool
-    {
-        return $this->isParticipant;
-    }
-
-    // TODO: REMOVE AFTER REFACTORING
-    public function setIsParticipant(?bool $isParticipant): self
-    {
-        $this->isParticipant = $isParticipant;
-
-        return $this;
-    }
-
-    // TODO: REMOVE AFTER REFACTORING
-    public function canImport(): bool
-    {
-        if ($this->hospitals->isEmpty()) {
-            return false;
-        }
-
-        return true;
-    }
-
-    // TODO: REMOVE AFTER REFACTORING
-    public function getAllowsEmail(): ?bool
-    {
-        return $this->allowsEmail;
-    }
-
-    // TODO: REMOVE AFTER REFACTORING
-    public function setAllowsEmail(?bool $allowsEmail): self
-    {
-        $this->allowsEmail = $allowsEmail;
-
-        return $this;
-    }
-
-    // TODO: REMOVE AFTER REFACTORING
-    public function getAllowsEmailReminder(): ?bool
-    {
-        return $this->allowsEmailReminder;
-    }
-
-    // TODO: REMOVE AFTER REFACTORING
-    public function setAllowsEmailReminder(?bool $allowsEmailReminder): self
-    {
-        $this->allowsEmailReminder = $allowsEmailReminder;
-
-        return $this;
-    }
-
-    // TODO: REMOVE AFTER REFACTORING
-    public function getToggleAllocSidebar(): ?bool
-    {
-        return $this->toggleAllocSidebar;
-    }
-
-    // TODO: REMOVE AFTER REFACTORING
-    public function setToggleAllocSidebar(?bool $toggleAllocSidebar): self
-    {
-        $this->toggleAllocSidebar = $toggleAllocSidebar;
-
-        return $this;
-    }
-
-    // TODO: REMOVE AFTER REFACTORING
-    public function switchAllocSidebar(): self
-    {
-        if ($this->toggleAllocSidebar) {
-            $this->toggleAllocSidebar = false;
-        } else {
-            $this->toggleAllocSidebar = true;
-        }
-
-        return $this;
     }
 }

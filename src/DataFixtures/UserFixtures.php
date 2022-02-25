@@ -13,15 +13,15 @@ class UserFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
-        UserFactory::new(['username' => 'admin'])->asAdmin()->create();
+        UserFactory::new(['username' => 'admin'])->asAdmin()->create()->verify()->enableParticipation();
 
-        UserFactory::new(['username' => 'foo'])->create();
+        UserFactory::new(['username' => 'foo'])->create()->verify()->enableParticipation();
 
-        UserFactory::new(['username' => 'randomUser'])->withNoAccess()->create();
+        UserFactory::new(['username' => 'unknownUser'])->create();
 
-        UserFactory::new(['username' => 'expiredUser'])->withNoAccess()->create()->expireCredentials();
+        UserFactory::new(['username' => 'expiredUser'])->create()->verify()->enableParticipation()->expireCredentials();
 
-        UserFactory::createMany(10);
+        UserFactory::createMany(random_int(3, 10));
 
         $manager->flush();
     }
