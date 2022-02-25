@@ -25,7 +25,7 @@
 
 3. You are ready to go, just open the site with your favorite browser!
 
-If you have the need to populate the database with some Fixtures for development you could either directly execute ```bin/console doctrine:fixtures:load``` or use ```composer setup-dev``` instead.
+If you have the need to populate the database with some Fixtures for development you could either directly execute `bin/console doctrine:fixtures:load` or use `composer setup-dev` instead.
 
 # Contributing
 
