@@ -130,47 +130,6 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col">
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    {{ 'Allocations'|trans }}
-                                </h2>
-                                <p class="card-text">
-                                    {{
-                                        'Browse trough all the data, filter it and explore what IVENA got for us.'|trans
-                                    }}
-                                </p>
-                                <a href="{{ path('app_allocation_index') }}"
-                                    class="btn btn-primary">
-                                    <i class="bi bi-search"></i>
-                                    {{ 'View all Allocations'|trans }}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h2 class="card-title">
-                                    {{ 'Statistics'|trans }}
-                                </h2>
-                                <p class="card-text">
-                                    {{
-                                        'Explore the statistics that we already generated from our IVENA data.'|trans
-                                    }}
-                                </p>
-                                <a href="{{ path('app_statistics_index') }}"
-                                    class="btn btn-primary">
-                                    <i class="bi bi-search"></i>
-                                    {{ 'View Statistics'|trans }}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="card mb-3">
                     <div class="card-body">
                         <h2 class="card-title">
@@ -191,6 +150,47 @@
                             <i class="bi bi-search"></i>
                             {{ 'View your imports'|trans }}
                         </a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    {{ 'Allocations'|trans }}
+                                </h2>
+                                <p class="card-text">
+                                    {{
+                                    'Browse trough all the data, filter it and explore what IVENA got for us.'|trans
+                                    }}
+                                </p>
+                                <a href="{{ path('app_allocation_index') }}"
+                                   class="btn btn-primary">
+                                    <i class="bi bi-search"></i>
+                                    {{ 'View all Allocations'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    {{ 'Statistics'|trans }}
+                                </h2>
+                                <p class="card-text">
+                                    {{
+                                    'Explore the statistics that we already generated from our IVENA data.'|trans
+                                    }}
+                                </p>
+                                <a href="{{ path('app_statistics_index') }}"
+                                   class="btn btn-primary">
+                                    <i class="bi bi-search"></i>
+                                    {{ 'View Statistics'|trans }}
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             {% endif %}
