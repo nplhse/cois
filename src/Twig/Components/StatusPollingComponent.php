@@ -26,4 +26,11 @@ class StatusPollingComponent
 
         return $import->getStatus();
     }
+
+    public function getId(): string
+    {
+        $import = $this->importRepository->findOneBy(['id' => $this->importId]);
+
+        return $import->getStatus();
+    }
 }

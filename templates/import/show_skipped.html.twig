@@ -1,0 +1,212 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'View Import'|trans }}: {{ import.name }} (#{{ import.id }}) - {{
+        parent()
+    }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_import_index'),
+                            label: 'Import'|trans
+                        },
+                        {
+                            label: 'View Import'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+
+    {% if is_granted('delete', import) %}
+        <div class="float-end">
+            {{ include('import/_delete.html.twig') }}
+        </div>
+    {% endif %}
+
+    <h1>
+        {{ 'View Import'|trans }}
+        <small class="text-muted">(<i>#{{ import.id }}</i>)</small>
+    </h1>
+
+    <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+            <a class="nav-link"
+                href="{{
+                path(
+                    'app_import_show',
+                    {
+                        id: import.id
+                    }
+                )
+                }}">
+                {{ 'View Import'|trans }}
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">
+                {{ 'Skipped rows'|trans }} <span class="badge bg-primary">{{ results|length }}</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="row">
+        <div class="col">
+            <div class="card mb-3">
+                <div class="card-header">
+                    {{ 'Basic information'|trans }}
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <h5 class="card-title">
+                                {{ 'Caption'|trans }}
+                            </h5>
+                            <p>
+                                {{ import.name }}
+                            </p>
+                        </div>
+                        <div class="col-4">
+                            <h5 class="card-title">
+                                {{ 'Content'|trans }}
+                            </h5>
+                            <p>
+                                {{ import.type }}
+                            </p>
+                        </div>
+                        <div class="col-4">
+                            <h5 class="card-title">
+                                {{ 'Status'|trans }}
+                            </h5>
+                            <p>
+                                {{
+                                    component(
+                                        'status_polling',
+                                        {
+                                            importId: import.id
+                                        }
+                                    )
+                                }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% for result in results %}
+                <div class="card mb-3">
+                    <div class="card-header">
+                        #{{ loop.index }}
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <h5 class="card-title">
+                                {{ 'Messages'|trans }}
+                            </h5>
+                            <p class="text-danger">
+                                {{ result.errors|nl2br }}
+                            </p>
+
+                            <div class="text-right">
+                                <a class="btn btn-primary"
+                                    data-bs-toggle="collapse"
+                                    href="#collapse{{ loop.index }}"
+                                    role="button"
+                                    aria-expanded="false"
+                                    aria-controls="collapse{{ loop.index }}">
+                                    View data
+                                </a>
+                            </div>
+
+                            <div class="collapse" id="collapse{{ loop.index }}">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr class="d-flex">
+                                            <th class="col-2" scope="col">
+                                                Caption
+                                            </th>
+                                            <th class="col-4" scope="col">
+                                                Value
+                                            </th>
+                                            <th class="col-2" scope="col">
+                                                Caption
+                                            </th>
+                                            <th class="col-4" scope="col">
+                                                Value
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        {% for row in result.data|batch(
+                                            2,
+                                            null
+                                        ) %}
+                                            <tr class="d-flex">
+                                                {% for key, value in row %}
+                                                    <td class="col-2">
+                                                        {{ key }}
+                                                    </td>
+                                                    <td class="col-4">
+                                                        {% if
+                                                            value is null
+                                                                or value is empty %}
+                                                            <span class="badge bg-secondary">
+                                                                null
+                                                            </span>
+                                                        {% else %}
+                                                            <pre>
+                                                                {{ value }}
+                                                            </pre>
+                                                        {% endif %}
+                                                    </td>
+                                                {% endfor %}
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end mb-2">
+        <p>
+            <a class="btn btn-outline-secondary"
+                href="{{ path('app_import_index') }}"
+                role="button">
+                {{ 'Back to imports'|trans({}, 'forms') }}
+            </a>
+            {% if is_granted('delete', import) %}
+                <a class="btn btn-primary"
+                    href="{{
+                    path(
+                        'app_import_edit',
+                        {
+                            id: import.id
+                        }
+                    )
+                    }}">
+                    <i class="bi bi-pencil-fill"></i>
+                    {{ 'Edit Import'|trans }}
+                </a>
+            {% endif %}
+        </p>
+    </div>
+{% endblock %}

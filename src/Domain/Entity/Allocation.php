@@ -380,6 +380,10 @@ class Allocation implements AllocationInterface, IdentifierInterface
             return $this;
         }
 
+        if (empty($gender)) {
+            throw new \InvalidArgumentException(sprintf('Empty Gender is not a valid option'));
+        }
+
         throw new \InvalidArgumentException(sprintf('Gender %s is not a valid option', $gender));
     }
 

@@ -23,6 +23,8 @@ class Import implements ImportInterface, IdentifierInterface, TimestampableInter
 
     public const STATUS_FAILURE = 'failure';
 
+    public const STATUS_INCOMPLETE = 'incomplete';
+
     public const STATUS_SUCCESS = 'success';
 
     public const MIME_CSV = 'text/csv';
@@ -37,7 +39,7 @@ class Import implements ImportInterface, IdentifierInterface, TimestampableInter
 
     protected string $type;
 
-    private array $statuses = [self::STATUS_PENDING, self::STATUS_FAILURE, self::STATUS_SUCCESS];
+    private array $statuses = [self::STATUS_PENDING, self::STATUS_FAILURE, self::STATUS_INCOMPLETE, self::STATUS_SUCCESS];
 
     protected string $status;
 
@@ -62,6 +64,8 @@ class Import implements ImportInterface, IdentifierInterface, TimestampableInter
     protected int $runCount = 0;
 
     protected int $runtime = 0;
+
+    protected ?int $skippedRows = null;
 
     public function __construct()
     {
@@ -243,5 +247,15 @@ class Import implements ImportInterface, IdentifierInterface, TimestampableInter
     public function getRuntime(): int
     {
         return $this->runtime;
+    }
+
+    public function getSkippedRows(): ?int
+    {
+        return $this->skippedRows;
+    }
+
+    public function addSkippedRow(): void
+    {
+        ++$this->skippedRows;
     }
 }

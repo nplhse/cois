@@ -63,5 +63,6 @@ services:
         arguments:
             - '@doctrine.orm.entity_manager'
             - '@debug.stopwatch'
+            - '@validator'
             - !tagged_iterator { tag: "app.import_reader", default_index_method: "getFileType" }
             - !tagged_iterator { tag: "app.import_writer", default_priority_method: "getPriority" }

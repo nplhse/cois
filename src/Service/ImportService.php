@@ -7,11 +7,14 @@ use App\Application\Contract\ImportWriterInterface;
 use App\Application\Exception\ImportReaderNotFoundException;
 use App\Application\Exception\ImportWriteException;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Event\Import\ImportSkippedRowEvent;
+use App\Domain\Event\Import\ImportFailedEvent;
 use App\Entity\Import;
+use App\Entity\SkippedRow;
 use App\Service\Import\Reader\CsvImportReader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
+use Symfony\Component\Validator\ConstraintViolationList;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ImportService
 {
@@ -31,13 +34,16 @@ class ImportService
 
     private Stopwatch $stopwatch;
 
-    public function __construct(EntityManagerInterface $entityManager, Stopwatch $stopwatch, iterable $importReader, iterable $importWriter)
+    private ValidatorInterface $validator;
+
+    public function __construct(EntityManagerInterface $entityManager, Stopwatch $stopwatch, ValidatorInterface $validator, iterable $importReader, iterable $importWriter)
     {
         // Important: Disable SQL logging!
         $this->em = $entityManager;
         $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
 
         $this->stopwatch = $stopwatch;
+        $this->validator = $validator;
 
         $this->importReader = $importReader instanceof \Traversable ? iterator_to_array($importReader) : $importReader;
         $this->importWriter = $importWriter instanceof \Traversable ? iterator_to_array($importWriter) : $importWriter;
@@ -85,8 +91,33 @@ class ImportService
                     foreach ($activeWriters as $writer) {
                         $entity = $writer->processData($entity, $row, $import);
                     }
+
+                    $errors = $this->validator->validate($entity);
+
+                    if (count($errors) > 0) {
+                        foreach ($errors as $error) {
+                            $errorMessage = $error->getMessage().'\n';
+                        }
+
+                        $skippedRow = new SkippedRow();
+                        $skippedRow->setImport($import);
+                        $skippedRow->setErrors($errorMessage);
+                        $skippedRow->setData($row);
+
+                        $this->em->persist($skippedRow);
+
+                        $import->addSkippedRow();
+                        continue;
+                    }
                 } catch (\InvalidArgumentException $e) {
-                    $this->eventDispatcher->dispatch(new ImportSkippedRowEvent($import, $e), ImportSkippedRowEvent::NAME);
+                    $skippedRow = new SkippedRow();
+                    $skippedRow->setImport($import);
+                    $skippedRow->setErrors($e->getMessage());
+                    $skippedRow->setData($row);
+
+                    $this->em->persist($skippedRow);
+
+                    $import->addSkippedRow();
                     continue;
                 }
 
@@ -114,10 +145,26 @@ class ImportService
             $import->setStatus(Import::STATUS_FAILURE);
         }
 
+        if ($this->getPercentage($iteration, $import->getSkippedRows()) > 0.25 && $this->getPercentage($iteration, $import->getSkippedRows()) < 5) {
+            $import->setStatus(Import::STATUS_INCOMPLETE);
+        } elseif ($this->getPercentage($iteration, $import->getSkippedRows()) > 5) {
+            $this->dispatchEvent(new ImportFailedEvent($import, new ImportWriteException('Too many skipped rows in import.')));
+            $import->setStatus(Import::STATUS_FAILURE);
+        }
+
         $import->bumpRunCount();
         $import->setRowCount($iteration);
-        $import->setRuntime($this->stopwatch->stop('import-data')->getDuration());
+        $import->setRuntime((int) $this->stopwatch->stop('import-data')->getDuration());
 
         $this->em->flush();
+    }
+
+    private function getPercentage(int $total, int $number): float
+    {
+        if ($total > 0) {
+            return round(($number * 100) / $total, 2);
+        }
+
+        return 0;
     }
 }
