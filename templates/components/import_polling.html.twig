@@ -27,7 +27,7 @@
                         {{ 'Runtime'|trans }}
                     </h6>
                     <p>
-                        {{ import.runtime|number_format(5, '.', ',') }}s
+                        {{ import.runtime / 1000 }}s
                     </p>
                 </div>
             </div>

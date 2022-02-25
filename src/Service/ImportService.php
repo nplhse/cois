@@ -6,17 +6,16 @@ use App\Application\Contract\ImportReaderInterface;
 use App\Application\Contract\ImportWriterInterface;
 use App\Application\Exception\ImportReaderNotFoundException;
 use App\Application\Exception\ImportWriteException;
+use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Event\Import\ImportSkippedRowEvent;
 use App\Entity\Import;
 use App\Service\Import\Reader\CsvImportReader;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class ImportService
 {
-    private array $result = [];
-
-    private float $runtime;
+    use EventDispatcherTrait;
 
     /**
      * @var iterable|array<ImportReaderInterface>
@@ -30,23 +29,18 @@ class ImportService
 
     private EntityManagerInterface $em;
 
-    private EventDispatcherInterface $eventDispatcher;
+    private Stopwatch $stopwatch;
 
-    public function __construct(EntityManagerInterface $entityManager, EventDispatcherInterface $eventDispatcher, iterable $importReader, iterable $importWriter)
+    public function __construct(EntityManagerInterface $entityManager, Stopwatch $stopwatch, iterable $importReader, iterable $importWriter)
     {
         // Important: Disable SQL logging!
         $this->em = $entityManager;
         $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
 
-        $this->eventDispatcher = $eventDispatcher;
+        $this->stopwatch = $stopwatch;
 
         $this->importReader = $importReader instanceof \Traversable ? iterator_to_array($importReader) : $importReader;
         $this->importWriter = $importWriter instanceof \Traversable ? iterator_to_array($importWriter) : $importWriter;
-    }
-
-    public function getResult(): array
-    {
-        return $this->result;
     }
 
     public function import(string $path, string $fileType): iterable
@@ -80,7 +74,7 @@ class ImportService
             }
         }
 
-        $this->startTime();
+        $this->stopwatch->start('import-data');
 
         try {
             foreach ($result as $row) {
@@ -98,6 +92,7 @@ class ImportService
 
                 $this->em->persist($entity);
 
+                // Persist flush only 500 entities at once via $entityStore
                 $entityStore[] = $entity;
 
                 if (0 === $iteration % 500) {
@@ -115,25 +110,14 @@ class ImportService
             }
 
             $import->setStatus(Import::STATUS_SUCCESS);
-        } catch (ImportWriteException $e) {
-            $import->setLastError($e->getMessage());
+        } catch (ImportWriteException) {
             $import->setStatus(Import::STATUS_FAILURE);
         }
 
         $import->bumpRunCount();
         $import->setRowCount($iteration);
-        $import->setRuntime((int) $this->stopTime());
+        $import->setRuntime($this->stopwatch->stop('import-data')->getDuration());
 
         $this->em->flush();
-    }
-
-    private function startTime(): void
-    {
-        $this->runtime = microtime(true);
-    }
-
-    private function stopTime(): float
-    {
-        return microtime(true) - $this->runtime;
     }
 }
