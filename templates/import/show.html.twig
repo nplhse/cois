@@ -62,7 +62,7 @@
                                 {{ 'Content'|trans }}
                             </h5>
                             <p>
-                                {{ import.contents }}
+                                {{ import.type }}
                             </p>
                         </div>
                         <div class="col-6">
@@ -138,9 +138,9 @@
                             : '' }}
                         <br />
                         <i class="bi bi-clock-history"></i>
-                        <strong>{{ 'Last run at'|trans }}</strong>
-                        {{ import.lastRun
-                            ? import.lastRun|date('d.m.Y H:i')
+                        <strong>{{ 'Updated at'|trans }}</strong>
+                        {{ import.updatedAt
+                            ? import.updatedAt|date('d.m.Y H:i')
                             : '' }}
                     </p>
                 </div>
@@ -156,19 +156,28 @@
                             {{ 'Download'|trans }}
                         </h5>
 
-                        <p>
-                            <a href="{{
-                                path(
-                                    'app_files_allocations',
-                                    {
-                                        id: import.id
-                                    }
-                                )
-                                }}">
+                        {% if import.filePath == 'dummy/path' %}
+                            <p class="text-muted">
                                 <i class="bi bi-file-earmark-arrow-down"></i>
                                 {{ 'Get original import file'|trans }}
-                            </a>
-                        </p>
+                            </p>
+                        {% else %}
+                            <p class="text-wrap text-black">
+                                <a href="{{
+                                    path(
+                                        'app_files_allocations',
+                                        {
+                                            id: import.id
+                                        }
+                                    )
+                                    }}">
+                                    <i class="bi bi-file-earmark-arrow-down">
+
+                                    </i>
+                                    {{ 'Get original import file'|trans }}
+                                </a>
+                            </p>
+                        {% endif %}
                     </div>
                 </div>
             {% endif %}

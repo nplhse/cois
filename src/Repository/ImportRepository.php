@@ -22,9 +22,6 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ImportRepository extends ServiceEntityRepository implements ImportRepositoryInterface
 {
-    // TODO: Remove after refactoring
-    public const PAGINATOR_PER_PAGE = 20;
-
     public const PER_PAGE = 20;
 
     public const DEFAULT_ORDER = 'desc';

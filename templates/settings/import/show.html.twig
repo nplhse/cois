@@ -3,7 +3,7 @@
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
 
 {% block title %}
-    {{ 'View Import'|trans }}: {{ import.caption }} - {{ parent() }}
+    {{ 'View Import'|trans }}: {{ import.name }} - {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -117,30 +117,6 @@
                             }}
                         </td>
                     </tr>
-                    {% if import.isFixture %}
-                        <tr class="table-warning">
-                            <th>
-                                {{ 'Is Fixture?'|trans }}
-                            </th>
-                            <td>
-                                <strong>
-                                    {{ 'Import is a Fixture'|trans }}
-                                </strong>
-                            </td>
-                        </tr>
-                    {% endif %}
-                    <tr>
-                        <th>
-                            {{ 'Errors'|trans }}
-                        </th>
-                        <td>
-                            {% if import.lastError %}
-                                {{ import.lastError }}
-                            {% else %}
-                                {{ 'No Errors'|trans }}
-                            {% endif %}
-                        </td>
-                    </tr>
                     <tr>
                         <th>
                             {{ 'Statistics'|trans }}
@@ -153,13 +129,8 @@
                                     }}
                                 </li>
                                 <li>
-                                    {{ 'Duration'|trans }}: {{
-                                        import.runtime|number_format(
-                                            5,
-                                            '.',
-                                            ','
-                                        )
-                                    }}s
+                                    {{ 'Duration'|trans }}: {{ import.runtime
+                                        / 1000 }}s
                                 </li>
                                 <li>
                                     {{ 'Times run'|trans }}: {{
@@ -174,14 +145,19 @@
                             {{ 'Import File'|trans }}
                         </th>
                         <td>
-                            {% if import.isFixture %}
-                                <p>
-                                    /{{ import.path }}{{ import.extension }} ({{
-                                        import.mimeType
-                                    }})
+                            {% if import.filePath == 'dummy/path' %}
+                                <p class="text-muted">
+                                    <i class="bi bi-file-earmark-arrow-down">
+
+                                    </i> /{{ import.filePath }}.{{
+                                        import.fileExtension
+                                    }} ({{ import.fileMimeType }})
                                 </p>
                             {% else %}
                                 <p class="text-wrap">
+                                    <i class="bi bi-file-earmark-arrow-down">
+
+                                    </i>
                                     <a href="{{
                                         path(
                                             'app_files_allocations',
@@ -190,10 +166,12 @@
                                             }
                                         )
                                         }}">
-                                        /{{ import.path }}
+                                        /{{ import.filePath }}
                                     </a>
-                                    (.<strong>{{ import.extension }}</strong> | <em>
-                                        {{ import.mimeType }}
+                                    (.<strong>
+                                        {{ import.fileExtension }}
+                                    </strong> | <em>
+                                        {{ import.fileMimeType }}
                                     </em>)
                                 </p>
                             {% endif %}
@@ -204,17 +182,23 @@
                             {{ 'Tasks'|trans }}
                         </th>
                         <td>
-                            <a class="btn btn-secondary"
-                                href="{{
-                                path(
-                                    'app_settings_import_refresh',
-                                    {
-                                        id: import.id
-                                    }
-                                )
-                                }}">
-                                {{ 'Refresh Import'|trans({}, 'forms') }}
-                            </a>
+                            {% if import.filePath == 'dummy/path' %}
+                                <a class="btn btn-secondary disabled">
+                                    {{ 'Refresh Import'|trans({}, 'forms') }}
+                                </a>
+                            {% else %}
+                                <a class="btn btn-secondary"
+                                    href="{{
+                                    path(
+                                        'app_settings_import_refresh',
+                                        {
+                                            id: import.id
+                                        }
+                                    )
+                                    }}">
+                                    {{ 'Refresh Import'|trans({}, 'forms') }}
+                                </a>
+                            {% endif %}
                         </td>
                     </tr>
                 </tbody>

@@ -8,12 +8,12 @@ use App\Domain\Contracts\SupplyAreaInterface;
 use App\Domain\Contracts\UserInterface;
 use App\Domain\Entity\Hospital as DomainHospital;
 use App\Repository\HospitalRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=HospitalRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Hospital extends DomainHospital
 {
@@ -92,34 +92,5 @@ class Hospital extends DomainHospital
     /**
      * @ORM\OneToMany(targetEntity=Import::class, mappedBy="hospital")
      */
-    private Collection $imports;
-
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->imports = new ArrayCollection();
-    }
-
-    public function getImports(): Collection
-    {
-        return $this->imports;
-    }
-
-    public function addImport(Import $import): self
-    {
-        if (!$this->imports->contains($import)) {
-            $this->imports[] = $import;
-            $import->setHospital($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImport(Import $import): self
-    {
-        $this->imports->removeElement($import);
-
-        return $this;
-    }
+    protected Collection $imports;
 }

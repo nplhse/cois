@@ -14,6 +14,8 @@ use App\Domain\Contracts\TimestampableInterface;
 use App\Domain\Contracts\UserInterface;
 use App\Domain\Entity\Traits\IdentifierTrait;
 use App\Domain\Entity\Traits\TimestampableTrait;
+use App\Entity\Import;
+use Doctrine\Common\Collections\Collection;
 
 class Hospital implements HospitalInterface, IdentifierInterface, TimestampableInterface, \Stringable
 {
@@ -58,11 +60,14 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
 
     protected string $location;
 
+    protected Collection $imports;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('NOW');
         $this->associatedUsers = new ArrayCollection();
         $this->supplyArea = null;
+        $this->imports = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -217,5 +222,27 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
     public function getLocation(): string
     {
         return $this->location;
+    }
+
+    public function getImports(): Collection
+    {
+        return $this->imports;
+    }
+
+    public function addImport(Import $import): self
+    {
+        if (!$this->imports->contains($import)) {
+            $this->imports[] = $import;
+            $import->setHospital($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImport(Import $import): self
+    {
+        $this->imports->removeElement($import);
+
+        return $this;
     }
 }
