@@ -25,6 +25,8 @@
 
 3. You are ready to go, just open the site with your favorite browser!
 
+If you have the need to populate the database with some Fixtures for development you could either directly execute ```bin/console doctrine:fixtures:load``` or use ```composer setup-dev``` instead.
+
 # Contributing
 
 Any contribution to this project is appreciated, whether it is related to fixing bugs, suggestions or improvements. Feel free to take your part in the development of COIS!
