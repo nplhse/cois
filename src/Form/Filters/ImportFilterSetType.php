@@ -2,10 +2,8 @@
 
 namespace App\Form\Filters;
 
-use App\Entity\Hospital;
-use App\Service\Filters\HospitalFilter;
+use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -32,15 +30,25 @@ class ImportFilterSetType extends AbstractType
         $builder
             ->add('ownImports', OwnImportFilterType::class)
             ->add('ownHospitals', OwnHospitalFilterType::class)
-            ->add('hospital', HospitalFilterType::class);
+            ->add('status', ImportStatusType::class);
 
         if ($this->security->isGranted('ROLE_ADMIN')) {
             $builder
                 ->add('user', UserFilterType::class)
                 ->add('hospital', HospitalFilterType::class);
         } else {
-            $builder
-                ->add('hospital', HospitalFilterType::class);
+            /** @var User $user */
+            $user = $this->security->getUser();
+
+            if ($user->getHospitals()->count() > 1) {
+                $builder
+                    ->add('hospital', HospitalFilterType::class, [
+                        'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('h')
+                            ->where('h.owner = :user')
+                            ->setParameter('user', $user)
+                            ->orderBy('h.name', 'ASC'),
+                    ]);
+            }
         }
 
         $builder

@@ -3,6 +3,7 @@
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
+use App\Entity\User;
 use App\Repository\HospitalRepository;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\Filters\Traits\HiddenFieldTrait;
@@ -10,6 +11,7 @@ use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 
 class HospitalFilter implements FilterInterface
 {
@@ -20,9 +22,12 @@ class HospitalFilter implements FilterInterface
 
     private HospitalRepository $hospitalRepository;
 
-    public function __construct(HospitalRepository $hospitalRepository)
+    private Security $security;
+
+    public function __construct(HospitalRepository $hospitalRepository, Security $security)
     {
         $this->hospitalRepository = $hospitalRepository;
+        $this->security = $security;
     }
 
     public function getValue(Request $request): mixed
@@ -71,6 +76,23 @@ class HospitalFilter implements FilterInterface
 
         if (!isset($hospital)) {
             return $qb;
+        }
+
+        // If User is not an Admin deny access unless user is Owner of hospital
+        if (!$this->security->isGranted('ROLE_ADMIN')) {
+            /** @var User $user */
+            $user = $this->security->getUser();
+            $denyAccess = true;
+
+            foreach ($user->getHospitals() as $entity) {
+                if ($entity->getId() === $hospital) {
+                    $denyAccess = false;
+                }
+            }
+
+            if ($denyAccess) {
+                return $qb;
+            }
         }
 
         return $qb->orWhere($arguments[FilterService::ENTITY_ALIAS].'hospital = :hospital')

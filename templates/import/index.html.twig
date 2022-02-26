@@ -171,15 +171,23 @@
 
                     {{ form_start(importForm) }}
 
-                    {{ form_row(importForm.ownImports) }}
+                    <div class="mb-3">
+                        {{ form_widget(importForm.ownImports) }}
 
-                    {{ form_row(importForm.ownHospitals) }}
-
-                    {{ form_row(importForm.hospital) }}
+                        {{ form_widget(importForm.ownHospitals) }}
+                    </div>
 
                     {% if is_granted('ROLE_ADMIN') %}
+                        {{ form_row(importForm.hospital) }}
+
                         {{ form_row(importForm.user) }}
+                    {% else %}
+                        {% if app.user.hospitals|length > 1 %}
+                            {{ form_row(importForm.hospital) }}
+                        {% endif %}
                     {% endif %}
+
+                    {{ form_row(importForm.status) }}
 
                     <div class="row">
                         <div class="col">

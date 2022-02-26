@@ -12,6 +12,7 @@ use App\Service\Filters\DateFilter;
 use App\Service\Filters\DispatchAreaFilter;
 use App\Service\Filters\HospitalFilter;
 use App\Service\Filters\HospitalOwnerFilter;
+use App\Service\Filters\ImportFilter;
 use App\Service\Filters\IndicationFilter;
 use App\Service\Filters\InfectionFilter;
 use App\Service\Filters\IsCPRFilter;
@@ -57,7 +58,7 @@ class AllocationController extends AbstractController
     public function index(Request $request, AllocationRepository $allocationRepository): Response
     {
         $this->filterService->setRequest($request);
-        $this->filterService->configureFilters([AllocationFilterSet::Param, HospitalFilter::Param, DateFilter::Param, IndicationFilter::Param, AssignmentFilter::Param, IndicationFilter::Param, InfectionFilter::Param, ModeOfTransportFilter::Param, OccasionFilter::Param, RequiresResusFilter::Param, RequiresCathlabFilter::Param, SpecialityFilter::Param, SpecialityDetailFilter::Param, UrgencyFilter::Param, IsCPRFilter::Param, IsPregnantFilter::Param, IsShockFilter::Param, IsVentilatedFilter::Param, IsWithPhysicianFilter::Param, IsWorkAccidentFilter::Param, StateFilter::Param, DispatchAreaFilter::Param, SupplyAreaFilter::Param, OwnHospitalFilter::Param, HospitalOwnerFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
+        $this->filterService->configureFilters([AllocationFilterSet::Param, HospitalFilter::Param, ImportFilter::Param, DateFilter::Param, IndicationFilter::Param, AssignmentFilter::Param, IndicationFilter::Param, InfectionFilter::Param, ModeOfTransportFilter::Param, OccasionFilter::Param, RequiresResusFilter::Param, RequiresCathlabFilter::Param, SpecialityFilter::Param, SpecialityDetailFilter::Param, UrgencyFilter::Param, IsCPRFilter::Param, IsPregnantFilter::Param, IsShockFilter::Param, IsVentilatedFilter::Param, IsWithPhysicianFilter::Param, IsWorkAccidentFilter::Param, StateFilter::Param, DispatchAreaFilter::Param, SupplyAreaFilter::Param, OwnHospitalFilter::Param, HospitalOwnerFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
 
         $paginator = $allocationRepository->getAllocationPaginator($this->filterService);
 
@@ -70,6 +71,7 @@ class AllocationController extends AbstractController
             'hidden' => [
                 SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
                 OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
+                ImportFilter::Param => $this->filterService->getValue(ImportFilter::Param),
             ],
         ];
 

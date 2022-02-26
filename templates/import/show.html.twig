@@ -61,13 +61,15 @@
                             }
                         )
                         }}">
-                        {{ 'Skipped rows'|trans }} <span class="badge bg-primary">{{
-                                import.skippedRows
-                            }}</span>
+                        {{ 'Skipped rows'|trans }}
+                        <span class="badge bg-primary">
+                            {{ import.skippedRows }}
+                        </span>
                     </a>
                 {% else %}
                     <a class="nav-link disabled" aria-current="page" href="#">
-                        {{ 'Skipped rows'|trans }} <span class="badge bg-secondary">0</span>
+                        {{ 'Skipped rows'|trans }}
+                        <span class="badge bg-secondary">0</span>
                     </a>
                 {% endif %}
             </li>
@@ -223,7 +225,21 @@
                 role="button">
                 {{ 'Back to imports'|trans({}, 'forms') }}
             </a>
-            {% if is_granted('delete', import) %}
+            {% if is_granted('filter', import) %}
+                <a class="btn btn-secondary"
+                    href="{{
+                    path(
+                        'app_allocation_index',
+                        {
+                            import: import.id
+                        }
+                    )
+                    }}">
+                    <i class="bi bi-filter"></i>
+                    {{ 'Show Allocations'|trans }}
+                </a>
+            {% endif %}
+            {% if is_granted('edit', import) %}
                 <a class="btn btn-primary"
                     href="{{
                     path(

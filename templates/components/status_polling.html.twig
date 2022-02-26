@@ -1,5 +1,7 @@
 <div {{ init_live_component(this) }}
-        {% if this.status == 'pending' %}
+        {% set times = 10 %}
+        {% if this.status == 'pending' and times > 0 %}
+            {% set times = times - 1 %}
             data-poll
         {% endif %}
 >
