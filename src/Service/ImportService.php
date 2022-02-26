@@ -8,12 +8,12 @@ use App\Application\Exception\ImportReaderNotFoundException;
 use App\Application\Exception\ImportWriteException;
 use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Event\Import\ImportFailedEvent;
+use App\Entity\Allocation;
 use App\Entity\Import;
 use App\Entity\SkippedRow;
 use App\Service\Import\Reader\CsvImportReader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
-use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ImportService
@@ -141,15 +141,22 @@ class ImportService
             }
 
             $import->setStatus(Import::STATUS_SUCCESS);
-        } catch (ImportWriteException) {
+        } catch (ImportWriteException|\Exception $e) {
             $import->setStatus(Import::STATUS_FAILURE);
+            $this->dispatchEvent(new ImportFailedEvent($import, $e));
         }
 
-        if ($this->getPercentage($iteration, $import->getSkippedRows()) > 0.25 && $this->getPercentage($iteration, $import->getSkippedRows()) < 5) {
-            $import->setStatus(Import::STATUS_INCOMPLETE);
-        } elseif ($this->getPercentage($iteration, $import->getSkippedRows()) > 5) {
-            $this->dispatchEvent(new ImportFailedEvent($import, new ImportWriteException('Too many skipped rows in import.')));
-            $import->setStatus(Import::STATUS_FAILURE);
+        if (Import::STATUS_FAILURE !== $import->getStatus()) {
+            if ($this->getPercentage($iteration, $import->getSkippedRows()) > 0.25 && $this->getPercentage($iteration, $import->getSkippedRows()) < 5) {
+                $import->setStatus(Import::STATUS_INCOMPLETE);
+            } elseif ($this->getPercentage($iteration, $import->getSkippedRows()) > 5) {
+                $this->dispatchEvent(new ImportFailedEvent($import, new ImportWriteException('Too many skipped rows in import.')));
+
+                $import->setStatus(Import::STATUS_FAILURE);
+
+                $allocationRepository = $this->em->getRepository(Allocation::class);
+                $allocationRepository->deleteByImport($import);
+            }
         }
 
         $import->bumpRunCount();

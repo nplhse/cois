@@ -2,6 +2,9 @@
 
 namespace App\Form\Filters;
 
+use App\Entity\User;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -54,6 +57,19 @@ class AllocationFilterSetType extends AbstractType
             $builder
                 ->add('hospital', HospitalFilterType::class)
                 ->add('owner', HospitalOwnerFilterType::class);
+        } else {
+            /** @var User $user */
+            $user = $this->security->getUser();
+
+            if ($user->getHospitals()->count() > 1) {
+                $builder
+                    ->add('hospital', HospitalFilterType::class, [
+                        'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('h')
+                            ->where('h.owner = :user')
+                            ->setParameter('user', $user)
+                            ->orderBy('h.name', 'ASC'),
+                    ]);
+            }
         }
 
         $builder

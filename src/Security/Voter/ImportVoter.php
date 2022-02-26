@@ -14,6 +14,8 @@ class ImportVoter extends Voter
 
     private const EDIT = 'edit';
 
+    private const FILTER = 'filter';
+
     private Security $security;
 
     public function __construct(Security $security)
@@ -24,7 +26,7 @@ class ImportVoter extends Voter
     protected function supports(string $attribute, mixed $subject): bool
     {
         // if the attribute isn't one we support, return false
-        if (!in_array($attribute, [self::EDIT, self::DELETE])) {
+        if (!in_array($attribute, [self::EDIT, self::DELETE, self::FILTER])) {
             return false;
         }
 
@@ -52,6 +54,7 @@ class ImportVoter extends Voter
         return match ($attribute) {
             self::DELETE => $this->canDelete($import, $user),
             self::EDIT => $this->canEdit($import, $user),
+            self::FILTER => $this->canFilter($import, $user),
             default => throw new \LogicException('This code should not be reached!'),
         };
     }
@@ -66,6 +69,15 @@ class ImportVoter extends Voter
     }
 
     private function canEdit(Import $import, User $user): bool
+    {
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            return true;
+        }
+
+        return $import->getHospital()->getOwner() === $import->getUser();
+    }
+
+    private function canFilter(Import $import, User $user): bool
     {
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;

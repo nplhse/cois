@@ -310,7 +310,7 @@ class AllocationRepository extends ServiceEntityRepository
             ->where('a.import = :import')
             ->setParameter(':import', $import->getId());
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()->execute();
     }
 
     public function getPZCs(): array

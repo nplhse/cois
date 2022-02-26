@@ -3,39 +3,35 @@
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
-use App\Entity\User;
+use App\Entity\Import;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
 
-class ImportFilter implements FilterInterface
+class ImportStatusFilter implements FilterInterface
 {
     use FilterTrait;
     use HiddenFieldTrait;
 
-    public const Param = 'import';
-
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
-    }
+    public const Param = 'import-status';
 
     public function getValue(Request $request): mixed
     {
-        $import = (int) $request->query->get('import');
+        $status = $request->query->get('status');
 
-        if (empty($import)) {
+        if (empty($status)) {
             $value = null;
         }
 
-        if ($import > 0) {
-            $value = $import;
+        $availableStatus = [
+            Import::STATUS_SUCCESS, Import::STATUS_FAILURE, Import::STATUS_PENDING, Import::STATUS_INCOMPLETE,
+        ];
+
+        if (in_array($status, $availableStatus, true)) {
+            $value = $status;
         } else {
             $value = null;
         }
@@ -55,19 +51,14 @@ class ImportFilter implements FilterInterface
 
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder
     {
-        $import = $this->cacheValue ?? $this->getValue($request);
+        $status = $this->cacheValue ?? $this->getValue($request);
 
-        if (!isset($import)) {
+        if (!isset($status)) {
             return $qb;
         }
 
-        // If User is not an Admin deny access
-        if (!$this->security->isGranted('ROLE_ADMIN')) {
-            return $qb;
-        }
-
-        return $qb->orWhere($arguments[FilterService::ENTITY_ALIAS].'import = :import')
-            ->setParameter('import', $import)
+        return $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'status = :status')
+            ->setParameter('status', $status)
             ;
     }
 }

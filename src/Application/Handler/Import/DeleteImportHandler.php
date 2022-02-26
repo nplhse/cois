@@ -9,6 +9,7 @@ use App\Domain\Command\Import\DeleteImportCommand;
 use App\Domain\Event\Import\ImportDeletedEvent;
 use App\Domain\Repository\ImportRepositoryInterface;
 use App\Repository\AllocationRepository;
+use App\Repository\SkippedRowRepository;
 
 class DeleteImportHandler implements HandlerInterface
 {
@@ -18,10 +19,13 @@ class DeleteImportHandler implements HandlerInterface
 
     private AllocationRepository $allocationRepository;
 
-    public function __construct(ImportRepositoryInterface $importRepository, AllocationRepository $allocationRepository)
+    private SkippedRowRepository $skippedRowRepository;
+
+    public function __construct(ImportRepositoryInterface $importRepository, AllocationRepository $allocationRepository, SkippedRowRepository $skippedRowRepository)
     {
         $this->importRepository = $importRepository;
         $this->allocationRepository = $allocationRepository;
+        $this->skippedRowRepository = $skippedRowRepository;
     }
 
     public function __invoke(DeleteImportCommand $command): void
@@ -32,6 +36,7 @@ class DeleteImportHandler implements HandlerInterface
             throw new ImportNotFoundException('Could not find import: '.$command->getId());
         }
 
+        $this->skippedRowRepository->deleteByImport($import);
         $this->allocationRepository->deleteByImport($import);
         $this->importRepository->delete($import);
 

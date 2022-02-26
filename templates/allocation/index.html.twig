@@ -251,6 +251,10 @@
 
                     {{ form_row(allocationForm.ownHospitals) }}
 
+                    {% if not is_granted('ROLE_ADMIN') %}
+                        {{ form_row(allocationForm.hospital) }}
+                    {% endif %}
+
                     <h5>
                         {{ 'Filter by Location'|trans }}
                     </h5>

@@ -14,7 +14,8 @@ use App\Form\ImportType;
 use App\Repository\ImportRepository;
 use App\Repository\SkippedRowRepository;
 use App\Service\Filters\HospitalFilter;
-use App\Service\Filters\ImportFilter;
+use App\Service\Filters\ImportFilterSet;
+use App\Service\Filters\ImportStatusFilter;
 use App\Service\Filters\OrderFilter;
 use App\Service\Filters\OwnHospitalFilter;
 use App\Service\Filters\OwnImportFilter;
@@ -53,7 +54,7 @@ class ImportController extends AbstractController
     public function index(Request $request, ImportRepository $importRepository): Response
     {
         $this->filterService->setRequest($request);
-        $this->filterService->configureFilters([ImportFilter::Param, OwnImportFilter::Param, UserFilter::Param, HospitalFilter::Param, OwnHospitalFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
+        $this->filterService->configureFilters([ImportFilterSet::Param, OwnImportFilter::Param, ImportStatusFilter::Param, UserFilter::Param, HospitalFilter::Param, OwnHospitalFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
 
         $paginator = $importRepository->getImportPaginator($this->filterService);
 
@@ -69,7 +70,7 @@ class ImportController extends AbstractController
             ],
         ];
 
-        $importForm = $this->filterService->buildForm(ImportFilter::Param, array_merge($importArguments, $args));
+        $importForm = $this->filterService->buildForm(ImportFilterSet::Param, array_merge($importArguments, $args));
         $importForm->handleRequest($request);
 
         $sortArguments = [

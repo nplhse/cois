@@ -2106,6 +2106,38 @@
         <source>User</source>
         <target>User</target>
       </trans-unit>
+      <trans-unit id="73LS6HH" resname="Show Allocations">
+        <source>Show Allocations</source>
+        <target>Show corresponding Allocations</target>
+      </trans-unit>
+      <trans-unit id="8Q07d1G" resname="Every status">
+        <source>Every status</source>
+        <target>Every status</target>
+      </trans-unit>
+      <trans-unit id="ruQIhH0" resname="success">
+        <source>success</source>
+        <target>Success</target>
+      </trans-unit>
+      <trans-unit id="YqL_09b" resname="pending">
+        <source>pending</source>
+        <target>Pending</target>
+      </trans-unit>
+      <trans-unit id="hVVLud1" resname="incomplete">
+        <source>incomplete</source>
+        <target>Incomplete</target>
+      </trans-unit>
+      <trans-unit id="XSipD0S" resname="failed">
+        <source>failed</source>
+        <target>Failed</target>
+      </trans-unit>
+      <trans-unit id="Kraywhc" resname="RowCount">
+        <source>RowCount</source>
+        <target>Row Count</target>
+      </trans-unit>
+      <trans-unit id="bu1YKDt" resname="SkippedRows">
+        <source>SkippedRows</source>
+        <target>Skipped Rows</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

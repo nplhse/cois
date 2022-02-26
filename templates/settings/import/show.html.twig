@@ -65,15 +65,17 @@
                                 }
                             )
                             }}">
-                            {{ 'Skipped rows'|trans }} <span class="badge bg-primary">{{
-                                    import.skippedRows
-                                }}</span>
+                            {{ 'Skipped rows'|trans }}
+                            <span class="badge bg-primary">
+                                {{ import.skippedRows }}
+                            </span>
                         </a>
                     {% else %}
                         <a class="nav-link disabled"
                             aria-current="page"
                             href="#">
-                            {{ 'Skipped rows'|trans }} <span class="badge bg-secondary">0</span>
+                            {{ 'Skipped rows'|trans }}
+                            <span class="badge bg-secondary">0</span>
                         </a>
                     {% endif %}
                 </li>

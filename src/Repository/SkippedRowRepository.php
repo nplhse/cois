@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Import;
 use App\Entity\SkippedRow;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,32 +20,13 @@ class SkippedRowRepository extends ServiceEntityRepository
         parent::__construct($registry, SkippedRow::class);
     }
 
-    // /**
-    //  * @return SkippedRow[] Returns an array of SkippedRow objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function deleteByImport(Import $import): mixed
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('s')
+            ->delete('App:Allocation', 's')
+            ->where('s.import = :import')
+            ->setParameter(':import', $import->getId());
 
-    /*
-    public function findOneBySomeField($value): ?SkippedRow
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $qb->getQuery()->execute();
     }
-    */
 }

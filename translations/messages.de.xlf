@@ -2181,6 +2181,38 @@
         <source>User</source>
         <target>Benutzer</target>
       </trans-unit>
+      <trans-unit id="73LS6HH" resname="Show Allocations">
+        <source>Show Allocations</source>
+        <target>Zugehörige Einsätze anzeigen</target>
+      </trans-unit>
+      <trans-unit id="8Q07d1G" resname="Every status">
+        <source>Every status</source>
+        <target>Jeder Status</target>
+      </trans-unit>
+      <trans-unit id="ruQIhH0" resname="success">
+        <source>success</source>
+        <target>Abgeschlossen</target>
+      </trans-unit>
+      <trans-unit id="YqL_09b" resname="pending">
+        <source>pending</source>
+        <target>In Bearbeitung</target>
+      </trans-unit>
+      <trans-unit id="hVVLud1" resname="incomplete">
+        <source>incomplete</source>
+        <target>Unvollständig</target>
+      </trans-unit>
+      <trans-unit id="XSipD0S" resname="failed">
+        <source>failed</source>
+        <target>Fehlgeschlagen</target>
+      </trans-unit>
+      <trans-unit id="Kraywhc" resname="RowCount">
+        <source>RowCount</source>
+        <target>Anzahl der Datensätze</target>
+      </trans-unit>
+      <trans-unit id="bu1YKDt" resname="SkippedRows">
+        <source>SkippedRows</source>
+        <target>Übersprungene Zeilen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

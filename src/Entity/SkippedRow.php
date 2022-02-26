@@ -19,7 +19,7 @@ class SkippedRow
 
     /**
      * @ORM\ManyToOne(targetEntity=Import::class)
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private Import $import;
 
