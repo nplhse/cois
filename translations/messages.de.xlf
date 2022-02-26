@@ -2079,7 +2079,107 @@
       </trans-unit>
       <trans-unit id="vNRvSTY" resname="View your Hospitals">
         <source>View your Hospitals</source>
-        <target>View your Hospitals</target>
+        <target>Ihre Kliniken ansehen</target>
+      </trans-unit>
+      <trans-unit id="drjsUnJ" resname="Skipped rows">
+        <source>Skipped rows</source>
+        <target>Übersprungene Zeilen</target>
+      </trans-unit>
+      <trans-unit id="BNe0gzk" resname="Messages">
+        <source>Messages</source>
+        <target>Nachrichten</target>
+      </trans-unit>
+      <trans-unit id="0MmMwxp" resname="Admin filters">
+        <source>Admin filters</source>
+        <target>Administrative Filter</target>
+      </trans-unit>
+      <trans-unit id="cnCtiey" resname="Show Filters">
+        <source>Show Filters</source>
+        <target>Filter anzeigen</target>
+      </trans-unit>
+      <trans-unit id="7qXEMzr" resname="Own hospitals">
+        <source>Own hospitals</source>
+        <target>Eigene Kliniken</target>
+      </trans-unit>
+      <trans-unit id="CgwgGiS" resname="Own imports">
+        <source>Own imports</source>
+        <target>Eigene Importe</target>
+      </trans-unit>
+      <trans-unit id="SSDz097" resname="All States">
+        <source>All States</source>
+        <target>Alle Bundesländer</target>
+      </trans-unit>
+      <trans-unit id="sb1ngWz" resname="All DispatchAreas">
+        <source>All DispatchAreas</source>
+        <target>Alle Leitstellen</target>
+      </trans-unit>
+      <trans-unit id="JBME4Ss" resname="All SupplyAreas">
+        <source>All SupplyAreas</source>
+        <target>Alle Versorgungsgebiete</target>
+      </trans-unit>
+      <trans-unit id="Y068CLP" resname="All indications">
+        <source>All indications</source>
+        <target>Alle Indikationen</target>
+      </trans-unit>
+      <trans-unit id="12jRbXz" resname="All urgencies">
+        <source>All urgencies</source>
+        <target>Alle Dringlichkeiten</target>
+      </trans-unit>
+      <trans-unit id="8v_lJrs" resname="All occasions">
+        <source>All occasions</source>
+        <target>Alle Anlässe</target>
+      </trans-unit>
+      <trans-unit id="cwU7z4N" resname="All specialities">
+        <source>All specialities</source>
+        <target>Alle Fachabteilungen</target>
+      </trans-unit>
+      <trans-unit id="wESrkFx" resname="All speciality details">
+        <source>All speciality details</source>
+        <target>Alle Fachgebiete</target>
+      </trans-unit>
+      <trans-unit id="lZ5VYuo" resname="All infections">
+        <source>All infections</source>
+        <target>Alle Infektionen</target>
+      </trans-unit>
+      <trans-unit id="vbJxxOM" resname="All assignments">
+        <source>All assignments</source>
+        <target>Alle Zuweisungen</target>
+      </trans-unit>
+      <trans-unit id="EuFSPXC" resname="All modes of transport">
+        <source>All modes of transport</source>
+        <target>Alle Transportarten</target>
+      </trans-unit>
+      <trans-unit id="IlYnGve" resname="All hospital owners">
+        <source>All hospital owners</source>
+        <target>Alle Klinikbesitzer</target>
+      </trans-unit>
+      <trans-unit id="lt00RZN" resname="All hospitals">
+        <source>All hospitals</source>
+        <target>Alle Kliniken</target>
+      </trans-unit>
+      <trans-unit id="gyYp.zP" resname="Filter Allocations">
+        <source>Filter Allocations</source>
+        <target>Einsätze filtern</target>
+      </trans-unit>
+      <trans-unit id="DiOwz_v" resname="All locations">
+        <source>All locations</source>
+        <target>Alle Lagen</target>
+      </trans-unit>
+      <trans-unit id="mcCJHtG" resname="All sizes">
+        <source>All sizes</source>
+        <target>Alle Größen</target>
+      </trans-unit>
+      <trans-unit id="94mBMOV" resname="All users">
+        <source>All users</source>
+        <target>Alle Größen</target>
+      </trans-unit>
+      <trans-unit id="I4ZvOvE" resname="Filter Imports">
+        <source>Filter Imports</source>
+        <target>Importe filtern</target>
+      </trans-unit>
+      <trans-unit id="tRLZfny" resname="User">
+        <source>User</source>
+        <target>Benutzer</target>
       </trans-unit>
     </body>
   </file>

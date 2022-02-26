@@ -3,6 +3,7 @@
 namespace App\Form\Filters;
 
 use App\Entity\Hospital;
+use App\Service\Filters\HospitalFilter;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -31,35 +32,15 @@ class ImportFilterSetType extends AbstractType
         $builder
             ->add('ownImports', OwnImportFilterType::class)
             ->add('ownHospitals', OwnHospitalFilterType::class)
-            ->add('hospital', EntityType::class, [
-                'required' => false,
-                'class' => Hospital::class,
-                'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('h')
-                    ->orderBy('h.name', 'ASC'),
-                'choice_label' => 'name',
-            ]);
+            ->add('hospital', HospitalFilterType::class);
 
         if ($this->security->isGranted('ROLE_ADMIN')) {
             $builder
                 ->add('user', UserFilterType::class)
-                ->add('hospital', EntityType::class, [
-                    'required' => false,
-                    'class' => Hospital::class,
-                    'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('h')
-                        ->orderBy('h.name', 'ASC'),
-                    'choice_label' => 'name',
-                ]);
+                ->add('hospital', HospitalFilterType::class);
         } else {
             $builder
-                ->add('hospital', EntityType::class, [
-                    'required' => false,
-                    'class' => Hospital::class,
-                    'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('h')
-                        ->where('h.owner = :user')
-                        ->setParameter('user', $this->security->getUser())
-                        ->orderBy('h.name', 'ASC'),
-                    'choice_label' => 'name',
-                ]);
+                ->add('hospital', HospitalFilterType::class);
         }
 
         $builder

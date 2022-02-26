@@ -2006,6 +2006,106 @@
         <source>View your Hospitals</source>
         <target>View your Hospitals</target>
       </trans-unit>
+      <trans-unit id="drjsUnJ" resname="Skipped rows">
+        <source>Skipped rows</source>
+        <target>Skipped rows</target>
+      </trans-unit>
+      <trans-unit id="BNe0gzk" resname="Messages">
+        <source>Messages</source>
+        <target>Messages</target>
+      </trans-unit>
+      <trans-unit id="0MmMwxp" resname="Admin filters">
+        <source>Admin filters</source>
+        <target>Admin filters</target>
+      </trans-unit>
+      <trans-unit id="cnCtiey" resname="Show Filters">
+        <source>Show Filters</source>
+        <target>Show Filters</target>
+      </trans-unit>
+      <trans-unit id="7qXEMzr" resname="Own hospitals">
+        <source>Own hospitals</source>
+        <target>Own hospitals</target>
+      </trans-unit>
+      <trans-unit id="CgwgGiS" resname="Own imports">
+        <source>Own imports</source>
+        <target>Own imports</target>
+      </trans-unit>
+      <trans-unit id="SSDz097" resname="All States">
+        <source>All States</source>
+        <target>All States</target>
+      </trans-unit>
+      <trans-unit id="sb1ngWz" resname="All DispatchAreas">
+        <source>All DispatchAreas</source>
+        <target>All DispatchArea</target>
+      </trans-unit>
+      <trans-unit id="JBME4Ss" resname="All SupplyAreas">
+        <source>All SupplyAreas</source>
+        <target>All SupplyAreas</target>
+      </trans-unit>
+      <trans-unit id="Y068CLP" resname="All indications">
+        <source>All indications</source>
+        <target>All indications</target>
+      </trans-unit>
+      <trans-unit id="12jRbXz" resname="All urgencies">
+        <source>All urgencies</source>
+        <target>All urgencies</target>
+      </trans-unit>
+      <trans-unit id="8v_lJrs" resname="All occasions">
+        <source>All occasions</source>
+        <target>All occasions</target>
+      </trans-unit>
+      <trans-unit id="cwU7z4N" resname="All specialities">
+        <source>All specialities</source>
+        <target>All specialities</target>
+      </trans-unit>
+      <trans-unit id="wESrkFx" resname="All speciality details">
+        <source>All speciality details</source>
+        <target>All speciality details</target>
+      </trans-unit>
+      <trans-unit id="lZ5VYuo" resname="All infections">
+        <source>All infections</source>
+        <target>All infections</target>
+      </trans-unit>
+      <trans-unit id="vbJxxOM" resname="All assignments">
+        <source>All assignments</source>
+        <target>All assignments</target>
+      </trans-unit>
+      <trans-unit id="EuFSPXC" resname="All modes of transport">
+        <source>All modes of transport</source>
+        <target>All modes of transport</target>
+      </trans-unit>
+      <trans-unit id="IlYnGve" resname="All hospital owners">
+        <source>All hospital owners</source>
+        <target>All hospital owners</target>
+      </trans-unit>
+      <trans-unit id="lt00RZN" resname="All hospitals">
+        <source>All hospitals</source>
+        <target>All hospitals</target>
+      </trans-unit>
+      <trans-unit id="gyYp.zP" resname="Filter Allocations">
+        <source>Filter Allocations</source>
+        <target>Filter Allocations</target>
+      </trans-unit>
+      <trans-unit id="DiOwz_v" resname="All locations">
+        <source>All locations</source>
+        <target>All locations</target>
+      </trans-unit>
+      <trans-unit id="mcCJHtG" resname="All sizes">
+        <source>All sizes</source>
+        <target>All sizes</target>
+      </trans-unit>
+      <trans-unit id="94mBMOV" resname="All users">
+        <source>All users</source>
+        <target>All users</target>
+      </trans-unit>
+      <trans-unit id="I4ZvOvE" resname="Filter Imports">
+        <source>Filter Imports</source>
+        <target>Filter Imports</target>
+      </trans-unit>
+      <trans-unit id="tRLZfny" resname="User">
+        <source>User</source>
+        <target>User</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
