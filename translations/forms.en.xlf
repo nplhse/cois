@@ -601,6 +601,14 @@
         <source>Enable Participation</source>
         <target>Enable Participation</target>
       </trans-unit>
+      <trans-unit id="DfbxytN" resname="Show">
+        <source>Show</source>
+        <target>Show</target>
+      </trans-unit>
+      <trans-unit id="M7k0ds9" resname="Time">
+        <source>Time</source>
+        <target>Time</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

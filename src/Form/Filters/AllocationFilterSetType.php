@@ -61,7 +61,7 @@ class AllocationFilterSetType extends AbstractType
                 'label' => 'Reset filters',
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Filter Hospitals',
+                'label' => 'Filter Allocations',
             ])
         ;
     }
