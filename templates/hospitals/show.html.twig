@@ -54,15 +54,19 @@
                         {{ 'Hospital location'|trans }}
                     </div>
                     <div class="card-body">
+                        <h5 class="card-title">
+                            {{ 'Geographical location'|trans }}
+                        </h5>
+
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-4">
                                 <h6 class="card-subtitle text-muted">
                                     {{ 'State'|trans }}
                                 </h6>
                                 {% if hospital.state %}
                                     <p>
                                         <span class="badge bg-secondary">
-                                            <i class="bi bi-collection"></i>
+                                            <i class="bi bi-flag"></i>
                                             <a class="link-light"
                                                 href="{{
                                                 path(
@@ -78,39 +82,14 @@
                                     </p>
                                 {% endif %}
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <h6 class="card-subtitle text-muted">
-                                    {{ 'SupplyArea'|trans }}
-                                </h6>
-                                {% if hospital.supplyArea %}
-                                    <p>
-                                        <span class="badge bg-secondary">
-                                            <i class="bi bi-collection"></i>
-                                            <a class="link-light"
-                                                href="{{
-                                                path(
-                                                    'app_hospital_index',
-                                                    app.request.query.all|merge({
-                                                        supplyArea: hospital.supplyArea.id
-                                                    })
-                                                )
-                                                }}">
-                                                {{ hospital.supplyArea.name }}
-                                            </a>
-                                        </span>
-                                    </p>
-                                {% endif %}
-                            </div>
-                            <div class="col-6">
+                            <div class="col-4">
                                 <h6 class="card-subtitle text-muted">
                                     {{ 'DispatchArea'|trans }}
                                 </h6>
                                 {% if hospital.dispatchArea %}
                                     <p>
                                         <span class="badge bg-secondary">
-                                            <i class="bi bi-collection"></i>
+                                            <i class="bi bi-geo-alt"></i>
                                             <a class="link-light"
                                                 href="{{
                                                 path(
@@ -121,6 +100,29 @@
                                                 )
                                                 }}">
                                                 {{ hospital.dispatchArea.name }}
+                                            </a>
+                                        </span>
+                                    </p>
+                                {% endif %}
+                            </div>
+                            <div class="col-4">
+                                <h6 class="card-subtitle text-muted">
+                                    {{ 'SupplyArea'|trans }}
+                                </h6>
+                                {% if hospital.supplyArea %}
+                                    <p>
+                                        <span class="badge bg-secondary">
+                                            <i class="bi bi-geo"></i>
+                                            <a class="link-light"
+                                                href="{{
+                                                path(
+                                                    'app_hospital_index',
+                                                    app.request.query.all|merge({
+                                                        supplyArea: hospital.supplyArea.id
+                                                    })
+                                                )
+                                                }}">
+                                                {{ hospital.supplyArea.name }}
                                             </a>
                                         </span>
                                     </p>
@@ -262,11 +264,13 @@
                                 ? hospital.createdAt|date('d.m.Y H:i')
                                 : '' }}
                             <br />
-                            <i class="bi bi-clock-history"></i>
-                            <strong>{{ 'Updated at'|trans }}</strong>
-                            {{ hospital.updatedAt
-                                ? hospital.updatedAt|date('d.m.Y H:i')
-                                : '' }}
+                            {% if hospital.updatedAt %}
+                                <i class="bi bi-clock-history"></i>
+                                <strong>{{ 'Updated at'|trans }}</strong>
+                                {{ hospital.updatedAt
+                                    ? hospital.updatedAt|date('d.m.Y H:i')
+                                    : '' }}
+                            {% endif %}
                         </p>
                     </div>
                 </div>
@@ -279,11 +283,12 @@
                         <p>
                             {{
                                 'dashboard.allocations.by_hospital'|trans({
-                                    '%count%': hospital_allocations|number_format(
+                                    '%allocations%': hospital_allocations|number_format(
                                         0,
                                         '',
                                         '.'
-                                    )
+                                    ),
+                                    '%imports%': hospital_imports
                                 })
                             }}
                         </p>

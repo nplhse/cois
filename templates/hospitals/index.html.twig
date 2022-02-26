@@ -51,7 +51,7 @@
                         <div class="col-md-6">
                             <div class="card mb-3">
                                 {% if hospital.owner == app.user %}
-                                    <div class="card-header bg-secondary"></div>
+                                    <div class="card-header bg-primary bg-opacity-25"></div>
                                 {% else %}
                                     <div class="card-header"></div>
                                 {% endif %}
@@ -73,122 +73,68 @@
                                     </h6>
 
                                     <p class="m-0">
-                                        {% if hospital.state %}
-                                            <span class="badge bg-secondary">
-                                                <i class="bi bi-tag"></i>
-                                                <a class="link-light"
-                                                    href="{{
-                                                    path(
-                                                        'app_hospital_index',
-                                                        app.request.query.all|merge({
-                                                            state: hospital.state.id,
-                                                            page: 1
-                                                        })
-                                                    )
-                                                    }}">
-                                                    {{ hospital.state.name }}
-                                                </a>
-                                            </span>
-                                        {% endif %}
+                                        {{
+                                            active_filters.widget(
+                                                filters,
+                                                'state',
+                                                hospital.state.name,
+                                                hospital.state.id,
+                                                'app_hospital_index',
+                                                'bi bi-flag'
+                                            )
+                                        }}
 
-                                        {% if hospital.dispatchArea %}
-                                            <span class="badge bg-secondary">
-                                                <i class="bi bi-tag"></i>
-                                                <a class="link-light"
-                                                    href="{{
-                                                    path(
-                                                        'app_hospital_index',
-                                                        app.request.query.all|merge({
-                                                            state: hospital.dispatchArea.id,
-                                                            page: 1
-                                                        })
-                                                    )
-                                                    }}">
-                                                    {{
-                                                        hospital.dispatchArea.name
-                                                    }}
-                                                </a>
-                                            </span>
-                                        {% endif %}
+                                        {{
+                                            active_filters.widget(
+                                                filters,
+                                                'dispatchArea',
+                                                hospital.dispatchArea.name,
+                                                hospital.dispatchArea.id,
+                                                'app_hospital_index',
+                                                'bi bi-geo-alt'
+                                            )
+                                        }}
 
                                         {% if hospital.supplyArea %}
-                                            <span class="badge bg-secondary">
-                                                <i class="bi bi-tag"></i>
-                                                <a class="link-light"
-                                                    href="{{
-                                                    path(
-                                                        'app_hospital_index',
-                                                        app.request.query.all|merge({
-                                                            state: hospital.supplyArea.id,
-                                                            page: 1
-                                                        })
-                                                    )
-                                                    }}">
-                                                    {{
-                                                        hospital.supplyArea.name
-                                                    }}
-                                                </a>
-                                            </span>
+                                            {{
+                                                active_filters.widget(
+                                                    filters,
+                                                    'supplyArea',
+                                                    hospital.supplyArea.name,
+                                                    hospital.supplyArea.id,
+                                                    'app_hospital_index',
+                                                    'bi bi-geo'
+                                                )
+                                            }}
                                         {% endif %}
 
-                                        {% if hospital.location %}
-                                            <span class="badge bg-secondary">
-                                                <i class="bi bi-tag"></i>
-                                                <a class="link-light"
-                                                    href="{{
-                                                    path(
-                                                        'app_hospital_index',
-                                                        app.request.query.all|merge({
-                                                            location: hospital.location,
-                                                            page: 1
-                                                        })
-                                                    )
-                                                    }}">
-                                                    {% if
-                                                        hospital.location
-                                                            == 'urban' %}
-                                                        {{ 'Urban'|trans }}
-                                                    {% elseif
-                                                        hospital.location
-                                                            == 'rural' %}
-                                                        {{ 'Rural'|trans }}
-                                                    {% endif %}
-                                                </a>
-                                            </span>
-                                        {% endif %}
+                                        {{
+                                            active_filters.widget(
+                                                filters,
+                                                'location',
+                                                hospital.location|trans,
+                                                hospital.location,
+                                                'app_hospital_index'
+                                            )
+                                        }}
 
-                                        {% if hospital.size %}
-                                            <span class="badge bg-secondary">
-                                                <i class="bi bi-tag"></i>
-                                                <a class="link-light"
-                                                    href="{{
-                                                    path(
-                                                        'app_hospital_index',
-                                                        app.request.query.all|merge({
-                                                            size: hospital.size,
-                                                            page: 1
-                                                        })
-                                                    )
-                                                    }}">
-                                                    {% if
-                                                        hospital.size
-                                                            == 'small' %}
-                                                        {{ 'Small'|trans }}
-                                                    {% elseif
-                                                        hospital.size
-                                                            == 'medium' %}
-                                                        {{ 'Medium'|trans }}
-                                                    {% elseif
-                                                        hospital.size
-                                                            == 'large' %}
-                                                        {{ 'Large'|trans }}
-                                                    {% endif %}({{
-                                                        hospital.beds
-                                                    }}
-                                                    {{ 'Beds'|trans }})
-                                                </a>
-                                            </span>
-                                        {% endif %}
+                                        {% set size = (hospital.size|trans)
+                                            ~ ' ('
+                                            ~ hospital.beds
+                                            ~ ' '
+                                            ~ ('Beds'|trans)
+                                            ~ ')'
+                                        %}
+
+                                        {{
+                                            active_filters.widget(
+                                                filters,
+                                                'size',
+                                                size,
+                                                hospital.size,
+                                                'app_hospital_index'
+                                            )
+                                        }}
                                     </p>
                                 </div>
                             </div>

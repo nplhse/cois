@@ -9,9 +9,11 @@ use App\Service\Filters\Traits\FilterTrait;
 use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class DispatchAreaFilter implements FilterInterface
 {
@@ -43,17 +45,23 @@ class DispatchAreaFilter implements FilterInterface
         return $this->setCacheValue($value);
     }
 
-    public function getAltValue(Request $request): mixed
+    public function getAltValues(): array
     {
-        $areaId = $this->cacheValue ?? $this->getValue($request);
+        return (new FilesystemAdapter())->get('dispatch_area_filter', function (ItemInterface $item) {
+            $qb = $this->dispatchAreaRepository->createQueryBuilder('d');
+            $result = $qb->select('d.id, d.name')
+                ->orderBy('d.id')
+                ->getQuery()
+                ->getArrayResult();
 
-        if (isset($areaId)) {
-            $area = $this->dispatchAreaRepository->findOneBy(['id' => $areaId]);
+            $values = [];
 
-            return $area->getName();
-        }
+            foreach ($result as $row) {
+                $values[$row['id']] = $row['name'];
+            }
 
-        return null;
+            return $values;
+        });
     }
 
     public function supportsForm(): bool
@@ -80,7 +88,7 @@ class DispatchAreaFilter implements FilterInterface
         }
 
         $qb->leftJoin($arguments[FilterService::ENTITY_ALIAS].'dispatchArea', 'dispatchArea')
-            ->orWhere('dispatchArea.id = :dispatchArea')
+            ->andWhere('dispatchArea.id = :dispatchArea')
                 ->setParameter('dispatchArea', $area)
             ;
 

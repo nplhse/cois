@@ -2,46 +2,48 @@
 
 namespace App\DataTransferObjects;
 
+use App\Service\Filters\OrderFilter;
+use App\Service\Filters\PageFilter;
+
 class FilterDto
 {
-    private array $filters;
-
-    private array $altValues;
-
     private bool $active = false;
 
-    public function __construct(array $filters)
-    {
-        $this->filters = $filters;
-    }
+    private array $filterItems = [];
 
-    public function set(string $key, mixed $value, mixed $altValue = null): void
+    public function addFilter(string $key, mixed $value, array $altValues): void
     {
-        $this->filters[$key] = $value;
+        $this->filterItems[$key] = new FilterItemDto($key, $value, $altValues);
 
-        if ($altValue) {
-            $this->altValues[$key] = $altValue;
+        switch ($key) {
+            case PageFilter::Param:
+            case OrderFilter::Param:
+                break;
+            default:
+                if (!is_null($value)) {
+                    $this->active = true;
+                }
+                break;
         }
     }
 
-    public function get(string $key): mixed
+    public function getFilter(string $key): ?FilterItemDto
     {
-        return $this->filters[$key] ?? null;
+        return $this->filterItems[$key] ?? null;
     }
 
-    public function getAltValue(string $key): mixed
+    public function issetFilter(string $key): bool
     {
-        return $this->altValues[$key] ?? null;
+        return isset($this->filterItems[$key]);
     }
 
-    public function getAll(): array
+    public function getFilters(): array
     {
-        return $this->filters;
-    }
+        $filters = $this->filterItems;
 
-    public function activate(): void
-    {
-        $this->active = true;
+        unset($filters[PageFilter::Param], $filters[OrderFilter::Param]);
+
+        return $filters;
     }
 
     public function isActive(): bool

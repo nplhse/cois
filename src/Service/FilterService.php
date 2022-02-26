@@ -7,9 +7,6 @@ use App\Application\Exception\FilterDoesNotSupportForms;
 use App\Application\Exception\FilterMissingArgumentException;
 use App\Application\Exception\FilterNotFoundException;
 use App\DataTransferObjects\FilterDto;
-use App\Service\Filters\DateFilter;
-use App\Service\Filters\OrderFilter;
-use App\Service\Filters\PageFilter;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -83,32 +80,21 @@ class FilterService
 
     public function getFilterDto(): FilterDto
     {
-        $filterDto = new FilterDto([]);
+        $filterDto = new FilterDto();
 
         foreach ($this->availableFilters as $filter) {
             if ($this->filters[$filter]->getValue($this->request)) {
-                switch ($this->filters[$filter]->getParam()) {
-                    case PageFilter::Param:
-                    case OrderFilter::Param:
-                        break;
-                    case DateFilter::Param:
-                        $date = $this->filters[$filter]->getValue($this->request);
-                        if (null === $date['startDate'] && null === $date['endDate']) {
-                            break;
-                        }
-                        // no break
-                    default:
-                        $filterDto->activate();
+                if (method_exists($this->filters[$filter], 'getAltValues')) {
+                    $altValues = $this->filters[$filter]->getAltValues();
+                } else {
+                    $altValues = [];
                 }
-            }
 
-            if (method_exists($this->filters[$filter], 'getAltValue')) {
-                $altValue = $this->filters[$filter]->getAltValue($this->request);
-            } else {
-                $altValue = null;
-            }
+                $key = $this->filters[$filter]->getParam();
+                $value = $this->filters[$filter]->getValue($this->request);
 
-            $filterDto->set($this->filters[$filter]->getParam(), $this->filters[$filter]->getValue($this->request), $altValue);
+                $filterDto->addFilter($key, $value, $altValues);
+            }
         }
 
         return $filterDto;

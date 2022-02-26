@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Domain\Contracts\ImportInterface;
 use App\Domain\Repository\ImportRepositoryInterface;
+use App\Entity\Hospital;
 use App\Entity\Import;
 use App\Entity\User;
 use App\Service\Filters\OrderFilter;
@@ -67,13 +68,20 @@ class ImportRepository extends ServiceEntityRepository implements ImportReposito
         ;
     }
 
-    public function countImports(User $user = null): mixed
+    public function countImports(mixed $entity = null): mixed
     {
-        if ($user) {
+        if ($entity instanceof User) {
             $qb = $this->createQueryBuilder('i')
                 ->select('COUNT(i.id)')
                 ->andWhere('i.user = :user')
-                ->setparameter('user', $user->getId())
+                ->setparameter('user', $entity->getId())
+                ->getQuery()
+                ->getSingleScalarResult();
+        } elseif ($entity instanceof Hospital) {
+            $qb = $this->createQueryBuilder('i')
+                ->select('COUNT(i.id)')
+                ->andWhere('i.hospital = :hospital')
+                ->setparameter('hospital', $entity->getId())
                 ->getQuery()
                 ->getSingleScalarResult();
         } else {

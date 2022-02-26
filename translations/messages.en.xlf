@@ -211,7 +211,7 @@
       </trans-unit>
       <trans-unit id="y125qmS" resname="dashboard.allocations.by_hospital">
         <source>dashboard.allocations.by_hospital</source>
-        <target>There are %count% allocations from this hospital.</target>
+        <target>There have been %imports% imports that created %allocations% allocations from this hospital.</target>
       </trans-unit>
       <trans-unit id="iPZX6a2" resname="hospitals.admin.warning">
         <source>hospitals.admin.warning</source>

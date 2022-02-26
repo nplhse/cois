@@ -9,9 +9,11 @@ use App\Service\Filters\Traits\FilterTrait;
 use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class SupplyAreaFilter implements FilterInterface
 {
@@ -43,17 +45,23 @@ class SupplyAreaFilter implements FilterInterface
         return $this->setCacheValue($value);
     }
 
-    public function getAltValue(Request $request): mixed
+    public function getAltValues(): array
     {
-        $areaId = $this->cacheValue ?? $this->getValue($request);
+        return (new FilesystemAdapter())->get('supply_area_filter', function (ItemInterface $item) {
+            $qb = $this->supplyAreaRepository->createQueryBuilder('s');
+            $result = $qb->select('s.id, s.name')
+                ->orderBy('s.id')
+                ->getQuery()
+                ->getArrayResult();
 
-        if (isset($areaId)) {
-            $area = $this->supplyAreaRepository->findOneBy(['id' => $areaId]);
+            $values = [];
 
-            return $area->getName();
-        }
+            foreach ($result as $row) {
+                $values[$row['id']] = $row['name'];
+            }
 
-        return null;
+            return $values;
+        });
     }
 
     public function supportsForm(): bool
@@ -80,7 +88,7 @@ class SupplyAreaFilter implements FilterInterface
         }
 
         $qb->leftJoin($arguments[FilterService::ENTITY_ALIAS].'supplyArea', 'supplyArea')
-            ->orWhere('supplyArea.id = :supplyArea')
+            ->andWhere('supplyArea.id = :supplyArea')
                 ->setParameter('supplyArea', $area)
             ;
 

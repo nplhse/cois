@@ -12,6 +12,7 @@ use App\Form\HospitalType;
 use App\Repository\AllocationRepository;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\HospitalRepository;
+use App\Repository\ImportRepository;
 use App\Repository\SupplyAreaRepository;
 use App\Service\Filters\DispatchAreaFilter;
 use App\Service\Filters\HospitalFilterSet;
@@ -205,7 +206,7 @@ class HospitalController extends AbstractController
     }
 
     #[Route(path: '/{id}', name: 'app_hospital_show', methods: ['GET'])]
-    public function show(Hospital $hospital, AllocationRepository $allocationRepository): Response
+    public function show(Hospital $hospital, AllocationRepository $allocationRepository, ImportRepository $importRepository): Response
     {
         $userIsOwner = $hospital->getOwner() == $this->getUser();
 
@@ -216,6 +217,7 @@ class HospitalController extends AbstractController
         return $this->render('hospitals/show.html.twig', [
             'hospital' => $hospital,
             'hospital_allocations' => $allocationRepository->countAllocations(),
+            'hospital_imports' => $importRepository->countImports($hospital),
             'user_can_edit' => true,
         ]);
     }

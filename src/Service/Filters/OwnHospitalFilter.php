@@ -17,7 +17,7 @@ class OwnHospitalFilter implements FilterInterface
     use FilterTrait;
     use HiddenFieldTrait;
 
-    public const Param = 'own-hospital';
+    public const Param = 'ownHospitals';
 
     private Security $security;
 
@@ -65,7 +65,7 @@ class OwnHospitalFilter implements FilterInterface
             return $qb;
         }
 
-        return $qb->orWhere($arguments[FilterService::ENTITY_ALIAS].'owner = :owner')
+        return $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'owner = :owner')
             ->setParameter('owner', $this->security->getUser())
         ;
     }

@@ -9,9 +9,11 @@ use App\Service\Filters\Traits\FilterTrait;
 use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class StateFilter implements FilterInterface
 {
@@ -43,17 +45,23 @@ class StateFilter implements FilterInterface
         return $this->setCacheValue($value);
     }
 
-    public function getAltValue(Request $request): mixed
+    public function getAltValues(): array
     {
-        $stateId = $this->cacheValue ?? $this->getValue($request);
+        return (new FilesystemAdapter())->get('state_filter', function (ItemInterface $item) {
+            $qb = $this->stateRepository->createQueryBuilder('s');
+            $result = $qb->select('s.id, s.name')
+                ->orderBy('s.id')
+                ->getQuery()
+                ->getArrayResult();
 
-        if (isset($stateId)) {
-            $state = $this->stateRepository->findOneBy(['id' => $stateId]);
+            $values = [];
 
-            return $state->getName();
-        }
+            foreach ($result as $row) {
+                $values[$row['id']] = $row['name'];
+            }
 
-        return null;
+            return $values;
+        });
     }
 
     public function supportsForm(): bool
@@ -80,7 +88,7 @@ class StateFilter implements FilterInterface
         }
 
         $qb->leftJoin($arguments[FilterService::ENTITY_ALIAS].'state', 'state')
-            ->orWhere('state.id = :state')
+            ->andWhere('state.id = :state')
                 ->setParameter('state', $state)
             ;
 

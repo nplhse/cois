@@ -10,61 +10,76 @@
                 {{ 'Active Filters'|trans }}:&nbsp;
             </span>
 
-            {% for key, filter in filters.all %}
-                {% if is_type(filter, 'string') %}
-                    {% if key != "order" %}
-                            <a href="{{
-                            path(
-                                targetPath,
-                                app.request.query.all|merge({
-                                (key): '',
-                                page: ''
-                            })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>{{ key|capitalize }}:</u>
-                                {{ filter|capitalize }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                            </a>
-                    {% endif %}
-                {% endif %}
-                {% if is_type(filter, 'integer') %}
-                    {% if key != "page" %}
-                        <a href="{{
-                        path(
-                            targetPath,
-                            app.request.query.all|merge({
-                            (key): '',
-                            page: ''
-                        })
-                        )
-                        }}">
-                            {% if filters.altValue(key) %}
-                                <span class="badge rounded-pill bg-primary">
-                                <u>{{ key|capitalize }}:</u>
-                                {{ filters.altValue(key)|capitalize }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
+            {% for key, filter in filters.getFilters %}
+                {% if key != 'ownHospitals' %}
+                    <a href="{{
+                    path(
+                        targetPath,
+                        app.request.query.all|merge({
+                        (key): '',
+                        page: ''
+                    })
+                    )
+                    }}">
+                        <span class="badge rounded-pill bg-primary">
+                            <u>{{ filter.key|trans }}:</u>
+                            {% if filter.altValue %}
+                                {{ filter.altValue }}
                             {% else %}
-                                {% if key == "own-hospital" %}
-                                    <span class="badge rounded-pill bg-primary">
-                                        <u>{{ 'Own hospitals'|trans }}</u>
-                                        <i class="bi bi-x-lg"></i>
-                                    </span>
-                                {% else %}
-                                    <span class="badge rounded-pill bg-primary">
-                                        <u>{{ key|capitalize }}:</u>
-                                        {{ filter|capitalize }}
-                                        <i class="bi bi-x-lg"></i>
-                                    </span>
-                                {% endif %}
+                                {{ filter.value|trans }}
                             {% endif %}
-                        </a>
-                    {% endif %}
+                            <i class="bi bi-x-lg"></i>
+                        </span>
+                    </a>
+                {% else %}
+                    <a href="{{
+                    path(
+                        targetPath,
+                        app.request.query.all|merge({
+                        ownHospitals: '',
+                        page: ''
+                    })
+                    )
+                    }}">
+                    <span class="badge rounded-pill bg-primary">
+                        <u>{{ 'Own hospitals'|trans }}</u>
+                        <i class="bi bi-x-lg"></i>
+                    </span>
+                    </a>
                 {% endif %}
             {% endfor %}
         </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro widget(filters, key, caption, value, targetPath, icon = 'bi bi-tag') %}
+    {% if filters.getFilter(key) and filters.getFilter(key).value == (value) %}
+        <span class="badge bg-primary">
+            <i class="{{ icon }}"></i>
+            <a class="link-light"
+               href="{{
+               path(
+                   (targetPath),
+                   app.request.query.all|merge({
+                   (key): '',
+                   page: ''
+               })
+               )
+               }}">{{ caption }}</a>
+        </span>
+    {% else %}
+        <span class="badge bg-secondary">
+            <i class="{{ icon }}"></i>
+            <a class="link-light"
+               href="{{
+               path(
+                   (targetPath),
+                   app.request.query.all|merge({
+                   (key): (value),
+                   page: ''
+               })
+               )
+               }}">{{ caption }}</a>
+        </span>
     {% endif %}
 {% endmacro %}

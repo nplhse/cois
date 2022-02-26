@@ -65,7 +65,7 @@ class HospitalOwnerFilter implements FilterInterface
             return $qb;
         }
 
-        return $qb->orWhere($arguments[FilterService::ENTITY_ALIAS].'owner = :owner')
+        return $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'owner = :owner')
             ->setParameter('owner', $owner)
         ;
     }
@@ -80,7 +80,7 @@ class HospitalOwnerFilter implements FilterInterface
             }
 
             return $qb->leftJoin($arguments[FilterService::ENTITY_ALIAS].'hospital', 'hospital')
-                ->orWhere('hospital.owner = :owner')
+                ->andWhere('hospital.owner = :owner')
                 ->setParameter('owner', $owner)
                 ;
         }

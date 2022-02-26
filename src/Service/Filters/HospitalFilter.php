@@ -9,9 +9,11 @@ use App\Service\Filters\Traits\FilterTrait;
 use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class HospitalFilter implements FilterInterface
 {
@@ -47,17 +49,23 @@ class HospitalFilter implements FilterInterface
         return $this->setCacheValue($value);
     }
 
-    public function getAltValue(Request $request): mixed
+    public function getAltValues(): array
     {
-        $hospitalId = $this->cacheValue ?? $this->getValue($request);
+        return (new FilesystemAdapter())->get('hospital_filter', function (ItemInterface $item) {
+            $qb = $this->hospitalRepository->createQueryBuilder('h');
+            $result = $qb->select('h.id, h.name')
+                ->orderBy('h.id')
+                ->getQuery()
+                ->getArrayResult();
 
-        if (isset($hospitalId)) {
-            $hospital = $this->hospitalRepository->findOneBy(['id' => $hospitalId]);
+            $values = [];
 
-            return $hospital->getName();
-        }
+            foreach ($result as $row) {
+                $values[$row['id']] = $row['name'];
+            }
 
-        return null;
+            return $values;
+        });
     }
 
     public function supportsForm(): bool
