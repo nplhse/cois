@@ -9,12 +9,15 @@ use App\Domain\Command\Import\ImportDataCommand;
 use App\Domain\Contracts\UserInterface;
 use App\Domain\Event\Import\ImportFailedEvent;
 use App\Entity\Import;
+use App\Factory\ImportFilterFactory;
+use App\Factory\OrderFilterFactory;
 use App\Factory\PaginationFactory;
+use App\Factory\SearchFilterFactory;
 use App\Form\ImportType;
+use App\Repository\HospitalRepository;
 use App\Repository\ImportRepository;
 use App\Repository\SkippedRowRepository;
 use App\Service\Filters\HospitalFilter;
-use App\Service\Filters\ImportFilterSet;
 use App\Service\Filters\ImportStatusFilter;
 use App\Service\Filters\OrderFilter;
 use App\Service\Filters\OwnHospitalFilter;
@@ -51,45 +54,37 @@ class ImportController extends AbstractController
     }
 
     #[Route(path: '/', name: 'app_import_index')]
-    public function index(Request $request, ImportRepository $importRepository): Response
+    public function index(Request $request, ImportRepository $importRepository, ImportFilterFactory $importFilterFactory, OrderFilterFactory $orderFilterFactory, SearchFilterFactory $searchFilterFactory): Response
     {
         $this->filterService->setRequest($request);
-        $this->filterService->configureFilters([ImportFilterSet::Param, OwnImportFilter::Param, ImportStatusFilter::Param, UserFilter::Param, HospitalFilter::Param, OwnHospitalFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
+        $this->filterService->configureFilters($importFilterFactory->getFilters());
 
         $paginator = $importRepository->getImportPaginator($this->filterService);
 
-        $args = [
-            'action' => $this->generateUrl('app_import_index'),
-            'method' => 'GET',
-        ];
+        $importFilterFactory->setHiddenFields([
+            SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
+            OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
+        ]);
 
-        $importArguments = [
-            'hidden' => [
-                SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
-                OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
-            ],
-        ];
-
-        $importForm = $this->filterService->buildForm(ImportFilterSet::Param, array_merge($importArguments, $args));
+        $importForm = $importFilterFactory->setAction($this->generateUrl('app_import_index'))->getForm();
         $importForm->handleRequest($request);
 
-        $sortArguments = [
-            'sortable' => ImportRepository::SORTABLE,
-            'hidden' => [
-                SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
-            ],
-        ];
+        $orderFilterFactory->setHiddenFields([
+            OwnImportFilter::Param => $this->filterService->getValue(OwnImportFilter::Param),
+            ImportStatusFilter::Param => $this->filterService->getValue(ImportStatusFilter::Param),
+            UserFilter::Param => $this->filterService->getValue(UserFilter::Param),
+            HospitalFilter::Param => $this->filterService->getValue(HospitalFilter::Param),
+            OwnHospitalFilter::Param => $this->filterService->getValue(OwnHospitalFilter::Param),
+            SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
+        ]);
 
-        $sortForm = $this->filterService->buildForm(OrderFilter::Param, array_merge($sortArguments, $args));
-        $sortForm->handleRequest($request);
+        $sortForm = $orderFilterFactory->setSortable(HospitalRepository::SORTABLE)->setAction($this->generateUrl('app_import_index'))->getForm();
 
-        $searchArguments = [
-            'hidden' => [
-                OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
-            ],
-        ];
+        $searchFilterFactory->setHiddenFields([
+            OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
+        ]);
 
-        $searchForm = $this->filterService->buildForm(SearchFilter::Param, array_merge($searchArguments, $args));
+        $searchForm = $searchFilterFactory->setAction($this->generateUrl('app_import_index'))->getForm();
         $searchForm->handleRequest($request);
 
         return $this->renderForm('import/index.html.twig', [
