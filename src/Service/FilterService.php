@@ -52,19 +52,6 @@ class FilterService
         return null;
     }
 
-    public function buildForm(string $filter, array $arguments): mixed
-    {
-        if (!in_array($filter, $this->availableFilters, true)) {
-            throw new FilterNotFoundException('Could not find filter: '.$filter);
-        }
-
-        if (!$this->filters[$filter]->supportsForm()) {
-            throw new FilterDoesNotSupportForms('Filter '.$filter.' does not support building forms.');
-        }
-
-        return $this->filters[$filter]->buildForm($arguments);
-    }
-
     public function processQuery(QueryBuilder $qb, array $arguments): mixed
     {
         if (!array_key_exists(self::ENTITY_ALIAS, $arguments)) {

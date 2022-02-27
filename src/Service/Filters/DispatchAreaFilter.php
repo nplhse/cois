@@ -18,13 +18,10 @@ class DispatchAreaFilter implements FilterInterface
 
     public const Param = 'dispatchArea';
 
-    private FormFactoryInterface $formFactory;
-
     private DispatchAreaRepository $dispatchAreaRepository;
 
-    public function __construct(FormFactoryInterface $formFactory, DispatchAreaRepository $dispatchAreaRepository)
+    public function __construct(DispatchAreaRepository $dispatchAreaRepository)
     {
-        $this->formFactory = $formFactory;
         $this->dispatchAreaRepository = $dispatchAreaRepository;
     }
 
