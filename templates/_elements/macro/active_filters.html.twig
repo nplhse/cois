@@ -11,22 +11,28 @@
             </span>
 
             {% for key, filter in filters.getFilters %}
-                {% if key == 'ownHospitals' %}
+                {% if filter.type == 'boolean' %}
                     <a href="{{
                     path(
                         targetPath,
                         app.request.query.all|merge({
-                        ownHospitals: '',
+                        (key): '',
                         page: ''
                     })
                     )
                     }}">
                     <span class="badge rounded-pill bg-primary">
-                        <u>{{ 'Own hospitals'|trans }}</u>
+                        <u>
+                            {% if filter.altValue %}
+                                {{ filter.altValue|trans }}
+                            {% else %}
+                                {{ filter.value }}
+                            {% endif %}
+                        </u>
                         <i class="bi bi-x-lg"></i>
                     </span>
                     </a>
-                {% elseif key == 'date' %}
+                {% elseif filter.type == 'date' %}
                     {% if filter.value.startDate is not empty %}
                         <a href="{{
                         path(
@@ -38,7 +44,7 @@
                         )
                         }}">
                             <span class="badge rounded-pill bg-primary">
-                                <u>{{ filter.key|trans }}:</u>
+                                <u>{{ 'Start Date'|trans }}:</u>
                                     {{ filter.value.startDate|date(
                                         'd.m.Y',
                                         'Europe/Berlin'
@@ -58,7 +64,7 @@
                         )
                         }}">
                             <span class="badge rounded-pill bg-primary">
-                                <u>{{ filter.key|trans }}:</u>
+                                <u>{{ 'End Date'|trans }}:</u>
                                     {{ filter.value.endDate|date(
                                         'd.m.Y',
                                         'Europe/Berlin'

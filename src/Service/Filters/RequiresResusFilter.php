@@ -34,6 +34,16 @@ class RequiresResusFilter implements FilterInterface
         return $this->setCacheValue($value);
     }
 
+    public function getAltValues(): mixed
+    {
+        return ['1' => 'Requires Resuscitation'];
+    }
+
+    public function getType(): string
+    {
+        return 'boolean';
+    }
+
     public function supportsForm(): bool
     {
         return false;

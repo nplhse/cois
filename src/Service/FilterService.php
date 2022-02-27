@@ -90,10 +90,16 @@ class FilterService
                     $altValues = [];
                 }
 
+                if (method_exists($this->filters[$filter], 'getType')) {
+                    $type = $this->filters[$filter]->getType();
+                } else {
+                    $type = 'string';
+                }
+
                 $key = $this->filters[$filter]->getParam();
                 $value = $this->filters[$filter]->getValue($this->request);
 
-                $filterDto->addFilter($key, $value, $altValues);
+                $filterDto->addFilter($key, $value, $altValues, $type);
             }
         }
 

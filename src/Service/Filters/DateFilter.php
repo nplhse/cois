@@ -38,6 +38,11 @@ class DateFilter implements FilterInterface
         return $this->setCacheValue($value);
     }
 
+    public function getType(): string
+    {
+        return 'date';
+    }
+
     public function supportsForm(): bool
     {
         return false;

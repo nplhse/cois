@@ -34,6 +34,20 @@ class UrgencyFilter implements FilterInterface
         return $this->setCacheValue($value);
     }
 
+    public function getAltValues(): mixed
+    {
+        return [
+            '1' => 'SK1',
+            '2' => 'SK2',
+            '3' => 'SK3',
+        ];
+    }
+
+    public function getType(): string
+    {
+        return 'string';
+    }
+
     public function supportsForm(): bool
     {
         return false;

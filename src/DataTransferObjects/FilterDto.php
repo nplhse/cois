@@ -12,15 +12,15 @@ class FilterDto
 
     private array $filterItems = [];
 
-    public function addFilter(string $key, mixed $value, array $altValues): void
+    public function addFilter(string $key, mixed $value, array $altValues, string $type = 'string'): void
     {
-        $this->filterItems[$key] = new FilterItemDto($key, $value, $altValues);
+        $this->filterItems[$key] = new FilterItemDto($key, $value, $altValues, $type);
 
         switch ($key) {
             case PageFilter::Param:
             case OrderFilter::Param:
                 break;
-            case DateFilter::Param;
+            case DateFilter::Param:
                 foreach ($value as $itemKey => $itemValue) {
                     if (!is_null($itemValue)) {
                         $this->active = true;
@@ -33,8 +33,6 @@ class FilterDto
                 }
                 break;
         }
-
-        dump($key);
     }
 
     public function getFilter(string $key): ?FilterItemDto

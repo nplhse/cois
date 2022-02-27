@@ -2138,6 +2138,22 @@
         <source>SkippedRows</source>
         <target>Skipped Rows</target>
       </trans-unit>
+      <trans-unit id="23v8833" resname="Indication">
+        <source>Indication</source>
+        <target>Indication</target>
+      </trans-unit>
+      <trans-unit id="4385834" resname="ModeOfTransport">
+        <source>ModeOfTransport</source>
+        <target>ModeOfTransport</target>
+      </trans-unit>
+      <trans-unit id="3453d53" resname="SpecialityDetail">
+        <source>SpecialityDetail</source>
+        <target>SpecialityDetail</target>
+      </trans-unit>
+      <trans-unit id="345s3553" resname="Own Hospitals">
+        <source>Own Hospitals</source>
+        <target>Own Hospitals</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

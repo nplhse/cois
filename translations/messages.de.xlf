@@ -2213,6 +2213,22 @@
         <source>SkippedRows</source>
         <target>Übersprungene Zeilen</target>
       </trans-unit>
+      <trans-unit id="238833" resname="Indication">
+        <source>Indication</source>
+        <target>RMI</target>
+      </trans-unit>
+      <trans-unit id="438834" resname="ModeOfTransport">
+        <source>ModeOfTransport</source>
+        <target>Transportart</target>
+      </trans-unit>
+      <trans-unit id="345353" resname="SpecialityDetail">
+        <source>SpecialityDetail</source>
+        <target>Fachbereich</target>
+      </trans-unit>
+      <trans-unit id="3453553" resname="Own Hospitals">
+        <source>Own Hospitals</source>
+        <target>Eigene Kliniken</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

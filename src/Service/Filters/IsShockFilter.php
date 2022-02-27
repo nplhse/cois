@@ -34,6 +34,16 @@ class IsShockFilter implements FilterInterface
         return $this->setCacheValue($value);
     }
 
+    public function getAltValues(): mixed
+    {
+        return ['1' => 'Is Shock'];
+    }
+
+    public function getType(): string
+    {
+        return 'boolean';
+    }
+
     public function supportsForm(): bool
     {
         return false;
