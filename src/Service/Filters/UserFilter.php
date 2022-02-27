@@ -7,10 +7,10 @@ use App\Repository\UserRepository;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class UserFilter implements FilterInterface
 {
@@ -22,10 +22,13 @@ class UserFilter implements FilterInterface
 
     private UserRepository $userRepository;
 
-    public function __construct(Security $security, UserRepository $userRepository)
+    private TagAwareCacheInterface $cache;
+
+    public function __construct(Security $security, UserRepository $userRepository, TagAwareCacheInterface $appCache)
     {
         $this->security = $security;
         $this->userRepository = $userRepository;
+        $this->cache = $appCache;
     }
 
     public function getValue(Request $request): mixed
@@ -47,8 +50,9 @@ class UserFilter implements FilterInterface
 
     public function getAltValues(): array
     {
-        return (new FilesystemAdapter())->get('user_filter', function (ItemInterface $item) {
+        return $this->cache->get('user_filter', function (ItemInterface $item) {
             $item->expiresAfter(3600);
+            $item->tag(['filter', 'user_filter']);
 
             $qb = $this->userRepository->createQueryBuilder('u');
             $result = $qb->select('u.id, u.username as name')

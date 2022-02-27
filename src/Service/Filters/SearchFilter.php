@@ -3,7 +3,6 @@
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
-use App\Repository\UserRepository;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;

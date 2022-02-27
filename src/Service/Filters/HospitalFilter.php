@@ -8,10 +8,10 @@ use App\Repository\HospitalRepository;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class HospitalFilter implements FilterInterface
 {
@@ -23,10 +23,13 @@ class HospitalFilter implements FilterInterface
 
     private Security $security;
 
-    public function __construct(HospitalRepository $hospitalRepository, Security $security)
+    private TagAwareCacheInterface $cache;
+
+    public function __construct(HospitalRepository $hospitalRepository, Security $security, TagAwareCacheInterface $appCache)
     {
         $this->hospitalRepository = $hospitalRepository;
         $this->security = $security;
+        $this->cache = $appCache;
     }
 
     public function getValue(Request $request): mixed
@@ -48,8 +51,9 @@ class HospitalFilter implements FilterInterface
 
     public function getAltValues(): array
     {
-        return (new FilesystemAdapter())->get('hospital_filter', function (ItemInterface $item) {
+        return $this->cache->get('hospital_filter', function (ItemInterface $item) {
             $item->expiresAfter(3600);
+            $item->tag(['filter', 'hospital_filter']);
 
             $qb = $this->hospitalRepository->createQueryBuilder('h');
             $result = $qb->select('h.id, h.name')

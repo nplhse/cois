@@ -7,9 +7,9 @@ use App\Repository\StateRepository;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class StateFilter implements FilterInterface
 {
@@ -19,9 +19,12 @@ class StateFilter implements FilterInterface
 
     private StateRepository $stateRepository;
 
-    public function __construct(StateRepository $stateRepository)
+    private TagAwareCacheInterface $cache;
+
+    public function __construct(StateRepository $stateRepository, TagAwareCacheInterface $appCache)
     {
         $this->stateRepository = $stateRepository;
+        $this->cache = $appCache;
     }
 
     public function getValue(Request $request): mixed
@@ -39,8 +42,9 @@ class StateFilter implements FilterInterface
 
     public function getAltValues(): array
     {
-        return (new FilesystemAdapter())->get('state_filter', function (ItemInterface $item) {
+        return $this->cache->get('state_filter', function (ItemInterface $item) {
             $item->expiresAfter(3600);
+            $item->tag(['filter', 'state_filter']);
 
             $qb = $this->stateRepository->createQueryBuilder('s');
             $result = $qb->select('s.id, s.name')

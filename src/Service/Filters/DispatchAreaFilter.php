@@ -7,9 +7,9 @@ use App\Repository\DispatchAreaRepository;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class DispatchAreaFilter implements FilterInterface
 {
@@ -19,9 +19,12 @@ class DispatchAreaFilter implements FilterInterface
 
     private DispatchAreaRepository $dispatchAreaRepository;
 
-    public function __construct(DispatchAreaRepository $dispatchAreaRepository)
+    private TagAwareCacheInterface $cache;
+
+    public function __construct(DispatchAreaRepository $dispatchAreaRepository, TagAwareCacheInterface $appCache)
     {
         $this->dispatchAreaRepository = $dispatchAreaRepository;
+        $this->cache = $appCache;
     }
 
     public function getValue(Request $request): mixed
@@ -39,8 +42,9 @@ class DispatchAreaFilter implements FilterInterface
 
     public function getAltValues(): array
     {
-        return (new FilesystemAdapter())->get('dispatch_area_filter', function (ItemInterface $item) {
+        return $this->cache->get('dispatch_area_filter', function (ItemInterface $item) {
             $item->expiresAfter(3600);
+            $item->tag(['filter', 'dispatch_area_filter']);
 
             $qb = $this->dispatchAreaRepository->createQueryBuilder('d');
             $result = $qb->select('d.id, d.name')

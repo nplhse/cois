@@ -7,9 +7,9 @@ use App\Repository\SupplyAreaRepository;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class SupplyAreaFilter implements FilterInterface
 {
@@ -19,9 +19,12 @@ class SupplyAreaFilter implements FilterInterface
 
     private SupplyAreaRepository $supplyAreaRepository;
 
-    public function __construct(SupplyAreaRepository $supplyAreaRepository)
+    private TagAwareCacheInterface $cache;
+
+    public function __construct(SupplyAreaRepository $supplyAreaRepository, TagAwareCacheInterface $appCache)
     {
         $this->supplyAreaRepository = $supplyAreaRepository;
+        $this->cache = $appCache;
     }
 
     public function getValue(Request $request): mixed
@@ -39,8 +42,9 @@ class SupplyAreaFilter implements FilterInterface
 
     public function getAltValues(): array
     {
-        return (new FilesystemAdapter())->get('supply_area_filter', function (ItemInterface $item) {
+        return $this->cache->get('supply_area_filter', function (ItemInterface $item) {
             $item->expiresAfter(3600);
+            $item->tag(['filter', 'supply_area_filter']);
 
             $qb = $this->supplyAreaRepository->createQueryBuilder('s');
             $result = $qb->select('s.id, s.name')
