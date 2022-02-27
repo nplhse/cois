@@ -10,61 +10,123 @@
                 {{ 'Active Filters'|trans }}:&nbsp;
             </span>
 
-            {% for key, filter in filters.all %}
-                {% if is_type(filter, 'string') %}
-                    {% if key != "order" %}
-                            <a href="{{
-                            path(
-                                targetPath,
-                                app.request.query.all|merge({
-                                (key): '',
-                                page: ''
-                            })
-                            )
-                            }}">
-                            <span class="badge rounded-pill bg-primary">
-                                <u>{{ key|capitalize }}:</u>
-                                {{ filter|capitalize }}
-                                <i class="bi bi-x-lg"></i>
-                            </span>
-                            </a>
-                    {% endif %}
-                {% endif %}
-                {% if is_type(filter, 'integer') %}
-                    {% if key != "page" %}
+            {% for key, filter in filters.getFilters %}
+                {% if filter.type == 'boolean' %}
+                    <a href="{{
+                    path(
+                        targetPath,
+                        app.request.query.all|merge({
+                        (key): '',
+                        page: ''
+                    })
+                    )
+                    }}">
+                    <span class="badge rounded-pill bg-primary">
+                        <u>
+                            {% if filter.altValue %}
+                                {{ filter.altValue|trans }}
+                            {% else %}
+                                {{ filter.value }}
+                            {% endif %}
+                        </u>
+                        <i class="bi bi-x-lg"></i>
+                    </span>
+                    </a>
+                {% elseif filter.type == 'date' %}
+                    {% if filter.value.startDate is not empty %}
                         <a href="{{
                         path(
                             targetPath,
                             app.request.query.all|merge({
-                            (key): '',
+                            startDate: '',
                             page: ''
                         })
                         )
                         }}">
-                            {% if filters.altValue(key) %}
-                                <span class="badge rounded-pill bg-primary">
-                                <u>{{ key|capitalize }}:</u>
-                                {{ filters.altValue(key)|capitalize }}
+                            <span class="badge rounded-pill bg-primary">
+                                <u>{{ 'Start Date'|trans }}:</u>
+                                    {{ filter.value.startDate|date(
+                                        'd.m.Y',
+                                        'Europe/Berlin'
+                                    ) }}
                                 <i class="bi bi-x-lg"></i>
                             </span>
-                            {% else %}
-                                {% if key == "own-hospital" %}
-                                    <span class="badge rounded-pill bg-primary">
-                                        <u>{{ 'Own hospitals'|trans }}</u>
-                                        <i class="bi bi-x-lg"></i>
-                                    </span>
-                                {% else %}
-                                    <span class="badge rounded-pill bg-primary">
-                                        <u>{{ key|capitalize }}:</u>
-                                        {{ filter|capitalize }}
-                                        <i class="bi bi-x-lg"></i>
-                                    </span>
-                                {% endif %}
-                            {% endif %}
                         </a>
                     {% endif %}
+                    {% if filter.value.endDate is not empty %}
+                        <a href="{{
+                        path(
+                            targetPath,
+                            app.request.query.all|merge({
+                            endDate: '',
+                            page: ''
+                        })
+                        )
+                        }}">
+                            <span class="badge rounded-pill bg-primary">
+                                <u>{{ 'End Date'|trans }}:</u>
+                                    {{ filter.value.endDate|date(
+                                        'd.m.Y',
+                                        'Europe/Berlin'
+                                    ) }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                {% else %}
+                    <a href="{{
+                    path(
+                        targetPath,
+                        app.request.query.all|merge({
+                        (key): '',
+                        page: ''
+                    })
+                    )
+                    }}">
+                        <span class="badge rounded-pill bg-primary">
+                            <u>{{ filter.key|trans }}:</u>
+                            {% if filter.altValue %}
+                                {{ filter.altValue }}
+                            {% else %}
+                                {{ filter.value|trans }}
+                            {% endif %}
+                            <i class="bi bi-x-lg"></i>
+                        </span>
+                    </a>
                 {% endif %}
             {% endfor %}
         </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro widget(filters, key, caption, value, targetPath, icon = 'bi bi-tag') %}
+    {% if filters.getFilter(key) and filters.getFilter(key).value == (value) %}
+        <span class="badge bg-primary">
+            <i class="{{ icon }}"></i>
+            <a class="link-light"
+               href="{{
+               path(
+                   (targetPath),
+                   app.request.query.all|merge({
+                   (key): '',
+                   page: ''
+               })
+               )
+               }}">{{ caption }}</a>
+        </span>
+    {% else %}
+        <span class="badge bg-secondary">
+            <i class="{{ icon }}"></i>
+            <a class="link-light"
+               href="{{
+               path(
+                   (targetPath),
+                   app.request.query.all|merge({
+                   (key): (value),
+                   page: ''
+               })
+               )
+               }}">{{ caption }}</a>
+        </span>
     {% endif %}
 {% endmacro %}

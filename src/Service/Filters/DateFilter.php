@@ -4,16 +4,13 @@ namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
 use App\Service\Filters\Traits\FilterTrait;
-use App\Service\Filters\Traits\HiddenFieldTrait;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class DateFilter implements FilterInterface
 {
     use FilterTrait;
-    use HiddenFieldTrait;
 
     public const Param = 'date';
 
@@ -38,14 +35,9 @@ class DateFilter implements FilterInterface
         return $this->setCacheValue($value);
     }
 
-    public function supportsForm(): bool
+    public function getType(): string
     {
-        return false;
-    }
-
-    public function buildForm(array $arguments): ?FormInterface
-    {
-        return null;
+        return 'date';
     }
 
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder

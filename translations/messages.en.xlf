@@ -211,7 +211,7 @@
       </trans-unit>
       <trans-unit id="y125qmS" resname="dashboard.allocations.by_hospital">
         <source>dashboard.allocations.by_hospital</source>
-        <target>There are %count% allocations from this hospital.</target>
+        <target>There have been %imports% imports that created %allocations% allocations from this hospital.</target>
       </trans-unit>
       <trans-unit id="iPZX6a2" resname="hospitals.admin.warning">
         <source>hospitals.admin.warning</source>
@@ -2126,9 +2126,9 @@
         <source>incomplete</source>
         <target>Incomplete</target>
       </trans-unit>
-      <trans-unit id="XSipD0S" resname="failed">
-        <source>failed</source>
-        <target>Failed</target>
+      <trans-unit id="FtNLXnv" resname="failure">
+        <source>failure</source>
+        <target>Failure</target>
       </trans-unit>
       <trans-unit id="Kraywhc" resname="RowCount">
         <source>RowCount</source>
@@ -2137,6 +2137,34 @@
       <trans-unit id="bu1YKDt" resname="SkippedRows">
         <source>SkippedRows</source>
         <target>Skipped Rows</target>
+      </trans-unit>
+      <trans-unit id="dLTsgXa" resname="Indication">
+        <source>Indication</source>
+        <target>Indication</target>
+      </trans-unit>
+      <trans-unit id="zGBj_7W" resname="ModeOfTransport">
+        <source>ModeOfTransport</source>
+        <target>Mode of transport</target>
+      </trans-unit>
+      <trans-unit id="f0qzWtK" resname="SpecialityDetail">
+        <source>SpecialityDetail</source>
+        <target>Speciality detail</target>
+      </trans-unit>
+      <trans-unit id="AA5BUE9" resname="Own Hospitals">
+        <source>Own Hospitals</source>
+        <target>Own Hospitals</target>
+      </trans-unit>
+      <trans-unit id="0FFBR0h" resname="Own Imports">
+        <source>Own Imports</source>
+        <target>Own Imports</target>
+      </trans-unit>
+      <trans-unit id="zYZQVU3" resname="ImportStatus">
+        <source>ImportStatus</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="TU0M0g." resname="Geographical location">
+        <source>Geographical location</source>
+        <target>__Geographical location</target>
       </trans-unit>
     </body>
   </file>

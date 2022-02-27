@@ -4,16 +4,13 @@ namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
 use App\Service\Filters\Traits\FilterTrait;
-use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class UrgencyFilter implements FilterInterface
 {
     use FilterTrait;
-    use HiddenFieldTrait;
 
     public const Param = 'urgency';
 
@@ -34,14 +31,18 @@ class UrgencyFilter implements FilterInterface
         return $this->setCacheValue($value);
     }
 
-    public function supportsForm(): bool
+    public function getAltValues(): mixed
     {
-        return false;
+        return [
+            '1' => 'SK1',
+            '2' => 'SK2',
+            '3' => 'SK3',
+        ];
     }
 
-    public function buildForm(array $arguments): ?FormInterface
+    public function getType(): string
     {
-        return null;
+        return 'string';
     }
 
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder

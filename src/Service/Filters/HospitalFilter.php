@@ -6,17 +6,16 @@ use App\Application\Contract\FilterInterface;
 use App\Entity\User;
 use App\Repository\HospitalRepository;
 use App\Service\Filters\Traits\FilterTrait;
-use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class HospitalFilter implements FilterInterface
 {
     use FilterTrait;
-    use HiddenFieldTrait;
 
     public const Param = 'hospital';
 
@@ -47,27 +46,25 @@ class HospitalFilter implements FilterInterface
         return $this->setCacheValue($value);
     }
 
-    public function getAltValue(Request $request): mixed
+    public function getAltValues(): array
     {
-        $hospitalId = $this->cacheValue ?? $this->getValue($request);
+        return (new FilesystemAdapter())->get('hospital_filter', function (ItemInterface $item) {
+            $item->expiresAfter(3600);
 
-        if (isset($hospitalId)) {
-            $hospital = $this->hospitalRepository->findOneBy(['id' => $hospitalId]);
+            $qb = $this->hospitalRepository->createQueryBuilder('h');
+            $result = $qb->select('h.id, h.name')
+                ->orderBy('h.id')
+                ->getQuery()
+                ->getArrayResult();
 
-            return $hospital->getName();
-        }
+            $values = [];
 
-        return null;
-    }
+            foreach ($result as $row) {
+                $values[$row['id']] = $row['name'];
+            }
 
-    public function supportsForm(): bool
-    {
-        return false;
-    }
-
-    public function buildForm(array $arguments): ?FormInterface
-    {
-        return null;
+            return $values;
+        });
     }
 
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder

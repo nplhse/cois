@@ -7,9 +7,6 @@ use App\Application\Exception\FilterDoesNotSupportForms;
 use App\Application\Exception\FilterMissingArgumentException;
 use App\Application\Exception\FilterNotFoundException;
 use App\DataTransferObjects\FilterDto;
-use App\Service\Filters\DateFilter;
-use App\Service\Filters\OrderFilter;
-use App\Service\Filters\PageFilter;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -55,19 +52,6 @@ class FilterService
         return null;
     }
 
-    public function buildForm(string $filter, array $arguments): mixed
-    {
-        if (!in_array($filter, $this->availableFilters, true)) {
-            throw new FilterNotFoundException('Could not find filter: '.$filter);
-        }
-
-        if (!$this->filters[$filter]->supportsForm()) {
-            throw new FilterDoesNotSupportForms('Filter '.$filter.' does not support building forms.');
-        }
-
-        return $this->filters[$filter]->buildForm($arguments);
-    }
-
     public function processQuery(QueryBuilder $qb, array $arguments): mixed
     {
         if (!array_key_exists(self::ENTITY_ALIAS, $arguments)) {
@@ -83,32 +67,27 @@ class FilterService
 
     public function getFilterDto(): FilterDto
     {
-        $filterDto = new FilterDto([]);
+        $filterDto = new FilterDto();
 
         foreach ($this->availableFilters as $filter) {
             if ($this->filters[$filter]->getValue($this->request)) {
-                switch ($this->filters[$filter]->getParam()) {
-                    case PageFilter::Param:
-                    case OrderFilter::Param:
-                        break;
-                    case DateFilter::Param:
-                        $date = $this->filters[$filter]->getValue($this->request);
-                        if (null === $date['startDate'] && null === $date['endDate']) {
-                            break;
-                        }
-                        // no break
-                    default:
-                        $filterDto->activate();
+                if (method_exists($this->filters[$filter], 'getAltValues')) {
+                    $altValues = $this->filters[$filter]->getAltValues();
+                } else {
+                    $altValues = [];
                 }
-            }
 
-            if (method_exists($this->filters[$filter], 'getAltValue')) {
-                $altValue = $this->filters[$filter]->getAltValue($this->request);
-            } else {
-                $altValue = null;
-            }
+                if (method_exists($this->filters[$filter], 'getType')) {
+                    $type = $this->filters[$filter]->getType();
+                } else {
+                    $type = 'string';
+                }
 
-            $filterDto->set($this->filters[$filter]->getParam(), $this->filters[$filter]->getValue($this->request), $altValue);
+                $key = $this->filters[$filter]->getParam();
+                $value = $this->filters[$filter]->getValue($this->request);
+
+                $filterDto->addFilter($key, $value, $altValues, $type);
+            }
         }
 
         return $filterDto;

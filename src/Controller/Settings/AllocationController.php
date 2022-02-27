@@ -3,14 +3,18 @@
 namespace App\Controller\Settings;
 
 use App\Entity\Allocation;
+use App\Factory\AllocationFilterFactory;
+use App\Factory\OrderFilterFactory;
 use App\Factory\PaginationFactory;
+use App\Factory\SearchFilterFactory;
 use App\Repository\AllocationRepository;
-use App\Service\Filters\AllocationFilterSet;
+use App\Repository\HospitalRepository;
 use App\Service\Filters\AssignmentFilter;
 use App\Service\Filters\DateFilter;
 use App\Service\Filters\DispatchAreaFilter;
 use App\Service\Filters\HospitalFilter;
 use App\Service\Filters\HospitalOwnerFilter;
+use App\Service\Filters\ImportFilter;
 use App\Service\Filters\IndicationFilter;
 use App\Service\Filters\InfectionFilter;
 use App\Service\Filters\IsCPRFilter;
@@ -19,7 +23,6 @@ use App\Service\Filters\IsShockFilter;
 use App\Service\Filters\IsVentilatedFilter;
 use App\Service\Filters\IsWithPhysicianFilter;
 use App\Service\Filters\IsWorkAccidentFilter;
-use App\Service\Filters\LocationFilter;
 use App\Service\Filters\ModeOfTransportFilter;
 use App\Service\Filters\OccasionFilter;
 use App\Service\Filters\OrderFilter;
@@ -52,49 +55,56 @@ class AllocationController extends AbstractController
     }
 
     #[Route('/', name: 'app_settings_allocation_index', methods: ['GET'])]
-    public function index(Request $request, AllocationRepository $allocationRepository): Response
+    public function index(Request $request, AllocationRepository $allocationRepository, AllocationFilterFactory $allocationFilterFactory, OrderFilterFactory $orderFilterFactory, SearchFilterFactory $searchFilterFactory): Response
     {
         $this->filterService->setRequest($request);
-        $this->filterService->configureFilters([AllocationFilterSet::Param, HospitalFilter::Param, DateFilter::Param, IndicationFilter::Param, AssignmentFilter::Param, IndicationFilter::Param, InfectionFilter::Param, ModeOfTransportFilter::Param, OccasionFilter::Param, RequiresResusFilter::Param, RequiresCathlabFilter::Param, SpecialityFilter::Param, SpecialityDetailFilter::Param, UrgencyFilter::Param, IsCPRFilter::Param, IsPregnantFilter::Param, IsShockFilter::Param, IsVentilatedFilter::Param, IsWithPhysicianFilter::Param, IsWorkAccidentFilter::Param, StateFilter::Param, DispatchAreaFilter::Param, SupplyAreaFilter::Param, OwnHospitalFilter::Param, HospitalOwnerFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
+        $this->filterService->configureFilters($allocationFilterFactory->getFilters());
 
         $paginator = $allocationRepository->getAllocationPaginator($this->filterService);
 
-        $args = [
-            'action' => $this->generateUrl('app_settings_allocation_index'),
-            'method' => 'GET',
-        ];
+        $allocationFilterFactory->setHiddenFields([
+            SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
+            OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
+        ]);
 
-        $allocationArguments = [
-            'hidden' => [
-                SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
-                OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
-            ],
-        ];
-
-        $allocationForm = $this->filterService->buildForm(AllocationFilterSet::Param, array_merge($allocationArguments, $args));
+        $allocationForm = $allocationFilterFactory->setAction($this->generateUrl('app_settings_allocation_index'))->getForm();
         $allocationForm->handleRequest($request);
 
-        $sortArguments = [
-            'sortable' => AllocationRepository::SORTABLE,
-            'hidden' => [
-                LocationFilter::Param => $this->filterService->getValue(LocationFilter::Param),
-                StateFilter::Param => $this->filterService->getValue(StateFilter::Param),
-                SupplyAreaFilter::Param => $this->filterService->getValue(SupplyAreaFilter::Param),
-                DispatchAreaFilter::Param => $this->filterService->getValue(DispatchAreaFilter::Param),
-                SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
-            ],
-        ];
+        $orderFilterFactory->setHiddenFields([
+            HospitalFilter::Param => $this->filterService->getValue(HospitalFilter::Param),
+            ImportFilter::Param => $this->filterService->getValue(ImportFilter::Param),
+            DateFilter::Param => $this->filterService->getValue(DateFilter::Param),
+            IndicationFilter::Param => $this->filterService->getValue(IndicationFilter::Param),
+            AssignmentFilter::Param => $this->filterService->getValue(AssignmentFilter::Param),
+            InfectionFilter::Param => $this->filterService->getValue(InfectionFilter::Param),
+            ModeOfTransportFilter::Param => $this->filterService->getValue(ModeOfTransportFilter::Param),
+            OccasionFilter::Param => $this->filterService->getValue(OccasionFilter::Param),
+            RequiresResusFilter::Param => $this->filterService->getValue(RequiresResusFilter::Param),
+            RequiresCathlabFilter::Param => $this->filterService->getValue(RequiresCathlabFilter::Param),
+            SpecialityFilter::Param => $this->filterService->getValue(SpecialityFilter::Param),
+            SpecialityDetailFilter::Param => $this->filterService->getValue(SpecialityDetailFilter::Param),
+            UrgencyFilter::Param => $this->filterService->getValue(UrgencyFilter::Param),
+            IsCPRFilter::Param => $this->filterService->getValue(IsCPRFilter::Param),
+            IsPregnantFilter::Param => $this->filterService->getValue(IsPregnantFilter::Param),
+            IsShockFilter::Param => $this->filterService->getValue(IsShockFilter::Param),
+            IsVentilatedFilter::Param => $this->filterService->getValue(IsVentilatedFilter::Param),
+            IsWithPhysicianFilter::Param => $this->filterService->getValue(IsWithPhysicianFilter::Param),
+            IsWorkAccidentFilter::Param => $this->filterService->getValue(IsWorkAccidentFilter::Param),
+            OwnHospitalFilter::Param => $this->filterService->getValue(OwnHospitalFilter::Param),
+            HospitalOwnerFilter::Param => $this->filterService->getValue(HospitalOwnerFilter::Param),
+            StateFilter::Param => $this->filterService->getValue(StateFilter::Param),
+            SupplyAreaFilter::Param => $this->filterService->getValue(SupplyAreaFilter::Param),
+            DispatchAreaFilter::Param => $this->filterService->getValue(DispatchAreaFilter::Param),
+            SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
+        ]);
 
-        $sortForm = $this->filterService->buildForm(OrderFilter::Param, array_merge($sortArguments, $args));
-        $sortForm->handleRequest($request);
+        $sortForm = $orderFilterFactory->setSortable(HospitalRepository::SORTABLE)->setAction($this->generateUrl('app_settings_allocation_index'))->getForm();
 
-        $searchArguments = [
-            'hidden' => [
-                OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
-            ],
-        ];
+        $searchFilterFactory->setHiddenFields([
+            OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
+        ]);
 
-        $searchForm = $this->filterService->buildForm(SearchFilter::Param, array_merge($searchArguments, $args));
+        $searchForm = $searchFilterFactory->setAction($this->generateUrl('app_settings_allocation_index'))->getForm();
         $searchForm->handleRequest($request);
 
         return $this->renderForm('settings/allocation/index.html.twig', [

@@ -95,6 +95,7 @@ class ImportService
                     $errors = $this->validator->validate($entity);
 
                     if (count($errors) > 0) {
+                        $errorMessage = '';
                         foreach ($errors as $error) {
                             $errorMessage = $error->getMessage().'\n';
                         }

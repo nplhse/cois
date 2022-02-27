@@ -466,6 +466,10 @@ class AllocationRepository extends ServiceEntityRepository
             ->getArrayResult();
 
         foreach ($results as $result) {
+            if (empty($result['specialityDetail'])) {
+                continue;
+            }
+
             if (!in_array($result['specialityDetail'], $speciality, true)) {
                 $speciality[$result['specialityDetail']] = $result['specialityDetail'];
             }

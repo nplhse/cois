@@ -7,15 +7,15 @@ use App\Domain\Command\Hospital\DeleteHospitalCommand;
 use App\Domain\Command\Hospital\EditHospitalCommand;
 use App\Domain\Contracts\HospitalInterface;
 use App\Entity\Hospital;
+use App\Factory\HospitalFilterFactory;
+use App\Factory\OrderFilterFactory;
 use App\Factory\PaginationFactory;
+use App\Factory\SearchFilterFactory;
 use App\Form\HospitalType;
 use App\Repository\HospitalRepository;
 use App\Service\Filters\DispatchAreaFilter;
-use App\Service\Filters\HospitalFilterSet;
-use App\Service\Filters\HospitalOwnerFilter;
 use App\Service\Filters\LocationFilter;
 use App\Service\Filters\OrderFilter;
-use App\Service\Filters\OwnHospitalFilter;
 use App\Service\Filters\PageFilter;
 use App\Service\Filters\SearchFilter;
 use App\Service\Filters\SizeFilter;
@@ -45,49 +45,37 @@ class HospitalController extends AbstractController
     }
 
     #[Route('/', name: 'app_settings_hospital_index', methods: ['GET'])]
-    public function index(Request $request, HospitalRepository $hospitalRepository): Response
+    public function index(Request $request, HospitalRepository $hospitalRepository, HospitalFilterFactory $hospitalFilterFactory, OrderFilterFactory $orderFilterFactory, SearchFilterFactory $searchFilterFactory): Response
     {
         $this->filterService->setRequest($request);
-        $this->filterService->configureFilters([LocationFilter::Param, SizeFilter::Param, StateFilter::Param, DispatchAreaFilter::Param, SupplyAreaFilter::Param, HospitalFilterSet::Param, OwnHospitalFilter::Param, HospitalOwnerFilter::Param, PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
+        $this->filterService->configureFilters($hospitalFilterFactory->getFilters());
 
         $paginator = $hospitalRepository->getHospitalPaginator($this->filterService);
 
-        $args = [
-            'action' => $this->generateUrl('app_settings_hospital_index'),
-            'method' => 'GET',
-        ];
+        $hospitalFilterFactory->setHiddenFields([
+            SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
+            OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
+        ]);
 
-        $hospitalArguments = [
-            'hidden' => [
-                SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
-                OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
-            ],
-        ];
-
-        $hospitalForm = $this->filterService->buildForm(HospitalFilterSet::Param, array_merge($hospitalArguments, $args));
+        $hospitalForm = $hospitalFilterFactory->setAction($this->generateUrl('app_settings_hospital_index'))->getForm();
         $hospitalForm->handleRequest($request);
 
-        $sortArguments = [
-            'sortable' => HospitalRepository::SORTABLE,
-            'hidden' => [
-                LocationFilter::Param => $this->filterService->getValue(LocationFilter::Param),
-                StateFilter::Param => $this->filterService->getValue(StateFilter::Param),
-                SupplyAreaFilter::Param => $this->filterService->getValue(SupplyAreaFilter::Param),
-                DispatchAreaFilter::Param => $this->filterService->getValue(DispatchAreaFilter::Param),
-                SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
-            ],
-        ];
+        $orderFilterFactory->setHiddenFields([
+            LocationFilter::Param => $this->filterService->getValue(LocationFilter::Param),
+            SizeFilter::Param => $this->filterService->getValue(SizeFilter::Param),
+            StateFilter::Param => $this->filterService->getValue(StateFilter::Param),
+            SupplyAreaFilter::Param => $this->filterService->getValue(SupplyAreaFilter::Param),
+            DispatchAreaFilter::Param => $this->filterService->getValue(DispatchAreaFilter::Param),
+            SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
+        ]);
 
-        $sortForm = $this->filterService->buildForm(OrderFilter::Param, array_merge($sortArguments, $args));
-        $sortForm->handleRequest($request);
+        $sortForm = $orderFilterFactory->setSortable(HospitalRepository::SORTABLE)->setAction($this->generateUrl('app_settings_hospital_index'))->getForm();
 
-        $searchArguments = [
-            'hidden' => [
-                OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
-            ],
-        ];
+        $searchFilterFactory->setHiddenFields([
+            OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
+        ]);
 
-        $searchForm = $this->filterService->buildForm(SearchFilter::Param, array_merge($searchArguments, $args));
+        $searchForm = $searchFilterFactory->setAction($this->generateUrl('app_settings_hospital_index'))->getForm();
         $searchForm->handleRequest($request);
 
         return $this->renderForm('settings/hospital/index.html.twig', [
