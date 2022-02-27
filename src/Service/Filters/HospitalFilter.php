@@ -6,11 +6,9 @@ use App\Application\Contract\FilterInterface;
 use App\Entity\User;
 use App\Repository\HospitalRepository;
 use App\Service\Filters\Traits\FilterTrait;
-use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Cache\ItemInterface;
@@ -18,7 +16,6 @@ use Symfony\Contracts\Cache\ItemInterface;
 class HospitalFilter implements FilterInterface
 {
     use FilterTrait;
-    use HiddenFieldTrait;
 
     public const Param = 'hospital';
 
@@ -52,6 +49,8 @@ class HospitalFilter implements FilterInterface
     public function getAltValues(): array
     {
         return (new FilesystemAdapter())->get('hospital_filter', function (ItemInterface $item) {
+            $item->expiresAfter(3600);
+
             $qb = $this->hospitalRepository->createQueryBuilder('h');
             $result = $qb->select('h.id, h.name')
                 ->orderBy('h.id')
@@ -66,16 +65,6 @@ class HospitalFilter implements FilterInterface
 
             return $values;
         });
-    }
-
-    public function supportsForm(): bool
-    {
-        return false;
-    }
-
-    public function buildForm(array $arguments): ?FormInterface
-    {
-        return null;
     }
 
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder
