@@ -50,7 +50,7 @@ class ImportReloadCommand extends Command
         try {
             $import = $this->importRepository->findOneBy(['id' => $importId]);
             $this->allocationRepository->deleteByImport($import);
-            $this->messageBus->dispatch(new ImportDataCommand($importId));
+            $this->messageBus->dispatch(new ImportDataCommand($import->getId()));
         } catch (HandlerFailedException $e) {
             $io->warning(sprintf('Something went wrong! Failed to reload import %d: %s.', $importId, $e->getMessage()));
 
