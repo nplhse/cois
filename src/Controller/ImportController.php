@@ -14,7 +14,6 @@ use App\Factory\OrderFilterFactory;
 use App\Factory\PaginationFactory;
 use App\Factory\SearchFilterFactory;
 use App\Form\ImportType;
-use App\Repository\HospitalRepository;
 use App\Repository\ImportRepository;
 use App\Repository\SkippedRowRepository;
 use App\Service\Filters\HospitalFilter;
@@ -78,7 +77,7 @@ class ImportController extends AbstractController
             SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
         ]);
 
-        $sortForm = $orderFilterFactory->setSortable(HospitalRepository::SORTABLE)->setAction($this->generateUrl('app_import_index'))->getForm();
+        $sortForm = $orderFilterFactory->setSortable(ImportRepository::SORTABLE)->setAction($this->generateUrl('app_import_index'))->getForm();
 
         $searchFilterFactory->setHiddenFields([
             OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),

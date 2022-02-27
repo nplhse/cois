@@ -3,6 +3,7 @@
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
+use App\Repository\UserRepository;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
@@ -32,8 +33,6 @@ class SearchFilter implements FilterInterface
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder
     {
         $search = $this->cacheValue ?? $this->getValue($request);
-
-        $this->checkArguments($arguments, [self::SEARCHABLE]);
 
         if (!isset($search)) {
             return $qb;

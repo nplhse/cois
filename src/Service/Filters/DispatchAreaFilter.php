@@ -8,7 +8,6 @@ use App\Service\Filters\Traits\FilterTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Contracts\Cache\ItemInterface;
 

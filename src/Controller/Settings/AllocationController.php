@@ -8,7 +8,6 @@ use App\Factory\OrderFilterFactory;
 use App\Factory\PaginationFactory;
 use App\Factory\SearchFilterFactory;
 use App\Repository\AllocationRepository;
-use App\Repository\HospitalRepository;
 use App\Service\Filters\AssignmentFilter;
 use App\Service\Filters\DateFilter;
 use App\Service\Filters\DispatchAreaFilter;
@@ -98,7 +97,7 @@ class AllocationController extends AbstractController
             SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
         ]);
 
-        $sortForm = $orderFilterFactory->setSortable(HospitalRepository::SORTABLE)->setAction($this->generateUrl('app_settings_allocation_index'))->getForm();
+        $sortForm = $orderFilterFactory->setSortable(AllocationRepository::SORTABLE)->setAction($this->generateUrl('app_settings_allocation_index'))->getForm();
 
         $searchFilterFactory->setHiddenFields([
             OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),

@@ -6,7 +6,9 @@ use App\Domain\Command\User\CreateUserCommand;
 use App\Domain\Command\User\EditUserCommand;
 use App\Domain\Command\User\PromoteUserCommand;
 use App\Entity\User;
+use App\Factory\OrderFilterFactory;
 use App\Factory\PaginationFactory;
+use App\Factory\SearchFilterFactory;
 use App\Form\User\UserType;
 use App\Repository\UserRepository;
 use App\Service\Filters\OrderFilter;
@@ -38,34 +40,24 @@ class UserController extends AbstractController
     }
 
     #[Route('/', name: 'app_settings_user_index', methods: ['GET'])]
-    public function index(Request $request, UserRepository $userRepository): Response
+    public function index(Request $request, UserRepository $userRepository, OrderFilterFactory $orderFilterFactory, SearchFilterFactory $searchFilterFactory): Response
     {
         $this->filterService->setRequest($request);
         $this->filterService->configureFilters([PageFilter::Param, SearchFilter::Param, OrderFilter::Param]);
 
         $paginator = $userRepository->getUserPaginator($this->filterService);
 
-        $sortArguments = [
-            'action' => $this->generateUrl('app_settings_user_index'),
-            'method' => 'GET',
-            'sortable' => UserRepository::SORTABLE,
-            'hidden' => [
-                SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
-            ],
-        ];
+        $orderFilterFactory->setHiddenFields([
+            SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
+        ]);
 
-        $sortForm = $this->filterService->buildForm(OrderFilter::Param, $sortArguments);
-        $sortForm->handleRequest($request);
+        $sortForm = $orderFilterFactory->setSortable(UserRepository::SORTABLE)->setAction($this->generateUrl('app_settings_user_index'))->getForm();
 
-        $searchArguments = [
-            'action' => $this->generateUrl('app_settings_user_index'),
-            'method' => 'GET',
-            'hidden' => [
-                OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
-            ],
-        ];
+        $searchFilterFactory->setHiddenFields([
+            OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
+        ]);
 
-        $searchForm = $this->filterService->buildForm(SearchFilter::Param, $searchArguments);
+        $searchForm = $searchFilterFactory->setAction($this->generateUrl('app_settings_user_index'))->getForm();
         $searchForm->handleRequest($request);
 
         return $this->renderForm('settings/user/index.html.twig', [

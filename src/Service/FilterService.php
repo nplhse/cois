@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use App\Application\Contract\FilterInterface;
-use App\Application\Exception\FilterDoesNotSupportForms;
 use App\Application\Exception\FilterMissingArgumentException;
 use App\Application\Exception\FilterNotFoundException;
 use App\DataTransferObjects\FilterDto;
