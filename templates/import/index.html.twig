@@ -61,7 +61,13 @@
                             {{ 'Hospital'|trans({}, 'forms') }}
                         </th>
                         <th>
-                            {{ 'Created at'|trans({}, 'forms') }}
+                            {% if filters.getFilter('order').value.sortBy == "rowCount" %}
+                                {{ 'RowCount'|trans() }}
+                            {% elseif filters.getFilter('order').value.sortBy == "skippedRows" %}
+                                {{ 'SkippedRows'|trans() }}
+                            {% else %}
+                                {{ 'Created at'|trans({}, 'forms') }}
+                            {% endif %}
                         </th>
                         <th>
                             {{ 'Status'|trans({}, 'forms') }}
@@ -112,7 +118,13 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    {{ import.createdAt|date('d.m.Y H:i') }}
+                                    {% if filters.getFilter('order').value.sortBy == "rowCount" %}
+                                        {{ import.rowCount }}
+                                    {% elseif filters.getFilter('order').value.sortBy == "skippedRows" %}
+                                        {{ import.skippedRows }}
+                                    {% else %}
+                                        {{ import.createdAt|date('d.m.Y H:i') }}
+                                    {% endif %}
                                 </td>
                                 <td>
                                     {{ component('status_polling', { importId: import.id }) }}
