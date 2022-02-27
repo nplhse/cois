@@ -3,13 +3,16 @@
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
+use App\Repository\UserRepository;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\Filters\Traits\HiddenFieldTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class UserFilter implements FilterInterface
 {
@@ -20,9 +23,12 @@ class UserFilter implements FilterInterface
 
     private Security $security;
 
-    public function __construct(Security $security)
+    private UserRepository $userRepository;
+
+    public function __construct(Security $security, UserRepository $userRepository)
     {
         $this->security = $security;
+        $this->userRepository = $userRepository;
     }
 
     public function getValue(Request $request): mixed
@@ -40,6 +46,25 @@ class UserFilter implements FilterInterface
         }
 
         return $this->setCacheValue($value);
+    }
+
+    public function getAltValues(): array
+    {
+        return (new FilesystemAdapter())->get('user_filter', function (ItemInterface $item) {
+            $qb = $this->userRepository->createQueryBuilder('u');
+            $result = $qb->select('u.id, u.username as name')
+                ->orderBy('u.id')
+                ->getQuery()
+                ->getArrayResult();
+
+            $values = [];
+
+            foreach ($result as $row) {
+                $values[$row['id']] = $row['name'];
+            }
+
+            return $values;
+        });
     }
 
     public function supportsForm(): bool

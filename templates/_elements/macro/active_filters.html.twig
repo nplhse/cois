@@ -11,7 +11,63 @@
             </span>
 
             {% for key, filter in filters.getFilters %}
-                {% if key != 'ownHospitals' %}
+                {% if key == 'ownHospitals' %}
+                    <a href="{{
+                    path(
+                        targetPath,
+                        app.request.query.all|merge({
+                        ownHospitals: '',
+                        page: ''
+                    })
+                    )
+                    }}">
+                    <span class="badge rounded-pill bg-primary">
+                        <u>{{ 'Own hospitals'|trans }}</u>
+                        <i class="bi bi-x-lg"></i>
+                    </span>
+                    </a>
+                {% elseif key == 'date' %}
+                    {% if filter.value.startDate is not empty %}
+                        <a href="{{
+                        path(
+                            targetPath,
+                            app.request.query.all|merge({
+                            startDate: '',
+                            page: ''
+                        })
+                        )
+                        }}">
+                            <span class="badge rounded-pill bg-primary">
+                                <u>{{ filter.key|trans }}:</u>
+                                    {{ filter.value.startDate|date(
+                                        'd.m.Y',
+                                        'Europe/Berlin'
+                                    ) }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                    {% if filter.value.endDate is not empty %}
+                        <a href="{{
+                        path(
+                            targetPath,
+                            app.request.query.all|merge({
+                            endDate: '',
+                            page: ''
+                        })
+                        )
+                        }}">
+                            <span class="badge rounded-pill bg-primary">
+                                <u>{{ filter.key|trans }}:</u>
+                                    {{ filter.value.endDate|date(
+                                        'd.m.Y',
+                                        'Europe/Berlin'
+                                    ) }}
+                                <i class="bi bi-x-lg"></i>
+                            </span>
+                        </a>
+                    {% endif %}
+                {% else %}
                     <a href="{{
                     path(
                         targetPath,
@@ -30,21 +86,6 @@
                             {% endif %}
                             <i class="bi bi-x-lg"></i>
                         </span>
-                    </a>
-                {% else %}
-                    <a href="{{
-                    path(
-                        targetPath,
-                        app.request.query.all|merge({
-                        ownHospitals: '',
-                        page: ''
-                    })
-                    )
-                    }}">
-                    <span class="badge rounded-pill bg-primary">
-                        <u>{{ 'Own hospitals'|trans }}</u>
-                        <i class="bi bi-x-lg"></i>
-                    </span>
                     </a>
                 {% endif %}
             {% endfor %}

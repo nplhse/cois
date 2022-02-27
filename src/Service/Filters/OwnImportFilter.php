@@ -16,7 +16,7 @@ class OwnImportFilter implements FilterInterface
     use FilterTrait;
     use HiddenFieldTrait;
 
-    public const Param = 'own-import';
+    public const Param = 'ownImports';
 
     private Security $security;
 

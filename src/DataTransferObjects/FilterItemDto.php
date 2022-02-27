@@ -29,6 +29,10 @@ class FilterItemDto implements \Stringable
 
     public function getAltValue(): mixed
     {
+        if (is_array($this->value)) {
+            return null;
+        }
+
         return $this->altValues[$this->value] ?? null;
     }
 

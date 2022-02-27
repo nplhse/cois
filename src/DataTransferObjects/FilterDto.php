@@ -2,6 +2,7 @@
 
 namespace App\DataTransferObjects;
 
+use App\Service\Filters\DateFilter;
 use App\Service\Filters\OrderFilter;
 use App\Service\Filters\PageFilter;
 
@@ -19,12 +20,21 @@ class FilterDto
             case PageFilter::Param:
             case OrderFilter::Param:
                 break;
+            case DateFilter::Param;
+                foreach ($value as $itemKey => $itemValue) {
+                    if (!is_null($itemValue)) {
+                        $this->active = true;
+                    }
+                }
+                break;
             default:
                 if (!is_null($value)) {
                     $this->active = true;
                 }
                 break;
         }
+
+        dump($key);
     }
 
     public function getFilter(string $key): ?FilterItemDto

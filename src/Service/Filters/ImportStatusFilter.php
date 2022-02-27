@@ -16,7 +16,7 @@ class ImportStatusFilter implements FilterInterface
     use FilterTrait;
     use HiddenFieldTrait;
 
-    public const Param = 'import-status';
+    public const Param = 'importStatus';
 
     public function getValue(Request $request): mixed
     {
