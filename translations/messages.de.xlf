@@ -2201,8 +2201,8 @@
         <source>incomplete</source>
         <target>Unvollständig</target>
       </trans-unit>
-      <trans-unit id="XSipD0S" resname="failed">
-        <source>failed</source>
+      <trans-unit id="FtNLXnv" resname="failure">
+        <source>failure</source>
         <target>Fehlgeschlagen</target>
       </trans-unit>
       <trans-unit id="Kraywhc" resname="RowCount">
@@ -2213,21 +2213,33 @@
         <source>SkippedRows</source>
         <target>Übersprungene Zeilen</target>
       </trans-unit>
-      <trans-unit id="238833" resname="Indication">
+      <trans-unit id="dLTsgXa" resname="Indication">
         <source>Indication</source>
         <target>RMI</target>
       </trans-unit>
-      <trans-unit id="438834" resname="ModeOfTransport">
+      <trans-unit id="zGBj_7W" resname="ModeOfTransport">
         <source>ModeOfTransport</source>
         <target>Transportart</target>
       </trans-unit>
-      <trans-unit id="345353" resname="SpecialityDetail">
+      <trans-unit id="f0qzWtK" resname="SpecialityDetail">
         <source>SpecialityDetail</source>
         <target>Fachbereich</target>
       </trans-unit>
-      <trans-unit id="3453553" resname="Own Hospitals">
+      <trans-unit id="AA5BUE9" resname="Own Hospitals">
         <source>Own Hospitals</source>
         <target>Eigene Kliniken</target>
+      </trans-unit>
+      <trans-unit id="0FFBR0h" resname="Own Imports">
+        <source>Own Imports</source>
+        <target>Eigene Imports</target>
+      </trans-unit>
+      <trans-unit id="zYZQVU3" resname="ImportStatus">
+        <source>ImportStatus</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="TU0M0g." resname="Geographical location">
+        <source>Geographical location</source>
+        <target>__Geographical location</target>
       </trans-unit>
     </body>
   </file>
