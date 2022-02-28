@@ -84,9 +84,9 @@ class UserController extends AbstractController
                 $user->getEmail(),
                 $user->getPlainPassword(),
                 $user->getRoles(),
-                $form->get('hasCredentialsExpired')->getData(),
-                $user->isVerified(),
-                $user->isParticipant()
+                false,
+                false,
+                false
             );
 
             try {

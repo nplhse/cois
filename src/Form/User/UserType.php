@@ -36,15 +36,6 @@ class UserType extends AbstractType
                 'second_options' => ['label' => 'Repeat Password'],
                 'required' => false,
             ]);
-
-        if ($options['creation']) {
-            $builder
-                ->add('hasCredentialsExpired', CheckboxType::class, [
-                    'mapped' => false,
-                ])
-                ->add('isVerified')
-                ->add('isParticipant');
-        }
     }
 
     /**
