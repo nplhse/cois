@@ -4,23 +4,32 @@ namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
 use App\Repository\HospitalRepository;
+use App\Repository\UserRepository;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class HospitalOwnerFilter implements FilterInterface
 {
     use FilterTrait;
 
-    public const Param = 'hospital-owner';
+    public const Param = 'owner';
 
     private Security $security;
 
-    public function __construct(Security $security)
+    private UserRepository $userRepository;
+
+    private TagAwareCacheInterface $cache;
+
+    public function __construct(Security $security, UserRepository $userRepository, TagAwareCacheInterface $appCache)
     {
         $this->security = $security;
+        $this->userRepository = $userRepository;
+        $this->cache = $appCache;
     }
 
     public function getValue(Request $request): mixed
@@ -38,6 +47,28 @@ class HospitalOwnerFilter implements FilterInterface
         }
 
         return $this->setCacheValue($value);
+    }
+
+    public function getAltValues(): array
+    {
+        return $this->cache->get('user_filter', function (ItemInterface $item) {
+            $item->expiresAfter(3600);
+            $item->tag(['filter', 'user_filter']);
+
+            $qb = $this->userRepository->createQueryBuilder('u');
+            $result = $qb->select('u.id, u.username as name')
+                ->orderBy('u.id')
+                ->getQuery()
+                ->getArrayResult();
+
+            $values = [];
+
+            foreach ($result as $row) {
+                $values[$row['id']] = $row['name'];
+            }
+
+            return $values;
+        });
     }
 
     public function processQuery(QueryBuilder $qb, array $arguments, Request $request): QueryBuilder

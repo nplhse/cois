@@ -249,10 +249,12 @@
 
                     {{ form_start(allocationForm) }}
 
-                    {{ form_row(allocationForm.ownHospitals) }}
+                    {% if not app.user.hospitals.empty %}
+                        {{ form_row(allocationForm.ownHospitals) }}
 
-                    {% if not is_granted('ROLE_ADMIN') %}
-                        {{ form_row(allocationForm.hospital) }}
+                        {% if not is_granted('ROLE_ADMIN') %}
+                            {{ form_row(allocationForm.hospital) }}
+                        {% endif %}
                     {% endif %}
 
                     <h5>
@@ -450,7 +452,7 @@
                         </div>
                     </div>
 
-                    {{ form_end(allocationForm) }}
+                    {{ form_end(allocationForm, {'render_rest': false}) }}
                 </div>
             </div>
 
