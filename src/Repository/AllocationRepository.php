@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Domain\Contracts\HospitalInterface;
 use App\Domain\Contracts\UserInterface;
 use App\Entity\Allocation;
 use App\Entity\Hospital;
@@ -41,8 +42,17 @@ class AllocationRepository extends ServiceEntityRepository
         parent::__construct($registry, Allocation::class);
     }
 
-    public function countAllocations(): string
+    public function countAllocations(mixed $entity = null): string
     {
+        if ($entity instanceof HospitalInterface) {
+            return $this->createQueryBuilder('a')
+                ->select('COUNT(a.id)')
+                ->andWhere('a.hospital = :hospital')
+                ->setparameter('hospital', $entity->getId())
+                ->getQuery()
+                ->getSingleScalarResult();
+        }
+
         $qb = $this->createQueryBuilder('a')
                 ->select('COUNT(a.id)')
                 ->getQuery()

@@ -204,7 +204,7 @@ class HospitalController extends AbstractController
 
         return $this->render('hospitals/show.html.twig', [
             'hospital' => $hospital,
-            'hospital_allocations' => $allocationRepository->countAllocations(),
+            'hospital_allocations' => $allocationRepository->countAllocations($hospital),
             'hospital_imports' => $importRepository->countImports($hospital),
             'user_can_edit' => true,
         ]);
