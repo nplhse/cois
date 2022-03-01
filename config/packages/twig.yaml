@@ -8,3 +8,6 @@ twig:
     paths:
         # point this wherever your css files live
         "%kernel.project_dir%/assets/styles": styles
+
+    globals:
+        app_allow_registration: "%app.registration%"

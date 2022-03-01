@@ -2239,7 +2239,11 @@
       </trans-unit>
       <trans-unit id="TU0M0g." resname="Geographical location">
         <source>Geographical location</source>
-        <target>__Geographical location</target>
+        <target>Georgraphischer Ort</target>
+      </trans-unit>
+      <trans-unit id="p_yRRVv" resname="For full access to this project, you need to login.">
+        <source>For full access to this project, you need to login.</source>
+        <target>Für vollständigen Zugriff auf die Plattform müssen Sie sich anmelden.</target>
       </trans-unit>
     </body>
   </file>

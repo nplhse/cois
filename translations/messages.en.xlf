@@ -2164,7 +2164,11 @@
       </trans-unit>
       <trans-unit id="TU0M0g." resname="Geographical location">
         <source>Geographical location</source>
-        <target>__Geographical location</target>
+        <target>Geographical location</target>
+      </trans-unit>
+      <trans-unit id="p_yRRVv" resname="For full access to this project, you need to login.">
+        <source>For full access to this project, you need to login.</source>
+        <target>For full access to this project, you need to login.</target>
       </trans-unit>
     </body>
   </file>

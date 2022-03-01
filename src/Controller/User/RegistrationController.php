@@ -30,6 +30,10 @@ class RegistrationController extends AbstractController
     #[Route('/', name: 'app_register')]
     public function register(Request $request, UserRepositoryInterface $userRepository, UserPasswordHasherInterface $passwordEncoder, UserAuthenticatorInterface $userAuthenticator, LoginFormAuthenticator $authenticator): ?Response
     {
+        if (!$this->getParameter('app.registration')) {
+            throw $this->createNotFoundException('Registration is currently not available.');
+        }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
