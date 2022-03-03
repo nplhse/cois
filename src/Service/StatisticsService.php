@@ -372,7 +372,7 @@ class StatisticsService
         }
 
         foreach ($allocations->getItems() as $allocation) {
-            if (0 === $allocation->getUrgency()) {
+            if ('0' === $allocation->getUrgency() || '' === $allocation->getUrgency()) {
                 break;
             }
 
