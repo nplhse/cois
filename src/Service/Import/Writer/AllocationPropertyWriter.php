@@ -33,6 +33,7 @@ class AllocationPropertyWriter implements \App\Application\Contract\ImportWriter
         ['key' => 'Transportmittel', 'target' => 'ModeOfTransport'],
         ['key' => 'Neben-PZC-Text', 'target' => 'SecondaryIndication'],
         ['key' => 'Patienten-Übergabepunkt (PÜP)', 'target' => 'HandoverPoint'],
+        ['key' => 'Patienten-Übergabepunkt (PüP)', 'target' => 'HandoverPoint'],
         ['key' => 'Patienten-?bergabepunkt (P?P)', 'target' => 'HandoverPoint'],
     ];
 
