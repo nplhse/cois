@@ -372,6 +372,10 @@ class StatisticsService
         }
 
         foreach ($allocations->getItems() as $allocation) {
+            if (0 === $allocation->getUrgency()) {
+                break;
+            }
+
             $percent = $this->getFormattedNumber($this->getValueInPercent($allocation->getCounter(), $total));
 
             $results[] = [
