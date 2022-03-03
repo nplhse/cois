@@ -2087,7 +2087,7 @@
       </trans-unit>
       <trans-unit id="BNe0gzk" resname="Messages">
         <source>Messages</source>
-        <target>Nachrichten</target>
+        <target>Fehlermeldungen</target>
       </trans-unit>
       <trans-unit id="0MmMwxp" resname="Admin filters">
         <source>Admin filters</source>
@@ -2191,7 +2191,7 @@
       </trans-unit>
       <trans-unit id="ruQIhH0" resname="success">
         <source>success</source>
-        <target>Abgeschlossen</target>
+        <target>Ok</target>
       </trans-unit>
       <trans-unit id="YqL_09b" resname="pending">
         <source>pending</source>
@@ -2203,7 +2203,11 @@
       </trans-unit>
       <trans-unit id="FtNLXnv" resname="failure">
         <source>failure</source>
-        <target>Fehlgeschlagen</target>
+        <target>Fehler</target>
+      </trans-unit>
+      <trans-unit id="Lhz6grA" resname="empty">
+        <source>empty</source>
+        <target>Leer</target>
       </trans-unit>
       <trans-unit id="Kraywhc" resname="RowCount">
         <source>RowCount</source>
@@ -2244,6 +2248,10 @@
       <trans-unit id="p_yRRVv" resname="For full access to this project, you need to login.">
         <source>For full access to this project, you need to login.</source>
         <target>Für vollständigen Zugriff auf die Plattform müssen Sie sich anmelden.</target>
+      </trans-unit>
+      <trans-unit id="AxmKIcl" resname="View raw data">
+        <source>View raw data</source>
+        <target>Rohdaten ansehen</target>
       </trans-unit>
     </body>
   </file>

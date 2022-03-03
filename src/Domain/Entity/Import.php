@@ -27,6 +27,8 @@ class Import implements ImportInterface, IdentifierInterface, TimestampableInter
 
     public const STATUS_SUCCESS = 'success';
 
+    public const STATUS_EMPTY = 'empty';
+
     public const MIME_CSV = 'text/csv';
 
     public const MIME_PLAIN = 'text/plain';
@@ -39,7 +41,7 @@ class Import implements ImportInterface, IdentifierInterface, TimestampableInter
 
     protected string $type;
 
-    private array $statuses = [self::STATUS_PENDING, self::STATUS_FAILURE, self::STATUS_INCOMPLETE, self::STATUS_SUCCESS];
+    private array $statuses = [self::STATUS_PENDING, self::STATUS_FAILURE, self::STATUS_INCOMPLETE, self::STATUS_SUCCESS, self::STATUS_EMPTY];
 
     protected string $status;
 

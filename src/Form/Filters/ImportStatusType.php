@@ -18,6 +18,7 @@ class ImportStatusType extends AbstractType
                 Import::STATUS_PENDING => Import::STATUS_PENDING,
                 Import::STATUS_INCOMPLETE => Import::STATUS_INCOMPLETE,
                 Import::STATUS_FAILURE => Import::STATUS_FAILURE,
+                Import::STATUS_EMPTY => Import::STATUS_EMPTY,
             ],
             'placeholder' => 'Every status',
             'empty_data' => '',

@@ -2130,6 +2130,10 @@
         <source>failure</source>
         <target>Failure</target>
       </trans-unit>
+      <trans-unit id="Lhz6grA" resname="empty">
+        <source>empty</source>
+        <target>Empty</target>
+      </trans-unit>
       <trans-unit id="Kraywhc" resname="RowCount">
         <source>RowCount</source>
         <target>Row Count</target>
@@ -2169,6 +2173,10 @@
       <trans-unit id="p_yRRVv" resname="For full access to this project, you need to login.">
         <source>For full access to this project, you need to login.</source>
         <target>For full access to this project, you need to login.</target>
+      </trans-unit>
+      <trans-unit id="AxmKIcl" resname="View raw data">
+        <source>View raw data</source>
+        <target>View raw data</target>
       </trans-unit>
     </body>
   </file>

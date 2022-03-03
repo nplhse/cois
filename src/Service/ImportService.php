@@ -160,6 +160,10 @@ class ImportService
             }
         }
 
+        if (0 === $iteration) {
+            $import->setStatus(Import::STATUS_EMPTY);
+        }
+
         $import->bumpRunCount();
         $import->setRowCount($iteration);
         $import->setRuntime((int) $this->stopwatch->stop('import-data')->getDuration());
