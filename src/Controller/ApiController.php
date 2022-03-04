@@ -16,7 +16,6 @@ use App\Query\AllocationQuery;
 use App\Repository\HospitalRepository;
 use App\Service\RequestParamService;
 use App\Service\StatisticsService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,39 +30,13 @@ class ApiController extends AbstractController
 
     private StatisticsService $statisticsService;
 
-    private EntityManagerInterface $entityManager;
-
     private ?Hospital $hospital = null;
 
-    public function __construct(HospitalRepository $hospitalRepository, AllocationQuery $allocationQuery, StatisticsService $statisticsService, EntityManagerInterface $entityManager)
+    public function __construct(HospitalRepository $hospitalRepository, AllocationQuery $allocationQuery, StatisticsService $statisticsService)
     {
         $this->hospitalRepository = $hospitalRepository;
         $this->allocationQuery = $allocationQuery;
         $this->statisticsService = $statisticsService;
-        $this->entityManager = $entityManager;
-    }
-
-    #[Route('/api/toggle', name: 'app_api_toggle')]
-    public function toggle(Request $request): Response
-    {
-        $this->denyAccessUnlessGranted('ROLE_USER');
-
-        $user = $this->getUser();
-
-        switch ($request->query->get('target')) {
-            case 'alloc-sidebar':
-                $user->switchAllocSidebar();
-
-                break;
-        }
-
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
-
-        $response = new Response();
-        $response->setStatusCode(Response::HTTP_OK);
-
-        return $response;
     }
 
     #[Route('/api/age.json', name: 'app_api_age')]
@@ -183,6 +156,7 @@ class ApiController extends AbstractController
             $hospitalId = (int) $paramService->getHospital();
 
             if (!empty($hospitalId)) {
+                /* @phpstan-ignore-next-line */
                 $this->hospital = $this->hospitalRepository->findById($hospitalId);
 
                 if ($this->isGranted('viewStats', $this->hospital)) {

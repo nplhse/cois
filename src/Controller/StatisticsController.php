@@ -78,6 +78,7 @@ class StatisticsController extends AbstractController
             $hospitalId = (int) $paramService->getHospital();
 
             if (!empty($hospitalId)) {
+                /** @phpstan-ignore-next-line */
                 $hospital = $this->hospitalRepository->findById($hospitalId);
 
                 if ($this->isGranted('viewStats', $hospital)) {
@@ -106,6 +107,7 @@ class StatisticsController extends AbstractController
             $hospitalId = (int) $paramService->getHospital();
 
             if (!empty($hospitalId)) {
+                /** @phpstan-ignore-next-line */
                 $hospital = $this->hospitalRepository->findById($hospitalId);
 
                 if ($this->isGranted('viewStats', $hospital)) {
@@ -134,6 +136,7 @@ class StatisticsController extends AbstractController
             $hospitalId = (int) $paramService->getHospital();
 
             if (!empty($hospitalId)) {
+                /** @phpstan-ignore-next-line */
                 $hospital = $this->hospitalRepository->findById($hospitalId);
 
                 if ($this->isGranted('viewStats', $hospital)) {
@@ -162,6 +165,7 @@ class StatisticsController extends AbstractController
             $hospitalId = (int) $paramService->getHospital();
 
             if (!empty($hospitalId)) {
+                /** @phpstan-ignore-next-line */
                 $hospital = $this->hospitalRepository->findById($hospitalId);
 
                 if ($this->isGranted('viewStats', $hospital)) {
@@ -203,6 +207,7 @@ class StatisticsController extends AbstractController
             $hospitalId = (int) $paramService->getHospital();
 
             if (!empty($hospitalId)) {
+                /** @phpstan-ignore-next-line */
                 $hospital = $this->hospitalRepository->findById($hospitalId);
 
                 if ($this->isGranted('viewStats', $hospital)) {

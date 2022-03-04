@@ -15,6 +15,7 @@ parameters:
         - assets
         - build
         - node_modules
+        - src/Domain/Repository/EntityRepositoryInterface.php
         - vendor
         - templates
     bootstrapFiles:

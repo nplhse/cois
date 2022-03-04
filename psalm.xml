@@ -42,5 +42,11 @@
                 <directory name="src/Factory/" />
             </errorLevel>
         </ImplementedReturnTypeMismatch>
+        <UndefinedMagicMethod>
+            <errorLevel type="suppress">
+                <file name="src/Controller/ApiController.php" />
+                <file name="src/Controller/StatisticsController.php" />
+            </errorLevel>
+        </UndefinedMagicMethod>
     </issueHandlers>
 </psalm>
