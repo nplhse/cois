@@ -78,8 +78,6 @@ class AllocationTest extends TestCase
             ->method('getName')
             ->willReturn($areaName);
 
-        $this->assertNull($allocation->getSupplyArea());
-
         $allocation->setSupplyArea($supplyArea);
         $this->assertEquals($areaName, $allocation->getSupplyArea()->getName());
     }
