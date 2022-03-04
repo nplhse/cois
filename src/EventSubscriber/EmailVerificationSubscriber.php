@@ -47,7 +47,7 @@ class EmailVerificationSubscriber implements EventSubscriberInterface
         );
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             UserRegisteredEvent::NAME => ['onUserRegistered', 0],
