@@ -16,8 +16,6 @@ class SwitchStateDispatchAreaHandlerTest extends TestCase
 {
     public function testHandler(): void
     {
-        $this->markTestSkipped('Needs some adjustment');
-
         $oldState = $this->createMock(StateInterface::class);
         $oldState->expects($this->exactly(1))
             ->method('getId')
@@ -41,7 +39,7 @@ class SwitchStateDispatchAreaHandlerTest extends TestCase
 
         $dispatchAreaRepository = $this->createMock(DispatchAreaRepository::class);
         $dispatchAreaRepository->expects($this->exactly(1))
-            ->method('getById')
+            ->method('findOneBy')
             ->willReturn($area);
         $dispatchAreaRepository->expects($this->exactly(1))
             ->method('save');
@@ -53,8 +51,6 @@ class SwitchStateDispatchAreaHandlerTest extends TestCase
                 [1, $oldState],
                 [2, $newState],
             ]);
-        $stateRepository->expects($this->exactly(1))
-            ->method('save');
 
         $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
         $eventDispatcher->expects($this->exactly(1))

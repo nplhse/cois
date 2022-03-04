@@ -9,6 +9,7 @@ use App\Domain\Contracts\StateInterface;
 use App\Domain\Event\DispatchArea\DispatchAreaDeletedEvent;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\StateRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -16,8 +17,6 @@ class DeleteDispatchAreaHandlerTest extends TestCase
 {
     public function testHandler(): void
     {
-        $this->markTestSkipped('Needs some adjustment');
-
         $state = $this->createMock(StateInterface::class);
         $state->expects($this->exactly(1))
             ->method('removeDispatchArea')
@@ -26,10 +25,18 @@ class DeleteDispatchAreaHandlerTest extends TestCase
             ->method('getId')
             ->willReturn(1);
 
+        $emptyCollection = $this->createMock(ArrayCollection::class);
+        $emptyCollection->expects($this->once())
+            ->method('isEmpty')
+            ->willReturn(true);
+
         $dispatchArea = $this->createMock(DispatchAreaInterface::class);
         $dispatchArea->expects($this->exactly(1))
             ->method('getState')
             ->willReturn($state);
+        $dispatchArea->expects($this->exactly(1))
+            ->method('getHospitals')
+            ->willReturn($emptyCollection);
 
         $dispatchAreaRespository = $this->createMock(DispatchAreaRepository::class);
         $dispatchAreaRespository->expects($this->exactly(1))
@@ -41,7 +48,7 @@ class DeleteDispatchAreaHandlerTest extends TestCase
 
         $stateRepository = $this->createMock(StateRepository::class);
         $stateRepository->expects($this->exactly(1))
-            ->method('getById')
+            ->method('findOneBy')
             ->willReturn($state);
         $stateRepository->expects($this->exactly(1))
             ->method('save');
