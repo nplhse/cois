@@ -4,7 +4,7 @@ namespace App\Domain\Repository;
 
 use App\Domain\Contracts\HospitalInterface;
 
-interface HospitalRepositoryInterface
+interface HospitalRepositoryInterface extends EntityRepositoryInterface
 {
     public function add(HospitalInterface $hospital): void;
 

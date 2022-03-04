@@ -4,7 +4,7 @@ namespace App\Domain\Repository;
 
 use App\Domain\Contracts\StateInterface;
 
-interface StateRepositoryInterface
+interface StateRepositoryInterface extends EntityRepositoryInterface
 {
     public function add(StateInterface $state): void;
 

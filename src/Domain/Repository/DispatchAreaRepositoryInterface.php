@@ -4,7 +4,7 @@ namespace App\Domain\Repository;
 
 use App\Domain\Contracts\DispatchAreaInterface;
 
-interface DispatchAreaRepositoryInterface
+interface DispatchAreaRepositoryInterface extends EntityRepositoryInterface
 {
     public function add(DispatchAreaInterface $area): void;
 
