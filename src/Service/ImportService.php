@@ -147,7 +147,7 @@ class ImportService
             $this->dispatchEvent(new ImportFailedEvent($import, $e));
         }
 
-        if (Import::STATUS_FAILURE !== $import->getStatus()) {
+        if (0 !== $iteration && Import::STATUS_SUCCESS === $import->getStatus()) {
             if ($this->getPercentage($iteration, $import->getSkippedRows()) > 0.25 && $this->getPercentage($iteration, $import->getSkippedRows()) < 5) {
                 $import->setStatus(Import::STATUS_INCOMPLETE);
             } elseif ($this->getPercentage($iteration, $import->getSkippedRows()) > 5) {
