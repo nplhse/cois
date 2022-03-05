@@ -146,7 +146,7 @@
             "@run-checks-php"
         ],
         "run-checks-js": [
-            "yarn run eslint",
+            "yarn run eslint assets",
             "yarn run prettier --check ."
         ],
         "run-checks-php": [
