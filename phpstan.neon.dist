@@ -20,7 +20,6 @@ parameters:
         - templates
     bootstrapFiles:
         - tests/bootstrap.php
-        - vendor/bin/.phpunit/phpunit/vendor/autoload.php
     symfony:
         container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml
     checkGenericClassInNonGenericObjectType: false
