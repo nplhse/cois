@@ -36,7 +36,9 @@ jobs:
         run: vendor/bin/ecs
 
       - name: Analyse PHP Code (PHPStan)
-        run: vendor/bin/phpstan analyse
+        run: |
+          php bin/console cache:warmup
+          vendor/bin/phpstan analyse
 
       - name: Analyse PHP Code (Psalm)
         run: vendor/bin/psalm
