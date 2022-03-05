@@ -1,5 +1,7 @@
 # COIS - Collaborative IVENA statistics
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Continuous Integration](https://github.com/nplhse/cois/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/nplhse/cois/actions/workflows/continuous-integration.yml)
+
 # Requirements
 
 -   Webserver (Apache, Nginx, LiteSpeed, IIS, etc.) with PHP 8.0 or higher and MySQL 8.0 as database
