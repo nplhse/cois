@@ -20,7 +20,7 @@
         "eslint-plugin-vue": "^8.4.1",
         "file-loader": "^6.0.0",
         "node-sass": "^7.0.1",
-        "postcss": "^8.4.5",
+        "postcss": "^8.4.7",
         "postcss-loader": "^6.2.1",
         "prettier": "^2.5.1",
         "prettier-plugin-twig-melody": "^0.4.6",
