@@ -65,7 +65,7 @@ class AllocationFilterSetType extends AbstractType
                     ->add('hospital', HospitalFilterType::class, [
                         'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('h')
                             ->where('h.owner = :user')
-                            ->setParameter('user', $user)
+                            ->setParameter('user', $user->getId())
                             ->orderBy('h.name', 'ASC'),
                     ]);
             }

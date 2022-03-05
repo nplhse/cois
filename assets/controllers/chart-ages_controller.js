@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Controller } from "stimulus";
 import * as d3 from "d3";
 
@@ -47,7 +48,7 @@ export default class extends Controller {
                 .attr("cx", (d) => scX(d["age"]))
                 .attr("cy", accessor);
 
-            var lnMkr = d3
+            let lnMkr = d3
                 .line()
                 .curve(curve)
                 .x((d) => scX(d["age"]))
@@ -61,8 +62,8 @@ export default class extends Controller {
             .append("svg")
             .attr("transform", `translate(40, 20)`);
 
-        var g1 = svg.append("g");
-        var g2 = svg.append("g");
+        let g1 = svg.append("g");
+        let g2 = svg.append("g");
 
         drawData(g1, (d) => scY1(d["female"]), d3.curveNatural);
         drawData(g2, (d) => scY2(d["male"]), d3.curveNatural);
@@ -87,21 +88,21 @@ export default class extends Controller {
             .call(d3.axisTop(scX))
             .attr("transform", "translate(0," + pxY + ")");
 
-        var tr = d3
+        let tr = d3
             .select(".objecttable tbody")
             .selectAll("tr")
             .data(data)
             .enter()
             .append("tr");
 
-        var td = tr
+        let td = tr
             .selectAll("td")
-            .data(function (d, i) {
+            .data((d, i) => {
                 return Object.values(d);
             })
             .enter()
             .append("td")
-            .text(function (d) {
+            .text((d) => {
                 return d;
             });
     }

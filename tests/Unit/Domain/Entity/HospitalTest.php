@@ -109,8 +109,6 @@ class HospitalTest extends TestCase
             ->method('getName')
             ->willReturn($areaName);
 
-        $this->assertNull($hospital->getSupplyArea());
-
         $hospital->setSupplyArea($supplyArea);
         $this->assertEquals($areaName, $hospital->getSupplyArea()->getName());
     }

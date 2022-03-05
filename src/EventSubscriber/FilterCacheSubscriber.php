@@ -54,7 +54,7 @@ class FilterCacheSubscriber implements EventSubscriberInterface
         $this->cache->invalidateTags(['supply_area_filter']);
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             UserRegisteredEvent::NAME => ['onUserChange', 0],

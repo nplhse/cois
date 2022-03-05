@@ -4,7 +4,7 @@ namespace App\Domain\Repository;
 
 use App\Domain\Contracts\SupplyAreaInterface;
 
-interface SupplyAreaRepositoryInterface
+interface SupplyAreaRepositoryInterface extends EntityRepositoryInterface
 {
     public function add(SupplyAreaInterface $area): void;
 

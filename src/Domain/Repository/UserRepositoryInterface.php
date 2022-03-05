@@ -4,7 +4,7 @@ namespace App\Domain\Repository;
 
 use App\Domain\Contracts\UserInterface;
 
-interface UserRepositoryInterface
+interface UserRepositoryInterface extends EntityRepositoryInterface
 {
     public function add(UserInterface $user): void;
 

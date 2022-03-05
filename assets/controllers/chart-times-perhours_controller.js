@@ -38,7 +38,7 @@ export default class extends Controller {
                 .attr("cx", (d) => scX(d["time"]))
                 .attr("cy", accessor);
 
-            var lnMkr = d3
+            let lnMkr = d3
                 .line()
                 .curve(curve)
                 .x((d) => scX(d["time"]))
