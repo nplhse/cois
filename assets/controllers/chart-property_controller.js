@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Controller } from "stimulus";
 import * as d3 from "d3";
 
@@ -22,7 +23,7 @@ export default class extends Controller {
             .append("g")
             .attr("transform", `translate(75, 75)`);
 
-        var pie = d3
+        let pie = d3
             .pie()
             .value((d) => d.count)
             .sort(null)
@@ -30,7 +31,7 @@ export default class extends Controller {
 
         let arcMkr = d3.arc().innerRadius(25).outerRadius(75);
 
-        var scC = d3
+        let scC = d3
             .scaleOrdinal()
             .domain(pie.map((d) => d.label))
             .range([d3.schemeTableau10[9], d3.schemeTableau10[0]]);
@@ -54,21 +55,21 @@ export default class extends Controller {
             .attr("font-size", 14)
             .attr("text-anchor", "middle");
 
-        var tr = d3
+        let tr = d3
             .select("." + this.tableTargetValue + " tbody")
             .selectAll("tr")
             .data(data)
             .enter()
             .append("tr");
 
-        var td = tr
+        let td = tr
             .selectAll("td")
-            .data(function (d, i) {
+            .data((d, i) => {
                 return Object.values(d);
             })
             .enter()
             .append("td")
-            .text(function (d) {
+            .text((d) => {
                 return d;
             });
     }
