@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+{% import '_elements/macro/active_filters.html.twig' as active_filters %}
 
 {% block title %}
     {{ 'Urgency Statistics'|trans }} - {{ parent() }}
@@ -37,39 +38,53 @@
                 {{ 'Urgency Statistics'|trans }}
             </h1>
 
+            {{ active_filters.render(filters, 'app_statistics_urgency') }}
+
             <h2>
                 {{ 'Distribution of urgencies'|trans }}
             </h2>
+
             <div class="row"
-                {{
-                stimulus_controller(
-                    'chart-urgency',
-                    {
-                        target: '#graph1',
-                        url: url('app_api_urgency')
-                    }
-                )
-                }}>
-                <div class="col-4 justify-content-center">
-                    <svg id="graph1" class="m-2" width="200" height="200"></svg>
+                 data-controller="chart-urgency"
+                 data-chart-urgency-target-value="#graph1"
+                 data-chart-urgency-data-value='{{ data|json_encode(constant('JSON_PRETTY_PRINT'))|raw }}'
+                >
+                <div class="col-8 justify-content-center">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="bi bi-pie-chart"></i>
+                            {{ 'Graph'|trans({}, 'forms') }}
+                        </div>
+                        <div class="card-body">
+                            <svg id="graph1" class="m-2" width="200" height="200"></svg>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-8">
-                    <table id="table" class="objecttable table table-hover">
-                        <thead>
-                            <tr>
-                                <th>
-                                    {{ 'Urgency'|trans }}
-                                </th>
-                                <th>
-                                    {{ 'Count'|trans }}
-                                </th>
-                                <th>
-                                    {{ 'Percent'|trans }}
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                <div class="col-4">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="bi bi-funnel"></i>
+                            {{ 'Filters'|trans({}, 'forms') }}
+                        </div>
+                        <div class="card-body">
+                            {{ form_start(filter_form) }}
+
+                            {{ form_row(filter_form.hospital) }}
+
+                            <div class="row">
+                                <div class="col">
+                                    {{ form_row(filter_form.submit) }}
+                                </div>
+                                <div class="col">
+                                    <div class="float-end">
+                                        {{ form_row(filter_form.reset) }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{ form_end(filter_form) }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
