@@ -2,6 +2,8 @@
 
 namespace App\DataTransferObjects;
 
+use App\Application\Contract\ResultCollectionInterface;
+
 final class ResultCollection implements ResultCollectionInterface
 {
     private array $items;

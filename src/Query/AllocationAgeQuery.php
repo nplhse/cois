@@ -2,8 +2,8 @@
 
 namespace App\Query;
 
+use App\Application\Contract\ResultCollectionInterface;
 use App\DataTransferObjects\ResultCollection;
-use App\DataTransferObjects\ResultCollectionInterface;
 use App\Entity\Allocation;
 use App\Entity\Hospital;
 use Doctrine\ORM\EntityManagerInterface;

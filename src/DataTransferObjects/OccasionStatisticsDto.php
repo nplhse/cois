@@ -2,6 +2,9 @@
 
 namespace App\DataTransferObjects;
 
+use App\Application\Contract\ConstructFromArrayInterface;
+use App\Application\Traits\ConstructableFromArrayTrait;
+
 class OccasionStatisticsDto implements ConstructFromArrayInterface
 {
     use ConstructableFromArrayTrait;
