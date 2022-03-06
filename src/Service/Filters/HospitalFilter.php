@@ -96,8 +96,7 @@ class HospitalFilter implements FilterInterface
             }
         }
 
-        return $qb->orWhere($arguments[FilterService::ENTITY_ALIAS].'hospital = :hospital')
-            ->setParameter('hospital', $hospital)
-            ;
+        return $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'hospital = :hospital')
+            ->setParameter('hospital', $hospital);
     }
 }
