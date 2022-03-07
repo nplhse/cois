@@ -4,7 +4,7 @@ import * as d3 from "d3";
 
 export default class extends Controller {
     static values = {
-        url: String,
+        data: String,
         target: String,
     };
 
@@ -13,8 +13,9 @@ export default class extends Controller {
     }
 
     async render() {
-        const response = await fetch(this.urlValue);
-        const data = await response.json();
+        const data = JSON.parse(this.dataValue);
+
+        console.log(data);
 
         const svg = d3
             .select(this.targetValue)

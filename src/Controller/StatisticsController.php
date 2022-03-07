@@ -199,7 +199,7 @@ class StatisticsController extends AbstractController
         ]);
     }
 
-    #[Route('/statistics/pzc', name: 'app_statistics_pzc')]
+    #[Route('/statistics/code', name: 'app_statistics_pzc')]
     public function pzc(Request $request): Response
     {
         if ($this->getUser()) {
@@ -225,13 +225,6 @@ class StatisticsController extends AbstractController
 
         return $this->render('statistics/pzc.html.twig', [
             'results' => $results,
-        ]);
-    }
-
-    #[Route('/statistics/urgency', name: 'app_statistics_urgency')]
-    public function urgency(): Response
-    {
-        return $this->render('statistics/urgency.html.twig', [
         ]);
     }
 }

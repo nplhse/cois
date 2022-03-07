@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTransferObjects;
+namespace App\Application\Traits;
 
 trait ConstructableFromArrayTrait
 {
