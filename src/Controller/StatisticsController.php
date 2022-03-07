@@ -199,7 +199,7 @@ class StatisticsController extends AbstractController
         ]);
     }
 
-    #[Route('/statistics/pzc', name: 'app_statistics_pzc')]
+    #[Route('/statistics/code', name: 'app_statistics_pzc')]
     public function pzc(Request $request): Response
     {
         if ($this->getUser()) {

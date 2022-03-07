@@ -60,12 +60,12 @@ final class AllocationQuery
                 ->addOrderBy('allocation.urgency', 'ASC');
         } elseif ('pzc' === $this->property) {
             $qb->select(
-                'allocation.RMI AS PZC',
-                'COUNT(allocation.RMI) AS counter',
-                'allocation.PZCText AS PZCText'
+                'allocation.indicationCode AS PZC',
+                'COUNT(allocation.indicationCode) AS counter',
+                'allocation.indication AS PZCText'
             )
                 ->from(Allocation::class, 'allocation')
-                ->groupBy('allocation.RMI, allocation.PZCText')
+                ->groupBy('allocation.indicationCode, allocation.indication')
                 ->addOrderBy('counter', 'DESC');
         } elseif ('speciality' === $this->property) {
             $qb->select(
