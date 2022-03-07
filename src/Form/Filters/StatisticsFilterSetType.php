@@ -3,7 +3,6 @@
 namespace App\Form\Filters;
 
 use App\Domain\Entity\User;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -28,7 +27,13 @@ class StatisticsFilterSetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('ownHospital', OwnHospitalFilterType::class);
+            ->add('ownHospitals', OwnHospitalFilterType::class)
+            ->add('startDate', DateFilterType::class)
+            ->add('endDate', DateFilterType::class)
+            ->add('state', StateType::class)
+            ->add('dispatchArea', DispatchAreaType::class)
+            ->add('supplyArea', SupplyAreaType::class)
+        ;
 
         if ($this->security->isGranted('ROLE_ADMIN')) {
             $builder
@@ -39,12 +44,7 @@ class StatisticsFilterSetType extends AbstractType
 
             if ($user->getHospitals()->count() > 1) {
                 $builder
-                    ->add('hospital', HospitalFilterType::class, [
-                        'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('h')
-                            ->where('h.owner = :user')
-                            ->setParameter('user', $user->getId())
-                            ->orderBy('h.name', 'ASC'),
-                    ]);
+                    ->add('hospital', HospitalFilterType::class);
             }
         }
 

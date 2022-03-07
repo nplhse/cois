@@ -56,6 +56,7 @@ class HospitalFilter implements FilterInterface
             $item->tag(['filter', 'hospital_filter']);
 
             $qb = $this->hospitalRepository->createQueryBuilder('h');
+
             $result = $qb->select('h.id, h.name')
                 ->orderBy('h.id')
                 ->getQuery()

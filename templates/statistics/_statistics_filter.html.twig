@@ -1,0 +1,75 @@
+<div class="col-4 collapse" id="collapseFilters">
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="bi bi-funnel"></i>
+            {{ 'Filters'|trans({}, 'forms') }}
+        </div>
+        <div class="card-body">
+            {{ form_start(filter_form) }}
+
+            <h5>
+                {{ 'Filter by Hospital'|trans }}
+            </h5>
+
+            {{ form_row(filter_form.ownHospitals) }}
+
+            {% if (app.user.hospitals|length) > 1 %}
+                {{
+                    form_row(
+                        filter_form.hospital,
+                        {
+                            label: false
+                        }
+                    )
+                }}
+            {% endif %}
+
+            <h5>
+                {{ 'Filter by Dates'|trans }}
+            </h5>
+
+            <div class="input-group mb-3">
+                {{
+                    form_widget(
+                        filter_form.startDate,
+                        {
+                            label: false
+                        }
+                    )
+                }}
+
+                {{
+                    form_widget(
+                        filter_form.endDate,
+                        {
+                            label: false
+                        }
+                    )
+                }}
+            </div>
+
+            <h5>
+                {{ 'Filter by Location'|trans }}
+            </h5>
+
+            {{ form_row(filter_form.state) }}
+
+            {{ form_row(filter_form.dispatchArea) }}
+
+            {{ form_row(filter_form.supplyArea) }}
+
+            <div class="row">
+                <div class="col">
+                    {{ form_row(filter_form.submit) }}
+                </div>
+                <div class="col">
+                    <div class="float-end">
+                        {{ form_row(filter_form.reset) }}
+                    </div>
+                </div>
+            </div>
+
+            {{ form_end(filter_form) }}
+        </div>
+    </div>
+</div>

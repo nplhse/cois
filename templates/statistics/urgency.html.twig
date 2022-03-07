@@ -34,17 +34,19 @@
             {{ include('statistics/_statistics_subnav.html.twig') }}
         </div>
         <div class="col">
-            <div class="float-end">
-                <a class="btn btn-primary"
-                    data-bs-toggle="collapse"
-                    data-action="toggle#switch"
-                    href="#collapseFilters"
-                    role="button"
-                    aria-expanded="false"
-                    aria-controls="collapseFilters">
-                    <i class="bi bi-sliders"></i> {{ 'Show Filters'|trans }}
-                </a>
-            </div>
+            {% if is_granted('filter_statistics', app.user) %}
+                <div class="float-end">
+                    <a class="btn btn-primary"
+                        data-bs-toggle="collapse"
+                        data-action="toggle#switch"
+                        href="#collapseFilters"
+                        role="button"
+                        aria-expanded="false"
+                        aria-controls="collapseFilters">
+                        <i class="bi bi-sliders"></i> {{ 'Show Filters'|trans }}
+                    </a>
+                </div>
+            {% endif %}
 
             <h1>
                 {{ 'Urgency Statistics'|trans }}
@@ -125,34 +127,9 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-4 collapse" id="collapseFilters">
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            <i class="bi bi-funnel"></i>
-                            {{ 'Filters'|trans({}, 'forms') }}
-                        </div>
-                        <div class="card-body">
-                            {{ form_start(filter_form) }}
-
-                            {{ form_row(filter_form.ownHospital) }}
-
-                            {{ form_row(filter_form.hospital) }}
-
-                            <div class="row">
-                                <div class="col">
-                                    {{ form_row(filter_form.submit) }}
-                                </div>
-                                <div class="col">
-                                    <div class="float-end">
-                                        {{ form_row(filter_form.reset) }}
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{ form_end(filter_form) }}
-                        </div>
-                    </div>
-                </div>
+                {% if is_granted('filter_statistics', app.user) %}
+                    {% include 'statistics/_statistics_filter.html.twig' %}
+                {% endif %}
             </div>
         </div>
     </div>
