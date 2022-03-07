@@ -4,6 +4,7 @@ namespace App\Factory;
 
 use App\Form\Filters\StatisticsFilterSetType;
 use App\Service\Filters\HospitalFilter;
+use App\Service\Filters\OwnHospitalFilter;
 
 class StatisticsFilterFactory extends AbstractFilterFactory
 {
@@ -11,6 +12,7 @@ class StatisticsFilterFactory extends AbstractFilterFactory
     {
         return [
             HospitalFilter::Param,
+            OwnHospitalFilter::Param,
         ];
     }
 

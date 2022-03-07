@@ -55,7 +55,7 @@ class UrgencyStatisticsController extends AbstractStatisticsController
             $results[] = [
                 'label' => 'SK'.$allocation['urgency'],
                 'count' => $allocation['counter'],
-                'percent' => $this->getValueInPercent($allocation['counter'], $total).'%',
+                'percent' => $this->getValueInPercent($allocation['counter'], $total),
             ];
         }
 
