@@ -7577,33 +7577,37 @@
         },
         {
             "name": "symfony/ux-live-component",
-            "version": "v2.0.1",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-live-component.git",
-                "reference": "471b423cfa020430e4b0cf5f9e6c9c534cfcebba"
+                "reference": "068ea22fa530c1eb9499b96b6030f4981487b5b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-live-component/zipball/471b423cfa020430e4b0cf5f9e6c9c534cfcebba",
-                "reference": "471b423cfa020430e4b0cf5f9e6c9c534cfcebba",
+                "url": "https://api.github.com/repos/symfony/ux-live-component/zipball/068ea22fa530c1eb9499b96b6030f4981487b5b1",
+                "reference": "068ea22fa530c1eb9499b96b6030f4981487b5b1",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.0",
-                "symfony/ux-twig-component": "^2.0"
+                "symfony/serializer": "^5.4|^6.0",
+                "symfony/ux-twig-component": "^2.1"
+            },
+            "conflict": {
+                "symfony/config": "<5.4.0"
             },
             "require-dev": {
                 "doctrine/annotations": "^1.0",
                 "doctrine/doctrine-bundle": "^2.0",
                 "doctrine/orm": "^2.7",
-                "symfony/dependency-injection": "^4.4.2|^5.0|^6.0",
-                "symfony/framework-bundle": "^4.4|^5.0|^6.0",
-                "symfony/phpunit-bridge": "^5.2|^6.0",
-                "symfony/security-csrf": "^4.4|^5.0|^6.0",
-                "symfony/serializer": "^4.4|^5.0|^6.0",
-                "symfony/twig-bundle": "^4.4|^5.0|^6.0",
-                "symfony/validator": "^4.4|^5.0|^6.0",
+                "symfony/dependency-injection": "^5.4|^6.0",
+                "symfony/form": "^5.4|^6.0",
+                "symfony/framework-bundle": "^5.4|^6.0",
+                "symfony/phpunit-bridge": "^6.0",
+                "symfony/security-csrf": "^5.4|^6.0",
+                "symfony/twig-bundle": "^5.4|^6.0",
+                "symfony/validator": "^5.4|^6.0",
                 "zenstruck/browser": "^0.9.1",
                 "zenstruck/foundry": "^1.10"
             },
@@ -7637,7 +7641,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-live-component/tree/v2.0.1"
+                "source": "https://github.com/symfony/ux-live-component/tree/v2.1.0"
             },
             "funding": [
                 {
@@ -7653,35 +7657,36 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-09T14:02:21+00:00"
+            "time": "2022-03-04T14:48:57+00:00"
         },
         {
             "name": "symfony/ux-twig-component",
-            "version": "v2.0.1",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-twig-component.git",
-                "reference": "bbfb4a3f1a2ff1f707c1eb953af6d466eafbdf47"
+                "reference": "4193b5d870070fd6df0bf880a542dcc6fcf2e5fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/bbfb4a3f1a2ff1f707c1eb953af6d466eafbdf47",
-                "reference": "bbfb4a3f1a2ff1f707c1eb953af6d466eafbdf47",
+                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/4193b5d870070fd6df0bf880a542dcc6fcf2e5fc",
+                "reference": "4193b5d870070fd6df0bf880a542dcc6fcf2e5fc",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.0",
-                "symfony/dependency-injection": "^4.4|^5.0|^6.0",
-                "symfony/property-access": "^4.4|^5.0|^6.0",
+                "symfony/dependency-injection": "^5.4|^6.0",
+                "symfony/event-dispatcher": "^5.4|^6.0",
+                "symfony/property-access": "^5.4|^6.0",
                 "twig/twig": "^2.0|^3.0"
             },
             "conflict": {
-                "symfony/dependency-injection": "<4.4.18,<5.1.10,<5.2.1"
+                "symfony/config": "<5.4.0"
             },
             "require-dev": {
-                "symfony/framework-bundle": "^4.4|^5.0|^6.0",
-                "symfony/phpunit-bridge": "^5.2|^6.0",
-                "symfony/twig-bundle": "^4.4|^5.0|^6.0"
+                "symfony/framework-bundle": "^5.4|^6.0",
+                "symfony/phpunit-bridge": "^6.0",
+                "symfony/twig-bundle": "^5.4|^6.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -7713,7 +7718,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-twig-component/tree/v2.0.1"
+                "source": "https://github.com/symfony/ux-twig-component/tree/v2.1.0"
             },
             "funding": [
                 {
@@ -7729,7 +7734,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-12-03T21:37:12+00:00"
+            "time": "2022-02-22T14:21:01+00:00"
         },
         {
             "name": "symfony/validator",
