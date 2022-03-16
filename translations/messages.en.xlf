@@ -2172,11 +2172,19 @@
       </trans-unit>
       <trans-unit id="p_yRRVv" resname="For full access to this project, you need to login.">
         <source>For full access to this project, you need to login.</source>
-        <target>For full access to this project, you need to login.</target>
+        <target>For full access to this project, you need to log in. Unfortunately you can't create an account by yourself.</target>
       </trans-unit>
       <trans-unit id="AxmKIcl" resname="View raw data">
         <source>View raw data</source>
         <target>View raw data</target>
+      </trans-unit>
+      <trans-unit id="fKw8Kxw" resname="Nothing found, try filtering again.">
+        <source>Nothing found, try filtering again.</source>
+        <target>Nothing found, try filtering again.</target>
+      </trans-unit>
+      <trans-unit id="cjWjpiq" resname="No data found for your request.">
+        <source>No data found for your request.</source>
+        <target>No data found for your request.</target>
       </trans-unit>
     </body>
   </file>

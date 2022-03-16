@@ -11,6 +11,7 @@ use App\Domain\Event\Import\ImportFailedEvent;
 use App\Entity\Allocation;
 use App\Entity\Import;
 use App\Entity\SkippedRow;
+use App\Repository\AllocationRepository;
 use App\Service\Import\Reader\CsvImportReader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -97,7 +98,7 @@ class ImportService
                     if (count($errors) > 0) {
                         $errorMessage = '';
                         foreach ($errors as $error) {
-                            $errorMessage = $error->getMessage().'\n';
+                            $errorMessage = $error->getMessage()."\n";
                         }
 
                         $skippedRow = new SkippedRow();
@@ -155,6 +156,7 @@ class ImportService
 
                 $import->setStatus(Import::STATUS_FAILURE);
 
+                /** @var AllocationRepository $allocationRepository */
                 $allocationRepository = $this->em->getRepository(Allocation::class);
                 $allocationRepository->deleteByImport($import);
             }
