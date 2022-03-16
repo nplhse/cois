@@ -271,7 +271,7 @@ class Allocation extends DomainAllocation
     protected bool $specialityWasClosed;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=200, nullable=true)
      */
     protected ?string $handoverPoint = null;
 
