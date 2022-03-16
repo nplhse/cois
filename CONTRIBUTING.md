@@ -6,4 +6,21 @@ However you should follow the following simple guidelines for your contribution 
 
 - COIS uses the [GitFlow branching model](http://nvie.com/posts/a-successful-git-branching-model/) for the process from development to release. Because of GitFlow contributions can only be accepted via pull requests on [Github](https://github.com/nplhse/cois).
 - Please keep in mind, that COIS follows [SemVer v2.0.0](http://semver.org/).
-- Also you should make sure to follow the [PHP Standards Recommendations](http://www.php-fig.org/psr/) and the [Symfony best practices](http://symfony.com/doc/current/best_practices/index.html).
+- You should make sure to follow the [PHP Standards Recommendations](http://www.php-fig.org/psr/) and the [Symfony best practices](http://symfony.com/doc/current/best_practices/index.html).
+- Also, you must agree to the [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## Setup of your dev environment
+
+This project expects you to have local webserver and a locally installed MySQL/MariaDB instance, see installation part of the [README](README.md). It seamlessly integrates works with the [Symfony binary cli tool](https://github.com/symfony-cli/symfony-cli).
+
+If you have the need to populate the database with some Fixtures for development you could either directly execute `bin/console doctrine:fixtures:load` or use `composer setup-dev` instead of `composer setup`.
+
+When using these fixtures there are always several pre-configured Users by default:
+
+| Username    | Password   | Description                         |
+|-------------|------------|-------------------------------------|
+| admin       | *password* | **Admin** user with full privileges |
+| foo         | *password* | Default user                        |
+| unknownUser | *password* | User with **no** access             |
+| expiredUser | *password* | User with **expired** credentials   |
+
