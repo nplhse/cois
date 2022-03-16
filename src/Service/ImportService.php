@@ -112,7 +112,7 @@ class ImportService
                         $import->addSkippedRow();
                         continue;
                     }
-                } catch (\InvalidArgumentException $e) {
+                } catch (\Exception $e) {
                     $skippedRow = new SkippedRow();
                     $skippedRow->setImport($import);
                     $skippedRow->setErrors($e->getMessage());
