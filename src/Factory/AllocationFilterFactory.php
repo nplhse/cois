@@ -25,6 +25,7 @@ use App\Service\Filters\PageFilter;
 use App\Service\Filters\RequiresCathlabFilter;
 use App\Service\Filters\RequiresResusFilter;
 use App\Service\Filters\SearchFilter;
+use App\Service\Filters\SecondaryDeploymentFilter;
 use App\Service\Filters\SpecialityDetailFilter;
 use App\Service\Filters\SpecialityFilter;
 use App\Service\Filters\StateFilter;
@@ -63,6 +64,7 @@ class AllocationFilterFactory extends AbstractFilterFactory
             PageFilter::Param,
             SearchFilter::Param,
             OrderFilter::Param,
+            SecondaryDeploymentFilter::Param,
         ];
     }
 

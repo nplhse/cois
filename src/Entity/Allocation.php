@@ -177,7 +177,7 @@ class Allocation extends DomainAllocation
     protected string $occasion;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     #[Assert\NotBlank(message: 'The assignment must not be empty.')]
     protected string $assignment;
@@ -249,7 +249,7 @@ class Allocation extends DomainAllocation
     protected bool $isWithPhysician;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=10, nullable=true)
      */
     #[Assert\NotBlank(message: 'The modeOfTransport must not be empty.')]
     protected string $modeOfTransport;
@@ -273,10 +273,9 @@ class Allocation extends DomainAllocation
     protected bool $specialityWasClosed;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
-    #[Assert\NotBlank(message: 'The handoverPoint must not be empty.')]
-    protected string $handoverPoint;
+    protected ?string $handoverPoint = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -304,4 +303,9 @@ class Allocation extends DomainAllocation
      * @ORM\Column(type="integer", nullable=true)
      */
     protected ?int $secondaryIndicationCode = null;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    protected ?string $secondaryDeployment = null;
 }

@@ -211,6 +211,21 @@
                         </div>
                     </div>
 
+                    {% if allocation.secondaryDeployment %}
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 class="card-subtitle text-muted">
+                                    {{
+                                        'allocations.field.secondaryDeployment'|trans
+                                    }}
+                                </h6>
+                                <p>
+                                    {{ allocation.secondaryDeployment }}
+                                </p>
+                            </div>
+                        </div>
+                    {% endif %}
+
                     <h5 class="card-title">
                         {{ 'allocations.field.transport'|trans }}
                     </h5>

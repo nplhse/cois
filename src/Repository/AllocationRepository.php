@@ -487,4 +487,28 @@ class AllocationRepository extends ServiceEntityRepository
 
         return $speciality;
     }
+
+    public function getSecondaryDeployments(): array
+    {
+        $secondaryDeployments = [];
+
+        $results = $this->createQueryBuilder('a')
+            ->select('a.secondaryDeployment')
+            ->addOrderBy('a.secondaryDeployment', 'ASC')
+            ->distinct()
+            ->getQuery()
+            ->getArrayResult();
+
+        foreach ($results as $result) {
+            if (empty($result['secondaryDeployment'])) {
+                $result['secondaryDeployment'] = 'None';
+            }
+
+            if (!in_array($result['secondaryDeployment'], $secondaryDeployments, true)) {
+                $secondaryDeployments[$result['secondaryDeployment']] = $result['secondaryDeployment'];
+            }
+        }
+
+        return $secondaryDeployments;
+    }
 }

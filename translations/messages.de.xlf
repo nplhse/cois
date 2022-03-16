@@ -2261,6 +2261,22 @@
         <source>No data found for your request.</source>
         <target>Keine Daten für Ihre Anfrage gefunden.</target>
       </trans-unit>
+      <trans-unit id="7fYRKH7" resname="allocations.field.secondaryDeployment">
+        <source>allocations.field.secondaryDeployment</source>
+        <target>Sekundäranlass</target>
+      </trans-unit>
+      <trans-unit id="N4yBsd2" resname="SecondaryDeployment">
+        <source>SecondaryDeployment</source>
+        <target>Sekundäranlass</target>
+      </trans-unit>
+      <trans-unit id="SHT2RdO" resname="Secondary Deployments">
+        <source>Secondary Deployments</source>
+        <target>Mit und ohne Sekundäränlass</target>
+      </trans-unit>
+      <trans-unit id="3JN7WYk" resname="None">
+        <source>None</source>
+        <target>Kein Sekundäranlass</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

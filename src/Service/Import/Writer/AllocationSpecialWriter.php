@@ -29,6 +29,10 @@ class AllocationSpecialWriter implements \App\Application\Contract\ImportWriterI
             $entity->setSecondaryIndicationCode((int) substr($row['Neben-PZC'], 0, 3));
         }
 
+        if (isset($row['Sekundäranlass'])) {
+            $entity->setSecondaryDeployment($row['Sekundäranlass']);
+        }
+
         return $entity;
     }
 }

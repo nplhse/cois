@@ -50,6 +50,7 @@ class AllocationFilterSetType extends AbstractType
             ->add('isWorkAccident', IsWorkAccidentFilterType::class)
             ->add('speciality', SpecialityType::class)
             ->add('specialityDetail', SpecialityDetailType::class)
+            ->add('secondaryDeployment', SecondaryDeploymentType::class)
         ;
 
         if ($this->security->isGranted('ROLE_ADMIN')) {

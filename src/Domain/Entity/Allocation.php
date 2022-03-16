@@ -107,7 +107,7 @@ class Allocation implements AllocationInterface, IdentifierInterface
 
     protected bool $specialityWasClosed;
 
-    protected string $handoverPoint;
+    protected ?string $handoverPoint = null;
 
     protected ?string $comment;
 
@@ -118,6 +118,8 @@ class Allocation implements AllocationInterface, IdentifierInterface
     protected ?string $secondaryIndication;
 
     protected ?int $secondaryIndicationCode;
+
+    protected ?string $secondaryDeployment = null;
 
     public function __construct()
     {
@@ -547,7 +549,7 @@ class Allocation implements AllocationInterface, IdentifierInterface
         return $this;
     }
 
-    public function getHandoverPoint(): string
+    public function getHandoverPoint(): ?string
     {
         return $this->handoverPoint;
     }
@@ -610,5 +612,17 @@ class Allocation implements AllocationInterface, IdentifierInterface
     public function getSecondaryIndicationCode(): ?int
     {
         return $this->secondaryIndicationCode;
+    }
+
+    public function setSecondaryDeployment(?string $secondaryDeployment): self
+    {
+        $this->secondaryDeployment = $secondaryDeployment;
+
+        return $this;
+    }
+
+    public function getSecondaryDeployment(): ?string
+    {
+        return $this->secondaryDeployment;
     }
 }

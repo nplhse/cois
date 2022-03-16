@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+  <file source-language="de" target-language="en" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -2185,6 +2185,22 @@
       <trans-unit id="cjWjpiq" resname="No data found for your request.">
         <source>No data found for your request.</source>
         <target>No data found for your request.</target>
+      </trans-unit>
+      <trans-unit id="7fYRKH7" resname="allocations.field.secondaryDeployment">
+        <source>allocations.field.secondaryDeployment</source>
+        <target>Secondary Deployment</target>
+      </trans-unit>
+      <trans-unit id="N4yBsd2" resname="SecondaryDeployment">
+        <source>SecondaryDeployment</source>
+        <target>Secondary Deployment</target>
+      </trans-unit>
+      <trans-unit id="SHT2RdO" resname="Secondary Deployments">
+        <source>Secondary Deployments</source>
+        <target>With and without secondary deployment</target>
+      </trans-unit>
+      <trans-unit id="3JN7WYk" resname="None">
+        <source>None</source>
+        <target>No secondary deployment</target>
       </trans-unit>
     </body>
   </file>

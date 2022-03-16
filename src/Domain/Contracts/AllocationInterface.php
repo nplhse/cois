@@ -140,7 +140,7 @@ interface AllocationInterface
 
     public function setHandoverPoint(string $handoverPoint): self;
 
-    public function getHandoverPoint(): string;
+    public function getHandoverPoint(): ?string;
 
     public function setComment(?string $comment): self;
 
@@ -161,4 +161,8 @@ interface AllocationInterface
     public function setSecondaryIndicationCode(?int $secondaryIndicationCode): self;
 
     public function getSecondaryIndicationCode(): ?int;
+
+    public function setSecondaryDeployment(?string $secondaryDeployment): self;
+
+    public function getSecondaryDeployment(): ?string;
 }

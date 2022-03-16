@@ -419,6 +419,15 @@
                         )
                     }}
 
+                    {{
+                        form_row(
+                            allocationForm.secondaryDeployment,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
                     {% if is_granted('ROLE_ADMIN') %}
                         <h5>
                             {{ 'Admin filters'|trans }}
