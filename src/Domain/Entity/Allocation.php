@@ -27,9 +27,9 @@ class Allocation implements AllocationInterface, IdentifierInterface
 
     protected ImportInterface $import;
 
-    protected ?StateInterface $state = null;
+    protected StateInterface $state;
 
-    protected ?DispatchAreaInterface $dispatchArea = null;
+    protected DispatchAreaInterface $dispatchArea;
 
     protected ?SupplyAreaInterface $supplyArea = null;
 
@@ -157,7 +157,7 @@ class Allocation implements AllocationInterface, IdentifierInterface
         return $this;
     }
 
-    public function getState(): ?StateInterface
+    public function getState(): StateInterface
     {
         return $this->state;
     }
@@ -169,7 +169,7 @@ class Allocation implements AllocationInterface, IdentifierInterface
         return $this;
     }
 
-    public function getDispatchArea(): ?DispatchAreaInterface
+    public function getDispatchArea(): DispatchAreaInterface
     {
         return $this->dispatchArea;
     }
