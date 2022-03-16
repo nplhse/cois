@@ -272,6 +272,15 @@
                                     )
                                 }}
 
+                                {{
+                                    form_row(
+                                        allocationForm.secondaryDeployment,
+                                        {
+                                            label: false
+                                        }
+                                    )
+                                }}
+
                                 <h5>
                                     {{ 'Admin filters'|trans }}
                                 </h5>
@@ -367,7 +376,7 @@
                                         }
                                     )
                                     }}">
-                                    {{ allocation.import.caption }}
+                                    {{ allocation.import.name }}
                                 </a>
                             </td>
                             <td>

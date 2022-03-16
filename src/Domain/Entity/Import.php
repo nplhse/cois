@@ -251,6 +251,11 @@ class Import implements ImportInterface, IdentifierInterface, TimestampableInter
         return $this->runtime;
     }
 
+    public function resetSkippedRows(): void
+    {
+        $this->skippedRows = 0;
+    }
+
     public function getSkippedRows(): ?int
     {
         return $this->skippedRows ?? 0;

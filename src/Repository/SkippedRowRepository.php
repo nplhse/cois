@@ -23,7 +23,7 @@ class SkippedRowRepository extends ServiceEntityRepository
     public function deleteByImport(Import $import): mixed
     {
         $qb = $this->createQueryBuilder('s')
-            ->delete('App:Allocation', 's')
+            ->delete('App:SkippedRow', 's')
             ->where('s.import = :import')
             ->setParameter(':import', $import->getId());
 

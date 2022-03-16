@@ -72,6 +72,7 @@ class ImportService
 
     public function process(iterable $result, Import $import): void
     {
+        $import->resetSkippedRows();
         $activeWriters = [];
         $iteration = 0;
 

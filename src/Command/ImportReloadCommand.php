@@ -5,6 +5,7 @@ namespace App\Command;
 use App\Domain\Command\Import\ImportDataCommand;
 use App\Repository\AllocationRepository;
 use App\Repository\ImportRepository;
+use App\Repository\SkippedRowRepository;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -26,13 +27,16 @@ class ImportReloadCommand extends Command
 
     private ImportRepository $importRepository;
 
-    public function __construct(MessageBusInterface $messageBus, AllocationRepository $allocationRepository, ImportRepository $importRepository, string $name = null)
+    private SkippedRowRepository $skippedRowRepository;
+
+    public function __construct(MessageBusInterface $messageBus, AllocationRepository $allocationRepository, ImportRepository $importRepository, SkippedRowRepository $skippedRowRepository, string $name = null)
     {
         parent::__construct($name);
 
         $this->messageBus = $messageBus;
         $this->allocationRepository = $allocationRepository;
         $this->importRepository = $importRepository;
+        $this->skippedRowRepository = $skippedRowRepository;
     }
 
     protected function configure(): void
@@ -50,6 +54,7 @@ class ImportReloadCommand extends Command
         try {
             $import = $this->importRepository->findOneBy(['id' => $importId]);
             $this->allocationRepository->deleteByImport($import);
+            $this->skippedRowRepository->deleteByImport($import);
             $this->messageBus->dispatch(new ImportDataCommand($import->getId()));
         } catch (HandlerFailedException $e) {
             $io->warning(sprintf('Something went wrong! Failed to reload import %d: %s.', $importId, $e->getMessage()));

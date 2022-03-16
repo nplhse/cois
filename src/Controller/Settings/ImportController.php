@@ -254,12 +254,13 @@ class ImportController extends AbstractController
     }
 
     #[Route('/{id}/refresh', name: 'app_settings_import_refresh')]
-    public function refresh(Request $request, Import $import, AllocationRepository $allocationRepository): Response
+    public function refresh(Request $request, Import $import, AllocationRepository $allocationRepository, SkippedRowRepository $skippedRowRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         try {
             $allocationRepository->deleteByImport($import);
+            $skippedRowRepository->deleteByImport($import);
             $this->messageBus->dispatch(new ImportDataCommand($import->getId()));
         } catch (HandlerFailedException $e) {
             $this->addFlash('danger', sprintf('Something went wrong! Failed to reload import %d: %s.', $import->getId(), $e->getMessage()));
