@@ -149,9 +149,9 @@ class ImportService
         }
 
         if (0 !== $iteration && Import::STATUS_SUCCESS === $import->getStatus()) {
-            if ($this->getPercentage($iteration, $import->getSkippedRows()) > 0.25 && $this->getPercentage($iteration, $import->getSkippedRows()) < 5) {
+            if ($this->getPercentage($iteration, $import->getSkippedRows()) > 1 && $this->getPercentage($iteration, $import->getSkippedRows()) < 10) {
                 $import->setStatus(Import::STATUS_INCOMPLETE);
-            } elseif ($this->getPercentage($iteration, $import->getSkippedRows()) > 5) {
+            } elseif ($this->getPercentage($iteration, $import->getSkippedRows()) > 10) {
                 $this->dispatchEvent(new ImportFailedEvent($import, new ImportWriteException('Too many skipped rows in import.')));
 
                 $import->setStatus(Import::STATUS_FAILURE);

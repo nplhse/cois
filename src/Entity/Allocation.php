@@ -179,7 +179,6 @@ class Allocation extends DomainAllocation
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    #[Assert\NotBlank(message: 'The assignment must not be empty.')]
     protected string $assignment;
 
     /**
@@ -251,7 +250,6 @@ class Allocation extends DomainAllocation
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
      */
-    #[Assert\NotBlank(message: 'The modeOfTransport must not be empty.')]
     protected string $modeOfTransport;
 
     /**
@@ -283,9 +281,8 @@ class Allocation extends DomainAllocation
     protected ?string $comment = null;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
-    #[Assert\NotBlank(message: 'The indication must not be empty.')]
     protected string $indication;
 
     /**
