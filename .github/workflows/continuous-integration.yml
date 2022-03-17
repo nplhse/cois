@@ -133,3 +133,10 @@ jobs:
               run: vendor/bin/phpunit
               env:
                   DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
+
+            - name: Upload coverage results to Coveralls
+              env:
+                  COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  composer global require php-coveralls/php-coveralls
+                  php-coveralls --coverage_clover=var/build/coverage/logs/clover.xml -v
