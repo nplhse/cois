@@ -15,6 +15,7 @@ use App\Domain\Contracts\TimestampableInterface;
 use App\Domain\Contracts\UserInterface;
 use App\Domain\Entity\Traits\IdentifierTrait;
 use App\Domain\Entity\Traits\TimestampableTrait;
+use Doctrine\Common\Collections\Collection;
 
 class Hospital implements HospitalInterface, IdentifierInterface, TimestampableInterface, \Stringable
 {
@@ -59,7 +60,7 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
 
     protected string $location;
 
-    protected ArrayCollection $imports;
+    protected Collection $imports;
 
     public function __construct()
     {
@@ -223,7 +224,7 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
         return $this->location;
     }
 
-    public function getImports(): ArrayCollection
+    public function getImports(): Collection
     {
         return $this->imports;
     }

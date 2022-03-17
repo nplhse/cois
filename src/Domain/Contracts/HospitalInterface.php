@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Contracts;
 
 use App\Domain\Adapter\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 interface HospitalInterface
 {
@@ -56,5 +57,5 @@ interface HospitalInterface
 
     public function removeImport(ImportInterface $import): self;
 
-    public function getImports(): ArrayCollection;
+    public function getImports(): Collection;
 }
