@@ -51,4 +51,10 @@ interface HospitalInterface
     public function setLocation(string $location): self;
 
     public function getLocation(): string;
+
+    public function addImport(ImportInterface $import): self;
+
+    public function removeImport(ImportInterface $import): self;
+
+    public function getImports(): ArrayCollection;
 }

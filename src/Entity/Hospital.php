@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Domain\Adapter\ArrayCollection;
 use App\Domain\Contracts\DispatchAreaInterface;
 use App\Domain\Contracts\StateInterface;
 use App\Domain\Contracts\SupplyAreaInterface;
@@ -92,5 +93,5 @@ class Hospital extends DomainHospital
     /**
      * @ORM\OneToMany(targetEntity=Import::class, mappedBy="hospital")
      */
-    protected Collection $imports;
+    protected ArrayCollection $imports;
 }

@@ -7,6 +7,7 @@ use App\Domain\Contracts\StateInterface;
 use App\Domain\Contracts\SupplyAreaInterface;
 use App\Domain\Contracts\UserInterface;
 use App\Domain\Entity\Hospital;
+use App\Domain\Entity\Import;
 use App\Domain\Entity\User;
 use PHPUnit\Framework\TestCase;
 
@@ -199,5 +200,24 @@ class HospitalTest extends TestCase
 
         $user->setUpdatedAt($time);
         $this->assertEquals($time, $user->getUpdatedAt());
+    }
+
+    public function testImports(): void
+    {
+        $importName = 'Test Hospital';
+
+        $import = $this->createMock(Import::class);
+        $import->expects($this->exactly(1))
+            ->method('getName')
+            ->willReturn($importName);
+
+        $hospital = new Hospital();
+
+        $hospital->addImport($import);
+        $this->assertEquals($importName, $hospital->getImports()->first()->getName());
+        $this->assertCount(1, $hospital->getImports());
+
+        $hospital->removeImport($import);
+        $this->assertCount(0, $hospital->getImports());
     }
 }
