@@ -15,6 +15,7 @@ class SecurityControllerTest extends WebTestCase
     {
         $this->browser()
             ->visit('/login')
+            ->dump()
             ->assertSeeIn('h1', 'Login')
             ->fillField('Username', 'foo')
             ->fillField('Password', 'password')
