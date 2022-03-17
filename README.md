@@ -1,6 +1,6 @@
 # COIS - Collaborative IVENA statistics
 
-[![Continuous Integration](https://github.com/nplhse/cois/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/nplhse/cois/actions/workflows/continuous-integration.yml) [![Coverage Status](https://coveralls.io/repos/github/nplhse/cois/badge.svg?branch=main)](https://coveralls.io/github/nplhse/cois?branch=main) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Continuous Integration](https://github.com/nplhse/cois/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/nplhse/cois/actions/workflows/continuous-integration.yml) [![Coverage Status](https://coveralls.io/repos/github/nplhse/cois/badge.svg?branch=main)](https://coveralls.io/github/nplhse/cois?branch=main) [![Maintainability](https://api.codeclimate.com/v1/badges/42c306c963c6a04bd2ea/maintainability)](https://codeclimate.com/github/nplhse/cois/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/42c306c963c6a04bd2ea/test_coverage)](https://codeclimate.com/github/nplhse/cois/test_coverage)
 
 # Requirements
 
