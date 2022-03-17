@@ -15,8 +15,6 @@ use App\Domain\Contracts\TimestampableInterface;
 use App\Domain\Contracts\UserInterface;
 use App\Domain\Entity\Traits\IdentifierTrait;
 use App\Domain\Entity\Traits\TimestampableTrait;
-use App\Domain\Entity\Import;
-use Doctrine\Common\Collections\Collection;
 
 class Hospital implements HospitalInterface, IdentifierInterface, TimestampableInterface, \Stringable
 {

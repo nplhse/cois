@@ -100,6 +100,25 @@ class UserTest extends TestCase
         $this->assertEquals(false, $user->isParticipant());
     }
 
+    public function testPasswords(): void
+    {
+        $user = new User();
+        $password = 'password';
+
+        $user->setPassword($password);
+        $this->assertEquals($password, $user->getPassword());
+
+        $user->setPlainPassword($password);
+        $this->assertEquals($password, $user->getPlainPassword());
+        $this->assertEmpty($user->getPassword());
+
+        $user->setPlainPassword(null);
+        $this->assertNull($user->getPlainPassword());
+
+        $user->eraseCredentials();
+        $this->assertNull($user->getPlainPassword());
+    }
+
     public function testHospitals(): void
     {
         $hospitalName = 'Test Hospital';
@@ -117,5 +136,16 @@ class UserTest extends TestCase
 
         $user->removeHospital($hospital);
         $this->assertCount(0, $user->getHospitals());
+    }
+
+    public function testCredentialExpiration(): void
+    {
+        $user = new User();
+
+        $user->setPassword('password');
+        $this->assertFalse($user->hasCredentialsExpired());
+
+        $user->expireCredentials();
+        $this->assertTrue($user->hasCredentialsExpired());
     }
 }

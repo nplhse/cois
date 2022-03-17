@@ -75,5 +75,9 @@ class DispatchAreaTest extends TestCase
 
         $dispatchArea->setUpdatedAt($time);
         $this->assertEquals($time, $dispatchArea->getUpdatedAt());
+
+        $dispatchArea->updateTimestamps();
+        $this->assertEquals($time, $dispatchArea->getCreatedAt());
+        $this->assertNotEquals($time, $dispatchArea->getUpdatedAt());
     }
 }

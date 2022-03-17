@@ -205,6 +205,14 @@ class AllocationTest extends TestCase
         $allocation->setGender('D');
         $this->assertEquals('D', $allocation->getGender());
 
+        try {
+            $this->expectException(\InvalidArgumentException::class);
+            $this->expectExceptionMessage('Empty Gender is not a valid option');
+            $allocation->setGender((string) null);
+        } catch (\InvalidArgumentException $e) {
+            // Continue
+        }
+
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Gender X is not a valid option');
         $allocation->setGender('X');
