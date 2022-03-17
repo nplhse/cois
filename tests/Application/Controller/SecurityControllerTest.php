@@ -15,7 +15,9 @@ class SecurityControllerTest extends WebTestCase
     {
         $this->browser()
             ->visit('/login')
-            ->dump()
+            ->use(function(\Zenstruck\Browser $browser) {
+                var_dump($browser->response()->body());
+            })
             ->assertSeeIn('h1', 'Login')
             ->fillField('Username', 'foo')
             ->fillField('Password', 'password')
