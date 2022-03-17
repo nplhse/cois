@@ -4,6 +4,7 @@ namespace App\Tests\Unit\Domain\Entity;
 
 use App\Domain\Contracts\StateInterface;
 use App\Domain\Entity\DispatchArea;
+use App\Domain\Entity\Hospital;
 use PHPUnit\Framework\TestCase;
 
 class DispatchAreaTest extends TestCase
@@ -33,6 +34,25 @@ class DispatchAreaTest extends TestCase
         $this->assertEquals($stateName, $dispatchArea->getState()->getName());
     }
 
+    public function testHospitals(): void
+    {
+        $hospitalName = 'Test Hospital';
+
+        $hospital = $this->createMock(Hospital::class);
+        $hospital->expects($this->exactly(1))
+            ->method('getName')
+            ->willReturn($hospitalName);
+
+        $dispatchArea = new DispatchArea();
+
+        $dispatchArea->addHospital($hospital);
+        $this->assertEquals($hospitalName, $dispatchArea->getHospitals()->first()->getName());
+        $this->assertCount(1, $dispatchArea->getHospitals());
+
+        $dispatchArea->removeHospital($hospital);
+        $this->assertCount(0, $dispatchArea->getHospitals());
+    }
+
     public function testId(): void
     {
         $id = 123;
@@ -55,5 +75,9 @@ class DispatchAreaTest extends TestCase
 
         $dispatchArea->setUpdatedAt($time);
         $this->assertEquals($time, $dispatchArea->getUpdatedAt());
+
+        $dispatchArea->updateTimestamps();
+        $this->assertEquals($time, $dispatchArea->getCreatedAt());
+        $this->assertNotEquals($time, $dispatchArea->getUpdatedAt());
     }
 }

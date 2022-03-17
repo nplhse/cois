@@ -194,4 +194,14 @@ class ImportTest extends TestCase
         $import->setUpdatedAt($time);
         $this->assertEquals($time, $import->getUpdatedAt());
     }
+
+    public function testSkippedRows(): void
+    {
+        $import = new Import();
+
+        $this->assertEquals(0, $import->getSkippedRows());
+
+        $import->addSkippedRow();
+        $this->assertEquals(1, $import->getSkippedRows());
+    }
 }

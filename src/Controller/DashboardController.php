@@ -7,10 +7,12 @@ use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
 use App\Repository\ImportRepository;
 use App\Repository\UserRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[IsGranted('ROLE_USER')]
 class DashboardController extends AbstractController
 {
     #[Route('/dashboard/', name: 'app_dashboard')]
@@ -18,10 +20,6 @@ class DashboardController extends AbstractController
     {
         /** @var UserInterface $user */
         $user = $this->getUser();
-
-        if (null === $this->getUser()) {
-            return $this->redirectToRoute('app_default');
-        }
 
         if ($user->getHospitals()->isEmpty()) {
             $allocationCount = 0;

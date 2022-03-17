@@ -3,6 +3,7 @@
 namespace App\Tests\Unit\Domain\Entity;
 
 use App\Domain\Contracts\StateInterface;
+use App\Domain\Entity\Hospital;
 use App\Domain\Entity\SupplyArea;
 use PHPUnit\Framework\TestCase;
 
@@ -31,6 +32,25 @@ class SupplyAreaTest extends TestCase
 
         $supplyArea->setState($state);
         $this->assertEquals($stateName, $supplyArea->getState()->getName());
+    }
+
+    public function testHospitals(): void
+    {
+        $hospitalName = 'Test Hospital';
+
+        $hospital = $this->createMock(Hospital::class);
+        $hospital->expects($this->exactly(1))
+            ->method('getName')
+            ->willReturn($hospitalName);
+
+        $area = new SupplyArea();
+
+        $area->addHospital($hospital);
+        $this->assertEquals($hospitalName, $area->getHospitals()->first()->getName());
+        $this->assertCount(1, $area->getHospitals());
+
+        $area->removeHospital($hospital);
+        $this->assertCount(0, $area->getHospitals());
     }
 
     public function testId(): void
