@@ -142,8 +142,8 @@ jobs:
                   php-coveralls --coverage_clover=var/build/coverage/logs/clover.xml -v
 
             - name: Upload coverage to Codeclimate
-              uses: MartinNuc/codeclimate-action@2
+              uses: paambaati/codeclimate-action@v3.0.0
               env:
                   CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_REPORTER_ID }}
               with:
-                  coverageLocations: ${{github.workspace}}/var/build/coverage/logs/clover.xml
+                  coverageLocations: ${{github.workspace}}/var/build/coverage/logs/clover.xml:clover
