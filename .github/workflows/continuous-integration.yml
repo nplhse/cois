@@ -109,7 +109,7 @@ jobs:
               run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
             - name: Run Migration
-              run: php bin/console doctrine:schema:create --force || echo "No schema found or schema failed"
+              run: php bin/console doctrine:schema:create || echo "No schema found or schema failed"
               env:
                   DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
 
