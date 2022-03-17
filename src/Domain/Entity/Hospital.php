@@ -224,7 +224,7 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
         return $this->location;
     }
 
-    public function getImports(): ArrayCollection
+    public function getImports(): Collection
     {
         return $this->imports;
     }
