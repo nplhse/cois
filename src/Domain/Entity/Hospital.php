@@ -8,13 +8,14 @@ use App\Domain\Adapter\ArrayCollection;
 use App\Domain\Contracts\DispatchAreaInterface;
 use App\Domain\Contracts\HospitalInterface;
 use App\Domain\Contracts\IdentifierInterface;
+use App\Domain\Contracts\ImportInterface;
 use App\Domain\Contracts\StateInterface;
 use App\Domain\Contracts\SupplyAreaInterface;
 use App\Domain\Contracts\TimestampableInterface;
 use App\Domain\Contracts\UserInterface;
 use App\Domain\Entity\Traits\IdentifierTrait;
 use App\Domain\Entity\Traits\TimestampableTrait;
-use App\Entity\Import;
+use App\Domain\Entity\Import;
 use Doctrine\Common\Collections\Collection;
 
 class Hospital implements HospitalInterface, IdentifierInterface, TimestampableInterface, \Stringable
@@ -60,7 +61,7 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
 
     protected string $location;
 
-    protected Collection $imports;
+    protected ArrayCollection $imports;
 
     public function __construct()
     {
@@ -224,12 +225,12 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
         return $this->location;
     }
 
-    public function getImports(): Collection
+    public function getImports(): ArrayCollection
     {
         return $this->imports;
     }
 
-    public function addImport(Import $import): self
+    public function addImport(ImportInterface $import): self
     {
         if (!$this->imports->contains($import)) {
             $this->imports[] = $import;
@@ -239,7 +240,7 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
         return $this;
     }
 
-    public function removeImport(Import $import): self
+    public function removeImport(ImportInterface $import): self
     {
         $this->imports->removeElement($import);
 

@@ -2,6 +2,7 @@
 
 namespace App\Tests\Unit\Domain\Entity;
 
+use App\Domain\Entity\Hospital;
 use App\Domain\Entity\User;
 use PHPUnit\Framework\TestCase;
 
@@ -97,5 +98,24 @@ class UserTest extends TestCase
 
         $user->disableParticipation();
         $this->assertEquals(false, $user->isParticipant());
+    }
+
+    public function testHospitals(): void
+    {
+        $hospitalName = 'Test Hospital';
+
+        $hospital = $this->createMock(Hospital::class);
+        $hospital->expects($this->exactly(1))
+            ->method('getName')
+            ->willReturn($hospitalName);
+
+        $user = new User();
+
+        $user->addHospital($hospital);
+        $this->assertEquals($hospitalName, $user->getHospitals()->first()->getName());
+        $this->assertCount(1, $user->getHospitals());
+
+        $user->removeHospital($hospital);
+        $this->assertCount(0, $user->getHospitals());
     }
 }
