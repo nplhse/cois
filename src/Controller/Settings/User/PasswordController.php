@@ -45,6 +45,7 @@ class PasswordController extends AbstractController
                 $this->cleanSessionAfterReset();
             } catch (HandlerFailedException) {
                 $this->addFlash('danger', 'Sorry, something went wrong. Please try again later!');
+                return $this->redirectToRoute('app_settings_password');
             }
 
             $this->addFlash('success', 'Your password has been changed successfully.');
