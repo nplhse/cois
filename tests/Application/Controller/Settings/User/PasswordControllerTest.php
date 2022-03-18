@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Application\Controller\Settings;
+namespace App\Tests\Application\Controller\Settings\User;
 
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
