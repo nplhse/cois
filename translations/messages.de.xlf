@@ -1463,7 +1463,7 @@
       </trans-unit>
       <trans-unit id="bkss3J_" resname="For full access to this project, you need to login. If you don´t already have a login you can register yourself.">
         <source>For full access to this project, you need to login. If you don´t already have a login you can register yourself.</source>
-        <target>Für kompletten Zugriff auf das Projekt müssen Sie sich anmelden. Falls Sie noch kein Benutzerkonto haben, können Sie sich registrieren.</target>
+        <target>Für vollständigen Zugriff auf die Plattform müssen Sie sich anmelden. Eine eigenständige Registrierung ist aktuell nicht möglich.</target>
       </trans-unit>
       <trans-unit id="q.sr6NJ" resname="Click here to Login">
         <source>Click here to Login</source>
@@ -2247,7 +2247,7 @@
       </trans-unit>
       <trans-unit id="p_yRRVv" resname="For full access to this project, you need to login.">
         <source>For full access to this project, you need to login.</source>
-        <target>Für vollständigen Zugriff auf die Plattform müssen Sie sich anmelden. Eine eigenständige Registrierung ist aktuell nicht möglich.</target>
+        <target>Für vollständigen Zugriff auf die Plattform müssen Sie sich anmelden, oder ein neues Benutzerkonto erstellen.</target>
       </trans-unit>
       <trans-unit id="AxmKIcl" resname="View raw data">
         <source>View raw data</source>

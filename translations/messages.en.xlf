@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="de" target-language="en" datatype="plaintext" original="file.ext">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -1464,7 +1464,7 @@
       </trans-unit>
       <trans-unit id="bkss3J_" resname="For full access to this project, you need to login. If you don´t already have a login you can register yourself.">
         <source>For full access to this project, you need to login. If you don´t already have a login you can register yourself.</source>
-        <target>For full access to this project, you need to login. If you don´t already have a login you can register yourself.</target>
+        <target>For full access to this project, you need to log in. Unfortunately you can't create an account by yourself.</target>
       </trans-unit>
       <trans-unit id="q.sr6NJ" resname="Click here to Login">
         <source>Click here to Login</source>
@@ -2172,7 +2172,7 @@
       </trans-unit>
       <trans-unit id="p_yRRVv" resname="For full access to this project, you need to login.">
         <source>For full access to this project, you need to login.</source>
-        <target>For full access to this project, you need to log in. Unfortunately you can't create an account by yourself.</target>
+        <target>For full access to this project, you have to log in or create a new account.</target>
       </trans-unit>
       <trans-unit id="AxmKIcl" resname="View raw data">
         <source>View raw data</source>
