@@ -43,6 +43,11 @@ class Covid19ExportController extends AbstractController
             $data[] = $this->getValuesForRow($temp, 3, $code);
         }
 
+        $result = $query->executeStats(null);
+        $temp = $this->buildTotalsArray($result->getItems());
+
+        $data[] = $this->getValuesForRow($temp, 0, 0);
+
         $csv = Writer::createFromPath('php://temp', 'r+');
         $csv->insertAll(new \ArrayIterator($data));
 
@@ -89,6 +94,18 @@ class Covid19ExportController extends AbstractController
         return $this->fillGaps($data);
     }
 
+    public function buildTotalsArray(array $results): array
+    {
+        $data = [];
+
+        foreach ($results as $row) {
+            $months[$row['creationMonth']] = $row['count'];
+            $data[$row['creationYear']] = $months;
+        }
+
+        return $data;
+    }
+
     public function fillGaps(array $data): array
     {
         for ($iy = 2019; $iy <= 2021; ++$iy) {
@@ -108,7 +125,7 @@ class Covid19ExportController extends AbstractController
         return $data;
     }
 
-    public function getValuesForRow(array $data, int $value, int $code): array
+    public function getValuesForRow(array $data, int $value = 0, int $code = 0): array
     {
         $result = [];
         $year = 2019;
@@ -116,14 +133,30 @@ class Covid19ExportController extends AbstractController
         for ($i = 0; $i <= 36; ++$i) {
             if (0 !== $i) {
                 if ($i <= 12) {
-                    $result[] = $data[$year][$i][$value];
+                    if ($value > 0) {
+                        $result[] = $data[$year][$i][$value];
+                    } else {
+                        $result[] = $data[$year][$i];
+                    }
                 } elseif ($i <= 24) {
-                    $result[] = $data[$year + 1][$i - 12][$value];
+                    if ($value > 0) {
+                        $result[] = $data[$year][$i - 12][$value];
+                    } else {
+                        $result[] = $data[$year][$i - 12];
+                    }
                 } else {
-                    $result[] = $data[$year + 2][$i - 24][$value];
+                    if ($value > 0) {
+                        $result[] = $data[$year][$i - 24][$value];
+                    } else {
+                        $result[] = $data[$year][$i - 24];
+                    }
                 }
             } else {
-                $result[] = $code.'_SK'.$value;
+                if ($value > 0) {
+                    $result[] = $code.'_SK'.$value;
+                } else {
+                    $result[] = 'Total';
+                }
             }
         }
 

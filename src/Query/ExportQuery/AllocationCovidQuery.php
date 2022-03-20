@@ -51,24 +51,18 @@ final class AllocationCovidQuery
         return new ResultCollection($qb->getQuery()->getResult());
     }
 
-    public function executeStats(int $indicationCode, ?FilterService $filterService = null): ResultCollectionInterface
+    public function executeStats(?FilterService $filterService = null): ResultCollectionInterface
     {
         $qb = $this->entityManager->createQueryBuilder();
 
         $qb->select(
-            'allocation.indicationCode',
-            'allocation.urgency',
-            'COUNT(allocation.urgency) as count',
+            'COUNT(allocation.id) as count',
             'allocation.creationYear',
             'allocation.creationMonth',
         )
-            ->where('allocation.indicationCode = :indicationCode')
-            ->setParameter('indicationCode', $indicationCode)
             ->andWhere($qb->expr()->between('allocation.creationYear', self::startYear, self::endYear))
             ->from(Allocation::class, 'allocation')
-            ->groupBy('allocation.indicationCode')
-            ->addGroupBy('allocation.urgency')
-            ->addGroupBy('allocation.creationYear')
+            ->groupBy('allocation.creationYear')
             ->addGroupBy('allocation.creationMonth')
             ->orderBy('allocation.creationYear')
             ->addOrderBy('allocation.creationMonth')
