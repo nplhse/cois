@@ -2277,6 +2277,51 @@
         <source>None</source>
         <target>Kein Sekundäranlass</target>
       </trans-unit>
+      <trans-unit id="NmSJVXn" resname="Export">
+        <source>Export</source>
+        <target>Export</target>
+      </trans-unit>
+      <trans-unit id="L03PWf8" resname="Exports">
+        <source>Exports</source>
+        <target>Exporte</target>
+      </trans-unit>
+      <trans-unit id="iizAZzs" resname="Demo">
+        <source>Demo</source>
+        <target>Beispiel</target>
+      </trans-unit>
+      <trans-unit id="5Cor5JG" resname="COVID19 data">
+        <source>COVID19 data</source>
+        <target>COVID19 Daten</target>
+      </trans-unit>
+      <trans-unit id="kHicEtB" resname="View Details">
+        <source>View Details</source>
+        <target>Details ansehen</target>
+      </trans-unit>
+      <trans-unit id="5IjtVr8" resname="COVID19 demo">
+        <source>COVID19 demo</source>
+        <target>COVID19 Demo</target>
+      </trans-unit>
+      <trans-unit id="Um4Ah8w" resname="Description">
+        <source>Description</source>
+        <target>Beschreibung</target>
+      </trans-unit>
+      <trans-unit id="VQm9EHc" resname="export.c19.description">
+        <source>export.c19.description</source>
+        <target>
+          Dieser Export enthält die monatlichen Summen von mehreren Indikationscodes in den Jahren von Anfang 2019 bis
+          Ende 2021. Diese Codes sind 131, 132, 213, 311, 312, 315, 319, 332, 333, 354, 423, 376, 377, 378 und die
+          Summen sind aufgeschlüsselt nach Dringlichkeiten von SK1 (höchste Dringlichkeit) bis SK3 (niedrigste
+          Dringlichkeit).
+        </target>
+      </trans-unit>
+      <trans-unit id="UACc4dp" resname="File">
+        <source>File</source>
+        <target>Datei</target>
+      </trans-unit>
+      <trans-unit id="tumO8KT" resname="Download (CSV)">
+        <source>Download (CSV)</source>
+        <target>Herunterladen (CSV)</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

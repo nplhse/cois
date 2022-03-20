@@ -9,4 +9,6 @@ interface ResultCollectionInterface
     public function hydrateSingleResultAs(string $className): object;
 
     public function hydrateResultsAs(string $className): object;
+
+    public function getItems(): array;
 }

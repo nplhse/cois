@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'Export'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            {{
+                breadcrumbs.render(
+                    [
+                        {
+                            url: url('app_dashboard'),
+                            label: 'Home'|trans
+                        },
+                        {
+                            url: url('app_export_index'),
+                            label: 'Export'|trans
+                        },
+                        {
+                            label: 'COVID19 demo'|trans
+                        }
+                    ]
+                )
+            }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h1>
+                {{ 'COVID19 demo'|trans }}
+            </h1>
+
+            <table class="table table-hover">
+                <thead>
+                    <th class="w-25">
+                        {{ 'Name'|trans }}
+                    </th>
+                    <th class="w-75">
+                        {{ 'Value'|trans }}
+                    </th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            {{ 'Description'|trans }}
+                        </td>
+                        <td>
+                            <p>
+                                {{ 'export.c19.description'|trans }}
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ 'Category'|trans }}
+                        </td>
+                        <td>
+                            <p>
+                                <span class="badge bg-primary">
+                                    <i class="bi bi-tag"></i>
+                                    {{ 'Demo'|trans }}
+                                </span>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ 'File'|trans }}
+                        </td>
+                        <td>
+                            <a class="btn btn-primary"
+                                href="{{ path('app_export_c19_file') }}">
+                                <i class="bi bi-download"></i>
+                                {{ 'Download (CSV)'|trans }}
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
