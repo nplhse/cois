@@ -2202,6 +2202,48 @@
         <source>None</source>
         <target>No secondary deployment</target>
       </trans-unit>
+      <trans-unit id="NmSJVXn" resname="Export">
+        <source>Export</source>
+        <target>Export</target>
+      </trans-unit>
+      <trans-unit id="L03PWf8" resname="Exports">
+        <source>Exports</source>
+        <target>Exports</target>
+      </trans-unit>
+      <trans-unit id="iizAZzs" resname="Demo">
+        <source>Demo</source>
+        <target>Demo</target>
+      </trans-unit>
+      <trans-unit id="5Cor5JG" resname="COVID19 data">
+        <source>COVID19 data</source>
+        <target>COVID19 data</target>
+      </trans-unit>
+      <trans-unit id="kHicEtB" resname="View Details">
+        <source>View Details</source>
+        <target>View Details</target>
+      </trans-unit>
+      <trans-unit id="5IjtVr8" resname="COVID19 demo">
+        <source>COVID19 demo</source>
+        <target>COVID19 demo</target>
+      </trans-unit>
+      <trans-unit id="Um4Ah8w" resname="Description">
+        <source>Description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="VQm9EHc" resname="export.c19.description">
+        <source>export.c19.description</source>
+        <target>This export includes the monthly counts of several indication codes during the years 2019 to 2021. These
+          codes are 131, 132, 213, 311, 312, 315, 319, 332, 333, 354, 423, 376, 377, 378 and the respective counts
+          are listed by urgencies ranging from SK1 (highest urgency) to SK3 (lowest urgency).</target>
+      </trans-unit>
+      <trans-unit id="UACc4dp" resname="File">
+        <source>File</source>
+        <target>File</target>
+      </trans-unit>
+      <trans-unit id="tumO8KT" resname="Download (CSV)">
+        <source>Download (CSV)</source>
+        <target>Download (CSV)</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
