@@ -24,7 +24,7 @@ class Covid19ExportController extends AbstractController
     public function generateFile(AllocationCovidQuery $query): Response
     {
         $header = [];
-        $indicationCodes = [131, 132, 213, 311, 312, 315, 319, 332, 333, 354, 423, 376, 377, 378];
+        $indicationCodes = [124, 130, 310, 311, 312, 315, 326, 331, 332, 333, 348, 349, 354, 376, 377, 421, 422, 423, 511, 512, 513];
         $data = [];
 
         $header[0] = ['Name'];

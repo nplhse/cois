@@ -2309,9 +2309,9 @@
         <source>export.c19.description</source>
         <target>
           Dieser Export enthält die monatlichen Summen von mehreren Indikationscodes in den Jahren von Anfang 2019 bis
-          Ende 2021. Diese Codes sind 131, 132, 213, 311, 312, 315, 319, 332, 333, 354, 423, 376, 377, 378 und die
-          Summen sind aufgeschlüsselt nach Dringlichkeiten von SK1 (höchste Dringlichkeit) bis SK3 (niedrigste
-          Dringlichkeit).
+          Ende 2021. Diese Codes sind 124, 130, 310, 311, 312, 315, 326, 331, 332, 333, 348, 349, 354, 376, 377, 421,
+          422, 423, 511, 512, 513 und die Summen sind aufgeschlüsselt nach Dringlichkeiten von SK1 (höchste
+          Dringlichkeit) bis SK3 (niedrigste Dringlichkeit).
         </target>
       </trans-unit>
       <trans-unit id="UACc4dp" resname="File">
