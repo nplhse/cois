@@ -11,3 +11,4 @@ twig:
 
     globals:
         app_allow_registration: "%app.registration%"
+        app_cookie_consent: "app.cookie_consent"

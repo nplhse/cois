@@ -2245,6 +2245,38 @@
         <source>Download (CSV)</source>
         <target>Download (CSV)</target>
       </trans-unit>
+      <trans-unit id="ZyXnu80" resname="System">
+        <source>System</source>
+        <target>System</target>
+      </trans-unit>
+      <trans-unit id="As4BM_G" resname="Cookie Consent">
+        <source>Cookie Consent</source>
+        <target>Cookie Consent</target>
+      </trans-unit>
+      <trans-unit id="o1vaJiR" resname="Showing count Items">
+        <source>Showing count Items</source>
+        <target>Showing %count% items, with %perPage% items per Page.</target>
+      </trans-unit>
+      <trans-unit id="QJgiUAh" resname="This website is using cookies, you have to accept necessary cookies to proceed.">
+        <source>This website is using cookies, you have to accept necessary cookies to proceed.</source>
+        <target>This website is using cookies, you have to accept necessary cookies to proceed.</target>
+      </trans-unit>
+      <trans-unit id="SIRb.zN" resname="Dismiss">
+        <source>Dismiss</source>
+        <target>Dismiss</target>
+      </trans-unit>
+      <trans-unit id="0NuLXjZ" resname="Options">
+        <source>Options</source>
+        <target>Options</target>
+      </trans-unit>
+      <trans-unit id="535353" resname="Allow">
+        <source>Allow</source>
+        <target>Allow</target>
+      </trans-unit>
+      <trans-unit id="345366" resname="Necessary Cookies">
+        <source>Necessary Cookies</source>
+        <target>Necessary Cookies</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

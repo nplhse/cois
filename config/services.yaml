@@ -9,7 +9,9 @@ parameters:
     app.mailer.sender: "noreply@cois.dev"
     app.mailer.from: "Collaborative IVENA statistics"
     app.registration: '%env(default:app.default.registration:APP_REGISTRATION)%'
+    app.cookie_consent: '%env(default:app.default.cookie_consent:APP_COOKIE_CONSENT)%'
 
+    app.default.cookie_consent: true
     app.default.registration: true
 
 services:

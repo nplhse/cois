@@ -609,6 +609,26 @@
         <source>Time</source>
         <target>Time</target>
       </trans-unit>
+      <trans-unit id="z9ZcKOQ" resname="Revoke ALL cookie consents">
+        <source>Revoke ALL cookie consents</source>
+        <target>Revoke ALL Consents</target>
+      </trans-unit>
+      <trans-unit id="Sd2Lcv0" resname="Lookup key">
+        <source>Lookup key</source>
+        <target>Lookup key</target>
+      </trans-unit>
+      <trans-unit id="uLHYlMa" resname="Categories">
+        <source>Categories</source>
+        <target>Categories</target>
+      </trans-unit>
+      <trans-unit id="PD3gyRx" resname="IP Address">
+        <source>IP Address</source>
+        <target>IP Address</target>
+      </trans-unit>
+      <trans-unit id="OlJlEYg" resname="No Cookies found">
+        <source>No Cookies found</source>
+        <target>No Cookies found</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
