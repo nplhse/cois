@@ -177,6 +177,30 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row mt-4">
+                    <h1>
+                        {{ 'System'|trans }}
+                    </h1>
+
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <a href="{{
+                                    path(
+                                        'app_settings_cookie_consent'
+                                    )
+                                    }}">
+                                    <i class="bi bi-award"
+                                        style="font-size: 5rem; color: cornflowerblue;">
+
+                                    </i><br />
+                                    {{ 'Cookie Consent'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             {% endif %}
         </div>
     </div>

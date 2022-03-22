@@ -23,6 +23,10 @@
             {% include '_elements/navbar.html.twig' %}
         {% endblock %}
 
+        {% if has_cookie_consent(app.request) == false %}
+            {{ cookie_consent_render() }}
+        {% endif %}
+
         <main role="main" class="content p-3">
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
