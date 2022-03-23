@@ -51,22 +51,23 @@ class Page
     /**
      * @ORM\Column(type="datetime")
      */
-    protected UserInterface $createdBy;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    protected ?UserInterface $updatedBy = null;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
     protected \DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected ?\DateTimeInterface $updatedAt = null;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    protected UserInterface $createdBy;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     */
+    protected ?UserInterface $updatedBy = null;
 
     public function getId(): ?int
     {
