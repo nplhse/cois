@@ -32,6 +32,36 @@ Encore
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
 
+    /* CKEDITOR */
+    .copyFiles([
+        {
+            from: "./node_modules/ckeditor4/",
+            to: "ckeditor/[path][name].[ext]",
+            pattern: /\.(js|css)$/,
+            includeSubdirectories: false,
+        },
+        {
+            from: "./node_modules/ckeditor4/adapters",
+            to: "ckeditor/adapters/[path][name].[ext]",
+        },
+        {
+            from: "./node_modules/ckeditor4/lang",
+            to: "ckeditor/lang/[path][name].[ext]",
+        },
+        {
+            from: "./node_modules/ckeditor4/plugins",
+            to: "ckeditor/plugins/[path][name].[ext]",
+        },
+        {
+            from: "./node_modules/ckeditor4/skins",
+            to: "ckeditor/skins/[path][name].[ext]",
+        },
+        {
+            from: "./node_modules/ckeditor4/vendor",
+            to: "ckeditor/vendor/[path][name].[ext]",
+        },
+    ])
+
     /*
      * FEATURE CONFIG
      *

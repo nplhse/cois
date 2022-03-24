@@ -645,6 +645,10 @@
         <source>Type</source>
         <target>Typ</target>
       </trans-unit>
+      <trans-unit id="ppPC4Vp" resname="Edit Page">
+        <source>Edit Page</source>
+        <target>Edit Page</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

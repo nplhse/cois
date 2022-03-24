@@ -2402,6 +2402,10 @@
         <source>Impressum</source>
         <target>Impressum</target>
       </trans-unit>
+      <trans-unit id="S4VOldi" resname="You will find more information on this page.">
+        <source>You will find more information on this page.</source>
+        <target>Sie finden weitere Informationen zur Nutzung von Cookies auf dieser Seite.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
