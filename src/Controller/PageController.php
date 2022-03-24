@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Domain\Enum\Page\PageTypeEnum;
+use App\Form\CookieConsentType;
 use App\Repository\PageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,16 +22,23 @@ class PageController extends AbstractController
     #[Route('/page/{slug}', name: 'app_page')]
     public function index(string $slug): Response
     {
-        $slug = urldecode($slug);
-
-        $page = $this->pageRepository->findOneBy(['slug' => urldecode($slug)]);
+        $page = $this->pageRepository->findOneBy(['slug' => $slug]);
 
         if (null === $page) {
             throw new NotFoundHttpException(sprintf('Page %s could not be found', $slug));
         }
 
-        return $this->render('page/index.html.twig', [
+        $this->denyAccessUnlessGranted('view', $page);
+
+        if (PageTypeEnum::PrivacyPage === $page->getType()) {
+            $form = $this->createForm(CookieConsentType::class);
+        } else {
+            $form = null;
+        }
+
+        return $this->renderForm('page/index.html.twig', [
             'page' => $page,
+            'consentForm' => $form,
         ]);
     }
 }

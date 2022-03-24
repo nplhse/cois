@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Entity\Page;
+use App\Domain\Enum\Page\PageTypeEnum;
 use App\Repository\PageRepository;
 
 class PageService
@@ -22,7 +22,11 @@ class PageService
             return true;
         }
 
-        $page = $this->pageRepository->findOneBy(['slug' => $slug]);
+        $page = match ($slug) {
+            'imprint' => $this->pageRepository->findOneBy(['type' => PageTypeEnum::ImprintPage]),
+            'privacy' => $this->pageRepository->findOneBy(['type' => PageTypeEnum::PrivacyPage]),
+            default => $this->pageRepository->findOneBy(['slug' => $slug]),
+        };
 
         if (null === $page) {
             return false;
@@ -33,20 +37,12 @@ class PageService
         return true;
     }
 
-    public function getPage(string $slug): ?Page
+    public function getSlug(string $target): ?string
     {
-        if (isset($this->pageStore[$slug])) {
-            return $this->pageStore[$slug];
+        if ($this->hasPage($target)) {
+            return $this->pageStore[$target]->getSlug();
         }
 
-        $page = $this->pageRepository->findOneBy(['slug' => $slug]);
-
-        if (null === $page) {
-            return null;
-        }
-
-        $this->pageStore[$slug] = $page;
-
-        return $page;
+        return null;
     }
 }

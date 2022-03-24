@@ -21,7 +21,7 @@
                             label: 'Settings'|trans
                         },
                         {
-                            url: url('app_settings_hospital_index'),
+                            url: url('app_settings_page_index'),
                             label: 'Pages'|trans
                         },
                         {
@@ -38,6 +38,10 @@
             {{ include('settings/_settings_subnav.html.twig') }}
         </div>
         <div class="col">
+            <div class="float-end">
+                {{ include('settings/page/_delete_form.html.twig') }}
+            </div>
+
             <h1>
                 {{ 'Edit Page'|trans }}
             </h1>

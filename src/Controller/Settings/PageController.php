@@ -150,10 +150,10 @@ class PageController extends AbstractController
                 ]);
             }
 
+            $this->addFlash('success', 'Page '.$page->getTitle().' has been edited.');
+
             return $this->redirectToRoute('app_settings_page_show', ['id' => $page->getId()], Response::HTTP_SEE_OTHER);
         }
-
-        $this->addFlash('success', 'Page '.$page->getTitle().' has been edited.');
 
         return $this->renderForm('settings/page/edit.html.twig', [
             'page' => $page,
