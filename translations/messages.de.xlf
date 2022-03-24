@@ -2336,7 +2336,7 @@
       </trans-unit>
       <trans-unit id="QJgiUAh" resname="This website is using cookies, you have to accept necessary cookies to proceed.">
         <source>This website is using cookies, you have to accept necessary cookies to proceed.</source>
-        <target>Diese Seite benutzt Cookies, Sie müssen daher zumindest notwendige Cookies akzeptieren.</target>
+        <target>Diese Seite benutzt Cookies, Sie müssen daher der Verwendung von Cookies zustimmen.</target>
       </trans-unit>
       <trans-unit id="SIRb.zN" resname="Dismiss">
         <source>Dismiss</source>
@@ -2346,13 +2346,61 @@
         <source>Options</source>
         <target>Optionen</target>
       </trans-unit>
-      <trans-unit id="24455" resname="Allow">
+      <trans-unit id="4hPBYdX" resname="Allow">
         <source>Allow</source>
         <target>Erlauben</target>
       </trans-unit>
-      <trans-unit id="12324" resname="Necessary Cookies">
+      <trans-unit id="y4RlYHl" resname="Necessary Cookies">
         <source>Necessary Cookies</source>
         <target>Notwendige Cookies</target>
+      </trans-unit>
+      <trans-unit id="ppPC4Vp" resname="Edit Page">
+        <source>Edit Page</source>
+        <target>Seite bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="kEbaFq6" resname="Pages">
+        <source>Pages</source>
+        <target>Seiten</target>
+      </trans-unit>
+      <trans-unit id="M9tMA3i" resname="Create Page">
+        <source>Create Page</source>
+        <target>Seite erstellen</target>
+      </trans-unit>
+      <trans-unit id="RSQsjmT" resname="Showing count Pages">
+        <source>Showing count Pages</source>
+        <target>Zeige %count% Seiten, mit %perPage% pro Seite.</target>
+      </trans-unit>
+      <trans-unit id="Xzxpo2C" resname="View Page">
+        <source>View Page</source>
+        <target>Seite ansehen</target>
+      </trans-unit>
+      <trans-unit id="fozSBW2" resname="Title">
+        <source>Title</source>
+        <target>Titel</target>
+      </trans-unit>
+      <trans-unit id="0VOH7Mb" resname="Slug">
+        <source>Slug</source>
+        <target>Kürzel</target>
+      </trans-unit>
+      <trans-unit id="uq3fcPt" resname="Type">
+        <source>Type</source>
+        <target>Typ</target>
+      </trans-unit>
+      <trans-unit id="IPDEcp3" resname="Updated by">
+        <source>Updated by</source>
+        <target>Aktualisiert von</target>
+      </trans-unit>
+      <trans-unit id="FEV5nAM" resname="Learn more">
+        <source>Learn more</source>
+        <target>Mehr erfahren</target>
+      </trans-unit>
+      <trans-unit id="VKV8MUf" resname="Privacy">
+        <source>Privacy</source>
+        <target>Privatsphäre</target>
+      </trans-unit>
+      <trans-unit id="uKYFGSP" resname="Impressum">
+        <source>Impressum</source>
+        <target>Impressum</target>
       </trans-unit>
     </body>
   </file>
