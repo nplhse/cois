@@ -629,6 +629,22 @@
         <source>No Cookies found</source>
         <target>No Cookies found</target>
       </trans-unit>
+      <trans-unit id="ItN_2yf" resname="Update Page">
+        <source>Update Page</source>
+        <target>Update Page</target>
+      </trans-unit>
+      <trans-unit id="M9tMA3i" resname="Create Page">
+        <source>Create Page</source>
+        <target>Create Page</target>
+      </trans-unit>
+      <trans-unit id=".hnM_8g" resname="Create new Page">
+        <source>Create new Page</source>
+        <target>Create new Page</target>
+      </trans-unit>
+      <trans-unit id="uq3fcPt" resname="Type">
+        <source>Type</source>
+        <target>Typ</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1,10 +1,50 @@
 {% block footer %}
-    <footer class="footer">
-        <div class="p-3">
-            <span class="text-muted small">
-                <i class="bi-github"></i>
-                <a href="https://github.com/nplhse/cois">cois</a> v0.1.0-alpha
-            </span>
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <div class="col-md-4 ps-2 d-flex align-items-center">
+            <p>
+                <span class="text-muted small">
+                    Powered by <a href="https://github.com/nplhse/cois">
+                        <i class="bi-github" role="img" aria-label="GitHub"></i>
+                        cois
+                    </a> v0.1.0-alpha
+                </span><br />
+                <span class="text-muted">
+                    &copy; 2021 Jens Christoph Steltner
+                </span>
+            </p>
         </div>
+
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            {% if has_page('privacy') %}
+                <li class="ms-2">
+                    <a class="nav-link px-2 text-muted"
+                        href="{{
+                        path(
+                            'app_page',
+                            {
+                                slug: 'privacy'
+                            }
+                        )
+                        }}">
+                        {{ 'Privacy'|trans }}
+                    </a>
+                </li>
+            {% endif %}
+            {% if has_page('impressum') %}
+                <li class="ms-2">
+                    <a class="nav-link px-2 text-muted"
+                        href="{{
+                        path(
+                            'app_page',
+                            {
+                                slug: 'impressum'
+                            }
+                        )
+                        }}">
+                        {{ 'Impressum'|trans }}
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
     </footer>
 {% endblock %}

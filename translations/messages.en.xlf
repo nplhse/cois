@@ -2269,13 +2269,61 @@
         <source>Options</source>
         <target>Options</target>
       </trans-unit>
-      <trans-unit id="535353" resname="Allow">
+      <trans-unit id="4hPBYdX" resname="Allow">
         <source>Allow</source>
         <target>Allow</target>
       </trans-unit>
-      <trans-unit id="345366" resname="Necessary Cookies">
+      <trans-unit id="y4RlYHl" resname="Necessary Cookies">
         <source>Necessary Cookies</source>
         <target>Necessary Cookies</target>
+      </trans-unit>
+      <trans-unit id="ppPC4Vp" resname="Edit Page">
+        <source>Edit Page</source>
+        <target>Edit Page</target>
+      </trans-unit>
+      <trans-unit id="kEbaFq6" resname="Pages">
+        <source>Pages</source>
+        <target>Pages</target>
+      </trans-unit>
+      <trans-unit id="M9tMA3i" resname="Create Page">
+        <source>Create Page</source>
+        <target>Create Page</target>
+      </trans-unit>
+      <trans-unit id="RSQsjmT" resname="Showing count Pages">
+        <source>Showing count Pages</source>
+        <target>Showing %count% pages, with %perPage% items per Page.</target>
+      </trans-unit>
+      <trans-unit id="Xzxpo2C" resname="View Page">
+        <source>View Page</source>
+        <target>View Page</target>
+      </trans-unit>
+      <trans-unit id="fozSBW2" resname="Title">
+        <source>Title</source>
+        <target>Title</target>
+      </trans-unit>
+      <trans-unit id="0VOH7Mb" resname="Slug">
+        <source>Slug</source>
+        <target>Slug</target>
+      </trans-unit>
+      <trans-unit id="uq3fcPt" resname="Type">
+        <source>Type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="IPDEcp3" resname="Updated by">
+        <source>Updated by</source>
+        <target>Updated by</target>
+      </trans-unit>
+      <trans-unit id="FEV5nAM" resname="Learn more">
+        <source>Learn more</source>
+        <target>Learn more</target>
+      </trans-unit>
+      <trans-unit id="VKV8MUf" resname="Privacy">
+        <source>Privacy</source>
+        <target>Privacy</target>
+      </trans-unit>
+      <trans-unit id="uKYFGSP" resname="Impressum">
+        <source>Impressum</source>
+        <target>Impressum</target>
       </trans-unit>
     </body>
   </file>

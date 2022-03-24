@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Domain\Entity\Traits;
 
 use App\Domain\Contracts\UserInterface;
-use Doctrine\ORM\Mapping as ORM;
 
 trait BlamableTrait
 {

@@ -32,6 +32,9 @@
             "config/packages/test/dama_doctrine_test_bundle.yaml"
         ]
     },
+    "dflydev/dot-access-data": {
+        "version": "v3.0.1"
+    },
     "dnoegel/php-xdg-base-dir": {
         "version": "v0.1.1"
     },
@@ -159,6 +162,12 @@
     "laminas/laminas-code": {
         "version": "4.0.0"
     },
+    "league/commonmark": {
+        "version": "2.2.3"
+    },
+    "league/config": {
+        "version": "v1.1.1"
+    },
     "league/csv": {
         "version": "9.8.0"
     },
@@ -204,6 +213,12 @@
     },
     "netresearch/jsonmapper": {
         "version": "v2.1.0"
+    },
+    "nette/schema": {
+        "version": "v1.2.2"
+    },
+    "nette/utils": {
+        "version": "v3.2.7"
     },
     "nikic/php-parser": {
         "version": "v4.10.4"
@@ -799,6 +814,9 @@
     },
     "twig/intl-extra": {
         "version": "v3.3.0"
+    },
+    "twig/markdown-extra": {
+        "version": "v3.3.8"
     },
     "twig/string-extra": {
         "version": "v3.3.1"

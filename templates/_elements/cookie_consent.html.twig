@@ -24,6 +24,19 @@
 
             <div class="mt-2 pt-2 border-top">
                 {{ form_widget(consentForm.submit) }}
+                {% if has_page('privacy') %}
+                    <a class="btn btn-sm btn-outline-primary"
+                        href="{{
+                        path(
+                            'app_page',
+                            {
+                                slug: 'privacy'
+                            }
+                        )
+                        }}">
+                        {{ 'Learn more'|trans }}
+                    </a>
+                {% endif %}
                 <button type="button"
                     class="btn btn-secondary btn-sm"
                     data-bs-dismiss="toast">

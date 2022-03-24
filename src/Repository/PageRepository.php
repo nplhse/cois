@@ -3,9 +3,14 @@
 namespace App\Repository;
 
 use App\Entity\Page;
+use App\Service\Filters\OrderFilter;
+use App\Service\Filters\PageFilter;
+use App\Service\Filters\SearchFilter;
+use App\Service\FilterService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,6 +21,18 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PageRepository extends ServiceEntityRepository
 {
+    public const PER_PAGE = 10;
+
+    public const DEFAULT_ORDER = 'desc';
+
+    public const DEFAULT_SORT = 'createdAt';
+
+    public const SORTABLE = ['name', 'createdAt'];
+
+    public const SEARCHABLE = ['name'];
+
+    public const ENTITY_ALIAS = 'p.';
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Page::class);
@@ -45,32 +62,26 @@ class PageRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Page[] Returns an array of Page objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function save(): void
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $this->_em->flush();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Page
+    public function getPaginator(FilterService $filterService): Paginator
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $qb = $this->createQueryBuilder('p');
+
+        $arguments = [
+            PageFilter::PER_PAGE => self::PER_PAGE,
+            FilterService::ENTITY_ALIAS => self::ENTITY_ALIAS,
+            OrderFilter::DEFAULT_ORDER => self::DEFAULT_ORDER,
+            OrderFilter::DEFAULT_SORT => self::DEFAULT_SORT,
+            OrderFilter::SORTABLE => self::SORTABLE,
+            SearchFilter::SEARCHABLE => self::SEARCHABLE,
+        ];
+
+        $qb = $filterService->processQuery($qb, $arguments);
+
+        return new Paginator($qb->getQuery());
     }
-    */
 }

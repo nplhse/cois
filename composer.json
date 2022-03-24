@@ -26,6 +26,7 @@
         "doctrine/doctrine-bundle": "^2.2",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.8",
+        "league/commonmark": "^2.2",
         "league/csv": "^9.6",
         "league/flysystem": "^3.0",
         "league/flysystem-bundle": "^2.0",
@@ -71,6 +72,7 @@
         "twig/extra-bundle": "^3.3",
         "twig/inky-extra": "^3.3",
         "twig/intl-extra": "^3.3",
+        "twig/markdown-extra": "^3.3",
         "twig/string-extra": "^3.3",
         "twig/twig": "^2.12|^3.0"
     },
