@@ -2329,6 +2329,18 @@
         <source>You will find more information on this page.</source>
         <target>You will find more information on this page.</target>
       </trans-unit>
+      <trans-unit id="szLDSS1" resname="Configuration">
+        <source>Configuration</source>
+        <target>Configuration</target>
+      </trans-unit>
+      <trans-unit id="idhlEzl" resname="Edit Setting">
+        <source>Edit Setting</source>
+        <target>Edit Setting</target>
+      </trans-unit>
+      <trans-unit id="UknG16u" resname="No Settings found">
+        <source>No Settings found</source>
+        <target>No Settings found.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

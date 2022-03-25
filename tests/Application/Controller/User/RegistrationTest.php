@@ -14,7 +14,7 @@ class RegistrationTest extends WebTestCase
     public function testRegistration(): void
     {
         $this->browser()
-            ->visit('/register')
+            ->visit('/register/')
             ->assertSeeIn('h1', 'Register')
             ->fillField('Username', 'newUser')
             ->fillField('Password', 'password')

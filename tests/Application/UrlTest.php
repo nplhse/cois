@@ -4,9 +4,12 @@ namespace App\Tests\Application;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 class UrlTest extends WebTestCase
 {
+    use ResetDatabase;
+
     /**
      * @dataProvider getPublicUrls
      */

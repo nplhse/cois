@@ -6,6 +6,7 @@ use App\Factory\AllocationFactory;
 use App\Factory\DispatchAreaFactory;
 use App\Factory\HospitalFactory;
 use App\Factory\ImportFactory;
+use App\Factory\SettingFactory;
 use App\Factory\StateFactory;
 use App\Factory\SupplyAreaFactory;
 use App\Factory\UserFactory;
@@ -20,6 +21,10 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
+        SettingFactory::new(['name' => 'title', 'value' => 'Collaborative IVENA statistics', 'type' => 'string', 'category' => 'general']);
+        SettingFactory::new(['name' => 'enable_registration', 'value' => 'true', 'type' => 'boolean', 'category' => 'user']);
+        SettingFactory::new(['name' => 'enable_cookie_consent', 'value' => 'true', 'type' => 'boolean', 'category' => 'user']);
+
         StateFactory::createMany(3);
 
         DispatchAreaFactory::createMany(8, static fn () => ['state' => StateFactory::random()]);
