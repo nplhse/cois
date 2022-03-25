@@ -649,6 +649,18 @@
         <source>Edit Page</source>
         <target>Edit Page</target>
       </trans-unit>
+      <trans-unit id="P38Fawd" resname="Update Setting">
+        <source>Update Setting</source>
+        <target>Update Setting</target>
+      </trans-unit>
+      <trans-unit id="KSwG8AR" resname="Category">
+        <source>Category</source>
+        <target>Category</target>
+      </trans-unit>
+      <trans-unit id="jjeVPSP" resname="Value">
+        <source>Value</source>
+        <target>Value</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

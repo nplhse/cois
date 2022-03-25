@@ -191,6 +191,23 @@
     <ul class="list-group">
         {% if
             app.request.attributes.get('_route')
+                starts with 'app_settings_config' %}
+            <li class="list-group-item active">
+                <i class="bi bi-gear-fill"></i>
+                <a class="text-light" href="{{ path('app_settings_config') }}">
+                    {{ 'Configuration'|trans }}
+                </a>
+            </li>
+        {% else %}
+            <li class="list-group-item">
+                <i class="bi bi-gear"></i>
+                <a href="{{ path('app_settings_config') }}">
+                    {{ 'Configuration'|trans }}
+                </a>
+            </li>
+        {% endif %}
+        {% if
+            app.request.attributes.get('_route')
                 starts with 'app_settings_cookie' %}
             <li class="list-group-item active">
                 <i class="bi bi-award-fill"></i>

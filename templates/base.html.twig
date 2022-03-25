@@ -23,8 +23,10 @@
             {% include '_elements/navbar.html.twig' %}
         {% endblock %}
 
-        {% if has_cookie_consent(app.request) == false %}
-            {{ cookie_consent_render() }}
+        {% if setting('enable_cookie_consent') %}
+            {% if has_cookie_consent(app.request) == false %}
+                {{ cookie_consent_render() }}
+            {% endif %}
         {% endif %}
 
         <main role="main" class="content p-3">

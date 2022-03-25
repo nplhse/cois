@@ -61,7 +61,7 @@
                 {% endif %}
             </p>
 
-            {% if page.type == 'privacy' %}
+            {% if setting('enable_cookie_consent') and page.type == 'privacy' %}
                 <div class="float-md-end" style="width: 30rem;">
                     <div class="card">
                         <div class="card-header">

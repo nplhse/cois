@@ -164,6 +164,7 @@
         ],
         "setup": [
             "@setup-db",
+            "bin/console app:settings:load",
             "@setup-frontend"
         ],
         "setup-db": [
@@ -172,6 +173,7 @@
         "setup-dev": [
             "@setup-db",
             "bin/console doctrine:fixtures:load --no-interaction",
+            "bin/console app:settings:load",
             "@setup-frontend"
         ],
         "setup-frontend": [

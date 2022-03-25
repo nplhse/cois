@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" target-language="de" datatype="plaintext" original="file.ext">
+  <file source-language="de" target-language="de" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -2405,6 +2405,18 @@
       <trans-unit id="S4VOldi" resname="You will find more information on this page.">
         <source>You will find more information on this page.</source>
         <target>Sie finden weitere Informationen zur Nutzung von Cookies auf dieser Seite.</target>
+      </trans-unit>
+      <trans-unit id="szLDSS1" resname="Configuration">
+        <source>Configuration</source>
+        <target>Konfiguration</target>
+      </trans-unit>
+      <trans-unit id="idhlEzl" resname="Edit Setting">
+        <source>Edit Setting</source>
+        <target>Einstellung bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="UknG16u" resname="No Settings found">
+        <source>No Settings found</source>
+        <target>Keine Einstellungen gefunden.</target>
       </trans-unit>
     </body>
   </file>

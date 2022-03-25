@@ -201,6 +201,19 @@
                     <div class="col-4">
                         <div class="card">
                             <div class="card-body text-center">
+                                <a href="{{ path('app_settings_config') }}">
+                                    <i class="bi bi-gear"
+                                        style="font-size: 5rem; color: cornflowerblue;">
+
+                                    </i><br />
+                                    {{ 'Configuration'|trans }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card-body text-center">
                                 <a href="{{
                                     path(
                                         'app_settings_cookie_consent'
