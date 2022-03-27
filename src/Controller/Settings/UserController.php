@@ -220,11 +220,4 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_settings_user_show', ['id' => $user->getId()]);
     }
-
-    // Todo: REMOVE AFTER REFACTORING
-    #[Route('/{id}/toggle', name: 'app_settings_user_toggle')]
-    public function toggleOption(User $user): Response
-    {
-        return new JsonResponse([]);
-    }
 }
