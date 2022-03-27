@@ -4,6 +4,7 @@ namespace App\Controller\Settings;
 
 use App\Domain\Command\User\CreateUserCommand;
 use App\Domain\Command\User\EditUserCommand;
+use App\Domain\Command\User\ExpireUserCommand;
 use App\Domain\Command\User\PromoteUserCommand;
 use App\Entity\User;
 use App\Factory\OrderFilterFactory;
@@ -18,7 +19,6 @@ use App\Service\FilterService;
 use App\Service\MailerService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
@@ -201,6 +201,24 @@ class UserController extends AbstractController
         }
 
         $this->addFlash('success', 'User has been promoted.');
+
+        return $this->redirectToRoute('app_settings_user_show', ['id' => $user->getId()]);
+    }
+
+    #[Route('/{id}/expire', name: 'app_settings_user_expire')]
+    public function expire(User $user): Response
+    {
+        $command = new ExpireUserCommand(
+            $user->getId(),
+        );
+
+        try {
+            $this->messageBus->dispatch($command);
+        } catch (HandlerFailedException) {
+            $this->addFlash('danger', 'Sorry, something went wrong. Please try again later!');
+        }
+
+        $this->addFlash('success', 'User credentials have been expired.');
 
         return $this->redirectToRoute('app_settings_user_show', ['id' => $user->getId()]);
     }

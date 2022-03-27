@@ -201,7 +201,7 @@
                             {{ 'Tasks'|trans }}
                         </th>
                         <td>
-                            <a class="btn btn-secondary"
+                            <a class="btn btn-secondary mb-1"
                                 href="{{
                                 path(
                                     'app_settings_user_welcome',
@@ -214,7 +214,7 @@
                                 {{ 'Send Welcome E-Mail'|trans({}, 'forms') }}
                             </a>
                             {% if user.isVerified == true %}
-                                <a class="btn btn-danger"
+                                <a class="btn btn-danger mb-1"
                                     href="{{
                                     path(
                                         'app_settings_user_verify',
@@ -228,7 +228,7 @@
                                     {{ 'Unverify User'|trans({}, 'forms') }}
                                 </a>
                             {% else %}
-                                <a class="btn btn-success"
+                                <a class="btn btn-success mb-1"
                                     href="{{
                                     path(
                                         'app_settings_user_verify',
@@ -244,7 +244,7 @@
                             {% endif %}
 
                             {% if user.isParticipant == true %}
-                                <a class="btn btn-danger"
+                                <a class="btn btn-danger mb-1"
                                     href="{{
                                     path(
                                         'app_settings_user_verify',
@@ -263,7 +263,7 @@
                                     }}
                                 </a>
                             {% else %}
-                                <a class="btn btn-success"
+                                <a class="btn btn-success mb-1"
                                     href="{{
                                     path(
                                         'app_settings_user_verify',
@@ -279,6 +279,23 @@
                                             {},
                                             'forms'
                                         )
+                                    }}
+                                </a>
+                            {% endif %}
+
+                            {% if user.credentialsExpired == false %}
+                                <a class="btn btn-outline-danger mb-1"
+                                    href="{{
+                                    path(
+                                        'app_settings_user_expire',
+                                        {
+                                            id: user.id
+                                        }
+                                    )
+                                    }}">
+                                    <i class="bi bi-x-circle-fill"></i>
+                                    {{
+                                        'Expire Credentials'|trans({}, 'forms')
                                     }}
                                 </a>
                             {% endif %}
