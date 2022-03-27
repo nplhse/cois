@@ -85,12 +85,19 @@ class PageVoter extends Voter
             return false;
         }
 
-        if (PageTypeEnum::Public === $page->getType() || PageTypeEnum::PrivacyPage === $page->getType() || PageTypeEnum::ImprintPage === $page->getType()) {
-            return true;
-        }
-
-        if (PageTypeEnum::Private === $page->getType() && $this->security->isGranted('ROLE_USER')) {
-            return true;
+        switch ($page->getType()) {
+            case PageTypeEnum::Public:
+            case PageTypeEnum::PrivacyPage:
+            case PageTypeEnum::ImprintPage:
+            case PageTypeEnum::TermsPage:
+                return true;
+            case PageTypeEnum::Private:
+                if ($this->security->isGranted('ROLE_USER')) {
+                    return true;
+                }
+                // no break
+            default:
+                break;
         }
 
         return false;

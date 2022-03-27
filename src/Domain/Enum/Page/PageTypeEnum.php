@@ -13,4 +13,6 @@ abstract class PageTypeEnum extends AbstractBasicEnum
     public const ImprintPage = 'imprint';
 
     public const PrivacyPage = 'privacy';
+
+    public const TermsPage = 'terms';
 }
