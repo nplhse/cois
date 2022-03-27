@@ -14,6 +14,21 @@
         </div>
 
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            {% if has_page('terms') %}
+                <li class="ms-2">
+                    <a class="nav-link px-2 text-muted"
+                       href="{{
+                       path(
+                           'app_page',
+                           {
+                               slug: get_slug('terms')
+                           }
+                       )
+                       }}">
+                        {{ 'Terms'|trans }}
+                    </a>
+                </li>
+            {% endif %}
             {% if has_page('privacy') %}
                 <li class="ms-2">
                     <a class="nav-link px-2 text-muted"

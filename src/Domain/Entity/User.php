@@ -34,6 +34,8 @@ class User implements UserInterface, TimestampableInterface, \Stringable
 
     protected bool $hasCredentialsExpired = false;
 
+    protected ?bool $acceptedTerms = false;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('NOW');
@@ -219,6 +221,18 @@ class User implements UserInterface, TimestampableInterface, \Stringable
     public function expireCredentials(): self
     {
         $this->hasCredentialsExpired = true;
+
+        return $this;
+    }
+
+    public function hasAcceptedTerms(): bool
+    {
+        return $this->acceptedTerms ?? false;
+    }
+
+    public function setAcceptedTerms(bool $acceptedTerms): self
+    {
+        $this->acceptedTerms = $acceptedTerms;
 
         return $this;
     }

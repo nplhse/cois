@@ -25,6 +25,7 @@ class PageService
         $page = match ($slug) {
             'imprint' => $this->pageRepository->findOneBy(['type' => PageTypeEnum::ImprintPage]),
             'privacy' => $this->pageRepository->findOneBy(['type' => PageTypeEnum::PrivacyPage]),
+            'terms' => $this->pageRepository->findOneBy(['type' => PageTypeEnum::TermsPage]),
             default => $this->pageRepository->findOneBy(['slug' => $slug]),
         };
 

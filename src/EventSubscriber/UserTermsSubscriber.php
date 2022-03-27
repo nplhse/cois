@@ -3,27 +3,18 @@
 namespace App\EventSubscriber;
 
 use App\Entity\User;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class UserCredentialsSubscriber implements \Symfony\Component\EventDispatcher\EventSubscriberInterface
+class UserTermsSubscriber implements EventSubscriberInterface
 {
     private TokenStorageInterface $security;
 
-    private RouterInterface $router;
-
-    private array $excludedRoutes = [
-        'app_logout',
-        'app_verify_email',
-        'app_reset_credentials',
-    ];
-
-    public function __construct(TokenStorageInterface $security, RouterInterface $router)
+    public function __construct(TokenStorageInterface $security)
     {
         $this->security = $security;
-        $this->router = $router;
     }
 
     /**
@@ -44,11 +35,6 @@ class UserCredentialsSubscriber implements \Symfony\Component\EventDispatcher\Ev
             return;
         }
 
-        $currentRoute = $event->getRequest()->attributes->get('_route');
-        if (\in_array($currentRoute, $this->excludedRoutes, true)) {
-            return;
-        }
-
         $token = $this->security->getToken();
 
         if (null === $token) {
@@ -57,9 +43,9 @@ class UserCredentialsSubscriber implements \Symfony\Component\EventDispatcher\Ev
 
         $user = $token->getUser();
 
-        if ($user instanceof User && $user->hasCredentialsExpired()) {
-            $response = new RedirectResponse($this->router->generate('app_reset_credentials'));
-            $event->setResponse($response);
+        if ($user instanceof User && false === $user->hasAcceptedTerms()) {
+            // $response = new RedirectResponse($this->router->generate('app_reset_accept_terms'));
+            // $event->setResponse($response);
         }
     }
 }
