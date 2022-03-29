@@ -2373,6 +2373,14 @@
         <source>TermsPage</source>
         <target>Page: Terms</target>
       </trans-unit>
+      <trans-unit id="7Nnxahq" resname="By checking this box, you are agreeing to our #TERMS# and #PRIVACY#.">
+        <source>By checking this box, you are agreeing to our #TERMS# and #PRIVACY#.</source>
+        <target>By checking this box, you are agreeing to our #TERMS# and #PRIVACY#.</target>
+      </trans-unit>
+      <trans-unit id="Hkmh4Tp" resname="Repeat Password">
+        <source>Repeat Password</source>
+        <target>Repeat Password</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

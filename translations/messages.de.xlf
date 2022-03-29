@@ -2450,6 +2450,14 @@
         <source>TermsPage</source>
         <target>Seite: Nutzungsbedingungen</target>
       </trans-unit>
+      <trans-unit id="7Nnxahq" resname="By checking this box, you are agreeing to our #TERMS# and #PRIVACY#.">
+        <source>By checking this box, you are agreeing to our #TERMS# and #PRIVACY#.</source>
+        <target>Ich akzeptiere die #TERMS# und #PRIVACY#.</target>
+      </trans-unit>
+      <trans-unit id="Hkmh4Tp" resname="Repeat Password">
+        <source>Repeat Password</source>
+        <target>Passwort wiederholen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
