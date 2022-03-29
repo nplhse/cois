@@ -3,12 +3,12 @@
 namespace App\Form\User;
 
 use App\Entity\User;
+use App\Service\SettingService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -17,6 +17,14 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class RegistrationFormType extends AbstractType
 {
+    private SettingService $settingService;
+
+    public function __construct(SettingService $settingService)
+    {
+        $this->settingService = $settingService;
+        $this->settingService->loadSettings();
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -42,28 +50,27 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class, [
                 'required' => true,
             ])
-            ->add('terms', TextareaType::class, [
-                'attr' => [
-                    'readonly' => true,
-                ],
+        ;
+
+        if ($options['enable_terms']) {
+            $builder->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
-            ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'label' => 'Agree to terms and conditions',
+                'label' => 'By checking this box, you are agreeing to our #TERMS# and #PRIVACY#.',
+                'required' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'You have agree to our terms.',
                     ]),
                 ],
-            ])
-        ;
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'enable_terms' => false,
         ]);
     }
 }
