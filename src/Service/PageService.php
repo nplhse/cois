@@ -46,4 +46,13 @@ class PageService
 
         return null;
     }
+
+    public function getTitle(string $target): ?string
+    {
+        if ($this->hasPage($target)) {
+            return $this->pageStore[$target]->getTitle();
+        }
+
+        return null;
+    }
 }

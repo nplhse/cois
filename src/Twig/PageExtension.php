@@ -20,6 +20,7 @@ class PageExtension extends AbstractExtension
         return [
             new TwigFunction('has_page', [$this->pageService, 'hasPage']),
             new TwigFunction('get_slug', [$this->pageService, 'getSlug']),
+            new TwigFunction('get_title', [$this->pageService, 'getTitle']),
         ];
     }
 }
