@@ -80,11 +80,6 @@ class User extends DomainUser implements UserInterface, PasswordAuthenticatedUse
     protected bool $hasCredentialsExpired = false;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    protected ?bool $acceptedTerms;
-
-    /**
      * @param array<string> $roles
      *
      * @return $this

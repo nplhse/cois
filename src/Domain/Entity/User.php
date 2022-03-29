@@ -224,16 +224,4 @@ class User implements UserInterface, TimestampableInterface, \Stringable
 
         return $this;
     }
-
-    public function hasAcceptedTerms(): bool
-    {
-        return $this->acceptedTerms ?? false;
-    }
-
-    public function setAcceptedTerms(bool $acceptedTerms): self
-    {
-        $this->acceptedTerms = $acceptedTerms;
-
-        return $this;
-    }
 }
