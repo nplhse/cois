@@ -2341,6 +2341,46 @@
         <source>No Settings found</source>
         <target>No Settings found.</target>
       </trans-unit>
+      <trans-unit id="WRk1sVs" resname="Public">
+        <source>Public</source>
+        <target>Public</target>
+      </trans-unit>
+      <trans-unit id="xj62cgx" resname="Private">
+        <source>Private</source>
+        <target>Private</target>
+      </trans-unit>
+      <trans-unit id="6.Eu9Hz" resname="Draft">
+        <source>Draft</source>
+        <target>Draft</target>
+      </trans-unit>
+      <trans-unit id="LvQuwh2" resname="Published">
+        <source>Published</source>
+        <target>Published</target>
+      </trans-unit>
+      <trans-unit id="tI.znC4" resname="Deleted">
+        <source>Deleted</source>
+        <target>Deleted</target>
+      </trans-unit>
+      <trans-unit id="3ij6CWA" resname="ImprintPage">
+        <source>ImprintPage</source>
+        <target>Page: Imprint</target>
+      </trans-unit>
+      <trans-unit id="YB4392T" resname="PrivacyPage">
+        <source>PrivacyPage</source>
+        <target>Page: Privacy</target>
+      </trans-unit>
+      <trans-unit id="bdqzG7v" resname="TermsPage">
+        <source>TermsPage</source>
+        <target>Page: Terms</target>
+      </trans-unit>
+      <trans-unit id="7Nnxahq" resname="By checking this box, you are agreeing to our #TERMS# and #PRIVACY#.">
+        <source>By checking this box, you are agreeing to our #TERMS# and #PRIVACY#.</source>
+        <target>By checking this box, you are agreeing to our #TERMS# and #PRIVACY#.</target>
+      </trans-unit>
+      <trans-unit id="Hkmh4Tp" resname="Repeat Password">
+        <source>Repeat Password</source>
+        <target>Repeat Password</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

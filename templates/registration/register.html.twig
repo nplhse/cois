@@ -30,6 +30,41 @@
                 }}
                 {{ form_row(registrationForm.email) }}
 
+                {% if enable_terms is defined and enable_terms.value == true %}
+                    {% set termsFormGroup %}
+                        {{ form_row(registrationForm.agreeTerms) }}
+                    {% endset %}
+
+                    {{
+                        termsFormGroup
+                            |replace({
+                                '#TERMS#': '<a href="'
+                                    ~ path(
+                                        'app_page',
+                                        {
+                                            slug: get_slug('terms')
+                                        }
+                                    )
+                                    ~ '"> '
+                                    ~ (get_title('terms')|capitalize)
+                                    ~ '</a>'
+                            })
+                            |replace({
+                                '#PRIVACY#': '<a href="'
+                                    ~ path(
+                                        'app_page',
+                                        {
+                                            slug: get_slug('privacy')
+                                        }
+                                    )
+                                    ~ '"> '
+                                    ~ (get_title('privacy')|capitalize)
+                                    ~ '</a>'
+                            })
+                            |raw
+                    }}
+                {% endif %}
+
                 <div class="float-end">
                     <button type="submit" class="btn btn-primary">
                         <i class="bi bi-person-plus-fill"></i>

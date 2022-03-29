@@ -54,4 +54,13 @@ class SettingRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getArrayResult();
     }
+
+    public function clearAllSettings(): mixed
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->delete('App:Setting', 's')
+        ;
+
+        return $qb->getQuery()->execute();
+    }
 }

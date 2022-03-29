@@ -2,10 +2,13 @@
 
 namespace App\DataFixtures;
 
+use App\Domain\Enum\Page\PageStatusEnum;
+use App\Domain\Enum\Page\PageTypeEnum;
 use App\Factory\AllocationFactory;
 use App\Factory\DispatchAreaFactory;
 use App\Factory\HospitalFactory;
 use App\Factory\ImportFactory;
+use App\Factory\PageFactory;
 use App\Factory\SettingFactory;
 use App\Factory\StateFactory;
 use App\Factory\SupplyAreaFactory;
@@ -21,9 +24,52 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        SettingFactory::new(['name' => 'title', 'value' => 'Collaborative IVENA statistics', 'type' => 'string', 'category' => 'general']);
-        SettingFactory::new(['name' => 'enable_registration', 'value' => 'true', 'type' => 'boolean', 'category' => 'user']);
-        SettingFactory::new(['name' => 'enable_cookie_consent', 'value' => 'true', 'type' => 'boolean', 'category' => 'user']);
+        SettingFactory::createOne([
+            'name' => 'title',
+            'value' => 'Collaborative IVENA statistics',
+            'type' => 'string',
+            'category' => 'general',
+        ]);
+        SettingFactory::createOne([
+            'name' => 'enable_registration',
+            'value' => 'true',
+            'type' => 'boolean',
+            'category' => 'user',
+        ]);
+        SettingFactory::createOne([
+            'name' => 'enable_cookie_consent',
+            'value' => 'true',
+            'type' => 'boolean',
+            'category' => 'user',
+        ]);
+        SettingFactory::createOne([
+            'name' => 'enable_terms',
+            'value' => 'true',
+            'type' => 'boolean',
+            'category' => 'user',
+        ]);
+
+        PageFactory::createOne([
+            'title' => 'Imprint',
+            'slug' => 'imprint',
+            'type' => PageTypeEnum::ImprintPage,
+            'status' => PageStatusEnum::Published,
+            'createdBy' => UserFactory::random(),
+        ]);
+        PageFactory::createOne([
+            'title' => 'Privacy',
+            'slug' => 'privacy',
+            'type' => PageTypeEnum::PrivacyPage,
+            'status' => PageStatusEnum::Published,
+            'createdBy' => UserFactory::random(),
+        ]);
+        PageFactory::createOne([
+            'title' => 'Terms and conditions',
+            'slug' => 'terms',
+            'type' => PageTypeEnum::TermsPage,
+            'status' => PageStatusEnum::Published,
+            'createdBy' => UserFactory::random(),
+        ]);
 
         StateFactory::createMany(3);
 

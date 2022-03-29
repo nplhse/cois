@@ -5,7 +5,7 @@
                 Powered by <a href="https://github.com/nplhse/cois">
                     <i class="bi-github" role="img" aria-label="GitHub"></i>
                     cois
-                </a> v0.1.0-alpha
+                </a>&nbsp;v0.1.0-alpha
             </span>
         </div>
 
@@ -14,6 +14,21 @@
         </div>
 
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            {% if has_page('terms') %}
+                <li class="ms-2">
+                    <a class="nav-link px-2 text-muted"
+                        href="{{
+                        path(
+                            'app_page',
+                            {
+                                slug: get_slug('terms')
+                            }
+                        )
+                        }}">
+                        {{ get_title('terms') }}
+                    </a>
+                </li>
+            {% endif %}
             {% if has_page('privacy') %}
                 <li class="ms-2">
                     <a class="nav-link px-2 text-muted"
@@ -25,7 +40,7 @@
                             }
                         )
                         }}">
-                        {{ 'Privacy'|trans }}
+                        {{ get_title('privacy') }}
                     </a>
                 </li>
             {% endif %}
@@ -40,7 +55,7 @@
                             }
                         )
                         }}">
-                        {{ 'Impressum'|trans }}
+                        {{ get_title('imprint') }}
                     </a>
                 </li>
             {% endif %}

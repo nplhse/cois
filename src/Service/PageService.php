@@ -25,6 +25,7 @@ class PageService
         $page = match ($slug) {
             'imprint' => $this->pageRepository->findOneBy(['type' => PageTypeEnum::ImprintPage]),
             'privacy' => $this->pageRepository->findOneBy(['type' => PageTypeEnum::PrivacyPage]),
+            'terms' => $this->pageRepository->findOneBy(['type' => PageTypeEnum::TermsPage]),
             default => $this->pageRepository->findOneBy(['slug' => $slug]),
         };
 
@@ -41,6 +42,15 @@ class PageService
     {
         if ($this->hasPage($target)) {
             return $this->pageStore[$target]->getSlug();
+        }
+
+        return null;
+    }
+
+    public function getTitle(string $target): ?string
+    {
+        if ($this->hasPage($target)) {
+            return $this->pageStore[$target]->getTitle();
         }
 
         return null;

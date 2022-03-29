@@ -34,6 +34,8 @@ class User implements UserInterface, TimestampableInterface, \Stringable
 
     protected bool $hasCredentialsExpired = false;
 
+    protected ?bool $acceptedTerms = false;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('NOW');

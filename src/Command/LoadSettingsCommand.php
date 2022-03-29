@@ -30,9 +30,12 @@ class LoadSettingsCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         try {
+            $this->settingRepository->clearAllSettings();
+
             $this->addTitle();
             $this->addRegistration();
             $this->addCookieConsent();
+            $this->addTerms();
         } catch (\Exception $e) {
             $io->warning(sprintf('Something went wrong! Failed to load Settings: %s.', $e->getMessage()));
 
@@ -70,6 +73,17 @@ class LoadSettingsCommand extends Command
     {
         $setting = new Setting();
         $setting->setName('enable_cookie_consent');
+        $setting->setCategory('user');
+        $setting->setType('boolean');
+        $setting->setValue('true');
+
+        $this->settingRepository->add($setting, false);
+    }
+
+    private function addTerms(): void
+    {
+        $setting = new Setting();
+        $setting->setName('enable_terms');
         $setting->setCategory('user');
         $setting->setType('boolean');
         $setting->setValue('true');

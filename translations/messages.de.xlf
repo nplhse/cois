@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="de" target-language="de" datatype="plaintext" original="file.ext">
+  <file source-language="en" target-language="de" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -2396,7 +2396,7 @@
       </trans-unit>
       <trans-unit id="VKV8MUf" resname="Privacy">
         <source>Privacy</source>
-        <target>Privatsphäre</target>
+        <target><![CDATA[Datenschutz& Cookies]]></target>
       </trans-unit>
       <trans-unit id="uKYFGSP" resname="Impressum">
         <source>Impressum</source>
@@ -2417,6 +2417,46 @@
       <trans-unit id="UknG16u" resname="No Settings found">
         <source>No Settings found</source>
         <target>Keine Einstellungen gefunden.</target>
+      </trans-unit>
+      <trans-unit id="WRk1sVs" resname="Public">
+        <source>Public</source>
+        <target>Öffentlich</target>
+      </trans-unit>
+      <trans-unit id="xj62cgx" resname="Private">
+        <source>Private</source>
+        <target>Nur für angemeldete Benutzer</target>
+      </trans-unit>
+      <trans-unit id="6.Eu9Hz" resname="Draft">
+        <source>Draft</source>
+        <target>Entwurf</target>
+      </trans-unit>
+      <trans-unit id="LvQuwh2" resname="Published">
+        <source>Published</source>
+        <target>Veröffentlicht</target>
+      </trans-unit>
+      <trans-unit id="tI.znC4" resname="Deleted">
+        <source>Deleted</source>
+        <target>Gelöscht</target>
+      </trans-unit>
+      <trans-unit id="3ij6CWA" resname="ImprintPage">
+        <source>ImprintPage</source>
+        <target>Seite: Impressum</target>
+      </trans-unit>
+      <trans-unit id="YB4392T" resname="PrivacyPage">
+        <source>PrivacyPage</source>
+        <target>Seite: Datenschutz</target>
+      </trans-unit>
+      <trans-unit id="bdqzG7v" resname="TermsPage">
+        <source>TermsPage</source>
+        <target>Seite: Nutzungsbedingungen</target>
+      </trans-unit>
+      <trans-unit id="7Nnxahq" resname="By checking this box, you are agreeing to our #TERMS# and #PRIVACY#.">
+        <source>By checking this box, you are agreeing to our #TERMS# and #PRIVACY#.</source>
+        <target>Ich akzeptiere die #TERMS# und #PRIVACY#.</target>
+      </trans-unit>
+      <trans-unit id="Hkmh4Tp" resname="Repeat Password">
+        <source>Repeat Password</source>
+        <target>Passwort wiederholen</target>
       </trans-unit>
     </body>
   </file>
