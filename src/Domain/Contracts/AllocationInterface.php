@@ -132,7 +132,7 @@ interface AllocationInterface
 
     public function setSpecialityDetail(string $specialityDetail): self;
 
-    public function getSpecialityDetail(): string;
+    public function getSpecialityDetail(): ?string;
 
     public function setSpecialityWasClosed(bool $specialityWasClosed): self;
 
