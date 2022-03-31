@@ -259,10 +259,9 @@ class Allocation extends DomainAllocation
     protected string $speciality;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
-    #[Assert\NotBlank(message: 'The specialityDetail must not be empty.')]
-    protected string $specialityDetail;
+    protected ?string $specialityDetail = null;
 
     /**
      * @ORM\Column(type="boolean")

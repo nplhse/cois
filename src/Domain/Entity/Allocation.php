@@ -103,7 +103,7 @@ class Allocation implements AllocationInterface, IdentifierInterface
 
     protected string $speciality;
 
-    protected string $specialityDetail;
+    protected ?string $specialityDetail = null;
 
     protected bool $specialityWasClosed;
 
@@ -525,7 +525,7 @@ class Allocation implements AllocationInterface, IdentifierInterface
         return $this;
     }
 
-    public function getSpecialityDetail(): string
+    public function getSpecialityDetail(): ?string
     {
         return $this->specialityDetail;
     }
