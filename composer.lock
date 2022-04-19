@@ -6872,6 +6872,72 @@
             "time": "2022-03-02T12:58:14+00:00"
         },
         {
+            "name": "symfony/requirements-checker",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/requirements-checker.git",
+                "reference": "cf8893f384348a338157d637e170fe8fb2356016"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/requirements-checker/zipball/cf8893f384348a338157d637e170fe8fb2356016",
+                "reference": "cf8893f384348a338157d637e170fe8fb2356016",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "bin": [
+                "bin/requirements-checker"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Requirements\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Check Symfony requirements and give recommendations",
+            "keywords": [
+                "configuration",
+                "distribution"
+            ],
+            "support": {
+                "issues": "https://github.com/symfony/requirements-checker/issues",
+                "source": "https://github.com/symfony/requirements-checker/tree/v2.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-11-30T16:18:33+00:00"
+        },
+        {
             "name": "symfony/routing",
             "version": "v6.0.5",
             "source": {
@@ -13197,72 +13263,6 @@
             "time": "2021-06-05T21:20:04+00:00"
         },
         {
-            "name": "symfony/requirements-checker",
-            "version": "v2.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/requirements-checker.git",
-                "reference": "cf8893f384348a338157d637e170fe8fb2356016"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/requirements-checker/zipball/cf8893f384348a338157d637e170fe8fb2356016",
-                "reference": "cf8893f384348a338157d637e170fe8fb2356016",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9"
-            },
-            "bin": [
-                "bin/requirements-checker"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Requirements\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "Check Symfony requirements and give recommendations",
-            "keywords": [
-                "configuration",
-                "distribution"
-            ],
-            "support": {
-                "issues": "https://github.com/symfony/requirements-checker/issues",
-                "source": "https://github.com/symfony/requirements-checker/tree/v2.0.1"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2021-11-30T16:18:33+00:00"
-        },
-        {
             "name": "symfony/web-profiler-bundle",
             "version": "v6.0.6",
             "source": {
@@ -13743,35 +13743,39 @@
         },
         {
             "name": "zenstruck/browser",
-            "version": "v0.9.2",
+            "version": "v0.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zenstruck/browser.git",
-                "reference": "c976a5367301ec5f43475dd6634409668f1055a4"
+                "reference": "2afbccaf2414464eb92672e532fb23576958c401"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zenstruck/browser/zipball/c976a5367301ec5f43475dd6634409668f1055a4",
-                "reference": "c976a5367301ec5f43475dd6634409668f1055a4",
+                "url": "https://api.github.com/repos/zenstruck/browser/zipball/2afbccaf2414464eb92672e532fb23576958c401",
+                "reference": "2afbccaf2414464eb92672e532fb23576958c401",
                 "shasum": ""
             },
             "require": {
                 "behat/mink": "^1.8",
-                "mtdowling/jmespath.php": "^2.6",
                 "php": ">=7.4",
-                "symfony/browser-kit": "^4.4.9|^5.0.9|^6.0",
-                "symfony/css-selector": "^4.4|^5.0|^6.0",
-                "symfony/framework-bundle": "^4.4|^5.0|^6.0",
+                "symfony/browser-kit": "^5.4|^6.0",
+                "symfony/css-selector": "^5.4|^6.0",
+                "symfony/dom-crawler": "^5.4|^6.0",
+                "symfony/framework-bundle": "^5.4|^6.0",
                 "symfony/polyfill-php80": "^1.20",
                 "zenstruck/assert": "^1.0",
                 "zenstruck/callback": "^1.1"
             },
             "require-dev": {
-                "dbrekelmans/bdi": "^0.3.0",
-                "symfony/mime": ">=4.4.1",
-                "symfony/panther": "^1.0|^2.0",
-                "symfony/phpunit-bridge": "^5.3",
-                "symfony/security-bundle": "^4.4|^5.0|^6.0"
+                "dbrekelmans/bdi": "^1.0",
+                "mtdowling/jmespath.php": "^2.6",
+                "phpstan/phpstan": "^1.4",
+                "phpunit/phpunit": "^9.5",
+                "symfony/mime": "^5.4|^6.0",
+                "symfony/panther": "^1.1|^2.0",
+                "symfony/phpunit-bridge": "^6.0",
+                "symfony/security-bundle": "^5.4|^6.0",
+                "zenstruck/foundry": "^1.17"
             },
             "type": "library",
             "autoload": {
@@ -13797,7 +13801,7 @@
             ],
             "support": {
                 "issues": "https://github.com/zenstruck/browser/issues",
-                "source": "https://github.com/zenstruck/browser/tree/v0.9.2"
+                "source": "https://github.com/zenstruck/browser/tree/v0.11.0"
             },
             "funding": [
                 {
@@ -13805,7 +13809,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-02-08T19:02:06+00:00"
+            "time": "2022-04-07T14:10:50+00:00"
         },
         {
             "name": "zenstruck/callback",
@@ -13954,7 +13958,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.0",
+        "php": ">=8.1",
         "ext-ctype": "*",
         "ext-iconv": "*"
     },
