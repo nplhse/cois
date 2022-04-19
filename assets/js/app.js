@@ -8,6 +8,10 @@
 // Start the Stimulus application
 import "./bootstrap";
 
-// Import bootstrap and stlyes
+// Import bootstrap and styles
 import "bootstrap";
-import "../styles/app.scss";
+import "../../node_modules/bootstrap/dist/css/bootstrap.css";
+import "../../node_modules/bootstrap-icons/font/bootstrap-icons.css";
+
+// Import custom styles
+import "../styles/app.css";
