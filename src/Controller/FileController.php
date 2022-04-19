@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 /**
  * @IsGranted("ROLE_ADMIN")
@@ -32,10 +33,17 @@ class FileController extends AbstractController
 
         $disposition = HeaderUtils::makeDisposition(
             HeaderUtils::DISPOSITION_ATTACHMENT,
-            $import->getName().'.'.$import->getFileExtension()
+            $this->getSaveFilename($import->getName(), $import->getFileExtension()),
         );
         $response->headers->set('Content-Disposition', $disposition);
 
         return $response;
+    }
+
+    private function getSaveFilename(string $name, string $extension): string
+    {
+        $slugger = new AsciiSlugger();
+
+        return $slugger->slug($name).'.'.$extension;
     }
 }
