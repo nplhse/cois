@@ -10,7 +10,7 @@ import "./bootstrap";
 
 // Import bootstrap and styles
 import "bootstrap";
-import "../../node_modules/bootstrap/dist/css/bootstrap.css";
+import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 
 // Import custom styles
