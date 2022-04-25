@@ -28,6 +28,7 @@ yarn-error.log
 ###< friendsofphp/php-cs-fixer ###
 
 /build/
+hosts.yaml
 
 ###> phpunit/phpunit ###
 /phpunit.xml
