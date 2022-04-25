@@ -33,6 +33,7 @@ class MailerService
         $email = (new TemplatedEmail())
             ->to(new Address($user->getEmail()))
             ->from(new Address($this->mailerSender, $this->mailerFrom))
+            ->replyTo($this->mailerSender)
             ->subject('Monthly reminder to import new data')
             ->htmlTemplate('emails/import/reminder.inky.twig')
             ->context([
@@ -48,6 +49,7 @@ class MailerService
         $email = (new TemplatedEmail())
             ->to(new Address($user->getEmail()))
             ->from(new Address($this->mailerSender, $this->mailerFrom))
+            ->replyTo($this->mailerSender)
             ->subject('Reset your Password')
             ->htmlTemplate('emails/user/reset_password.inky.twig')
             ->context([
@@ -62,6 +64,7 @@ class MailerService
         $email = (new TemplatedEmail())
             ->to(new Address($user->getEmail()))
             ->from(new Address($this->mailerSender, $this->mailerFrom))
+            ->replyTo($this->mailerSender)
             ->subject('Verify your E-Mail address')
             ->htmlTemplate('emails/user/verify_email.inky.twig')
             ->context([
@@ -78,6 +81,7 @@ class MailerService
         $email = (new TemplatedEmail())
             ->to(new Address($user->getEmail()))
             ->from(new Address($this->mailerSender, $this->mailerFrom))
+            ->replyTo($this->mailerSender)
             ->subject('Welcome to Collaborative IVENA statistics')
             ->htmlTemplate('emails/user/welcome.inky.twig')
             ->context([

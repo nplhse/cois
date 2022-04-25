@@ -1,7 +1,3 @@
 framework:
     mailer:
         dsn: "%env(MAILER_DSN)%"
-        envelope:
-            sender: "noreply@example.com"
-        headers:
-            from: "Collaborative IVENA Statistics <noreply@example.com>"

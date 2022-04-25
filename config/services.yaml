@@ -6,11 +6,13 @@
 parameters:
     app.locale: "%env(resolve:APP_LOCALE)%"
     app.supported_locales: "en|de"
-    app.mailer.sender: "noreply@cois.dev"
-    app.mailer.from: "Collaborative IVENA statistics"
+    app.mailer.sender: '%env(default:app.default.mailer.sender:APP_MAILER_SENDER)%'
+    app.mailer.from: '%env(default:app.default.mailer.from:APP_MAILER_FROM)%'
     app.registration: '%env(default:app.default.registration:APP_REGISTRATION)%'
     app.cookie_consent: '%env(default:app.default.cookie_consent:APP_COOKIE_CONSENT)%'
 
+    app.default.mailer.sender: 'noreply@cois.dev'
+    app.default.mailer.from: 'Collaborative IVENA statistics'
     app.default.cookie_consent: true
     app.default.registration: true
 
