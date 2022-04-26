@@ -100,7 +100,7 @@
         "symplify/easy-coding-standard": "^10.0",
         "vimeo/psalm": "^4.7",
         "weirdan/doctrine-psalm-plugin": "^2.0",
-        "zenstruck/browser": "^0.11.0",
+        "zenstruck/browser": "^1.1.0",
         "zenstruck/foundry": "^1.16"
     },
     "config": {
