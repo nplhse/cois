@@ -1086,10 +1086,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.5.tgz#db5a11bf66bdab39569719555b0f76e138d7bd64"
   integrity sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==
 
-"@symfony/stimulus-bridge@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@symfony/stimulus-bridge/-/stimulus-bridge-3.0.0.tgz#9976ab27fb41c80111ffdcc43c17c49b75521b02"
-  integrity sha512-efoQP0DWIXNOh9zPN5JUEokTMQyFBbVO5ioUQIRRAw9y0Qj6bv+mshAnljUzI7xupTZu9zNH4XjY1d0tnl/n9A==
+"@symfony/stimulus-bridge@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@symfony/stimulus-bridge/-/stimulus-bridge-3.1.0.tgz#fcca15b09af5ed346e9b94f9e5770fd3994287a8"
+  integrity sha512-24ENJnGm7KrXsBWuOtg+Av5Rdt/EYravv2AthOKYIIXzd3FhygRAjOdbJicOv1nJOGS0gGqeBme57QEOoG86bw==
   dependencies:
     "@hotwired/stimulus-webpack-helpers" "^1.0.1"
     acorn "^8.0.5"
@@ -2259,10 +2259,10 @@ core-js@^2.4.0:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.12.tgz#d9333dfa7b065e347cc5682219d6f690859cc2ec"
   integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
 
-core-js@^3.21.1:
-  version "3.21.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.21.1.tgz#f2e0ddc1fc43da6f904706e8e955bc19d06a0d94"
-  integrity sha512-FRq5b/VMrWlrmCzwRrpDYNxyHP9BcAZC+xHJaqTgIE5091ZV1NTmyh0sGOg5XqpnHvR0svdy0sv1gWA1zmhxig==
+core-js@^3.22.4:
+  version "3.22.4"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.22.4.tgz#f4b3f108d45736935aa028444a69397e40d8c531"
+  integrity sha512-1uLykR+iOfYja+6Jn/57743gc9n73EWiOnSJJ4ba3B4fOEYDBv25MagmEZBxTp5cWq4b/KPx/l77zgsp28ju4w==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
