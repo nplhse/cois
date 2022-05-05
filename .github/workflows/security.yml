@@ -1,32 +1,32 @@
 name: Security Scan
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
 
 jobs:
-  psalm:
-    name: Psalm Security Analysis
-      runs-on: ubuntu-latest
-      strategy:
-        fail-fast: false
-        matrix:
-          php-versions: ["8.1"]
-          
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v2
+    psalm:
+        name: Psalm Security Analysis
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                php-versions: ["8.1"]
 
-        - uses: shivammathur/setup-php@v2
-          with:
-            php-version: ${{ matrix.php-versions }}
-            
-        - name: Analyse PHP Code (Psalm)
-          run: vendor/bin/psalm --report=results.sarif
-        
-        - name: Upload Security Analysis results to GitHub
-          uses: github/codeql-action/upload-sarif@v1
-          with:
-            sarif_file: results.sarif
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            - uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php-versions }}
+
+            - name: Analyse PHP Code (Psalm)
+              run: vendor/bin/psalm --report=results.sarif
+
+            - name: Upload Security Analysis results to GitHub
+              uses: github/codeql-action/upload-sarif@v1
+              with:
+                  sarif_file: results.sarif
