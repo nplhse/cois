@@ -9,74 +9,51 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ORM\HasLifecycleCallbacks()
- */
 #[UniqueEntity(fields: ['username'], message: 'Please choose a different username')]
 #[UniqueEntity(fields: ['email'], message: 'Please choose a different email address')]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class User extends DomainUser implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     protected int $id;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
     protected string $username;
 
-    /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
     protected string $email;
 
     /**
-     * @ORM\Column(type="json")
-     *
      * @var array<string>
      */
+    #[ORM\Column(type: 'json')]
     protected array $roles = [];
 
-    /**
-     * @ORM\Column(type="string")
-     */
+    #[ORM\Column(type: 'string')]
     protected string $password;
 
     protected ?string $plainPassword = null;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     protected \DateTimeInterface $createdAt;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    protected ?\DateTimeInterface $updatedAt = null;
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    protected ?\DateTimeInterface $updatedAt;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Hospital::class, mappedBy="owner")
-     * @ORM\OrderBy({"name" = "ASC"})
-     */
+    #[ORM\OneToMany(targetEntity: Hospital::class, mappedBy: 'owner')]
+    #[ORM\OrderBy(['name' => 'ASC'])]
     protected \Doctrine\Common\Collections\Collection $hospitals;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: 'boolean')]
     protected bool $isVerified = false;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: 'boolean')]
     protected bool $isParticipant = false;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: 'boolean')]
     protected bool $hasCredentialsExpired = false;
 
     /**

@@ -46,7 +46,7 @@ class ImportFilterSetType extends AbstractType
                         'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('h')
                             ->where('h.owner = :user')
                             ->setParameter('user', $user->getId())
-                            ->orderBy('h.name', 'ASC'),
+                            ->orderBy('h.name', \Doctrine\Common\Collections\Criteria::ASC),
                     ]);
             }
         }

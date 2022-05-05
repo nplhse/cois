@@ -97,7 +97,6 @@
         "symfony/phpunit-bridge": "^6.0",
         "symfony/var-dumper": "^5.2",
         "symfony/web-profiler-bundle": "^6.0",
-        "symplify/easy-coding-standard": "^10.0",
         "vimeo/psalm": "^4.7",
         "weirdan/doctrine-psalm-plugin": "^2.0",
         "zenstruck/browser": "^1.1.0",
@@ -138,9 +137,20 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
+        "check-js": [
+            "yarn run eslint assets",
+            "yarn run prettier --check ."
+        ],
+        "check-php": [
+            "vendor/bin/php-cs-fixer fix",
+            "vendor/bin/psalm",
+            "vendor/bin/phpstan analyse"
+        ],
         "ci": [
-            "@run-checks",
-            "@run-tests"
+            "@composer validate",
+            "@check-js",
+            "@check-php",
+            "vendor/bin/phpunit"
         ],
         "reset": [
             "@composer install",
@@ -148,38 +158,19 @@
             "bin/console doctrine:database:create",
             "@setup-dev"
         ],
-        "run-checks": [
-            "@composer validate",
-            "@run-checks-js",
-            "@run-checks-php"
-        ],
-        "run-checks-js": [
-            "yarn run eslint assets",
-            "yarn run prettier --check ."
-        ],
-        "run-checks-php": [
-            "vendor/bin/php-cs-fixer fix",
-            "vendor/bin/psalm",
-            "vendor/bin/phpstan analyse"
-        ],
         "run-tests": [
             "vendor/bin/phpunit"
         ],
         "setup": [
-            "@setup-db",
+            "bin/console doctrine:migrations:migrate --no-interaction",
             "bin/console app:settings:load",
-            "@setup-frontend"
-        ],
-        "setup-db": [
-            "bin/console doctrine:migrations:migrate --no-interaction"
+            "yarn install",
+            "yarn encore build"
         ],
         "setup-dev": [
-            "@setup-db",
+            "bin/console doctrine:migrations:migrate --no-interaction",
             "bin/console doctrine:fixtures:load --no-interaction",
             "bin/console app:settings:load",
-            "@setup-frontend"
-        ],
-        "setup-frontend": [
             "yarn install",
             "yarn encore dev"
         ]

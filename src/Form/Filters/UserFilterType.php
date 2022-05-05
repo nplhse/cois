@@ -17,7 +17,7 @@ class UserFilterType extends AbstractType
             'class' => User::class,
             'choice_label' => 'username',
             'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('u')
-                ->orderBy('u.username', 'ASC'),
+                ->orderBy('u.username', \Doctrine\Common\Collections\Criteria::ASC),
             'empty_data' => '',
             'placeholder' => 'All users',
         ]);

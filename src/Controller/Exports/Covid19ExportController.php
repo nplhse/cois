@@ -55,7 +55,7 @@ class Covid19ExportController extends AbstractController
         // with Symfony StreamResponse you can flush the body content if necessary
         // see Symfony documentation for more information
         $flush_threshold = 1000; // the flush value should depend on your CSV size.
-        $content_callback = function () use ($csv, $flush_threshold) {
+        $content_callback = function () use ($csv, $flush_threshold): void {
             foreach ($csv->chunk(1024) as $offset => $chunk) {
                 echo $chunk;
                 if (0 === $offset % $flush_threshold) {

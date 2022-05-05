@@ -63,13 +63,13 @@ class ImportRepository extends ServiceEntityRepository implements ImportReposito
         return $this->createQueryBuilder('i')
             ->andWhere('i.user = :val')
             ->setParameter('val', $user->getId())
-            ->orderBy('i.id', 'ASC')
+            ->orderBy('i.id', \Doctrine\Common\Collections\Criteria::ASC)
             ->getQuery()
             ->getResult()
         ;
     }
 
-    public function countImports(mixed $entity = null): mixed
+    public function countImports(UserInterface|\App\Entity\Hospital|null $entity = null): mixed
     {
         if ($entity instanceof UserInterface) {
             $qb = $this->createQueryBuilder('i')

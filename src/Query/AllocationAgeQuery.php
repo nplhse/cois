@@ -30,7 +30,7 @@ final class AllocationAgeQuery
             )
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.age, allocation.gender')
-                ->addOrderBy('allocation.age', 'ASC');
+                ->addOrderBy('allocation.age', \Doctrine\Common\Collections\Criteria::ASC);
 
         if (null !== $this->hospital) {
             $qb->where('allocation.hospital = :hospital')

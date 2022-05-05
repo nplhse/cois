@@ -5,36 +5,24 @@ namespace App\Entity;
 use App\Repository\SettingRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=SettingRepository::class)
- */
+#[ORM\Entity(repositoryClass: SettingRepository::class)]
 class Setting
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private string $value;
 
-    /**
-     * @ORM\Column(type="string", length=10)
-     */
+    #[ORM\Column(type: 'string', length: 10)]
     private string $type;
 
-    /**
-     * @ORM\Column(type="string", length=25)
-     */
+    #[ORM\Column(type: 'string', length: 25)]
     private string $category;
 
     public function getId(): ?int

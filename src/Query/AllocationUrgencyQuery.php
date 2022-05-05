@@ -28,7 +28,7 @@ final class AllocationUrgencyQuery
                 ->where('allocation.urgency IS NOT NULL')
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.urgency')
-                ->addOrderBy('allocation.urgency', 'ASC');
+                ->addOrderBy('allocation.urgency', \Doctrine\Common\Collections\Criteria::ASC);
 
         if (null !== $filterService) {
             $qb = $filterService->processQuery($qb, [FilterService::ENTITY_ALIAS => 'allocation.']);

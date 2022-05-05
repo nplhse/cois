@@ -77,7 +77,7 @@ class ImportType extends AbstractType
                         'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('h')
                             ->where('h.owner = :user')
                             ->setParameter('user', $this->security->getUser())
-                            ->orderBy('h.name', 'ASC'),
+                            ->orderBy('h.name', \Doctrine\Common\Collections\Criteria::ASC),
                     ]);
             }
         }

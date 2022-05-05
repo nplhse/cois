@@ -5,32 +5,22 @@ namespace App\Entity;
 use App\Repository\SkippedRowRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=SkippedRowRepository::class)
- */
+#[ORM\Entity(repositoryClass: SkippedRowRepository::class)]
 class SkippedRow
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private int $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Import::class)
-     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
-     */
+    #[ORM\ManyToOne(targetEntity: Import::class)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private Import $import;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: 'text')]
     private string $errors;
 
-    /**
-     * @ORM\Column(type="json")
-     */
+    #[ORM\Column(type: 'json')]
     private array $data = [];
 
     public function getId(): ?int

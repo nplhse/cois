@@ -22,16 +22,16 @@ class HospitalFilterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         if ($this->security->isGranted('ROLE_ADMIN')) {
-            $query_builder = fn (EntityRepository $er) => $er->createQueryBuilder('h')
-                ->orderBy('h.name', 'ASC');
+            $query_builder = fn (EntityRepository $er): \Doctrine\ORM\QueryBuilder => $er->createQueryBuilder('h')
+                ->orderBy('h.name', \Doctrine\Common\Collections\Criteria::ASC);
         } else {
             /** @var User $user */
             $user = $this->security->getUser();
 
-            $query_builder = fn (EntityRepository $er) => $er->createQueryBuilder('h')
+            $query_builder = fn (EntityRepository $er): \Doctrine\ORM\QueryBuilder => $er->createQueryBuilder('h')
                 ->where('h.owner = :user')
                 ->setParameter('user', $user->getId())
-                ->orderBy('h.name', 'ASC');
+                ->orderBy('h.name', \Doctrine\Common\Collections\Criteria::ASC);
         }
 
         $resolver->setDefaults([
