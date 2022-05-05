@@ -104,7 +104,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $qb = $this->createQueryBuilder('u')
             ->where('u.roles LIKE :role')
             ->setParameter('role', '%ROLE_ADMIN%')
-            ->orderBy('u.id', 'ASC');
+            ->orderBy('u.id', \Doctrine\Common\Collections\Criteria::ASC);
 
         return $qb->getQuery()->execute();
     }
@@ -141,7 +141,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         $qb = $this->createQueryBuilder('u')
             ->leftJoin('u.hospitals', 'h')
-            ->orderBy('u.id', 'ASC')
+            ->orderBy('u.id', \Doctrine\Common\Collections\Criteria::ASC)
             ->distinct()
             ->getQuery()
             ->execute();

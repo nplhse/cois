@@ -48,8 +48,8 @@ class SettingRepository extends ServiceEntityRepository
     public function findAllSettings(): array
     {
         $qb = $this->createQueryBuilder('s')
-            ->orderBy('s.category', 'ASC')
-            ->orderBy('s.name', 'ASC')
+            ->orderBy('s.category', \Doctrine\Common\Collections\Criteria::ASC)
+            ->orderBy('s.name', \Doctrine\Common\Collections\Criteria::ASC)
         ;
 
         return $qb->getQuery()->getArrayResult();

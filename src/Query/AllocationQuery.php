@@ -32,7 +32,7 @@ final class AllocationQuery
             )
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.creationWeekday')
-                ->addOrderBy('allocation.creationWeekday', 'DESC');
+                ->addOrderBy('allocation.creationWeekday', \Doctrine\Common\Collections\Criteria::DESC);
         } elseif ('gender' === $this->property) {
             $qb->select(
                     'allocation.gender',
@@ -40,7 +40,7 @@ final class AllocationQuery
                 )
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.gender')
-                ->addOrderBy('allocation.gender', 'DESC');
+                ->addOrderBy('allocation.gender', \Doctrine\Common\Collections\Criteria::DESC);
         } elseif ('times' === $this->property) {
             $qb->select(
                 'allocation.creationHour AS time',
@@ -48,7 +48,7 @@ final class AllocationQuery
             )
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.creationHour')
-                ->addOrderBy('allocation.creationHour', 'ASC');
+                ->addOrderBy('allocation.creationHour', \Doctrine\Common\Collections\Criteria::ASC);
         } elseif ('urgency' === $this->property) {
             $qb->select(
                 'allocation.urgency AS urgency',
@@ -57,7 +57,7 @@ final class AllocationQuery
                 ->where('allocation.urgency IS NOT NULL')
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.urgency')
-                ->addOrderBy('allocation.urgency', 'ASC');
+                ->addOrderBy('allocation.urgency', \Doctrine\Common\Collections\Criteria::ASC);
         } elseif ('pzc' === $this->property) {
             $qb->select(
                 'allocation.indicationCode AS PZC',
@@ -66,7 +66,7 @@ final class AllocationQuery
             )
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.indicationCode, allocation.indication')
-                ->addOrderBy('counter', 'DESC');
+                ->addOrderBy('counter', \Doctrine\Common\Collections\Criteria::DESC);
         } elseif ('speciality' === $this->property) {
             $qb->select(
                 'allocation.speciality AS speciality',
@@ -74,7 +74,7 @@ final class AllocationQuery
             )
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.speciality')
-                ->addOrderBy('counter', 'DESC');
+                ->addOrderBy('counter', \Doctrine\Common\Collections\Criteria::DESC);
         } elseif ('specialityDetail' === $this->property) {
             $qb->select(
                 'allocation.specialityDetail AS speciality',
@@ -82,7 +82,7 @@ final class AllocationQuery
             )
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.specialityDetail')
-                ->addOrderBy('counter', 'DESC');
+                ->addOrderBy('counter', \Doctrine\Common\Collections\Criteria::DESC);
         } elseif ('infection' === $this->property) {
             $qb->select(
                 'allocation.isInfectious AS infection',
@@ -90,7 +90,7 @@ final class AllocationQuery
             )
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.isInfectious')
-                ->addOrderBy('counter', 'DESC');
+                ->addOrderBy('counter', \Doctrine\Common\Collections\Criteria::DESC);
         } elseif ('assignment' === $this->property) {
             $qb->select(
                 'allocation.assignment AS assignment',
@@ -98,7 +98,7 @@ final class AllocationQuery
             )
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.assignment')
-                ->addOrderBy('counter', 'DESC');
+                ->addOrderBy('counter', \Doctrine\Common\Collections\Criteria::DESC);
         } elseif ('occasion' === $this->property) {
             $qb->select(
                 'allocation.occasion AS occasion',
@@ -106,7 +106,7 @@ final class AllocationQuery
             )
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.occasion')
-                ->addOrderBy('counter', 'DESC');
+                ->addOrderBy('counter', \Doctrine\Common\Collections\Criteria::DESC);
         } elseif ('transport' === $this->property) {
             $qb->select(
                 'allocation.modeOfTransport AS transport',
@@ -114,7 +114,7 @@ final class AllocationQuery
             )
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.modeOfTransport')
-                ->addOrderBy('counter', 'DESC');
+                ->addOrderBy('counter', \Doctrine\Common\Collections\Criteria::DESC);
         }
 
         if (null !== $this->hospital) {

@@ -63,7 +63,7 @@ class ImportRepository extends ServiceEntityRepository implements ImportReposito
         return $this->createQueryBuilder('i')
             ->andWhere('i.user = :val')
             ->setParameter('val', $user->getId())
-            ->orderBy('i.id', 'ASC')
+            ->orderBy('i.id', \Doctrine\Common\Collections\Criteria::ASC)
             ->getQuery()
             ->getResult()
         ;

@@ -16,7 +16,7 @@ class StateType extends AbstractType
             'required' => false,
             'class' => State::class,
             'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('s')
-                ->orderBy('s.name', 'ASC'),
+                ->orderBy('s.name', \Doctrine\Common\Collections\Criteria::ASC),
             'choice_label' => 'name',
             'placeholder' => 'All States',
             'empty_data' => '',

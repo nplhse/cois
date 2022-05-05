@@ -78,7 +78,7 @@ class AllocationRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('a')
             ->select('a.age, COUNT(a.age) AS counter')
             ->groupBy('a.age')
-            ->orderBy('a.age', 'ASC');
+            ->orderBy('a.age', \Doctrine\Common\Collections\Criteria::ASC);
 
         if (isset($param['gender'])) {
             $qb->andWhere('a.gender = :gender')
@@ -109,7 +109,7 @@ class AllocationRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('a')
             ->select('a.arrivalHour, COUNT(a.arrivalHour) AS counter')
             ->groupBy('a.arrivalHour')
-            ->addOrderBy('a.arrivalHour', 'DESC')
+            ->addOrderBy('a.arrivalHour', \Doctrine\Common\Collections\Criteria::DESC)
             ->getQuery()
             ->getResult();
 
@@ -121,7 +121,7 @@ class AllocationRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('a')
             ->select('a.arrivalWeekday, COUNT(a.arrivalWeekday) AS counter')
             ->groupBy('a.arrivalWeekday')
-            ->addOrderBy('a.arrivalWeekday', 'DESC')
+            ->addOrderBy('a.arrivalWeekday', \Doctrine\Common\Collections\Criteria::DESC)
             ->getQuery()
             ->getResult();
 
@@ -133,7 +133,7 @@ class AllocationRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('a')
             ->select('a.PZC, COUNT(a.PZC) AS counter')
             ->groupBy('a.PZC')
-            ->addOrderBy('counter', 'DESC')
+            ->addOrderBy('counter', \Doctrine\Common\Collections\Criteria::DESC)
             ->getQuery()
             ->getResult();
 
@@ -145,7 +145,7 @@ class AllocationRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('a')
             ->select('a.SK, COUNT(a.SK) AS counter')
             ->groupBy('a.SK')
-            ->addOrderBy('counter', 'DESC')
+            ->addOrderBy('counter', \Doctrine\Common\Collections\Criteria::DESC)
             ->getQuery()
             ->getResult();
 
@@ -156,7 +156,7 @@ class AllocationRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('a')
             ->select('DISTINCT a.PZCText, a.PZC')
-            ->addOrderBy('a.PZCText', 'ASC')
+            ->addOrderBy('a.PZCText', \Doctrine\Common\Collections\Criteria::ASC)
             ->getQuery()
             ->getResult();
 
@@ -167,7 +167,7 @@ class AllocationRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('a')
             ->select('DISTINCT a.assignment')
-            ->addOrderBy('a.assignment', 'ASC')
+            ->addOrderBy('a.assignment', \Doctrine\Common\Collections\Criteria::ASC)
             ->getQuery()
             ->getResult();
 
@@ -178,7 +178,7 @@ class AllocationRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('a')
             ->select('DISTINCT a.occasion')
-            ->addOrderBy('a.occasion', 'ASC')
+            ->addOrderBy('a.occasion', \Doctrine\Common\Collections\Criteria::ASC)
             ->getQuery()
             ->getResult();
 
@@ -189,7 +189,7 @@ class AllocationRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('a')
             ->select('DISTINCT a.modeOfTransport')
-            ->addOrderBy('a.modeOfTransport', 'ASC')
+            ->addOrderBy('a.modeOfTransport', \Doctrine\Common\Collections\Criteria::ASC)
             ->getQuery()
             ->getResult();
 
@@ -200,7 +200,7 @@ class AllocationRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('a')
             ->select('DISTINCT a.SK AS urgency')
-            ->addOrderBy('a.SK', 'ASC')
+            ->addOrderBy('a.SK', \Doctrine\Common\Collections\Criteria::ASC)
             ->getQuery()
             ->getResult();
 
@@ -211,7 +211,7 @@ class AllocationRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('a')
             ->select('DISTINCT a.isInfectious AS infection')
-            ->addOrderBy('a.isInfectious', 'ASC')
+            ->addOrderBy('a.isInfectious', \Doctrine\Common\Collections\Criteria::ASC)
             ->getQuery()
             ->getResult();
 
@@ -222,7 +222,7 @@ class AllocationRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('a')
             ->select('DISTINCT a.speciality AS speciality')
-            ->addOrderBy('a.speciality', 'ASC')
+            ->addOrderBy('a.speciality', \Doctrine\Common\Collections\Criteria::ASC)
             ->getQuery()
             ->getResult();
 
@@ -233,7 +233,7 @@ class AllocationRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('a')
             ->select('DISTINCT a.specialityDetail AS specialityDetail')
-            ->addOrderBy('a.specialityDetail', 'ASC')
+            ->addOrderBy('a.specialityDetail', \Doctrine\Common\Collections\Criteria::ASC)
             ->getQuery()
             ->getResult();
 
@@ -246,12 +246,12 @@ class AllocationRepository extends ServiceEntityRepository
             $qb = $this->createQueryBuilder('a')
                 ->select('a.specialityDetail, COUNT(a.specialityDetail) AS counter')
                 ->groupBy('a.specialityDetail')
-                ->orderBy('a.specialityDetail', 'ASC');
+                ->orderBy('a.specialityDetail', \Doctrine\Common\Collections\Criteria::ASC);
         } else {
             $qb = $this->createQueryBuilder('a')
                 ->select('a.speciality, COUNT(a.speciality) AS counter')
                 ->groupBy('a.speciality')
-                ->orderBy('a.speciality', 'ASC');
+                ->orderBy('a.speciality', \Doctrine\Common\Collections\Criteria::ASC);
         }
 
         return $qb->getQuery()->getResult();
@@ -263,47 +263,47 @@ class AllocationRepository extends ServiceEntityRepository
             $qb = $this->createQueryBuilder('a')
                 ->select('a.requiresResus, COUNT(a.requiresResus) AS counter')
                 ->groupBy('a.requiresResus')
-                ->orderBy('a.requiresResus', 'ASC');
+                ->orderBy('a.requiresResus', \Doctrine\Common\Collections\Criteria::ASC);
         } elseif ('requiresCathlab' == $detail) {
             $qb = $this->createQueryBuilder('a')
                 ->select('a.requiresCathlab, COUNT(a.requiresCathlab) AS counter')
                 ->groupBy('a.requiresCathlab')
-                ->orderBy('a.requiresCathlab', 'ASC');
+                ->orderBy('a.requiresCathlab', \Doctrine\Common\Collections\Criteria::ASC);
         } elseif ('isCPR' == $detail) {
             $qb = $this->createQueryBuilder('a')
                 ->select('a.isCPR, COUNT(a.isCPR) AS counter')
                 ->groupBy('a.isCPR')
-                ->orderBy('a.isCPR', 'ASC');
+                ->orderBy('a.isCPR', \Doctrine\Common\Collections\Criteria::ASC);
         } elseif ('isVentilated' == $detail) {
             $qb = $this->createQueryBuilder('a')
                 ->select('a.isVentilated, COUNT(a.isVentilated) AS counter')
                 ->groupBy('a.isVentilated')
-                ->orderBy('a.isVentilated', 'ASC');
+                ->orderBy('a.isVentilated', \Doctrine\Common\Collections\Criteria::ASC);
         } elseif ('isShock' == $detail) {
             $qb = $this->createQueryBuilder('a')
                 ->select('a.isShock, COUNT(a.isShock) AS counter')
                 ->groupBy('a.isShock')
-                ->orderBy('a.isShock', 'ASC');
+                ->orderBy('a.isShock', \Doctrine\Common\Collections\Criteria::ASC);
         } elseif ('isInfectious' == $detail) {
             $qb = $this->createQueryBuilder('a')
                 ->select('a.isInfectious, COUNT(a.isInfectious) AS counter')
                 ->groupBy('a.isInfectious')
-                ->orderBy('a.isInfectious', 'ASC');
+                ->orderBy('a.isInfectious', \Doctrine\Common\Collections\Criteria::ASC);
         } elseif ('isPregnant' == $detail) {
             $qb = $this->createQueryBuilder('a')
                 ->select('a.isPregnant, COUNT(a.isPregnant) AS counter')
                 ->groupBy('a.isPregnant')
-                ->orderBy('a.isPregnant', 'ASC');
+                ->orderBy('a.isPregnant', \Doctrine\Common\Collections\Criteria::ASC);
         } elseif ('isWithPhysician' == $detail) {
             $qb = $this->createQueryBuilder('a')
                 ->select('a.isWithPhysician, COUNT(a.isWithPhysician) AS counter')
                 ->groupBy('a.isWithPhysician')
-                ->orderBy('a.isWithPhysician', 'ASC');
+                ->orderBy('a.isWithPhysician', \Doctrine\Common\Collections\Criteria::ASC);
         } elseif ('isWorkAccident' == $detail) {
             $qb = $this->createQueryBuilder('a')
                 ->select('a.isWorkAccident, COUNT(a.isWorkAccident) AS counter')
                 ->groupBy('a.isWorkAccident')
-                ->orderBy('a.isWorkAccident', 'ASC');
+                ->orderBy('a.isWorkAccident', \Doctrine\Common\Collections\Criteria::ASC);
         }
 
         if (!isset($qb)) {
@@ -358,7 +358,7 @@ class AllocationRepository extends ServiceEntityRepository
 
         $results = $this->createQueryBuilder('a')
             ->select('a.indicationCode, a.indication')
-            ->orderBy('a.indicationCode', 'ASC')
+            ->orderBy('a.indicationCode', \Doctrine\Common\Collections\Criteria::ASC)
             ->distinct()
             ->getQuery()
             ->getArrayResult();
@@ -382,7 +382,7 @@ class AllocationRepository extends ServiceEntityRepository
 
         $results = $this->createQueryBuilder('a')
             ->select('a.assignment')
-            ->addOrderBy('a.assignment', 'ASC')
+            ->addOrderBy('a.assignment', \Doctrine\Common\Collections\Criteria::ASC)
             ->distinct()
             ->getQuery()
             ->getArrayResult();
@@ -402,7 +402,7 @@ class AllocationRepository extends ServiceEntityRepository
 
         $results = $this->createQueryBuilder('a')
             ->select('a.occasion')
-            ->addOrderBy('a.occasion', 'ASC')
+            ->addOrderBy('a.occasion', \Doctrine\Common\Collections\Criteria::ASC)
             ->distinct()
             ->getQuery()
             ->getArrayResult();
@@ -426,7 +426,7 @@ class AllocationRepository extends ServiceEntityRepository
 
         $results = $this->createQueryBuilder('a')
             ->select('a.isInfectious')
-            ->addOrderBy('a.isInfectious', 'ASC')
+            ->addOrderBy('a.isInfectious', \Doctrine\Common\Collections\Criteria::ASC)
             ->distinct()
             ->getQuery()
             ->getArrayResult();
@@ -446,7 +446,7 @@ class AllocationRepository extends ServiceEntityRepository
 
         $results = $this->createQueryBuilder('a')
             ->select('a.speciality')
-            ->addOrderBy('a.speciality', 'ASC')
+            ->addOrderBy('a.speciality', \Doctrine\Common\Collections\Criteria::ASC)
             ->distinct()
             ->getQuery()
             ->getArrayResult();
@@ -470,7 +470,7 @@ class AllocationRepository extends ServiceEntityRepository
 
         $results = $this->createQueryBuilder('a')
             ->select('a.specialityDetail')
-            ->addOrderBy('a.specialityDetail', 'ASC')
+            ->addOrderBy('a.specialityDetail', \Doctrine\Common\Collections\Criteria::ASC)
             ->distinct()
             ->getQuery()
             ->getArrayResult();
@@ -494,7 +494,7 @@ class AllocationRepository extends ServiceEntityRepository
 
         $results = $this->createQueryBuilder('a')
             ->select('a.secondaryDeployment')
-            ->addOrderBy('a.secondaryDeployment', 'ASC')
+            ->addOrderBy('a.secondaryDeployment', \Doctrine\Common\Collections\Criteria::ASC)
             ->distinct()
             ->getQuery()
             ->getArrayResult();

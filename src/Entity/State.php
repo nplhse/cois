@@ -6,54 +6,33 @@ use App\Domain\Entity\State as DomainState;
 use App\Repository\StateRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=StateRepository::class)
- * @ORM\HasLifecycleCallbacks()
- */
+#[ORM\Entity(repositoryClass: StateRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class State extends DomainState
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     protected int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     protected string $name;
 
-    /**
-     * @ORM\OneToMany(targetEntity=DispatchArea::class, mappedBy="state")
-     * @ORM\OrderBy({"name" = "ASC"})
-     */
+    #[ORM\OneToMany(targetEntity: DispatchArea::class, mappedBy: 'state')]
+    #[ORM\OrderBy(['name' => 'ASC'])]
     protected \Doctrine\Common\Collections\Collection $dispatchAreas;
 
-    /**
-     * @ORM\OneToMany(targetEntity=SupplyArea::class, mappedBy="state")
-     * @ORM\OrderBy({"name" = "ASC"})
-     */
+    #[ORM\OneToMany(targetEntity: SupplyArea::class, mappedBy: 'state')]
+    #[ORM\OrderBy(['name' => 'ASC'])]
     protected \Doctrine\Common\Collections\Collection $supplyAreas;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Hospital::class, mappedBy="state")
-     * @ORM\OrderBy({"name" = "ASC"})
-     */
+    #[ORM\OneToMany(targetEntity: Hospital::class, mappedBy: 'state')]
+    #[ORM\OrderBy(['name' => 'ASC'])]
     protected \Doctrine\Common\Collections\Collection $hospitals;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     protected \DateTimeInterface $createdAt;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    protected ?\DateTimeInterface $updatedAt = null;
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    protected ?\DateTimeInterface $updatedAt;
 }

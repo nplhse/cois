@@ -23,7 +23,7 @@ class HospitalFilterType extends AbstractType
     {
         if ($this->security->isGranted('ROLE_ADMIN')) {
             $query_builder = fn (EntityRepository $er) => $er->createQueryBuilder('h')
-                ->orderBy('h.name', 'ASC');
+                ->orderBy('h.name', \Doctrine\Common\Collections\Criteria::ASC);
         } else {
             /** @var User $user */
             $user = $this->security->getUser();
@@ -31,7 +31,7 @@ class HospitalFilterType extends AbstractType
             $query_builder = fn (EntityRepository $er) => $er->createQueryBuilder('h')
                 ->where('h.owner = :user')
                 ->setParameter('user', $user->getId())
-                ->orderBy('h.name', 'ASC');
+                ->orderBy('h.name', \Doctrine\Common\Collections\Criteria::ASC);
         }
 
         $resolver->setDefaults([

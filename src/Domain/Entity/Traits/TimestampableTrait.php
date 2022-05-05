@@ -36,13 +36,10 @@ trait TimestampableTrait
         return $this;
     }
 
-    /**
-     * @ORM\PreUpdate()
-     */
+    #[ORM\PreUpdate]
     public function updateTimestamps(): void
     {
         $now = new \DateTime();
-
         $this->setUpdatedAt($now);
     }
 }

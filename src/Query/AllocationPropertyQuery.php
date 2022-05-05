@@ -31,7 +31,7 @@ final class AllocationPropertyQuery
             )
                 ->from(Allocation::class, 'allocation')
                 ->groupBy($this->property)
-                ->addOrderBy($this->property, 'DESC');
+                ->addOrderBy($this->property, \Doctrine\Common\Collections\Criteria::DESC);
 
         if (null !== $this->hospital) {
             $qb->where('allocation.hospital = :hospital')

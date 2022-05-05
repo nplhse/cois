@@ -105,7 +105,7 @@ class HospitalRepository extends ServiceEntityRepository implements HospitalRepo
         return $this->createQueryBuilder('h')
             ->select('h.name, h.id')
             ->distinct(true)
-            ->orderBy('h.name', 'ASC')
+            ->orderBy('h.name', \Doctrine\Common\Collections\Criteria::ASC)
             ->getQuery()
             ->getArrayResult()
             ;
