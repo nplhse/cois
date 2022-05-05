@@ -25,7 +25,7 @@ class RegistrationController extends AbstractController
 
     private SettingService $settingService;
 
-    public function __construct(MessageBusInterface $messageBus, SettingService $settingService)
+    public function __construct(MessageBusInterface $messageBus, SettingService $settingService, private string $appRegistration)
     {
         $this->messageBus = $messageBus;
         $this->settingService = $settingService;
@@ -35,7 +35,7 @@ class RegistrationController extends AbstractController
     #[Route('/', name: 'app_register')]
     public function register(Request $request, UserRepositoryInterface $userRepository, UserPasswordHasherInterface $passwordEncoder, UserAuthenticatorInterface $userAuthenticator, LoginFormAuthenticator $authenticator): ?Response
     {
-        if (!$this->getParameter('app.registration')) {
+        if (!$this->appRegistration) {
             throw $this->createNotFoundException('Registration is currently not available.');
         }
 
