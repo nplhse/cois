@@ -60,10 +60,10 @@ Encore
         to: Encore.isProduction()
             ? "images/[path][name].[hash:8].[ext]"
             : "images/[path][name].[ext]",
-    })
+    });
 
-    // enables Sass/SCSS support
-    // .enableSassLoader()
-    // .enablePostCssLoader();
+// enables Sass/SCSS support
+// .enableSassLoader()
+// .enablePostCssLoader();
 
 module.exports = Encore.getWebpackConfig();
