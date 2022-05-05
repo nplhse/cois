@@ -2,39 +2,30 @@
 
 declare(strict_types=1);
 
-use Rector\Core\Configuration\Option;
-use Rector\Php74\Rector\Property\TypedPropertyRector;
-use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
-use Rector\Set\ValueObject\LevelSetList;
+use Rector\Config\RectorConfig;
+use Rector\Core\ValueObject\PhpVersion;
+use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\Symfony\Set\SymfonySetList;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    // get parameters
-    $parameters = $containerConfigurator->parameters();
-    $parameters->set(Option::PHPSTAN_FOR_RECTOR_PATH, getcwd().'/phpstan.neon.dist');
+return static function (RectorConfig $rectorConfig): void {
+    // paths to refactor; solid alternative to CLI arguments
+    $rectorConfig->paths([__DIR__.'/src', __DIR__.'/tests']);
 
-    $parameters->set(Option::PATHS, [
-        __DIR__.'/src',
+    // is your PHP version different from the one you refactor to? [default: your PHP version], uses PHP_VERSION_ID format
+    $rectorConfig->phpVersion(PhpVersion::PHP_81);
+
+    // Path to Symfony configuration
+    $rectorConfig->symfonyContainerXml(__DIR__.'/var/cache/dev/App_KernelDevDebugContainer.xml');
+
+    // Definition of the RuleSets to be used by rector
+    $rectorConfig->sets([
+        DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
+        DoctrineSetList::DOCTRINE_CODE_QUALITY,
+        SymfonySetList::SYMFONY_52,
+        SymfonySetList::SYMFONY_CODE_QUALITY,
+        SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION,
     ]);
 
-    $parameters->set(Option::SKIP, [
-        ClassPropertyAssignToConstructorPromotionRector::class,
-    ]);
-
-    $parameters->set(
-        Option::SYMFONY_CONTAINER_XML_PATH_PARAMETER,
-        __DIR__.'/var/cache/dev/App_KernelDevDebugContainer.xml'
-    );
-
-    // Define what rule sets will be applied
-    $containerConfigurator->import(LevelSetList::UP_TO_PHP_80);
-    $containerConfigurator->import(SymfonySetList::SYMFONY_54);
-    $containerConfigurator->import(SymfonySetList::SYMFONY_CODE_QUALITY);
-
-    // get services (needed for register a single rule)
-    // $services = $containerConfigurator->services();
-
-    // register a single rule
-    // $services->set(TypedPropertyRector::class);
+    // Path to PHPStan with extensions, that PHPStan in Rector uses to determine types
+    $rectorConfig->phpstanConfig(__DIR__.'/phpstan.neon.dist');
 };
