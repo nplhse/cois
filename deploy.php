@@ -18,6 +18,7 @@ add('shared_dirs', [
     'var/storage',
     ]);
 add('writable_dirs', [
+    'public/build',
     'var',
     'var/cache',
     'var/log',
@@ -40,3 +41,4 @@ after('deploy:vendors', 'build');
 
 // On failure
 after('deploy:failed', 'deploy:unlock');
+after('deploy:failed', 'rollback');
