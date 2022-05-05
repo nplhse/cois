@@ -228,7 +228,7 @@ class UserController extends AbstractController
     {
         try {
             $mailer->sendWelcomeEmail($user);
-        } catch (\Exception $e) {
+        } catch (HandlerFailedException $e) {
             $this->addFlash('danger', 'Could not send welcome E-Mail to '.$user->getUsername().': '.$e->getMessage());
 
             return $this->redirectToRoute('app_settings_user_show', ['id' => $user->getId()]);

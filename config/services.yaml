@@ -8,6 +8,7 @@ parameters:
     app.supported_locales: "en|de"
     app.mailer.sender: '%env(default:app.default.mailer.sender:APP_MAILER_SENDER)%'
     app.mailer.from: '%env(default:app.default.mailer.from:APP_MAILER_FROM)%'
+    app.mailer.admin: "%env(resolve:APP_MAILER_ADMIN)%"
     app.registration: '%env(default:app.default.registration:APP_REGISTRATION)%'
     app.cookie_consent: '%env(default:app.default.cookie_consent:APP_COOKIE_CONSENT)%'
 
