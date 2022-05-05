@@ -1086,10 +1086,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.5.tgz#db5a11bf66bdab39569719555b0f76e138d7bd64"
   integrity sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==
 
-"@symfony/stimulus-bridge@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@symfony/stimulus-bridge/-/stimulus-bridge-3.0.0.tgz#9976ab27fb41c80111ffdcc43c17c49b75521b02"
-  integrity sha512-efoQP0DWIXNOh9zPN5JUEokTMQyFBbVO5ioUQIRRAw9y0Qj6bv+mshAnljUzI7xupTZu9zNH4XjY1d0tnl/n9A==
+"@symfony/stimulus-bridge@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@symfony/stimulus-bridge/-/stimulus-bridge-3.1.0.tgz#fcca15b09af5ed346e9b94f9e5770fd3994287a8"
+  integrity sha512-24ENJnGm7KrXsBWuOtg+Av5Rdt/EYravv2AthOKYIIXzd3FhygRAjOdbJicOv1nJOGS0gGqeBme57QEOoG86bw==
   dependencies:
     "@hotwired/stimulus-webpack-helpers" "^1.0.1"
     acorn "^8.0.5"
@@ -1860,21 +1860,21 @@ bootstrap-icons@^1.8.1:
   resolved "https://registry.yarnpkg.com/bootstrap-icons/-/bootstrap-icons-1.8.1.tgz#773c1625bcbf3e86090ea9da4386c2c6459c5582"
   integrity sha512-IXUqislddPJfwq6H+2nTkHyr9epO9h6u1AG0OZCx616w+TgzeoCjfmI3qJMQqt1J586gN2IxzB4M99Ip4sTZ1w==
 
-bootstrap-vue@^2.21.2:
-  version "2.21.2"
-  resolved "https://registry.yarnpkg.com/bootstrap-vue/-/bootstrap-vue-2.21.2.tgz#ec38f66c3a2205becccddb6158a991d96509ed0b"
-  integrity sha512-0Exe+4MZysqhZNXIKf4TzkvXaupxh9EHsoCRez0o5Dc0J7rlafayOEwql63qXv74CgZO8E4U8ugRNJko1vMvNw==
+bootstrap-vue@^2.22.0:
+  version "2.22.0"
+  resolved "https://registry.yarnpkg.com/bootstrap-vue/-/bootstrap-vue-2.22.0.tgz#2b3d7926d24af0bd289ddce7ba76b07000aab3e5"
+  integrity sha512-denjR/ae0K7Jrcqud3TrZWw0p/crtyigeGUNunWQ4t+KFi+7rzJ6j6lx1W5/gpUtSSUgNbWrXcHH4lIWXzXOOQ==
   dependencies:
     "@nuxt/opencollective" "^0.3.2"
-    bootstrap ">=4.5.3 <5.0.0"
+    bootstrap "^4.6.1"
     popper.js "^1.16.1"
     portal-vue "^2.1.7"
     vue-functional-data-merge "^3.1.0"
 
-"bootstrap@>=4.5.3 <5.0.0":
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.6.0.tgz#97b9f29ac98f98dfa43bf7468262d84392552fd7"
-  integrity sha512-Io55IuQY3kydzHtbGvQya3H+KorS/M9rSNyfCGCg9WZ4pyT/lCxIlpJgG1GXW/PswzC84Tr2fBYi+7+jFVQQBw==
+bootstrap@^4.6.1:
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.6.1.tgz#bc25380c2c14192374e8dec07cf01b2742d222a2"
+  integrity sha512-0dj+VgI9Ecom+rvvpNZ4MUZJz8dcX7WCX+eTID9+/8HgOkv3dsRzi8BGeZJCQU6flWQVYxwTQnEZFrmJSEO7og==
 
 bootstrap@^5.1.3:
   version "5.1.3"
