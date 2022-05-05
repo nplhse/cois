@@ -22,9 +22,9 @@ monolog:
             handler: symfony_mailer
         symfony_mailer:
             type: symfony_mailer
-            from_email: "%app.mailer.sender%"
-            to_email: "%app.mailer.admin%"
-            subject: "%app.mailer.from% - %%message%%"
+            from_email: '%app.mailer.sender%'
+            to_email: '%app.mailer.admin%'
+            subject: '[%app.mailer.from%]: An Error Occured! %%message%%'
             level: debug
             formatter: monolog.formatter.html
             content_type: text/html
