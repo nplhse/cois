@@ -69,7 +69,7 @@ class ImportRepository extends ServiceEntityRepository implements ImportReposito
         ;
     }
 
-    public function countImports(mixed $entity = null): mixed
+    public function countImports(UserInterface|\App\Entity\Hospital|null $entity = null): mixed
     {
         if ($entity instanceof UserInterface) {
             $qb = $this->createQueryBuilder('i')

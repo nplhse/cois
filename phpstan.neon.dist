@@ -16,6 +16,7 @@ parameters:
         - build
         - node_modules
         - src/Domain/Repository/EntityRepositoryInterface.php
+        - src/Entity
         - vendor
         - templates
     bootstrapFiles:

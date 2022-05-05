@@ -42,7 +42,7 @@ class AllocationRepository extends ServiceEntityRepository
         parent::__construct($registry, Allocation::class);
     }
 
-    public function countAllocations(mixed $entity = null): string
+    public function countAllocations(Hospital|null $entity = null): string
     {
         if ($entity instanceof HospitalInterface) {
             return $this->createQueryBuilder('a')
