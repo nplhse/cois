@@ -21,17 +21,17 @@ export default class extends Controller {
             .select(this.targetValue)
             .append("svg")
             .append("g")
-            .attr("transform", `translate(100, 100)`);
+            .attr("transform", "translate(100, 100)");
 
-        let pie = d3
+        const pie = d3
             .pie()
             .value((d) => d.count)
             .sort(null)
             .padAngle(0.025)(data);
 
-        let arcMkr = d3.arc().innerRadius(50).outerRadius(100);
+        const arcMkr = d3.arc().innerRadius(50).outerRadius(100);
 
-        let scC = d3
+        const scC = d3
             .scaleOrdinal()
             .domain(data)
             .range([
@@ -59,14 +59,14 @@ export default class extends Controller {
             .attr("font-size", 14)
             .attr("text-anchor", "middle");
 
-        let tr = d3
+        const tr = d3
             .select(".objecttable tbody")
             .selectAll("tr")
             .data(data)
             .enter()
             .append("tr");
 
-        let td = tr
+        const td = tr
             .selectAll("td")
             .data((d, i) => {
                 return Object.values(d);

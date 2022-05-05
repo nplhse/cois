@@ -15,10 +15,10 @@ export default class extends Controller {
         const response = await fetch(this.urlValue);
         const data = await response.json();
 
-        let pxX = 700;
-        let pxY = 380;
+        const pxX = 700;
+        const pxY = 380;
 
-        let makeScale = function (accessor, range) {
+        const makeScale = function (accessor, range) {
             return d3
                 .scaleLinear()
                 .domain(d3.extent(data, accessor))
@@ -26,22 +26,22 @@ export default class extends Controller {
                 .nice();
         };
 
-        let scX = makeScale((d) => d["time"], [0, pxX]);
-        let scY = makeScale((d) => d["count"], [pxY, 0]);
+        const scX = makeScale((d) => d.time, [0, pxX]);
+        const scY = makeScale((d) => d.count, [pxY, 0]);
 
-        let drawData = function (g, accessor, curve) {
+        const drawData = function (g, accessor, curve) {
             g.selectAll("circle")
                 .data(data)
                 .enter()
                 .append("circle")
                 .attr("r", 2)
-                .attr("cx", (d) => scX(d["time"]))
+                .attr("cx", (d) => scX(d.time))
                 .attr("cy", accessor);
 
-            let lnMkr = d3
+            const lnMkr = d3
                 .line()
                 .curve(curve)
-                .x((d) => scX(d["time"]))
+                .x((d) => scX(d.time))
                 .y(accessor);
 
             g.append("path").attr("fill", "none").attr("d", lnMkr(data));
@@ -51,14 +51,14 @@ export default class extends Controller {
             .select(this.targetValue)
             .append("svg")
             .append("g")
-            .attr("transform", `translate(40, 10)`);
+            .attr("transform", "translate(40, 10)");
 
-        drawData(svg, (d) => scY(d["count"]), d3.curveNatural);
+        drawData(svg, (d) => scY(d.count), d3.curveNatural);
 
         svg.selectAll("circle").attr("fill", "green");
         svg.selectAll("path").attr("stroke", "black");
 
-        let axMkr = d3.axisLeft(scY);
+        const axMkr = d3.axisLeft(scY);
         axMkr(svg.append("g"));
 
         svg.append("g")

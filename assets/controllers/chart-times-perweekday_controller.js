@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Controller } from "stimulus";
 import * as d3 from "d3";
 

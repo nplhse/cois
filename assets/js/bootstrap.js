@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { startStimulusApp } from "@symfony/stimulus-bridge";
 
 import LiveController from "@symfony/ux-live-component";

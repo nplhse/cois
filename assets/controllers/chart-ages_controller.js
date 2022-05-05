@@ -16,10 +16,10 @@ export default class extends Controller {
         const response = await fetch(this.urlValue);
         const data = await response.json();
 
-        let pxX = 700;
-        let pxY = 380;
+        const pxX = 700;
+        const pxY = 380;
 
-        let makeScale = function (accessor, range, surplus = true) {
+        const makeScale = function (accessor, range, surplus = true) {
             if (surplus) {
                 return d3
                     .scaleLinear()
@@ -35,23 +35,23 @@ export default class extends Controller {
                 .nice();
         };
 
-        let scX = makeScale((d) => d["age"], [0, pxX], false);
-        let scY1 = makeScale((d) => d["male"], [pxY, 0]);
-        let scY2 = makeScale((d) => d["male"], [pxY, 0]);
+        const scX = makeScale((d) => d.age, [0, pxX], false);
+        const scY1 = makeScale((d) => d.male, [pxY, 0]);
+        const scY2 = makeScale((d) => d.male, [pxY, 0]);
 
-        let drawData = function (g, accessor, curve) {
+        const drawData = function (g, accessor, curve) {
             g.selectAll("circle")
                 .data(data)
                 .enter()
                 .append("circle")
                 .attr("r", 2)
-                .attr("cx", (d) => scX(d["age"]))
+                .attr("cx", (d) => scX(d.age))
                 .attr("cy", accessor);
 
-            let lnMkr = d3
+            const lnMkr = d3
                 .line()
                 .curve(curve)
-                .x((d) => scX(d["age"]))
+                .x((d) => scX(d.age))
                 .y(accessor);
 
             g.append("path").attr("fill", "none").attr("d", lnMkr(data));
@@ -60,13 +60,13 @@ export default class extends Controller {
         const svg = d3
             .select(this.targetValue)
             .append("svg")
-            .attr("transform", `translate(40, 20)`);
+            .attr("transform", "translate(40, 20)");
 
-        let g1 = svg.append("g");
-        let g2 = svg.append("g");
+        const g1 = svg.append("g");
+        const g2 = svg.append("g");
 
-        drawData(g1, (d) => scY1(d["female"]), d3.curveNatural);
-        drawData(g2, (d) => scY2(d["male"]), d3.curveNatural);
+        drawData(g1, (d) => scY1(d.female), d3.curveNatural);
+        drawData(g2, (d) => scY2(d.male), d3.curveNatural);
 
         g1.selectAll("circle").attr("fill", "red");
         g1.selectAll("path").attr("stroke", "lightsalmon");
@@ -88,14 +88,14 @@ export default class extends Controller {
             .call(d3.axisTop(scX))
             .attr("transform", "translate(0," + pxY + ")");
 
-        let tr = d3
+        const tr = d3
             .select(".objecttable tbody")
             .selectAll("tr")
             .data(data)
             .enter()
             .append("tr");
 
-        let td = tr
+        const td = tr
             .selectAll("td")
             .data((d, i) => {
                 return Object.values(d);
