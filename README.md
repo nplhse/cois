@@ -4,7 +4,7 @@
 
 # Requirements
 
--   Webserver (Apache, Nginx, LiteSpeed, IIS, etc.) with PHP 8.0 or higher and MySQL 8.0 as database
+-   Webserver (Apache, Nginx, LiteSpeed, IIS, etc.) with PHP 8.1 or higher and MySQL 8.0 (or MariaDB) as database
 
 # Installation
 
