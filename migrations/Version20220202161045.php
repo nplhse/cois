@@ -21,7 +21,7 @@ final class Version20220202161045 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE user ADD created_at DATETIME DEFAULT NULL, ADD updated_at DATETIME DEFAULT NULL');
-        $this->addSql('DROP INDEX series ON rememberme_token');
+        // $this->addSql('DROP INDEX series ON rememberme_token');
         $this->addSql('ALTER TABLE rememberme_token CHANGE series series VARCHAR(88) NOT NULL');
     }
 

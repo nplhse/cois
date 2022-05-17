@@ -31,6 +31,10 @@
 
 If you have the need to populate the database with some Fixtures for development you could either directly execute `bin/console doctrine:fixtures:load` or use `composer setup-dev` instead of `composer setup`.
 
+To be able to run the tests properly you need to execute `composer setup-tests`. This command creates the testing database including the schema and all required fixtures.
+
+If you'd like there is also support for Docker which mainly includes a database, as it is recommended to use the symfony cli server with a local installation of PHP.
+
 # Contributing
 
 Any contribution to this project is appreciated, whether it is related to fixing bugs, suggestions or improvements. Feel free to take your part in the development of COIS!
