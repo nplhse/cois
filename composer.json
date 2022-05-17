@@ -168,7 +168,7 @@
             "bin/console doctrine:migrations:migrate --no-interaction",
             "bin/console app:settings:load",
             "yarn install",
-            "yarn encore build"
+            "yarn encore production"
         ],
         "setup-dev": [
             "bin/console doctrine:migrations:migrate --no-interaction",
@@ -176,6 +176,12 @@
             "bin/console app:settings:load",
             "yarn install",
             "yarn encore dev"
+        ],
+        "setup-tests": [
+            "bin/console doctrine:database:create --no-interaction --env=test",
+            "bin/console doctrine:schema:create --no-interaction --env=test",
+            "bin/console doctrine:fixtures:load --no-interaction --env=test",
+            "bin/console app:settings:load --env=test"
         ]
     },
     "conflict": {
