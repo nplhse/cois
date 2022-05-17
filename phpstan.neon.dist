@@ -22,7 +22,5 @@ parameters:
         - tests/bootstrap.php
     symfony:
         container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml
-    ignoreErrors:
-        - '#repositoryClass(.*)expects class-string(.*)EntityRepository#'
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
