@@ -18,7 +18,6 @@ add('shared_dirs', [
     'var/storage',
     ]);
 add('writable_dirs', [
-    'public/build',
     'var',
     'var/cache',
     'var/log',
@@ -29,15 +28,23 @@ add('writable_dirs', [
 import('hosts.yaml');
 
 // Customized tasks
-task('build', function () {
+task('build_locally', function () {
+    runLocally('yarn install');
+    runLocally('yarn build');
+    upload('./public/build', '{{release_path}}/public/.');
+});
+
+task('build_remote', function () {
     cd('{{release_path}}');
     run('yarn install');
     run('yarn build');
 });
 
+// Attach custom tasks to default workflow
 before('deploy:symlink', 'database:migrate');
 
-after('deploy:vendors', 'build');
+// Switch "build_locally" with "build_remote" if your setup requires
+after('deploy:vendors', 'build_locally');
 
 // On failure
 after('deploy:failed', 'deploy:unlock');
