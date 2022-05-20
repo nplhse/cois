@@ -3,7 +3,6 @@
 namespace App\Form\User;
 
 use App\Entity\User;
-use App\Service\SettingService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -17,12 +16,8 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class RegistrationFormType extends AbstractType
 {
-    private SettingService $settingService;
-
-    public function __construct(SettingService $settingService)
+    public function __construct(private bool $appTerms)
     {
-        $this->settingService = $settingService;
-        $this->settingService->loadSettings();
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -70,7 +65,7 @@ class RegistrationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'enable_terms' => false,
+            'enable_terms' => $this->appTerms,
         ]);
     }
 }

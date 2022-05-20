@@ -9,7 +9,6 @@ use App\Factory\DispatchAreaFactory;
 use App\Factory\HospitalFactory;
 use App\Factory\ImportFactory;
 use App\Factory\PageFactory;
-use App\Factory\SettingFactory;
 use App\Factory\StateFactory;
 use App\Factory\SupplyAreaFactory;
 use App\Factory\UserFactory;
@@ -24,31 +23,6 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        SettingFactory::createOne([
-            'name' => 'title',
-            'value' => 'Collaborative IVENA statistics',
-            'type' => 'string',
-            'category' => 'general',
-        ]);
-        SettingFactory::createOne([
-            'name' => 'enable_registration',
-            'value' => 'true',
-            'type' => 'boolean',
-            'category' => 'user',
-        ]);
-        SettingFactory::createOne([
-            'name' => 'enable_cookie_consent',
-            'value' => 'true',
-            'type' => 'boolean',
-            'category' => 'user',
-        ]);
-        SettingFactory::createOne([
-            'name' => 'enable_terms',
-            'value' => 'true',
-            'type' => 'boolean',
-            'category' => 'user',
-        ]);
-
         PageFactory::createOne([
             'title' => 'Imprint',
             'slug' => 'imprint',

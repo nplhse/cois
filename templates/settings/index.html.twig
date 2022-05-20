@@ -193,42 +193,31 @@
                     </div>
                 </div>
 
-                <div class="row mt-4">
-                    <h1>
-                        {{ 'System'|trans }}
-                    </h1>
+                {% if app_cookie_consent %}
+                    <div class="row mt-4">
+                        <h1>
+                            {{ 'System'|trans }}
+                        </h1>
 
-                    <div class="col-4">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <a href="{{ path('app_settings_config') }}">
-                                    <i class="bi bi-gear"
-                                        style="font-size: 5rem; color: cornflowerblue;">
+                        <div class="col-4">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <a href="{{
+                                        path(
+                                            'app_settings_cookie_consent'
+                                        )
+                                        }}">
+                                        <i class="bi bi-award"
+                                            style="font-size: 5rem; color: cornflowerblue;">
 
-                                    </i><br />
-                                    {{ 'Configuration'|trans }}
-                                </a>
+                                        </i><br />
+                                        {{ 'Cookie Consent'|trans }}
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <a href="{{
-                                    path(
-                                        'app_settings_cookie_consent'
-                                    )
-                                    }}">
-                                    <i class="bi bi-award"
-                                        style="font-size: 5rem; color: cornflowerblue;">
-
-                                    </i><br />
-                                    {{ 'Cookie Consent'|trans }}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endif %}
             {% endif %}
         </div>
     </div>

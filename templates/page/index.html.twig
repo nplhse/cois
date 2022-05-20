@@ -1,9 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
-{% import '_elements/macro/pagination.html.twig' as pagination %}
-{% import '_elements/macro/filters.html.twig' as filter %}
-{% import '_elements/macro/active_filters.html.twig' as active_filters %}
 
 {% block title %}
     {{ page.title }} - {{ parent() }}
@@ -61,7 +58,7 @@
                 {% endif %}
             </p>
 
-            {% if setting('enable_cookie_consent') and page.type == 'privacy' %}
+            {% if app_cookie_consent and page.type == 'privacy' %}
                 <div class="float-md-end" style="width: 30rem;">
                     <div class="card">
                         <div class="card-header">
@@ -101,7 +98,7 @@
                 </div>
             {% endif %}
 
-            {{ page.content|markdown_to_html }}
+            {{ page.content }}
         </div>
     </div>
 {% endblock %}

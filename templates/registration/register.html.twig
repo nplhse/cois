@@ -30,7 +30,7 @@
                 }}
                 {{ form_row(registrationForm.email) }}
 
-                {% if enable_terms is defined and enable_terms.value == true %}
+                {% if app_terms == true %}
                     {% set termsFormGroup %}
                         {{ form_row(registrationForm.agreeTerms) }}
                     {% endset %}

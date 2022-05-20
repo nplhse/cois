@@ -22,12 +22,12 @@ class NotifyAdminSubscriber implements EventSubscriberInterface
 
     private string $mailerFrom;
 
-    public function __construct(UserRepositoryInterface $userRepository, MailerInterface $mailer, string $mailerSender, string $mailerFrom)
+    public function __construct(UserRepositoryInterface $userRepository, MailerInterface $mailer, string $appMailerSender, string $appMailerFrom)
     {
         $this->userRepository = $userRepository;
         $this->mailer = $mailer;
-        $this->mailerSender = $mailerSender;
-        $this->mailerFrom = $mailerFrom;
+        $this->mailerSender = $appMailerSender;
+        $this->mailerFrom = $appMailerFrom;
     }
 
     public function sendHospitalCreatedNotification(HospitalCreatedEvent $event): void
