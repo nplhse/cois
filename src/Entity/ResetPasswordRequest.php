@@ -14,7 +14,7 @@ class ResetPasswordRequest implements ResetPasswordRequestInterface
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     private int $id;
 
     #[ORM\ManyToOne(targetEntity: User::class)]

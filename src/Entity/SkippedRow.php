@@ -10,17 +10,17 @@ class SkippedRow
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     private int $id;
 
     #[ORM\ManyToOne(targetEntity: Import::class)]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private Import $import;
 
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::TEXT)]
     private string $errors;
 
-    #[ORM\Column(type: 'json')]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::JSON)]
     private array $data = [];
 
     public function getId(): ?int
