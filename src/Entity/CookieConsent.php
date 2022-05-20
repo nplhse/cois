@@ -14,22 +14,22 @@ class CookieConsent
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     private int $id;
 
-    #[ORM\Column(type: 'string', length: 32)]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 32)]
     private string $lookupKey;
 
-    #[ORM\Column(type: 'string', length: 45)]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 45)]
     private string $ipAddress;
 
-    #[ORM\Column(type: 'array')]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::ARRAY)]
     private array $categories = [];
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE)]
     protected \DateTimeInterface $createdAt;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE, nullable: true)]
     protected ?\DateTimeInterface $updatedAt = null;
 
     public function getId(): ?int

@@ -21,46 +21,55 @@ class Hospital extends DomainHospital
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     protected int $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
     protected string $name;
 
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::TEXT)]
     protected string $address;
 
     #[ORM\ManyToOne(targetEntity: State::class, inversedBy: 'hospitals')]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn]
     protected ?StateInterface $state = null;
 
     #[ORM\ManyToOne(targetEntity: DispatchArea::class, inversedBy: 'hospitals')]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn]
     protected ?DispatchAreaInterface $dispatchArea = null;
 
     #[ORM\ManyToOne(targetEntity: SupplyArea::class, inversedBy: 'hospitals')]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn]
     protected ?SupplyAreaInterface $supplyArea = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'hospitals')]
     #[ORM\JoinColumn(nullable: false)]
     protected UserInterface $owner;
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE)]
     protected \DateTimeInterface $createdAt;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE, nullable: true)]
     protected ?\DateTimeInterface $updatedAt;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
     protected string $size;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     protected int $beds;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
     protected string $location;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection<int, \App\Entity\Import>|\App\Entity\Import[]
+     */
     #[ORM\OneToMany(targetEntity: Import::class, mappedBy: 'hospital')]
     protected Collection $imports;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->imports = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 }

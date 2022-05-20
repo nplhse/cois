@@ -17,43 +17,46 @@ class User extends DomainUser implements UserInterface, PasswordAuthenticatedUse
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     protected int $id;
 
-    #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 180, unique: true)]
     protected string $username;
 
-    #[ORM\Column(type: 'string', length: 255, unique: true)]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255, unique: true)]
     protected string $email;
 
     /**
      * @var array<string>
      */
-    #[ORM\Column(type: 'json')]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::JSON)]
     protected array $roles = [];
 
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING)]
     protected string $password;
 
     protected ?string $plainPassword = null;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE, nullable: true)]
     protected \DateTimeInterface $createdAt;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE, nullable: true)]
     protected ?\DateTimeInterface $updatedAt;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection<int, \App\Entity\Hospital>|\App\Entity\Hospital[]
+     */
     #[ORM\OneToMany(targetEntity: Hospital::class, mappedBy: 'owner')]
     #[ORM\OrderBy(['name' => 'ASC'])]
     protected \Doctrine\Common\Collections\Collection $hospitals;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::BOOLEAN)]
     protected bool $isVerified = false;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::BOOLEAN)]
     protected bool $isParticipant = false;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::BOOLEAN)]
     protected bool $hasCredentialsExpired = false;
 
     /**
@@ -77,5 +80,11 @@ class User extends DomainUser implements UserInterface, PasswordAuthenticatedUse
     public function getSalt(): ?string
     {
         return null;
+    }
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->hospitals = new \Doctrine\Common\Collections\ArrayCollection();
     }
 }
