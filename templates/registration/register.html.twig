@@ -46,7 +46,7 @@
                                         }
                                     )
                                     ~ '"> '
-                                    ~ (get_title('terms')|capitalize)
+                                    ~ get_title('terms')
                                     ~ '</a>'
                             })
                             |replace({
@@ -58,7 +58,7 @@
                                         }
                                     )
                                     ~ '"> '
-                                    ~ (get_title('privacy')|capitalize)
+                                    ~ get_title('privacy')
                                     ~ '</a>'
                             })
                             |raw
