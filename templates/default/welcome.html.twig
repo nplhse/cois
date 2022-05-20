@@ -25,13 +25,13 @@
                             {{ 'How to participate'|trans }}
                         </h2>
                         <p>
-                            {% if setting('enable_registration') %}
+                            {% if app_registration %}
                                 {{
-                                    'For full access to this project, you need to login.'|trans
+                                    'For full access to this project, you need to login. If you don´t already have a login you can register yourself.'|trans
                                 }}
                             {% else %}
                                 {{
-                                    'For full access to this project, you need to login. If you don´t already have a login you can register yourself.'|trans
+                                    'For full access to this project, you need to login.'|trans
                                 }}
                             {% endif %}
                         </p>
@@ -43,7 +43,7 @@
                                 role="button">
                                 {{ 'Click here to Login'|trans }}
                             </a>
-                            {% if setting('enable_registration') %}
+                            {% if app_registration %}
                                 <a class="btn btn-outline-light"
                                     href="{{ path('app_register') }}"
                                     role="button">

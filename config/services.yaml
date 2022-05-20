@@ -4,18 +4,24 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    app.locale: "%env(resolve:APP_LOCALE)%"
+    app.cookie_consent: '%env(bool:default:app.default.cookie_consent:APP_COOKIE_CONSENT)%'
+    app.locale: "%env(string:default:app.default.locale:APP_LOCALE)%"
     app.supported_locales: "en|de"
-    app.mailer.sender: '%env(default:app.default.mailer.sender:APP_MAILER_SENDER)%'
-    app.mailer.from: '%env(default:app.default.mailer.from:APP_MAILER_FROM)%'
-    app.mailer.admin: "%env(resolve:APP_MAILER_ADMIN)%"
-    app.registration: '%env(default:app.default.registration:APP_REGISTRATION)%'
-    app.cookie_consent: '%env(default:app.default.cookie_consent:APP_COOKIE_CONSENT)%'
+    app.mailer.admin: '%env(string:default:app.default.mailer.admin:APP_MAILER_ADMIN)%'
+    app.mailer.from: '%env(string:default:app.default.mailer.from:APP_MAILER_FROM)%'
+    app.mailer.sender: '%env(string:default:app.default.mailer.sender:APP_MAILER_SENDER)%'
+    app.registration: '%env(bool:default:app.default.registration:APP_REGISTRATION)%'
+    app.terms: '%env(bool:default:app.default.terms:APP_TERMS)%'
+    app.title: '%env(string:default:app.default.title:APP_TITLE)%'
 
-    app.default.mailer.sender: 'noreply@cois.dev'
-    app.default.mailer.from: 'Collaborative IVENA statistics'
     app.default.cookie_consent: true
+    app.default.locale: 'en'
+    app.default.mailer.admin: 'admin@cois.dev'
+    app.default.mailer.from: 'Collaborative IVENA statistics'
+    app.default.mailer.sender: 'noreply@cois.dev'
     app.default.registration: true
+    app.default.terms: true
+    app.default.title: 'Collaborative IVENA statistics'
 
 services:
     # default configuration for services in *this* file
@@ -23,10 +29,13 @@ services:
         autowire: true # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
+            $appCookieConsent: "%app.cookie_consent%"
             $appLocale: "%app.locale%"
+            $appMailerSender: "%app.mailer.sender%"
+            $appMailerFrom: "%app.mailer.from%"
             $appRegistration: "%app.registration%"
-            $mailerSender: "%app.mailer.sender%"
-            $mailerFrom: "%app.mailer.from%"
+            $appTerms: "%app.terms%"
+            $appTitle: "%app.title%"
             $projectDir: '%kernel.project_dir%'
 
     _instanceof:

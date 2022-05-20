@@ -20,12 +20,12 @@ class MailerService
 
     private string $mailerFrom;
 
-    public function __construct(MailerInterface $mailer, RouterInterface $router, string $mailerSender, string $mailerFrom)
+    public function __construct(MailerInterface $mailer, RouterInterface $router, string $appMailerSender, string $appMailerFrom)
     {
         $this->mailer = $mailer;
         $this->router = $router;
-        $this->mailerSender = $mailerSender;
-        $this->mailerFrom = $mailerFrom;
+        $this->mailerSender = $appMailerSender;
+        $this->mailerFrom = $appMailerFrom;
     }
 
     public function sendImportReminderEmail(User $user): void

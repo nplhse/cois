@@ -5,7 +5,6 @@ namespace App\Tests\Application\Controller\User;
 use App\Domain\Enum\Page\PageStatusEnum;
 use App\Domain\Enum\Page\PageTypeEnum;
 use App\Factory\PageFactory;
-use App\Factory\SettingFactory;
 use App\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Zenstruck\Browser\Test\HasBrowser;
@@ -18,20 +17,6 @@ class RegistrationTest extends WebTestCase
 
     public function testRegistration(): void
     {
-        SettingFactory::createOne([
-            'name' => 'enable_registration',
-            'value' => 'true',
-            'type' => 'boolean',
-            'category' => 'user',
-        ]);
-
-        SettingFactory::createOne([
-            'name' => 'enable_terms',
-            'value' => 'true',
-            'type' => 'boolean',
-            'category' => 'user',
-        ]);
-
         PageFactory::createOne([
             'title' => 'Privacy',
             'slug' => 'privacy',

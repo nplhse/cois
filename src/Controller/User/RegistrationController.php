@@ -7,7 +7,6 @@ use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
 use App\Form\User\RegistrationFormType;
 use App\Security\LoginFormAuthenticator;
-use App\Service\SettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,15 +20,8 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 #[Route(path: 'register')]
 class RegistrationController extends AbstractController
 {
-    private MessageBusInterface $messageBus;
-
-    private SettingService $settingService;
-
-    public function __construct(MessageBusInterface $messageBus, SettingService $settingService, private string $appRegistration)
+    public function __construct(private MessageBusInterface $messageBus, private bool $appRegistration, private bool $appTerms)
     {
-        $this->messageBus = $messageBus;
-        $this->settingService = $settingService;
-        $this->settingService->loadSettings();
     }
 
     #[Route('/', name: 'app_register')]
@@ -41,7 +33,7 @@ class RegistrationController extends AbstractController
 
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user, [
-            'enable_terms' => $this->settingService->getByName('enable_terms'),
+            'enable_terms' => $this->appTerms,
         ]);
         $form->handleRequest($request);
 
@@ -74,7 +66,6 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
-            'enable_terms' => $this->settingService->getByName('enable_terms'),
         ]);
     }
 }

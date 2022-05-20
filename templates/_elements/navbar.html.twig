@@ -5,11 +5,11 @@
             <div class="container-fluid">
                 {% if is_granted('ROLE_USER') %}
                     <a class="navbar-brand" href="{{ path('app_dashboard') }}">
-                        {{ setting('title') }}
+                        {{ app_title }}
                     </a>
                 {% else %}
                     <a class="navbar-brand" href="{{ path('app_default') }}">
-                        {{ setting('title') }}
+                        {{ app_title }}
                     </a>
                 {% endif %}
                 <button class="navbar-toggler"
@@ -217,7 +217,7 @@
                                 </ul>
                             </li>
                         {% else %}
-                            {% if setting('enable_registration') %}
+                            {% if app_registration %}
                                 <li class="nav-item">
                                     <a class="nav-link"
                                         aria-current="page"

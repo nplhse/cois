@@ -10,5 +10,7 @@ twig:
         "%kernel.project_dir%/assets/styles": styles
 
     globals:
-        app_allow_registration: "%app.registration%"
-        app_cookie_consent: "app.cookie_consent"
+        app_cookie_consent: "%app.cookie_consent%"
+        app_registration: "%app.registration%"
+        app_terms: "%app.terms%"
+        app_title: "%app.title%"

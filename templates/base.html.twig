@@ -6,7 +6,7 @@
 
         <title>
             {% block title %}
-                {{ 'title'|trans }}
+                {{ app_title }}
             {% endblock %}
         </title>
 
@@ -23,7 +23,7 @@
             {% include '_elements/navbar.html.twig' %}
         {% endblock %}
 
-        {% if setting('enable_cookie_consent') %}
+        {% if app_cookie_consent %}
             {% if has_cookie_consent(app.request) == false %}
                 {{ cookie_consent_render() }}
             {% endif %}
