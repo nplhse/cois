@@ -22,8 +22,8 @@ monolog:
             handler: symfony_mailer
         symfony_mailer:
             type: symfony_mailer
-            from_email: "noreply@versorgungsforschung.io"
-            to_email: "mail@nplhse.com"
+            from_email: "%app.mailer.sender%"
+            to_email: "%app.mailer.admin%"
             subject: "[%app.mailer.from%]: An Error Occured! %%message%%"
             level: debug
             formatter: monolog.formatter.html
