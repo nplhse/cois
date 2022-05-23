@@ -39,10 +39,10 @@ Encore
      * list of features, see:
      * https://symfony.com/doc/current/frontend.html#adding-more-features
      */
-    .cleanupOutputBeforeBuild(['public'], (options) => {
+    .cleanupOutputBeforeBuild(["public"], (options) => {
         options.verbose = true;
         options.root = __dirname;
-        options.exclude = ['emails'];
+        options.exclude = ["emails"];
     })
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
@@ -103,7 +103,7 @@ Encore
 const baseConfig = Encore.getWebpackConfig();
 
 // Set a unique name for the config (needed later!)
-baseConfig.name = 'baseConfig';
+baseConfig.name = "baseConfig";
 
 // reset Encore to build the second config
 Encore.reset();
@@ -144,7 +144,7 @@ Encore
 const mailerConfig = Encore.getWebpackConfig();
 
 // Set a unique name for the config (needed later!)
-mailerConfig.name = 'mailerConfig';
+mailerConfig.name = "mailerConfig";
 
 // export the final configuration as an array of multiple configurations
 module.exports = [baseConfig, mailerConfig];
