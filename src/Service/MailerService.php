@@ -83,7 +83,7 @@ class MailerService
             ->from(new Address($this->mailerSender, $this->mailerFrom))
             ->replyTo($this->mailerSender)
             ->subject('Welcome to Collaborative IVENA statistics')
-            ->htmlTemplate('emails/user/welcome.inky.twig')
+            ->htmlTemplate('emails/user/welcome.twig')
             ->context([
                 'user' => $user,
                 'link' => $this->router->generate('app_login', [], UrlGenerator::ABSOLUTE_URL),
