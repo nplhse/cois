@@ -1,10 +1,10 @@
-{% apply inline_css(source('@css/emails.css')) %}
+{% extends 'emails/base.twig' %}
 
 {% block content %}
-    <h3>
+    <h1>
         Fancy display heading
         <small class="text-muted">With faded secondary text</small>
-    </h3>
+    </h1>
 
     <p class="lead">
         This is a lead paragraph. It stands out from regular paragraphs.
@@ -55,4 +55,3 @@
 
     <a class="btn btn-primary" href="#" role="button">Link</a>
 {% endblock %}
-{% endapply %}
