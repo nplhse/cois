@@ -1,6 +1,6 @@
 {
     "devDependencies": {
-        "@babel/core": "^7.17.9",
+        "@babel/core": "^7.18.2",
         "@babel/eslint-parser": "^7.17.0",
         "@babel/preset-env": "^7.18.0",
         "@hotwired/stimulus": "^3.0.0",
