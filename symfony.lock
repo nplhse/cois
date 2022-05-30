@@ -208,6 +208,9 @@
     "markrogoyski/math-php": {
         "version": "v1.10.0"
     },
+    "masterminds/html5": {
+        "version": "2.7.5"
+    },
     "monolog/monolog": {
         "version": "2.2.0"
     },
