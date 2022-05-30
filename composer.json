@@ -46,7 +46,7 @@
         "symfony/form": "6.0.*",
         "symfony/framework-bundle": "6.0.*",
         "symfony/http-client": "6.0.*",
-        "symfony/intl": "6.0.*",
+        "symfony/intl": "6.1.*",
         "symfony/mailer": "6.1.*",
         "symfony/messenger": "6.1.*",
         "symfony/mime": "6.0.*",
