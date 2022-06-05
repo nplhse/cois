@@ -8,10 +8,12 @@ use App\Factory\PageFactory;
 use App\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Zenstruck\Browser\Test\HasBrowser;
+use Zenstruck\Foundry\Test\Factories;
 use Zenstruck\Foundry\Test\ResetDatabase;
 
 class RegistrationTest extends WebTestCase
 {
+    use Factories;
     use HasBrowser;
     use ResetDatabase;
 
