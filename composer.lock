@@ -8114,16 +8114,16 @@
         },
         {
             "name": "symfony/ux-dropzone",
-            "version": "v2.1.1",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-dropzone.git",
-                "reference": "e5115ed7fc894248b77bffebb7f57bc2f584d219"
+                "reference": "d05688cc9a6b53e9f16b6f832e9af31ee66fae00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-dropzone/zipball/e5115ed7fc894248b77bffebb7f57bc2f584d219",
-                "reference": "e5115ed7fc894248b77bffebb7f57bc2f584d219",
+                "url": "https://api.github.com/repos/symfony/ux-dropzone/zipball/d05688cc9a6b53e9f16b6f832e9af31ee66fae00",
+                "reference": "d05688cc9a6b53e9f16b6f832e9af31ee66fae00",
                 "shasum": ""
             },
             "require": {
@@ -8174,7 +8174,7 @@
                 "symfony-ux"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-dropzone/tree/v2.1.1"
+                "source": "https://github.com/symfony/ux-dropzone/tree/v2.2.0"
             },
             "funding": [
                 {
@@ -8190,7 +8190,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-02-01T04:57:29+00:00"
+            "time": "2022-06-13T19:14:08+00:00"
         },
         {
             "name": "symfony/ux-live-component",
