@@ -16,6 +16,7 @@ parameters:
         - build
         - node_modules
         - src/Domain/Repository/EntityRepositoryInterface.php
+        - src/Twig/Components/PaginationComponent.php
         - vendor
         - templates
     bootstrapFiles:
