@@ -5888,16 +5888,16 @@
         },
         {
             "name": "symfony/oh-my-smtp-mailer",
-            "version": "v6.1.0",
+            "version": "v6.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/oh-my-smtp-mailer.git",
-                "reference": "9588bd05582baad82bba39352de9dab74d5c0965"
+                "reference": "9a8a96e1dfa902683b3a376ff16b60da98570312"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/oh-my-smtp-mailer/zipball/9588bd05582baad82bba39352de9dab74d5c0965",
-                "reference": "9588bd05582baad82bba39352de9dab74d5c0965",
+                "url": "https://api.github.com/repos/symfony/oh-my-smtp-mailer/zipball/9a8a96e1dfa902683b3a376ff16b60da98570312",
+                "reference": "9a8a96e1dfa902683b3a376ff16b60da98570312",
                 "shasum": ""
             },
             "require": {
@@ -5938,7 +5938,7 @@
             "description": "Symfony OhMySMTP Mailer Bridge",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/oh-my-smtp-mailer/tree/v6.1.0"
+                "source": "https://github.com/symfony/oh-my-smtp-mailer/tree/v6.1.2"
             },
             "funding": [
                 {
@@ -5954,7 +5954,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-01T07:15:35+00:00"
+            "abandoned": "symfony/mail-pace-mailer",
+            "time": "2022-06-19T13:21:48+00:00"
         },
         {
             "name": "symfony/options-resolver",
