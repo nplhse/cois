@@ -4,102 +4,103 @@ namespace App\Twig\Components;
 
 use App\DataTransferObjects\PaginationDto;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
-use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsTwigComponent('pagination')]
 class PaginationComponent
 {
     public PaginationDto $dto;
 
-    public int $nearbyPagesLimit = 2;
+    public int $nearbyPagesLimit;
 
-    #[ExposeInTemplate(name: 'total', getter: 'getTotal')]
-    private int $total;
+    public int $total;
 
-    #[ExposeInTemplate(name: 'previous', getter: 'getPrevious')]
-    private ?int $previous;
+    public ?int $previous;
 
-    #[ExposeInTemplate(name: 'first', getter: 'getFirst')]
-    private ?int $first;
+    public ?int $first;
 
-    #[ExposeInTemplate(name: 'nearbyPagesLeft', getter: 'getNearbyLeft')]
-    private array $nearbyLeft;
+    public array $nearbyPagesLeft = [];
 
-    #[ExposeInTemplate(name: 'current', getter: 'getCurrent')]
-    private int $current;
+    public int $current;
 
-    #[ExposeInTemplate(name: 'nearbyPagesRight', getter: 'getNearbyRight')]
-    private array $nearbyRight;
+    public array $nearbyPagesRight = [];
 
-    #[ExposeInTemplate(name: 'last', getter: 'getLast')]
-    private ?int $last;
+    public ?int $last;
 
-    #[ExposeInTemplate(name: 'next', getter: 'getNext')]
-    private ?int $next;
+    public ?int $next;
 
-    public function getTotal(): ?int
+    public function mount(PaginationDto $dto, int $nearbyPagesLimit = 2): void
     {
-        return $this->dto->getLast();
+        $this->dto = $dto;
+        $this->nearbyPagesLimit = $nearbyPagesLimit;
+
+        $this->total = $this->dto->getLast();
+        $this->current = $this->dto->getPage();
+        $this->previous = $this->dto->getPrevious();
+        $this->next = $this->dto->getNext();
+
+        $this->first = $this->getFirst();
+        $this->last = $this->getLast();
+        $this->nearbyPagesLeft = $this->getNearbyPagesLeft();
+        $this->nearbyPagesRight = $this->getNearbyPagesRight();
     }
 
-    public function getPrevious(): ?int
+    private function getFirst(): ?int
     {
-        return $this->dto->getPrevious();
-    }
-
-    public function getFirst(): ?int
-    {
-        $page = $this->dto->getPage();
-
-        if ($page - $this->nearbyPagesLimit > 1) {
+        if (($this->current - $this->nearbyPagesLimit) > 1) {
             return 1;
         }
 
         return null;
     }
 
-    public function getNearbyLeft(): array
+    private function getNearbyPagesLeft(): array
     {
-        $page = $this->dto->getPage();
+        if (1 === $this->current) {
+            return $this->nearbyPagesLeft;
+        }
 
-        return match ($page - $this->nearbyPagesLimit) {
-            -2 => [],
-            -1 => [$page - 1],
-            default => [$page - 2, $page - 1],
-        };
+        $t = $this->current;
+
+        for ($i = 1; $i <= $this->nearbyPagesLimit; ++$i) {
+            --$t;
+
+            if ($t <= 0) {
+                break;
+            }
+
+            $this->nearbyPagesLeft[] = $t;
+        }
+
+        return array_reverse($this->nearbyPagesLeft);
     }
 
-    public function getCurrent(): int
+    private function getNearbyPagesRight(): array
     {
-        return $this->dto->getPage();
+        if ($this->current === $this->total) {
+            return $this->nearbyPagesRight;
+        }
+
+        $t = $this->current;
+
+        for ($i = 1; $i <= $this->nearbyPagesLimit; ++$i) {
+            ++$t;
+
+            if ($t > $this->total) {
+                break;
+            }
+
+            $this->nearbyPagesRight[] = $t;
+        }
+
+        return $this->nearbyPagesRight;
     }
 
-    public function getNearbyRight(): array
+    private function getLast(): ?int
     {
-        $last = $this->dto->getPage();
-
-        return match ($this->dto->getPage() - $this->dto->getLast()) {
-            0 => [],
-            -1 => [$last + 1],
-            default => [$last + 1, $last + 2],
-        };
-    }
-
-    public function getLast(): ?int
-    {
-        $last = $this->dto->getLast();
-        $page = $this->dto->getPage();
-        $limit = $this->nearbyPagesLimit + 1;
-
-        if ($page < $last - $limit) {
-            return $this->dto->getLast();
+        if ($this->current < ($this->total - $this->nearbyPagesLimit)) {
+            return $this->total;
         }
 
         return null;
-    }
-
-    public function getNext(): ?int
-    {
-        return $this->dto->getNext();
     }
 }
