@@ -153,12 +153,12 @@
                 </div>
                 <div class="col-8">
                     {{
-                    pagination.navbar(
-                        pages.last,
-                        pages.page,
-                        pages.previous,
-                        pages.next
-                    )
+                        component(
+                            'pagination',
+                            {
+                                dto: pages
+                            }
+                        )
                     }}
                 </div>
                 <div class="col-2">
