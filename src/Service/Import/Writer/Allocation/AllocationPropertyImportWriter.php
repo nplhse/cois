@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Service\Import\Writer;
+namespace App\Service\Import\Writer\Allocation;
 
 use App\Domain\Contracts\ImportInterface;
 use App\Entity\Allocation;
 
-class AllocationPropertyWriter
+class AllocationPropertyImportWriter implements \App\Application\Contract\AllocationImportWriterInterface
 {
-    public const Data_Type = 'allocation';
-
     private array $simpleParameters = [
         ['key' => 'Schockraum', 'target' => 'RequiresResus', 'pattern' => 'S+'],
         ['key' => 'Herzkatheter', 'target' => 'RequiresCathlab', 'pattern' => 'H+'],
@@ -37,17 +35,12 @@ class AllocationPropertyWriter
         ['key' => 'Patienten-?bergabepunkt (P?P)', 'target' => 'HandoverPoint'],
     ];
 
-    public static function getDataType(): string
-    {
-        return self::Data_Type;
-    }
-
     public static function getPriority(): int
     {
         return 50;
     }
 
-    public function processData(?object $entity, array $row, ImportInterface $import): ?object
+    public function process(Allocation $entity, array $row, ImportInterface $import): ?object
     {
         /** @var Allocation $entity */
         $entity = $this->setTimes($entity, $row);
@@ -56,22 +49,6 @@ class AllocationPropertyWriter
         $entity = $this->setDirectParameters($entity, $row);
 
         return $entity;
-    }
-
-    public function setTimes(Allocation $allocation, array $row): Allocation
-    {
-        $allocation->setCreatedAt(new \DateTime($row['Erstellungsdatum']));
-        $allocation->setArrivalAt(new \DateTime($row['Datum (Eintreffzeit)'].' '.$row['Uhrzeit (Eintreffzeit)']));
-
-        return $allocation;
-    }
-
-    public function setDemographicData(Allocation $allocation, array $row): Allocation
-    {
-        $allocation->setGender($row['Geschlecht']);
-        $allocation->setAge((int) $row['Alter']);
-
-        return $allocation;
     }
 
     public function setSimpleParameters(Allocation $allocation, array $row): Allocation

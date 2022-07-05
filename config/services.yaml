@@ -49,6 +49,9 @@ services:
         App\Application\Contract\ImportWriterInterface:
             tags: [ "app.import_writer" ]
 
+        App\Application\Contract\AllocationImportWriterInterface:
+            tags: [ "app.allocation_import_writer" ]
+
         App\Application\Contract\ImportReaderInterface:
             tags: [ "app.import_reader" ]
 

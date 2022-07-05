@@ -10,5 +10,5 @@ interface ImportWriterInterface
 
     public static function getPriority(): int;
 
-    public function processData(?object $entity, array $row, ImportInterface $import): ?object;
+    public function processData(array $row, ImportInterface $import): ?object;
 }

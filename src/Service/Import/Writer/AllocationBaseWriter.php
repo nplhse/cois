@@ -6,7 +6,7 @@ use App\Application\Exception\ImportWriteException;
 use App\Domain\Contracts\ImportInterface;
 use App\Entity\Allocation;
 
-class AllocationBaseWriter implements \App\Application\Contract\ImportWriterInterface
+class AllocationBaseWriter
 {
     public const Data_Type = 'allocation';
 

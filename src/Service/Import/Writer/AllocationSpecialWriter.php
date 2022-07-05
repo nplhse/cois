@@ -5,7 +5,7 @@ namespace App\Service\Import\Writer;
 use App\Domain\Contracts\ImportInterface;
 use App\Entity\Allocation;
 
-class AllocationSpecialWriter implements \App\Application\Contract\ImportWriterInterface
+class AllocationSpecialWriter
 {
     public const Data_Type = 'allocation';
 

@@ -5,14 +5,15 @@ namespace App\Service;
 use App\Application\Contract\ImportReaderInterface;
 use App\Application\Contract\ImportWriterInterface;
 use App\Application\Exception\ImportReaderNotFoundException;
+use App\Application\Exception\ImportValidationException;
 use App\Application\Exception\ImportWriteException;
 use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Event\Import\ImportFailedEvent;
 use App\Entity\Allocation;
 use App\Entity\Import;
 use App\Entity\SkippedRow;
+use App\Helper\StatisticsHelper;
 use App\Repository\AllocationRepository;
-use App\Service\Import\Reader\CsvImportReader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -20,6 +21,10 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class ImportService
 {
     use EventDispatcherTrait;
+
+    public const CUTOFF_MIN = 1;
+
+    public const CUTOFF_MAX = 10;
 
     /**
      * @var iterable|array<ImportReaderInterface>
@@ -52,15 +57,12 @@ class ImportService
 
     public function import(string $path, string $fileType): iterable
     {
+        // Check if primary fileType exists
         if (array_key_exists('$fileType', $this->importReader)) {
             return $this->importReader[$fileType]->importData($path);
         }
 
-        // If there is no fileType, just assume it can be parsed as CSV
-        if (empty($fileType)) {
-            return $this->importReader[CsvImportReader::File_Type]->importData($path);
-        }
-
+        // Check if alias fileType exists
         foreach ($this->importReader as $reader) {
             if ($reader->getAlias() && in_array($fileType, $reader->getAlias(), true)) {
                 return $this->importReader[$reader::getFileType()]->importData($path);
@@ -72,114 +74,119 @@ class ImportService
 
     public function process(iterable $result, Import $import): void
     {
-        $import->resetSkippedRows();
-        $activeWriters = [];
         $iteration = 0;
-
-        foreach ($this->importWriter as $writer) {
-            if ($writer::getDataType() === $import->getType()) {
-                $activeWriters[] = $writer;
-            }
-        }
-
-        $this->stopwatch->start('import-data');
+        $import->resetSkippedRows();
+        $activeWriters = $this->getActiveImportWriters($this->importWriter, $import);
 
         try {
+            $this->stopwatch->start('import-data');
+
             foreach ($result as $row) {
                 ++$iteration;
-                $entity = null;
 
                 try {
                     foreach ($activeWriters as $writer) {
-                        $entity = $writer->processData($entity, $row, $import);
-                    }
-
-                    $errors = $this->validator->validate($entity);
-
-                    if (count($errors) > 0) {
-                        $errorMessage = '';
-                        foreach ($errors as $error) {
-                            $errorMessage = $error->getMessage()."\n";
+                        // First row includes headers
+                        if (1 === $iteration) {
+                            $writer->addHeaders($row);
+                            continue;
                         }
 
-                        $skippedRow = new SkippedRow();
-                        $skippedRow->setImport($import);
-                        $skippedRow->setErrors($errorMessage);
-                        $skippedRow->setData($row);
+                        $entity = $writer->processData($row, $import);
+                        $errors = $this->validator->validate($entity);
 
-                        $this->em->persist($skippedRow);
+                        if (count($errors) > 0) {
+                            $errorMessage = '';
+                            foreach ($errors as $error) {
+                                $errorMessage = $error->getMessage()."\n";
+                            }
 
-                        $import->addSkippedRow();
-                        continue;
+                            throw new ImportValidationException($errorMessage);
+                        }
+
+                        $this->em->persist($entity);
+
+                        // Persist flush only 500 entities at once via $entityStore
+                        $entityStore[] = $entity;
+
+                        if (0 === $iteration % 500) {
+                            $this->em->flush();
+
+                            foreach ($entityStore as $tempEntity) {
+                                $this->em->detach($tempEntity);
+                            }
+
+                            $entityStore = null;
+
+                            gc_enable();
+                            gc_collect_cycles();
+                        }
                     }
                 } catch (\Exception $e) {
-                    $skippedRow = new SkippedRow();
-                    $skippedRow->setImport($import);
-                    $skippedRow->setErrors($e->getMessage());
-                    $skippedRow->setData($row);
-
-                    $this->em->persist($skippedRow);
-
-                    $import->addSkippedRow();
+                    $this->addSkippedRow($import, $e->getMessage(), $row);
                     continue;
-                }
-
-                $this->em->persist($entity);
-
-                // Persist flush only 500 entities at once via $entityStore
-                $entityStore[] = $entity;
-
-                if (0 === $iteration % 500) {
-                    $this->em->flush();
-
-                    foreach ($entityStore as $tempEntity) {
-                        $this->em->detach($tempEntity);
-                    }
-
-                    $entityStore = null;
-
-                    gc_enable();
-                    gc_collect_cycles();
                 }
             }
 
-            $import->setStatus(Import::STATUS_SUCCESS);
+            // Check if any rows have been imported
+            if ($iteration > 0) {
+                $import->setStatus(Import::STATUS_SUCCESS);
+            } else {
+                $import->setStatus(Import::STATUS_EMPTY);
+            }
         } catch (ImportWriteException|\Exception $e) {
             $import->setStatus(Import::STATUS_FAILURE);
             $this->dispatchEvent(new ImportFailedEvent($import, $e));
-        }
-
-        if (0 !== $iteration && Import::STATUS_SUCCESS === $import->getStatus()) {
-            if ($this->getPercentage($iteration, $import->getSkippedRows()) > 1 && $this->getPercentage($iteration, $import->getSkippedRows()) < 10) {
-                $import->setStatus(Import::STATUS_INCOMPLETE);
-            } elseif ($this->getPercentage($iteration, $import->getSkippedRows()) > 10) {
-                $this->dispatchEvent(new ImportFailedEvent($import, new ImportWriteException('Too many skipped rows in import.')));
-
-                $import->setStatus(Import::STATUS_FAILURE);
-
-                /** @var AllocationRepository $allocationRepository */
-                $allocationRepository = $this->em->getRepository(Allocation::class);
-                $allocationRepository->deleteByImport($import);
-            }
-        }
-
-        if (0 === $iteration) {
-            $import->setStatus(Import::STATUS_EMPTY);
         }
 
         $import->bumpRunCount();
         $import->setRowCount($iteration);
         $import->setRuntime((int) $this->stopwatch->stop('import-data')->getDuration());
 
+        $this->assessSkippedRows($import);
+
         $this->em->flush();
     }
 
-    private function getPercentage(int $total, int $number): float
+    private function getActiveImportWriters(array $importWriter, \App\Domain\Entity\Import $import): array
     {
-        if ($total > 0) {
-            return round(($number * 100) / $total, 2);
+        $activeWriters = [];
+
+        foreach ($importWriter as $writer) {
+            if ($writer::getDataType() === $import->getType()) {
+                $activeWriters[] = $writer;
+            }
         }
 
-        return 0;
+        return $activeWriters;
+    }
+
+    private function addSkippedRow(Import $import, string $message, array $row): void
+    {
+        $skippedRow = new SkippedRow();
+        $skippedRow->setImport($import);
+        $skippedRow->setErrors($message);
+        $skippedRow->setData($row);
+
+        $this->em->persist($skippedRow);
+
+        $import->addSkippedRow();
+    }
+
+    public function assessSkippedRows(Import $import): void
+    {
+        $percentage = StatisticsHelper::getPercentage($import->getRowCount(), $import->getSkippedRows());
+
+        if ($percentage > self::CUTOFF_MIN && $percentage < self::CUTOFF_MAX) {
+            $import->setStatus(Import::STATUS_INCOMPLETE);
+        } elseif ($percentage >= self::CUTOFF_MAX) {
+            $this->dispatchEvent(new ImportFailedEvent($import, new ImportWriteException('Too many skipped rows in import.')));
+
+            $import->setStatus(Import::STATUS_FAILURE);
+
+            /** @var AllocationRepository $allocationRepository */
+            $allocationRepository = $this->em->getRepository(Allocation::class);
+            $allocationRepository->deleteByImport($import);
+        }
     }
 }

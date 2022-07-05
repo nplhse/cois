@@ -3,9 +3,9 @@
 namespace App\Service\Import\Reader;
 
 use App\Application\Contract\ImportReaderInterface;
-use ForceUTF8\Encoding;
-use Symfony\Component\Filesystem\Filesystem;
+use League\Csv\Reader;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CsvImportReader implements ImportReaderInterface
 {
@@ -15,11 +15,24 @@ class CsvImportReader implements ImportReaderInterface
         'text/plain',
     ];
 
-    private array $defaults = [
-        'hasFieldNames' => true,
-        'delimiter' => ';',
-        'enclosure' => '"',
-    ];
+    private array $options;
+
+    public function __construct(array $options = [])
+    {
+        $resolver = new OptionsResolver();
+        $this->configureOptions($resolver);
+
+        $this->options = $resolver->resolve($options);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'hasFieldNames' => false,
+            'delimiter' => ';',
+            'enclosure' => '"',
+        ]);
+    }
 
     public static function getFileType(): string
     {
@@ -31,48 +44,33 @@ class CsvImportReader implements ImportReaderInterface
         return self::File_Alias;
     }
 
-    public function setDefaults(array $defaults): void
-    {
-        $this->defaults = array_merge($this->defaults, $defaults);
-    }
-
     public function importData(string $path): iterable
     {
-        $filesystem = new Filesystem();
+        if (!ini_get('auto_detect_line_endings')) {
+            ini_set('auto_detect_line_endings', '1');
+        }
 
-        if ($filesystem->exists($path)) {
-            $file = fopen($path, 'r');
+        if (file_exists($path)) {
+            $data = file_get_contents($path);
         } else {
             throw new FileNotFoundException($path);
         }
 
-        if ($this->defaults['hasFieldNames']) {
-            $keys = fgetcsv($file, 0, $this->defaults['delimiter'], $this->defaults['enclosure']);
-        } else {
-            $keys = [];
+        if (!mb_check_encoding($data, 'UTF-8')) {
+            mb_convert_encoding(...[&$data, 'HTML-ENTITIES', 'UTF-8']);
         }
 
-        $result = [];
+        $reader = Reader::createFromString($data);
+        $reader->setDelimiter($this->options['delimiter']);
+        $reader->setEnclosure($this->options['enclosure']);
 
-        while ($row = fgetcsv($file, 0, $this->defaults['delimiter'], $this->defaults['enclosure'])) {
-            $n = count($row);
-            $res = [];
-            for ($i = 0; $i < $n; ++$i) {
-                $idx = ($this->defaults['hasFieldNames']) ? $keys[$i] : $i;
-                $id8 = Encoding::fixUTF8($idx);
-                $val = Encoding::fixUTF8($row[$i]);
-
-                // Fixing inconsistent naming of Schockraum in Marburg-Biedenkopf
-                if ('Schockraum' === $id8 && isset($res['Schockraum'])) {
-                    $id8 = 'Schockraum Art';
-                }
-
-                $res[$id8] = $val;
-            }
-
-            yield $res;
+        if ($this->options['hasFieldNames']) {
+            $reader->setHeaderOffset(0);
         }
 
-        fclose($file);
+        $records = $reader->getRecords();
+        foreach ($records as $offset => $record) {
+            yield $record;
+        }
     }
 }
