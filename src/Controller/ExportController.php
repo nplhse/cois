@@ -113,6 +113,7 @@ class ExportController extends AbstractController
         $response->headers->set('Content-Disposition', $disposition);
         $response->headers->set('Content-Description', 'File Transfer');
         $response->setCallback($content_callback);
-        $response->send();
+
+        return $response;
     }
 }
