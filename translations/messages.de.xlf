@@ -1647,7 +1647,7 @@
       </trans-unit>
       <trans-unit id="JBwB1Vo" resname="PZC">
         <source>PZC</source>
-        <target>Zuweigungscode</target>
+        <target>Zuweisungscode</target>
       </trans-unit>
       <trans-unit id="6qRk1aA" resname="PZC Statistics">
         <source>PZC Statistics</source>
