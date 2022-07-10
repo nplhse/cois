@@ -11,4 +11,6 @@ interface ResultCollectionInterface
     public function hydrateResultsAs(string $className): object;
 
     public function getItems(): array;
+
+    public function getIterable(): iterable;
 }

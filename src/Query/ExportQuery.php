@@ -5,7 +5,6 @@ namespace App\Query;
 use App\Application\Contract\ResultCollectionInterface;
 use App\DataTransferObjects\ResultCollection;
 use App\Entity\Allocation;
-use App\Entity\Hospital;
 use App\Service\FilterService;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -13,16 +12,12 @@ final class ExportQuery
 {
     private EntityManagerInterface $entityManager;
 
-    private string $property;
-
-    private ?Hospital $hospital = null;
-
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
 
-    public function count(FilterService $filterService)
+    public function count(FilterService $filterService): int
     {
         $qb = $this->entityManager->createQueryBuilder();
         $qb
