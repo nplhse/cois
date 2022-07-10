@@ -31,6 +31,8 @@ class ExportController extends AbstractController
     #[Route('/export', name: 'app_export_index')]
     public function index(Request $request, ExportFilterFactory $exportFilterFactory): Response
     {
+        $this->denyAccessUnlessGranted('export', $this->getUser());
+
         $this->filterService->setRequest($request);
         $this->filterService->configureFilters($exportFilterFactory->getFilters());
 
@@ -55,6 +57,8 @@ class ExportController extends AbstractController
     #[Route('/export/fetch', name: 'app_export_fetch')]
     public function fetch(Request $request, ExportFilterFactory $exportFilterFactory): Response
     {
+        $this->denyAccessUnlessGranted('canExport', $this->getUser());
+
         $this->filterService->setRequest($request);
         $this->filterService->configureFilters($exportFilterFactory->getFilters());
 
