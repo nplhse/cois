@@ -82,7 +82,7 @@ class OwnHospitalFilter implements FilterInterface
                 ;
         }
 
-        if (!isset($ownHospitals)) {
+        if (!isset($ownHospitals) && empty($arguments['alwaysOn'])) {
             return $qb;
         }
 

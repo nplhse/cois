@@ -26,6 +26,7 @@ final class ExportQuery
 
         $arguments = [
             'joinOwner' => true,
+            'alwaysOn' => true,
             FilterService::ENTITY_ALIAS => 'a.',
         ];
 
@@ -40,10 +41,12 @@ final class ExportQuery
         $qb
             ->select("a.id, hospital.name, DATE_FORMAT(a.createdAt, '%d.%m.%Y %H:%i'), DATE_FORMAT(a.arrivalAt, '%d.%m.%Y %H:%i'), a.urgency, a.occasion, a.assignment, a.requiresResus, a.requiresCathlab, a.gender, a.age, a.isCPR, a.isVentilated, a.isShock, a.isPregnant, a.isInfectious, a.isWorkAccident, a.modeOfTransport, a.speciality, a.specialityDetail, a.handoverPoint, a.indication, a.indicationCode, a.secondaryIndication, a.secondaryIndicationCode, a.secondaryDeployment")
             ->from('App:Allocation', 'a')
-            ->leftJoin('a.hospital', 'hospital');
+            ->leftJoin('a.hospital', 'hospital')
+        ;
 
         $arguments = [
             'joinOwner' => true,
+            'alwaysOn' => true,
             FilterService::ENTITY_ALIAS => 'a.',
         ];
 

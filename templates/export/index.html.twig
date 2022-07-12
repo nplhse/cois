@@ -32,10 +32,9 @@
                 {{ 'Exports'|trans }}
             </h1>
 
-            <div class="alert alert-success">
-                {{ active_filters.render(filters, 'app_export_index') }}
-
-                {% if results %}
+            {% if results %}
+                <div class="alert alert-success">
+                    {{ active_filters.render(filters, 'app_export_index') }}
                     <a class="btn btn-primary"
                         href="{{
                         path(
@@ -45,8 +44,8 @@
                         }}">
                         Download {{ results }} rows
                     </a>
-                {% endif %}
-            </div>
+                </div>
+            {% endif %}
 
             <div class="card">
                 <div class="card-body">
@@ -56,13 +55,7 @@
 
                     {{ form_start(exportForm) }}
 
-                    {{ form_row(exportForm.ownHospitals) }}
-
-                    {% if
-                        (app.user.hospitals|length) > 1
-                            or is_granted('ROLE_ADMIN') %}
-                        {{ form_row(exportForm.hospital) }}
-                    {% endif %}
+                    {{ form_row(exportForm.hospital) }}
 
                     <h5>
                         {{ 'Filter by Dates'|trans }}

@@ -16,7 +16,6 @@ use App\Form\Filters\IsWithPhysicianFilterType;
 use App\Form\Filters\IsWorkAccidentFilterType;
 use App\Form\Filters\ModeOfTransportType;
 use App\Form\Filters\OccasionType;
-use App\Form\Filters\OwnHospitalFilterType;
 use App\Form\Filters\RequiresCathlabFilterType;
 use App\Form\Filters\RequiresResusFilterType;
 use App\Form\Filters\SecondaryDeploymentType;
@@ -25,6 +24,7 @@ use App\Form\Filters\SpecialityType;
 use App\Form\Filters\UrgencyType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -48,7 +48,9 @@ class ExportType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('ownHospitals', OwnHospitalFilterType::class)
+            ->add('ownHospitals', HiddenType::class, [
+                'attr' => ['class' => 'hidden-field', 'value' => 1],
+            ])
             ->add('indication', IndicationType::class)
             ->add('urgency', UrgencyType::class)
             ->add('assignment', AssignmentType::class)
@@ -78,15 +80,13 @@ class ExportType extends AbstractType
             /** @var User $user */
             $user = $this->security->getUser();
 
-            if ($user->getHospitals()->count() > 1) {
-                $builder
+            $builder
                     ->add('hospital', HospitalFilterType::class, [
                         'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('h')
                             ->where('h.owner = :user')
                             ->setParameter('user', $user->getId())
                             ->orderBy('h.name', \Doctrine\Common\Collections\Criteria::ASC),
                     ]);
-            }
         }
 
         $builder

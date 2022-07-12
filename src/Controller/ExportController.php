@@ -57,7 +57,7 @@ class ExportController extends AbstractController
     #[Route('/export/fetch', name: 'app_export_fetch')]
     public function fetch(Request $request, ExportFilterFactory $exportFilterFactory): Response
     {
-        $this->denyAccessUnlessGranted('canExport', $this->getUser());
+        $this->denyAccessUnlessGranted('export', $this->getUser());
 
         $this->filterService->setRequest($request);
         $this->filterService->configureFilters($exportFilterFactory->getFilters());
@@ -67,31 +67,31 @@ class ExportController extends AbstractController
         $csv = Writer::createFromPath('php://temp', 'r+');
         $csv->insertOne([
             'id',
-            'hospital',
-            'createdAt',
-            'arrivalAt',
-            'urgency',
-            'occasion',
-            'assignment',
-            'requiresResus',
-            'requiresCathlab',
-            'gender',
-            'age',
-            'isCPR',
-            'isVentilated',
-            'isShock',
-            'isPregnant',
-            'isInfectious',
-            'isWorkAccident',
-            'modeOfTransport',
-            'speciality',
-            'specialityDetail',
-            'handoverPoint',
-            'indication',
-            'indicationCode',
-            'secondaryIndication',
-            'secondaryIndicationCode',
-            'secondaryDeployment',
+            'klinik',
+            'erstellt',
+            'ankunft',
+            'dringlichkeit',
+            'anlass',
+            'zuweisung',
+            'schockraum',
+            'herzkatheter',
+            'geschlecht',
+            'alter',
+            'reanimation',
+            'beatmet',
+            'schock',
+            'schwanger',
+            'infektioes',
+            'arbeitsunfall',
+            'transport',
+            'fachrichtung',
+            'fachabteilung',
+            'uebergabepunkt',
+            'indikation',
+            'indikationsCode',
+            'sekundaereIndikation',
+            'sekundaereIndikationsCode',
+            'sekundaereinsatz',
         ]);
         $csv->insertAll($results->getIterable());
 
