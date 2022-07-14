@@ -806,17 +806,13 @@
         <source>user.card.security.text</source>
         <target>Mange or update your password.</target>
       </trans-unit>
-      <trans-unit id="6qNM5OD" resname="default.title">
-        <source>default.title</source>
-        <target>Welcome</target>
+      <trans-unit id="6qNM5OD" resname="welcome.title">
+        <source>welcome.title</source>
+        <target>Welcome to</target>
       </trans-unit>
-      <trans-unit id="ILiv0v6" resname="default.welcome.title">
-        <source>default.welcome.title</source>
-        <target>Welcome to Collaborative IVENA statistics</target>
-      </trans-unit>
-      <trans-unit id="swglSDP" resname="default.welcome.text">
-        <source>default.welcome.text</source>
-        <target>This is the website of the Collaborative IVENA statistics project. We provide statistics about german emergency medicine with the help of IVENA, which is a tool that is used to dispatch patients to hospitals.</target>
+      <trans-unit id="swglSDP" resname="welcome.text">
+        <source>welcome.text</source>
+        <target>We provide statistics about german emergency medicine with the help of IVENA, which is a tool that is used to dispatch patients to hospitals.</target>
       </trans-unit>
       <trans-unit id="iOSoddH" resname="link.faq">
         <source>link.faq</source>
@@ -2380,6 +2376,18 @@
       <trans-unit id="Hkmh4Tp" resname="Repeat Password">
         <source>Repeat Password</source>
         <target>Repeat Password</target>
+      </trans-unit>
+      <trans-unit id="0a">
+        <source>link.login.action</source>
+        <target>Click here to Login</target>
+      </trans-unit>
+      <trans-unit id="1a">
+        <source>link.register.action</source>
+        <target>Create a new Account</target>
+      </trans-unit>
+      <trans-unit id="2a">
+        <source>link.dashboard.action</source>
+        <target>Go to Dashboard</target>
       </trans-unit>
     </body>
   </file>

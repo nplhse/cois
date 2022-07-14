@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'welcome.title'|trans }} {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="container py-4">
+        <div class="px-4 py-5 my-5 text-center">
+            <h1 class="display-5 fw-bold">
+                {{ 'welcome.title'|trans }} {{ app_title }}
+            </h1>
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">
+                    {{ 'welcome.text'|trans }}
+                </p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    {% if not is_granted('ROLE_USER') %}
+                        <a class="btn btn-primary btn-lg px-4 gap-3"
+                            href="{{ path('app_login') }}"
+                            role="button">
+                            {{ 'link.login.action'|trans }}
+                        </a>
+                        {% if app_registration %}
+                            <a class="btn btn-outline-secondary btn-lg px-4"
+                                href="{{ path('app_register') }}"
+                                role="button">
+                                {{ 'link.register.action'|trans }}
+                            </a>
+                        {% endif %}
+                    {% else %}
+                        <a class="btn btn-primary btn-lg px-4 gap-3"
+                            href="{{ path('app_dashboard') }}"
+                            role="button">
+                            {{ 'link.dashboard.action'|trans }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="container" id="statistics">
+            <h2 class="pb-2 border-bottom">
+                {{ 'Statistics'|trans }}
+            </h2>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-3">
+                <div class="col d-flex align-items-start">
+                    <i class="bi bi-person-fill flex-shrink-0 me-3"
+                        style="font-size: 1.75em">
+
+                    </i>
+                    <div>
+                        <h4 class="fw-bold mb-0">
+                            {{ userCount|number_format(0, '', '.') }}
+                            {{ 'Users'|trans }}
+                        </h4>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <i class="bi bi-house-door-fill flex-shrink-0 me-3"
+                        style="font-size: 1.75em">
+
+                    </i>
+                    <div>
+                        <h4 class="fw-bold mb-0">
+                            {{ hospitalCount|number_format(0, '', '.') }}
+                            {{ 'Hospitals'|trans }}
+                        </h4>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <i class="bi bi-list-ul flex-shrink-0 me-3"
+                        style="font-size: 1.75em">
+
+                    </i>
+                    <div>
+                        <h4 class="fw-bold mb-0">
+                            {{ allocationCount|number_format(0, '', '.') }}
+                            {{ 'Allocations'|trans }}
+                        </h4>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-start">
+                    <i class="bi bi-file-earmark-arrow-up-fill flex-shrink-0 me-3"
+                        style="font-size: 1.75em">
+
+                    </i>
+                    <div>
+                        <h4 class="fw-bold mb-0">
+                            {{ importCount|number_format(0, '', '.') }}
+                            {{ 'Imports'|trans }}
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

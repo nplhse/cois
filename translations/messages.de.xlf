@@ -805,16 +805,12 @@
         <source>user.card.security.text</source>
         <target>Verwalten oder ändern Sie Ihr Passwort.</target>
       </trans-unit>
-      <trans-unit id="6qNM5OD" resname="default.title">
-        <source>default.title</source>
-        <target>Willkommen</target>
+      <trans-unit id="ILiv0v6" resname="welcome.title">
+        <source>welcome.title</source>
+        <target>Willkommen bei </target>
       </trans-unit>
-      <trans-unit id="ILiv0v6" resname="default.welcome.title">
-        <source>default.welcome.title</source>
-        <target>Willkommen bei den kollaborativen IVENA Statistiken</target>
-      </trans-unit>
-      <trans-unit id="swglSDP" resname="default.welcome.text">
-        <source>default.welcome.text</source>
+      <trans-unit id="swglSDP" resname="welcome.text">
+        <source>welcome.text</source>
         <target>Dieses Projekt hat das Ziel Statistiken zur notfallmedizinischen Versorgungsforschung in Deutschland bereitzustellen. Grundlage hierfür sind Daten, welche auf Basis des IVENA-Systems zur Zuweisung von Patienten im Rettungsdienst genutzt werden.</target>
       </trans-unit>
       <trans-unit id="iOSoddH" resname="link.faq">
@@ -2457,6 +2453,18 @@
       <trans-unit id="Hkmh4Tp" resname="Repeat Password">
         <source>Repeat Password</source>
         <target>Passwort wiederholen</target>
+      </trans-unit>
+      <trans-unit id="0">
+        <source>link.login.action</source>
+        <target>Zur Anmeldung</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>link.register.action</source>
+        <target>Neues Benutzerkonto erstellen</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>link.dashboard.action</source>
+        <target>Zur Übersicht</target>
       </trans-unit>
     </body>
   </file>
