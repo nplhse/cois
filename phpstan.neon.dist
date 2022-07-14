@@ -23,5 +23,8 @@ parameters:
         - tests/bootstrap.php
     symfony:
         container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml
+    ignoreErrors:
+        - message: "#^Unreachable statement - code above always terminates.$#"
+          path: tests
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
