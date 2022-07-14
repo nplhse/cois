@@ -28,8 +28,6 @@ class WelcomeControllerTest extends WebTestCase
 
     public function testStatistics(): void
     {
-        $this->markTestSkipped();
-
         StateFactory::createMany(3);
 
         DispatchAreaFactory::createMany(8, static fn () => ['state' => StateFactory::random()]);
@@ -58,10 +56,10 @@ class WelcomeControllerTest extends WebTestCase
 
         $this->browser()
             ->visit('/')
-            ->assertSeeIn('h4', '4 Users')
-            ->assertSeeIn('h4', '2 Hospitals')
-            ->assertSeeIn('h4', '7 Allocations')
-            ->assertSeeIn('h4', '6 Imports')
+            ->assertContains('4 Users')
+            ->assertContains('2 Hospitals')
+            ->assertContains('7 Allocations')
+            ->assertContains('6 Imports')
         ;
     }
 }

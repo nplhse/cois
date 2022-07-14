@@ -24,10 +24,10 @@ class WelcomeController extends AbstractController
     public function index(): Response
     {
         return $this->render('welcome/welcome.html.twig', [
-            'allocationCount' => $this->allocationRepository->countAllocations(),
-            'hospitalCount' => $this->hospitalRepository->countHospitals(),
-            'importCount' => $this->importRepository->countImports(),
-            'userCount' => $this->userRepository->countUsers(),
+            'allocationCount' => number_format((int) $this->allocationRepository->countAllocations(), 0, ',', '.'),
+            'hospitalCount' => number_format((int) $this->hospitalRepository->countHospitals(), 0, ',', '.'),
+            'importCount' => number_format((int) $this->importRepository->countImports(), 0, ',', '.'),
+            'userCount' => number_format((int) $this->userRepository->countUsers(), 0, ',', '.'),
         ]);
     }
 }
