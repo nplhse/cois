@@ -1,0 +1,242 @@
+{% block navbar %}
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
+            <div class="container-fluid">
+                {% if is_granted('ROLE_USER') %}
+                    <a class="navbar-brand" href="{{ path('app_dashboard') }}">
+                        {{ app_title }}
+                    </a>
+                {% else %}
+                    <a class="navbar-brand" href="{{ path('app_welcome') }}">
+                        {{ app_title }}
+                    </a>
+                {% endif %}
+                <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarCollapse"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse"
+                    id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        {% if is_granted('ROLE_USER') %}
+                            <li class="nav-item">
+                                {% if
+                                    app.request.attributes.get('_route')
+                                        starts with 'app_hospital' %}
+                                    <a class="nav-link active"
+                                        aria-current="page"
+                                        href="{{ path('app_hospital_index') }}">
+                                        {{ 'link.hospitals'|trans }}
+                                    </a>
+                                {% else %}
+                                    <a class="nav-link"
+                                        aria-current="page"
+                                        href="{{ path('app_hospital_index') }}">
+                                        {{ 'link.hospitals'|trans }}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                        {% if
+                            is_granted('ROLE_USER')
+                                and app.user.isParticipant %}
+                            <li class="nav-item">
+                                {% if
+                                    app.request.attributes.get('_route')
+                                        starts with 'app_allocation' %}
+                                    <a class="nav-link active"
+                                        aria-current="page"
+                                        href="{{
+                                        path(
+                                            'app_allocation_index'
+                                        )
+                                        }}">
+                                        {{ 'link.allocations'|trans }}
+                                    </a>
+                                {% else %}
+                                    <a class="nav-link"
+                                        aria-current="page"
+                                        href="{{
+                                        path(
+                                            'app_allocation_index'
+                                        )
+                                        }}">
+                                        {{ 'link.allocations'|trans }}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            {% if
+                                app.request.attributes.get('_route')
+                                    starts with 'app_statistics' %}
+                                <a class="nav-link active"
+                                    aria-current="page"
+                                    href="{{ path('app_statistics_index') }}">
+                                    {{ 'link.statistics'|trans }}
+                                </a>
+                            {% else %}
+                                <a class="nav-link"
+                                    aria-current="page"
+                                    href="{{ path('app_statistics_index') }}">
+                                    {{ 'link.statistics'|trans }}
+                                </a>
+                            {% endif %}
+                        </li>
+                        {% if
+                            is_granted('ROLE_USER')
+                                and app.user.isParticipant %}
+                            <li class="nav-item">
+                                {% if
+                                    app.request.attributes.get('_route')
+                                        starts with 'app_import' %}
+                                    <a class="nav-link active"
+                                        aria-current="page"
+                                        href="{{ path('app_import_index') }}">
+                                        {{ 'link.import'|trans }}
+                                    </a>
+                                {% else %}
+                                    <a class="nav-link"
+                                        aria-current="page"
+                                        href="{{ path('app_import_index') }}">
+                                        {{ 'link.import'|trans }}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                        {% if
+                            is_granted('ROLE_USER')
+                                and app.user.isParticipant %}
+                            <li class="">
+                                {% if
+                                    app.request.attributes.get('_route')
+                                        starts with 'app_export' %}
+                                    <a class="nav-link active"
+                                        aria-current="page"
+                                        href="{{ path('app_export_index') }}">
+                                        {{ 'link.export'|trans }}
+                                    </a>
+                                {% else %}
+                                    <a class="nav-link"
+                                        aria-current="page"
+                                        href="{{ path('app_export_index') }}">
+                                        {{ 'link.export'|trans }}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                            <li class="nav-item dropdown">
+                                {% if is_granted('IS_IMPERSONATOR') %}
+                                    <a class="nav-link dropdown-toggle text-warning"
+                                        href="#"
+                                        id="navbarDropdown"
+                                        role="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        {{
+                                            'nav.logged_in_as'|trans({
+                                                '%name%': app.user.username
+                                            })
+                                        }}
+                                    </a>
+                                {% else %}
+                                    <a class="nav-link dropdown-toggle"
+                                        href="#"
+                                        id="navbarDropdown"
+                                        role="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        {{
+                                            'nav.logged_in_as'|trans({
+                                                '%name%': app.user.username
+                                            })
+                                        }}
+                                    </a>
+                                {% endif %}
+                                <ul class="dropdown-menu"
+                                    aria-labelledby="navbarDropdown">
+                                    {% if is_granted('ROLE_USER') %}
+                                        <li>
+                                            <a class="dropdown-item"
+                                                href="{{
+                                                path(
+                                                    'app_settings_profile'
+                                                )
+                                                }}">
+                                                <i class="bi-person-circle"></i>
+                                                {{ 'Edit your profile'|trans }}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                                href="{{
+                                                path(
+                                                    'app_settings'
+                                                )
+                                                }}">
+                                                <i class="bi-gear"></i>
+                                                {{ 'Settings'|trans }}
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                    {% endif %}
+                                    {% if is_granted('IS_IMPERSONATOR') %}
+                                        <li>
+                                            <a class="dropdown-item text-danger"
+                                                href="{{
+                                                impersonation_exit_path(
+                                                    path(
+                                                        'app_settings_user_index'
+                                                    )
+                                                )
+                                                }}">
+                                                <i class="bi-door-closed-fill">
+
+                                                </i>
+                                                {{ 'Exit impersonation'|trans }}
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                    {% endif %}
+                                    <li>
+                                        <a class="dropdown-item"
+                                            href="{{ path('app_logout') }}">
+                                            <i class="bi-power"></i>
+                                            {{ 'link.logout'|trans }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            {% if app_registration %}
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                        aria-current="page"
+                                        href="{{ path('app_register') }}">
+                                        {{ 'Register'|trans }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                    aria-current="page"
+                                    href="{{ path('app_login') }}">
+                                    {{ 'link.login'|trans }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+{% endblock %}

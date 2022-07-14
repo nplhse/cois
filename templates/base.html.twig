@@ -20,7 +20,7 @@
     </head>
     <body>
         {% block header %}
-            {% include '_elements/navbar.html.twig' %}
+            {% include 'elements/navbar.html.twig' %}
         {% endblock %}
 
         {% if app_cookie_consent %}
@@ -52,6 +52,6 @@
             {% endblock %}
         </main>
 
-        {% include '_elements/footer.html.twig' %}
+        {% include 'elements/footer.html.twig' %}
     </body>
 </html>
