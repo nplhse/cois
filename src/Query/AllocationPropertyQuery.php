@@ -26,9 +26,9 @@ final class AllocationPropertyQuery
         $qb = $this->entityManager->createQueryBuilder();
 
         $qb->select(
-                $this->property.' AS property',
-                'COUNT('.$this->property.') AS counter'
-            )
+            $this->property.' AS property',
+            'COUNT('.$this->property.') AS counter'
+        )
                 ->from(Allocation::class, 'allocation')
                 ->groupBy($this->property)
                 ->addOrderBy($this->property, \Doctrine\Common\Collections\Criteria::DESC);

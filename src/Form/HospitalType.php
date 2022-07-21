@@ -38,7 +38,7 @@ class HospitalType extends AbstractType
         if ($options['backend']) {
             $builder
                 ->add('owner')
-                ;
+            ;
         }
     }
 

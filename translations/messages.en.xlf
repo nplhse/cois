@@ -123,7 +123,7 @@
       </trans-unit>
       <trans-unit id="bFqhgee" resname="dashboard.allocations.by_your_hospital">
         <source>dashboard.allocations.by_your_hospital</source>
-        <target>With %count% allocations from your hospital.</target>
+        <target>With %count% Allocations from your Hospital.</target>
       </trans-unit>
       <trans-unit id="WIzt02l" resname="dashboard.imports">
         <source>dashboard.imports</source>
@@ -131,7 +131,7 @@
       </trans-unit>
       <trans-unit id="fj.rWWU" resname="dashboard.imports.by_you">
         <source>dashboard.imports.by_you</source>
-        <target>With %count% imports from you.</target>
+        <target>With %count% Imports from you.</target>
       </trans-unit>
       <trans-unit id="jxa9tb_" resname="hospitals.edit.title">
         <source>hospitals.edit.title</source>
@@ -806,17 +806,13 @@
         <source>user.card.security.text</source>
         <target>Mange or update your password.</target>
       </trans-unit>
-      <trans-unit id="6qNM5OD" resname="default.title">
-        <source>default.title</source>
-        <target>Welcome</target>
+      <trans-unit id="i07781n" resname="welcome.title">
+        <source>welcome.title</source>
+        <target>Welcome to</target>
       </trans-unit>
-      <trans-unit id="ILiv0v6" resname="default.welcome.title">
-        <source>default.welcome.title</source>
-        <target>Welcome to Collaborative IVENA statistics</target>
-      </trans-unit>
-      <trans-unit id="swglSDP" resname="default.welcome.text">
-        <source>default.welcome.text</source>
-        <target>This is the website of the Collaborative IVENA statistics project. We provide statistics about german emergency medicine with the help of IVENA, which is a tool that is used to dispatch patients to hospitals.</target>
+      <trans-unit id="gTwEl6a" resname="welcome.text">
+        <source>welcome.text</source>
+        <target>We provide statistics about german emergency medicine with the help of IVENA, which is a tool that is used to dispatch patients to hospitals.</target>
       </trans-unit>
       <trans-unit id="iOSoddH" resname="link.faq">
         <source>link.faq</source>
@@ -852,7 +848,7 @@
       </trans-unit>
       <trans-unit id="eRq1lRV" resname="dashboard.verify.text">
         <source>dashboard.verify.text</source>
-        <target>We are currently waiting for your verification process to be completed before you can get started. In the meantime you can take a look at our statistics of the FAQ.</target>
+        <target>We are currently waiting for your verification process to be completed before you can get started.</target>
       </trans-unit>
       <trans-unit id="drag3Pb" resname="Change your Password">
         <source>Change your Password</source>
@@ -2380,6 +2376,62 @@
       <trans-unit id="Hkmh4Tp" resname="Repeat Password">
         <source>Repeat Password</source>
         <target>Repeat Password</target>
+      </trans-unit>
+      <trans-unit id="prWzz68" resname="link.login.action">
+        <source>link.login.action</source>
+        <target>Click here to Login</target>
+      </trans-unit>
+      <trans-unit id="LtlfR4W" resname="link.register.action">
+        <source>link.register.action</source>
+        <target>Create a new Account</target>
+      </trans-unit>
+      <trans-unit id="2K6T9rI" resname="link.dashboard.action">
+        <source>link.dashboard.action</source>
+        <target>Go to Dashboard</target>
+      </trans-unit>
+      <trans-unit id="U8lNMZX" resname="dashboard.hospitals.by_user">
+        <source>dashboard.hospitals.by_user</source>
+        <target>With %count% Hospitals from you.</target>
+      </trans-unit>
+      <trans-unit id="m6C0sQG" resname="dashboard.verify.email.success">
+        <source>dashboard.verify.email.success</source>
+        <target>Your E-Mail address has been verified.</target>
+      </trans-unit>
+      <trans-unit id="UXm0DRD" resname="dashboard.verify.email.missing">
+        <source>dashboard.verify.email.missing</source>
+        <target>Your E-Mail address has NOT been verified.</target>
+      </trans-unit>
+      <trans-unit id="Hh7n78Z" resname="dashboard.verify.account.success">
+        <source>dashboard.verify.account.success</source>
+        <target>Your Account has been confirmed by an admin.</target>
+      </trans-unit>
+      <trans-unit id="X2x1ZW3" resname="dashboard.verify.account.missing">
+        <source>dashboard.verify.account.missing</source>
+        <target>Your Account has NOT been confirmed by an admin.</target>
+      </trans-unit>
+      <trans-unit id="FOJac5x" resname="dashboard.onboarding.step1">
+        <source>dashboard.onboarding.step1</source>
+        <target>Step 1: Verficiation</target>
+      </trans-unit>
+      <trans-unit id="vnGd_1d" resname="dashboard.onboarding.step2">
+        <source>dashboard.onboarding.step2</source>
+        <target>Step 2: Create first Hospital</target>
+      </trans-unit>
+      <trans-unit id="F2OxgKI" resname="dashboard.onboarding.hospital.create">
+        <source>dashboard.onboarding.hospital.create</source>
+        <target>Click here to create your very first Hospital.</target>
+      </trans-unit>
+      <trans-unit id="ynrF977" resname="dashboard.onboarding.hospital.success">
+        <source>dashboard.onboarding.hospital.success</source>
+        <target>Your first Hospital has been created sucessfully.</target>
+      </trans-unit>
+      <trans-unit id="mcBZSVe" resname="dashboard.onboarding.step3">
+        <source>dashboard.onboarding.step3</source>
+        <target>Step 3: Create first Import</target>
+      </trans-unit>
+      <trans-unit id="FthLGGY" resname="dashboard.onboarding.import.create">
+        <source>dashboard.onboarding.import.create</source>
+        <target>Click here to create the first Import for your Hospital.</target>
       </trans-unit>
     </body>
   </file>

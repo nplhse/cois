@@ -15,6 +15,8 @@ class ParticipationVoter extends Voter
 
     private const FILTER_STATISTICS = 'filter_statistics';
 
+    private const EXPORT = 'export';
+
     private Security $security;
 
     public function __construct(Security $security)
@@ -25,7 +27,7 @@ class ParticipationVoter extends Voter
     protected function supports(string $attribute, mixed $subject): bool
     {
         // if the attribute isn't one we support, return false
-        if (!in_array($attribute, [self::CREATE_HOSPITAL, self::CREATE_IMPORT, self::FILTER_STATISTICS])) {
+        if (!in_array($attribute, [self::CREATE_HOSPITAL, self::CREATE_IMPORT, self::FILTER_STATISTICS, self::EXPORT])) {
             return false;
         }
 
@@ -50,6 +52,7 @@ class ParticipationVoter extends Voter
             self::CREATE_HOSPITAL => $this->canCreateHospital($subject),
             self::CREATE_IMPORT => $this->canCreateImport($subject),
             self::FILTER_STATISTICS => $this->canFilterStatistics($subject),
+            self::EXPORT => $this->canExport($subject),
             default => throw new \LogicException('This code should not be reached!'),
         };
     }
@@ -64,6 +67,23 @@ class ParticipationVoter extends Voter
     }
 
     private function canCreateImport(User $user): bool
+    {
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            return true;
+        }
+
+        if (!$user->isParticipant()) {
+            return false;
+        }
+
+        if ($user->getHospitals()->isEmpty()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private function canExport(User $user): bool
     {
         if ($this->security->isGranted('ROLE_ADMIN')) {
             return true;

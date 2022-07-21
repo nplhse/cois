@@ -27,50 +27,14 @@
         </h1>
 
         <div class="col-md">
-            {% if
-                app.user.isVerified == false
-                    or app.user.isParticipant == false %}
-                <div class="card mb-3 border-warning">
-                    <div class="card-body">
-                        <h2 class="card-title">
-                            {{ 'dashboard.verify.title'|trans }}
-                        </h2>
-                        <p class="card-text">
-                            {{ 'dashboard.verify.text'|trans }}
-                        </p>
-                        <ul>
-                            <li>
-                                {% if app.user.isVerified %}
-                                    <i class="bi bi-check-circle-fill text-success">
-
-                                    </i>
-                                    Your E-Mail is verified
-                                {% else %}
-                                    <i class="bi bi-stop-circle-fill text-danger">
-
-                                    </i>
-                                    Your E-Mail is <strong>not</strong> verified
-                                {% endif %}
-                            </li>
-                            <li>
-                                {% if app.user.isParticipant %}
-                                    <i class="bi bi-check-circle-fill text-success">
-
-                                    </i>
-                                    Account has been confirmed by admin.
-                                {% else %}
-                                    <i class="bi bi-stop-circle-fill text-danger">
-
-                                    </i>
-                                    Account has <strong>
-                                        not
-                                    </strong> been confirmed by admin.
-                                {% endif %}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            {% endif %}
+            {{
+                component(
+                    'onboarding',
+                    {
+                        user: app.user
+                    }
+                )
+            }}
 
             {% if app.user.isParticipant %}
                 <p>
@@ -130,28 +94,32 @@
                     </div>
                 </div>
 
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h2 class="card-title">
-                            {{ 'Import data'|trans }}
-                        </h2>
-                        <p class="card-text">
-                            {{ 'Add some of your data to the database.'|trans }}
-                        </p>
-                        {% if app.user.hospitals is not empty %}
-                            <a href="{{ path('app_import_new') }}"
-                                class="btn btn-success">
-                                <i class="bi bi-plus-circle"></i>
+                {% if app.user.hospitals is not empty or userImportCount > 0 %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h2 class="card-title">
                                 {{ 'Import data'|trans }}
+                            </h2>
+                            <p class="card-text">
+                                {{
+                                    'Add some of your data to the database.'|trans
+                                }}
+                            </p>
+                            {% if app.user.hospitals is not empty %}
+                                <a href="{{ path('app_import_new') }}"
+                                    class="btn btn-success">
+                                    <i class="bi bi-plus-circle"></i>
+                                    {{ 'Import data'|trans }}
+                                </a>
+                            {% endif %}
+                            <a href="{{ path('app_import_index') }}"
+                                class="btn btn-primary">
+                                <i class="bi bi-search"></i>
+                                {{ 'View your imports'|trans }}
                             </a>
-                        {% endif %}
-                        <a href="{{ path('app_import_index') }}"
-                            class="btn btn-primary">
-                            <i class="bi bi-search"></i>
-                            {{ 'View your imports'|trans }}
-                        </a>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
 
                 <div class="row">
                     <div class="col">
@@ -196,58 +164,43 @@
             {% endif %}
         </div>
         <div class="col-md-4">
-            <div class="card text-dark bg-light mb-2">
-                <div class="card-body">
-                    <h3>
-                        <i class="bi bi-person-fill"></i>
-                        {{ users|number_format(0, '', '.') }}
-                        <small class="text-muted">
-                            {{ 'dashboard.users'|trans }}
-                        </small>
-                    </h3>
+            <h2 class="pb-2 border-bottom">
+                {{ 'Statistics'|trans }}
+            </h2>
+            <div class="col d-flex align-items-start py-1">
+                <i class="bi bi-person-fill flex-shrink-0 me-3"
+                    style="font-size: 1.75em">
+
+                </i>
+                <div>
+                    <h4 class="fw-bold mb-0">
+                        {{ userCount|number_format(0, '', '.') }}
+                        {{ 'Users'|trans }}
+                    </h4>
                 </div>
             </div>
+            <div class="col d-flex align-items-start py-1">
+                <i class="bi bi-house-door-fill flex-shrink-0 me-3"
+                    style="font-size: 1.75em">
 
-            <div class="card text-dark bg-light mb-2">
-                <div class="card-body">
-                    <h3>
-                        <i class="bi bi-house-door-fill"></i>
-                        {{ hospitals|number_format(0, '', '.') }}
-                        <small class="text-muted">
-                            {% if app.user.isParticipant %}
-                                <a class="text-muted"
-                                    href="{{ path('app_hospital_index') }}">
-                                    {{ 'dashboard.hospitals'|trans }}
-                                </a>
-                            {% else %}
+                </i>
+                <div>
+                    <h4 class="fw-bold mb-0">
+                        {{ hospitalCount|number_format(0, '', '.') }}
+                        {% if app.user.isParticipant %}
+                            <a class="text-dark"
+                                href="{{ path('app_hospital_index') }}">
                                 {{ 'dashboard.hospitals'|trans }}
-                            {% endif %}
-                        </small>
-                    </h3>
-                </div>
-            </div>
-
-            <div class="card text-dark bg-light mb-2">
-                <div class="card-body">
-                    <h3>
-                        <i class="bi bi-list-ul"></i>
-                        {{ allocations|number_format(0, '', '.') }}
-                        <small class="text-muted">
-                            {% if app.user.isParticipant %}
-                                <a class="text-muted"
-                                    href="{{ path('app_allocation_index') }}">
-                                    {{ 'dashboard.allocations'|trans }}
-                                </a>
-                            {% else %}
-                                {{ 'dashboard.allocations'|trans }}
-                            {% endif %}
-                        </small>
-                    </h3>
+                            </a>
+                        {% else %}
+                            {{ 'dashboard.hospitals'|trans }}
+                        {% endif %}
+                    </h4>
                     {% if app.user.hospitals is not empty %}
                         <p>
                             {{
-                                'dashboard.allocations.by_your_hospital'|trans({
-                                    '%count%': hospital_allocations|number_format(
+                                'dashboard.hospitals.by_user'|trans({
+                                    '%count%': userHospitalCount|number_format(
                                         0,
                                         '',
                                         '.'
@@ -258,28 +211,60 @@
                     {% endif %}
                 </div>
             </div>
+            <div class="col d-flex align-items-start py-1">
+                <i class="bi bi-list-ul flex-shrink-0 me-3"
+                    style="font-size: 1.75em">
 
-            <div class="card text-dark bg-light mb-2">
-                <div class="card-body">
-                    <h3>
-                        <i class="bi bi-file-earmark-arrow-up-fill"></i>
-                        {{ imports|number_format(0, '', '.') }}
-                        <small class="text-muted">
-                            {% if is_granted('create_import', app.user) %}
-                                <a class="text-muted"
-                                    href="{{ path('app_import_index') }}">
-                                    {{ 'dashboard.imports'|trans }}
-                                </a>
-                            {% else %}
+                </i>
+                <div>
+                    <h4 class="fw-bold mb-0">
+                        {{ allocationCount|number_format(0, '', '.') }}
+                        {% if app.user.isParticipant %}
+                            <a class="text-dark"
+                                href="{{ path('app_allocation_index') }}">
+                                {{ 'dashboard.allocations'|trans }}
+                            </a>
+                        {% else %}
+                            {{ 'dashboard.allocations'|trans }}
+                        {% endif %}
+                    </h4>
+                    {% if app.user.hospitals is not empty %}
+                        <p>
+                            {{
+                                'dashboard.allocations.by_your_hospital'|trans({
+                                    '%count%': userAllocationCount|number_format(
+                                        0,
+                                        '',
+                                        '.'
+                                    )
+                                })
+                            }}
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col d-flex align-items-start py-1">
+                <i class="bi bi-file-earmark-arrow-up-fill flex-shrink-0 me-3"
+                    style="font-size: 1.75em">
+
+                </i>
+                <div>
+                    <h4 class="fw-bold mb-0">
+                        {{ importCount|number_format(0, '', '.') }}
+                        {% if is_granted('create_import', app.user) %}
+                            <a class="text-dark"
+                                href="{{ path('app_import_index') }}">
                                 {{ 'dashboard.imports'|trans }}
-                            {% endif %}
-                        </small>
-                    </h3>
+                            </a>
+                        {% else %}
+                            {{ 'dashboard.imports'|trans }}
+                        {% endif %}
+                    </h4>
                     {% if app.user.isParticipant %}
                         <p>
                             {{
                                 'dashboard.imports.by_you'|trans({
-                                    '%count%': user_imports
+                                    '%count%': userImportCount
                                 })
                             }}
                         </p>

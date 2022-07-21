@@ -37,12 +37,12 @@ class SecondaryDeploymentFilter implements FilterInterface
 
         if ('None' === $secondaryDeployment) {
             return $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'secondaryDeployment IS NULL')
-                ;
+            ;
         }
 
         $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'secondaryDeployment = :secondaryDeployment')
                 ->setParameter('secondaryDeployment', $secondaryDeployment)
-            ;
+        ;
 
         return $qb;
     }

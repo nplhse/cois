@@ -37,7 +37,7 @@ class ModeOfTransportFilter implements FilterInterface
 
         $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'modeOfTransport = :modeOfTransport')
                 ->setParameter('modeOfTransport', $modeOfTransport)
-            ;
+        ;
 
         return $qb;
     }

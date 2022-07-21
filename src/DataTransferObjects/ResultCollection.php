@@ -35,6 +35,11 @@ final class ResultCollection implements ResultCollectionInterface
         return new self($hydratedItems);
     }
 
+    public function getIterable(): iterable
+    {
+        return new \ArrayObject($this->items);
+    }
+
     public function getItems(): array
     {
         return $this->items;

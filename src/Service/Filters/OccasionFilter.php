@@ -37,7 +37,7 @@ class OccasionFilter implements FilterInterface
 
         $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'occasion = :occasion')
                 ->setParameter('occasion', $occasion)
-            ;
+        ;
 
         return $qb;
     }

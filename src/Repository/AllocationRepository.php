@@ -328,7 +328,7 @@ class AllocationRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('a');
         $query->select($query->expr()->substring('a.PZC', 1, 3).'AS PZC, a.PZCText')
             ->distinct(true)
-            ;
+        ;
 
         return $query->getQuery()->getArrayResult();
     }

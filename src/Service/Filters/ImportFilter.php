@@ -55,6 +55,6 @@ class ImportFilter implements FilterInterface
 
         return $qb->orWhere($arguments[FilterService::ENTITY_ALIAS].'import = :import')
             ->setParameter('import', $import)
-            ;
+        ;
     }
 }
