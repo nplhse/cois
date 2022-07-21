@@ -51,9 +51,10 @@ jobs:
 
             - name: Yarn install
               if: steps.yarn-cache-node-modules.outputs.cache-hit != 'true'
-              run: |
-                  yarn install
-                  yarn encore dev
+              run: yarn install
+
+            - name: Run Webpack (as dev)
+              run: yarn encore dev
 
             - name: Analyse JS (ESLint)
               run: yarn run eslint assets
