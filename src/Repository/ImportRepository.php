@@ -95,6 +95,16 @@ class ImportRepository extends ServiceEntityRepository implements ImportReposito
         return $qb;
     }
 
+    public function countImportsByUser(UserInterface $user): mixed
+    {
+        return $this->createQueryBuilder('i')
+            ->select('COUNT(i.id)')
+            ->andWhere('i.user = :user')
+            ->setparameter('user', $user->getId())
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     public function getAllImports(): array
     {
         return $this->findBy([], ['name' => 'ASC']);

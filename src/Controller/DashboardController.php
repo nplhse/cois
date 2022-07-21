@@ -15,25 +15,28 @@ use Symfony\Component\Routing\Annotation\Route;
 #[IsGranted('ROLE_USER')]
 class DashboardController extends AbstractController
 {
+    public function __construct(
+        private AllocationRepository $allocationRepository,
+        private HospitalRepository $hospitalRepository,
+        private ImportRepository $importRepository,
+        private UserRepository $userRepository,
+    ) {
+    }
+
     #[Route('/dashboard/', name: 'app_dashboard')]
-    public function index(AllocationRepository $allocationRepository, HospitalRepository $hospitalRepository, UserRepository $userRepository, ImportRepository $importRepository): Response
+    public function index(): Response
     {
         /** @var UserInterface $user */
         $user = $this->getUser();
 
-        if ($user->getHospitals()->isEmpty()) {
-            $allocationCount = 0;
-        } else {
-            $allocationCount = $allocationRepository->countAllocationsByUser($user);
-        }
-
         return $this->render('dashboard/index.html.twig', [
-            'allocations' => $allocationRepository->countAllocations(),
-            'hospitals' => $hospitalRepository->countHospitals(),
-            'hospital_allocations' => $allocationCount,
-            'users' => $userRepository->countUsers(),
-            'user_imports' => $importRepository->countImports($user),
-            'imports' => $importRepository->countImports(),
+            'allocationCount' => $this->allocationRepository->countAllocations(),
+            'hospitalCount' => $this->hospitalRepository->countHospitals(),
+            'importCount' => $this->importRepository->countImports(),
+            'userCount' => $this->userRepository->countUsers(),
+            'userAllocationCount' => $this->allocationRepository->countAllocationsByUser($user),
+            'userHospitalCount' => $this->hospitalRepository->countHospitalsByUsers($user),
+            'userImportCount' => $this->importRepository->countImportsByUser($user),
         ]);
     }
 }

@@ -805,11 +805,11 @@
         <source>user.card.security.text</source>
         <target>Verwalten oder ändern Sie Ihr Passwort.</target>
       </trans-unit>
-      <trans-unit id="ILiv0v6" resname="welcome.title">
+      <trans-unit id="i07781n" resname="welcome.title">
         <source>welcome.title</source>
         <target>Willkommen bei </target>
       </trans-unit>
-      <trans-unit id="swglSDP" resname="welcome.text">
+      <trans-unit id="gTwEl6a" resname="welcome.text">
         <source>welcome.text</source>
         <target>Dieses Projekt hat das Ziel Statistiken zur notfallmedizinischen Versorgungsforschung in Deutschland bereitzustellen. Grundlage hierfür sind Daten, welche auf Basis des IVENA-Systems zur Zuweisung von Patienten im Rettungsdienst genutzt werden.</target>
       </trans-unit>
@@ -847,7 +847,7 @@
       </trans-unit>
       <trans-unit id="eRq1lRV" resname="dashboard.verify.text">
         <source>dashboard.verify.text</source>
-        <target>Da Sie noch nicht vollständig verifiziert worden sind, können Sie aktuell noch nicht auf alle Inhalte zugreifen. Sie können sich aber schon die öffentlichen Statistiken, sowie die häufig gestellten Fragen (FAQ) ansehen.</target>
+        <target>Da Sie noch nicht vollständig verifiziert worden sind, können Sie aktuell noch nicht auf alle Inhalte zugreifen.</target>
       </trans-unit>
       <trans-unit id="drag3Pb" resname="Change your Password">
         <source>Change your Password</source>
@@ -2454,17 +2454,37 @@
         <source>Repeat Password</source>
         <target>Passwort wiederholen</target>
       </trans-unit>
-      <trans-unit id="0">
+      <trans-unit id="prWzz68" resname="link.login.action">
         <source>link.login.action</source>
         <target>Zur Anmeldung</target>
       </trans-unit>
-      <trans-unit id="1">
+      <trans-unit id="LtlfR4W" resname="link.register.action">
         <source>link.register.action</source>
         <target>Neues Benutzerkonto erstellen</target>
       </trans-unit>
-      <trans-unit id="2">
+      <trans-unit id="2K6T9rI" resname="link.dashboard.action">
         <source>link.dashboard.action</source>
         <target>Zur Übersicht</target>
+      </trans-unit>
+      <trans-unit id="U8lNMZX" resname="dashboard.hospitals.by_user">
+        <source>dashboard.hospitals.by_user</source>
+        <target>Mit %count% Kliniken von Ihnen.</target>
+      </trans-unit>
+      <trans-unit id="m6C0sQG" resname="dashboard.verify.email.success">
+        <source>dashboard.verify.email.success</source>
+        <target>Ihre E-Mail Adresse ist bestätigt.</target>
+      </trans-unit>
+      <trans-unit id="UXm0DRD" resname="dashboard.verify.email.missing">
+        <source>dashboard.verify.email.missing</source>
+        <target>Ihre E-Mail Adresse ist noch NICHT bestätigt.</target>
+      </trans-unit>
+      <trans-unit id="Hh7n78Z" resname="dashboard.verify.account.success">
+        <source>dashboard.verify.account.success</source>
+        <target>Ihr Benutzerkonto wurde von einem Admin bestätigt.</target>
+      </trans-unit>
+      <trans-unit id="X2x1ZW3" resname="dashboard.verify.account.missing">
+        <source>dashboard.verify.account.missing</source>
+        <target>Ihr Benutzerkonto wurde noch NICHT von einem Admin bestätigt.</target>
       </trans-unit>
     </body>
   </file>

@@ -52,7 +52,8 @@
                     </i>
                     <div>
                         <h4 class="fw-bold mb-0">
-                            {{ userCount }} {{ 'Users'|trans }}
+                            {{ userCount|number_format(0, '', '.') }}
+                            {{ 'Users'|trans }}
                         </h4>
                     </div>
                 </div>
@@ -63,7 +64,8 @@
                     </i>
                     <div>
                         <h4 class="fw-bold mb-0">
-                            {{ hospitalCount }} {{ 'Hospitals'|trans }}
+                            {{ hospitalCount|number_format(0, '', '.') }}
+                            {{ 'Hospitals'|trans }}
                         </h4>
                     </div>
                 </div>
@@ -74,7 +76,8 @@
                     </i>
                     <div>
                         <h4 class="fw-bold mb-0">
-                            {{ allocationCount }} {{ 'Allocations'|trans }}
+                            {{ allocationCount|number_format(0, '', '.') }}
+                            {{ 'Allocations'|trans }}
                         </h4>
                     </div>
                 </div>
@@ -85,7 +88,8 @@
                     </i>
                     <div>
                         <h4 class="fw-bold mb-0">
-                            {{ importCount }} {{ 'Imports'|trans }}
+                            {{ importCount|number_format(0, '', '.') }}
+                            {{ 'Imports'|trans }}
                         </h4>
                     </div>
                 </div>
