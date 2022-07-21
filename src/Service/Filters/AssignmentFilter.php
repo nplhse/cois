@@ -37,7 +37,7 @@ class AssignmentFilter implements FilterInterface
 
         $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'assignment = :assignment')
                 ->setParameter('assignment', $assignment)
-            ;
+        ;
 
         return $qb;
     }

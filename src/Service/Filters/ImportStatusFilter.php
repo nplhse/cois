@@ -46,6 +46,6 @@ class ImportStatusFilter implements FilterInterface
 
         return $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'status = :status')
             ->setParameter('status', $status)
-            ;
+        ;
     }
 }

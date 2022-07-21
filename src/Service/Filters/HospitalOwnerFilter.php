@@ -100,7 +100,7 @@ class HospitalOwnerFilter implements FilterInterface
             return $qb->leftJoin($arguments[FilterService::ENTITY_ALIAS].'hospital', 'hospital')
                 ->andWhere('hospital.owner = :owner')
                 ->setParameter('owner', $owner)
-                ;
+            ;
         }
 
         if (!isset($owner)) {
