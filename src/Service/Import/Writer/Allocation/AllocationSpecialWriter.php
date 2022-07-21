@@ -1,25 +1,13 @@
 <?php
 
-namespace App\Service\Import\Writer;
+namespace App\Service\Import\Writer\Allocation;
 
 use App\Domain\Contracts\ImportInterface;
 use App\Entity\Allocation;
 
-class AllocationSpecialWriter implements \App\Application\Contract\ImportWriterInterface
+class AllocationSpecialWriter implements \App\Application\Contract\AllocationImportWriterInterface
 {
-    public const Data_Type = 'allocation';
-
-    public static function getDataType(): string
-    {
-        return self::Data_Type;
-    }
-
-    public static function getPriority(): int
-    {
-        return 45;
-    }
-
-    public function processData(?object $entity, array $row, ImportInterface $import): ?object
+    public function process(?object $entity, array $row, ImportInterface $import): ?object
     {
         /* @var Allocation $entity */
         $entity->setUrgency((int) substr($row['PZC'], 5, 1));
