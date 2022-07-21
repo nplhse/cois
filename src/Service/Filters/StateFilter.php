@@ -73,7 +73,7 @@ class StateFilter implements FilterInterface
         $qb->leftJoin($arguments[FilterService::ENTITY_ALIAS].'state', 'state')
             ->andWhere('state.id = :state')
                 ->setParameter('state', $state)
-            ;
+        ;
 
         return $qb;
     }

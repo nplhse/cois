@@ -37,16 +37,8 @@ class ImportDataHandler implements HandlerInterface
             throw new ImportNotFoundException('Could not find Import with id %d', $command->getImportId());
         }
 
-        if (null === $import->getFilePath()) {
-            $path = $this->projectDir.self::Import_DIR.$import->getPath();
-            $result = $this->importService->import($path, $import->getMimeType());
-        } elseif ('' === $import->getFilePath()) {
-            $path = $this->projectDir.self::Import_DIR.$import->getPath();
-            $result = $this->importService->import($path, $import->getMimeType());
-        } else {
-            $path = $this->projectDir.self::Import_DIR.$import->getFilePath();
-            $result = $this->importService->import($path, $import->getFileMimeType());
-        }
+        $path = $this->projectDir.self::Import_DIR.$import->getFilePath();
+        $result = $this->importService->import($path, $import->getFileMimeType());
 
         $this->importService->process($result, $import);
 

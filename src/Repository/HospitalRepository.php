@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Domain\Contracts\HospitalInterface;
+use App\Domain\Contracts\UserInterface;
 use App\Domain\Repository\HospitalRepositoryInterface;
 use App\Entity\Hospital;
 use App\Entity\User;
@@ -67,7 +68,7 @@ class HospitalRepository extends ServiceEntityRepository implements HospitalRepo
             ->setParameter(':beds', $beds)
             ->getQuery()
             ->getOneOrNullResult()
-            ;
+        ;
     }
 
     public function findOneByUser(User $user): ?Hospital
@@ -87,13 +88,25 @@ class HospitalRepository extends ServiceEntityRepository implements HospitalRepo
             ->setParameter(':id', $id)
             ->getQuery()
             ->getOneOrNullResult()
-            ;
+        ;
     }
 
     public function countHospitals(): string
     {
         $qb = $this->createQueryBuilder('h')
             ->select('COUNT(h.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return $qb;
+    }
+
+    public function countHospitalsByUsers(UserInterface $user): string
+    {
+        $qb = $this->createQueryBuilder('h')
+            ->select('COUNT(h.id)')
+            ->andWhere('h.owner = :user')
+            ->setParameter('user', $user->getId())
             ->getQuery()
             ->getSingleScalarResult();
 
@@ -108,7 +121,7 @@ class HospitalRepository extends ServiceEntityRepository implements HospitalRepo
             ->orderBy('h.name', \Doctrine\Common\Collections\Criteria::ASC)
             ->getQuery()
             ->getArrayResult()
-            ;
+        ;
     }
 
     public function getHospitalPaginator(FilterService $filterService): Paginator

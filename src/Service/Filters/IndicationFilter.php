@@ -41,7 +41,7 @@ class IndicationFilter implements FilterInterface
 
         $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'indicationCode = :indicationCode')
                 ->setParameter('indicationCode', $indicationCode)
-            ;
+        ;
 
         return $qb;
     }

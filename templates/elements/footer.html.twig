@@ -1,0 +1,64 @@
+{% block footer %}
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <div class="col-md-4 ps-2 d-flex align-items-center">
+            <span class="text-muted">
+                Powered by <a href="https://github.com/nplhse/cois">
+                    <i class="bi-github" role="img" aria-label="GitHub"></i>
+                    cois
+                </a>&nbsp;v0.1.0-alpha
+            </span>
+        </div>
+
+        <div class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <i class="bi bi-emoji-smile text-muted"></i>
+        </div>
+
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            {% if has_page('terms') %}
+                <li class="ms-2">
+                    <a class="nav-link px-2 text-muted"
+                        href="{{
+                        path(
+                            'app_page',
+                            {
+                                slug: get_slug('terms')
+                            }
+                        )
+                        }}">
+                        {{ get_title('terms') }}
+                    </a>
+                </li>
+            {% endif %}
+            {% if has_page('privacy') %}
+                <li class="ms-2">
+                    <a class="nav-link px-2 text-muted"
+                        href="{{
+                        path(
+                            'app_page',
+                            {
+                                slug: get_slug('privacy')
+                            }
+                        )
+                        }}">
+                        {{ get_title('privacy') }}
+                    </a>
+                </li>
+            {% endif %}
+            {% if has_page('imprint') %}
+                <li class="ms-2">
+                    <a class="nav-link px-2 text-muted"
+                        href="{{
+                        path(
+                            'app_page',
+                            {
+                                slug: get_slug('imprint')
+                            }
+                        )
+                        }}">
+                        {{ get_title('imprint') }}
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </footer>
+{% endblock %}

@@ -44,7 +44,7 @@ class SizeFilter implements FilterInterface
 
         $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'size = :size')
                 ->setParameter('size', $size)
-            ;
+        ;
 
         return $qb;
     }

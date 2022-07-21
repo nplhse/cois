@@ -44,7 +44,7 @@ class LocationFilter implements FilterInterface
 
         $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'location = :location')
                 ->setParameter('location', $location)
-            ;
+        ;
 
         return $qb;
     }

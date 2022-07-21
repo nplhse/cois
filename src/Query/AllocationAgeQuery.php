@@ -24,10 +24,10 @@ final class AllocationAgeQuery
         $qb = $this->entityManager->createQueryBuilder();
 
         $qb->select(
-                'allocation.age AS age',
-                'allocation.gender AS gender',
-                'COUNT(allocation.age) AS counter'
-            )
+            'allocation.age AS age',
+            'allocation.gender AS gender',
+            'COUNT(allocation.age) AS counter'
+        )
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.age, allocation.gender')
                 ->addOrderBy('allocation.age', \Doctrine\Common\Collections\Criteria::ASC);

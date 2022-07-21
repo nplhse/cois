@@ -37,7 +37,7 @@ class SpecialityDetailFilter implements FilterInterface
 
         $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'specialityDetail = :specialityDetail')
                 ->setParameter('specialityDetail', $specialityDetail)
-            ;
+        ;
 
         return $qb;
     }

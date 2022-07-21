@@ -1,0 +1,135 @@
+{% if step is not null %}
+    <div class="list-group w-auto pb-3">
+        <label class="list-group-item d-flex gap-3">
+            {% if step <= 1 %}
+                <input class="form-check-input flex-shrink-0"
+                    type="checkbox"
+                    value=""
+                    disabled
+                    style="font-size: 1.375em;" />
+            {% else %}
+                <input class="form-check-input flex-shrink-0"
+                    type="checkbox"
+                    value=""
+                    disabled
+                    checked
+                    style="font-size: 1.375em;" />
+            {% endif %}
+            <span class="pt-1 form-checked-content">
+                <strong>{{ 'dashboard.onboarding.step1'|trans }}</strong>
+                <small class="d-block text-muted">
+                    {{ 'dashboard.verify.text'|trans }}
+                    <ul>
+                        <li>
+                            {% if app.user.isVerified %}
+                                <i class="bi bi-check-circle-fill text-success">
+
+                                </i>
+                                {{ 'dashboard.verify.email.success'|trans }}
+                            {% else %}
+                                <i class="bi bi-stop-circle-fill text-danger">
+
+                                </i>
+                                {{ 'dashboard.verify.email.missing'|trans }}
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if app.user.isParticipant %}
+                                <i class="bi bi-check-circle-fill text-success">
+
+                                </i>
+                                {{ 'dashboard.verify.account.success'|trans }}
+                            {% else %}
+                                <i class="bi bi-stop-circle-fill text-danger">
+
+                                </i>
+                                {{ 'dashboard.verify.account.missing'|trans }}
+                            {% endif %}
+                        </li>
+                    </ul>
+                </small>
+            </span>
+        </label>
+        <label class="list-group-item d-flex gap-3">
+            {% if step <= 2 %}
+                <input class="form-check-input flex-shrink-0"
+                    type="checkbox"
+                    value=""
+                    disabled
+                    style="font-size: 1.375em;" />
+            {% else %}
+                <input class="form-check-input flex-shrink-0"
+                    type="checkbox"
+                    value=""
+                    disabled
+                    checked
+                    style="font-size: 1.375em;" />
+            {% endif %}
+            <span class="pt-1 form-checked-content">
+                <strong>{{ 'dashboard.onboarding.step2'|trans }}</strong>
+                <small class="d-block text-muted">
+                    {% if step == 2 %}
+                        <ul>
+                            <li>
+                                <i class="bi bi-plus-circle-fill text-primary">
+
+                                </i>
+                                <a href="{{ path('app_hospital_new') }}">
+                                    {{
+                                        'dashboard.onboarding.hospital.create'|trans
+                                    }}
+                                </a>
+                            </li>
+                        </ul>
+                    {% elseif step == 3 %}
+                        <ul>
+                            <li>
+                                <i class="bi bi-check-circle-fill text-success">
+
+                                </i>
+                                {{
+                                    'dashboard.onboarding.hospital.success'|trans
+                                }}
+                            </li>
+                        </ul>
+                    {% endif %}
+                </small>
+            </span>
+        </label>
+        <label class="list-group-item d-flex gap-3">
+            {% if step <= 3 %}
+                <input class="form-check-input flex-shrink-0"
+                    type="checkbox"
+                    value=""
+                    disabled
+                    style="font-size: 1.375em;" />
+            {% else %}
+                <input class="form-check-input flex-shrink-0"
+                    type="checkbox"
+                    value=""
+                    disabled
+                    checked
+                    style="font-size: 1.375em;" />
+            {% endif %}
+            <span class="pt-1 form-checked-content">
+                <strong>{{ 'dashboard.onboarding.step3'|trans }}</strong>
+                {% if step == 3 %}
+                    <small class="d-block text-muted">
+                        <ul>
+                            <li>
+                                <i class="bi bi-plus-circle-fill text-primary">
+
+                                </i>
+                                <a href="{{ path('app_import_new') }}">
+                                    {{
+                                        'dashboard.onboarding.import.create'|trans
+                                    }}
+                                </a>
+                            </li>
+                        </ul>
+                    </small>
+                {% endif %}
+            </span>
+        </label>
+    </div>
+{% endif %}

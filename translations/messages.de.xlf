@@ -805,16 +805,12 @@
         <source>user.card.security.text</source>
         <target>Verwalten oder ändern Sie Ihr Passwort.</target>
       </trans-unit>
-      <trans-unit id="6qNM5OD" resname="default.title">
-        <source>default.title</source>
-        <target>Willkommen</target>
+      <trans-unit id="i07781n" resname="welcome.title">
+        <source>welcome.title</source>
+        <target>Willkommen bei </target>
       </trans-unit>
-      <trans-unit id="ILiv0v6" resname="default.welcome.title">
-        <source>default.welcome.title</source>
-        <target>Willkommen bei den kollaborativen IVENA Statistiken</target>
-      </trans-unit>
-      <trans-unit id="swglSDP" resname="default.welcome.text">
-        <source>default.welcome.text</source>
+      <trans-unit id="gTwEl6a" resname="welcome.text">
+        <source>welcome.text</source>
         <target>Dieses Projekt hat das Ziel Statistiken zur notfallmedizinischen Versorgungsforschung in Deutschland bereitzustellen. Grundlage hierfür sind Daten, welche auf Basis des IVENA-Systems zur Zuweisung von Patienten im Rettungsdienst genutzt werden.</target>
       </trans-unit>
       <trans-unit id="iOSoddH" resname="link.faq">
@@ -851,7 +847,7 @@
       </trans-unit>
       <trans-unit id="eRq1lRV" resname="dashboard.verify.text">
         <source>dashboard.verify.text</source>
-        <target>Da Sie noch nicht vollständig verifiziert worden sind, können Sie aktuell noch nicht auf alle Inhalte zugreifen. Sie können sich aber schon die öffentlichen Statistiken, sowie die häufig gestellten Fragen (FAQ) ansehen.</target>
+        <target>Da Sie noch nicht vollständig verifiziert worden sind, können Sie aktuell noch nicht auf alle Inhalte zugreifen.</target>
       </trans-unit>
       <trans-unit id="drag3Pb" resname="Change your Password">
         <source>Change your Password</source>
@@ -1463,7 +1459,7 @@
       </trans-unit>
       <trans-unit id="bkss3J_" resname="For full access to this project, you need to login. If you don´t already have a login you can register yourself.">
         <source>For full access to this project, you need to login. If you don´t already have a login you can register yourself.</source>
-        <target>Für vollständigen Zugriff auf die Plattform müssen Sie sich anmelden. Eine eigenständige Registrierung ist aktuell nicht möglich.</target>
+        <target>Für vollständigen Zugriff auf die Plattform müssen Sie sich anmelden, oder ein neues Benutzerkonto erstellen.</target>
       </trans-unit>
       <trans-unit id="q.sr6NJ" resname="Click here to Login">
         <source>Click here to Login</source>
@@ -1647,7 +1643,7 @@
       </trans-unit>
       <trans-unit id="JBwB1Vo" resname="PZC">
         <source>PZC</source>
-        <target>Zuweigungscode</target>
+        <target>Zuweisungscode</target>
       </trans-unit>
       <trans-unit id="6qRk1aA" resname="PZC Statistics">
         <source>PZC Statistics</source>
@@ -2247,7 +2243,7 @@
       </trans-unit>
       <trans-unit id="p_yRRVv" resname="For full access to this project, you need to login.">
         <source>For full access to this project, you need to login.</source>
-        <target>Für vollständigen Zugriff auf die Plattform müssen Sie sich anmelden, oder ein neues Benutzerkonto erstellen.</target>
+        <target>Für vollständigen Zugriff auf die Plattform müssen Sie sich anmelden. Eine eigenständige Registrierung ist aktuell nicht möglich.</target>
       </trans-unit>
       <trans-unit id="AxmKIcl" resname="View raw data">
         <source>View raw data</source>
@@ -2473,6 +2469,61 @@
       <trans-unit id="OS9hvz2" resname="flash.registration.success">
         <source>flash.registration.success</source>
         <target>Ihr Benutzerkonto wurde erfolgreich registriert! Eine E-Mail zur Bestätigung wurde an Ihre Addresse verschickt.</target>
+      <trans-unit id="prWzz68" resname="link.login.action">
+        <source>link.login.action</source>
+        <target>Zur Anmeldung</target>
+      </trans-unit>
+      <trans-unit id="LtlfR4W" resname="link.register.action">
+        <source>link.register.action</source>
+        <target>Neues Benutzerkonto erstellen</target>
+      </trans-unit>
+      <trans-unit id="2K6T9rI" resname="link.dashboard.action">
+        <source>link.dashboard.action</source>
+        <target>Zur Übersicht</target>
+      </trans-unit>
+      <trans-unit id="U8lNMZX" resname="dashboard.hospitals.by_user">
+        <source>dashboard.hospitals.by_user</source>
+        <target>Mit %count% Kliniken von Ihnen.</target>
+      </trans-unit>
+      <trans-unit id="m6C0sQG" resname="dashboard.verify.email.success">
+        <source>dashboard.verify.email.success</source>
+        <target>Ihre E-Mail Adresse ist bestätigt.</target>
+      </trans-unit>
+      <trans-unit id="UXm0DRD" resname="dashboard.verify.email.missing">
+        <source>dashboard.verify.email.missing</source>
+        <target>Ihre E-Mail Adresse ist noch NICHT bestätigt.</target>
+      </trans-unit>
+      <trans-unit id="Hh7n78Z" resname="dashboard.verify.account.success">
+        <source>dashboard.verify.account.success</source>
+        <target>Ihr Benutzerkonto wurde von einem Admin bestätigt.</target>
+      </trans-unit>
+      <trans-unit id="X2x1ZW3" resname="dashboard.verify.account.missing">
+        <source>dashboard.verify.account.missing</source>
+        <target>Ihr Benutzerkonto wurde noch NICHT von einem Admin bestätigt.</target>
+      </trans-unit>
+      <trans-unit id="FOJac5x" resname="dashboard.onboarding.step1">
+        <source>dashboard.onboarding.step1</source>
+        <target>Schritt 1: Verifizierung</target>
+      </trans-unit>
+      <trans-unit id="vnGd_1d" resname="dashboard.onboarding.step2">
+        <source>dashboard.onboarding.step2</source>
+        <target>Schritt 2: Erste Klinik erstellen</target>
+      </trans-unit>
+      <trans-unit id="F2OxgKI" resname="dashboard.onboarding.hospital.create">
+        <source>dashboard.onboarding.hospital.create</source>
+        <target>Klicken Sie hier um Ihre erste Klinik zu erstellen.</target>
+      </trans-unit>
+      <trans-unit id="ynrF977" resname="dashboard.onboarding.hospital.success">
+        <source>dashboard.onboarding.hospital.success</source>
+        <target>Erste Klinik wurde erfolgreich erstellt.</target>
+      </trans-unit>
+      <trans-unit id="mcBZSVe" resname="dashboard.onboarding.step3">
+        <source>dashboard.onboarding.step3</source>
+        <target>Schritt 3: Ersten Import erstellen</target>
+      </trans-unit>
+      <trans-unit id="FthLGGY" resname="dashboard.onboarding.import.create">
+        <source>dashboard.onboarding.import.create</source>
+        <target>Klicken Sie hier, um den ersten Import durchzuführen.</target>
       </trans-unit>
     </body>
   </file>
