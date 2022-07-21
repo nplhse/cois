@@ -1,0 +1,31 @@
+{% extends 'emails/base.twig' %}
+
+{% block content %}
+    <h1>
+        {{
+            'confirm.email.heading'|trans(
+                {
+                    '%appTitle%': app_title
+                },
+                'emails'
+            )
+        }}
+    </h1>
+
+    <p class="lead">
+        {{ 'confirm.email.text'|trans({}, 'emails') }}
+    </p>
+
+    <p class="text-center">
+        <a class="btn btn-primary" href="{{ signedUrl }}" role="button">
+            {{ 'confirm.email.btn'|trans({}, 'emails') }}
+        </a>
+    </p>
+
+    <p>
+        {{ 'confirm.email.action'|trans({}, 'emails') }}
+        {{
+            expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle')
+        }}.
+    </p>
+{% endblock %}

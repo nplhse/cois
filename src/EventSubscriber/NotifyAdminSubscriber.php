@@ -11,10 +11,16 @@ use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class NotifyAdminSubscriber implements EventSubscriberInterface
 {
     private UserRepositoryInterface $userRepository;
+
+    private TranslatorInterface $translator;
+
+    private UrlGeneratorInterface $router;
 
     private MailerInterface $mailer;
 
@@ -22,9 +28,11 @@ class NotifyAdminSubscriber implements EventSubscriberInterface
 
     private string $mailerFrom;
 
-    public function __construct(UserRepositoryInterface $userRepository, MailerInterface $mailer, string $appMailerSender, string $appMailerFrom)
+    public function __construct(UserRepositoryInterface $userRepository, TranslatorInterface $translator, UrlGeneratorInterface $router, MailerInterface $mailer, string $appMailerSender, string $appMailerFrom)
     {
         $this->userRepository = $userRepository;
+        $this->translator = $translator;
+        $this->router = $router;
         $this->mailer = $mailer;
         $this->mailerSender = $appMailerSender;
         $this->mailerFrom = $appMailerFrom;
@@ -98,9 +106,15 @@ class NotifyAdminSubscriber implements EventSubscriberInterface
                 ->from(new Address($this->mailerSender, $this->mailerFrom))
                 ->to(new Address($admin->getEmail()))
                 ->importance(NotificationEmail::IMPORTANCE_MEDIUM)
-                ->subject('A new User has been created')
-                ->htmlTemplate('emails/notification/user_new.inky.twig')
-                ->context(['user' => $user]);
+                ->subject($this->translator->trans('notification.user.new.title', [], 'emails'))
+                ->htmlTemplate('emails/notification/user_new.twig')
+                ->action($this->translator->trans('notification.user.new.btn.review', [], 'emails'), $this->router->generate('app_settings_user_show', ['id' => $user->getId()], UrlGeneratorInterface::ABSOLUTE_URL))
+                ->context(
+                    [
+                        'username' => $user->getUsername(),
+                        'userEmail' => $user->getEmail(),
+                    ]
+                );
 
             $this->mailer->send($email);
         }

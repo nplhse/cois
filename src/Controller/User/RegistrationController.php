@@ -16,11 +16,16 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route(path: 'register')]
 class RegistrationController extends AbstractController
 {
-    public function __construct(private MessageBusInterface $messageBus, private bool $appRegistration, private bool $appTerms)
+    public function __construct(
+        private MessageBusInterface $messageBus,
+        private TranslatorInterface $translator,
+        private bool $appRegistration,
+        private bool $appTerms)
     {
     }
 
@@ -47,7 +52,11 @@ class RegistrationController extends AbstractController
             try {
                 $this->messageBus->dispatch($command);
             } catch (HandlerFailedException) {
-                $this->addFlash('danger', 'Sorry, something went wrong. Please try again later!');
+                $this->addFlash('danger', $this->translator->trans('flash.registration.failure'));
+
+                return $this->render('registration/register.html.twig', [
+                    'registrationForm' => $form->createView(),
+                ]);
             }
 
             /** @var ?UserInterface $user */
@@ -56,6 +65,8 @@ class RegistrationController extends AbstractController
             if (null === $user) {
                 throw new \RuntimeException('Sorry, something went wrong. Please try again later.');
             }
+
+            $this->addFlash('success', $this->translator->trans('flash.registration.success'));
 
             return $userAuthenticator->authenticateUser(
                 $user,

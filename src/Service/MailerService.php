@@ -2,12 +2,14 @@
 
 namespace App\Service;
 
+use App\Domain\Contracts\UserInterface;
 use App\Entity\User;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\ResetPassword\Model\ResetPasswordToken;
 
 class MailerService
@@ -16,14 +18,17 @@ class MailerService
 
     private RouterInterface $router;
 
+    private TranslatorInterface $translator;
+
     private string $mailerSender;
 
     private string $mailerFrom;
 
-    public function __construct(MailerInterface $mailer, RouterInterface $router, string $appMailerSender, string $appMailerFrom)
+    public function __construct(MailerInterface $mailer, RouterInterface $router, TranslatorInterface $translator, string $appMailerSender, string $appMailerFrom)
     {
         $this->mailer = $mailer;
         $this->router = $router;
+        $this->translator = $translator;
         $this->mailerSender = $appMailerSender;
         $this->mailerFrom = $appMailerFrom;
     }
@@ -71,6 +76,22 @@ class MailerService
                 'user' => $user,
                 'signedUrl' => $signedUrl,
                 'expiration' => '3600',
+            ]);
+
+        $this->mailer->send($email);
+    }
+
+    public function sendPromotionEmail(UserInterface $user): void
+    {
+        $email = (new TemplatedEmail())
+            ->to(new Address($user->getEmail()))
+            ->from(new Address($this->mailerSender, $this->mailerFrom))
+            ->replyTo($this->mailerSender)
+            ->subject($this->translator->trans('account.promoted.title', [], 'emails'))
+            ->htmlTemplate('emails/user/promoted.twig')
+            ->context([
+                'user' => $user,
+                'targetUrl' => $this->router->generate('app_dashboard', [], UrlGenerator::ABSOLUTE_URL),
             ]);
 
         $this->mailer->send($email);

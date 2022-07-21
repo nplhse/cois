@@ -24,7 +24,7 @@
                         style="border-collapse: collapse;">
                         <tr>
                             <td style="padding: 10px 0 20px 0;">
-                                <h1 class="display-5">
+                                <h1 class="display-6 text-dark">
                                     <a href="{{ url('app_dashboard') }}">
                                         {{ app_title }}
                                     </a>
@@ -39,26 +39,16 @@
                                 {% endblock %}
 
                                 <p>
-                                    {{ 'Cheers,'|trans({}, 'emails') }}<br />
-                                    {{
-                                        'Your friendly COIS-Team.'|trans(
-                                            {},
-                                            'emails'
-                                        )
-                                    }}
+                                    {{ 'footer.cheers'|trans({}, 'emails') }}<br />
+                                    {{ 'footer.team'|trans({}, 'emails') }}
                                 </p>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <p style="color: #c0c0c0">
-                                    {{
-                                        'You are recieving this E-Mail because it was '|trans(
-                                            {},
-                                            'emails'
-                                        )
-                                    }}
-                                </p>
+                                <small style="color: #c0c0c0">
+                                    {{ 'footer.legal'|trans({}, 'emails') }}
+                                </small>
                             </td>
                         </tr>
                     </table>
