@@ -28,6 +28,27 @@ jobs:
             - name: Validate main `composer.json` and `composer.lock` files
               run: composer validate --no-check-version
 
+            - name: Cache node_modules
+              uses: actions/cache@v1
+              id: yarn-cache-node-modules
+              with:
+                  path: node_modules
+                  key: ${{ runner.os }}-yarn-cache-node-modules-${{ hashFiles('**/yarn.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-yarn-cache-node-modules-
+
+            - name: Yarn install
+              if: steps.yarn-cache-node-modules.outputs.cache-hit != 'true'
+              run: |
+                  yarn install
+                  yarn encore dev
+
+            - name: Analyse JS (ESLint)
+              run: yarn run eslint assets
+
+            - name: Analyse JS Style (Pettier)
+              run: yarn run prettier --check .
+
             - name: Cache Composer packages
               id: composer-cache
               uses: actions/cache@v2
@@ -47,25 +68,6 @@ jobs:
 
             - name: Analyse PHP Code (Psalm)
               run: vendor/bin/psalm
-
-            - name: Cache node_modules
-              uses: actions/cache@v1
-              id: yarn-cache-node-modules
-              with:
-                  path: node_modules
-                  key: ${{ runner.os }}-yarn-cache-node-modules-${{ hashFiles('**/yarn.lock') }}
-                  restore-keys: |
-                      ${{ runner.os }}-yarn-cache-node-modules-
-
-            - name: Yarn install
-              if: steps.yarn-cache-node-modules.outputs.cache-hit != 'true'
-              run: yarn install
-
-            - name: Analyse JS (ESLint)
-              run: yarn run eslint assets
-
-            - name: Analyse JS Style (Pettier)
-              run: yarn run prettier --check .
 
     tests:
         name: Tests (PHP ${{ matrix.php-versions }})
