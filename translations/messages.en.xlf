@@ -2409,6 +2409,30 @@
         <source>dashboard.verify.account.missing</source>
         <target>Your Account has NOT been confirmed by an admin.</target>
       </trans-unit>
+      <trans-unit id="FOJac5x" resname="dashboard.onboarding.step1">
+        <source>dashboard.onboarding.step1</source>
+        <target>Step 1: Verficiation</target>
+      </trans-unit>
+      <trans-unit id="vnGd_1d" resname="dashboard.onboarding.step2">
+        <source>dashboard.onboarding.step2</source>
+        <target>Step 2: Create first Hospital</target>
+      </trans-unit>
+      <trans-unit id="F2OxgKI" resname="dashboard.onboarding.hospital.create">
+        <source>dashboard.onboarding.hospital.create</source>
+        <target>Click here to create your very first Hospital.</target>
+      </trans-unit>
+      <trans-unit id="ynrF977" resname="dashboard.onboarding.hospital.success">
+        <source>dashboard.onboarding.hospital.success</source>
+        <target>Your first Hospital has been created sucessfully.</target>
+      </trans-unit>
+      <trans-unit id="mcBZSVe" resname="dashboard.onboarding.step3">
+        <source>dashboard.onboarding.step3</source>
+        <target>Step 3: Create first Import</target>
+      </trans-unit>
+      <trans-unit id="FthLGGY" resname="dashboard.onboarding.import.create">
+        <source>dashboard.onboarding.import.create</source>
+        <target>Click here to create the first Import for your Hospital.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

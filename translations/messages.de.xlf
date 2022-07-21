@@ -2486,6 +2486,30 @@
         <source>dashboard.verify.account.missing</source>
         <target>Ihr Benutzerkonto wurde noch NICHT von einem Admin bestätigt.</target>
       </trans-unit>
+      <trans-unit id="FOJac5x" resname="dashboard.onboarding.step1">
+        <source>dashboard.onboarding.step1</source>
+        <target>Schritt 1: Verifizierung</target>
+      </trans-unit>
+      <trans-unit id="vnGd_1d" resname="dashboard.onboarding.step2">
+        <source>dashboard.onboarding.step2</source>
+        <target>Schritt 2: Erste Klinik erstellen</target>
+      </trans-unit>
+      <trans-unit id="F2OxgKI" resname="dashboard.onboarding.hospital.create">
+        <source>dashboard.onboarding.hospital.create</source>
+        <target>Klicken Sie hier um Ihre erste Klinik zu erstellen.</target>
+      </trans-unit>
+      <trans-unit id="ynrF977" resname="dashboard.onboarding.hospital.success">
+        <source>dashboard.onboarding.hospital.success</source>
+        <target>Erste Klinik wurde erfolgreich erstellt.</target>
+      </trans-unit>
+      <trans-unit id="mcBZSVe" resname="dashboard.onboarding.step3">
+        <source>dashboard.onboarding.step3</source>
+        <target>Schritt 3: Ersten Import erstellen</target>
+      </trans-unit>
+      <trans-unit id="FthLGGY" resname="dashboard.onboarding.import.create">
+        <source>dashboard.onboarding.import.create</source>
+        <target>Klicken Sie hier, um den ersten Import durchzuführen.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
