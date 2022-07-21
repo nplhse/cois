@@ -68,27 +68,31 @@
             <span class="pt-1 form-checked-content">
                 <strong>{{ 'dashboard.onboarding.step2'|trans }}</strong>
                 <small class="d-block text-muted">
-                            {% if step == 2 %}
-                                <ul>
-                        <li>
+                    {% if step == 2 %}
+                        <ul>
+                            <li>
                                 <i class="bi bi-plus-circle-fill text-primary">
 
                                 </i>
                                 <a href="{{ path('app_hospital_new') }}">
-                                    {{ 'dashboard.onboarding.hospital.create'|trans }}
+                                    {{
+                                        'dashboard.onboarding.hospital.create'|trans
+                                    }}
                                 </a>
                             </li>
-                    </ul>
-                            {% elseif step == 3 %}
-                                <ul>
-                        <li>
+                        </ul>
+                    {% elseif step == 3 %}
+                        <ul>
+                            <li>
                                 <i class="bi bi-check-circle-fill text-success">
 
                                 </i>
-                                {{ 'dashboard.onboarding.hospital.success'|trans }}
-                                </li>
-                    </ul>
-                            {% endif %}
+                                {{
+                                    'dashboard.onboarding.hospital.success'|trans
+                                }}
+                            </li>
+                        </ul>
+                    {% endif %}
                 </small>
             </span>
         </label>
@@ -117,7 +121,9 @@
 
                                 </i>
                                 <a href="{{ path('app_import_new') }}">
-                                    {{ 'dashboard.onboarding.import.create'|trans }}
+                                    {{
+                                        'dashboard.onboarding.import.create'|trans
+                                    }}
                                 </a>
                             </li>
                         </ul>
