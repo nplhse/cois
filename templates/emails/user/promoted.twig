@@ -1,0 +1,24 @@
+{% extends 'emails/base.twig' %}
+
+{% block content %}
+    <h1>
+        {{
+            'account.verified.email.heading'|trans(
+                {
+                    '%username%': user.username
+                },
+                'emails'
+            )
+        }}
+    </h1>
+
+    <p class="lead">
+        {{ 'account.verified.text'|trans({}, 'emails') }}
+    </p>
+
+    <p class="text-center">
+        <a class="btn btn-primary" href="{{ targetUrl }}" role="button">
+            {{ 'account.verified.btn'|trans({}, 'emails') }}
+        </a>
+    </p>
+{% endblock %}

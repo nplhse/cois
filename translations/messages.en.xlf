@@ -2377,6 +2377,22 @@
         <source>Repeat Password</source>
         <target>Repeat Password</target>
       </trans-unit>
+      <trans-unit id="Z4delRH" resname="notification.user.new">
+        <source>notification.user.new</source>
+        <target>A new User with the username %username% and the E-Mail address %userEmail% has registered.</target>
+      </trans-unit>
+      <trans-unit id="dmU.Nyg" resname="notification.user.new.btn.review">
+        <source>notification.user.new.btn.review</source>
+        <target>Review User</target>
+      </trans-unit>
+      <trans-unit id="b9Oc3SR" resname="flash.registration.failure">
+        <source>flash.registration.failure</source>
+        <target>Sorry! Something went wrong with your registration. Please try again later, or contact an administrator.</target>
+      </trans-unit>
+      <trans-unit id="OS9hvz2" resname="flash.registration.success">
+        <source>flash.registration.success</source>
+        <target>Your account has been registered successfully! An email has been sent to you to confirm the registration.</target>
+      </trans-unit>
       <trans-unit id="prWzz68" resname="link.login.action">
         <source>link.login.action</source>
         <target>Click here to Login</target>

@@ -40,14 +40,6 @@ jobs:
             - name: Install Dependencies
               run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-            - name: Analyse PHP Code (PHPStan)
-              run: |
-                  php bin/console cache:warmup
-                  vendor/bin/phpstan analyse
-
-            - name: Analyse PHP Code (Psalm)
-              run: vendor/bin/psalm
-
             - name: Cache node_modules
               uses: actions/cache@v1
               id: yarn-cache-node-modules
@@ -61,11 +53,22 @@ jobs:
               if: steps.yarn-cache-node-modules.outputs.cache-hit != 'true'
               run: yarn install
 
+            - name: Run Webpack (as dev)
+              run: yarn encore dev
+
             - name: Analyse JS (ESLint)
               run: yarn run eslint assets
 
             - name: Analyse JS Style (Pettier)
               run: yarn run prettier --check .
+
+            - name: Analyse PHP Code (PHPStan)
+              run: |
+                  php bin/console cache:warmup
+                  vendor/bin/phpstan analyse
+
+            - name: Analyse PHP Code (Psalm)
+              run: vendor/bin/psalm
 
     tests:
         name: Tests (PHP ${{ matrix.php-versions }})

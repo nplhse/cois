@@ -119,6 +119,70 @@
         <source>View import</source>
         <target>View import</target>
       </trans-unit>
+      <trans-unit id="obpZrpz" resname="confirm.email.title">
+        <source>confirm.email.title</source>
+        <target>Please confirm your E-Mail address</target>
+      </trans-unit>
+      <trans-unit id="Z4delRH" resname="notification.user.new">
+        <source>notification.user.new</source>
+        <target>A new User has been created with the username %username% and the E-Mail address %userEmail%.</target>
+      </trans-unit>
+      <trans-unit id="dmU.Nyg" resname="notification.user.new.btn.review">
+        <source>notification.user.new.btn.review</source>
+        <target>Review User</target>
+      </trans-unit>
+      <trans-unit id="nyEpnYg" resname="confirm.email.heading">
+        <source>confirm.email.heading</source>
+        <target>Please confirm your E-Mail address</target>
+      </trans-unit>
+      <trans-unit id="R.SKKVe" resname="confirm.email.text">
+        <source>confirm.email.text</source>
+        <target>Welcome to our website! To complete your registration you need to confirm your e-mail address and be verified by an administrator.</target>
+      </trans-unit>
+      <trans-unit id="XsD.ae0" resname="confirm.email.btn">
+        <source>confirm.email.btn</source>
+        <target>Confirm my E-Mail address</target>
+      </trans-unit>
+      <trans-unit id="uZy6Pzw" resname="footer.cheers">
+        <source>footer.cheers</source>
+        <target>Cheers,</target>
+      </trans-unit>
+      <trans-unit id="yVNEPwn" resname="footer.team">
+        <source>footer.team</source>
+        <target>Your friendly team.</target>
+      </trans-unit>
+      <trans-unit id="wNnQCIQ" resname="footer.legal">
+        <source>footer.legal</source>
+        <target>You are receiving this E-Mail because your address is connected to an user account. If you do not want E-Mails from us, please contact an administrator.</target>
+      </trans-unit>
+      <trans-unit id="YNz5pyw" resname="notification.user.new.title">
+        <source>notification.user.new.title</source>
+        <target>A new User has registered</target>
+      </trans-unit>
+      <trans-unit id="Qraz0_0" resname="confirm.email.action">
+        <source>confirm.email.action</source>
+        <target>The link from this e-mail is valid for:</target>
+      </trans-unit>
+      <trans-unit id="KSQTwT3" resname="account.verified.title">
+        <source>account.verified.title</source>
+        <target>Your account has been verified</target>
+      </trans-unit>
+      <trans-unit id="5JCkYmh" resname="account.promoted.title">
+        <source>account.promoted.title</source>
+        <target>Your account has been confirmed</target>
+      </trans-unit>
+      <trans-unit id="D_UI_k2" resname="account.verified.email.heading">
+        <source>account.verified.email.heading</source>
+        <target>Welcome %username%</target>
+      </trans-unit>
+      <trans-unit id="NFnbIWS" resname="account.verified.text">
+        <source>account.verified.text</source>
+        <target>Your account has been verified by an administrator, and you are now free to use the whole plattform.</target>
+      </trans-unit>
+      <trans-unit id="C6qyrhs" resname="account.verified.btn">
+        <source>account.verified.btn</source>
+        <target>Go to dashboard</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

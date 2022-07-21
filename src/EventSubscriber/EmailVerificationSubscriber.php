@@ -9,14 +9,24 @@ use App\Security\EmailVerifier;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mime\Address;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class EmailVerificationSubscriber implements EventSubscriberInterface
 {
     private EmailVerifier $emailVerifier;
 
-    public function __construct(EmailVerifier $emailVerifier)
+    private TranslatorInterface $translator;
+
+    private string $mailerSender;
+
+    private string $mailerFrom;
+
+    public function __construct(EmailVerifier $emailVerifier, TranslatorInterface $translator, string $appMailerSender, string $appMailerFrom)
     {
         $this->emailVerifier = $emailVerifier;
+        $this->translator = $translator;
+        $this->mailerSender = $appMailerSender;
+        $this->mailerFrom = $appMailerFrom;
     }
 
     public function onUserRegistered(UserRegisteredEvent $event): void
@@ -26,10 +36,10 @@ class EmailVerificationSubscriber implements EventSubscriberInterface
         // generate a signed url and email it to the user
         $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
             (new TemplatedEmail())
-                ->from(new Address('noreply@example.com', 'Collaborative IVENA statistics'))
-                ->to($user->getEmail())
-                ->subject('Please Confirm your Email')
-                ->htmlTemplate('emails/user/confirmation_email.inky.twig')
+                ->from(new Address($this->mailerSender, $this->mailerFrom))
+                ->to(new Address($user->getEmail()))
+                ->subject($this->translator->trans('confirm.email.title', [], 'emails'))
+                ->htmlTemplate('emails/user/confirmation_email.twig')
         );
     }
 
@@ -40,10 +50,10 @@ class EmailVerificationSubscriber implements EventSubscriberInterface
         // generate a signed url and email it to the user
         $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
             (new TemplatedEmail())
-                ->from(new Address('noreply@example.com', 'Collaborative IVENA statistics'))
-                ->to($user->getEmail())
-                ->subject('Please Confirm your Email')
-                ->htmlTemplate('emails/user/confirmation_email.inky.twig')
+                ->from(new Address($this->mailerSender, $this->mailerFrom))
+                ->to(new Address($user->getEmail()))
+                ->subject($this->translator->trans('confirm.email.title', [], 'emails'))
+                ->htmlTemplate('emails/user/verify_email.twig')
         );
     }
 

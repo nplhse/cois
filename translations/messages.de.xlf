@@ -2454,6 +2454,22 @@
         <source>Repeat Password</source>
         <target>Passwort wiederholen</target>
       </trans-unit>
+      <trans-unit id="Z4delRH" resname="notification.user.new">
+        <source>notification.user.new</source>
+        <target>Ein neuer Benutzer mit dem Benutzernamen %username% und der E-Mail Adresse %userEmail% hat sich registriert.</target>
+      </trans-unit>
+      <trans-unit id="dmU.Nyg" resname="notification.user.new.btn.review">
+        <source>notification.user.new.btn.review</source>
+        <target>Benutzer ansehen</target>
+      </trans-unit>
+      <trans-unit id="b9Oc3SR" resname="flash.registration.failure">
+        <source>flash.registration.failure</source>
+        <target>Die Registrierung ist leider fehlgeschlagen, bitte versuchen Sie es später erneut oder kontaktieren Sie einen Administrator.</target>
+      </trans-unit>
+      <trans-unit id="OS9hvz2" resname="flash.registration.success">
+        <source>flash.registration.success</source>
+        <target>Ihr Benutzerkonto wurde erfolgreich registriert! Eine E-Mail zur Bestätigung wurde an Ihre Addresse verschickt.</target>
+      </trans-unit>
       <trans-unit id="prWzz68" resname="link.login.action">
         <source>link.login.action</source>
         <target>Zur Anmeldung</target>

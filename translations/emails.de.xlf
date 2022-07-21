@@ -118,6 +118,66 @@
         <source>View import</source>
         <target>Import ansehen</target>
       </trans-unit>
+      <trans-unit id="obpZrpz" resname="confirm.email.title">
+        <source>confirm.email.title</source>
+        <target>Bitte bestätigen Sie ihre E-Mail Adresse</target>
+      </trans-unit>
+      <trans-unit id="Z4delRH" resname="notification.user.new">
+        <source>notification.user.new</source>
+        <target>Ein neuer Benutzer mit dem Benutzernamen %username% und der E-Mail Adresse %userEmail% hat sich registriert.</target>
+      </trans-unit>
+      <trans-unit id="dmU.Nyg" resname="notification.user.new.btn.review">
+        <source>notification.user.new.btn.review</source>
+        <target>Benutzer ansehen</target>
+      </trans-unit>
+      <trans-unit id="nyEpnYg" resname="confirm.email.heading">
+        <source>confirm.email.heading</source>
+        <target>Bitte bestätigen Sie Ihre E-Mail Adresse</target>
+      </trans-unit>
+      <trans-unit id="R.SKKVe" resname="confirm.email.text">
+        <source>confirm.email.text</source>
+        <target>Herzlich willkommen auf unserer Seite! Damit die Registrierung abgeschlossen werden kann, müssen Sie zunächst Ihre E-Mail-Adresse bestätigen und zusätzlich von einem Administrator verifiziert werden.</target>
+      </trans-unit>
+      <trans-unit id="XsD.ae0" resname="confirm.email.btn">
+        <source>confirm.email.btn</source>
+        <target>Meine E-Mail Adresse bestätigen</target>
+      </trans-unit>
+      <trans-unit id="uZy6Pzw" resname="footer.cheers">
+        <source>footer.cheers</source>
+        <target>Viele Grüße,</target>
+      </trans-unit>
+      <trans-unit id="yVNEPwn" resname="footer.team">
+        <source>footer.team</source>
+        <target>Das Team</target>
+      </trans-unit>
+      <trans-unit id="wNnQCIQ" resname="footer.legal">
+        <source>footer.legal</source>
+        <target>Sie haben diese E-Mail erhalten, weil diese mit einem Benutzerkonto auf unserer Plattform verknüpft ist. Wenn Sie dies nicht wünschen, wenden Sie sich bitte an einen Administrator unserer Seite.</target>
+      </trans-unit>
+      <trans-unit id="YNz5pyw" resname="notification.user.new.title">
+        <source>notification.user.new.title</source>
+        <target>Ein neuer Benutzer hat sich registriert</target>
+      </trans-unit>
+      <trans-unit id="Qraz0_0" resname="confirm.email.action">
+        <source>confirm.email.action</source>
+        <target>Der Link aus dieser E-Mail ist gültig für:</target>
+      </trans-unit>
+      <trans-unit id="5JCkYmh" resname="account.promoted.title">
+        <source>account.promoted.title</source>
+        <target>Ihr Benutzerkonto wurde bestätigt</target>
+      </trans-unit>
+      <trans-unit id="D_UI_k2" resname="account.verified.email.heading">
+        <source>account.verified.email.heading</source>
+        <target>Willkommen %username%!</target>
+      </trans-unit>
+      <trans-unit id="NFnbIWS" resname="account.verified.text">
+        <source>account.verified.text</source>
+        <target>Ihr Benutzerkonto wurde von einem Administrator bestätigt, Sie können nun den vollen Umfang der Funktionen benutzen.</target>
+      </trans-unit>
+      <trans-unit id="C6qyrhs" resname="account.verified.btn">
+        <source>account.verified.btn</source>
+        <target>Zur Seite gehen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
