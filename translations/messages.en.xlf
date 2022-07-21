@@ -2392,6 +2392,7 @@
       <trans-unit id="OS9hvz2" resname="flash.registration.success">
         <source>flash.registration.success</source>
         <target>Your account has been registered successfully! An email has been sent to you to confirm the registration.</target>
+      </trans-unit>
       <trans-unit id="prWzz68" resname="link.login.action">
         <source>link.login.action</source>
         <target>Click here to Login</target>
