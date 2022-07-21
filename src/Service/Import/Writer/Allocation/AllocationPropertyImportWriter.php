@@ -35,11 +35,6 @@ class AllocationPropertyImportWriter implements \App\Application\Contract\Alloca
         ['key' => 'Patienten-?bergabepunkt (P?P)', 'target' => 'HandoverPoint'],
     ];
 
-    public static function getPriority(): int
-    {
-        return 50;
-    }
-
     public function process(Allocation $entity, array $row, ImportInterface $import): ?object
     {
         /** @var Allocation $entity */
@@ -49,6 +44,22 @@ class AllocationPropertyImportWriter implements \App\Application\Contract\Alloca
         $entity = $this->setDirectParameters($entity, $row);
 
         return $entity;
+    }
+
+    public function setTimes(Allocation $allocation, array $row): Allocation
+    {
+        $allocation->setCreatedAt(new \DateTime($row['Datum (Erstellungsdatum)'].' '.$row['Uhrzeit (Erstellungsdatum)']));
+        $allocation->setArrivalAt(new \DateTime($row['Datum (Eintreffzeit)'].' '.$row['Uhrzeit (Eintreffzeit)']));
+
+        return $allocation;
+    }
+
+    public function setDemographicData(Allocation $allocation, array $row): Allocation
+    {
+        $allocation->setGender($row['Geschlecht']);
+        $allocation->setAge((int) $row['Alter']);
+
+        return $allocation;
     }
 
     public function setSimpleParameters(Allocation $allocation, array $row): Allocation

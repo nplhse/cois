@@ -1,26 +1,14 @@
 <?php
 
-namespace App\Service\Import\Writer;
+namespace App\Service\Import\Writer\Allocation;
 
 use App\Application\Exception\ImportWriteException;
 use App\Domain\Contracts\ImportInterface;
 use App\Entity\Allocation;
 
-class AllocationBaseWriter
+class AllocationBaseWriter implements \App\Application\Contract\AllocationImportWriterInterface
 {
-    public const Data_Type = 'allocation';
-
-    public static function getDataType(): string
-    {
-        return self::Data_Type;
-    }
-
-    public static function getPriority(): int
-    {
-        return 100;
-    }
-
-    public function processData(?object $entity, array $row, ImportInterface $import): ?object
+    public function process(?object $entity, array $row, ImportInterface $import): ?object
     {
         if ($this->checkIfRowIsFromMANV($row)) {
             throw new ImportWriteException('This row is related to a MANV, which is not currently supported.');

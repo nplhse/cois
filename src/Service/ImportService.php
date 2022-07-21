@@ -5,7 +5,6 @@ namespace App\Service;
 use App\Application\Contract\ImportReaderInterface;
 use App\Application\Contract\ImportWriterInterface;
 use App\Application\Exception\ImportReaderNotFoundException;
-use App\Application\Exception\ImportValidationException;
 use App\Application\Exception\ImportWriteException;
 use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Event\Import\ImportFailedEvent;
@@ -16,7 +15,6 @@ use App\Helper\StatisticsHelper;
 use App\Repository\AllocationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ImportService
 {
@@ -40,16 +38,13 @@ class ImportService
 
     private Stopwatch $stopwatch;
 
-    private ValidatorInterface $validator;
-
-    public function __construct(EntityManagerInterface $entityManager, Stopwatch $stopwatch, ValidatorInterface $validator, iterable $importReader, iterable $importWriter)
+    public function __construct(EntityManagerInterface $entityManager, Stopwatch $stopwatch, iterable $importReader, iterable $importWriter)
     {
         // Important: Disable SQL logging!
         $this->em = $entityManager;
         $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
 
         $this->stopwatch = $stopwatch;
-        $this->validator = $validator;
 
         $this->importReader = $importReader instanceof \Traversable ? iterator_to_array($importReader) : $importReader;
         $this->importWriter = $importWriter instanceof \Traversable ? iterator_to_array($importWriter) : $importWriter;
@@ -86,23 +81,7 @@ class ImportService
 
                 try {
                     foreach ($activeWriters as $writer) {
-                        // First row includes headers
-                        if (1 === $iteration) {
-                            $writer->addHeaders($row);
-                            continue;
-                        }
-
                         $entity = $writer->processData($row, $import);
-                        $errors = $this->validator->validate($entity);
-
-                        if (count($errors) > 0) {
-                            $errorMessage = '';
-                            foreach ($errors as $error) {
-                                $errorMessage = $error->getMessage()."\n";
-                            }
-
-                            throw new ImportValidationException($errorMessage);
-                        }
 
                         $this->em->persist($entity);
 

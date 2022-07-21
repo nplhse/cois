@@ -85,6 +85,11 @@ services:
         arguments:
             - '@doctrine.orm.entity_manager'
             - '@debug.stopwatch'
-            - '@validator'
             - !tagged_iterator { tag: "app.import_reader", default_index_method: "getFileType" }
             - !tagged_iterator { tag: "app.import_writer", default_priority_method: "getPriority" }
+
+    App\Service\Import\Writer\AllocationImportWriter:
+        class: 'App\Service\Import\Writer\AllocationImportWriter'
+        arguments:
+            - !tagged_iterator { tag: "app.allocation_import_writer" }
+            - '@validator'
