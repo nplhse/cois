@@ -47,8 +47,8 @@ class RegistrationTest extends WebTestCase
             ->assertOn('/dashboard/')
             ->assertSee('Logged in as: newUser')
             ->assertSeeIn('h1', 'Welcome to Collaborative IVENA statistics')
-            ->assertSee('Your E-Mail is not verified')
-            ->assertSee('Account has not been confirmed by admin.')
+            ->assertSee('Your E-Mail address has NOT been verified.')
+            ->assertSee('Your Account has NOT been confirmed by an admin.')
         ;
     }
 }

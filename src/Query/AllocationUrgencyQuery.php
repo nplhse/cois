@@ -22,9 +22,9 @@ final class AllocationUrgencyQuery
         $qb = $this->entityManager->createQueryBuilder();
 
         $qb->select(
-                'allocation.urgency AS urgency',
-                'COUNT(allocation.urgency) AS counter'
-            )
+            'allocation.urgency AS urgency',
+            'COUNT(allocation.urgency) AS counter'
+        )
                 ->where('allocation.urgency IS NOT NULL')
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.urgency')

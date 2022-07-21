@@ -35,9 +35,9 @@ final class AllocationQuery
                 ->addOrderBy('allocation.creationWeekday', \Doctrine\Common\Collections\Criteria::DESC);
         } elseif ('gender' === $this->property) {
             $qb->select(
-                    'allocation.gender',
-                    'COUNT(allocation.gender) AS counter'
-                )
+                'allocation.gender',
+                'COUNT(allocation.gender) AS counter'
+            )
                 ->from(Allocation::class, 'allocation')
                 ->groupBy('allocation.gender')
                 ->addOrderBy('allocation.gender', \Doctrine\Common\Collections\Criteria::DESC);

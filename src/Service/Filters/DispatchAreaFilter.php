@@ -73,7 +73,7 @@ class DispatchAreaFilter implements FilterInterface
         $qb->leftJoin($arguments[FilterService::ENTITY_ALIAS].'dispatchArea', 'dispatchArea')
             ->andWhere('dispatchArea.id = :dispatchArea')
                 ->setParameter('dispatchArea', $area)
-            ;
+        ;
 
         return $qb;
     }

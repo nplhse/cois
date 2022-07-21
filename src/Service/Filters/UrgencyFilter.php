@@ -55,7 +55,7 @@ class UrgencyFilter implements FilterInterface
 
         $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'urgency = :urgency')
                 ->setParameter('urgency', $urgency)
-            ;
+        ;
 
         return $qb;
     }

@@ -37,7 +37,7 @@ class InfectionFilter implements FilterInterface
 
         $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'isInfectious = :isInfectious')
                 ->setParameter('isInfectious', $infection)
-            ;
+        ;
 
         return $qb;
     }

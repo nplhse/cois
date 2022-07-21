@@ -81,17 +81,17 @@ class UserFilter implements FilterInterface
 
             return $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'user = :user')
                 ->setParameter('user', $user)
-                ;
+            ;
         }
 
         if (!isset($user)) {
             return $qb->orWhere($arguments[FilterService::ENTITY_ALIAS].'user = :user')
                 ->setParameter('user', $this->security->getUser())
-                ;
+            ;
         }
 
         return $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'user = :user')
             ->setParameter('user', $this->security->getUser())
-            ;
+        ;
     }
 }

@@ -73,7 +73,7 @@ class SupplyAreaFilter implements FilterInterface
         $qb->leftJoin($arguments[FilterService::ENTITY_ALIAS].'supplyArea', 'supplyArea')
             ->andWhere('supplyArea.id = :supplyArea')
                 ->setParameter('supplyArea', $area)
-            ;
+        ;
 
         return $qb;
     }

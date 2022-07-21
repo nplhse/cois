@@ -56,10 +56,10 @@ class WelcomeControllerTest extends WebTestCase
 
         $this->browser()
             ->visit('/')
-            ->assertContains('4 Users')
-            ->assertContains('2 Hospitals')
-            ->assertContains('7 Allocations')
-            ->assertContains('6 Imports')
+            ->assertContains('4')
+            ->assertContains('2')
+            ->assertContains('7')
+            ->assertContains('6')
         ;
     }
 }
