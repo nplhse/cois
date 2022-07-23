@@ -1,0 +1,28 @@
+{% extends 'emails/base.twig' %}
+
+{% block content %}
+    <h1>
+        {{ 'import.reminder.email.heading'|trans({}, 'emails') }}
+    </h1>
+
+    <p class="lead">
+        {{
+            'import.reminder.email.text'|trans(
+                {
+                    '%username%': username
+                },
+                'emails'
+            )
+        }}
+    </p>
+
+    <p>
+        {{ 'import.reminder.email.help'|trans({}, 'emails') }}
+    </p>
+
+    <p class="text-center">
+        <a class="btn btn-primary" href="{{ targetUrl }}" role="button">
+            {{ 'import.reminder.email.btn'|trans({}, 'emails') }}
+        </a>
+    </p>
+{% endblock %}

@@ -183,6 +183,83 @@
         <source>account.verified.btn</source>
         <target>Go to dashboard</target>
       </trans-unit>
+      <trans-unit id="tE4wy3U" resname="welcome.email.heading">
+        <source>welcome.email.heading</source>
+        <target>Nice to meet you!</target>
+      </trans-unit>
+      <trans-unit id="qwXmHoG" resname="welcome.email.text">
+        <source>welcome.email.text</source>
+        <target>We are looking forward to your participation in our project and can`t wait for your first data.</target>
+      </trans-unit>
+      <trans-unit id="bbV2gHf" resname="welcome.email.btn">
+        <source>welcome.email.btn</source>
+        <target>Click here to login</target>
+      </trans-unit>
+      <trans-unit id="X1w0gQB" resname="welcome.email.account">
+        <source>welcome.email.account</source>
+        <target>An account has been created for you with the username: %username%. Your initial password should have already been submitted to you
+          by the administrator, you will have to change it immediately after your first login.</target>
+      </trans-unit>
+      <trans-unit id="TZBK4RB" resname="account.welcome.title">
+        <source>account.welcome.title</source>
+        <target>A new account has been created for you</target>
+      </trans-unit>
+      <trans-unit id="fyb0EXz" resname="verify.email.heading">
+        <source>verify.email.heading</source>
+        <target>Please verify your new email address</target>
+      </trans-unit>
+      <trans-unit id=".2BuGQG" resname="verify.email.text">
+        <source>verify.email.text</source>
+        <target>Your E-Mail address on our plattform has been changed. Please confirm your new email address by clicking the following button.</target>
+      </trans-unit>
+      <trans-unit id="FHpWl2C" resname="verify.email.btn">
+        <source>verify.email.btn</source>
+        <target>Confirm new email address</target>
+      </trans-unit>
+      <trans-unit id="qYZokTX" resname="verify.email.action">
+        <source>verify.email.action</source>
+        <target>Please note that this link expires in %expiration% hours.</target>
+      </trans-unit>
+      <trans-unit id="rXva4j6" resname="account.verify.title">
+        <source>account.verify.title</source>
+        <target>Please verify your email address</target>
+      </trans-unit>
+      <trans-unit id="Yp6iFu5" resname="account.reset.title">
+        <source>account.reset.title</source>
+        <target>Reset password</target>
+      </trans-unit>
+      <trans-unit id="9yH9i0p" resname="reset.email.heading">
+        <source>reset.email.heading</source>
+        <target>Reset your password</target>
+      </trans-unit>
+      <trans-unit id="yoJ20KQ" resname="reset.email.text">
+        <source>reset.email.text</source>
+        <target>A reset of your password has been requested. To proceed click on the link below, or copy and paste it to your browser. If you didn´t request it by yourself, please ignore this e-mail.</target>
+      </trans-unit>
+      <trans-unit id="2hKtPER" resname="reset.email.btn">
+        <source>reset.email.btn</source>
+        <target>Reset my password</target>
+      </trans-unit>
+      <trans-unit id="KhCKnMr" resname="import.reminder.title">
+        <source>import.reminder.title</source>
+        <target>Monthly reminder to import new data</target>
+      </trans-unit>
+      <trans-unit id="0">
+        <source>import.reminder.email.heading</source>
+        <target>Want to import new Data?</target>
+      </trans-unit>
+      <trans-unit id="1">
+        <source>import.reminder.email.text</source>
+        <target>Hey there %username%! Have you noticed? Yet another month has passed. And you know what? We think that is a great moment to upload some new data to our project.</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>import.reminder.email.btn</source>
+        <target>emails</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>import.reminder.email.help</source>
+        <target>But how do you ask? Very good question. The process is simple: Just login into IVENA, dump all the allocations from the last month as .CSV file and submit them via our form.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

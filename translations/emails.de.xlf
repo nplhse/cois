@@ -178,6 +178,83 @@
         <source>account.verified.btn</source>
         <target>Zur Seite gehen</target>
       </trans-unit>
+      <trans-unit id="tE4wy3U" resname="welcome.email.heading">
+        <source>welcome.email.heading</source>
+        <target>Herzlich Willkommen!</target>
+      </trans-unit>
+      <trans-unit id="qwXmHoG" resname="welcome.email.text">
+        <source>welcome.email.text</source>
+        <target>Wir freuen uns auf Ihre Mitarbeit an diesem Projekt und hoffen darauf, bald Ihre ersten Daten zu empfangen.</target>
+      </trans-unit>
+      <trans-unit id="bbV2gHf" resname="welcome.email.btn">
+        <source>welcome.email.btn</source>
+        <target>Hier klicken zur Anmeldung</target>
+      </trans-unit>
+      <trans-unit id="X1w0gQB" resname="welcome.email.account">
+        <source>welcome.email.account</source>
+        <target>Ein Konto mit dem Benutzernamen %username% wurde für Sie auf unserer Plattform angelegt. Ein erstes Passwort wurde bereits für Sie von einem Administrator festgelegt und wird
+          separat an Sie übermittelt werden. Dieses Passwort muss bei der ersten Anmeldung geändert werden.</target>
+      </trans-unit>
+      <trans-unit id="TZBK4RB" resname="account.welcome.title">
+        <source>account.welcome.title</source>
+        <target>Ein Benutzerkonto wurde für Sie erstellt</target>
+      </trans-unit>
+      <trans-unit id="fyb0EXz" resname="verify.email.heading">
+        <source>verify.email.heading</source>
+        <target>Bestätigen Sie Ihre E-Mail Adresse</target>
+      </trans-unit>
+      <trans-unit id=".2BuGQG" resname="verify.email.text">
+        <source>verify.email.text</source>
+        <target>Ihre E-Mail Adresse auf unserer Plattform wurde geändert, bitte betätigen Sie daher Ihre neue E-Mail-Adresse.</target>
+      </trans-unit>
+      <trans-unit id="FHpWl2C" resname="verify.email.btn">
+        <source>verify.email.btn</source>
+        <target>Neue E-Mail Adresse bestätigen</target>
+      </trans-unit>
+      <trans-unit id="qYZokTX" resname="verify.email.action">
+        <source>verify.email.action</source>
+        <target>Bitte beachten Sie, dass dieser Link in %expiration% Stunden ungültig wird.</target>
+      </trans-unit>
+      <trans-unit id="rXva4j6" resname="account.verify.title">
+        <source>account.verify.title</source>
+        <target>Bestätigen Sie Ihre E-Mail Adresse</target>
+      </trans-unit>
+      <trans-unit id="Yp6iFu5" resname="account.reset.title">
+        <source>account.reset.title</source>
+        <target>Password zurücksetzen</target>
+      </trans-unit>
+      <trans-unit id="9yH9i0p" resname="reset.email.heading">
+        <source>reset.email.heading</source>
+        <target>Password zurücksetzen</target>
+      </trans-unit>
+      <trans-unit id="yoJ20KQ" resname="reset.email.text">
+        <source>reset.email.text</source>
+        <target>Wir haben eine Anfrage zum Zurücksetzen Ihres Passwortes erhalten. Um Fortzufahren klicken Sie bitte auf den unten stehenden Link. Falls Sie dies nicht selbst beantragt haben, ignorieren Sie bitte diese E-Mail.</target>
+      </trans-unit>
+      <trans-unit id="2hKtPER" resname="reset.email.btn">
+        <source>reset.email.btn</source>
+        <target>Mein Passwort zurückzusetzen</target>
+      </trans-unit>
+      <trans-unit id="KhCKnMr" resname="import.reminder.title">
+        <source>import.reminder.title</source>
+        <target>Erinnerung an den Import neuer Daten</target>
+      </trans-unit>
+      <trans-unit id="0a">
+        <source>import.reminder.email.heading</source>
+        <target>Möchten Sie neue Daten importieren?</target>
+      </trans-unit>
+      <trans-unit id="1a">
+        <source>import.reminder.email.text</source>
+        <target>Hallo %username%! Haben Sie bemerkt? Ein weiterer Monat ist vergangen, das ist die perfekte Gelegenheit um neue Daten in unsere Plattform hochzuladen.</target>
+      </trans-unit>
+      <trans-unit id="2a">
+        <source>import.reminder.email.btn</source>
+        <target>Hier klicken, um neue Daten zu importieren</target>
+      </trans-unit>
+      <trans-unit id="3a">
+        <source>import.reminder.email.help</source>
+        <target>Wie Sie das tun können? Gute Frage! Melden Sie sich einfach bei IVENA an, laden Sie die Einsätze des letzten Monats als CSV-Datei herunter und laden Sie diese über das verlinkte Formular hoch.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

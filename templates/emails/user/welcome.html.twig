@@ -1,0 +1,28 @@
+{% extends 'emails/base.twig' %}
+
+{% block content %}
+    <h1>
+        {{ 'welcome.email.heading'|trans({}, 'emails') }}
+    </h1>
+
+    <p class="lead">
+        {{ 'welcome.email.text'|trans({}, 'emails') }}
+    </p>
+
+    <p>
+        {{
+            'welcome.email.account'|trans(
+                {
+                    '%username%': username
+                },
+                'emails'
+            )
+        }}
+    </p>
+
+    <p class="text-center">
+        <a class="btn btn-primary" href="{{ targetUrl }}" role="button">
+            {{ 'welcome.email.btn'|trans({}, 'emails') }}
+        </a>
+    </p>
+{% endblock %}

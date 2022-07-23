@@ -39,11 +39,11 @@ class MailerService
             ->to(new Address($user->getEmail()))
             ->from(new Address($this->mailerSender, $this->mailerFrom))
             ->replyTo($this->mailerSender)
-            ->subject('Monthly reminder to import new data')
-            ->htmlTemplate('emails/import/reminder.inky.twig')
+            ->subject($this->translator->trans('import.reminder.title', [], 'emails'))
+            ->htmlTemplate('emails/import/reminder.html.twig')
             ->context([
-                'user' => $user,
-                'link' => $this->router->generate('app_import_new', [], UrlGenerator::ABSOLUTE_URL),
+                'username' => $user->getUsername(),
+                'targetUrl' => $this->router->generate('app_import_new', [], UrlGenerator::ABSOLUTE_URL),
             ]);
 
         $this->mailer->send($email);
@@ -55,10 +55,11 @@ class MailerService
             ->to(new Address($user->getEmail()))
             ->from(new Address($this->mailerSender, $this->mailerFrom))
             ->replyTo($this->mailerSender)
-            ->subject('Reset your Password')
-            ->htmlTemplate('emails/user/reset_password.inky.twig')
+            ->subject($this->translator->trans('account.reset.title', [], 'emails'))
+            ->htmlTemplate('emails/user/reset_password.html.twig')
             ->context([
                 'resetToken' => $resetToken,
+                'expiration' => '3600',
             ]);
 
         $this->mailer->send($email);
@@ -70,8 +71,8 @@ class MailerService
             ->to(new Address($user->getEmail()))
             ->from(new Address($this->mailerSender, $this->mailerFrom))
             ->replyTo($this->mailerSender)
-            ->subject('Verify your E-Mail address')
-            ->htmlTemplate('emails/user/verify_email.inky.twig')
+            ->subject($this->translator->trans('account.verify.title', [], 'emails'))
+            ->htmlTemplate('emails/user/verify_email.html.twig')
             ->context([
                 'user' => $user,
                 'signedUrl' => $signedUrl,
@@ -88,7 +89,7 @@ class MailerService
             ->from(new Address($this->mailerSender, $this->mailerFrom))
             ->replyTo($this->mailerSender)
             ->subject($this->translator->trans('account.promoted.title', [], 'emails'))
-            ->htmlTemplate('emails/user/promoted.twig')
+            ->htmlTemplate('emails/user/promoted.html.twig')
             ->context([
                 'user' => $user,
                 'targetUrl' => $this->router->generate('app_dashboard', [], UrlGenerator::ABSOLUTE_URL),
@@ -103,11 +104,11 @@ class MailerService
             ->to(new Address($user->getEmail()))
             ->from(new Address($this->mailerSender, $this->mailerFrom))
             ->replyTo($this->mailerSender)
-            ->subject('Welcome to Collaborative IVENA statistics')
-            ->htmlTemplate('emails/user/welcome.twig')
+            ->subject($this->translator->trans('account.welcome.title', [], 'emails'))
+            ->htmlTemplate('emails/user/welcome.html.twig')
             ->context([
-                'user' => $user,
-                'link' => $this->router->generate('app_login', [], UrlGenerator::ABSOLUTE_URL),
+                'username' => $user->getUsername(),
+                'targetUrl' => $this->router->generate('app_login', [], UrlGenerator::ABSOLUTE_URL),
             ]);
 
         $this->mailer->send($email);

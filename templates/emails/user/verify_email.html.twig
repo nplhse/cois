@@ -1,0 +1,28 @@
+{% extends 'emails/base.twig' %}
+
+{% block content %}
+    <h1>
+        {{ 'verify.email.heading'|trans({}, 'emails') }}
+    </h1>
+
+    <p class="lead">
+        {{ 'verify.email.text'|trans({}, 'emails') }}
+    </p>
+
+    <p class="text-center">
+        <a class="btn btn-primary" href="{{ signedUrl }}" role="button">
+            {{ 'verify.email.btn'|trans({}, 'emails') }}
+        </a>
+    </p>
+
+    <p>
+        {{
+            'verify.email.action'|trans(
+                {
+                    '%expiration%': expiration|date('g')
+                },
+                'emails'
+            )
+        }}
+    </p>
+{% endblock %}

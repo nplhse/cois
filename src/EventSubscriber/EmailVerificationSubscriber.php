@@ -39,7 +39,7 @@ class EmailVerificationSubscriber implements EventSubscriberInterface
                 ->from(new Address($this->mailerSender, $this->mailerFrom))
                 ->to(new Address($user->getEmail()))
                 ->subject($this->translator->trans('confirm.email.title', [], 'emails'))
-                ->htmlTemplate('emails/user/confirmation_email.twig')
+                ->htmlTemplate('emails/user/confirmation_email.html.twig')
         );
     }
 
@@ -53,7 +53,7 @@ class EmailVerificationSubscriber implements EventSubscriberInterface
                 ->from(new Address($this->mailerSender, $this->mailerFrom))
                 ->to(new Address($user->getEmail()))
                 ->subject($this->translator->trans('confirm.email.title', [], 'emails'))
-                ->htmlTemplate('emails/user/verify_email.twig')
+                ->htmlTemplate('emails/user/verify_email.html.twig')
         );
     }
 
