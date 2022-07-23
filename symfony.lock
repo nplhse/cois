@@ -193,9 +193,6 @@
     "league/mime-type-detection": {
         "version": "1.7.0"
     },
-    "lorenzo/pinky": {
-        "version": "1.0.5"
-    },
     "masterminds/html5": {
         "version": "2.7.5"
     },
@@ -811,9 +808,6 @@
     },
     "twig/extra-bundle": {
         "version": "v3.2.1"
-    },
-    "twig/inky-extra": {
-        "version": "v3.3.0"
     },
     "twig/intl-extra": {
         "version": "v3.3.0"
