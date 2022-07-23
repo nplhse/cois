@@ -21,7 +21,7 @@ class RegistrationTest extends WebTestCase
     {
         $this->markTestSkipped();
 
-        /**
+        /*
 
         PageFactory::createOne([
             'title' => 'Privacy',
