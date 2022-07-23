@@ -62,10 +62,6 @@ class RegistrationController extends AbstractController
             /** @var ?UserInterface $user */
             $user = $userRepository->findOneByUsername($user->getUsername());
 
-            if (null === $user) {
-                throw new \RuntimeException('Sorry, something went wrong. Please try again later.');
-            }
-
             $this->addFlash('success', $this->translator->trans('flash.registration.success'));
 
             return $userAuthenticator->authenticateUser(
