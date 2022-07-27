@@ -1,11 +1,16 @@
 {% extends '@email/default/notification/body.html.twig' %}
 
 {% block content %}
-    <p>
-        <strong>Import:</strong> {{ import.name }}<br />
-        <strong>User:</strong> {{ import.user }}<br />
-        <strong>Hospital:</strong> {{ import.hospital }}
-    </p>
+    {{
+        'notification.import.skipped'|trans(
+            {
+                '%importName%': importName,
+                '%importUser%': importUser,
+                '%importHospital%': importHospital
+            },
+            'emails'
+        )
+    }}
 
     {% if exception is defined %}
         <p>
@@ -16,18 +21,4 @@
         </p>
         <small>{{ exception.traceAsString }}</small>
     {% endif %}
-{% endblock %}
-
-{% block action %}
-    <spacer size="16"></spacer>
-    <button href="{{
-        url(
-            'app_settings_import_show',
-            {
-                id: import.id
-            }
-        )
-        }}">
-        {{ 'View import'|trans([], 'emails') }}
-    </button>
 {% endblock %}

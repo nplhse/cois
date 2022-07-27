@@ -47,9 +47,15 @@ class NotifyAdminSubscriber implements EventSubscriberInterface
                 ->from(new Address($this->mailerSender, $this->mailerFrom))
                 ->to(new Address($admin->getEmail()))
                 ->importance(NotificationEmail::IMPORTANCE_MEDIUM)
-                ->subject('A new Hospital has been created')
+                ->subject($this->translator->trans('notification.hospital.created.title', [], 'emails'))
                 ->htmlTemplate('emails/notification/hospital_new.inky.twig')
-                ->context(['hospital' => $hospital]);
+                ->action($this->translator->trans('notification.hospital.created.btn.review', [], 'emails'), $this->router->generate('app_hospital_show', ['id' => $hospital->getId()], UrlGeneratorInterface::ABSOLUTE_URL))
+                ->context([
+                    'hospitalName' => $hospital->getName(),
+                    'hospitalOwner' => $hospital->getOwner(),
+                    'hospitalState' => $hospital->getState(),
+                    'hospitalDispatchArea' => $hospital->getDispatchArea(),
+                ]);
 
             $this->mailer->send($email);
         }
@@ -65,10 +71,13 @@ class NotifyAdminSubscriber implements EventSubscriberInterface
                 ->from(new Address($this->mailerSender, $this->mailerFrom))
                 ->to(new Address($admin->getEmail()))
                 ->importance(NotificationEmail::IMPORTANCE_HIGH)
-                ->subject('A new Import has failed')
+                ->subject($this->translator->trans('notification.import.failed.title', [], 'emails'))
                 ->htmlTemplate('emails/notification/import_failed.inky.twig')
+                ->action($this->translator->trans('notification.import.failed.btn.review', [], 'emails'), $this->router->generate('app_import_show', ['id' => $import->getId()], UrlGeneratorInterface::ABSOLUTE_URL))
                 ->context([
-                    'import' => $import,
+                    'importName' => $import->getName(),
+                    'importUser' => $import->getUser(),
+                    'importHospital' => $import->getHospital(),
                     'exception' => $exception,
                 ]);
 
@@ -86,10 +95,13 @@ class NotifyAdminSubscriber implements EventSubscriberInterface
                 ->from(new Address($this->mailerSender, $this->mailerFrom))
                 ->to(new Address($admin->getEmail()))
                 ->importance(NotificationEmail::IMPORTANCE_LOW)
-                ->subject('Skipped row in Import')
+                ->subject($this->translator->trans('notification.import.skipped.title', [], 'emails'))
                 ->htmlTemplate('emails/notification/import_skipped.inky.twig')
+                ->action($this->translator->trans('notification.import.skipped.btn.review', [], 'emails'), $this->router->generate('app_import_show', ['id' => $import->getId()], UrlGeneratorInterface::ABSOLUTE_URL))
                 ->context([
-                    'import' => $import,
+                    'importName' => $import->getName(),
+                    'importUser' => $import->getUser(),
+                    'importHospital' => $import->getHospital(),
                     'exception' => $exception,
                 ]);
 
@@ -107,7 +119,7 @@ class NotifyAdminSubscriber implements EventSubscriberInterface
                 ->to(new Address($admin->getEmail()))
                 ->importance(NotificationEmail::IMPORTANCE_MEDIUM)
                 ->subject($this->translator->trans('notification.user.new.title', [], 'emails'))
-                ->htmlTemplate('emails/notification/user_new.twig')
+                ->htmlTemplate('emails/notification/user_new.inky.twig')
                 ->action($this->translator->trans('notification.user.new.btn.review', [], 'emails'), $this->router->generate('app_settings_user_show', ['id' => $user->getId()], UrlGeneratorInterface::ABSOLUTE_URL))
                 ->context(
                     [

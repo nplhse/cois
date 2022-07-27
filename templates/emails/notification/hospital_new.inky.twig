@@ -1,24 +1,15 @@
 {% extends '@email/default/notification/body.html.twig' %}
 
 {% block content %}
-    Hospital: {{ hospital.name }}<br />
-    State: {{ hospital.state }}<br />
-    Dispatch Area: {{ hospital.dispatchArea }}<br />
-    {% if hospital.supplyarea %}
-        Supply Area: {{ hospital.supplyArea }}<br />
-    {% endif %}Owner: {{ hospital.owner }}<br />
-{% endblock %}
-
-{% block action %}
-    <spacer size="16"></spacer>
-    <button href="{{
-        url(
-            'app_settings_hospital_show',
+    {{
+        'notification.hospital.new'|trans(
             {
-                id: hospital.id
-            }
+                '%hospitalName%': hospitalName,
+                '%hospitalOwner%': hospitalOwner,
+                '%hospitalState%': hospitalState,
+                '%hospitalDispatchArea%': hospitalDispatchArea
+            },
+            'emails'
         )
-        }}">
-        {{ 'Review hospital'|trans([], 'emails') }}
-    </button>
+    }}
 {% endblock %}

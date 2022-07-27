@@ -1,4 +1,4 @@
-{% extends 'emails/base.twig' %}
+{% extends 'emails/base_email.html.twig' %}
 
 {% block content %}
     <h1>
@@ -14,6 +14,27 @@
 
     <p class="lead">
         {{ 'account.verified.text'|trans({}, 'emails') }}
+    </p>
+
+    <p class="py-2">
+        {{ 'account.verified.nextSteps'|trans({}, 'emails') }}:<ul>
+            <li>
+                <strong>{{ 'dashboard.onboarding.step2'|trans }}</strong><br />
+                <a href="{{ path('app_hospital_new') }}">
+                    {{ 'dashboard.onboarding.hospital.create'|trans }}
+                </a>
+            </li>
+            <li>
+                <strong>{{ 'dashboard.onboarding.step3'|trans }}</strong><br />
+                <a href="{{ path('app_import_new') }}">
+                    {{ 'dashboard.onboarding.import.create'|trans }}
+                </a>
+            </li>
+        </ul>
+    </p>
+
+    <p>
+        {{ 'account.verified.otherSteps'|trans({}, 'emails') }}
     </p>
 
     <p class="text-center">
