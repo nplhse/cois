@@ -196,8 +196,8 @@ class UserController extends AbstractController
 
         try {
             $this->messageBus->dispatch($command);
-        } catch (HandlerFailedException) {
-            $this->addFlash('danger', 'Sorry, something went wrong. Please try again later!');
+        } catch (HandlerFailedException $exception) {
+            $this->addFlash('danger', 'Sorry, something went wrong.'.$exception->getMessage());
         }
 
         $this->addFlash('success', 'User has been promoted.');
