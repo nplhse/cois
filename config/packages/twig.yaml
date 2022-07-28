@@ -5,10 +5,6 @@ twig:
     date:
         timezone: Europe/Berlin
 
-    paths:
-        # point this wherever your css files live
-        "%kernel.project_dir%/public/build/emails": css
-
     globals:
         app_cookie_consent: "%app.cookie_consent%"
         app_registration: "%app.registration%"
