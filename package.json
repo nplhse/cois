@@ -22,7 +22,7 @@
         "regenerator-runtime": "^0.13.9",
         "sass": "^1.54.0",
         "sass-loader": "^13.0.2",
-        "stimulus": "^3.0.1",
+        "stimulus": "^3.1.0",
         "webpack-notifier": "^1.15.0"
     },
     "license": "UNLICENSED",

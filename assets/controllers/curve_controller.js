@@ -1,4 +1,4 @@
-import { Controller } from "stimulus";
+import { Controller } from "@hotwired/stimulus";
 import * as d3 from "d3";
 
 export default class extends Controller {
