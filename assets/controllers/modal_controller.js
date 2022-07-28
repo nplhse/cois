@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Controller } from "stimulus";
+import { Controller } from "@hotwired/stimulus";
 import { Modal } from "bootstrap";
 import $ from "jquery";
 
