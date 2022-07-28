@@ -18,7 +18,9 @@
             <span class="pt-1 form-checked-content">
                 <strong>{{ 'dashboard.onboarding.step1'|trans }}</strong>
                 <small class="d-block text-muted">
-                    {{ 'dashboard.verify.text'|trans }}
+                    {% if step <= 1 %}
+                        {{ 'dashboard.verify.text'|trans }}
+                    {% endif %}
                     <ul>
                         <li>
                             {% if app.user.isVerified %}

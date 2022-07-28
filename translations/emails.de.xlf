@@ -5,126 +5,13 @@
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
-      <trans-unit id="Rk8PcGU" resname="Cheers,">
-        <source>Cheers,</source>
-        <target>Viele Grüße,</target>
-      </trans-unit>
-      <trans-unit id="noVJLAs" resname="Your friendly COIS-Team.">
-        <source>Your friendly COIS-Team.</source>
-        <target>das COIS-Team.</target>
-      </trans-unit>
-      <trans-unit id="dnTemvP" resname="Sent from Collaborative IVENA statistics">
-        <source>Sent from Collaborative IVENA statistics</source>
-        <target>Gesendet von den kollaborativen IVENA Statistiken</target>
-      </trans-unit>
-      <trans-unit id="x8BKnEQ" resname="Verify your E-Mail address">
-        <source>Verify your E-Mail address</source>
-        <target>E-Mail Adresse betätigen</target>
-      </trans-unit>
-      <trans-unit id="MDz26OH" resname="Your E-Mail address for COIS - Collaborative IVENA statistics has been&#10;                changed. Please confirm your new email address by clicking the following button.">
-        <source>Your E-Mail address for COIS - Collaborative IVENA statistics has been
-                changed. Please confirm your new email address by clicking the following button.</source>
-        <target>Ihre E-Mail Adresse bei den kollaborativen IVENA Statistiken wurde geändert, bitte
-                betätigen Sie Ihre neue E-Mail Adresse.</target>
-      </trans-unit>
-      <trans-unit id="ITaQX9q" resname="Confirm my Email">
-        <source>Confirm my Email</source>
-        <target>Hier klicken um die E-Mail Adresse zu bestätigen</target>
-      </trans-unit>
-      <trans-unit id="nXm0zrB" resname="Please note that this link expires in %expiration% hours.">
-        <source>Please note that this link expires in %expiration% hours.</source>
-        <target>Bitte beachten Sie, dass dieser Link in %expiration% Stunden ungültig wird.</target>
-      </trans-unit>
-      <trans-unit id="WfpDeb4" resname="Reset your password">
-        <source>Reset your password</source>
-        <target>Passwort zurücksetzen</target>
-      </trans-unit>
-      <trans-unit id="O2yhjLQ" resname="A reset of your password has been requested. To proceed click on the link below, or copy and paste it to your browser. If you didn´t request it by yourself, please ignore this e-mail.">
-        <source>A reset of your password has been requested. To proceed click on the link below, or copy and paste it to your browser. If you didn´t request it by yourself, please ignore this e-mail.</source>
-        <target>Wir haben eine Anfrage zum Zurücksetzen Ihres Passwortes erhalten. Um Fortzufahren klicken Sie bitte auf den unten stehenden Link. Falls Sie dies nicht selbst beantragt haben, ignorieren Sie bitte diese E-Mail.</target>
-      </trans-unit>
-      <trans-unit id="2USNlhL" resname="Reset my password">
-        <source>Reset my password</source>
-        <target>Mein Password zurücksetzen</target>
-      </trans-unit>
-      <trans-unit id="CqutwbW" resname="Nice to meet you %username%!">
-        <source>Nice to meet you %username%!</source>
-        <target>Willkommen, %username%!</target>
-      </trans-unit>
-      <trans-unit id="1m_lQIk" resname="Welcome to COIS - Collaborative IVENA statistics, we are looking forward to your participation in our project and can`t wait for your first data.">
-        <source>Welcome to COIS - Collaborative IVENA statistics, we are looking forward to your participation in our project and can`t wait for your first data.</source>
-        <target>Willkommen bei den kollaborativen IVENA Statistiken! Wir freuen uns auf Ihre Mitarbeit an diesem Projekt und hoffen bald Ihre ersten Daten zu empfangen.</target>
-      </trans-unit>
-      <trans-unit id="7F33cta" resname="An account has been created for you with the username: %username%.">
-        <source>An account has been created for you with the username: %username%.</source>
-        <target>Ein Konto mit dem Benutzernamen %username% wurde für Sie angelegt.</target>
-      </trans-unit>
-      <trans-unit id="vhqKdgs" resname="Click here to login">
-        <source>Click here to login</source>
-        <target>Hier klicken zum Anmelden</target>
-      </trans-unit>
-      <trans-unit id="QRKVfbz" resname="Your initial password should have already been submitted to you&#10;                by the administrator, you will have to change it immediately&#10;                after your first login.">
-        <source>Your initial password should have already been submitted to you
-                by the administrator, you will have to change it immediately
-                after your first login.</source>
-        <target>Ein erstes Passwort wurde für Sie vom Administrator festgelegt und wird an Sie
-                übermittelt werden. Das Passwort muss bei der ersten Anmeldung geändert werden.</target>
-      </trans-unit>
-      <trans-unit id="C.8EXTd" resname="Want to upload new data?">
-        <source>Want to upload new data?</source>
-        <target>Möchten Sie neue Daten hochladen?</target>
-      </trans-unit>
-      <trans-unit id="mFvZ1.W" resname="Hey there %username%!">
-        <source>Hey there %username%!</source>
-        <target>Hallo %username%!</target>
-      </trans-unit>
-      <trans-unit id="q6.kNTA" resname="Have you noticed? Yet another month has passed. And you know what? We think that is a great moment to upload some new data to our project!">
-        <source>Have you noticed? Yet another month has passed. And you know what? We think that is a great moment to upload some new data to our project!</source>
-        <target>Haben Sie bemerkt? Ein weiterer Monat ist vergangen, dass ist die perfekte Gelegenheit um neue Daten in unsere Plattform hochzuladen!</target>
-      </trans-unit>
-      <trans-unit id="1k4iclW" resname="But how do you ask? Very good question. The process is simple: Just login into IVENA, dump all the allocations from the last month as .CSV file and submit them via our form.">
-        <source>But how do you ask? Very good question. The process is simple: Just login into IVENA, dump all the allocations from the last month as .CSV file and submit them via our form.</source>
-        <target>Wie Sie das tun können? Gute Frage! Melden Sie sich bei IVENA an, laden Sie die Einsätze des letzten Monats als CSV-Datei herunter und laden Sie diese über das Formular hoch.</target>
-      </trans-unit>
-      <trans-unit id="1sKE.Vq" resname="Click here to upload new data">
-        <source>Click here to upload new data</source>
-        <target>Hier klicken zum Importieren</target>
-      </trans-unit>
-      <trans-unit id="33UKuZk" resname="Review import">
-        <source>Review import</source>
-        <target>Import ansehen</target>
-      </trans-unit>
-      <trans-unit id="3BfAYSJ" resname="Review hospital">
-        <source>Review hospital</source>
-        <target>Klinik ansehen</target>
-      </trans-unit>
-      <trans-unit id="vgTmT8e" resname="Review user">
-        <source>Review user</source>
-        <target>Benutzer ansehenr</target>
-      </trans-unit>
-      <trans-unit id="ZdWO1Si" resname="Welcome to Collaborative IVENA statistics">
-        <source>Welcome to Collaborative IVENA statistics</source>
-        <target>Willkommen bei den kollaborativen IVENA Statistiken</target>
-      </trans-unit>
-      <trans-unit id="5MJBGgr" resname="Please confirm your email address by clicking the following link. This link will expire in">
-        <source>Please confirm your email address by clicking the following link. This link will expire in</source>
-        <target>Bitte bestätigten Sie Ihre E-Mail Adresse indem sie auf den folgenden Link klicken. Dieser Link ist gültig für</target>
-      </trans-unit>
-      <trans-unit id="r.lBOGQ" resname="Confirm my E-Mail address">
-        <source>Confirm my E-Mail address</source>
-        <target>Meine E-Mail bestätigen</target>
-      </trans-unit>
-      <trans-unit id="8JP8GWq" resname="View import">
-        <source>View import</source>
-        <target>Import ansehen</target>
-      </trans-unit>
       <trans-unit id="obpZrpz" resname="confirm.email.title">
         <source>confirm.email.title</source>
         <target>Bitte bestätigen Sie ihre E-Mail Adresse</target>
       </trans-unit>
       <trans-unit id="Z4delRH" resname="notification.user.new">
         <source>notification.user.new</source>
-        <target>Ein neuer Benutzer mit dem Benutzernamen %username% und der E-Mail Adresse %userEmail% hat sich registriert.</target>
+        <target>Ein neuer Benutzer mit dem Benutzernamen '%username%' und der E-Mail Adresse '%userEmail%' hat sich registriert.</target>
       </trans-unit>
       <trans-unit id="dmU.Nyg" resname="notification.user.new.btn.review">
         <source>notification.user.new.btn.review</source>
@@ -239,21 +126,65 @@
         <source>import.reminder.title</source>
         <target>Erinnerung an den Import neuer Daten</target>
       </trans-unit>
-      <trans-unit id="0a">
+      <trans-unit id=".bjPZN_" resname="import.reminder.email.heading">
         <source>import.reminder.email.heading</source>
         <target>Möchten Sie neue Daten importieren?</target>
       </trans-unit>
-      <trans-unit id="1a">
+      <trans-unit id="G2Ygojo" resname="import.reminder.email.text">
         <source>import.reminder.email.text</source>
         <target>Hallo %username%! Haben Sie bemerkt? Ein weiterer Monat ist vergangen, das ist die perfekte Gelegenheit um neue Daten in unsere Plattform hochzuladen.</target>
       </trans-unit>
-      <trans-unit id="2a">
+      <trans-unit id="vZ6tzaH" resname="import.reminder.email.btn">
         <source>import.reminder.email.btn</source>
         <target>Hier klicken, um neue Daten zu importieren</target>
       </trans-unit>
-      <trans-unit id="3a">
+      <trans-unit id="r3F3meb" resname="import.reminder.email.help">
         <source>import.reminder.email.help</source>
         <target>Wie Sie das tun können? Gute Frage! Melden Sie sich einfach bei IVENA an, laden Sie die Einsätze des letzten Monats als CSV-Datei herunter und laden Sie diese über das verlinkte Formular hoch.</target>
+      </trans-unit>
+      <trans-unit id="DQz5EDU" resname="account.verified.nextSteps">
+        <source>account.verified.nextSteps</source>
+        <target>Nachdem dieser erste Schritt Ihrer Anmeldung erfolgreich abgeschlossen wurde, empfehlen wir als Nächstes die folgenden beiden Schritte zu absolvieren</target>
+      </trans-unit>
+      <trans-unit id="wNj1IpK" resname="account.verified.otherSteps">
+        <source>account.verified.otherSteps</source>
+        <target>Falls Sie dies aktuell noch nicht wollen, haben wir folgende weitere Empfehlungen für Sie: Gehen Sie zur Seite und betrachten Sie die bisher bestehenden Kliniken, erkunden Sie die bereits importierten Einsätze, oder werfen Sie doch einen Blick auf unsere Statistiken!</target>
+      </trans-unit>
+      <trans-unit id="nh47DMp" resname="notification.hospital.new">
+        <source>notification.hospital.new</source>
+        <target>Eine neue Klinik mit dem Namen '%hospitalName%' wurde von '%hospitalOwner%' für die Leitstelle '%hospitalDispatchArea%' in '%hospitalState%' angelegt.</target>
+      </trans-unit>
+      <trans-unit id="XQsgxUf" resname="notification.import.failed">
+        <source>notification.import.failed</source>
+        <target>Der Import '%importName%' von '%importUser%' für die Klinik '%importHospital%' ist fehlgeschlagen.</target>
+      </trans-unit>
+      <trans-unit id="WtR8SVm" resname="notification.import.skipped">
+        <source>notification.import.skipped</source>
+        <target>Der Import '%importName%' von '%importUser%' für die Klinik '%importHospital%' enthält übersprungene Zeilen.</target>
+      </trans-unit>
+      <trans-unit id="yqP3M6J" resname="notification.hospital.created.title">
+        <source>notification.hospital.created.title</source>
+        <target>Eine neue Klinik wurde erstellt</target>
+      </trans-unit>
+      <trans-unit id="T_I4CG." resname="notification.hospital.created.btn.review">
+        <source>notification.hospital.created.btn.review</source>
+        <target>Neue Klinik ansehen</target>
+      </trans-unit>
+      <trans-unit id="CQVaxdu" resname="notification.import.failed.title">
+        <source>notification.import.failed.title</source>
+        <target>Ein neuer Import ist fehlgeschlagen</target>
+      </trans-unit>
+      <trans-unit id="SxjwsWX" resname="notification.import.failed.btn.review">
+        <source>notification.import.failed.btn.review</source>
+        <target>Fehlgeschlagenen Import ansehen</target>
+      </trans-unit>
+      <trans-unit id="PfsEww3" resname="notification.import.skipped.title">
+        <source>notification.import.skipped.title</source>
+        <target>Ein neuer Import hat übersprungene Zeilen</target>
+      </trans-unit>
+      <trans-unit id="oe9VUh." resname="notification.import.skipped.btn.review">
+        <source>notification.import.skipped.btn.review</source>
+        <target>Neuen Import ansehen</target>
       </trans-unit>
     </body>
   </file>
