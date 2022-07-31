@@ -32,7 +32,7 @@ For development puroses we recommend to use the `make setup-dev` command, which 
 
 To be able to run the tests properly you need to execute `make test-database`. This command creates the testing database including the schema and all required fixtures.
 
-If you'd like there is also support for Docker which mainly includes a database, as we recommend using the symfony cli server with a local installation of PHP. There is also a `make build` command that builds the containers und starts them in detached mode. 
+If you'd like there is also support for Docker which mainly includes a database, as we recommend using the symfony cli server with a local installation of PHP. There is also a `make build` command that builds the containers und starts them in detached mode.
 
 # Contributing
 
