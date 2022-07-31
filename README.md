@@ -17,23 +17,22 @@
     $ git clone https://github.com/nplhse/cois.git
     ```
 
-2. Install the tool and it`s dependencies by using **composer** and:
+2. Install the tool and it`s dependencies by using **make**:
 
     ```
     $ cd ~/webroot/cois
-    $ composer install
-    $ composer setup
+    $ make setup
     ```
 
 3. You are ready to go, just open the site with your favorite browser!
 
 ### Dev Environment
 
-If you have the need to populate the database with some Fixtures for development you could either directly execute `bin/console doctrine:fixtures:load` or use `composer setup-dev` instead of `composer setup`.
+For development puroses we recommend to use the `make setup-dev` command, which will provide a fully working environment including fixtures and dev builds for the frontend.
 
-To be able to run the tests properly you need to execute `composer setup-tests`. This command creates the testing database including the schema and all required fixtures.
+To be able to run the tests properly you need to execute `make test-database`. This command creates the testing database including the schema and all required fixtures.
 
-If you'd like there is also support for Docker which mainly includes a database, as it is recommended to use the symfony cli server with a local installation of PHP.
+If you'd like there is also support for Docker which mainly includes a database, as we recommend using the symfony cli server with a local installation of PHP. There is also a `make build` command that builds the containers und starts them in detached mode.
 
 # Contributing
 
