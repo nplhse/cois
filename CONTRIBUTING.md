@@ -13,7 +13,7 @@ However you should follow the following simple guidelines for your contribution 
 
 This project expects you to have local webserver and a locally installed MySQL/MariaDB instance, see installation part of the [README](README.md). It seamlessly integrates works with the [Symfony binary cli tool](https://github.com/symfony-cli/symfony-cli).
 
-If you have the need to populate the database with some Fixtures for development you could either directly execute `bin/console doctrine:fixtures:load` or use `composer setup-dev` instead of `composer setup`.
+If you have the need to re-populate the database with some fresh Fixtures you could either directly execute `bin/console doctrine:fixtures:load` or use `make reset-database` instead of `make reset` which resets the whole project.
 
 When using these fixtures there are always several pre-configured Users by default:
 
@@ -23,3 +23,27 @@ When using these fixtures there are always several pre-configured Users by defau
 | foo         | _password_ | Default user                        |
 | unknownUser | _password_ | User with **no** access             |
 | expiredUser | _password_ | User with **expired** credentials   |
+
+## Available make commands
+
+| Command            | Description                                     |
+| ------------------ | ----------------------------------------------- |
+| help               | Outputs help screen                             |
+| setup              | Setup the whole project                         |
+| setup-dev          | Setup the project in dev environment            |
+| install            | Install composer dependencies                   |
+| setup-frontend     | Setup the frontend via yarn                     |
+| setup-frontend-dev | Setup the frontend via yarn (dev environment)   |
+| setup-database     | Setup the database backend                      |
+| setup-fixtures     | Install the fixtures                            |
+| reset-database     | Reset the whole database (caution!)             |
+| test-database      | Setup the test database                         |
+| start              | Build and start the containers                  |
+| build              | Builds the Docker images                        |
+| up                 | Start the docker hub in detached mode (no logs) |
+| down               | Stop the docker hub                             |
+| logs               | Show live logs                                  |
+| checks             | Run static checks pipeline                      |
+| ci                 | Run CI pipeline                                 |
+| reset              | Reset pipeline for the whole project (caution!) |
+| tests              | Run test pipeline                               |
