@@ -1976,23 +1976,24 @@
         },
         {
             "name": "league/flysystem-bundle",
-            "version": "2.2.1",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem-bundle.git",
-                "reference": "9c3f8230f423b6926da3bbe75c55954c076d7a56"
+                "reference": "77a3dfb0fb23cb89b2b59cde6a22bc98bf13e128"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem-bundle/zipball/9c3f8230f423b6926da3bbe75c55954c076d7a56",
-                "reference": "9c3f8230f423b6926da3bbe75c55954c076d7a56",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-bundle/zipball/77a3dfb0fb23cb89b2b59cde6a22bc98bf13e128",
+                "reference": "77a3dfb0fb23cb89b2b59cde6a22bc98bf13e128",
                 "shasum": ""
             },
             "require": {
-                "league/flysystem": "^2.0|^3.0",
+                "league/flysystem": "^2.1|^3.0",
                 "php": ">=7.2",
                 "symfony/config": "^4.2|^5.0|^6.0",
                 "symfony/dependency-injection": "^4.2|^5.0|^6.0",
+                "symfony/deprecation-contracts": "^2.1|^3",
                 "symfony/http-kernel": "^4.2|^5.0|^6.0",
                 "symfony/options-resolver": "^4.2|^5.0|^6.0"
             },
@@ -2005,7 +2006,7 @@
                 "league/flysystem-ftp": "^2.0|^3.0",
                 "league/flysystem-google-cloud-storage": "^2.0|^3.0",
                 "league/flysystem-memory": "^2.0|^3.0",
-                "league/flysystem-sftp": "^2.0|^3.0",
+                "league/flysystem-sftp-v3": "^2.0|^3.0",
                 "symfony/dotenv": "^4.2|^5.0|^6.0",
                 "symfony/framework-bundle": "^4.2|^5.0|^6.0",
                 "symfony/phpunit-bridge": "^5.2",
@@ -2031,9 +2032,9 @@
             "description": "Symfony bundle integrating Flysystem into Symfony 4.2+ applications",
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem-bundle/issues",
-                "source": "https://github.com/thephpleague/flysystem-bundle/tree/2.2.1"
+                "source": "https://github.com/thephpleague/flysystem-bundle/tree/2.3.0"
             },
-            "time": "2022-04-22T14:32:57+00:00"
+            "time": "2022-06-17T11:02:50+00:00"
         },
         {
             "name": "league/mime-type-detection",
