@@ -154,41 +154,49 @@
         <source>account.verified.otherSteps</source>
         <target>If you don't like to follow these steps, here are some other recommendations: Go the site and take a look at our hospitals, discover our allocations or explore the statistics.</target>
       </trans-unit>
-      <trans-unit id="0">
+      <trans-unit id="nh47DMp" resname="notification.hospital.new">
         <source>notification.hospital.new</source>
         <target>A new hospital '%hospitalName%' has been created by '%hospitalOwner%' for dispatch area '%hospitalDispatchArea%' in the state '%hospitalState%.</target>
       </trans-unit>
-      <trans-unit id="1">
+      <trans-unit id="XQsgxUf" resname="notification.import.failed">
         <source>notification.import.failed</source>
         <target>The import '%importName%' which has been created by '%importUser%' for hospital '%importHospital%' has failed.</target>
       </trans-unit>
-      <trans-unit id="2">
+      <trans-unit id="WtR8SVm" resname="notification.import.skipped">
         <source>notification.import.skipped</source>
         <target>The import '%importName%' which has been created by '%importUser%' for hospital '%importHospital%' has skipped rows.</target>
       </trans-unit>
-      <trans-unit id="3a">
+      <trans-unit id="yqP3M6J" resname="notification.hospital.created.title">
         <source>notification.hospital.created.title</source>
         <target>A new hospital has been created</target>
       </trans-unit>
-      <trans-unit id="4a">
+      <trans-unit id="T_I4CG." resname="notification.hospital.created.btn.review">
         <source>notification.hospital.created.btn.review</source>
         <target>View the new Hospital</target>
       </trans-unit>
-      <trans-unit id="5a">
+      <trans-unit id="CQVaxdu" resname="notification.import.failed.title">
         <source>notification.import.failed.title</source>
         <target>A new Import has failed</target>
       </trans-unit>
-      <trans-unit id="6a">
+      <trans-unit id="SxjwsWX" resname="notification.import.failed.btn.review">
         <source>notification.import.failed.btn.review</source>
         <target>View the failed Import</target>
       </trans-unit>
-      <trans-unit id="7a">
+      <trans-unit id="PfsEww3" resname="notification.import.skipped.title">
         <source>notification.import.skipped.title</source>
         <target>A new Import has sipped Rows</target>
       </trans-unit>
-      <trans-unit id="8a">
+      <trans-unit id="oe9VUh." resname="notification.import.skipped.btn.review">
         <source>notification.import.skipped.btn.review</source>
         <target>View the Import with Skipped Rows</target>
+      </trans-unit>
+      <trans-unit id="d89aNTw" resname="notification.contact.request.title">
+        <source>notification.contact.request.title</source>
+        <target>New contact request</target>
+      </trans-unit>
+      <trans-unit id="AHAfsQd" resname="notification.contact.request">
+        <source>notification.contact.request</source>
+        <target>A new contact request has been submitted by '%name%' (%email_address%) with the subject '%subject%'.</target>
       </trans-unit>
     </body>
   </file>

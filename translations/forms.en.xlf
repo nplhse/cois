@@ -665,6 +665,26 @@
         <source>Expire Credentials</source>
         <target>Expire Credentials</target>
       </trans-unit>
+      <trans-unit id="ysOvPSq" resname="label.name">
+        <source>label.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="D2N6_cP" resname="label.email">
+        <source>label.email</source>
+        <target>E-Mail Address</target>
+      </trans-unit>
+      <trans-unit id="8gkrODb" resname="label.subject">
+        <source>label.subject</source>
+        <target>Subject</target>
+      </trans-unit>
+      <trans-unit id="51OQi14" resname="label.message">
+        <source>label.message</source>
+        <target>Message</target>
+      </trans-unit>
+      <trans-unit id="2uxHavc" resname="label.submit">
+        <source>label.submit</source>
+        <target>Submit</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

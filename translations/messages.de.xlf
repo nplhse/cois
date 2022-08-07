@@ -2526,6 +2526,26 @@
         <source>dashboard.onboarding.import.create</source>
         <target>Klicken Sie hier, um den ersten Import durchzuführen.</target>
       </trans-unit>
+      <trans-unit id="IEyEUda" resname="title.contact.form">
+        <source>title.contact.form</source>
+        <target>Kontakt</target>
+      </trans-unit>
+      <trans-unit id="Qw3OWwX" resname="title.contact.sent">
+        <source>title.contact.sent</source>
+        <target>Anfrage wurde versendet</target>
+      </trans-unit>
+      <trans-unit id="rf6h4IJ" resname="msg.contact.sent">
+        <source>msg.contact.sent</source>
+        <target>Vielen Dank! Ihre Kontaktanfrage wurde erfolgreich an unsere Administratoren versendet.</target>
+      </trans-unit>
+      <trans-unit id="mqI5EcD" resname="contact.btn.back">
+        <source>contact.btn.back</source>
+        <target>Zurück zur Seite</target>
+      </trans-unit>
+      <trans-unit id="4luesAk" resname="link.contact">
+        <source>link.contact</source>
+        <target>Kontakt</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
