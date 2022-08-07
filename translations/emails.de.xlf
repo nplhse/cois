@@ -186,6 +186,14 @@
         <source>notification.import.skipped.btn.review</source>
         <target>Neuen Import ansehen</target>
       </trans-unit>
+      <trans-unit id="d89aNTw" resname="notification.contact.request.title">
+        <source>notification.contact.request.title</source>
+        <target>Neue Kontaktanfrage</target>
+      </trans-unit>
+      <trans-unit id="AHAfsQd" resname="notification.contact.request">
+        <source>notification.contact.request</source>
+        <target>Eine neue Kontaktanfrage wurde von '%name%' (%email_address%) mit dem Betreff '%subject%' versendet.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

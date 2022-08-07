@@ -665,6 +665,26 @@
         <source>Expire Credentials</source>
         <target>Passwort zurücksetzen</target>
       </trans-unit>
+      <trans-unit id="ysOvPSq" resname="label.name">
+        <source>label.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="D2N6_cP" resname="label.email">
+        <source>label.email</source>
+        <target>E-Mail Adresse</target>
+      </trans-unit>
+      <trans-unit id="8gkrODb" resname="label.subject">
+        <source>label.subject</source>
+        <target>Betreff</target>
+      </trans-unit>
+      <trans-unit id="51OQi14" resname="label.message">
+        <source>label.message</source>
+        <target>Nachrichtentext</target>
+      </trans-unit>
+      <trans-unit id="2uxHavc" resname="label.submit">
+        <source>label.submit</source>
+        <target>Absenden</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -2449,6 +2449,26 @@
         <source>dashboard.onboarding.import.create</source>
         <target>Click here to create the first Import for your Hospital.</target>
       </trans-unit>
+      <trans-unit id="IEyEUda" resname="title.contact.form">
+        <source>title.contact.form</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="Qw3OWwX" resname="title.contact.sent">
+        <source>title.contact.sent</source>
+        <target>Your message has been sent</target>
+      </trans-unit>
+      <trans-unit id="rf6h4IJ" resname="msg.contact.sent">
+        <source>msg.contact.sent</source>
+        <target>Thank you! Your message has been sent to our administrators.</target>
+      </trans-unit>
+      <trans-unit id="mqI5EcD" resname="contact.btn.back">
+        <source>contact.btn.back</source>
+        <target>Back to our page</target>
+      </trans-unit>
+      <trans-unit id="4luesAk" resname="link.contact">
+        <source>link.contact</source>
+        <target>Contact</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
