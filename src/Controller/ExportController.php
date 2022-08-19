@@ -65,6 +65,8 @@ class ExportController extends AbstractController
         $results = $this->exportQuery->execute($this->filterService);
 
         $csv = Writer::createFromPath('php://temp', 'r+');
+        $csv->setDelimiter(';');
+        $csv->setEnclosure('"');
         $csv->insertOne([
             'id',
             'klinik',
