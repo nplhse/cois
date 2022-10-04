@@ -36,7 +36,7 @@
     "dependencies": {
         "bootstrap": "^5.2.0",
         "bootstrap-icons": "^1.9.1",
-        "ckeditor4": "^4.19.1",
+        "ckeditor4": "^4.20.0",
         "d3": "^7.6.1",
         "d3-scale": "^4.0.1",
         "d3-shape": "^3.1.0",
