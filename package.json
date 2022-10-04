@@ -2,17 +2,17 @@
     "devDependencies": {
         "@babel/core": "^7.19.3",
         "@babel/eslint-parser": "^7.18.9",
-        "@babel/preset-env": "^7.18.9",
+        "@babel/preset-env": "^7.19.3",
         "@hotwired/stimulus": "^3.1.0",
-        "@popperjs/core": "^2.11.5",
+        "@popperjs/core": "^2.11.6",
         "@symfony/stimulus-bridge": "^3.2.1",
         "@symfony/ux-dropzone": "file:vendor/symfony/ux-dropzone/Resources/assets",
         "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets",
         "@symfony/webpack-encore": "^3.0.0",
         "autoprefixer": "^10.4.8",
         "babel-loader": "^8.2.5",
-        "core-js": "^3.24.1",
-        "eslint": "^8.21.0",
+        "core-js": "^3.25.5",
+        "eslint": "^8.24.0",
         "eslint-plugin-import": "^2.25.2",
         "eslint-plugin-n": "^15.2.4",
         "eslint-plugin-promise": "^6.0.0",
@@ -20,7 +20,7 @@
         "prettier": "^2.7.1",
         "prettier-plugin-twig-melody": "^0.4.6",
         "regenerator-runtime": "^0.13.9",
-        "sass": "^1.54.0",
+        "sass": "^1.55.0",
         "sass-loader": "^13.0.2",
         "stimulus": "^3.1.0",
         "webpack-notifier": "^1.15.0"
@@ -40,7 +40,7 @@
         "d3": "^7.6.1",
         "d3-scale": "^4.0.1",
         "d3-shape": "^3.1.0",
-        "jquery": "^3.6.0"
+        "jquery": "^3.6.1"
     },
     "browserslist": [
         "defaults"
