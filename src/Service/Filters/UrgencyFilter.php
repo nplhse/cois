@@ -24,7 +24,7 @@ class UrgencyFilter implements FilterInterface
             $value = (int) urldecode($urgency);
         }
 
-        if (0 === $value) {
+        if (0 == $value) {
             $value = null;
         }
 
