@@ -11,20 +11,20 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<SupplyArea>
  *
- * @method static           SupplyArea|Proxy createOne(array $attributes = [])
- * @method static           SupplyArea[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static           SupplyArea|Proxy find(object|array|mixed $criteria)
- * @method static           SupplyArea|Proxy findOrCreate(array $attributes)
- * @method static           SupplyArea|Proxy first(string $sortedField = 'id')
- * @method static           SupplyArea|Proxy last(string $sortedField = 'id')
- * @method static           SupplyArea|Proxy random(array $attributes = [])
- * @method static           SupplyArea|Proxy randomOrCreate(array $attributes = [])
- * @method static           SupplyArea[]|Proxy[] all()
- * @method static           SupplyArea[]|Proxy[] findBy(array $attributes)
- * @method static           SupplyArea[]|Proxy[] randomSet(int $number, array $attributes = [])
- * @method static           SupplyArea[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static           SupplyAreaRepository|RepositoryProxy repository()
- * @method SupplyArea|Proxy create(array|callable $attributes = [])
+ * @method static SupplyArea|Proxy                     createOne(array $attributes = [])
+ * @method static SupplyArea[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
+ * @method static SupplyArea|Proxy                     find(object|array|mixed $criteria)
+ * @method static SupplyArea|Proxy                     findOrCreate(array $attributes)
+ * @method static SupplyArea|Proxy                     first(string $sortedField = 'id')
+ * @method static SupplyArea|Proxy                     last(string $sortedField = 'id')
+ * @method static SupplyArea|Proxy                     random(array $attributes = [])
+ * @method static SupplyArea|Proxy                     randomOrCreate(array $attributes = [])
+ * @method static SupplyArea[]|Proxy[]                 all()
+ * @method static SupplyArea[]|Proxy[]                 findBy(array $attributes)
+ * @method static SupplyArea[]|Proxy[]                 randomSet(int $number, array $attributes = [])
+ * @method static SupplyArea[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
+ * @method static SupplyAreaRepository|RepositoryProxy repository()
+ * @method        SupplyArea|Proxy                     create(array|callable $attributes = [])
  */
 final class SupplyAreaFactory extends ModelFactory
 {

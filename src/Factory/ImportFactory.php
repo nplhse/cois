@@ -11,20 +11,20 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<Import>
  *
- * @method static       Import|Proxy createOne(array $attributes = [])
- * @method static       Import[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static       Import|Proxy find(object|array|mixed $criteria)
- * @method static       Import|Proxy findOrCreate(array $attributes)
- * @method static       Import|Proxy first(string $sortedField = 'id')
- * @method static       Import|Proxy last(string $sortedField = 'id')
- * @method static       Import|Proxy random(array $attributes = [])
- * @method static       Import|Proxy randomOrCreate(array $attributes = [])
- * @method static       Import[]|Proxy[] all()
- * @method static       Import[]|Proxy[] findBy(array $attributes)
- * @method static       Import[]|Proxy[] randomSet(int $number, array $attributes = [])
- * @method static       Import[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static       ImportRepository|RepositoryProxy repository()
- * @method Import|Proxy create(array|callable $attributes = [])
+ * @method static Import|Proxy                     createOne(array $attributes = [])
+ * @method static Import[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
+ * @method static Import|Proxy                     find(object|array|mixed $criteria)
+ * @method static Import|Proxy                     findOrCreate(array $attributes)
+ * @method static Import|Proxy                     first(string $sortedField = 'id')
+ * @method static Import|Proxy                     last(string $sortedField = 'id')
+ * @method static Import|Proxy                     random(array $attributes = [])
+ * @method static Import|Proxy                     randomOrCreate(array $attributes = [])
+ * @method static Import[]|Proxy[]                 all()
+ * @method static Import[]|Proxy[]                 findBy(array $attributes)
+ * @method static Import[]|Proxy[]                 randomSet(int $number, array $attributes = [])
+ * @method static Import[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
+ * @method static ImportRepository|RepositoryProxy repository()
+ * @method        Import|Proxy                     create(array|callable $attributes = [])
  */
 final class ImportFactory extends ModelFactory
 {

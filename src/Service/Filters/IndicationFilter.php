@@ -24,7 +24,7 @@ class IndicationFilter implements FilterInterface
             $value = (int) urldecode($indicationCode);
         }
 
-        if (0 === $value) {
+        if (0 == $value) {
             $value = null;
         }
 

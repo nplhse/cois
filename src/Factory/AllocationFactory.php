@@ -12,20 +12,20 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<Allocation>
  *
- * @method static           Allocation|Proxy createOne(array $attributes = [])
- * @method static           Allocation[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static           Allocation|Proxy find(object|array|mixed $criteria)
- * @method static           Allocation|Proxy findOrCreate(array $attributes)
- * @method static           Allocation|Proxy first(string $sortedField = 'id')
- * @method static           Allocation|Proxy last(string $sortedField = 'id')
- * @method static           Allocation|Proxy random(array $attributes = [])
- * @method static           Allocation|Proxy randomOrCreate(array $attributes = [])
- * @method static           Allocation[]|Proxy[] all()
- * @method static           Allocation[]|Proxy[] findBy(array $attributes)
- * @method static           Allocation[]|Proxy[] randomSet(int $number, array $attributes = [])
- * @method static           Allocation[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static           AllocationRepository|RepositoryProxy repository()
- * @method Allocation|Proxy create(array|callable $attributes = [])
+ * @method static Allocation|Proxy                     createOne(array $attributes = [])
+ * @method static Allocation[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
+ * @method static Allocation|Proxy                     find(object|array|mixed $criteria)
+ * @method static Allocation|Proxy                     findOrCreate(array $attributes)
+ * @method static Allocation|Proxy                     first(string $sortedField = 'id')
+ * @method static Allocation|Proxy                     last(string $sortedField = 'id')
+ * @method static Allocation|Proxy                     random(array $attributes = [])
+ * @method static Allocation|Proxy                     randomOrCreate(array $attributes = [])
+ * @method static Allocation[]|Proxy[]                 all()
+ * @method static Allocation[]|Proxy[]                 findBy(array $attributes)
+ * @method static Allocation[]|Proxy[]                 randomSet(int $number, array $attributes = [])
+ * @method static Allocation[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
+ * @method static AllocationRepository|RepositoryProxy repository()
+ * @method        Allocation|Proxy                     create(array|callable $attributes = [])
  */
 final class AllocationFactory extends ModelFactory
 {
