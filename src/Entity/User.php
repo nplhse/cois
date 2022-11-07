@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Doctrine\UserPasswordListener;
 use App\Domain\Entity\User as DomainUser;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,6 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[UniqueEntity(fields: ['email'], message: 'Please choose a different email address')]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[Orm\EntityListeners([UserPasswordListener::class])]
 class User extends DomainUser implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable
 {
     #[ORM\Id]

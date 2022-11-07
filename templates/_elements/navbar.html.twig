@@ -8,7 +8,7 @@
                         {{ app_title }}
                     </a>
                 {% else %}
-                    <a class="navbar-brand" href="{{ path('app_default') }}">
+                    <a class="navbar-brand" href="{{ path('app_welcome') }}">
                         {{ app_title }}
                     </a>
                 {% endif %}
@@ -185,6 +185,16 @@
                                                 }}">
                                                 <i class="bi-gear"></i>
                                                 {{ 'Settings'|trans }}
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <li>
+                                            <a class="dropdown-item"
+                                                href="{{ path('admin') }}">
+                                                <i class="bi-dash-circle"></i>
+                                                {{ 'Administration'|trans }}
                                             </a>
                                         </li>
                                         <li><hr class="dropdown-divider" /></li>

@@ -189,6 +189,16 @@
                                         </li>
                                         <li><hr class="dropdown-divider" /></li>
                                     {% endif %}
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <li>
+                                            <a class="dropdown-item"
+                                                href="{{ path('admin') }}">
+                                                <i class="bi-speedometer2"></i>
+                                                {{ 'Administration'|trans }}
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider" /></li>
+                                    {% endif %}
                                     {% if is_granted('IS_IMPERSONATOR') %}
                                         <li>
                                             <a class="dropdown-item text-danger"
