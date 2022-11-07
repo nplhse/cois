@@ -31,8 +31,6 @@ class RegisterUserHandler implements HandlerInterface
         $user->setEmail($command->getEmail());
 
         $user->setPlainPassword($command->getPlainPassword());
-        $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPlainPassword()));
-        $user->eraseCredentials();
 
         $this->userRepository->add($user);
 

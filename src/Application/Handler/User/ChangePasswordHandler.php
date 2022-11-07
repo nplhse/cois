@@ -30,8 +30,6 @@ class ChangePasswordHandler implements HandlerInterface
         $user = $this->userRepository->findOneById($command->getId());
 
         $user->setPlainPassword($command->getPlainPassword());
-        $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPlainPassword()));
-        $user->eraseCredentials();
 
         $this->userRepository->save();
 
