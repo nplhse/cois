@@ -8,7 +8,6 @@ use App\Domain\Command\User\ChangePasswordCommand;
 use App\Domain\Event\User\UserChangedPasswordEvent;
 use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ChangePasswordHandler implements HandlerInterface
 {
@@ -16,12 +15,9 @@ class ChangePasswordHandler implements HandlerInterface
 
     private UserRepositoryInterface $userRepository;
 
-    private UserPasswordHasherInterface $passwordHasher;
-
-    public function __construct(UserRepositoryInterface $userRepository, UserPasswordHasherInterface $passwordHasher)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
-        $this->passwordHasher = $passwordHasher;
     }
 
     public function __invoke(ChangePasswordCommand $command): void
