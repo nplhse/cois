@@ -14,7 +14,7 @@
         "core-js": "^3.26.0",
         "eslint": "^8.26.0",
         "eslint-plugin-import": "^2.25.2",
-        "eslint-plugin-n": "^15.3.0",
+        "eslint-plugin-n": "^15.5.0",
         "eslint-plugin-promise": "^6.1.1",
         "file-loader": "^6.0.0",
         "prettier": "^2.7.1",
