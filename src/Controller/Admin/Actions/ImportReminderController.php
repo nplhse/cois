@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Controller\Settings;
+namespace App\Controller\Admin\Actions;
 
+use App\Controller\Admin\CookieConsentCrudController;
+use App\Controller\Admin\UserCrudController;
 use App\Domain\Command\Task\ImportReminderCommand;
 use App\Domain\Event\Task\TaskFailedEvent;
 use App\Repository\UserRepository;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,32 +15,27 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-class TaskController extends AbstractController
+#[Route('/admin/import/reminder', name: 'admin_import_reminder')]
+class ImportReminderController extends AbstractController
 {
-    private MessageBusInterface $messageBus;
-
-    public function __construct(MessageBusInterface $messageBus)
-    {
-        $this->messageBus = $messageBus;
+    public function __construct(
+        private UserRepository $userRepository,
+        private MessageBusInterface $messageBus,
+        private EventDispatcherInterface $eventDispatcher,
+        private AdminUrlGenerator $adminUrlGenerator
+    ) {
     }
 
-    #[Route('/settings/task/', name: 'app_settings_task_index')]
-    public function index(): Response
+    public function __invoke(): Response
     {
-        return $this->render('settings/task/index.html.twig');
-    }
-
-    #[Route('/settings/task/run/importReminder', name: 'app_settings_task_import_reminder')]
-    public function importReminder(UserRepository $userRepository, EventDispatcherInterface $eventDispatcher): Response
-    {
-        $recipients = $userRepository->findHospitalOwners();
+        $recipients = $this->userRepository->findHospitalOwners();
 
         $command = new ImportReminderCommand($recipients);
 
         try {
             $this->messageBus->dispatch($command);
         } catch (HandlerFailedException $e) {
-            $eventDispatcher->dispatch(new TaskFailedEvent($e), TaskFailedEvent::NAME);
+            $this->eventDispatcher->dispatch(new TaskFailedEvent($e), TaskFailedEvent::NAME);
             $this->addFlash('danger', 'Something went wrong! We have send a notification to the admin to handle this issue.');
 
             return $this->redirectToRoute('app_settings_task_index');
@@ -45,6 +43,8 @@ class TaskController extends AbstractController
 
         $this->addFlash('success', 'Import Reminder successfully sent to Hospital owners.');
 
-        return $this->redirectToRoute('app_settings_task_index');
+        return $this->redirect($this->adminUrlGenerator->setController(UserCrudController::class)
+            ->setAction('index')
+            ->generateUrl());
     }
 }

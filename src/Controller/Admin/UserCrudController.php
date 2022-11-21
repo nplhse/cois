@@ -23,6 +23,12 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setDefaultSort(['createdAt' => 'DESC']);
+    }
+
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -38,6 +44,7 @@ class UserCrudController extends AbstractCrudController
             ChoiceField::new('roles')
                 ->setChoices(array_combine(['ROLE_USER', 'ROLE_ADMIN'], ['ROLE_USER', 'ROLE_ADMIN']))
                 ->allowMultipleChoices()
+                ->renderAsBadges()
                 ->renderExpanded()
                 ->hideOnIndex(),
             AssociationField::new('hospitals'),
@@ -58,6 +65,7 @@ class UserCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         $verify = Action::new('verify')
+            ->addCssClass('btn btn-outline-success')
             ->linkToRoute('admin_user_verify', function (User $user): array {
                 return [
                     'id' => $user->getId(),
@@ -71,6 +79,7 @@ class UserCrudController extends AbstractCrudController
             });
 
         $unverify = Action::new('unverify')
+            ->addCssClass('btn btn-outline-danger')
             ->linkToRoute('admin_user_unverify', function (User $user): array {
                 return [
                     'id' => $user->getId(),
@@ -84,6 +93,7 @@ class UserCrudController extends AbstractCrudController
             });
 
         $enable_participation = Action::new('enable_participation')
+            ->addCssClass('btn btn-outline-success')
             ->linkToRoute('admin_user_enable_participation', function (User $user): array {
                 return [
                     'id' => $user->getId(),
@@ -97,6 +107,7 @@ class UserCrudController extends AbstractCrudController
             });
 
         $disable_participation = Action::new('disable_participation')
+            ->addCssClass('btn btn-outline-danger')
             ->linkToRoute('admin_user_disable_participation', function (User $user): array {
                 return [
                     'id' => $user->getId(),
@@ -110,6 +121,7 @@ class UserCrudController extends AbstractCrudController
             });
 
         $expire = Action::new('expire')
+            ->addCssClass('btn btn-outline-warning')
             ->linkToRoute('admin_user_expire', function (User $user): array {
                 return [
                     'id' => $user->getId(),
@@ -122,7 +134,12 @@ class UserCrudController extends AbstractCrudController
                 return true;
             });
 
+        $reminder = Action::new('reminder', 'Send monthly reminder', 'fa fa-paper-plane')
+            ->linkToRoute('admin_import_reminder')
+            ->createAsGlobalAction();
+
         return parent::configureActions($actions)
+            ->add(Crud::PAGE_INDEX, $reminder)
             ->add(Crud::PAGE_DETAIL, $verify)
             ->add(Crud::PAGE_DETAIL, $unverify)
             ->add(Crud::PAGE_DETAIL, $enable_participation)
