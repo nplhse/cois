@@ -184,30 +184,4 @@
             </li>
         {% endif %}
     </ul>
-
-    {% if app_cookie_consent == true %}
-        <h3>
-            {{ 'System'|trans }}
-        </h3>
-        <ul class="list-group">
-            {% if
-                app.request.attributes.get('_route')
-                    starts with 'app_settings_cookie' %}
-                <li class="list-group-item active">
-                    <i class="bi bi-award-fill"></i>
-                    <a class="text-light"
-                        href="{{ path('app_settings_cookie_consent') }}">
-                        {{ 'Cookie Consent'|trans }}
-                    </a>
-                </li>
-            {% else %}
-                <li class="list-group-item">
-                    <i class="bi bi-award"></i>
-                    <a href="{{ path('app_settings_cookie_consent') }}">
-                        {{ 'Cookie Consent'|trans }}
-                    </a>
-                </li>
-            {% endif %}
-        </ul>
-    {% endif %}
 {% endif %}
