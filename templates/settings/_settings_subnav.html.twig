@@ -59,24 +59,6 @@
     <ul class="list-group mb-3">
         {% if
             app.request.attributes.get('_route')
-                starts with 'app_settings_area' %}
-            <li class="list-group-item active">
-                <i class="bi bi-geo-alt-fill"></i>
-                <a class="text-light"
-                    href="{{ path('app_settings_area_index') }}">
-                    {{ 'Areas'|trans }}
-                </a>
-            </li>
-        {% else %}
-            <li class="list-group-item">
-                <i class="bi bi-geo-alt"></i>
-                <a href="{{ path('app_settings_area_index') }}">
-                    {{ 'Areas'|trans }}
-                </a>
-            </li>
-        {% endif %}
-        {% if
-            app.request.attributes.get('_route')
                 starts with 'app_settings_import' %}
             <li class="list-group-item active">
                 <i class="bi bi-archive-fill"></i>

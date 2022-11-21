@@ -52,13 +52,13 @@ class PageController extends AbstractController
             SearchFilter::Param => $this->filterService->getValue(SearchFilter::Param),
         ]);
 
-        $sortForm = $orderFilterFactory->setSortable(HospitalRepository::SORTABLE)->setAction($this->generateUrl('app_settings_hospital_index'))->getForm();
+        $sortForm = $orderFilterFactory->setSortable(HospitalRepository::SORTABLE)->setAction($this->generateUrl('app_settings_page_index'))->getForm();
 
         $searchFilterFactory->setHiddenFields([
             OrderFilter::Param => $this->filterService->getValue(OrderFilter::Param),
         ]);
 
-        $searchForm = $searchFilterFactory->setAction($this->generateUrl('app_settings_cookie_consent'))->getForm();
+        $searchForm = $searchFilterFactory->setAction($this->generateUrl('app_settings_page_index'))->getForm();
         $searchForm->handleRequest($request);
 
         return $this->renderForm('settings/page/index.html.twig', [
