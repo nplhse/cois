@@ -3,15 +3,12 @@
 namespace App\Controller\Admin\Actions;
 
 use App\Controller\Admin\UserCrudController;
-use App\Domain\Command\User\ExpireUserCommand;
 use App\Entity\User;
 use App\Service\MailerService;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/user/welcome/{id}', name: 'admin_user_welcome')]

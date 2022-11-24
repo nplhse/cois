@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin\Actions;
 
-use App\Controller\Admin\CookieConsentCrudController;
 use App\Controller\Admin\UserCrudController;
 use App\Domain\Command\Task\ImportReminderCommand;
 use App\Domain\Event\Task\TaskFailedEvent;

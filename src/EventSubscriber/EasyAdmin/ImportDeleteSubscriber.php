@@ -24,7 +24,7 @@ class ImportDeleteSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function deleteRelatedAllocations(BeforeEntityDeletedEvent $event)
+    public function deleteRelatedAllocations(BeforeEntityDeletedEvent $event): void
     {
         $entity = $event->getEntityInstance();
 
