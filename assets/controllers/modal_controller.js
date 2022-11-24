@@ -12,7 +12,6 @@ export default class extends Controller {
 
     async openModal(event) {
         const modal = new Modal(this.modalTarget);
-
         const response = await fetch(this.formUrlValue);
 
         this.modalBodyTarget.innerHTML = await response.text();
@@ -22,7 +21,9 @@ export default class extends Controller {
 
     async submitForm(event) {
         event.preventDefault();
+
         const $form = $(this.modalBodyTarget).find("form");
+
         this.modalBodyTarget.innerHTML = await $.ajax({
             url: this.formUrlValue,
             method: $form.prop("method"),
