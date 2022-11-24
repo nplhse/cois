@@ -59,24 +59,6 @@
     <ul class="list-group mb-3">
         {% if
             app.request.attributes.get('_route')
-                starts with 'app_settings_import' %}
-            <li class="list-group-item active">
-                <i class="bi bi-archive-fill"></i>
-                <a class="text-light"
-                    href="{{ path('app_settings_import_index') }}">
-                    {{ 'Imports'|trans }}
-                </a>
-            </li>
-        {% else %}
-            <li class="list-group-item">
-                <i class="bi bi-archive"></i>
-                <a href="{{ path('app_settings_import_index') }}">
-                    {{ 'Imports'|trans }}
-                </a>
-            </li>
-        {% endif %}
-        {% if
-            app.request.attributes.get('_route')
                 starts with 'app_settings_page' %}
             <li class="list-group-item active">
                 <i class="bi bi-book-fill"></i>
@@ -90,24 +72,6 @@
                 <i class="bi bi-book"></i>
                 <a href="{{ path('app_settings_page_index') }}">
                     {{ 'Pages'|trans }}
-                </a>
-            </li>
-        {% endif %}
-        {% if
-            app.request.attributes.get('_route')
-                starts with 'app_settings_user' %}
-            <li class="list-group-item active">
-                <i class="bi bi-people-fill"></i>
-                <a class="text-light"
-                    href="{{ path('app_settings_user_index') }}">
-                    {{ 'Users'|trans }}
-                </a>
-            </li>
-        {% else %}
-            <li class="list-group-item">
-                <i class="bi bi-people"></i>
-                <a href="{{ path('app_settings_user_index') }}">
-                    {{ 'Users'|trans }}
                 </a>
             </li>
         {% endif %}

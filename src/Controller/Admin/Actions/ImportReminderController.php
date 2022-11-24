@@ -38,7 +38,9 @@ class ImportReminderController extends AbstractController
             $this->eventDispatcher->dispatch(new TaskFailedEvent($e), TaskFailedEvent::NAME);
             $this->addFlash('danger', 'Something went wrong! We have send a notification to the admin to handle this issue.');
 
-            return $this->redirectToRoute('app_settings_task_index');
+            return $this->redirect($this->adminUrlGenerator->setController(UserCrudController::class)
+                ->setAction('index')
+                ->generateUrl());
         }
 
         $this->addFlash('success', 'Import Reminder successfully sent to Hospital owners.');

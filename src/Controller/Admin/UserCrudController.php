@@ -134,12 +134,20 @@ class UserCrudController extends AbstractCrudController
                 return true;
             });
 
+        $welcome = Action::new('send_welcome_mail', 'Send welcome mail')
+            ->linkToRoute('admin_user_welcome', function (User $user): array {
+                return [
+                    'id' => $user->getId(),
+                ];
+            });
+
         $reminder = Action::new('reminder', 'Send monthly reminder', 'fa fa-paper-plane')
             ->linkToRoute('admin_import_reminder')
             ->createAsGlobalAction();
 
         return parent::configureActions($actions)
             ->add(Crud::PAGE_INDEX, $reminder)
+            ->add(Crud::PAGE_INDEX, $welcome)
             ->add(Crud::PAGE_DETAIL, $verify)
             ->add(Crud::PAGE_DETAIL, $unverify)
             ->add(Crud::PAGE_DETAIL, $enable_participation)

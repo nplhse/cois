@@ -3,6 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Import;
+use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
@@ -55,5 +59,20 @@ class ImportCrudController extends AbstractCrudController
             DateField::new('updatedAt')
                 ->hideOnForm(),
         ];
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        $refresh = Action::new('refresh')
+            ->addCssClass('btn btn-outline-primary')
+            ->linkToRoute('admin_import_refresh', function (Import $import): array {
+                return [
+                    'id' => $import->getId(),
+                ];
+            });
+
+        return parent::configureActions($actions)
+            ->add(Crud::PAGE_DETAIL, $refresh)
+            ->add(Crud::PAGE_INDEX, $refresh);
     }
 }
