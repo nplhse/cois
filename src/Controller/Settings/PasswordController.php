@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Settings\User;
+namespace App\Controller\Settings;
 
 use App\Domain\Command\User\ChangePasswordCommand;
 use App\Entity\User;
