@@ -40,10 +40,7 @@ Encore
      * list of features, see:
      * https://symfony.com/doc/current/frontend.html#adding-more-features
      */
-    .cleanupOutputBeforeBuild(["public"], (options) => {
-        options.verbose = true;
-        options.root = __dirname;
-    })
+    .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
     // enables hashed filenames (e.g. app.abc123.css)
@@ -61,7 +58,7 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
-    // .enablePostCssLoader();
+    .enablePostCssLoader()
 
     .copyFiles({
         from: "./assets/images",
