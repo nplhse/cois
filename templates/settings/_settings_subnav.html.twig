@@ -51,29 +51,3 @@
         </li>
     {% endif %}
 </ul>
-
-{% if is_granted('ROLE_ADMIN') %}
-    <h3>
-        {{ 'Administration'|trans }}
-    </h3>
-    <ul class="list-group mb-3">
-        {% if
-            app.request.attributes.get('_route')
-                starts with 'app_settings_page' %}
-            <li class="list-group-item active">
-                <i class="bi bi-book-fill"></i>
-                <a class="text-light"
-                    href="{{ path('app_settings_page_index') }}">
-                    {{ 'Pages'|trans }}
-                </a>
-            </li>
-        {% else %}
-            <li class="list-group-item">
-                <i class="bi bi-book"></i>
-                <a href="{{ path('app_settings_page_index') }}">
-                    {{ 'Pages'|trans }}
-                </a>
-            </li>
-        {% endif %}
-    </ul>
-{% endif %}

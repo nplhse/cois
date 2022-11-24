@@ -77,28 +77,6 @@
                     </div>
                 </div>
             </div>
-
-            {% if is_granted('ROLE_ADMIN') %}
-                <div class="row mt-4">
-                    <h1>
-                        {{ 'Administration'|trans }}
-                    </h1>
-
-                    <div class="col-4">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <a href="{{ path('app_settings_page_index') }}">
-                                    <i class="bi bi-book"
-                                        style="font-size: 5rem; color: cornflowerblue;">
-
-                                    </i><br />
-                                    {{ 'Pages'|trans }}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endif %}
         </div>
     </div>
 {% endblock %}
