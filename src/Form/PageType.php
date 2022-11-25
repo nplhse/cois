@@ -8,6 +8,7 @@ use App\Entity\Page;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,7 +26,7 @@ class PageType extends AbstractType
                 'choices' => PageTypeEnum::getChoices(),
                 'empty_data' => PageTypeEnum::Public,
             ])
-            ->add('content', CKEditorType::class)
+            ->add('content', TextareaType::class)
             ->add('status', ChoiceType::class, [
                 'choices' => PageStatusEnum::getChoices(),
                 'empty_data' => PageStatusEnum::Draft,
