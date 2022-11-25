@@ -1,12 +1,12 @@
-{% extends '@email/default/notification/body.html.twig' %}
+{% extends '@email/default/notifications/body.html.twig' %}
 
 {% block content %}
     {{
-        'notification.import.skipped'|trans(
+        'notifications.import.skipped'|trans(
             {
-                '%importName%': importName,
-                '%importUser%': importUser,
-                '%importHospital%': importHospital
+                '%importName%': import_name,
+                '%importUser%': import_user,
+                '%importHospital%': import_hospital
             },
             'emails'
         )

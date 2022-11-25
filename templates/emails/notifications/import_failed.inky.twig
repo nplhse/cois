@@ -1,0 +1,24 @@
+{% extends '@email/default/notifications/body.html.twig' %}
+
+{% block content %}
+    {{
+        'notifications.import.failed'|trans(
+            {
+                '%importName%': import_name,
+                '%importUser%': import_user,
+                '%importHospital%': import_hospital
+            },
+            'emails'
+        )
+    }}
+
+    {% if exception is defined %}
+        <p>
+            {{ exception.message }}
+        </p>
+        <p>
+            {{ exception.file }}: {{ exception.line }}<br />
+        </p>
+        <small>{{ exception.traceAsString }}</small>
+    {% endif %}
+{% endblock %}

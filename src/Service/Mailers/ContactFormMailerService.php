@@ -27,7 +27,7 @@ class ContactFormMailerService
                 ->to(new Address($admin->getEmail()))
                 ->importance(NotificationEmail::IMPORTANCE_HIGH)
                 ->subject($this->translator->trans('notification.contact.request.title', [], 'emails'))
-                ->htmlTemplate('emails/notification/contact_request.inky.twig')
+                ->htmlTemplate('emails/notifications/contact_request.inky.twig')
                 ->context([
                     'name' => $contactRequest['name'],
                     'email_address' => $contactRequest['email_address'],

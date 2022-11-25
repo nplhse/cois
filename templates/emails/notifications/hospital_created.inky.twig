@@ -1,0 +1,15 @@
+{% extends '@email/default/notifications/body.html.twig' %}
+
+{% block content %}
+    {{
+        'notifications.hospital.new'|trans(
+            {
+                '%hospitalName%': hospital_name,
+                '%hospitalOwner%': hospital_owner,
+                '%hospitalState%': hospital_state,
+                '%hospitalDispatchArea%': hospital_dispatchArea
+            },
+            'emails'
+        )
+    }}
+{% endblock %}
