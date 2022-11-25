@@ -4,7 +4,7 @@ namespace App\EventSubscriber\Notifications;
 
 use App\Domain\Event\User\UserRegisteredEvent;
 
-class UserCreatedNotification extends AbstractAdminNotificationNotification
+class UserCreatedNotification extends AbstractAdminNotification
 {
     public function sendUserRegisteredNotification(UserRegisteredEvent $event): void
     {

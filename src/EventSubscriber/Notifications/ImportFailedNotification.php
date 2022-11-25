@@ -5,7 +5,7 @@ namespace App\EventSubscriber\Notifications;
 use App\Domain\Event\Import\ImportFailedEvent;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
 
-class ImportFailedNotification extends AbstractAdminNotificationNotification
+class ImportFailedNotification extends AbstractAdminNotification
 {
     public function sendImportFailedNotification(ImportFailedEvent $event): void
     {

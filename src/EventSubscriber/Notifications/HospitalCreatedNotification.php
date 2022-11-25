@@ -4,7 +4,7 @@ namespace App\EventSubscriber\Notifications;
 
 use App\Domain\Event\Hospital\HospitalCreatedEvent;
 
-class HospitalCreatedNotification extends AbstractAdminNotificationNotification
+class HospitalCreatedNotification extends AbstractAdminNotification
 {
     public function sendHospitalCreatedNotification(HospitalCreatedEvent $event): void
     {

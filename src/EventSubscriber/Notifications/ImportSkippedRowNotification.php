@@ -4,7 +4,7 @@ namespace App\EventSubscriber\Notifications;
 
 use App\Domain\Event\Import\ImportSkippedRowEvent;
 
-class ImportSkippedRowNotification extends AbstractAdminNotificationNotification
+class ImportSkippedRowNotification extends AbstractAdminNotification
 {
     public function sendImportSkippedRowNotification(ImportSkippedRowEvent $event): void
     {

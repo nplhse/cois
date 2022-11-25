@@ -11,7 +11,7 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-abstract class AbstractAdminNotificationNotification implements AdminNotificationInterface
+abstract class AbstractAdminNotification implements AdminNotificationInterface
 {
     public function __construct(
         private readonly UserRepositoryInterface $userRepository,
