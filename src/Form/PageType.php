@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Domain\Enum\Page\PageStatusEnum;
 use App\Domain\Enum\Page\PageTypeEnum;
 use App\Entity\Page;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
