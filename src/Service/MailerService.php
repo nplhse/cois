@@ -97,20 +97,4 @@ class MailerService
 
         $this->mailer->send($email);
     }
-
-    public function sendWelcomeEmail(User $user): void
-    {
-        $email = (new TemplatedEmail())
-            ->to(new Address($user->getEmail()))
-            ->from(new Address($this->mailerSender, $this->mailerFrom))
-            ->replyTo($this->mailerSender)
-            ->subject($this->translator->trans('account.welcome.title', [], 'emails'))
-            ->htmlTemplate('emails/user/welcome.html.twig')
-            ->context([
-                'username' => $user->getUsername(),
-                'targetUrl' => $this->router->generate('app_login', [], UrlGenerator::ABSOLUTE_URL),
-            ]);
-
-        $this->mailer->send($email);
-    }
 }
