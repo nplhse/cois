@@ -84,8 +84,8 @@ services:
         arguments:
             - !tagged_iterator { tag: "app.filters", default_index_method: "getParam" }
 
-    App\Service\ImportService:
-        class: 'App\Service\ImportService'
+    App\Service\Import\ImportService:
+        class: 'App\Service\Import\ImportService'
         arguments:
             - '@doctrine.orm.entity_manager'
             - '@debug.stopwatch'
