@@ -8,7 +8,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class ContactFormMailerService extends AbstractNotificationService
+class ContactFormNotificationService extends AbstractNotificationService
 {
     public function __construct(
         protected readonly TranslatorInterface $translator,
