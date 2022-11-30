@@ -36,7 +36,7 @@ class CookieConsentService
     {
         $form = $this->createForm();
 
-        return $this->twig->render('_elements/cookie_consent.html.twig', [
+        return $this->twig->render('elements/cookie_consent.html.twig', [
             'consentForm' => $form->createView(),
         ]);
     }

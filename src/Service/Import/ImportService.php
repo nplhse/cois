@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Import;
 
 use App\Application\Contract\ImportReaderInterface;
 use App\Application\Contract\ImportWriterInterface;

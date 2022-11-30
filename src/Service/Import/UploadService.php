@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Import;
 
 use League\Flysystem\FilesystemOperator;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

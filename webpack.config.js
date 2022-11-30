@@ -40,10 +40,7 @@ Encore
      * list of features, see:
      * https://symfony.com/doc/current/frontend.html#adding-more-features
      */
-    .cleanupOutputBeforeBuild(["public"], (options) => {
-        options.verbose = true;
-        options.root = __dirname;
-    })
+    .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
     // enables hashed filenames (e.g. app.abc123.css)
@@ -61,43 +58,14 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
-    // .enablePostCssLoader();
+    .enablePostCssLoader()
 
     .copyFiles({
         from: "./assets/images",
         to: Encore.isProduction()
             ? "images/[path][name].[hash:8].[ext]"
             : "images/[path][name].[ext]",
-    })
-
-    .copyFiles([
-        {
-            from: "./node_modules/ckeditor4/",
-            to: "ckeditor/[path][name].[ext]",
-            pattern: /\.(js|css)$/,
-            includeSubdirectories: false,
-        },
-        {
-            from: "./node_modules/ckeditor4/adapters",
-            to: "ckeditor/adapters/[path][name].[ext]",
-        },
-        {
-            from: "./node_modules/ckeditor4/lang",
-            to: "ckeditor/lang/[path][name].[ext]",
-        },
-        {
-            from: "./node_modules/ckeditor4/plugins",
-            to: "ckeditor/plugins/[path][name].[ext]",
-        },
-        {
-            from: "./node_modules/ckeditor4/skins",
-            to: "ckeditor/skins/[path][name].[ext]",
-        },
-        {
-            from: "./node_modules/ckeditor4/vendor",
-            to: "ckeditor/vendor/[path][name].[ext]",
-        },
-    ]);
+    });
 
 // export the final configuration as an array of multiple configurations
 module.exports = Encore.getWebpackConfig();

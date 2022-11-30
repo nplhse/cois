@@ -4,7 +4,7 @@ namespace App\Controller\User;
 
 use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
-use App\Service\MailerService;
+use App\Service\Mailers\UserVerificationMailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,11 +18,11 @@ class VerifyUserController extends AbstractController
 {
     private UserRepositoryInterface $userRepository;
 
-    private MailerService $mailer;
+    private UserVerificationMailerService $mailer;
 
     private VerifyEmailHelperInterface $verifyEmailHelper;
 
-    public function __construct(VerifyEmailHelperInterface $verifyEmailHelper, MailerService $mailer, UserRepositoryInterface $userRepository)
+    public function __construct(VerifyEmailHelperInterface $verifyEmailHelper, UserVerificationMailerService $mailer, UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
         $this->mailer = $mailer;

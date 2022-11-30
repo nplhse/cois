@@ -25,7 +25,7 @@ use App\Service\Filters\PageFilter;
 use App\Service\Filters\SearchFilter;
 use App\Service\Filters\UserFilter;
 use App\Service\FilterService;
-use App\Service\UploadService;
+use App\Service\Import\UploadService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

@@ -8,7 +8,7 @@ use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Command\Import\ImportDataCommand;
 use App\Domain\Event\Import\ImportSuccessEvent;
 use App\Domain\Repository\ImportRepositoryInterface;
-use App\Service\ImportService;
+use App\Service\Import\ImportService;
 
 class ImportDataHandler implements HandlerInterface
 {

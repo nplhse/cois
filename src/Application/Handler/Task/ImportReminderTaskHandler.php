@@ -5,17 +5,15 @@ namespace App\Application\Handler\Task;
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Command\Task\ImportReminderCommand;
-use App\Service\MailerService;
+use App\Service\Mailers\ImportReminderMailerService;
 
-class ImportReminderHandler implements HandlerInterface
+class ImportReminderTaskHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private MailerService $mailer;
-
-    public function __construct(MailerService $mailer)
-    {
-        $this->mailer = $mailer;
+    public function __construct(
+        private ImportReminderMailerService $mailer
+    ) {
     }
 
     public function __invoke(ImportReminderCommand $command): void

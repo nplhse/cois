@@ -6,7 +6,7 @@ use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
 use App\Form\User\ChangePasswordFormType;
 use App\Form\User\ResetPasswordRequestFormType;
-use App\Service\MailerService;
+use App\Service\Mailers\UserPasswordResetMailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,9 +27,9 @@ class ResetPasswordController extends AbstractController
 
     private ResetPasswordHelperInterface  $resetPasswordHelper;
 
-    private MailerService $mailer;
+    private UserPasswordResetMailerService $mailer;
 
-    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper, MailerService $mailer, UserRepositoryInterface $userRepository)
+    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper, UserPasswordResetMailerService $mailer, UserRepositoryInterface $userRepository)
     {
         $this->resetPasswordHelper = $resetPasswordHelper;
         $this->mailer = $mailer;

@@ -1,26 +1,28 @@
 <?php
 
-namespace App\EventSubscriber;
+namespace App\EventSubscriber\Emails;
 
 use App\Domain\Event\User\UserPromotedEvent;
+use App\Entity\User;
 use App\Repository\UserRepository;
-use App\Service\MailerService;
+use App\Service\Mailers\UserPromotedMailerService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class UserPromotionSubscriber implements EventSubscriberInterface
+class UserPromotionEmailSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private UserRepository $userRepository,
-        private MailerService $mailerService,
+        private UserPromotedMailerService $mailerService,
     ) {
     }
 
     public function onUserPromotedEvent(UserPromotedEvent $event): void
     {
+        /** @var User $user */
         $user = $this->userRepository->findOneById($event->getId());
 
         if (null !== $user && $event->getIsParticipant()) {
-            $this->mailerService->sendPromotionEmail($user);
+            $this->mailerService->sendUserPromotedEmail($user);
         }
     }
 

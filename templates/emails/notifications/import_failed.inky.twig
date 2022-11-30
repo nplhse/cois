@@ -2,11 +2,11 @@
 
 {% block content %}
     {{
-        'notification.import.skipped'|trans(
+        'notification.import.failed'|trans(
             {
-                '%importName%': importName,
-                '%importUser%': importUser,
-                '%importHospital%': importHospital
+                '%importName%': import_name,
+                '%importUser%': import_user,
+                '%importHospital%': import_hospital
             },
             'emails'
         )
