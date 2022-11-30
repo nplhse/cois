@@ -1,8 +1,8 @@
-{% extends '@email/default/notifications/body.html.twig' %}
+{% extends '@email/default/notification/body.html.twig' %}
 
 {% block content %}
     {{
-        'notifications.hospital.new'|trans(
+        'notification.hospital.new'|trans(
             {
                 '%hospitalName%': hospital_name,
                 '%hospitalOwner%': hospital_owner,

@@ -12,11 +12,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 abstract class AbstractMailerService implements MailerServiceInterface
 {
     public function __construct(
-        private readonly TranslatorInterface $translator,
-        private readonly UrlGeneratorInterface $router,
-        private readonly MailerInterface $mailer,
-        private readonly string $appMailerSender,
-        private readonly string $appMailerFrom
+        protected readonly TranslatorInterface $translator,
+        protected readonly UrlGeneratorInterface $router,
+        protected readonly MailerInterface $mailer,
+        protected readonly string $appMailerSender,
+        protected readonly string $appMailerFrom
     ) {
     }
 

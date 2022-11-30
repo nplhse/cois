@@ -1,8 +1,8 @@
-{% extends '@email/default/notifications/body.html.twig' %}
+{% extends '@email/default/notification/body.html.twig' %}
 
 {% block content %}
     {{
-        'notifications.user.new'|trans(
+        'notification.user.new'|trans(
             {
                 '%username%': user_name,
                 '%userEmail%': user_email

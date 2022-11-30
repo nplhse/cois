@@ -5,28 +5,29 @@ namespace App\EventSubscriber\Notifications;
 use App\Domain\Contracts\UserInterface;
 use App\Domain\Repository\UserRepositoryInterface;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-abstract class AbstractAdminNotification implements AdminNotificationInterface
+abstract class AbstractAdminNotification implements AdminNotificationInterface, EventSubscriberInterface
 {
     public function __construct(
         private readonly UserRepositoryInterface $userRepository,
         private readonly TranslatorInterface $translator,
         private readonly UrlGeneratorInterface $router,
         private readonly MailerInterface $mailer,
-        private readonly string $mailerSender,
-        private readonly string $mailerFrom
+        private readonly string $appMailerSender,
+        private readonly string $appMailerFrom
     ) {
     }
 
     public function getEmail(string $recipient, string $subject, string $template, array $context = []): NotificationEmail
     {
         return (new NotificationEmail())
-            ->from(new Address($this->mailerSender, $this->mailerFrom))
+            ->from(new Address($this->appMailerSender, $this->appMailerFrom))
             ->to(new Address($recipient))
             ->importance(NotificationEmail::IMPORTANCE_MEDIUM)
             ->subject($this->getTranslation($subject))

@@ -19,7 +19,7 @@ class HospitalCreatedNotification extends AbstractAdminNotification
             );
 
             $email->action(
-                $this->getTranslation('notifications.hospital.created.btn.review'),
+                $this->getTranslation('notification.hospital.created.btn.review'),
                 $this->getRoute('app_hospital_show', ['id' => $context['hospital_id']])
             );
 

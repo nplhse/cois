@@ -1,9 +1,9 @@
-{% extends '@email/default/notifications/body.html.twig' %}
+{% extends '@email/default/notification/body.html.twig' %}
 
 {% block content %}
     <row>
         {{
-            'notifications.contact.request'|trans(
+            'notification.contact.request'|trans(
                 {
                     '%name%': name,
                     '%email_address%': email_address,
