@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Import;
-use App\Service\UploadService;
+use App\Service\Import\UploadService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\HeaderUtils;
