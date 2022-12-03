@@ -17,11 +17,14 @@ return static function (RectorConfig $rectorConfig): void {
     // Path to Symfony configuration
     $rectorConfig->symfonyContainerXml(__DIR__.'/var/cache/dev/App_KernelDevDebugContainer.xml');
 
+    // Patho so Symfony container
+    $rectorConfig->symfonyContainerPhp(__DIR__.'/tests/symfony-container.php');
+
     // Definition of the RuleSets to be used by rector
     $rectorConfig->sets([
         DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
         DoctrineSetList::DOCTRINE_CODE_QUALITY,
-        SymfonySetList::SYMFONY_52,
+        SymfonySetList::SYMFONY_61,
         SymfonySetList::SYMFONY_CODE_QUALITY,
         SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION,
     ]);
