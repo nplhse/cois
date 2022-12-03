@@ -67,7 +67,7 @@ class VerifyUserController extends AbstractController
     }
 
     #[Route('send-verification', name: 'account_email_verify', )]
-    public function sendVerification(Request $request, TranslatorInterface $translator): Response
+    public function sendVerification(TranslatorInterface $translator): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
