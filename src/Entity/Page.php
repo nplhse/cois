@@ -11,6 +11,7 @@ use App\Repository\PageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PageRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Page
 {
     use BlamableTrait;
