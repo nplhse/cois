@@ -11,11 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CookieConsentController extends AbstractController
 {
-    private CookieConsentService $consentService;
-
-    public function __construct(CookieConsentService $consentService)
-    {
-        $this->consentService = $consentService;
+    public function __construct(
+        private CookieConsentService $consentService
+    ) {
     }
 
     #[Route('/cookie_consent', name: 'app_cookie_consent')]

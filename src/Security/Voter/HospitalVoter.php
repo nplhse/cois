@@ -16,11 +16,9 @@ class HospitalVoter extends Voter
 
     private const VIEWSTATS = 'viewStats';
 
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
+    public function __construct(
+        private Security $security
+    ) {
     }
 
     protected function supports(string $attribute, mixed $subject): bool

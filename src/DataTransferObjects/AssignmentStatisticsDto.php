@@ -9,14 +9,10 @@ class AssignmentStatisticsDto implements ConstructFromArrayInterface
 {
     use ConstructableFromArrayTrait;
 
-    private string $assignment;
-
-    private int $counter;
-
-    final public function __construct(string $assignment, int $counter = 0)
-    {
-        $this->assignment = $assignment;
-        $this->counter = $counter;
+    final public function __construct(
+        private string $assignment,
+        private int $counter = 0
+    ) {
     }
 
     public function getAssignment(): string

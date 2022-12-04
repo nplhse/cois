@@ -6,11 +6,9 @@ use App\Application\Contract\ResultCollectionInterface;
 
 final class ResultCollection implements ResultCollectionInterface
 {
-    private array $items;
-
-    public function __construct(array $items)
-    {
-        $this->items = $items;
+    public function __construct(
+        private array $items
+    ) {
     }
 
     public function getSingleResult(): array

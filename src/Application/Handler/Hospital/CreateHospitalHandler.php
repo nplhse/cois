@@ -13,11 +13,9 @@ class CreateHospitalHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private HospitalRepository $hospitalRepository;
-
-    public function __construct(HospitalRepository $hospitalRepository)
-    {
-        $this->hospitalRepository = $hospitalRepository;
+    public function __construct(
+        private HospitalRepository $hospitalRepository
+    ) {
     }
 
     public function __invoke(CreateHospitalCommand $command): void

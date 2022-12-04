@@ -10,11 +10,9 @@ abstract class AbstractFilterFactory
 {
     protected array $defaults;
 
-    protected FormFactoryInterface $formFactory;
-
-    public function __construct(FormFactoryInterface $formFactory)
-    {
-        $this->formFactory = $formFactory;
+    public function __construct(
+        protected FormFactoryInterface $formFactory
+    ) {
         $this->defaults = $this->getDefaults();
     }
 

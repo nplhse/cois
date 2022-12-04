@@ -15,11 +15,9 @@ class PageCreatedEvent extends Event implements DomainEventInterface
 
     public const NAME = 'page.created';
 
-    private Page $page;
-
-    public function __construct(Page $page)
-    {
-        $this->page = $page;
+    public function __construct(
+        private Page $page
+    ) {
     }
 
     public function getPage(): Page

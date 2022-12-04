@@ -15,14 +15,10 @@ class ImportSkippedRowEvent extends Event implements DomainEventInterface
 
     public const NAME = 'import.skipped_row';
 
-    private ImportInterface $import;
-
-    private \Exception $exception;
-
-    public function __construct(ImportInterface $import, ?\Exception $exception)
-    {
-        $this->import = $import;
-        $this->exception = $exception;
+    public function __construct(
+        private ImportInterface $import,
+        private ?\Exception $exception
+    ) {
     }
 
     public function getImport(): ImportInterface

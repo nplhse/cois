@@ -4,14 +4,10 @@ namespace App\Domain\Command\User;
 
 class ChangePasswordCommand
 {
-    private int $id;
-
-    private string $plainPassword;
-
-    public function __construct(int $id, string $plainPassword)
-    {
-        $this->id = $id;
-        $this->plainPassword = $plainPassword;
+    public function __construct(
+        private int $id,
+        private string $plainPassword
+    ) {
     }
 
     public function getId(): int

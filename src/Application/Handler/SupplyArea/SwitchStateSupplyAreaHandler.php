@@ -13,14 +13,10 @@ class SwitchStateSupplyAreaHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private SupplyAreaRepository $supplyAreaRepository;
-
-    private StateRepository $stateRepository;
-
-    public function __construct(SupplyAreaRepository $supplyAreaRepository, StateRepository $stateRepository)
-    {
-        $this->supplyAreaRepository = $supplyAreaRepository;
-        $this->stateRepository = $stateRepository;
+    public function __construct(
+        private SupplyAreaRepository $supplyAreaRepository,
+        private StateRepository $stateRepository
+    ) {
     }
 
     public function __invoke(SwitchStateSupplyAreaCommand $command): void

@@ -13,20 +13,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class EmailVerificationSubscriber implements EventSubscriberInterface
 {
-    private EmailVerifier $emailVerifier;
-
-    private TranslatorInterface $translator;
-
-    private string $mailerSender;
-
-    private string $mailerFrom;
-
-    public function __construct(EmailVerifier $emailVerifier, TranslatorInterface $translator, string $appMailerSender, string $appMailerFrom)
-    {
-        $this->emailVerifier = $emailVerifier;
-        $this->translator = $translator;
-        $this->mailerSender = $appMailerSender;
-        $this->mailerFrom = $appMailerFrom;
+    public function __construct(
+        private EmailVerifier $emailVerifier,
+        private TranslatorInterface $translator,
+        private string $mailerSender,
+        private string $mailerFrom
+    ) {
     }
 
     public function onUserRegistered(UserRegisteredEvent $event): void

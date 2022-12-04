@@ -8,11 +8,9 @@ use Twig\TwigFunction;
 
 class PageExtension extends AbstractExtension
 {
-    private PageService $pageService;
-
-    public function __construct(PageService $pageService)
-    {
-        $this->pageService = $pageService;
+    public function __construct(
+        private PageService $pageService
+    ) {
     }
 
     public function getFunctions(): array

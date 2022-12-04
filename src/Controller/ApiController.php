@@ -24,19 +24,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ApiController extends AbstractController
 {
-    private HospitalRepository $hospitalRepository;
-
-    private AllocationQuery $allocationQuery;
-
-    private StatisticsService $statisticsService;
-
     private ?Hospital $hospital = null;
 
-    public function __construct(HospitalRepository $hospitalRepository, AllocationQuery $allocationQuery, StatisticsService $statisticsService)
-    {
-        $this->hospitalRepository = $hospitalRepository;
-        $this->allocationQuery = $allocationQuery;
-        $this->statisticsService = $statisticsService;
+    public function __construct(
+        private HospitalRepository $hospitalRepository,
+        private AllocationQuery $allocationQuery,
+        private StatisticsService $statisticsService
+    ) {
     }
 
     #[Route('/api/age.json', name: 'app_api_age')]

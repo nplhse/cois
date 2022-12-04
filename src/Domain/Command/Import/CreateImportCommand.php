@@ -7,32 +7,16 @@ use App\Domain\Contracts\UserInterface;
 
 class CreateImportCommand
 {
-    private string $name;
-
-    private string $type;
-
-    private UserInterface $user;
-
-    private HospitalInterface $hospital;
-
-    private string $filePath;
-
-    private string $fileMimeType;
-
-    private string $fileExtension;
-
-    private int $fileSize;
-
-    public function __construct(string $name, string $type, UserInterface $user, HospitalInterface $hospital, string $filePath, string $fileMimeType, string $fileExtension, int $fileSize)
-    {
-        $this->name = $name;
-        $this->type = $type;
-        $this->user = $user;
-        $this->hospital = $hospital;
-        $this->filePath = $filePath;
-        $this->fileMimeType = $fileMimeType;
-        $this->fileExtension = $fileExtension;
-        $this->fileSize = $fileSize;
+    public function __construct(
+        private string $name,
+        private string $type,
+        private UserInterface $user,
+        private HospitalInterface $hospital,
+        private string $filePath,
+        private string $fileMimeType,
+        private string $fileExtension,
+        private int $fileSize
+    ) {
     }
 
     public function getName(): string

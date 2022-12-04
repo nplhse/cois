@@ -9,14 +9,10 @@ class SpecialityStatisticsDto implements ConstructFromArrayInterface
 {
     use ConstructableFromArrayTrait;
 
-    private string $speciality;
-
-    private int $counter;
-
-    final public function __construct(string $speciality, int $counter = 0)
-    {
-        $this->speciality = $speciality;
-        $this->counter = $counter;
+    final public function __construct(
+        private string $speciality,
+        private int $counter = 0
+    ) {
     }
 
     public function getSpeciality(): string

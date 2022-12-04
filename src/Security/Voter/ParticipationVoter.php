@@ -17,11 +17,9 @@ class ParticipationVoter extends Voter
 
     private const EXPORT = 'export';
 
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
+    public function __construct(
+        private Security $security
+    ) {
     }
 
     protected function supports(string $attribute, mixed $subject): bool

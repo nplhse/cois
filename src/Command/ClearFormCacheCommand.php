@@ -16,13 +16,10 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 )]
 class ClearFormCacheCommand extends Command
 {
-    private TagAwareCacheInterface $cache;
-
-    public function __construct(TagAwareCacheInterface $appCache)
-    {
+    public function __construct(
+        private TagAwareCacheInterface $cache
+    ) {
         parent::__construct();
-
-        $this->cache = $appCache;
     }
 
     protected function configure(): void

@@ -17,14 +17,10 @@ class StateFilter implements FilterInterface
 
     public const Param = 'state';
 
-    private StateRepository $stateRepository;
-
-    private TagAwareCacheInterface $cache;
-
-    public function __construct(StateRepository $stateRepository, TagAwareCacheInterface $appCache)
-    {
-        $this->stateRepository = $stateRepository;
-        $this->cache = $appCache;
+    public function __construct(
+        private StateRepository $stateRepository,
+        private TagAwareCacheInterface $cache
+    ) {
     }
 
     public function getValue(Request $request): mixed

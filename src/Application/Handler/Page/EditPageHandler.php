@@ -13,14 +13,10 @@ class EditPageHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private PageRepository $pageRepository;
-
-    private SluggerInterface $slugger;
-
-    public function __construct(PageRepository $pageRepository, SluggerInterface $slugger)
-    {
-        $this->pageRepository = $pageRepository;
-        $this->slugger = $slugger;
+    public function __construct(
+        private PageRepository $pageRepository,
+        private SluggerInterface $slugger
+    ) {
     }
 
     public function __invoke(EditPageCommand $command): void

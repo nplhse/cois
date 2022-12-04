@@ -12,11 +12,9 @@ class UserExpiredEvent extends Event implements DomainEventInterface
 
     public const NAME = 'user.expired';
 
-    private int $id;
-
-    public function __construct(int $id)
-    {
-        $this->id = $id;
+    public function __construct(
+        private int $id
+    ) {
     }
 
     public function getId(): int

@@ -7,13 +7,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RequestParamService
 {
-    private Request $request;
-
     private bool $filterIsSet = false;
 
-    public function __construct(Request $request)
-    {
-        $this->request = $request;
+    public function __construct(
+        private Request $request
+    ) {
     }
 
     public function __get(mixed $key): mixed

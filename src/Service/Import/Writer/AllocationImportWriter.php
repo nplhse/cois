@@ -2,7 +2,6 @@
 
 namespace App\Service\Import\Writer;
 
-use App\Application\Contract\AllocationImportWriterInterface;
 use App\Application\Exception\ImportValidationException;
 use App\Domain\Contracts\ImportInterface;
 use App\Entity\Allocation;
@@ -13,16 +12,12 @@ class AllocationImportWriter implements \App\Application\Contract\ImportWriterIn
     public const Data_Type = 'allocation';
 
     /**
-     * @var iterable|array<AllocationImportWriterInterface>
+     * @param \App\Application\Contract\AllocationImportWriterInterface[] $allocationImportWriter
      */
-    private iterable $allocationImportWriter;
-
-    private ValidatorInterface $validator;
-
-    public function __construct(iterable $allocationImportWriter, ValidatorInterface $validator)
-    {
-        $this->allocationImportWriter = $allocationImportWriter;
-        $this->validator = $validator;
+    public function __construct(
+        private iterable $allocationImportWriter,
+        private ValidatorInterface $validator
+    ) {
     }
 
     public static function getDataType(): string

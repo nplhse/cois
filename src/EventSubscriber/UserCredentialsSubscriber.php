@@ -10,20 +10,16 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class UserCredentialsSubscriber implements \Symfony\Component\EventDispatcher\EventSubscriberInterface
 {
-    private TokenStorageInterface $security;
-
-    private RouterInterface $router;
-
     private array $excludedRoutes = [
         'app_logout',
         'app_verify_email',
         'app_reset_credentials',
     ];
 
-    public function __construct(TokenStorageInterface $security, RouterInterface $router)
-    {
-        $this->security = $security;
-        $this->router = $router;
+    public function __construct(
+        private TokenStorageInterface $security,
+        private RouterInterface $router
+    ) {
     }
 
     /**

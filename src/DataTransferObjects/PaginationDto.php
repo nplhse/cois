@@ -4,23 +4,13 @@ namespace App\DataTransferObjects;
 
 class PaginationDto
 {
-    private int $page;
-
-    private int $perPage;
-
-    private ?int $previous;
-
-    private ?int $next;
-
-    private ?int $last;
-
-    public function __construct(int $page, int $perPage, ?int $previous, ?int $next, int $last)
-    {
-        $this->page = $page;
-        $this->perPage = $perPage;
-        $this->previous = $previous;
-        $this->next = $next;
-        $this->last = $last;
+    public function __construct(
+        private int $page,
+        private int $perPage,
+        private ?int $previous,
+        private ?int $next,
+        private ?int $last
+    ) {
     }
 
     public function getPage(): int

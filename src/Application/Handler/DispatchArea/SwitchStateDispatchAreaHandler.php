@@ -13,14 +13,10 @@ class SwitchStateDispatchAreaHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private DispatchAreaRepository $dispatchAreaRepository;
-
-    private StateRepository $stateRepository;
-
-    public function __construct(DispatchAreaRepository $dispatchAreaRepository, StateRepository $stateRepository)
-    {
-        $this->dispatchAreaRepository = $dispatchAreaRepository;
-        $this->stateRepository = $stateRepository;
+    public function __construct(
+        private DispatchAreaRepository $dispatchAreaRepository,
+        private StateRepository $stateRepository
+    ) {
     }
 
     public function __invoke(SwitchStateDispatchAreaCommand $command): void

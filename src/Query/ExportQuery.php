@@ -10,11 +10,9 @@ use Doctrine\ORM\EntityManagerInterface;
 
 final class ExportQuery
 {
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
+    public function __construct(
+        private EntityManagerInterface $entityManager
+    ) {
     }
 
     public function count(FilterService $filterService): int

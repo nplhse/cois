@@ -12,11 +12,9 @@ class UpdateSupplyAreaHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private SupplyAreaRepository $supplyAreaRepository;
-
-    public function __construct(SupplyAreaRepository $supplyAreaRepository)
-    {
-        $this->supplyAreaRepository = $supplyAreaRepository;
+    public function __construct(
+        private SupplyAreaRepository $supplyAreaRepository
+    ) {
     }
 
     public function __invoke(UpdateSupplyAreaCommand $command): void

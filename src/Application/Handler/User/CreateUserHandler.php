@@ -14,14 +14,10 @@ class CreateUserHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private UserRepositoryInterface $userRepository;
-
-    private UserPasswordHasherInterface $passwordHasher;
-
-    public function __construct(UserRepositoryInterface $userRepository, UserPasswordHasherInterface $passwordHasher)
-    {
-        $this->userRepository = $userRepository;
-        $this->passwordHasher = $passwordHasher;
+    public function __construct(
+        private UserRepositoryInterface $userRepository,
+        private UserPasswordHasherInterface $passwordHasher
+    ) {
     }
 
     public function __invoke(CreateUserCommand $command): void

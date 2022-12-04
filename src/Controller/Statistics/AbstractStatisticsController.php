@@ -10,14 +10,10 @@ abstract class AbstractStatisticsController extends AbstractController
 {
     public const VALUE_PRECISION = 2;
 
-    protected EntityManagerInterface $entityManager;
-
-    protected FilterService $filterService;
-
-    public function __construct(EntityManagerInterface $entityManager, FilterService $filterService)
-    {
-        $this->entityManager = $entityManager;
-        $this->filterService = $filterService;
+    public function __construct(
+        protected EntityManagerInterface $entityManager,
+        protected FilterService $filterService
+    ) {
     }
 
     abstract public function getQueryClass(): string;

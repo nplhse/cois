@@ -12,11 +12,9 @@ class UpdateDispatchAreaHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private DispatchAreaRepository $dispatchAreaRepository;
-
-    public function __construct(DispatchAreaRepository $dispatchAreaRepository)
-    {
-        $this->dispatchAreaRepository = $dispatchAreaRepository;
+    public function __construct(
+        private DispatchAreaRepository $dispatchAreaRepository
+    ) {
     }
 
     public function __invoke(UpdateDispatchAreaCommand $command): void

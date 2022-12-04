@@ -19,11 +19,9 @@ class PasswordController extends AbstractController
 {
     use ResetPasswordControllerTrait;
 
-    private MessageBusInterface $messageBus;
-
-    public function __construct(MessageBusInterface $messageBus)
-    {
-        $this->messageBus = $messageBus;
+    public function __construct(
+        private MessageBusInterface $messageBus
+    ) {
     }
 
     #[Route('/settings/password', name: 'app_settings_password', )]

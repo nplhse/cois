@@ -42,14 +42,10 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route(path: '/import')]
 class ImportController extends AbstractController
 {
-    private FilterService $filterService;
-
-    private MessageBusInterface $messageBus;
-
-    public function __construct(FilterService $filterService, MessageBusInterface $messageBus)
-    {
-        $this->filterService = $filterService;
-        $this->messageBus = $messageBus;
+    public function __construct(
+        private FilterService $filterService,
+        private MessageBusInterface $messageBus
+    ) {
     }
 
     #[Route(path: '/', name: 'app_import_index')]

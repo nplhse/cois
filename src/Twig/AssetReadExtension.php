@@ -8,11 +8,9 @@ use Twig\TwigFunction;
 
 class AssetReadExtension extends AbstractExtension
 {
-    private Packages $assetsManager;
-
-    public function __construct(Packages $assetsManager)
-    {
-        $this->assetsManager = $assetsManager;
+    public function __construct(
+        private Packages $assetsManager
+    ) {
     }
 
     public function getFunctions(): array

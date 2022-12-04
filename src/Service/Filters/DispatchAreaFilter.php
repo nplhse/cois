@@ -17,14 +17,10 @@ class DispatchAreaFilter implements FilterInterface
 
     public const Param = 'dispatchArea';
 
-    private DispatchAreaRepository $dispatchAreaRepository;
-
-    private TagAwareCacheInterface $cache;
-
-    public function __construct(DispatchAreaRepository $dispatchAreaRepository, TagAwareCacheInterface $appCache)
-    {
-        $this->dispatchAreaRepository = $dispatchAreaRepository;
-        $this->cache = $appCache;
+    public function __construct(
+        private DispatchAreaRepository $dispatchAreaRepository,
+        private TagAwareCacheInterface $cache
+    ) {
     }
 
     public function getValue(Request $request): mixed

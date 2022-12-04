@@ -12,11 +12,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PageController extends AbstractController
 {
-    private PageRepository $pageRepository;
-
-    public function __construct(PageRepository $pageRepository)
-    {
-        $this->pageRepository = $pageRepository;
+    public function __construct(
+        private PageRepository $pageRepository
+    ) {
     }
 
     #[Route('/page/{slug}', name: 'app_page')]

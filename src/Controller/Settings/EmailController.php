@@ -17,14 +17,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 #[IsGranted('ROLE_USER')]
 class EmailController extends AbstractController
 {
-    private MessageBusInterface $messageBus;
-
-    private TranslatorInterface $translator;
-
-    public function __construct(MessageBusInterface $messageBus, TranslatorInterface $translator)
-    {
-        $this->messageBus = $messageBus;
-        $this->translator = $translator;
+    public function __construct(
+        private MessageBusInterface $messageBus,
+        private TranslatorInterface $translator
+    ) {
     }
 
     #[Route('/settings/email', name: 'app_settings_email', )]

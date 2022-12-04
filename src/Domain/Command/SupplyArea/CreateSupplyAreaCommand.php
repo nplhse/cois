@@ -4,14 +4,10 @@ namespace App\Domain\Command\SupplyArea;
 
 class CreateSupplyAreaCommand
 {
-    private string $name;
-
-    private int $stateId;
-
-    public function __construct(string $name, int $stateId)
-    {
-        $this->stateId = $stateId;
-        $this->name = $name;
+    public function __construct(
+        private string $name,
+        private int $stateId
+    ) {
     }
 
     public function getName(): string

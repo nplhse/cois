@@ -17,13 +17,10 @@ class ResetPasswordRequest implements ResetPasswordRequestInterface
     #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     private int $id;
 
-    #[ORM\ManyToOne(targetEntity: User::class)]
+    public function __construct(#[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private User $user;
-
-    public function __construct(User $user, \DateTimeInterface $expiresAt, string $selector, string $hashedToken)
+    private User $user, \DateTimeInterface $expiresAt, string $selector, string $hashedToken)
     {
-        $this->user = $user;
         $this->initialize($expiresAt, $selector, $hashedToken);
     }
 

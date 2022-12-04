@@ -16,11 +16,9 @@ class OwnHospitalFilter implements FilterInterface
 
     public const Param = 'ownHospitals';
 
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
+    public function __construct(
+        private Security $security
+    ) {
     }
 
     public function getValue(Request $request): mixed

@@ -22,17 +22,11 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class StatisticsController extends AbstractController
 {
-    private HospitalRepository $hospitalRepository;
-
-    private AllocationQuery $allocationQuery;
-
-    private StatisticsService $statisticsService;
-
-    public function __construct(HospitalRepository $hospitalRepository, AllocationQuery $allocationQuery, StatisticsService $statisticsService)
-    {
-        $this->hospitalRepository = $hospitalRepository;
-        $this->allocationQuery = $allocationQuery;
-        $this->statisticsService = $statisticsService;
+    public function __construct(
+        private HospitalRepository $hospitalRepository,
+        private AllocationQuery $allocationQuery,
+        private StatisticsService $statisticsService
+    ) {
     }
 
     #[Route('/statistics', name: 'app_statistics_index')]

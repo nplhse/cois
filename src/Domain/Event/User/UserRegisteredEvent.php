@@ -13,11 +13,9 @@ class UserRegisteredEvent extends Event implements DomainEventInterface
 
     public const NAME = 'user.registered';
 
-    private UserInterface $user;
-
-    public function __construct(UserInterface $user)
-    {
-        $this->user = $user;
+    public function __construct(
+        private UserInterface $user
+    ) {
     }
 
     public function getUser(): UserInterface

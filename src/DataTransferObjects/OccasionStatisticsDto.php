@@ -9,14 +9,10 @@ class OccasionStatisticsDto implements ConstructFromArrayInterface
 {
     use ConstructableFromArrayTrait;
 
-    private string $occasion;
-
-    private int $counter;
-
-    final public function __construct(string $occasion, int $counter = 0)
-    {
-        $this->occasion = $occasion;
-        $this->counter = $counter;
+    final public function __construct(
+        private string $occasion,
+        private int $counter = 0
+    ) {
     }
 
     public function getOccasion(): string

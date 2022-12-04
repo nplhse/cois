@@ -8,11 +8,9 @@ use Twig\TwigFunction;
 
 class CookieConsentExtension extends AbstractExtension
 {
-    private CookieConsentService $consentService;
-
-    public function __construct(CookieConsentService $consentService)
-    {
-        $this->consentService = $consentService;
+    public function __construct(
+        private CookieConsentService $consentService
+    ) {
     }
 
     public function getFunctions(): array

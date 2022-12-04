@@ -11,14 +11,10 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class SpecialityType extends AbstractType
 {
-    private TagAwareCacheInterface $cache;
-
-    private AllocationRepository $allocationRepository;
-
-    public function __construct(AllocationRepository $allocationRepository, TagAwareCacheInterface $appCache)
-    {
-        $this->allocationRepository = $allocationRepository;
-        $this->cache = $appCache;
+    public function __construct(
+        private AllocationRepository $allocationRepository,
+        private TagAwareCacheInterface $cache
+    ) {
     }
 
     public function configureOptions(OptionsResolver $resolver): void

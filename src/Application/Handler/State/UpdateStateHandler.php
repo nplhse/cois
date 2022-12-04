@@ -12,11 +12,9 @@ class UpdateStateHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private StateRepositoryInterface $stateRepository;
-
-    public function __construct(StateRepositoryInterface $stateRepository)
-    {
-        $this->stateRepository = $stateRepository;
+    public function __construct(
+        private StateRepositoryInterface $stateRepository
+    ) {
     }
 
     public function __invoke(UpdateStateCommand $command): void

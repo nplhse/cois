@@ -15,11 +15,9 @@ class StateDeletedEvent extends Event implements DomainEventInterface
 
     public const NAME = 'state.deleted';
 
-    private StateInterface $state;
-
-    public function __construct(StateInterface $state)
-    {
-        $this->state = $state;
+    public function __construct(
+        private StateInterface $state
+    ) {
     }
 
     public function getState(): StateInterface

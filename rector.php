@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Rector\Config\RectorConfig;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\Doctrine\Set\DoctrineSetList;
+use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 use Rector\Symfony\Set\SymfonySetList;
 
 return static function (RectorConfig $rectorConfig): void {
@@ -31,4 +32,7 @@ return static function (RectorConfig $rectorConfig): void {
 
     // Path to PHPStan with extensions, that PHPStan in Rector uses to determine types
     $rectorConfig->phpstanConfig(__DIR__.'/phpstan.neon.dist');
+
+    // Custom rules
+    $rectorConfig->rule(ClassPropertyAssignToConstructorPromotionRector::class);
 };

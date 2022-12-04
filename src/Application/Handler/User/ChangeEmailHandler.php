@@ -13,11 +13,9 @@ class ChangeEmailHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private UserRepositoryInterface $userRepository;
-
-    public function __construct(UserRepositoryInterface $userRepository)
-    {
-        $this->userRepository = $userRepository;
+    public function __construct(
+        private UserRepositoryInterface $userRepository
+    ) {
     }
 
     public function __invoke(ChangeEmailCommand $command): void

@@ -7,13 +7,11 @@ use App\Repository\PageRepository;
 
 class PageService
 {
-    private PageRepository $pageRepository;
-
     private array $pageStore;
 
-    public function __construct(PageRepository $pageRepository)
-    {
-        $this->pageRepository = $pageRepository;
+    public function __construct(
+        private PageRepository $pageRepository
+    ) {
     }
 
     public function hasPage(string $slug): bool

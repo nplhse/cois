@@ -16,17 +16,11 @@ class ImportDataHandler implements HandlerInterface
 
     public const Import_DIR = '/var/storage/import/';
 
-    private ImportRepositoryInterface $importRepository;
-
-    private ImportService $importService;
-
-    private string $projectDir;
-
-    public function __construct(ImportRepositoryInterface $importRepository, ImportService $importService, string $projectDir)
-    {
-        $this->importRepository = $importRepository;
-        $this->importService = $importService;
-        $this->projectDir = $projectDir;
+    public function __construct(
+        private ImportRepositoryInterface $importRepository,
+        private ImportService $importService,
+        private string $projectDir
+    ) {
     }
 
     public function __invoke(ImportDataCommand $command): void

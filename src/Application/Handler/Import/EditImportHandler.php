@@ -13,11 +13,9 @@ class EditImportHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private ImportRepositoryInterface $importRepository;
-
-    public function __construct(ImportRepositoryInterface $importRepository)
-    {
-        $this->importRepository = $importRepository;
+    public function __construct(
+        private ImportRepositoryInterface $importRepository
+    ) {
     }
 
     public function __invoke(EditImportCommand $command): void

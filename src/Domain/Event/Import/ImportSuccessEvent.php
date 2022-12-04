@@ -15,11 +15,9 @@ class ImportSuccessEvent extends Event implements DomainEventInterface
 
     public const NAME = 'import.success';
 
-    private ImportInterface $import;
-
-    public function __construct(ImportInterface $import)
-    {
-        $this->import = $import;
+    public function __construct(
+        private ImportInterface $import
+    ) {
     }
 
     public function getImport(): ImportInterface

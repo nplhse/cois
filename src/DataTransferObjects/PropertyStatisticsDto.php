@@ -9,14 +9,10 @@ class PropertyStatisticsDto implements ConstructFromArrayInterface
 {
     use ConstructableFromArrayTrait;
 
-    private string $property;
-
-    private int $counter;
-
-    final public function __construct(string $property, int $counter = 0)
-    {
-        $this->property = $property;
-        $this->counter = $counter;
+    final public function __construct(
+        private string $property,
+        private int $counter = 0
+    ) {
     }
 
     public function getProperty(): string

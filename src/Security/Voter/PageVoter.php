@@ -18,11 +18,9 @@ class PageVoter extends Voter
 
     private const VIEW = 'view';
 
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
+    public function __construct(
+        private Security $security
+    ) {
     }
 
     protected function supports(string $attribute, mixed $subject): bool

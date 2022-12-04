@@ -15,11 +15,9 @@ class OwnImportFilter implements FilterInterface
 
     public const Param = 'ownImports';
 
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
+    public function __construct(
+        private Security $security
+    ) {
     }
 
     public function getValue(Request $request): mixed

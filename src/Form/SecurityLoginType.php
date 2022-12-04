@@ -15,11 +15,9 @@ use Symfony\Component\Security\Core\Security;
 
 class SecurityLoginType extends AbstractType
 {
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
+    public function __construct(
+        private Security $security
+    ) {
     }
 
     /**

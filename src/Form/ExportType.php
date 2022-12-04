@@ -33,11 +33,9 @@ use Symfony\Component\Security\Core\Security;
 
 class ExportType extends AbstractType
 {
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
+    public function __construct(
+        private Security $security
+    ) {
     }
 
     public function getBlockPrefix(): string

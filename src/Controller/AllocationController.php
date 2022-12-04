@@ -48,11 +48,9 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AllocationController extends AbstractController
 {
-    private FilterService $filterService;
-
-    public function __construct(FilterService $filterService)
-    {
-        $this->filterService = $filterService;
+    public function __construct(
+        private FilterService $filterService
+    ) {
     }
 
     #[Route('/allocations/', name: 'app_allocation_index', methods: ['GET'])]

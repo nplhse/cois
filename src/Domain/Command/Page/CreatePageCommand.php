@@ -6,23 +6,13 @@ use App\Domain\Contracts\UserInterface;
 
 class CreatePageCommand
 {
-    private UserInterface $user;
-
-    private string $title;
-
-    private string $type;
-
-    private string $status;
-
-    private string $content;
-
-    public function __construct(UserInterface $user, string $title, string $type, string $status, string $content)
-    {
-        $this->user = $user;
-        $this->title = $title;
-        $this->type = $type;
-        $this->status = $status;
-        $this->content = $content;
+    public function __construct(
+        private UserInterface $user,
+        private string $title,
+        private string $type,
+        private string $status,
+        private string $content
+    ) {
     }
 
     public function getUser(): UserInterface

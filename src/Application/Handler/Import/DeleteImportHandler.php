@@ -15,17 +15,11 @@ class DeleteImportHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private ImportRepositoryInterface $importRepository;
-
-    private AllocationRepository $allocationRepository;
-
-    private SkippedRowRepository $skippedRowRepository;
-
-    public function __construct(ImportRepositoryInterface $importRepository, AllocationRepository $allocationRepository, SkippedRowRepository $skippedRowRepository)
-    {
-        $this->importRepository = $importRepository;
-        $this->allocationRepository = $allocationRepository;
-        $this->skippedRowRepository = $skippedRowRepository;
+    public function __construct(
+        private ImportRepositoryInterface $importRepository,
+        private AllocationRepository $allocationRepository,
+        private SkippedRowRepository $skippedRowRepository
+    ) {
     }
 
     public function __invoke(DeleteImportCommand $command): void

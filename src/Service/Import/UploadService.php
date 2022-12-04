@@ -7,11 +7,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadService
 {
-    private FilesystemOperator $storage;
-
-    public function __construct(FileSystemOperator $defaultStorage)
-    {
-        $this->storage = $defaultStorage;
+    public function __construct(
+        private FileSystemOperator $storage
+    ) {
     }
 
     public function uploadFile(UploadedFile $file): string

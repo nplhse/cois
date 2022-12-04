@@ -18,14 +18,10 @@ use Symfony\Component\Routing\Annotation\Route;
 #[IsGranted('ROLE_USER')]
 class ExportController extends AbstractController
 {
-    private FilterService $filterService;
-
-    private ExportQuery $exportQuery;
-
-    public function __construct(FilterService $filterService, ExportQuery $exportQuery)
-    {
-        $this->filterService = $filterService;
-        $this->exportQuery = $exportQuery;
+    public function __construct(
+        private FilterService $filterService,
+        private ExportQuery $exportQuery
+    ) {
     }
 
     #[Route('/export', name: 'app_export_index')]

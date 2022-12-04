@@ -16,20 +16,12 @@ class CookieConsentService
 {
     public const COOKIE_CONSENT = 'COOKIE_CONSENT';
 
-    private CookieConsentRepository $repository;
-
-    private FormFactoryInterface $formFactory;
-
-    private Environment $twig;
-
-    private UrlGeneratorInterface $urlGenerator;
-
-    public function __construct(CookieConsentRepository $repository, FormFactoryInterface $formFactory, Environment $twig, UrlGeneratorInterface $urlGenerator)
-    {
-        $this->repository = $repository;
-        $this->formFactory = $formFactory;
-        $this->twig = $twig;
-        $this->urlGenerator = $urlGenerator;
+    public function __construct(
+        private CookieConsentRepository $repository,
+        private FormFactoryInterface $formFactory,
+        private Environment $twig,
+        private UrlGeneratorInterface $urlGenerator
+    ) {
     }
 
     public function render(): string

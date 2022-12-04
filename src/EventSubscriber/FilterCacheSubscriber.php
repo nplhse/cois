@@ -22,11 +22,9 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class FilterCacheSubscriber implements EventSubscriberInterface
 {
-    private TagAwareCacheInterface $cache;
-
-    public function __construct(TagAwareCacheInterface $appCache)
-    {
-        $this->cache = $appCache;
+    public function __construct(
+        private TagAwareCacheInterface $cache
+    ) {
     }
 
     public function onUserChange(UserRegisteredEvent|UserCreatedEvent|UserChangedUsernameEvent $event): void

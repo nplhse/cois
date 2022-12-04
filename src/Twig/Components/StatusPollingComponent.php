@@ -13,11 +13,9 @@ class StatusPollingComponent
 
     public int $importId;
 
-    private ImportRepository $importRepository;
-
-    public function __construct(ImportRepository $importRepository)
-    {
-        $this->importRepository = $importRepository;
+    public function __construct(
+        private ImportRepository $importRepository
+    ) {
     }
 
     public function getStatus(): string

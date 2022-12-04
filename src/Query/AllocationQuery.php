@@ -10,15 +10,13 @@ use Doctrine\ORM\EntityManagerInterface;
 
 final class AllocationQuery
 {
-    private EntityManagerInterface $entityManager;
-
     private string $property;
 
     private ?Hospital $hospital = null;
 
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
+    public function __construct(
+        private EntityManagerInterface $entityManager
+    ) {
     }
 
     public function execute(): ResultCollectionInterface
