@@ -28,13 +28,17 @@
     <div class="row">
         <div class="col">
             {% if is_granted('edit', page) %}
-                {% set url = ea_url()
-                    .setController('App\\Controller\\Admin\\PageCrudController')
-                    .setAction('edit')
-                    .setEntityId(page.id) %}
+                {% set url =
+                    ea_url().setController(
+                        'App\\Controller\\Admin\\PageCrudController'
+                    ).setAction(
+                        'edit'
+                    ).setEntityId(
+                        page.id
+                    )
+                %}
                 <div class="float-end">
-                    <a class="btn btn-primary"
-                        href="{{ url }}">
+                    <a class="btn btn-primary" href="{{ url }}">
                         {{ 'Edit Page'|trans({}, 'forms') }}
                     </a>
                 </div>
