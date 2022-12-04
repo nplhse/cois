@@ -6,7 +6,11 @@ namespace App\Controller\Admin;
 
 use App\Domain\Enum\Page\PageStatusEnum;
 use App\Domain\Enum\Page\PageTypeEnum;
+use App\Entity\Import;
 use App\Entity\Page;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
@@ -43,5 +47,20 @@ class PageCrudController extends AbstractCrudController
                 ->hideOnForm(),
             AssociationField::new('updatedBy'),
         ];
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        $view = Action::new('view')
+            ->addCssClass('btn btn-outline-primary')
+            ->linkToRoute('app_page', function (Page $page): array {
+                return [
+                    'slug' => $page->getSlug(),
+                ];
+            });
+
+        return parent::configureActions($actions)
+            ->add(Crud::PAGE_DETAIL, $view)
+            ->add(Crud::PAGE_EDIT, $view);
     }
 }
