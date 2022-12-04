@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\User;
 
 use App\Domain\Command\User\RegisterUserCommand;
@@ -25,7 +27,8 @@ class RegistrationController extends AbstractController
         private MessageBusInterface $messageBus,
         private TranslatorInterface $translator,
         private bool $appRegistration,
-        private bool $appTerms)
+        private bool $appTerms
+    )
     {
     }
 

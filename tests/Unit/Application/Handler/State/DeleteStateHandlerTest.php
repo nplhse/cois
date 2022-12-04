@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Unit\Application\Handler\State;
 
 use App\Application\Handler\State\DeleteStateHandler;

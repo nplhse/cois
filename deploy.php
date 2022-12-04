@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Deployer;
 
 require 'recipe/symfony.php';
@@ -46,7 +48,7 @@ import('hosts.yaml');
  */
 
 // Customized tasks
-task('build_locally', function () {
+task('build_locally', function (): void {
     runLocally('yarn install');
     runLocally('yarn build');
     upload('./public/', '{{release_path}}/public/.');

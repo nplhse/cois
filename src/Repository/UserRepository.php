@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Domain\Contracts\UserInterface;
@@ -109,7 +111,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $qb->getQuery()->execute();
     }
 
-    public function countUsers(): string
+    public function countUsers(): int
     {
         $qb = $this->createQueryBuilder('u')
             ->select('COUNT(u.id)')

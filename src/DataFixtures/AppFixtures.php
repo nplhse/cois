@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Domain\Enum\Page\PageStatusEnum;
@@ -18,10 +20,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture implements DependentFixtureInterface
 {
-    /**
-     * @return void
-     */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         PageFactory::createOne([
             'title' => 'Imprint',

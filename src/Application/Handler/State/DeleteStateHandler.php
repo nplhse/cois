@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Handler\State;
 
 use App\Application\Contract\HandlerInterface;

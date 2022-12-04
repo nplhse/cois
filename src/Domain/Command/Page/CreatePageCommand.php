@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Command\Page;
 
 use App\Domain\Contracts\UserInterface;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Factory;
 
 use App\Entity\User;
@@ -49,7 +51,7 @@ final class UserFactory extends ModelFactory
     protected function initialize(): self
     {
         return $this
-            ->afterInstantiate(function (User $user) {
+            ->afterInstantiate(function (User $user): void {
                 $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPlainPassword()));
             })
         ;

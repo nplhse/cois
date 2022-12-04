@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Enum\Page;
 
 use App\Domain\Enum\AbstractBasicEnum;

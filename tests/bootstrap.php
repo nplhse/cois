@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Tests\Story\GlobalStory;
 use Symfony\Component\Dotenv\Dotenv;
 
@@ -11,6 +13,6 @@ if (file_exists(dirname(__DIR__).'/config/bootstrap.php')) {
     (new Dotenv())->bootEnv(dirname(__DIR__).'/.env');
 }
 
-Zenstruck\Foundry\Test\TestState::addGlobalState(function () {
+Zenstruck\Foundry\Test\TestState::addGlobalState(function (): void {
     GlobalStory::load();
 });

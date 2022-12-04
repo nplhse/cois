@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\EventSubscriber\Emails;
 
 use App\Domain\Event\User\UserPromotedEvent;

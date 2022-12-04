@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Import;
@@ -23,7 +25,7 @@ class FileController extends AbstractController
     {
         $path = $import->getFilePath();
 
-        $response = new StreamedResponse(function () use ($path, $fileUploader) {
+        $response = new StreamedResponse(function () use ($path, $fileUploader): void {
             $outputStream = fopen('php://output', 'wb');
             $fileStream = $fileUploader->streamFile($path);
             stream_copy_to_stream($fileStream, $outputStream);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
 use App\Entity\User;
@@ -35,7 +37,7 @@ class SecurityLoginType extends AbstractType
             /** @var User $user */
             $user = $this->security->getUser();
 
-            $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($user) {
+            $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($user): void {
                 $form = $event->getForm();
 
                 $form->remove('username');

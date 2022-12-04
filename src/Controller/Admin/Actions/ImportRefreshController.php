@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin\Actions;
 
 use App\Controller\Admin\ImportCrudController;
