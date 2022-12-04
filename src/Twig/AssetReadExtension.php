@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Twig;
 
 use Symfony\Component\Asset\Packages;
@@ -8,11 +10,9 @@ use Twig\TwigFunction;
 
 class AssetReadExtension extends AbstractExtension
 {
-    private Packages $assetsManager;
-
-    public function __construct(Packages $assetsManager)
-    {
-        $this->assetsManager = $assetsManager;
+    public function __construct(
+        private Packages $assetsManager
+    ) {
     }
 
     public function getFunctions(): array

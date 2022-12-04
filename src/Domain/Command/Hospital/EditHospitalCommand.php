@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Command\Hospital;
 
 use App\Domain\Contracts\DispatchAreaInterface;
@@ -9,38 +11,18 @@ use App\Domain\Contracts\UserInterface;
 
 class EditHospitalCommand
 {
-    private int $id;
-
-    private UserInterface $owner;
-
-    private string $name;
-
-    private string $address;
-
-    private ?StateInterface $state;
-
-    private ?DispatchAreaInterface $dispatchArea;
-
-    private ?SupplyAreaInterface $supplyArea;
-
-    private string $location;
-
-    private int $beds;
-
-    private string $size;
-
-    public function __construct(int $id, UserInterface $owner, string $name, string $address, ?StateInterface $state, ?DispatchAreaInterface $dispatchArea, ?SupplyAreaInterface $supplyArea, string $location, int $beds, string $size)
-    {
-        $this->id = $id;
-        $this->owner = $owner;
-        $this->name = $name;
-        $this->address = $address;
-        $this->state = $state;
-        $this->dispatchArea = $dispatchArea;
-        $this->supplyArea = $supplyArea;
-        $this->location = $location;
-        $this->beds = $beds;
-        $this->size = $size;
+    public function __construct(
+        private int $id,
+        private UserInterface $owner,
+        private string $name,
+        private string $address,
+        private ?StateInterface $state,
+        private ?DispatchAreaInterface $dispatchArea,
+        private ?SupplyAreaInterface $supplyArea,
+        private string $location,
+        private int $beds,
+        private string $size
+    ) {
     }
 
     public function getId(): int

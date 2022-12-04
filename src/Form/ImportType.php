@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
 use App\Entity\Hospital;
@@ -18,11 +20,9 @@ use Symfony\UX\Dropzone\Form\DropzoneType;
 
 class ImportType extends AbstractType
 {
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
+    public function __construct(
+        private Security $security
+    ) {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

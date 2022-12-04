@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security\Voter;
 
 use App\Entity\Hospital;
@@ -16,11 +18,9 @@ class HospitalVoter extends Voter
 
     private const VIEWSTATS = 'viewStats';
 
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
+    public function __construct(
+        private Security $security
+    ) {
     }
 
     protected function supports(string $attribute, mixed $subject): bool

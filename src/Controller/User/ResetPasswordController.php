@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\User;
 
 use App\Domain\Repository\UserRepositoryInterface;
@@ -23,17 +25,8 @@ class ResetPasswordController extends AbstractController
 {
     use ResetPasswordControllerTrait;
 
-    private UserRepositoryInterface $userRepository;
-
-    private ResetPasswordHelperInterface  $resetPasswordHelper;
-
-    private UserPasswordResetMailerService $mailer;
-
-    public function __construct(ResetPasswordHelperInterface $resetPasswordHelper, UserPasswordResetMailerService $mailer, UserRepositoryInterface $userRepository)
+    public function __construct(private ResetPasswordHelperInterface $resetPasswordHelper, private UserPasswordResetMailerService $mailer, private UserRepositoryInterface $userRepository)
     {
-        $this->resetPasswordHelper = $resetPasswordHelper;
-        $this->mailer = $mailer;
-        $this->userRepository = $userRepository;
     }
 
     /**

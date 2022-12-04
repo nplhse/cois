@@ -16,14 +16,10 @@ class SupplyAreaSwitchedStateEvent extends Event implements DomainEventInterface
 
     public const NAME = 'supply_area.switched_state';
 
-    private SupplyAreaInterface $area;
-
-    private StateInterface $state;
-
-    public function __construct(SupplyAreaInterface $area, StateInterface $state)
-    {
-        $this->area = $area;
-        $this->state = $state;
+    public function __construct(
+        private SupplyAreaInterface $area,
+        private StateInterface $state
+    ) {
     }
 
     public function getSupplyArea(): SupplyAreaInterface

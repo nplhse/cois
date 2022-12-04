@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataTransferObjects;
 
 use App\Application\Contract\ConstructFromArrayInterface;
@@ -9,14 +11,10 @@ class DayStatisticsDto implements ConstructFromArrayInterface
 {
     use ConstructableFromArrayTrait;
 
-    private string $day;
-
-    private int $counter;
-
-    final public function __construct(string $day, int $counter)
-    {
-        $this->day = $day;
-        $this->counter = $counter;
+    final public function __construct(
+        private string $day,
+        private int $counter
+    ) {
     }
 
     public function getDay(): string

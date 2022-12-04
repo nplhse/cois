@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Import;
@@ -12,9 +14,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 
-/**
- * @IsGranted("ROLE_ADMIN")
- */
+#[IsGranted('ROLE_ADMIN')]
 #[Route(path: '/_files')]
 class FileController extends AbstractController
 {
@@ -23,7 +23,7 @@ class FileController extends AbstractController
     {
         $path = $import->getFilePath();
 
-        $response = new StreamedResponse(function () use ($path, $fileUploader) {
+        $response = new StreamedResponse(function () use ($path, $fileUploader): void {
             $outputStream = fopen('php://output', 'wb');
             $fileStream = $fileUploader->streamFile($path);
             stream_copy_to_stream($fileStream, $outputStream);

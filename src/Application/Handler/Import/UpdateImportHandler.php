@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Handler\Import;
 
 use App\Application\Contract\HandlerInterface;
@@ -13,11 +15,9 @@ class UpdateImportHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private ImportRepositoryInterface $importRepository;
-
-    public function __construct(ImportRepositoryInterface $importRepository)
-    {
-        $this->importRepository = $importRepository;
+    public function __construct(
+        private ImportRepositoryInterface $importRepository
+    ) {
     }
 
     public function __invoke(UpdateImportCommand $command): void

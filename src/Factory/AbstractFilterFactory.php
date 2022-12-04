@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Factory;
 
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -10,11 +12,9 @@ abstract class AbstractFilterFactory
 {
     protected array $defaults;
 
-    protected FormFactoryInterface $formFactory;
-
-    public function __construct(FormFactoryInterface $formFactory)
-    {
-        $this->formFactory = $formFactory;
+    public function __construct(
+        protected FormFactoryInterface $formFactory
+    ) {
         $this->defaults = $this->getDefaults();
     }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
@@ -17,14 +19,10 @@ class SupplyAreaFilter implements FilterInterface
 
     public const Param = 'supplyArea';
 
-    private SupplyAreaRepository $supplyAreaRepository;
-
-    private TagAwareCacheInterface $cache;
-
-    public function __construct(SupplyAreaRepository $supplyAreaRepository, TagAwareCacheInterface $appCache)
-    {
-        $this->supplyAreaRepository = $supplyAreaRepository;
-        $this->cache = $appCache;
+    public function __construct(
+        private SupplyAreaRepository $supplyAreaRepository,
+        private TagAwareCacheInterface $cache
+    ) {
     }
 
     public function getValue(Request $request): mixed

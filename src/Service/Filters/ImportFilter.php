@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
@@ -16,11 +18,9 @@ class ImportFilter implements FilterInterface
 
     public const Param = 'import';
 
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
+    public function __construct(
+        private Security $security
+    ) {
     }
 
     public function getValue(Request $request): mixed

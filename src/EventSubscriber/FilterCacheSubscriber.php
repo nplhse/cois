@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\EventSubscriber;
 
 use App\Domain\Event\DispatchArea\DispatchAreaCreatedEvent;
@@ -22,11 +24,9 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 class FilterCacheSubscriber implements EventSubscriberInterface
 {
-    private TagAwareCacheInterface $cache;
-
-    public function __construct(TagAwareCacheInterface $appCache)
-    {
-        $this->cache = $appCache;
+    public function __construct(
+        private TagAwareCacheInterface $cache
+    ) {
     }
 
     public function onUserChange(UserRegisteredEvent|UserCreatedEvent|UserChangedUsernameEvent $event): void

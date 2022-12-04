@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Handler\User;
 
 use App\Application\Contract\HandlerInterface;
@@ -13,11 +15,9 @@ class PromoteUserHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private UserRepositoryInterface $userRepository;
-
-    public function __construct(UserRepositoryInterface $userRepository)
-    {
-        $this->userRepository = $userRepository;
+    public function __construct(
+        private UserRepositoryInterface $userRepository
+    ) {
     }
 
     public function __invoke(PromoteUserCommand $command): void

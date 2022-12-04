@@ -16,14 +16,10 @@ class DispatchAreaSwitchedStateEvent extends Event implements DomainEventInterfa
 
     public const NAME = 'dispatch_area.switched_state';
 
-    private DispatchAreaInterface $area;
-
-    private StateInterface $state;
-
-    public function __construct(DispatchAreaInterface $area, StateInterface $state)
-    {
-        $this->area = $area;
-        $this->state = $state;
+    public function __construct(
+        private DispatchAreaInterface $area,
+        private StateInterface $state
+    ) {
     }
 
     public function getDispatchArea(): DispatchAreaInterface

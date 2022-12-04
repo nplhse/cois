@@ -1,26 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Command\User;
 
 class EditUserCommand
 {
-    private int $id;
-
-    private string $username;
-
-    private string $email;
-
-    private ?string $plainPassword = null;
-
-    private array $roles;
-
-    public function __construct(int $id, string $username, string $email, ?string $plainPassword, array $roles)
-    {
-        $this->id = $id;
-        $this->username = $username;
-        $this->email = $email;
-        $this->plainPassword = $plainPassword;
-        $this->roles = $roles;
+    public function __construct(
+        private int $id,
+        private string $username,
+        private string $email,
+        private ?string $plainPassword,
+        private array $roles
+    ) {
     }
 
     public function getId(): int

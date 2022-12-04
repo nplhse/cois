@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Domain\Command\Hospital\CreateHospitalCommand;
@@ -36,14 +38,10 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/hospitals')]
 class HospitalController extends AbstractController
 {
-    private FilterService $filterService;
-
-    private MessageBusInterface $messageBus;
-
-    public function __construct(FilterService $filterService, MessageBusInterface $messageBus)
-    {
-        $this->filterService = $filterService;
-        $this->messageBus = $messageBus;
+    public function __construct(
+        private FilterService $filterService,
+        private MessageBusInterface $messageBus
+    ) {
     }
 
     #[Route('/', name: 'app_hospital_index')]

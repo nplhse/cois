@@ -15,11 +15,9 @@ class DispatchAreaUpdatedEvent extends Event implements DomainEventInterface
 
     public const NAME = 'dispatch_area.updated';
 
-    private DispatchAreaInterface $area;
-
-    public function __construct(DispatchAreaInterface $area)
-    {
-        $this->area = $area;
+    public function __construct(
+        private DispatchAreaInterface $area
+    ) {
     }
 
     public function getDispatchArea(): DispatchAreaInterface

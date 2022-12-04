@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Factory;
 
 use App\Entity\User;
@@ -29,13 +31,10 @@ use Zenstruck\Foundry\RepositoryProxy;
  */
 final class UserFactory extends ModelFactory
 {
-    private UserPasswordHasherInterface $passwordHasher;
-
-    public function __construct(UserPasswordHasherInterface $passwordHasher)
-    {
+    public function __construct(
+        private UserPasswordHasherInterface $passwordHasher
+    ) {
         parent::__construct();
-
-        $this->passwordHasher = $passwordHasher;
     }
 
     protected function getDefaults(): array
@@ -52,7 +51,7 @@ final class UserFactory extends ModelFactory
     protected function initialize(): self
     {
         return $this
-            ->afterInstantiate(function (User $user) {
+            ->afterInstantiate(function (User $user): void {
                 $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPlainPassword()));
             })
         ;

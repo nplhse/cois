@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security\Voter;
 
 use App\Domain\Contracts\UserInterface;
@@ -18,11 +20,9 @@ class PageVoter extends Voter
 
     private const VIEW = 'view';
 
-    private Security $security;
-
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
+    public function __construct(
+        private Security $security
+    ) {
     }
 
     protected function supports(string $attribute, mixed $subject): bool

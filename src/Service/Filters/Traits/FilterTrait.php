@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Filters\Traits;
 
 use App\Application\Exception\FilterMissingArgumentException;

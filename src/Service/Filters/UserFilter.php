@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
@@ -18,17 +20,11 @@ class UserFilter implements FilterInterface
 
     public const Param = 'user';
 
-    private Security $security;
-
-    private UserRepository $userRepository;
-
-    private TagAwareCacheInterface $cache;
-
-    public function __construct(Security $security, UserRepository $userRepository, TagAwareCacheInterface $appCache)
-    {
-        $this->security = $security;
-        $this->userRepository = $userRepository;
-        $this->cache = $appCache;
+    public function __construct(
+        private Security $security,
+        private UserRepository $userRepository,
+        private TagAwareCacheInterface $cache
+    ) {
     }
 
     public function getValue(Request $request): mixed

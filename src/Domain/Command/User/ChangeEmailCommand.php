@@ -1,17 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Command\User;
 
 class ChangeEmailCommand
 {
-    private int $id;
-
-    private string $email;
-
-    public function __construct(int $id, string $email)
-    {
-        $this->id = $id;
-        $this->email = $email;
+    public function __construct(
+        private int $id,
+        private string $email
+    ) {
     }
 
     public function getId(): int

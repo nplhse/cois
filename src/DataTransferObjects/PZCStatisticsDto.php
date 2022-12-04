@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataTransferObjects;
 
 use App\Application\Contract\ConstructFromArrayInterface;
@@ -9,17 +11,11 @@ class PZCStatisticsDto implements ConstructFromArrayInterface
 {
     use ConstructableFromArrayTrait;
 
-    private int $pzc;
-
-    private string $pzcText;
-
-    private int $counter;
-
-    final public function __construct(int $PZC = 0, int $counter = 0, string $PZCText = '')
-    {
-        $this->pzc = $PZC;
-        $this->pzcText = $PZCText;
-        $this->counter = $counter;
+    final public function __construct(
+        private int $pzc = 0,
+        private int $counter = 0,
+        private string $pzcText = ''
+    ) {
     }
 
     public function getPZC(): int

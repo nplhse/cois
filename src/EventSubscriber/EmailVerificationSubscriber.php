@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\EventSubscriber;
 
 use App\Domain\Event\User\UserChangedEmailEvent;
@@ -13,20 +15,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class EmailVerificationSubscriber implements EventSubscriberInterface
 {
-    private EmailVerifier $emailVerifier;
-
-    private TranslatorInterface $translator;
-
-    private string $mailerSender;
-
-    private string $mailerFrom;
-
-    public function __construct(EmailVerifier $emailVerifier, TranslatorInterface $translator, string $appMailerSender, string $appMailerFrom)
-    {
-        $this->emailVerifier = $emailVerifier;
-        $this->translator = $translator;
-        $this->mailerSender = $appMailerSender;
-        $this->mailerFrom = $appMailerFrom;
+    public function __construct(
+        private EmailVerifier $emailVerifier,
+        private TranslatorInterface $translator,
+        private string $appMailerSender,
+        private string $appMailerFrom
+    ) {
     }
 
     public function onUserRegistered(UserRegisteredEvent $event): void
@@ -34,9 +28,11 @@ class EmailVerificationSubscriber implements EventSubscriberInterface
         $user = $event->getUser();
 
         // generate a signed url and email it to the user
-        $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+        $this->emailVerifier->sendEmailConfirmation(
+            'app_verify_email',
+            $user,
             (new TemplatedEmail())
-                ->from(new Address($this->mailerSender, $this->mailerFrom))
+                ->from(new Address($this->appMailerSender, $this->appMailerFrom))
                 ->to(new Address($user->getEmail()))
                 ->subject($this->translator->trans('confirm.email.title', [], 'emails'))
                 ->htmlTemplate('emails/user/confirmation_email.html.twig')
@@ -48,9 +44,11 @@ class EmailVerificationSubscriber implements EventSubscriberInterface
         $user = $event->getUser();
 
         // generate a signed url and email it to the user
-        $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+        $this->emailVerifier->sendEmailConfirmation(
+            'app_verify_email',
+            $user,
             (new TemplatedEmail())
-                ->from(new Address($this->mailerSender, $this->mailerFrom))
+                ->from(new Address($this->appMailerSender, $this->appMailerFrom))
                 ->to(new Address($user->getEmail()))
                 ->subject($this->translator->trans('confirm.email.title', [], 'emails'))
                 ->htmlTemplate('emails/user/verify_email.html.twig')

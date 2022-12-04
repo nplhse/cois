@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Handler\State;
 
 use App\Application\Contract\HandlerInterface;
@@ -13,11 +15,9 @@ class DeleteStateHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private StateRepositoryInterface $stateRepository;
-
-    public function __construct(StateRepositoryInterface $stateRepository)
-    {
-        $this->stateRepository = $stateRepository;
+    public function __construct(
+        private StateRepositoryInterface $stateRepository
+    ) {
     }
 
     public function __invoke(DeleteStateCommand $command): void

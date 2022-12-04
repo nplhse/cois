@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Twig\Components;
 
 use App\Repository\ImportRepository;
@@ -13,11 +15,9 @@ class StatusPollingComponent
 
     public int $importId;
 
-    private ImportRepository $importRepository;
-
-    public function __construct(ImportRepository $importRepository)
-    {
-        $this->importRepository = $importRepository;
+    public function __construct(
+        private ImportRepository $importRepository
+    ) {
     }
 
     public function getStatus(): string

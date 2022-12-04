@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Import\Writer\Allocation;
 
 use App\Domain\Contracts\ImportInterface;
@@ -35,9 +37,12 @@ class AllocationPropertyImportWriter implements \App\Application\Contract\Alloca
         ['key' => 'Patienten-?bergabepunkt (P?P)', 'target' => 'HandoverPoint'],
     ];
 
-    public function process(Allocation $entity, array $row, ImportInterface $import): ?object
+    public function process(?object $entity, array $row, ImportInterface $import): ?object
     {
-        /** @var Allocation $entity */
+        if (!$entity instanceof Allocation) {
+            return $entity;
+        }
+
         $entity = $this->setTimes($entity, $row);
         $entity = $this->setDemographicData($entity, $row);
         $entity = $this->setSimpleParameters($entity, $row);

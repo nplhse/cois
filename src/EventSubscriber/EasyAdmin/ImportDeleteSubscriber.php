@@ -1,6 +1,6 @@
 <?php
 
-// src/EventSubscriber/EasyAdminSubscriber.php
+declare(strict_types=1);
 
 namespace App\EventSubscriber\EasyAdmin;
 
@@ -17,7 +17,7 @@ class ImportDeleteSubscriber implements EventSubscriberInterface
     ) {
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             BeforeEntityDeletedEvent::class => ['deleteRelatedAllocations'],

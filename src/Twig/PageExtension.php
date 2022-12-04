@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Twig;
 
 use App\Service\PageService;
@@ -8,11 +10,9 @@ use Twig\TwigFunction;
 
 class PageExtension extends AbstractExtension
 {
-    private PageService $pageService;
-
-    public function __construct(PageService $pageService)
-    {
-        $this->pageService = $pageService;
+    public function __construct(
+        private PageService $pageService
+    ) {
     }
 
     public function getFunctions(): array

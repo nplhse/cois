@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Command\Import;
 
 use App\Domain\Contracts\HospitalInterface;
@@ -7,38 +9,18 @@ use App\Domain\Contracts\UserInterface;
 
 class UpdateImportCommand
 {
-    private int $id;
-
-    private string $name;
-
-    private string $type;
-
-    private UserInterface $user;
-
-    private HospitalInterface $hospital;
-
-    private bool $updateFile;
-
-    private string $filePath;
-
-    private string $fileMimeType;
-
-    private string $fileExtension;
-
-    private int $fileSize;
-
-    public function __construct(int $id, string $name, string $type, UserInterface $user, HospitalInterface $hospital, bool $updateFile, string $filePath, string $fileMimeType, string $fileExtension, int $fileSize)
-    {
-        $this->id = $id;
-        $this->name = $name;
-        $this->type = $type;
-        $this->user = $user;
-        $this->hospital = $hospital;
-        $this->updateFile = $updateFile;
-        $this->filePath = $filePath;
-        $this->fileMimeType = $fileMimeType;
-        $this->fileExtension = $fileExtension;
-        $this->fileSize = $fileSize;
+    public function __construct(
+        private int $id,
+        private string $name,
+        private string $type,
+        private UserInterface $user,
+        private HospitalInterface $hospital,
+        private bool $updateFile,
+        private string $filePath,
+        private string $fileMimeType,
+        private string $fileExtension,
+        private int $fileSize
+    ) {
     }
 
     public function getId(): int

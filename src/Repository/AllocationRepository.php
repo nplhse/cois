@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Domain\Contracts\HospitalInterface;
@@ -42,7 +44,7 @@ class AllocationRepository extends ServiceEntityRepository
         parent::__construct($registry, Allocation::class);
     }
 
-    public function countAllocations(Hospital|null $entity = null): string
+    public function countAllocations(Hospital|null $entity = null): int
     {
         if ($entity instanceof HospitalInterface) {
             return $this->createQueryBuilder('a')
@@ -61,7 +63,7 @@ class AllocationRepository extends ServiceEntityRepository
         return $qb;
     }
 
-    public function countAllocationsByUser(UserInterface $user): string
+    public function countAllocationsByUser(UserInterface $user): int
     {
         $qb = $this->createQueryBuilder('a')
             ->select('COUNT(a.id)')

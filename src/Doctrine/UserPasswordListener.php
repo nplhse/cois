@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Doctrine;
 
 use App\Entity\User;
@@ -15,7 +17,7 @@ class UserPasswordListener
     ) {
     }
 
-    /** @Orm\PrePersist */
+    #[Orm\PrePersist]
     public function prePersist(User $user, LifecycleEventArgs $args): void
     {
         $password = $this->encodePassword($user, $user->getPlainPassword());
@@ -23,7 +25,7 @@ class UserPasswordListener
         $user->eraseCredentials();
     }
 
-    /** @Orm\PreUpdate */
+    #[Orm\PreUpdate]
     public function preUpdate(User $user, PreUpdateEventArgs $args): void
     {
         if ($user->getPlainPassword()) {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Unit\Domain\Entity;
 
 use App\Domain\Contracts\DispatchAreaInterface;
@@ -94,7 +96,7 @@ class AllocationTest extends TestCase
     public function testTimestamps(): void
     {
         $time = new \DateTime();
-        $time->setTimestamp(mktime(12, 15, 00, 1, 1, 2020));
+        $time->setTimestamp(mktime(12, 15, 0, 1, 1, 2020));
         $allocation = new Allocation();
 
         $allocation->setCreatedAt($time);

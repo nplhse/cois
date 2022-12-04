@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Import;
 
 use App\Application\Contract\ImportReaderInterface;
@@ -34,17 +36,13 @@ class ImportService
      */
     private iterable $importWriter;
 
-    private EntityManagerInterface $em;
-
-    private Stopwatch $stopwatch;
-
-    public function __construct(EntityManagerInterface $entityManager, Stopwatch $stopwatch, iterable $importReader, iterable $importWriter)
-    {
-        // Important: Disable SQL logging!
-        $this->em = $entityManager;
+    public function __construct(
+        private EntityManagerInterface $em,
+        private Stopwatch $stopwatch,
+        iterable $importReader,
+        iterable $importWriter
+    ) {
         $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
-
-        $this->stopwatch = $stopwatch;
 
         $this->importReader = $importReader instanceof \Traversable ? iterator_to_array($importReader) : $importReader;
         $this->importWriter = $importWriter instanceof \Traversable ? iterator_to_array($importWriter) : $importWriter;

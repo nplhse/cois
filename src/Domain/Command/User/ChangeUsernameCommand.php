@@ -1,17 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Command\User;
 
 class ChangeUsernameCommand
 {
-    private int $id;
-
-    private string $username;
-
-    public function __construct(int $id, string $username)
-    {
-        $this->id = $id;
-        $this->username = $username;
+    public function __construct(
+        private int $id,
+        private string $username
+    ) {
     }
 
     public function getId(): int

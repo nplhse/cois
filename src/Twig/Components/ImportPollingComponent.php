@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Twig\Components;
 
 use App\Entity\Import;
@@ -14,11 +16,9 @@ class ImportPollingComponent
 
     public int $importId;
 
-    private ImportRepository $importRepository;
-
-    public function __construct(ImportRepository $importRepository)
-    {
-        $this->importRepository = $importRepository;
+    public function __construct(
+        private ImportRepository $importRepository
+    ) {
     }
 
     public function getImport(): ?Import

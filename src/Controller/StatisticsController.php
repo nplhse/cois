@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\DataTransferObjects\AssignmentStatisticsDto;
@@ -17,22 +19,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @IsGranted("ROLE_USER")
- */
+#[IsGranted('ROLE_USER')]
 class StatisticsController extends AbstractController
 {
-    private HospitalRepository $hospitalRepository;
-
-    private AllocationQuery $allocationQuery;
-
-    private StatisticsService $statisticsService;
-
-    public function __construct(HospitalRepository $hospitalRepository, AllocationQuery $allocationQuery, StatisticsService $statisticsService)
-    {
-        $this->hospitalRepository = $hospitalRepository;
-        $this->allocationQuery = $allocationQuery;
-        $this->statisticsService = $statisticsService;
+    public function __construct(
+        private HospitalRepository $hospitalRepository,
+        private AllocationQuery $allocationQuery,
+        private StatisticsService $statisticsService
+    ) {
     }
 
     #[Route('/statistics', name: 'app_statistics_index')]

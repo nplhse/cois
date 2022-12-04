@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Handler\Hospital;
 
 use App\Application\Contract\HandlerInterface;
@@ -12,11 +14,9 @@ class DeleteHospitalHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private HospitalRepositoryInterface $hospitalRepository;
-
-    public function __construct(HospitalRepositoryInterface $hospitalRepository)
-    {
-        $this->hospitalRepository = $hospitalRepository;
+    public function __construct(
+        private HospitalRepositoryInterface $hospitalRepository
+    ) {
     }
 
     public function __invoke(DeleteHospitalCommand $command): void

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Import\Writer\Allocation;
 
 use App\Domain\Contracts\ImportInterface;
@@ -9,7 +11,10 @@ class AllocationSpecialWriter implements \App\Application\Contract\AllocationImp
 {
     public function process(?object $entity, array $row, ImportInterface $import): ?object
     {
-        /* @var Allocation $entity */
+        if (!$entity instanceof Allocation) {
+            return $entity;
+        }
+
         $entity->setUrgency((int) substr($row['PZC'], 5, 1));
         $entity->setIndicationCode((int) substr($row['PZC'], 0, 3));
 

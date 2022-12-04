@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\User;
 
 use App\Domain\Command\User\ChangePasswordCommand;
@@ -20,11 +22,8 @@ class ResetCredentialsController extends AbstractController
 {
     use ResetPasswordControllerTrait;
 
-    private MessageBusInterface $messageBus;
-
-    public function __construct(MessageBusInterface $messageBus)
+    public function __construct(private MessageBusInterface $messageBus)
     {
-        $this->messageBus = $messageBus;
     }
 
     #[Route(path: '/reset-credentials', name: 'app_reset_credentials')]

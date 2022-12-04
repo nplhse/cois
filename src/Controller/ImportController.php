@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Domain\Command\Import\CreateImportCommand;
@@ -36,20 +38,14 @@ use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @IsGranted("ROLE_USER")
- */
+#[IsGranted('ROLE_USER')]
 #[Route(path: '/import')]
 class ImportController extends AbstractController
 {
-    private FilterService $filterService;
-
-    private MessageBusInterface $messageBus;
-
-    public function __construct(FilterService $filterService, MessageBusInterface $messageBus)
-    {
-        $this->filterService = $filterService;
-        $this->messageBus = $messageBus;
+    public function __construct(
+        private FilterService $filterService,
+        private MessageBusInterface $messageBus
+    ) {
     }
 
     #[Route(path: '/', name: 'app_import_index')]

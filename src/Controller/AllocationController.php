@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Allocation;
@@ -43,16 +45,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @IsGranted("ROLE_USER")
- */
+#[IsGranted('ROLE_USER')]
 class AllocationController extends AbstractController
 {
-    private FilterService $filterService;
-
-    public function __construct(FilterService $filterService)
-    {
-        $this->filterService = $filterService;
+    public function __construct(
+        private FilterService $filterService
+    ) {
     }
 
     #[Route('/allocations/', name: 'app_allocation_index', methods: ['GET'])]

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataTransferObjects;
 
 use App\Application\Contract\ConstructFromArrayInterface;
@@ -9,14 +11,10 @@ class GenderStatisticsDto implements ConstructFromArrayInterface
 {
     use ConstructableFromArrayTrait;
 
-    private string $gender;
-
-    private int $counter;
-
-    final public function __construct(string $gender, int $counter)
-    {
-        $this->gender = $gender;
-        $this->counter = $counter;
+    final public function __construct(
+        private string $gender,
+        private int $counter
+    ) {
     }
 
     public function getGender(): string

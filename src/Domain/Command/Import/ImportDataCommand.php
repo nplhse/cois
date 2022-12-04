@@ -1,14 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Command\Import;
 
 class ImportDataCommand
 {
-    private int $importId;
-
-    public function __construct(int $importId)
-    {
-        $this->importId = $importId;
+    public function __construct(
+        private int $importId
+    ) {
     }
 
     public function getImportId(): int

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\EventSubscriber\Notifications;
 
 use App\Domain\Event\Import\ImportFailedEvent;

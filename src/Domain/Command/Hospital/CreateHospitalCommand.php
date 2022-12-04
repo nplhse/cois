@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Command\Hospital;
 
 use App\Domain\Contracts\DispatchAreaInterface;
@@ -9,35 +11,17 @@ use App\Domain\Contracts\UserInterface;
 
 class CreateHospitalCommand
 {
-    private UserInterface $owner;
-
-    private string $name;
-
-    private string $address;
-
-    private ?StateInterface $state;
-
-    private ?DispatchAreaInterface $dispatchArea;
-
-    private ?SupplyAreaInterface $supplyArea;
-
-    private string $location;
-
-    private int $beds;
-
-    private string $size;
-
-    public function __construct(UserInterface $owner, string $name, string $address, ?StateInterface $state, ?DispatchAreaInterface $dispatchArea, ?SupplyAreaInterface $supplyArea, string $location, int $beds, string $size)
-    {
-        $this->owner = $owner;
-        $this->name = $name;
-        $this->address = $address;
-        $this->state = $state;
-        $this->dispatchArea = $dispatchArea;
-        $this->supplyArea = $supplyArea;
-        $this->location = $location;
-        $this->beds = $beds;
-        $this->size = $size;
+    public function __construct(
+        private UserInterface $owner,
+        private string $name,
+        private string $address,
+        private ?StateInterface $state,
+        private ?DispatchAreaInterface $dispatchArea,
+        private ?SupplyAreaInterface $supplyArea,
+        private string $location,
+        private int $beds,
+        private string $size
+    ) {
     }
 
     public function getName(): string

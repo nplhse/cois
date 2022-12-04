@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataTransferObjects;
 
 use App\Application\Contract\ConstructFromArrayInterface;
@@ -9,14 +11,10 @@ class InfectionStatisticsDto implements ConstructFromArrayInterface
 {
     use ConstructableFromArrayTrait;
 
-    private string $infection;
-
-    private int $counter;
-
-    final public function __construct(string $infection, int $counter = 0)
-    {
-        $this->infection = $infection;
-        $this->counter = $counter;
+    final public function __construct(
+        private string $infection,
+        private int $counter = 0
+    ) {
     }
 
     public function getInfection(): string

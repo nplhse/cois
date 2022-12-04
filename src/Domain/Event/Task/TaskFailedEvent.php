@@ -14,11 +14,9 @@ class TaskFailedEvent extends Event implements DomainEventInterface
 
     public const NAME = 'task.failed';
 
-    private \Exception $exception;
-
-    public function __construct(\Exception $exception)
-    {
-        $this->exception = $exception;
+    public function __construct(
+        private \Exception $exception
+    ) {
     }
 
     public function getException(): \Exception

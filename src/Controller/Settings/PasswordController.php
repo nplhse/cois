@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Settings;
 
 use App\Domain\Command\User\ChangePasswordCommand;
@@ -19,11 +21,9 @@ class PasswordController extends AbstractController
 {
     use ResetPasswordControllerTrait;
 
-    private MessageBusInterface $messageBus;
-
-    public function __construct(MessageBusInterface $messageBus)
-    {
-        $this->messageBus = $messageBus;
+    public function __construct(
+        private MessageBusInterface $messageBus
+    ) {
     }
 
     #[Route('/settings/password', name: 'app_settings_password', )]

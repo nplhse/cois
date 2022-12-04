@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -8,11 +10,9 @@ class StatisticsService
 {
     public const VALUE_PRECISION = 2;
 
-    private TranslatorInterface $translator;
-
-    public function __construct(TranslatorInterface $translator)
-    {
-        $this->translator = $translator;
+    public function __construct(
+        private TranslatorInterface $translator
+    ) {
     }
 
     public function generateDayResults(object $allocations): array

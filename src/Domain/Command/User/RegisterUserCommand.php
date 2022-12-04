@@ -1,20 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Command\User;
 
 class RegisterUserCommand
 {
-    private string $username;
-
-    private string $email;
-
-    private string $plainPassword;
-
-    public function __construct(string $username, string $email, string $plainPassword)
-    {
-        $this->username = $username;
-        $this->email = $email;
-        $this->plainPassword = $plainPassword;
+    public function __construct(
+        private string $username,
+        private string $email,
+        private string $plainPassword
+    ) {
     }
 
     public function getUsername(): string

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataTransferObjects;
 
 use App\Application\Contract\ConstructFromArrayInterface;
@@ -9,14 +11,10 @@ class TransportStatisticsDto implements ConstructFromArrayInterface
 {
     use ConstructableFromArrayTrait;
 
-    private string $transport;
-
-    private int $counter;
-
-    final public function __construct(string $transport, int $counter = 0)
-    {
-        $this->transport = $transport;
-        $this->counter = $counter;
+    final public function __construct(
+        private string $transport,
+        private int $counter = 0
+    ) {
     }
 
     public function getTransport(): string

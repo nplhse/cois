@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Handler\User;
 
 use App\Application\Contract\HandlerInterface;
@@ -14,14 +16,10 @@ class CreateUserHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private UserRepositoryInterface $userRepository;
-
-    private UserPasswordHasherInterface $passwordHasher;
-
-    public function __construct(UserRepositoryInterface $userRepository, UserPasswordHasherInterface $passwordHasher)
-    {
-        $this->userRepository = $userRepository;
-        $this->passwordHasher = $passwordHasher;
+    public function __construct(
+        private UserRepositoryInterface $userRepository,
+        private UserPasswordHasherInterface $passwordHasher
+    ) {
     }
 
     public function __invoke(CreateUserCommand $command): void

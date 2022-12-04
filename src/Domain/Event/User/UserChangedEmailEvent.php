@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Event\User;
 
 use App\Domain\Contracts\DomainEventInterface;
@@ -13,11 +15,9 @@ class UserChangedEmailEvent extends Event implements DomainEventInterface
 
     public const NAME = 'user.changed_email';
 
-    private UserInterface $user;
-
-    public function __construct(UserInterface $user)
-    {
-        $this->user = $user;
+    public function __construct(
+        private UserInterface $user
+    ) {
     }
 
     public function getUser(): UserInterface

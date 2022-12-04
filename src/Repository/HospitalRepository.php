@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Domain\Contracts\HospitalInterface;
@@ -91,7 +93,7 @@ class HospitalRepository extends ServiceEntityRepository implements HospitalRepo
         ;
     }
 
-    public function countHospitals(): string
+    public function countHospitals(): int
     {
         $qb = $this->createQueryBuilder('h')
             ->select('COUNT(h.id)')
@@ -101,7 +103,7 @@ class HospitalRepository extends ServiceEntityRepository implements HospitalRepo
         return $qb;
     }
 
-    public function countHospitalsByUsers(UserInterface $user): string
+    public function countHospitalsByUsers(UserInterface $user): int
     {
         $qb = $this->createQueryBuilder('h')
             ->select('COUNT(h.id)')

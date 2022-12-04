@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
@@ -19,17 +21,11 @@ class HospitalFilter implements FilterInterface
 
     public const Param = 'hospital';
 
-    private HospitalRepository $hospitalRepository;
-
-    private Security $security;
-
-    private TagAwareCacheInterface $cache;
-
-    public function __construct(HospitalRepository $hospitalRepository, Security $security, TagAwareCacheInterface $appCache)
-    {
-        $this->hospitalRepository = $hospitalRepository;
-        $this->security = $security;
-        $this->cache = $appCache;
+    public function __construct(
+        private HospitalRepository $hospitalRepository,
+        private Security $security,
+        private TagAwareCacheInterface $cache
+    ) {
     }
 
     public function getValue(Request $request): mixed

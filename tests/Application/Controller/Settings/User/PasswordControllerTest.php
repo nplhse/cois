@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Application\Controller\Settings\User;
 
 use App\Repository\UserRepository;

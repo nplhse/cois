@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Query;
 
 use App\Application\Contract\ResultCollectionInterface;
@@ -10,13 +12,11 @@ use Doctrine\ORM\EntityManagerInterface;
 
 final class AllocationAgeQuery
 {
-    private EntityManagerInterface $entityManager;
-
     private ?Hospital $hospital = null;
 
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
+    public function __construct(
+        private EntityManagerInterface $entityManager
+    ) {
     }
 
     public function execute(): ResultCollectionInterface

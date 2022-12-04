@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Handler\Hospital;
 
 use App\Application\Contract\HandlerInterface;
@@ -12,11 +14,9 @@ class EditHospitalHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private HospitalRepository $hospitalRepository;
-
-    public function __construct(HospitalRepository $hospitalRepository)
-    {
-        $this->hospitalRepository = $hospitalRepository;
+    public function __construct(
+        private HospitalRepository $hospitalRepository
+    ) {
     }
 
     public function __invoke(EditHospitalCommand $command): void

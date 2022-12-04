@@ -15,11 +15,9 @@ class HospitalEditedEvent extends Event implements DomainEventInterface
 
     public const NAME = 'hospital.edited';
 
-    private HospitalInterface $hospital;
-
-    public function __construct(HospitalInterface $hospital)
-    {
-        $this->hospital = $hospital;
+    public function __construct(
+        private HospitalInterface $hospital
+    ) {
     }
 
     public function getHospital(): HospitalInterface

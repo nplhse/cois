@@ -15,11 +15,9 @@ class SupplyAreaUpdatedEvent extends Event implements DomainEventInterface
 
     public const NAME = 'supply_area.updated';
 
-    private SupplyAreaInterface $area;
-
-    public function __construct(SupplyAreaInterface $area)
-    {
-        $this->area = $area;
+    public function __construct(
+        private SupplyAreaInterface $area
+    ) {
     }
 
     public function getDispatchArea(): SupplyAreaInterface

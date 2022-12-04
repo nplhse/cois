@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security;
 
 use App\Form\SecurityLoginType;
@@ -24,14 +26,10 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
-    private \Symfony\Component\Routing\Generator\UrlGeneratorInterface $urlGenerator;
-
-    private \Symfony\Component\Form\FormFactoryInterface $formFactory;
-
-    public function __construct(FormFactoryInterface $formFactory, UrlGeneratorInterface $urlGenerator)
-    {
-        $this->formFactory = $formFactory;
-        $this->urlGenerator = $urlGenerator;
+    public function __construct(
+        private FormFactoryInterface $formFactory,
+        private UrlGeneratorInterface $urlGenerator
+    ) {
     }
 
     public function authenticate(Request $request): Passport

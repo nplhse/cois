@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Handler\Page;
 
 use App\Application\Contract\HandlerInterface;
@@ -12,11 +14,9 @@ class DeletePageHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private PageRepository $pageRepository;
-
-    public function __construct(PageRepository $pageRepository)
-    {
-        $this->pageRepository = $pageRepository;
+    public function __construct(
+        private PageRepository $pageRepository
+    ) {
     }
 
     public function __invoke(DeletePageCommand $command): void

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Domain\Enum\Page\PageTypeEnum;
@@ -12,11 +14,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PageController extends AbstractController
 {
-    private PageRepository $pageRepository;
-
-    public function __construct(PageRepository $pageRepository)
-    {
-        $this->pageRepository = $pageRepository;
+    public function __construct(
+        private PageRepository $pageRepository
+    ) {
     }
 
     #[Route('/page/{slug}', name: 'app_page')]

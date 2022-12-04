@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Handler\Page;
 
 use App\Application\Contract\HandlerInterface;
@@ -14,14 +16,10 @@ class CreatePageHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
-    private PageRepository $pageRepository;
-
-    private SluggerInterface $slugger;
-
-    public function __construct(PageRepository $pageRepository, SluggerInterface $slugger)
-    {
-        $this->pageRepository = $pageRepository;
-        $this->slugger = $slugger;
+    public function __construct(
+        private PageRepository $pageRepository,
+        private SluggerInterface $slugger
+    ) {
     }
 
     public function __invoke(CreatePageCommand $command): void

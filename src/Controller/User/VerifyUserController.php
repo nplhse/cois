@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\User;
 
 use App\Domain\Repository\UserRepositoryInterface;
@@ -16,17 +18,8 @@ use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 class VerifyUserController extends AbstractController
 {
-    private UserRepositoryInterface $userRepository;
-
-    private UserVerificationMailerService $mailer;
-
-    private VerifyEmailHelperInterface $verifyEmailHelper;
-
-    public function __construct(VerifyEmailHelperInterface $verifyEmailHelper, UserVerificationMailerService $mailer, UserRepositoryInterface $userRepository)
+    public function __construct(private VerifyEmailHelperInterface $verifyEmailHelper, private UserVerificationMailerService $mailer, private UserRepositoryInterface $userRepository)
     {
-        $this->userRepository = $userRepository;
-        $this->mailer = $mailer;
-        $this->verifyEmailHelper = $verifyEmailHelper;
     }
 
     #[Route(path: 'verify', name: 'app_verify_email')]
@@ -67,7 +60,7 @@ class VerifyUserController extends AbstractController
     }
 
     #[Route('send-verification', name: 'account_email_verify', )]
-    public function sendVerification(Request $request, TranslatorInterface $translator): Response
+    public function sendVerification(TranslatorInterface $translator): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 

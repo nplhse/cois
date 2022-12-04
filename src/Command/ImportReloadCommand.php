@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Command;
 
 use App\Domain\Command\Import\ImportDataCommand;
@@ -21,22 +23,13 @@ use Symfony\Component\Messenger\MessageBusInterface;
 )]
 class ImportReloadCommand extends Command
 {
-    private MessageBusInterface $messageBus;
-
-    private AllocationRepository $allocationRepository;
-
-    private ImportRepository $importRepository;
-
-    private SkippedRowRepository $skippedRowRepository;
-
-    public function __construct(MessageBusInterface $messageBus, AllocationRepository $allocationRepository, ImportRepository $importRepository, SkippedRowRepository $skippedRowRepository, string $name = null)
-    {
-        parent::__construct($name);
-
-        $this->messageBus = $messageBus;
-        $this->allocationRepository = $allocationRepository;
-        $this->importRepository = $importRepository;
-        $this->skippedRowRepository = $skippedRowRepository;
+    public function __construct(
+        private MessageBusInterface $messageBus,
+        private AllocationRepository $allocationRepository,
+        private ImportRepository $importRepository,
+        private SkippedRowRepository $skippedRowRepository,
+    ) {
+        parent::__construct();
     }
 
     protected function configure(): void
