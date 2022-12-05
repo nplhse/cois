@@ -35,7 +35,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "bootstrap": "^5.2.2",
+        "bootstrap": "^5.2.3",
         "bootstrap-icons": "^1.10.2",
         "d3": "^7.6.1",
         "d3-scale": "^4.0.1",
