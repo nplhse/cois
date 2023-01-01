@@ -28,8 +28,7 @@ class RegistrationController extends AbstractController
         private TranslatorInterface $translator,
         private bool $appRegistration,
         private bool $appTerms
-    )
-    {
+    ) {
     }
 
     #[Route('/', name: 'app_register')]
