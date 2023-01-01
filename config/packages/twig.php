@@ -16,4 +16,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'app_title' => '%app.title%',
         ],
     ]);
+
+    if ('test' === $containerConfigurator->env()) {
+        $containerConfigurator->extension('twig', [
+            'strict_variables' => true,
+        ]);
+    }
 };
