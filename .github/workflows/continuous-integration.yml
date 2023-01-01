@@ -25,9 +25,6 @@ jobs:
               with:
                   php-version: ${{ matrix.php-versions }}
 
-            - name: Copy .env.test.local
-              run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
-
             - name: Validate main `composer.json` and `composer.lock` files
               run: composer validate --no-check-version
 
@@ -97,9 +94,6 @@ jobs:
             - uses: shivammathur/setup-php@v2
               with:
                   php-version: ${{ matrix.php-versions }}
-
-            - name: Copy .env.test.local
-              run: php -r "file_exists('.env.test.local') || copy('.env.github.test', '.env.test.local');"
 
             - name: Cache Composer packages
               id: composer-cache
