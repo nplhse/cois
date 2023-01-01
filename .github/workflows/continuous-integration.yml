@@ -6,24 +6,24 @@ on:
     pull_request:
         branches: [main]
 
+permissions:
+    contents: read
+
 jobs:
     static-analysis:
         name: Static Analysis (PHP ${{ matrix.php-versions }})
         runs-on: ubuntu-latest
         strategy:
-            fail-fast: false
+            fail-fast: true
             matrix:
-                php-versions: ["8.1"]
+                php-versions: ["8.1", "8.2"]
         steps:
             - name: Checkout
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
 
             - uses: shivammathur/setup-php@v2
               with:
                   php-version: ${{ matrix.php-versions }}
-
-            - name: Copy .env.test.local
-              run: php -r "file_exists('.env.test.local') || copy('.env.test', '.env.test.local');"
 
             - name: Validate main `composer.json` and `composer.lock` files
               run: composer validate --no-check-version
@@ -37,8 +37,10 @@ jobs:
                   restore-keys: |
                       ${{ runner.os }}-php-
 
-            - name: Install Dependencies
-              run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+            - name: Install Dependencies& warmup cache
+              run: |
+                  composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+                  php bin/console cache:warmup
 
             - name: Cache node_modules
               uses: actions/cache@v1
@@ -63,9 +65,7 @@ jobs:
               run: yarn run prettier --check .
 
             - name: Analyse PHP Code (PHPStan)
-              run: |
-                  php bin/console cache:warmup
-                  vendor/bin/phpstan analyse
+              run: vendor/bin/phpstan analyse
 
             - name: Analyse PHP Code (Psalm)
               run: vendor/bin/psalm
@@ -84,19 +84,16 @@ jobs:
                     - 3306/tcp
                 options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
         strategy:
-            fail-fast: false
+            fail-fast: true
             matrix:
-                php-versions: ["8.1"]
+                php-versions: ["8.1", "8.2"]
         steps:
             - name: Checkout
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
 
             - uses: shivammathur/setup-php@v2
               with:
                   php-version: ${{ matrix.php-versions }}
-
-            - name: Copy .env.test.local
-              run: php -r "file_exists('.env.test.local') || copy('.env.github.test', '.env.test.local');"
 
             - name: Cache Composer packages
               id: composer-cache
