@@ -10,4 +10,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'utf8' => true,
         ],
     ]);
+
+    if ('prod' === $containerConfigurator->env()) {
+        $containerConfigurator->extension('framework', [
+            'router' => [
+                'strict_requirements' => null,
+            ],
+        ]);
+    }
 };
