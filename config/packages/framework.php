@@ -17,4 +17,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'log' => true,
         ],
     ]);
+
+    if ('test' === $containerConfigurator->env()) {
+        $containerConfigurator->extension('framework', [
+            'test' => true,
+            'session' => [
+                'storage_factory_id' => 'session.storage.factory.mock_file',
+            ],
+        ]);
+    }
 };
