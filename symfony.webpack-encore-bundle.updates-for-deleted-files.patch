@@ -1,0 +1,72 @@
+diff --git a/assets/bootstrap.js b/assets/bootstrap.js
+index 9792e6a..4ab2df6 100644
+--- a/assets/bootstrap.js
++++ b/assets/bootstrap.js
+@@ -1,5 +1,11 @@
+ import { startStimulusApp } from '@symfony/stimulus-bridge';
+-import '@symfony/autoimport';
+ 
+ // Registers Stimulus controllers from controllers.json and in the controllers/ directory
+-export const app = startStimulusApp(require.context('./controllers', true, /\.(j|t)sx?$/));
++export const app = startStimulusApp(require.context(
++    '@symfony/stimulus-bridge/lazy-controller-loader!./controllers',
++    true,
++    /\.[jt]sx?$/
++));
++
++// register any custom, 3rd party controllers here
++// app.register('some_controller_name', SomeImportedController);
+diff --git a/assets/controllers/hello_controller.js b/assets/controllers/hello_controller.js
+index 8c79f65..e847027 100644
+--- a/assets/controllers/hello_controller.js
++++ b/assets/controllers/hello_controller.js
+@@ -1,4 +1,4 @@
+-import { Controller } from 'stimulus';
++import { Controller } from '@hotwired/stimulus';
+ 
+ /*
+  * This is an example Stimulus controller!
+diff --git a/config/packages/webpack_encore.yaml b/config/packages/webpack_encore.yaml
+index 90f1a1d..4c009ee 100644
+--- a/config/packages/webpack_encore.yaml
++++ b/config/packages/webpack_encore.yaml
+@@ -7,7 +7,12 @@ webpack_encore:
+     # Set attributes that will be rendered on all script and link tags
+     script_attributes:
+         defer: true
++        # Uncomment (also under link_attributes) if using Turbo Drive
++        # https://turbo.hotwired.dev/handbook/drive#reloading-when-assets-change
++        # 'data-turbo-track': reload
+     # link_attributes:
++        # Uncomment if using Turbo Drive
++        # 'data-turbo-track': reload
+ 
+     # If using Encore.enableIntegrityHashes() and need the crossorigin attribute (default: false, or use 'anonymous' or 'use-credentials')
+     # crossorigin: 'anonymous'
+@@ -20,11 +25,21 @@ webpack_encore:
+ 
+     # If you have multiple builds:
+     # builds:
+-        # pass "frontend" as the 3rg arg to the Twig functions
++        # frontend: '%kernel.project_dir%/public/frontend/build'
++
++        # pass the build name as the 3rd argument to the Twig functions
+         # {{ encore_entry_script_tags('entry1', null, 'frontend') }}
+ 
+-        # frontend: '%kernel.project_dir%/public/frontend/build'
++framework:
++    assets:
++        json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'
++
++#when@prod:
++#    webpack_encore:
++#        # Cache the entrypoints.json (rebuild Symfony's cache when entrypoints.json changes)
++#        # Available in version 1.2
++#        cache: true
+ 
+-    # Cache the entrypoints.json (rebuild Symfony's cache when entrypoints.json changes)
+-    # Put in config/packages/prod/webpack_encore.yaml
+-    # cache: true
++#when@test:
++#    webpack_encore:
++#        strict_mode: false
