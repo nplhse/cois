@@ -37,8 +37,10 @@ jobs:
                   restore-keys: |
                       ${{ runner.os }}-php-
 
-            - name: Install Dependencies
-              run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+            - name: Install Dependencies& warmup cache
+              run: |
+                  composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+                  php bin/console cache:warmup
 
             - name: Cache node_modules
               uses: actions/cache@v1
@@ -63,9 +65,7 @@ jobs:
               run: yarn run prettier --check .
 
             - name: Analyse PHP Code (PHPStan)
-              run: |
-                  php bin/console cache:warmup
-                  vendor/bin/phpstan analyse
+              run: vendor/bin/phpstan analyse
 
             - name: Analyse PHP Code (Psalm)
               run: vendor/bin/psalm
