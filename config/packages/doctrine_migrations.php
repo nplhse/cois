@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->extension('doctrine_migrations', [
-        'migrations_paths' => [
-            'DoctrineMigrations' => '%kernel.project_dir%/migrations',
-        ],
-    ]);
+return static function (\Symfony\Config\DoctrineMigrationsConfig $migrationsConfig): void {
+    $migrationsConfig->migrationsPath('DoctrineMigrations', '%kernel.project_dir%/migrations');
+    $migrationsConfig->enableProfiler(false);
 };
