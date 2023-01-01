@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class UploadService
 {
     public function __construct(
-        private FileSystemOperator $storage
+        private readonly FileSystemOperator $defaultStorage
     ) {
     }
 
@@ -22,7 +22,7 @@ class UploadService
         $path = $this->generateDirectory(time()).$this->generateRandomName($file).'.'.$extension;
 
         try {
-            $this->storage->write($path, $file->getContent());
+            $this->defaultStorage->write($path, $file->getContent());
         } catch (\Exception) {
             throw new \Exception(sprintf('Could not upload file "%s"', $path));
         }
@@ -32,7 +32,7 @@ class UploadService
 
     public function streamFile(string $path): mixed
     {
-        $resource = $this->storage->readStream($path);
+        $resource = $this->defaultStorage->readStream($path);
 
         if (false == $resource) {
             throw new \Exception(sprintf('Error opening stream for "%s"', $path));

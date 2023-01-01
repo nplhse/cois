@@ -6,9 +6,11 @@
 
 -   Webserver (Apache, Nginx, LiteSpeed, IIS, etc.) with PHP 8.1 or higher and MySQL 8.0 (or MariaDB) as database
 
-# Installation
+# Setup
 
-## From GitHub
+This project expects you to have local webserver and a locally installed MySQL/MariaDB instance. See [Setup of your dev environment](CONTRIBUTING.md#setup-of-your-dev-environment) for more detailed information.
+
+## Install from GitHub
 
 1. Launch a **terminal** or **console** and navigate to the webroot folder. Clone this repository from [https://github.com/nplhse/cois]() to a folder in the webroot of your server, e.g. `~/webroot/cois`.
 
@@ -26,13 +28,9 @@
 
 3. You are ready to go, just open the site with your favorite browser!
 
-### Dev Environment
+### Using Docker
 
-For development puroses we recommend to use the `make setup-dev` command, which will provide a fully working environment including fixtures and dev builds for the frontend.
-
-To be able to run the tests properly you need to execute `make test-database`. This command creates the testing database including the schema and all required fixtures.
-
-If you'd like there is also support for Docker which mainly includes a database, as we recommend using the symfony cli server with a local installation of PHP. There is also a `make build` command that builds the containers und starts them in detached mode.
+This project includes support for Docker which mainly includes the database, as we recommend using the [Symfony binary cli server](https://github.com/symfony-cli/symfony-cli) with a local installation of PHP. There is a `make build` command that builds the containers und starts them in detached mode. More about the `make` setup can be found at [available make commands](CONTRIBUTING.md#available-make-commands).
 
 # Contributing
 
