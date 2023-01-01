@@ -4,9 +4,9 @@ We take the security of this software product and services running seriously and
 
 ## Supported Versions
 
-| Version   | Supported          |
-| --------- | ------------------ |
-| 0.1-alpha | :white_check_mark: |
+| Version | Supported          |
+| ------- | ------------------ |
+| alpha   | :white_check_mark: |
 
 ## Reporting a Vulnerability
 
@@ -14,9 +14,9 @@ If you believe you have found a security vulnerability in this repository, pleas
 
 **Please do not report security vulnerabilities through public GitHub issues, discussions, or pull requests.**
 
-Instead, please send an email to mail[@]nplhse.com.
+Instead, please [open a draft security advisory on Github](https://github.com/nplhse/cois/security/advisories/new) or send an email to mail[@]nplhse.com.
 
-Also please include as much of the information listed below as you can to help us better understand and resolve the issue:
+Also, please include as much of the information listed below as you can to help us better understand and resolve the issue:
 
 -   The type of issue (e.g., buffer overflow, SQL injection, or cross-site scripting)
 -   Full paths of source file(s) related to the manifestation of the issue
