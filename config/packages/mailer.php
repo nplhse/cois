@@ -2,12 +2,8 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Config\Framework\MailerConfig;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->extension('framework', [
-        'mailer' => [
-            'dsn' => '%env(MAILER_DSN)%',
-        ],
-    ]);
+return static function (MailerConfig $mailerConfig): void {
+    $mailerConfig->dsn('%env(MAILER_DSN)%');
 };

@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-return static function (Symfony\Config\FlysystemConfig $flysystemConfig): void {
+use Symfony\Config\FlysystemConfig;
+
+return static function (FlysystemConfig $flysystemConfig): void {
     $flysystemConfig->storage('defaultStorage')
         ->adapter('local')
         ->options([
