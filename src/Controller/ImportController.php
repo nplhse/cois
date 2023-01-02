@@ -103,11 +103,9 @@ class ImportController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if (!$this->isGranted('ROLE_ADMIN')) {
-                /** @var UserInterface $user */
-                $user = $this->getUser();
-                $import->setUser($user);
-            }
+            /** @var UserInterface $user */
+            $user = $this->getUser();
+            $import->setUser($user);
 
             /** @var UploadedFile $file */
             $file = $form->get('file')->getData();
@@ -131,7 +129,7 @@ class ImportController extends AbstractController
                 $this->addFlash('danger', 'Your import failed. We have send a notification to the admin to handle this issue.');
 
                 return $this->render('import/new.html.twig', [
-                    'form' => $form->createView(),
+                    'form' => $form,
                 ]);
             }
 
@@ -169,7 +167,7 @@ class ImportController extends AbstractController
 
                 return $this->render('import/edit.html.twig', [
                     'import' => $import,
-                    'form' => $form->createView(),
+                    'form' => $form,
                 ]);
             }
 
