@@ -6,7 +6,6 @@ namespace App\Form;
 
 use App\Entity\Hospital;
 use App\Entity\Import;
-use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -36,6 +35,10 @@ class ImportType extends AbstractType
             $builder
                 ->add('hospital', EntityType::class, [
                     'class' => Hospital::class,
+                    'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('h')
+                        ->where('h.owner = :user')
+                        ->setParameter('user', $this->security->getUser())
+                        ->orderBy('h.name', \Doctrine\Common\Collections\Criteria::ASC),
                 ])
                 ->add('type', ChoiceType::class, [
                     'choices' => [
@@ -46,7 +49,7 @@ class ImportType extends AbstractType
                 ->add('file', DropzoneType::class, [
                     'label' => 'Import data (Must be a *.csv file!)',
                     'mapped' => true,
-                    'required' => false,
+                    'required' => true,
 
                     // unmapped fields can't define their validation using annotations
                     // in the associated entity, so you can use the PHP constraint classes
@@ -61,25 +64,6 @@ class ImportType extends AbstractType
                         ]),
                     ],
                 ]);
-
-            if ($this->security->isGranted('ROLE_ADMIN')) {
-                $builder
-                    ->add('user', EntityType::class, [
-                        'class' => User::class,
-                    ])
-                    ->add('hospital', EntityType::class, [
-                        'class' => Hospital::class,
-                    ]);
-            } else {
-                $builder
-                    ->add('hospital', EntityType::class, [
-                        'class' => Hospital::class,
-                        'query_builder' => fn (EntityRepository $er) => $er->createQueryBuilder('h')
-                            ->where('h.owner = :user')
-                            ->setParameter('user', $this->security->getUser())
-                            ->orderBy('h.name', \Doctrine\Common\Collections\Criteria::ASC),
-                    ]);
-            }
         }
     }
 

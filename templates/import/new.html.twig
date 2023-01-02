@@ -34,29 +34,37 @@
             <strong>{{ 'Create new Import'|trans }}</strong>
         </h1>
 
-        <div class="card">
-            <div class="card-body">
-                <div class="alert alert-warning" role="alert">
-                    <strong>{{ 'Please notice'|trans }}:</strong>
-                    {{ 'Import infotext'|trans }}
+        <turbo-frame id="form">
+            <div class="card">
+                <div class="card-body">
+                    <div class="alert alert-warning" role="alert">
+                        <strong>{{ 'Please notice'|trans }}:</strong>
+                        {{ 'Import infotext'|trans }}
+                    </div>
+
+                    {{ form_start(form) }}
+
+                    {{ form_widget(form) }}
+
+                    <div class="float-end">
+                        <a class="btn btn-outline-secondary"
+                            href="{{ path('app_import_index') }}">
+                            {{ 'Back to imports'|trans({}, 'forms') }}
+                        </a>
+                        <button class="btn btn-primary">
+                            <i class="bi bi-folder-plus"></i>
+                            {{ 'Import new Data'|trans({}, 'forms') }}
+                        </button>
+                    </div>
+                    {{ form_end(form) }}
                 </div>
-
-                {{ form_start(form) }}
-
-                {{ form_widget(form) }}
-
-                <div class="float-end">
-                    <a class="btn btn-outline-secondary"
-                        href="{{ path('app_import_index') }}">
-                        {{ 'Back to imports'|trans({}, 'forms') }}
-                    </a>
-                    <button class="btn btn-primary">
-                        <i class="bi bi-folder-plus"></i>
-                        {{ 'Import new Data'|trans({}, 'forms') }}
-                    </button>
-                </div>
-                {{ form_end(form) }}
             </div>
+        </turbo-frame>
+        <div class="loading-ring fixed-center-block hidden">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
     </div>
 {% endblock %}
