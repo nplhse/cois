@@ -200,14 +200,17 @@
                                         <li><hr class="dropdown-divider" /></li>
                                     {% endif %}
                                     {% if is_granted('IS_IMPERSONATOR') %}
+                                        {% set url =
+                                            ea_url().setController(
+                                                'App\\Controller\\Admin\\UserCrudController'
+                                            ).setAction(
+                                                'index'
+                                            )
+                                        %}
                                         <li>
                                             <a class="dropdown-item text-danger"
                                                 href="{{
-                                                impersonation_exit_path(
-                                                    path(
-                                                        'app_settings_user_index'
-                                                    )
-                                                )
+                                                impersonation_exit_path()
                                                 }}">
                                                 <i class="bi-door-closed-fill">
 

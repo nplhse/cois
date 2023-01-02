@@ -44,7 +44,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                     'path' => '/',
                     'token_provider' => DoctrineTokenProvider::class,
                 ],
-                'switch_user' => true,
+                'switch_user' => [
+                    'target_route' => 'app_dashboard',
+                ],
             ],
         ],
         'access_control' => [[
