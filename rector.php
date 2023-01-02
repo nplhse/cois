@@ -18,7 +18,7 @@ return static function (RectorConfig $rectorConfig): void {
     // Path to Symfony configuration
     $rectorConfig->symfonyContainerXml(__DIR__.'/var/cache/dev/App_KernelDevDebugContainer.xml');
 
-    // Patho so Symfony container
+    // Path to Symfony container
     $rectorConfig->symfonyContainerPhp(__DIR__.'/tests/symfony-container.php');
 
     // Definition of the RuleSets to be used by rector
