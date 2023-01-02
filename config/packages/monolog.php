@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
+use Symfony\Config\MonologConfig;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
+return static function (MonologConfig $monologConfig, ContainerConfigurator $containerConfigurator): void {
     if ('dev' === $containerConfigurator->env()) {
         $containerConfigurator->extension('monolog', [
             'handlers' => [
@@ -47,14 +48,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'handlers' => [
                 'main' => [
                     'type' => 'fingers_crossed',
-                    'action_level' => 'error',
+                    'action_level' => 'critical',
                     'handler' => 'nested',
                     'excluded_http_codes' => [404, 405],
                     'buffer_size' => 50,
-                ],
-                'grouped' => [
-                    'type' => 'group',
-                    'members' => ['nested', 'deduplicated'],
                 ],
                 'nested' => [
                     'type' => 'stream',
@@ -66,19 +63,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                     'type' => 'console',
                     'process_psr_3_messages' => false,
                     'channels' => ['!event', '!doctrine'],
-                ],
-                'deduplicated' => [
-                    'type' => 'deduplication',
-                    'handler' => 'symfony_mailer',
-                ],
-                'symfony_mailer' => [
-                    'type' => 'symfony_mailer',
-                    'from_email' => '%app.mailer.sender%',
-                    'to_email' => '%app.mailer.admin%',
-                    'subject' => '[%app.mailer.from%]: An Error Occured! %%message%%',
-                    'level' => 'debug',
-                    'formatter' => 'monolog.formatter.html',
-                    'content_type' => 'text/html',
                 ],
             ],
         ]);
