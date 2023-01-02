@@ -10,6 +10,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'toolbar' => true,
             'intercept_redirects' => false,
         ]);
+
         $containerConfigurator->extension('framework', [
             'profiler' => [
                 'only_exceptions' => false,
@@ -23,6 +24,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'toolbar' => false,
             'intercept_redirects' => false,
         ]);
+
         $containerConfigurator->extension('framework', [
             'profiler' => [
                 'collect' => false,

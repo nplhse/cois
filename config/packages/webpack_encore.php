@@ -12,15 +12,15 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
     ]);
 
-    if ('test' === $containerConfigurator->env()) {
-        $containerConfigurator->extension('webpack_encore', [
-            'strict_mode' => false,
-        ]);
-    }
-
     if ('prod' === $containerConfigurator->env()) {
         $containerConfigurator->extension('webpack_encore', [
             'cache' => true,
+        ]);
+    }
+
+    if ('test' === $containerConfigurator->env()) {
+        $containerConfigurator->extension('webpack_encore', [
+            'strict_mode' => false,
         ]);
     }
 };
