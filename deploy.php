@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Deployer;
 
 require 'recipe/symfony.php';
+require 'recipe/deploy/shared.php';
 require 'contrib/webpack_encore.php';
 
 // Base configuration
@@ -13,6 +14,12 @@ set('keep_releases', 3);
 set('writable_mode', 'chmod');
 set('env', [
     'APP_ENV' => 'prod',
+]);
+
+// Keep current application config
+set('shared_files', [
+    '.env.local',
+    'config/packages/application.php',
 ]);
 
 // Set directories for symfony
