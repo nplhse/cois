@@ -19,23 +19,8 @@ use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_it
 return static function (ContainerConfigurator $containerConfigurator): void {
     $parameters = $containerConfigurator->parameters();
 
-    $parameters->set('app.cookie_consent', '%env(bool:default:app.default.cookie_consent:APP_COOKIE_CONSENT)%');
     $parameters->set('app.locale', '%env(string:default:app.default.locale:APP_LOCALE)%');
     $parameters->set('app.supported_locales', 'en|de');
-    $parameters->set('app.mailer.admin', '%env(string:default:app.default.mailer.admin:APP_MAILER_ADMIN)%');
-    $parameters->set('app.mailer.from', '%env(string:default:app.default.mailer.from:APP_MAILER_FROM)%');
-    $parameters->set('app.mailer.sender', '%env(string:default:app.default.mailer.sender:APP_MAILER_SENDER)%');
-    $parameters->set('app.registration', '%env(bool:default:app.default.registration:APP_REGISTRATION)%');
-    $parameters->set('app.terms', '%env(bool:default:app.default.terms:APP_TERMS)%');
-    $parameters->set('app.title', '%env(string:default:app.default.title:APP_TITLE)%');
-    $parameters->set('app.default.cookie_consent', true);
-    $parameters->set('app.default.locale', 'en');
-    $parameters->set('app.default.mailer.admin', 'admin@cois.dev');
-    $parameters->set('app.default.mailer.from', 'Collaborative IVENA statistics');
-    $parameters->set('app.default.mailer.sender', 'noreply@cois.dev');
-    $parameters->set('app.default.registration', true);
-    $parameters->set('app.default.terms', true);
-    $parameters->set('app.default.title', 'Collaborative IVENA statistics');
 
     $services = $containerConfigurator->services();
 

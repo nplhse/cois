@@ -14,6 +14,18 @@ class AppExtension extends Extension
         $configuration = new AppConfiguration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('app.test', $config['test']);
+        // General settings
+        $container->setParameter('app.title', $config['title']);
+        $container->setParameter('app.default.locale', $config['default_locale']);
+
+        // Feature switches
+        $container->setParameter('app.registration', $config['features']['enable_registration']);
+        $container->setParameter('app.terms', $config['features']['enable_terms']);
+        $container->setParameter('app.cookie_consent', $config['features']['enable_cookie_consent']);
+
+        // Mailer settings
+        $container->setParameter('app.mailer.from', $config['mailer']['from_address']);
+        $container->setParameter('app.mailer.sender', $config['mailer']['from_sender']);
+        $container->setParameter('app.mailer.admin', $config['mailer']['admin_address']);
     }
 }
