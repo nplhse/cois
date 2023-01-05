@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Import;
 
 use App\Entity\Import;
 use App\Service\Import\UploadService;
@@ -15,10 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 
 #[IsGranted('ROLE_ADMIN')]
-#[Route(path: '/_files')]
-class FileController extends AbstractController
+class ImportFileController extends AbstractController
 {
-    #[Route(path: '/alloc/{id}', name: 'app_files_allocations')]
+    #[Route(path: '/import/{id}/_file', name: 'app_file_import')]
     public function index(Import $import, UploadService $fileUploader): Response
     {
         $path = $import->getFilePath();
@@ -29,18 +28,18 @@ class FileController extends AbstractController
             stream_copy_to_stream($fileStream, $outputStream);
         });
 
-        $response->headers->set('Content-Type', $import->getFileMimeType());
-
         $disposition = HeaderUtils::makeDisposition(
             HeaderUtils::DISPOSITION_ATTACHMENT,
-            $this->getSaveFilename($import->getName(), $import->getFileExtension()),
+            $this->getSafeFilename($import->getName(), $import->getFileExtension()),
         );
+
         $response->headers->set('Content-Disposition', $disposition);
+        $response->headers->set('Content-Type', $import->getFileMimeType());
 
         return $response;
     }
 
-    private function getSaveFilename(string $name, string $extension): string
+    private function getSafeFilename(string $name, string $extension): string
     {
         $slugger = new AsciiSlugger();
 
