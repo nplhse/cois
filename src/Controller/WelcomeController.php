@@ -25,8 +25,6 @@ class WelcomeController extends AbstractController
     #[Route('/', name: 'app_welcome')]
     public function index(): Response
     {
-        dump($this->getParameter('app.title'));
-
         return $this->render('welcome/welcome.html.twig', [
             'allocationCount' => $this->allocationRepository->countAllocations(),
             'hospitalCount' => $this->hospitalRepository->countHospitals(),
