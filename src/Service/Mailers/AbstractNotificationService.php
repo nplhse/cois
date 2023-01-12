@@ -14,8 +14,8 @@ abstract class AbstractNotificationService extends AbstractMailerService
     {
         return (new NotificationEmail())
             ->to(new Address($recipient))
-            ->from(new Address($this->appMailerSender, $this->appMailerFrom))
-            ->replyTo($this->appMailerSender)
+            ->from(new Address($this->appMailerAddress, $this->appMailerSender))
+            ->replyTo($this->appMailerAddress)
             ->subject($this->getTranslation($subject))
             ->htmlTemplate($template)
             ->context($context);

@@ -24,8 +24,8 @@ class AppExtension extends Extension
         $container->setParameter('app.cookie_consent', $config['features']['enable_cookie_consent']);
 
         // Mailer settings
-        $container->setParameter('app.mailer.from', $config['mailer']['from_address']);
-        $container->setParameter('app.mailer.sender', $config['mailer']['from_sender']);
+        $container->setParameter('app.mailer.from_address', $config['mailer']['from_address']);
+        $container->setParameter('app.mailer.from_sender', $config['mailer']['from_sender']);
         $container->setParameter('app.mailer.admin', $config['mailer']['admin_address']);
     }
 }

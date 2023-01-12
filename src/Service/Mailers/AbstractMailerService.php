@@ -18,7 +18,7 @@ abstract class AbstractMailerService implements MailerServiceInterface
         protected readonly UrlGeneratorInterface $router,
         protected readonly MailerInterface $mailer,
         protected readonly string $appMailerSender,
-        protected readonly string $appMailerFrom
+        protected readonly string $appMailerAddress,
     ) {
     }
 
@@ -26,8 +26,8 @@ abstract class AbstractMailerService implements MailerServiceInterface
     {
         return (new TemplatedEmail())
             ->to(new Address($recipient))
-            ->from(new Address($this->appMailerSender, $this->appMailerFrom))
-            ->replyTo($this->appMailerSender)
+            ->from(new Address($this->appMailerAddress, $this->appMailerSender))
+            ->replyTo($this->appMailerAddress)
             ->subject($this->getTranslation($subject))
             ->htmlTemplate($template)
             ->context($context);

@@ -18,7 +18,7 @@ class ContactFormNotificationService extends AbstractNotificationService
         protected readonly MailerInterface $mailer,
         protected readonly UserRepository $userRepository,
         protected readonly string $appMailerSender,
-        protected readonly string $appMailerFrom,
+        protected readonly string $appMailerAddress,
     ) {
     }
 
