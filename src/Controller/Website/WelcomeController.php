@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Website;
 
 use App\Repository\AllocationRepository;
 use App\Repository\HospitalRepository;
@@ -25,7 +25,7 @@ class WelcomeController extends AbstractController
     #[Route('/', name: 'app_welcome')]
     public function index(): Response
     {
-        return $this->render('welcome/welcome.html.twig', [
+        return $this->render('website/welcome/welcome.html.twig', [
             'allocationCount' => $this->allocationRepository->countAllocations(),
             'hospitalCount' => $this->hospitalRepository->countHospitals(),
             'importCount' => $this->importRepository->countImports(),

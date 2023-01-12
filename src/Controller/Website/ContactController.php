@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Website;
 
 use App\Form\ContactType;
 use App\Service\Mailers\ContactFormNotificationService;
@@ -29,10 +29,10 @@ class ContactController extends AbstractController
 
             $this->mailerService->sendContactFormNotification($contactFormData);
 
-            return $this->render('contact/sent.html.twig');
+            return $this->render('website/contact/sent.html.twig');
         }
 
-        return $this->render('contact/form.html.twig', [
+        return $this->render('website/contact/form.html.twig', [
             'form' => $form->createView(),
         ]);
     }
