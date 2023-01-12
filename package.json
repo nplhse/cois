@@ -12,7 +12,7 @@
         "@symfony/ux-turbo": "file:vendor/symfony/ux-turbo/assets",
         "@symfony/webpack-encore": "^3.1.0",
         "autoprefixer": "^10.4.13",
-        "babel-loader": "^9.1.0",
+        "babel-loader": "^9.1.2",
         "core-js": "^3.27.1",
         "eslint": "^8.31.0",
         "eslint-plugin-import": "^2.25.2",
