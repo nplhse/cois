@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Website;
 
 use App\Domain\Enum\Page\PageTypeEnum;
 use App\Form\CookieConsentType;
@@ -36,7 +36,7 @@ class PageController extends AbstractController
             $form = null;
         }
 
-        return $this->renderForm('page/index.html.twig', [
+        return $this->renderForm('website/page/index.html.twig', [
             'page' => $page,
             'consentForm' => $form,
         ]);

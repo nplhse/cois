@@ -22,14 +22,14 @@ abstract class AbstractAdminNotification implements AdminNotificationInterface, 
         private readonly UrlGeneratorInterface $router,
         private readonly MailerInterface $mailer,
         private readonly string $appMailerSender,
-        private readonly string $appMailerFrom
+        private readonly string $appMailerAddress
     ) {
     }
 
     public function getEmail(string $recipient, string $subject, string $template, array $context = []): NotificationEmail
     {
         return (new NotificationEmail())
-            ->from(new Address($this->appMailerSender, $this->appMailerFrom))
+            ->from(new Address($this->appMailerAddress, $this->appMailerSender))
             ->to(new Address($recipient))
             ->importance(NotificationEmail::IMPORTANCE_MEDIUM)
             ->subject($this->getTranslation($subject))

@@ -19,7 +19,7 @@ class EmailVerificationSubscriber implements EventSubscriberInterface
         private EmailVerifier $emailVerifier,
         private TranslatorInterface $translator,
         private string $appMailerSender,
-        private string $appMailerFrom
+        private string $appMailerAddress,
     ) {
     }
 
@@ -32,7 +32,7 @@ class EmailVerificationSubscriber implements EventSubscriberInterface
             'app_verify_email',
             $user,
             (new TemplatedEmail())
-                ->from(new Address($this->appMailerSender, $this->appMailerFrom))
+                ->from(new Address($this->appMailerAddress, $this->appMailerSender))
                 ->to(new Address($user->getEmail()))
                 ->subject($this->translator->trans('confirm.email.title', [], 'emails'))
                 ->htmlTemplate('emails/user/confirmation_email.html.twig')
@@ -48,7 +48,7 @@ class EmailVerificationSubscriber implements EventSubscriberInterface
             'app_verify_email',
             $user,
             (new TemplatedEmail())
-                ->from(new Address($this->appMailerSender, $this->appMailerFrom))
+                ->from(new Address($this->appMailerAddress, $this->appMailerSender))
                 ->to(new Address($user->getEmail()))
                 ->subject($this->translator->trans('confirm.email.title', [], 'emails'))
                 ->htmlTemplate('emails/user/verify_email.html.twig')
