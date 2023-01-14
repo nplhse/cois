@@ -72,6 +72,9 @@ eslint:
 phpcsfixer:
 	vendor/bin/php-cs-fixer fix
 
+phpmd:
+	vendor/bin/phpmd src/ html phpmd.xml --report-file var/build/phpmd.html --ignore-violations-on-exit
+
 phpunit:
 	vendor/bin/phpunit
 
