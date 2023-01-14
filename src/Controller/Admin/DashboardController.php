@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\Entity\Category;
 use App\Entity\CookieConsent;
 use App\Entity\DispatchArea;
 use App\Entity\Hospital;
 use App\Entity\Import;
 use App\Entity\Page;
+use App\Entity\Post;
 use App\Entity\SkippedRow;
 use App\Entity\State;
 use App\Entity\SupplyArea;
+use App\Entity\Tag;
 use App\Entity\User;
 use App\Repository\SkippedRowRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -51,6 +54,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Users', 'fas fa-users', User::class);
         yield MenuItem::linkToCrud('Pages', 'fas fa-sitemap', Page::class);
         yield MenuItem::linkToCrud('Cookie Consent', 'fas fa-cookie-bite', CookieConsent::class);
+        yield MenuItem::section();
+        yield MenuItem::linkToCrud('label.categories', 'fas fa-tag', Category::class);
+        yield MenuItem::linkToCrud('label.tags', 'fas fa-tags', Tag::class);
+        yield MenuItem::linkToCrud('label.posts', 'fas fa-file', Post::class);
         yield MenuItem::section();
         yield MenuItem::linkToCrud('State', 'fas fa-map', State::class);
         yield MenuItem::linkToCrud('Dispatch Areas', 'fas fa-map-marker', DispatchArea::class);
