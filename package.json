@@ -15,7 +15,7 @@
         "babel-loader": "^9.1.2",
         "core-js": "^3.27.1",
         "eslint": "^8.32.0",
-        "eslint-plugin-import": "^2.25.2",
+        "eslint-plugin-import": "^2.27.4",
         "eslint-plugin-n": "^15.6.1",
         "eslint-plugin-promise": "^6.1.1",
         "file-loader": "^6.0.0",
