@@ -48,17 +48,17 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::section();
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToUrl('Return to site', 'fa fa-undo', $this->generateUrl('app_dashboard'));
-        yield MenuItem::section();
+        yield MenuItem::section('General');
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Users', 'fas fa-users', User::class);
-        yield MenuItem::linkToCrud('Pages', 'fas fa-sitemap', Page::class);
         yield MenuItem::linkToCrud('Cookie Consent', 'fas fa-cookie-bite', CookieConsent::class);
-        yield MenuItem::section();
+        yield MenuItem::section('Website');
+        yield MenuItem::linkToCrud('Pages', 'fas fa-sitemap', Page::class);
+        yield MenuItem::linkToCrud('label.posts', 'fas fa-file', Post::class);
         yield MenuItem::linkToCrud('label.categories', 'fas fa-tag', Category::class);
         yield MenuItem::linkToCrud('label.tags', 'fas fa-tags', Tag::class);
-        yield MenuItem::linkToCrud('label.posts', 'fas fa-file', Post::class);
-        yield MenuItem::section();
+        yield MenuItem::section('Data');
         yield MenuItem::linkToCrud('State', 'fas fa-map', State::class);
         yield MenuItem::linkToCrud('Dispatch Areas', 'fas fa-map-marker', DispatchArea::class);
         yield MenuItem::linkToCrud('Supply Areas', 'fas fa-map-pin', SupplyArea::class);

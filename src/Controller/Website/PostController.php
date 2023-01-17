@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PostController extends AbstractController
 {
-    #[Route('/blog/{id}', name: 'app_post')]
+    #[Route('/blog/{slug}', name: 'app_post')]
     public function invoke(Post $post): Response
     {
         return $this->render('website/blog/post.html.twig', [

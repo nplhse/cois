@@ -1,0 +1,12 @@
+<div {{ attributes }}>
+    <h4 class="fst-italic">
+        Tags
+    </h4>
+    <ol class="list-unstyled mb-0">
+        {% for tag in this.tags %}
+            <a href="#">{{ tag.name }}</a>,
+        {% else %}
+            Sorry, there are no tags.
+        {% endfor %}
+    </ol>
+</div>

@@ -9,6 +9,14 @@ enum PostStatus: string
     case Draft = 'Draft';
     case Published = 'Published';
 
+    public function getType(): string
+    {
+        return match ($this) {
+            PostStatus::Draft => PostStatus::Draft->value,
+            PostStatus::Published => PostStatus::Published->value,
+        };
+    }
+
     /**
      * @return array<string,string>
      */

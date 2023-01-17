@@ -1,0 +1,12 @@
+<div {{ attributes }}>
+    <h4 class="fst-italic">
+        Categories
+    </h4>
+    <ol class="list-unstyled mb-0">
+        {% for category in this.categories %}
+            <li><a href="#">{{ category.name }}</a></li>
+        {% else %}
+            <li>Sorry, there are no categories</li>
+        {% endfor %}
+    </ol>
+</div>

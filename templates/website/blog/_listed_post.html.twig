@@ -1,0 +1,43 @@
+{% block post %}
+    <article class="blog-post">
+        <h2 class="blog-post-title mb-1">
+            <a href="{{
+                path(
+                    'app_post',
+                    {
+                        slug: post.slug
+                    }
+                )
+                }}">
+                {{ post.title }}
+            </a>
+        </h2>
+        <p class="text-muted">
+            Posted on {{ post.createdAt|date }}, by {{ post.createdBy }}
+        </p>
+        <p>
+            {% if post.teaser %}
+                {{ post.teaser|raw }}
+            {% else %}
+                {% set paragraphs = post.content|split('<br>') %}
+                {% set teaser = paragraphs|first %}
+                {{ teaser|raw }}
+            {% endif %}
+            <a href="{{
+                path(
+                    'app_post',
+                    {
+                        slug: post.slug
+                    }
+                )
+                }}">
+                Read more...
+            </a>
+        </p>
+        <p class="text-muted">
+            Posted in {{ post.category }} | Tagged as{% for tag in post.tags %}
+                {{ tag.name }}{% if not loop.last %}, {% endif %}
+            {% endfor %}| {{ post.comments|length }} Comments
+        </p>
+    </article>
+{% endblock %}

@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\Domain\Enum\PostStatus;
 use App\Entity\Post;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 
 class PostCrudController extends AbstractCrudController
 {
@@ -25,11 +30,17 @@ class PostCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('title'),
-            TextField::new('slug')->hideOnIndex()->setRequired(false),
+            SlugField::new('slug')->hideOnIndex()->setTargetFieldName('title'),
             TextEditorField::new('content')->hideOnIndex(),
             AssociationField::new('category')->autocomplete(),
             CollectionField::new('tags')->onlyOnDetail(),
             AssociationField::new('tags')->onlyOnForms(),
+            ChoiceField::new('status')->onlyOnForms()
+                ->setFormType(EnumType::class)
+                ->setFormTypeOption('class', PostStatus::class)
+                ->setChoices(PostStatus::cases()),
+            BooleanField::new('isSticky'),
+            BooleanField::new('allowComments')->onlyOnForms(),
             DateTimeField::new('createdAt')->hideOnForm(),
             AssociationField::new('createdBy'),
             DateTimeField::new('updatedAt')->hideOnForm(),

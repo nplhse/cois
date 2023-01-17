@@ -7,12 +7,15 @@ namespace App\DataFixtures;
 use App\Domain\Enum\Page\PageStatusEnum;
 use App\Domain\Enum\Page\PageTypeEnum;
 use App\Factory\AllocationFactory;
+use App\Factory\CategoryFactory;
 use App\Factory\DispatchAreaFactory;
 use App\Factory\HospitalFactory;
 use App\Factory\ImportFactory;
 use App\Factory\PageFactory;
+use App\Factory\PostFactory;
 use App\Factory\StateFactory;
 use App\Factory\SupplyAreaFactory;
+use App\Factory\TagFactory;
 use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -69,6 +72,34 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             'dispatchArea' => DispatchAreaFactory::random(),
             'supplyArea' => SupplyAreaFactory::random(),
         ]);
+
+        CategoryFactory::new()->create(['name' => 'Demo Category']);
+        CategoryFactory::new()->create(['name' => 'Sample Category']);
+        CategoryFactory::new()->create(['name' => 'Another Category']);
+
+        TagFactory::new()->create(['name' => 'Demo Tag']);
+        TagFactory::new()->create(['name' => 'Sample Tag']);
+        TagFactory::new()->create(['name' => 'Another Tag']);
+        TagFactory::new()->create(['name' => 'Yet Another Tag']);
+
+        PostFactory::new()
+            ->many(1)
+            ->create(function () {
+                return [
+                    'isSticky' => true,
+                    'tags' => TagFactory::randomSet(2),
+                    'category' => CategoryFactory::random(),
+                ];
+            });
+
+        PostFactory::new()
+            ->many(15)
+            ->create(function () {
+                return [
+                    'tags' => TagFactory::randomSet(2),
+                    'category' => CategoryFactory::random(),
+                ];
+            });
 
         $manager->flush();
     }

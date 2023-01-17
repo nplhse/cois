@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Domain\Enum\PostStatus;
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -18,6 +19,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PostRepository extends ServiceEntityRepository
 {
+    public const PER_PAGE = 10;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Post::class);
@@ -41,28 +44,75 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Post[] Returns an array of Post objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findRecentPosts(int $limit = 5): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.status = :status')
+            ->setParameter('status', PostStatus::Published)
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
-//    public function findOneBySomeField($value): ?Post
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function countStickyPosts(): int
+    {
+        return $this->createQueryBuilder('p')
+            ->select('COUNT(p.id)')
+            ->andWhere('p.status = :status')
+            ->setParameter('status', PostStatus::Published)
+            ->andWhere('p.isSticky = :sticky')
+            ->setParameter('sticky', true)
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    public function findStickyPosts(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.status = :status')
+            ->setParameter('status', PostStatus::Published)
+            ->andWhere('p.isSticky = :sticky')
+            ->setParameter('sticky', true)
+            ->orderBy('p.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function getPaginator(int $page): \App\Pagination\Paginator
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->andWhere('p.status = :status')
+            ->setParameter('status', PostStatus::Published)
+            ->andWhere('p.isSticky = :sticky')
+            ->setParameter('sticky', false)
+            ->orderBy('p.createdAt', 'DESC')
+        ;
+
+        return (new \App\Pagination\Paginator($qb, self::PER_PAGE))->paginate($page);
+    }
+
+    public function getArchivePaginator(int $page, int $year, ?int $month): \App\Pagination\Paginator
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->andWhere('p.status = :status')
+            ->setParameter('status', PostStatus::Published)
+            ->andWhere('p.isSticky = :sticky')
+            ->setParameter('sticky', false)
+            ->andWhere('YEAR(p.createdAt) = :year')
+            ->setParameter('year', $year)
+            ->orderBy('p.createdAt', 'DESC')
+        ;
+
+        if ($month) {
+            $qb->andWhere('MONTH(p.createdAt) = :month')
+                ->setParameter('month', $month);
+        }
+
+        return (new \App\Pagination\Paginator($qb, self::PER_PAGE))->paginate($page);
+    }
 }

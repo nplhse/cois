@@ -1,0 +1,23 @@
+<div {{ attributes }}>
+    <h4 class="fst-italic">
+        Recent Posts
+    </h4>
+    <ol class="list-unstyled mb-0">
+        {% for post in this.recentPosts %}
+            <li>
+                <a href="{{
+                    path(
+                        'app_post',
+                        {
+                            slug: post.slug
+                        }
+                    )
+                    }}">
+                    {{ post.title }}
+                </a> ({{ post.createdAt|date }})
+            </li>
+        {% else %}
+            <li>Sorry, there are no posts!</li>
+        {% endfor %}
+    </ol>
+</div>
