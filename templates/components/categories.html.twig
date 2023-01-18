@@ -4,7 +4,18 @@
     </h4>
     <ol class="list-unstyled mb-0">
         {% for category in this.categories %}
-            <li><a href="#">{{ category.name }}</a></li>
+            <li>
+                <a href="{{
+                    path(
+                        'app_blog_category',
+                        {
+                            category: category
+                        }
+                    )
+                    }}">
+                    {{ category.name }}
+                </a>
+            </li>
         {% else %}
             <li>Sorry, there are no categories</li>
         {% endfor %}

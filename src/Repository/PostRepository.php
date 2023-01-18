@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Domain\Enum\PostStatus;
+use App\Entity\Category;
 use App\Entity\Post;
+use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -101,8 +103,6 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p')
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
-            ->andWhere('p.isSticky = :sticky')
-            ->setParameter('sticky', false)
             ->andWhere('YEAR(p.createdAt) = :year')
             ->setParameter('year', $year)
             ->orderBy('p.createdAt', 'DESC')
@@ -112,6 +112,33 @@ class PostRepository extends ServiceEntityRepository
             $qb->andWhere('MONTH(p.createdAt) = :month')
                 ->setParameter('month', $month);
         }
+
+        return (new \App\Pagination\Paginator($qb, self::PER_PAGE))->paginate($page);
+    }
+
+    public function getCategoryPaginator(int $page, Category $category): \App\Pagination\Paginator
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->andWhere('p.status = :status')
+            ->setParameter('status', PostStatus::Published)
+            ->andWhere('p.category = :category')
+            ->setParameter('category', $category)
+            ->orderBy('p.createdAt', 'DESC')
+        ;
+
+        return (new \App\Pagination\Paginator($qb, self::PER_PAGE))->paginate($page);
+    }
+
+    public function getTagPaginator(int $page, Tag $tag): \App\Pagination\Paginator
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->andWhere('p.status = :status')
+            ->setParameter('status', PostStatus::Published)
+            ->innerJoin('p.tags', 't')
+            ->andWhere('t.name = :tag')
+            ->setParameter('tag', $tag->getName())
+            ->orderBy('p.createdAt', 'DESC')
+        ;
 
         return (new \App\Pagination\Paginator($qb, self::PER_PAGE))->paginate($page);
     }

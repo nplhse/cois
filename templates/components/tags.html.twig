@@ -4,7 +4,9 @@
     </h4>
     <ol class="list-unstyled mb-0">
         {% for tag in this.tags %}
-            <a href="#">{{ tag.name }}</a>,
+            <!-- prettier-ignore-start -->
+            <a href="{{ path('app_blog_tag', {tag: tag}) }}">{{ tag.name }}</a>,
+            <!-- prettier-ignore-end -->
         {% else %}
             Sorry, there are no tags.
         {% endfor %}

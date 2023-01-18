@@ -13,7 +13,7 @@
             </a>
         </h2>
         <p class="text-muted">
-            Posted on {{ post.createdAt|date }}, by {{ post.createdBy }}
+            Posted on {{ post.createdAt|date('d.m.Y, H:i') }}, by {{ post.createdBy }}
         </p>
         <p>
             {% if post.teaser %}
@@ -35,8 +35,14 @@
             </a>
         </p>
         <p class="text-muted">
-            Posted in {{ post.category }} | Tagged as{% for tag in post.tags %}
-                {{ tag.name }}{% if not loop.last %}, {% endif %}
+            Posted in
+            <!-- prettier-ignore-start -->
+            <a href="{{ path('app_blog_category', {category: post.category}) }}" target="_top"> {{ post.category }}</a>
+            <!-- prettier-ignore-end -->
+            | Tagged as
+                {% for tag in post.tags %}
+                <!-- prettier-ignore-start --><a href="{{ path('app_blog_tag', {tag: tag}) }}" target="_top">
+                    {{ tag.name }}</a><!-- prettier-ignore-end -->{% if not loop.last %}, {% endif %}
             {% endfor %}| {{ post.comments|length }} Comments
         </p>
     </article>

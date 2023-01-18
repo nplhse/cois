@@ -5,16 +5,9 @@
     <ol class="list-unstyled mb-0">
         {% for post in this.recentPosts %}
             <li>
-                <a href="{{
-                    path(
-                        'app_post',
-                        {
-                            slug: post.slug
-                        }
-                    )
-                    }}">
-                    {{ post.title }}
-                </a> ({{ post.createdAt|date }})
+                <!-- prettier-ignore-start -->
+                <a href="{{ path('app_post', {slug: post.slug}) }}">{{ post.title }}</a> ({{ post.createdAt|date }})
+                <!-- prettier-ignore-end -->
             </li>
         {% else %}
             <li>Sorry, there are no posts!</li>

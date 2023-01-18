@@ -15,7 +15,7 @@ final class ArchiveComponent
     ) {
     }
 
-    public function getItems()
+    public function getItems(): array
     {
         $items = $this->query->execute()->getItems();
         $parsed = [];

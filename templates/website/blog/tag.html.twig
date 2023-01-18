@@ -3,7 +3,9 @@
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
 
 {% block title %}
-    {{ 'title.blog.archive'|trans }} - {{ 'title.blog'|trans }} - {{ parent() }}
+    {{ 'title.blog.tag'|trans }}: {{ tag.name }} - {{ 'title.blog'|trans }} - {{
+        parent()
+    }}
 {% endblock %}
 
 {% block body %}
@@ -22,7 +24,7 @@
                                 label: 'title.blog'|trans
                             },
                             {
-                                label: 'title.blog.archive'|trans
+                                label: tag.name
                             }
                         ]
                     )
@@ -33,7 +35,7 @@
         <div class="row">
             <div class="col-md-8">
                 <h3 class="pb-4 mb-4 fst-italic border-bottom">
-                    Archive for {{ archive_date }} <small class="text-muted">
+                    Showing tag {{ tag.name }} <small class="text-muted">
                         with
                         {{ paginator.numResults }} posts
                     </small>
