@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Entity\Comment;
 use App\Entity\CookieConsent;
 use App\Entity\DispatchArea;
 use App\Entity\Hospital;
@@ -58,6 +59,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('label.posts', 'fas fa-file', Post::class);
         yield MenuItem::linkToCrud('label.categories', 'fas fa-tag', Category::class);
         yield MenuItem::linkToCrud('label.tags', 'fas fa-tags', Tag::class);
+        yield MenuItem::linkToCrud('label.comments', 'fas fa-comment', Comment::class);
         yield MenuItem::section('Data');
         yield MenuItem::linkToCrud('State', 'fas fa-map', State::class);
         yield MenuItem::linkToCrud('Dispatch Areas', 'fas fa-map-marker', DispatchArea::class);

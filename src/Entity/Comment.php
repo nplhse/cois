@@ -85,6 +85,15 @@ class Comment
         return $this;
     }
 
+    public function getCreatedBy(): User|string
+    {
+        if ($this->user) {
+            return $this->user;
+        }
+
+        return $this->username;
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;

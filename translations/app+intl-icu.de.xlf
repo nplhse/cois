@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="de" target-language="de" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="PzXxh_w" resname="blog.posted_on">
+        <source>blog.posted_on</source>
+        <target>Veröffentlicht am {date}</target>
+      </trans-unit>
+      <trans-unit id="TyyD7xQ" resname="blog.posted_by">
+        <source>blog.posted_by</source>
+        <target>von {user}</target>
+      </trans-unit>
+      <trans-unit id="Fc3ChGa" resname="blog.read_more">
+        <source>blog.read_more</source>
+        <target>Mehr lesen...</target>
+      </trans-unit>
+      <trans-unit id="iK40vhR" resname="blog.posted_category">
+        <source>blog.posted_category</source>
+        <target>Kategorie</target>
+      </trans-unit>
+      <trans-unit id="KX6J2eO" resname="blog.posted_tags">
+        <source>blog.posted_tags</source>
+        <target>Tags</target>
+      </trans-unit>
+      <trans-unit id="1HI2Iu6" resname="blog.posted_comments">
+        <source>blog.posted_comments</source>
+        <target>{count, plural, =0 {Keine Kommentare} one {1 Kommentar} other {# Kommentare}}</target>
+      </trans-unit>
+      <trans-unit id="NO2hNuQ" resname="title.blog">
+        <source>title.blog</source>
+        <target>Blog</target>
+      </trans-unit>
+      <trans-unit id="MptMMmS" resname="blog.post.about">
+        <source>blog.post.about</source>
+        <target>Informationen</target>
+      </trans-unit>
+      <trans-unit id="vl8NRTZ" resname="blog.post.category">
+        <source>blog.post.category</source>
+        <target>Kategorie</target>
+      </trans-unit>
+      <trans-unit id="hCZwEb." resname="blog.post.tags">
+        <source>blog.post.tags</source>
+        <target>Tags</target>
+      </trans-unit>
+      <trans-unit id="tK1wRZs" resname="title.comments">
+        <source>title.comments</source>
+        <target>Kommentare</target>
+      </trans-unit>
+      <trans-unit id="sJqch67" resname="msg.comment.none_found">
+        <source>msg.comment.none_found</source>
+        <target>Dieser Beitrag hat noch keine Kommentare.</target>
+      </trans-unit>
+      <trans-unit id="rUSDj70" resname="title.comments.add">
+        <source>title.comments.add</source>
+        <target>Kommentar hinzufügen</target>
+      </trans-unit>
+      <trans-unit id="5CNDgVR" resname="msg.comments.form.posting_as">
+        <source>msg.comments.form.posting_as</source>
+        <target>Kommentar hinzufügen als {username}</target>
+      </trans-unit>
+      <trans-unit id="DeFUP8M" resname="btn.comments.add">
+        <source>btn.comments.add</source>
+        <target>Kommentar hinzufügen</target>
+      </trans-unit>
+      <trans-unit id="RBRw6xh" resname="title.blog.tag">
+        <source>title.blog.tag</source>
+        <target>Schlagwörter</target>
+      </trans-unit>
+      <trans-unit id="hNf6ACT" resname="blog.showing_tag">
+        <source>blog.showing_tag</source>
+        <target>Schlagwort: {tag}</target>
+      </trans-unit>
+      <trans-unit id="lY0AcV_" resname="blog.with_numbered_posts">
+        <source>blog.with_numbered_posts</source>
+        <target>{count, plural, =0 {ohne Beiträge} one {mit einem Beitrag} other {mit # Beiträgen}}</target>
+      </trans-unit>
+      <trans-unit id="wy9TRGD" resname="title.blog.archive">
+        <source>title.blog.archive</source>
+        <target>Archiv</target>
+      </trans-unit>
+      <trans-unit id="FtEyuIu" resname="blog.archive_for">
+        <source>blog.archive_for</source>
+        <target>Archiv für: {archive_date}</target>
+      </trans-unit>
+      <trans-unit id="OHRvfh3" resname="msg.comment.approval">
+        <source>msg.comment.approval</source>
+        <target>Kommentar wurde abgesendet, muss aber möglicherweise noch freigeschaltet werden.</target>
+      </trans-unit>
+      <trans-unit id="LnrqNmg" resname="blog.showing_category">
+        <source>blog.showing_category</source>
+        <target>Kategorie: {category}</target>
+      </trans-unit>
+      <trans-unit id="fwsLOQa" resname="msg.post.none_found">
+        <source>msg.post.none_found</source>
+        <target>Keine passenden Beiträge gefunden.</target>
+      </trans-unit>
+      <trans-unit id="kkhoBbp" resname="blog.post.no_tags">
+        <source>blog.post.no_tags</source>
+        <target>Keine Schlagwörter gefunden.</target>
+      </trans-unit>
+      <trans-unit id="HmSY.S_" resname="title.blog.recent_posts">
+        <source>title.blog.recent_posts</source>
+        <target>Letzte Beiträge</target>
+      </trans-unit>
+      <trans-unit id="SQkaeL1" resname="title.blog.category">
+        <source>title.blog.category</source>
+        <target>Kategorie</target>
+      </trans-unit>
+      <trans-unit id="LroffV0" resname="blog.post.no_categories">
+        <source>blog.post.no_categories</source>
+        <target>Keine Kategorien gefunden.</target>
+      </trans-unit>
+      <trans-unit id="4_5mfwh" resname="blog.post.no_posts">
+        <source>blog.post.no_posts</source>
+        <target>Keine Beiträge gefunden.</target>
+      </trans-unit>
+      <trans-unit id="oKu7X0G" resname="title.blog.categories">
+        <source>title.blog.categories</source>
+        <target>Kategorien</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

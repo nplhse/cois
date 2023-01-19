@@ -13,7 +13,21 @@
             </a>
         </h2>
         <p class="text-muted">
-            Posted on {{ post.createdAt|date('d.m.Y, H:i') }}, by {{ post.createdBy }}
+            {{
+                'blog.posted_on'|trans(
+                    {
+                        date: post.createdAt|date('d.m.Y, H:i')
+                    },
+                    'app'
+                )
+            }}, {{
+                'blog.posted_by'|trans(
+                    {
+                        user: post.createdBy
+                    },
+                    'app'
+                )
+            }}
         </p>
         <p>
             {% if post.teaser %}
@@ -31,19 +45,40 @@
                     }
                 )
                 }}">
-                Read more...
+                {{ 'blog.read_more'|trans({}, 'app') }}
             </a>
         </p>
         <p class="text-muted">
-            Posted in
+            {{ 'blog.posted_category'|trans({}, 'app') }}:
             <!-- prettier-ignore-start -->
             <a href="{{ path('app_blog_category', {category: post.category}) }}" target="_top"> {{ post.category }}</a>
             <!-- prettier-ignore-end -->
-            | Tagged as
-                {% for tag in post.tags %}
+            |{% if post.tags is not empty %}
+                {{ 'blog.posted_tags'|trans({}, 'app') }}:
+            {% endif %}
+            {% for tag in post.tags %}
                 <!-- prettier-ignore-start --><a href="{{ path('app_blog_tag', {tag: tag}) }}" target="_top">
-                    {{ tag.name }}</a><!-- prettier-ignore-end -->{% if not loop.last %}, {% endif %}
-            {% endfor %}| {{ post.comments|length }} Comments
+                    {{ tag.name }}</a>{% if not loop.last %}, {% endif %}
+                <!-- prettier-ignore-end -->
+            {% else %}
+                {{ 'blog.post.no_tags'|trans({}, 'app') }}
+            {% endfor %}| <a href="{{
+                path(
+                    'app_post',
+                    {
+                        slug: post.slug
+                    }
+                )
+                }}#comments">
+                {{
+                    'blog.posted_comments'|trans(
+                        {
+                            '%count%': post.comments|length
+                        },
+                        'app'
+                    )
+                }}
+            </a>
         </p>
     </article>
 {% endblock %}

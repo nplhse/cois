@@ -1,6 +1,6 @@
 <div {{ attributes }}>
     <h4 class="fst-italic">
-        Tags
+        {{ 'title.blog.tag'|trans({}, 'app') }}
     </h4>
     <ol class="list-unstyled mb-0">
         {% for tag in this.tags %}
@@ -8,7 +8,7 @@
             <a href="{{ path('app_blog_tag', {tag: tag}) }}">{{ tag.name }}</a>,
             <!-- prettier-ignore-end -->
         {% else %}
-            Sorry, there are no tags.
+            {{ 'blog.post.no_tags'|trans({}, 'app') }}
         {% endfor %}
     </ol>
 </div>

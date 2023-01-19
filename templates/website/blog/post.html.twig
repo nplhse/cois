@@ -1,107 +1,94 @@
-{% extends 'base.html.twig' %}
+{% extends 'website/blog/_blog_layout.html.twig' %}
 
 {% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
 
 {% block title %}
-    {{ post.title }} - {{ 'title.blog'|trans }} - {{ parent() }}
+    {{ post.title }} - {{ parent() }}
 {% endblock %}
 
-{% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                {{
-                    breadcrumbs.render(
-                        [
-                            {
-                                url: url('app_dashboard'),
-                                label: 'Home'|trans
-                            },
-                            {
-                                url: url('app_blog'),
-                                label: 'title.blog'|trans
-                            },
-                            {
-                                label: post.title
-                            }
-                        ]
-                    )
-                }}
-            </div>
-        </div>
+{% block breadcrumbs %}
+    {{
+        breadcrumbs.render(
+            [
+                {
+                    url: url('app_dashboard'),
+                    label: 'Home'|trans
+                },
+                {
+                    url: url('app_blog'),
+                    label: 'title.blog'|trans({}, 'app')
+                },
+                {
+                    label: post.title|trans({}, 'app')
+                }
+            ]
+        )
+    }}
+{% endblock %}
 
-        <div class="row">
-            <div class="col-md-8">
-                <article class="blog-post">
-                    <h1 class="blog-post-title mb-3">
-                        {{ post.title }}
-                    </h1>
-                    <p>
-                        {{ post.content|raw }}
-                    </p>
-                </article>
-            </div>
+{% block content %}
+    <article class="blog-post">
+        <h1 class="blog-post-title mb-3">
+            {{ post.title }}
+        </h1>
+        <p>
+            {{ post.content|raw }}
+        </p>
 
-            <div class="col-md-4">
-                <div class="position-sticky" style="top: 2rem;">
-                    <div class="p-4 mb-3 bg-light rounded">
-                        <h4 class="fst-italic">
-                            About
-                        </h4>
-                        <p>
-                            Posted on {{ post.createdAt|date|date('d.m.Y, H:i') }}, by {{ post.createdBy }}
-                        </p>
-                        <h6>
-                            Category
-                        </h6>
-                        <p>
-                            <a href="{{
-                                path(
-                                    'app_blog_category',
-                                    {
-                                        category: post.category
-                                    }
-                                )
-                                }}">
-                                {{ post.category }}
-                            </a>
-                        </p>
-                        <h6>
-                            Tags
-                        </h6>
-                        <p>
-                            {% for tag in post.tags %}
-                                <a href="{{
-                                    path(
-                                        'app_blog_tag',
-                                        {
-                                            tag: tag
-                                        }
-                                    )
-                                    }}">
-                                    {{ tag.name }}
-                                </a>{% if not loop.last %}, {% endif %}
-                            {% endfor %}
-                        </p>
-                    </div>
+        <turbo-frame id="blog-post-comments"
+            loading="lazy"
+            src="/blog/{{ post.id }}/comments"></turbo-frame>
+    </article>
+{% endblock %}
 
-                    <div class="p-4">
-                        {{ component('recent_posts') }}
-                    </div>
-
-                    <div class="p-4">
-                        {{ component('categories') }}
-                    </div>
-
-                    <div class="p-4">
-                        {{ component('tags') }}
-                    </div>
-
-                    <div class="p-4">
-                        {{ component('archive') }}
-                    </div>
-                </div>
-            </div>
-        </div>
+{% block aside_top %}
+    <div class="p-4 mb-3 bg-light rounded">
+        <h4 class="fst-italic">
+            {{ 'blog.post.about'|trans({}, 'app') }}
+        </h4>
+        <p>
+            {{
+                'blog.posted_on'|trans(
+                    {
+                        date: post.createdAt|date('d.m.Y, H:i')
+                    },
+                    'app'
+                )
+            }}, {{
+                'blog.posted_by'|trans(
+                    {
+                        user: post.createdBy
+                    },
+                    'app'
+                )
+            }}
+        </p>
+        <h6>
+            {{ 'blog.post.category'|trans({}, 'app') }}
+        </h6>
+        <p>
+            <a href="{{
+                path(
+                    'app_blog_category',
+                    {
+                        category: post.category
+                    }
+                )
+                }}">
+                {{ post.category }}
+            </a>
+        </p>
+        <h6>
+            {{ 'blog.post.tags'|trans({}, 'app') }}
+        </h6>
+        <p>
+            {% for tag in post.tags %}
+                <!-- prettier-ignore-start -->
+                <a href="{{ path('app_blog_tag', {tag: tag}) }}">{{ tag.name }}</a>{% if not loop.last %}, {% endif %}
+                <!-- prettier-ignore-end -->
+            {% else %}
+                {{ 'blog.post.no_tags'|trans({}, 'app') }}
+            {% endfor %}
+        </p>
     </div>
 {% endblock %}

@@ -53,10 +53,11 @@ final class PostFactory extends ModelFactory
     {
         return [
             'allowComments' => self::faker()->boolean(),
-            'category' => CategoryFactory::new(),
+            'category' => CategoryFactory::random(),
+            'tags' => TagFactory::randomSet(2),
             'content' => self::faker()->text(),
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeThisDecade()),
-            'createdBy' => UserFactory::new(),
+            'createdBy' => UserFactory::random(),
             'isSticky' => false,
             'status' => self::faker()->randomElement([PostStatus::Draft, PostStatus::Published]),
             'title' => self::faker()->sentence(random_int(3, 6)),

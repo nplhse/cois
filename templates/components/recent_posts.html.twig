@@ -1,6 +1,6 @@
 <div {{ attributes }}>
     <h4 class="fst-italic">
-        Recent Posts
+        {{ 'title.blog.recent_posts'|trans({}, 'app') }}
     </h4>
     <ol class="list-unstyled mb-0">
         {% for post in this.recentPosts %}

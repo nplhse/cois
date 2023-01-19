@@ -14,21 +14,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PostController extends AbstractController
+class CommentController extends AbstractController
 {
     public function __construct(
         private readonly CommentRepository $commentRepository
     ) {
     }
 
-    #[Route('/blog/{slug}', name: 'app_post')]
+    #[Route('/blog/{id}/comments', name: 'app_post_comments')]
     public function invoke(Post $post, Request $request): Response
     {
         $comment = new Comment();
 
         $form = $this->createForm(CommentType::class, $comment, [
-            'action' => $this->generateUrl('app_post', [
-                'slug' => $post->getSlug(),
+            'action' => $this->generateUrl('app_post_comments', [
+                'id' => $post->getId(),
             ]),
         ]);
         $form->handleRequest($request);
@@ -38,18 +38,40 @@ class PostController extends AbstractController
                 $comment->setUser($this->getUser());
             }
 
+            $comment = $this->setStatus($comment);
+
             $comment->setPost($post);
-            $comment->setStatus(CommentStatus::APPROVED);
             $comment->setCreatedAt(new \DateTimeImmutable());
 
             $this->commentRepository->save($comment, true);
 
-            $this->redirectToRoute('app_blog');
+            if (CommentStatus::APPROVED === $comment->getStatus()) {
+                return $this->redirectToRoute('app_post_comments', [
+                    'id' => $post->getId(),
+                ]);
+            }
+
+            $view = 'website/blog/_comments_approval.html.twig';
         }
 
-        return $this->render('website/blog/post.html.twig', [
-            'post' => $post,
+        if (empty($view)) {
+            $view = 'website/blog/_comments.html.twig';
+        }
+
+        $comments = $this->commentRepository->findCommentsByPost($post->getId());
+
+        return $this->render($view, [
+            'comments' => $comments,
             'form' => $form,
         ]);
+    }
+
+    private function setStatus(Comment $comment): Comment
+    {
+        if ($comment->getUser()) {
+            return $comment->setStatus(CommentStatus::APPROVED);
+        }
+
+        return $comment->setStatus(CommentStatus::SUBMITTED);
     }
 }

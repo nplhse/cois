@@ -8,6 +8,7 @@ use App\Domain\Enum\Page\PageStatusEnum;
 use App\Domain\Enum\Page\PageTypeEnum;
 use App\Factory\AllocationFactory;
 use App\Factory\CategoryFactory;
+use App\Factory\CommentFactory;
 use App\Factory\DispatchAreaFactory;
 use App\Factory\HospitalFactory;
 use App\Factory\ImportFactory;
@@ -73,6 +74,9 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             'supplyArea' => SupplyAreaFactory::random(),
         ]);
 
+        /*
+         * Add Blog to website
+         */
         CategoryFactory::new()->create(['name' => 'Demo Category']);
         CategoryFactory::new()->create(['name' => 'Sample Category']);
         CategoryFactory::new()->create(['name' => 'Another Category']);
@@ -89,15 +93,18 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
                     'isSticky' => true,
                     'tags' => TagFactory::randomSet(2),
                     'category' => CategoryFactory::random(),
+                    'comments' => CommentFactory::createMany(5),
+                    'createdBy' => UserFactory::random(),
                 ];
             });
 
         PostFactory::new()
-            ->many(15)
+            ->many(14)
             ->create(function () {
                 return [
                     'tags' => TagFactory::randomSet(2),
                     'category' => CategoryFactory::random(),
+                    'createdBy' => UserFactory::random(),
                 ];
             });
 

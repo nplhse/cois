@@ -1,0 +1,25 @@
+{% block comment %}
+    <div class="card mb-2">
+        <div class="card-body">
+            <h5 class="card-title">
+                {{
+                    'blog.posted_on'|trans(
+                        {
+                            date: comment.createdAt|date('d.m.Y, H:i')
+                        },
+                        'app'
+                    )
+                }}, {{
+                    'blog.posted_by'|trans(
+                        {
+                            user: comment.createdBy
+                        },
+                        'app'
+                    )
+                }}
+            </h5>
+
+            {{ comment.text }}
+        </div>
+    </div>
+{% endblock %}

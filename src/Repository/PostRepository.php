@@ -58,20 +58,6 @@ class PostRepository extends ServiceEntityRepository
         ;
     }
 
-    public function countStickyPosts(): int
-    {
-        return $this->createQueryBuilder('p')
-            ->select('COUNT(p.id)')
-            ->andWhere('p.status = :status')
-            ->setParameter('status', PostStatus::Published)
-            ->andWhere('p.isSticky = :sticky')
-            ->setParameter('sticky', true)
-            ->orderBy('p.createdAt', 'DESC')
-            ->getQuery()
-            ->getSingleScalarResult()
-        ;
-    }
-
     public function findStickyPosts(): array
     {
         return $this->createQueryBuilder('p')
