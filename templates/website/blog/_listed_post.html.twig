@@ -33,7 +33,7 @@
             {% if post.teaser %}
                 {{ post.teaser|raw }}
             {% else %}
-                {% set paragraphs = post.content|split('<br>') %}
+                {% set paragraphs = post.content|split('</p>') %}
                 {% set teaser = paragraphs|first %}
                 {{ teaser|raw }}
             {% endif %}

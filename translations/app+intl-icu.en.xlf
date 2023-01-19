@@ -59,7 +59,7 @@
       </trans-unit>
       <trans-unit id="5CNDgVR" resname="msg.comments.form.posting_as">
         <source>msg.comments.form.posting_as</source>
-        <target>Posting as {username}</target>
+        <target>Posting as: {username}</target>
       </trans-unit>
       <trans-unit id="DeFUP8M" resname="btn.comments.add">
         <source>btn.comments.add</source>
@@ -120,6 +120,14 @@
       <trans-unit id="oKu7X0G" resname="title.blog.categories">
         <source>title.blog.categories</source>
         <target>Categories</target>
+      </trans-unit>
+      <trans-unit id="STkMg_x" resname="btn.post.edit">
+        <source>btn.post.edit</source>
+        <target>Edit post</target>
+      </trans-unit>
+      <trans-unit id="sFZRoYy" resname="msg.comment.closed">
+        <source>msg.comment.closed</source>
+        <target>Sorry, the comments of this post are closed.</target>
       </trans-unit>
     </body>
   </file>

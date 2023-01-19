@@ -84,6 +84,17 @@ class PostRepository extends ServiceEntityRepository
         return (new \App\Pagination\Paginator($qb, self::PER_PAGE))->paginate($page);
     }
 
+    public function getFeedPaginator(int $page): \App\Pagination\Paginator
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->andWhere('p.status = :status')
+            ->setParameter('status', PostStatus::Published)
+            ->orderBy('p.createdAt', 'DESC')
+        ;
+
+        return (new \App\Pagination\Paginator($qb, self::PER_PAGE))->paginate($page);
+    }
+
     public function getArchivePaginator(int $page, int $year, ?int $month): \App\Pagination\Paginator
     {
         $qb = $this->createQueryBuilder('p')
@@ -108,7 +119,7 @@ class PostRepository extends ServiceEntityRepository
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
             ->andWhere('p.category = :category')
-            ->setParameter('category', $category)
+            ->setParameter('category', $category, Category::class)
             ->orderBy('p.createdAt', 'DESC')
         ;
 

@@ -32,16 +32,31 @@
                 <directory name="src/Repository" />
             </errorLevel>
         </MethodSignatureMismatch>
+        <NullableReturnStatement>
+            <errorLevel type="suppress">
+                <file name="src/Entity/Comment.php" />
+            </errorLevel>
+        </NullableReturnStatement>
         <InvalidScalarArgument>
             <errorLevel type="suppress">
                 <directory name="src/Controller/Settings/" />
             </errorLevel>
         </InvalidScalarArgument>
+        <InvalidNullableReturnType>
+            <errorLevel type="suppress">
+                <file name="src/Entity/Comment.php" />
+            </errorLevel>
+        </InvalidNullableReturnType>
         <ImplementedReturnTypeMismatch>
             <errorLevel type="suppress">
                 <directory name="src/Factory/" />
             </errorLevel>
         </ImplementedReturnTypeMismatch>
+        <ImplementedParamTypeMismatch>
+            <errorLevel type="suppress">
+                <directory name="src/Factory/" />
+            </errorLevel>
+        </ImplementedParamTypeMismatch>
         <UndefinedMagicMethod>
             <errorLevel type="suppress">
                 <file name="src/Controller/ApiController.php" />

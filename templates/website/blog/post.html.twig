@@ -28,6 +28,23 @@
 
 {% block content %}
     <article class="blog-post">
+        {% if is_granted('ROLE_ADMIN') %}
+            {% set url =
+                ea_url().setController(
+                    'App\\Controller\\Admin\\PostCrudController'
+                ).setAction(
+                    'edit'
+                ).setEntityId(
+                    post.id
+                )
+            %}
+            <div class="float-end">
+                <a class="btn btn-outline-primary" href="{{ url }}">
+                    <i class="bi bi-pencil-fill"></i>
+                    {{ 'btn.post.edit'|trans({}, 'app') }}
+                </a>
+            </div>
+        {% endif %}
         <h1 class="blog-post-title mb-3">
             {{ post.title }}
         </h1>

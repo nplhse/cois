@@ -35,6 +35,7 @@ class CommentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             if ($this->getUser()) {
+                /* @phpstan-ignore-next-line */
                 $comment->setUser($this->getUser());
             }
 
@@ -62,6 +63,7 @@ class CommentController extends AbstractController
 
         return $this->render($view, [
             'comments' => $comments,
+            'post' => $post,
             'form' => $form,
         ]);
     }
