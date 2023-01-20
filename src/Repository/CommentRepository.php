@@ -54,4 +54,34 @@ class CommentRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findApprovedPostsByUser(string $email, string $username): int
+    {
+        return $this->createQueryBuilder('c')
+            ->select('COUNT(c.id)')
+            ->andWhere('c.status = :status')
+            ->setParameter('status', CommentStatus::APPROVED)
+            ->andWhere('c.email = :email')
+            ->setParameter('email', $email)
+            ->andWhere('c.username = :username')
+            ->setParameter('username', $username)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    public function findRejectedPostsByUser(string $email, string $username): int
+    {
+        return $this->createQueryBuilder('c')
+            ->select('COUNT(c.id)')
+            ->andWhere('c.status = :status')
+            ->setParameter('status', CommentStatus::REJECTED)
+            ->andWhere('c.email = :email')
+            ->setParameter('email', $email)
+            ->andWhere('c.username = :username')
+            ->setParameter('username', $username)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
 }

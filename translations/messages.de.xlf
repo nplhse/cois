@@ -2546,13 +2546,21 @@
         <source>link.contact</source>
         <target>Kontakt</target>
       </trans-unit>
-      <trans-unit id="NO2hNuQ" resname="title.blog">
-        <source>title.blog</source>
-        <target>__title.blog</target>
+      <trans-unit id="NO2hNuQ" resname="label.posts">
+        <source>label.posts</source>
+        <target>Beiträge</target>
       </trans-unit>
-      <trans-unit id="SQkaeL1" resname="title.blog.category">
-        <source>title.blog.category</source>
-        <target>__title.blog.category</target>
+      <trans-unit id="SQkaeL1" resname="label.categories">
+        <source>label.categories</source>
+        <target>Kategorien</target>
+      </trans-unit>
+      <trans-unit id="1233" resname="label.tags">
+        <source>label.tags</source>
+        <target>Schlagwörter</target>
+      </trans-unit>
+      <trans-unit id="1234" resname="label.comments">
+        <source>label.comments</source>
+        <target>Kommentare</target>
       </trans-unit>
     </body>
   </file>

@@ -1,0 +1,40 @@
+{% extends '@email/default/notification/body.html.twig' %}
+
+{% block content %}
+    {{
+        'notification.comment.submitted'|trans(
+            {
+                '%commentUsername%': comment_username,
+                '%commentEmail%': comment_email
+            },
+            'emails'
+        )
+    }}
+
+    <row>
+        <columns>
+            {{ comment_text }}
+        </columns>
+    </row>
+
+    <row>
+        <columns>
+            <button class="success" href="{{ comment_approve_url }}">
+                {{
+                    'notification.comment.submitted.btn.approve'|trans(
+                        {},
+                        'emails'
+                    )
+                }}
+            </button>
+            <button class="alert" href="{{ comment_reject_url }}">
+                {{
+                    'notification.comment.submitted.btn.reject'|trans(
+                        {},
+                        'emails'
+                    )
+                }}
+            </button>
+        </columns>
+    </row>
+{% endblock %}

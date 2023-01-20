@@ -43,8 +43,8 @@ class PostCrudController extends AbstractCrudController
                 ->setFormType(EnumType::class)
                 ->setFormTypeOption('class', PostStatus::class)
                 ->setChoices(PostStatus::cases()),
-            BooleanField::new('isSticky'),
-            BooleanField::new('allowComments')->onlyOnForms(),
+            BooleanField::new('isSticky')->hideOnIndex(),
+            BooleanField::new('allowComments')->hideOnIndex(),
             DateTimeField::new('createdAt')->hideOnForm(),
             AssociationField::new('createdBy'),
             DateTimeField::new('updatedAt')->hideOnForm(),
@@ -55,6 +55,8 @@ class PostCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
+            ->setDefaultSort(['createdAt' => 'DESC'])
+            ->showEntityActionsInlined()
             ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
         ;
     }
@@ -72,6 +74,7 @@ class PostCrudController extends AbstractCrudController
         return parent::configureActions($actions)
             ->add(Crud::PAGE_DETAIL, $view)
             ->add(Crud::PAGE_EDIT, $view)
+            ->remove(Crud::PAGE_INDEX, Action::DELETE)
         ;
     }
 }

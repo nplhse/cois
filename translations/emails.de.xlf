@@ -194,6 +194,22 @@
         <source>notification.contact.request</source>
         <target>Eine neue Kontaktanfrage wurde von '%name%' (%email_address%) mit dem Betreff '%subject%' versendet.</target>
       </trans-unit>
+      <trans-unit id="32434" resname="notification.comment.submitted">
+        <source>notification.comment.submitted</source>
+        <target>Der folgende Kommentar wurde von '%commentUsername%' ('%commentEmail%') verfasst:</target>
+      </trans-unit>
+      <trans-unit id="54545" resname="notification.comment.submitted.title">
+        <source>notification.comment.submitted.title</source>
+        <target>Ein neuer Kommentar wurde erstellt</target>
+      </trans-unit>
+      <trans-unit id="524534." resname="notification.comment.submitted.btn.approve">
+        <source>notification.comment.submitted.btn.approve</source>
+        <target>Genehmigen</target>
+      </trans-unit>
+      <trans-unit id="2543544" resname="notification.comment.submitted.btn.reject">
+        <source>notification.comment.submitted.btn.reject</source>
+        <target>Ablehnen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
