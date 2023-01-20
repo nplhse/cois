@@ -17,7 +17,7 @@ class FeedController extends AbstractController
     ) {
     }
 
-    #[Route('/blog/rss.xml', defaults: ['page' => '1', '_format' => 'xml'], methods: ['GET'], name: 'app_blog_rss')]
+    #[Route('/blog/rss.xml', defaults: ['page' => '1', '_format' => 'xml'], methods: ['GET'], name: 'app_blog_feed_rss')]
     public function __invoke(Request $request): Response
     {
         $paginator = $this->postRepository->getFeedPaginator($this->getPage($request));

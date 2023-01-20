@@ -129,6 +129,14 @@
         <source>msg.comment.closed</source>
         <target>Die Kommentare für diesen Beitrag sind leider geschlossen.</target>
       </trans-unit>
+      <trans-unit id="0duq.Qu" resname="title.blog.feeds">
+        <source>title.blog.feeds</source>
+        <target>Feeds</target>
+      </trans-unit>
+      <trans-unit id="635s7OQ" resname="link.blog.rss_feed">
+        <source>link.blog.rss_feed</source>
+        <target>RSS-Feed abonnieren</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

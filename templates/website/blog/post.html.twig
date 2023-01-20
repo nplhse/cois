@@ -38,10 +38,34 @@
                     post.id
                 )
             %}
+            {% set url2 =
+                ea_url().setController(
+                    'App\\Controller\\Admin\\CommentCrudController'
+                ).setAction(
+                    'index'
+                ).set(
+                    'filters[post][value]',
+                    post.id
+                ).set(
+                    'filters[post][comparison]',
+                    '='
+                ).set(
+                    'filters[status][value]',
+                    'Submitted'
+                ).set(
+                    'filters[status][comparison]',
+                    '='
+                )
+            %}
             <div class="float-end">
+                {% if (post.pendingComments|length) > 0 %}
+                    <a class="btn btn-outline-secondary" href="{{ url2 }}">
+                        <i class="bi bi-chat-text"></i>
+                        {{ post.pendingComments|length }}
+                    </a>
+                {% endif %}
                 <a class="btn btn-outline-primary" href="{{ url }}">
                     <i class="bi bi-pencil-fill"></i>
-                    {{ 'btn.post.edit'|trans({}, 'app') }}
                 </a>
             </div>
         {% endif %}

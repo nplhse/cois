@@ -6,12 +6,14 @@ namespace App\Controller\Admin;
 
 use App\Domain\Enum\CommentStatus;
 use App\Entity\Comment;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 
 class CommentCrudController extends AbstractCrudController
@@ -25,7 +27,7 @@ class CommentCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
-            TextEditorField::new('text')->hideOnIndex(),
+            TextareaField::new('text')->hideOnIndex(),
             AssociationField::new('post'),
             ChoiceField::new('status')->onlyOnForms()
                 ->setFormType(EnumType::class)
@@ -33,5 +35,17 @@ class CommentCrudController extends AbstractCrudController
                 ->setChoices(CommentStatus::cases()),
             DateTimeField::new('createdAt')->hideOnForm(),
         ];
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add('post')
+            ->add(ChoiceFilter::new('status')->setChoices([
+                CommentStatus::SUBMITTED->name => CommentStatus::SUBMITTED->value,
+                CommentStatus::APPROVED->name => CommentStatus::APPROVED->value,
+                CommentStatus::REJECTED->name => CommentStatus::REJECTED->value,
+            ]))
+        ;
     }
 }

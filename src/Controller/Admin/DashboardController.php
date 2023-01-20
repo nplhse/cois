@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\Domain\Enum\CommentStatus;
 use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\CookieConsent;
@@ -17,6 +18,7 @@ use App\Entity\State;
 use App\Entity\SupplyArea;
 use App\Entity\Tag;
 use App\Entity\User;
+use App\Repository\CommentRepository;
 use App\Repository\SkippedRowRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -30,6 +32,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashboardController extends AbstractDashboardController
 {
     public function __construct(
+        private CommentRepository $commentRepository,
         private SkippedRowRepository $skippedRowRepository
     ) {
     }
@@ -59,7 +62,13 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('label.posts', 'fas fa-file', Post::class);
         yield MenuItem::linkToCrud('label.categories', 'fas fa-tag', Category::class);
         yield MenuItem::linkToCrud('label.tags', 'fas fa-tags', Tag::class);
-        yield MenuItem::linkToCrud('label.comments', 'fas fa-comment', Comment::class);
+        yield MenuItem::linkToCrud('label.comments', 'fas fa-comment', Comment::class)
+            ->setBadge($this->commentRepository->createQueryBuilder('c')
+                ->select('count(c.id)')
+                ->where('c.status = :status')
+                ->setParameter('status', CommentStatus::SUBMITTED)
+                ->getQuery()
+                ->getSingleScalarResult());
         yield MenuItem::section('Data');
         yield MenuItem::linkToCrud('State', 'fas fa-map', State::class);
         yield MenuItem::linkToCrud('Dispatch Areas', 'fas fa-map-marker', DispatchArea::class);

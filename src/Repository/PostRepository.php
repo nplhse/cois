@@ -119,7 +119,7 @@ class PostRepository extends ServiceEntityRepository
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
             ->andWhere('p.category = :category')
-            ->setParameter('category', $category, Category::class)
+            ->setParameter('category', $category->getId())
             ->orderBy('p.createdAt', 'DESC')
         ;
 

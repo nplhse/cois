@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Domain\Contracts\UserInterface;
+use App\Domain\Enum\CommentStatus;
 use App\Domain\Enum\PostStatus;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -267,6 +268,16 @@ class Post
         return $this->comments;
     }
 
+    public function getPendingComments(): \Doctrine\Common\Collections\ReadableCollection
+    {
+        return $this->getComments()->filter(fn (Comment $comment) => CommentStatus::SUBMITTED === $comment->getStatus());
+    }
+
+    public function getApprovedComments(): \Doctrine\Common\Collections\ReadableCollection
+    {
+        return $this->getComments()->filter(fn (Comment $comment) => CommentStatus::APPROVED === $comment->getStatus());
+    }
+
     public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
@@ -287,5 +298,10 @@ class Post
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->title;
     }
 }
