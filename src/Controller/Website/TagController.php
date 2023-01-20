@@ -6,7 +6,6 @@ namespace App\Controller\Website;
 
 use App\Entity\Tag;
 use App\Repository\PostRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,9 +18,8 @@ class TagController extends AbstractController
     ) {
     }
 
-    #[Route('/blog/tag/{tag}', name: 'app_blog_tag')]
-    #[ParamConverter('tag', options: ['mapping' => ['tag' => 'name']])]
-    public function index(Request $request, Tag $tag): Response
+    #[Route('/blog/tag/{slug}', name: 'app_blog_tag')]
+    public function index(Tag $tag, Request $request): Response
     {
         $paginator = $this->postRepository->getTagPaginator($this->getPage($request), $tag);
 

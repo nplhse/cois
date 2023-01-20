@@ -7,7 +7,10 @@ namespace App\Controller\Admin;
 use App\Entity\Tag;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class TagCrudController extends AbstractCrudController
@@ -22,6 +25,11 @@ class TagCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
+            SlugField::new('slug')->hideOnIndex()->setTargetFieldName('name'),
+            DateTimeField::new('createdAt')->hideOnForm(),
+            AssociationField::new('createdBy'),
+            DateTimeField::new('updatedAt')->hideOnForm(),
+            AssociationField::new('updatedBy'),
         ];
     }
 

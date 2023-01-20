@@ -6,7 +6,6 @@ namespace App\Controller\Website;
 
 use App\Entity\Category;
 use App\Repository\PostRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,9 +18,8 @@ class CategoryController extends AbstractController
     ) {
     }
 
-    #[Route('/blog/category/{category}', name: 'app_blog_category')]
-    #[ParamConverter('category', options: ['mapping' => ['category' => 'name']])]
-    public function index(Request $request, Category $category): Response
+    #[Route('/blog/category/{slug}', name: 'app_blog_category')]
+    public function index(Category $category, Request $request): Response
     {
         $paginator = $this->postRepository->getCategoryPaginator($this->getPage($request), $category);
 

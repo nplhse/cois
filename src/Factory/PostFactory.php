@@ -72,7 +72,7 @@ final class PostFactory extends ModelFactory
     {
         return $this
             ->afterInstantiate(function (Post $post): void {
-                $post->setSlug($this->slugger->slug($post->getTitle())->toString());
+                $post->setSlug($this->slugger->slug($post->getTitle())->lower()->toString());
             })
         ;
     }

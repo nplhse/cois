@@ -6,6 +6,7 @@ namespace App\Factory;
 
 use App\Entity\Tag;
 use App\Repository\TagRepository;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
@@ -36,8 +37,9 @@ final class TagFactory extends ModelFactory
      *
      * @todo inject services if required
      */
-    public function __construct()
-    {
+    public function __construct(
+        private readonly SluggerInterface $slugger
+    ) {
         parent::__construct();
     }
 
@@ -50,6 +52,8 @@ final class TagFactory extends ModelFactory
     {
         return [
             'name' => self::faker()->text(255),
+            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeThisDecade()),
+            'createdBy' => UserFactory::random(),
         ];
     }
 
@@ -59,7 +63,9 @@ final class TagFactory extends ModelFactory
     protected function initialize(): self
     {
         return $this
-            // ->afterInstantiate(function(Tag $tag): void {})
+            ->afterInstantiate(function (Tag $tag): void {
+                $tag->setSlug($this->slugger->slug($tag->getName())->lower()->toString());
+            })
         ;
     }
 

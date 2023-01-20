@@ -6,6 +6,7 @@ namespace App\Factory;
 
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
@@ -36,8 +37,9 @@ final class CategoryFactory extends ModelFactory
      *
      * @todo inject services if required
      */
-    public function __construct()
-    {
+    public function __construct(
+        private readonly SluggerInterface $slugger
+    ) {
         parent::__construct();
     }
 
@@ -50,6 +52,8 @@ final class CategoryFactory extends ModelFactory
     {
         return [
             'name' => self::faker()->text(255),
+            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeThisDecade()),
+            'createdBy' => UserFactory::random(),
         ];
     }
 
@@ -59,7 +63,9 @@ final class CategoryFactory extends ModelFactory
     protected function initialize(): self
     {
         return $this
-            // ->afterInstantiate(function(Category $category): void {})
+            ->afterInstantiate(function (Category $category): void {
+                $category->setSlug($this->slugger->slug($category->getName())->lower()->toString());
+            })
         ;
     }
 
