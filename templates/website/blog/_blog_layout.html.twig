@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'title.blog'|trans({}, 'app') }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {% block breadcrumbs %}
+                    {{
+                        breadcrumbs.render(
+                            [
+                                {
+                                    url: url('app_dashboard'),
+                                    label: 'Home'|trans
+                                },
+                                {
+                                    label: 'title.blog'|trans({}, 'app')
+                                }
+                            ]
+                        )
+                    }}
+                {% endblock %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                {% block content %}
+
+                {% endblock %}
+            </div>
+
+            <div class="col-md-4">
+                {% block aside %}
+                    {% block aside_top %}
+
+                    {% endblock %}
+                    {% block aside_body %}
+                        <div class="position-sticky" style="top: 2rem;">
+                            <div class="p-4">
+                                {{ component('recent_posts') }}
+                            </div>
+
+                            <div class="p-4">
+                                {{ component('feeds') }}
+                            </div>
+
+                            <div class="p-4">
+                                {{ component('categories') }}
+                            </div>
+
+                            <div class="p-4">
+                                {{ component('tags') }}
+                            </div>
+
+                            <div class="p-4">
+                                {{ component('archive') }}
+                            </div>
+                        </div>
+                    {% endblock %}
+                    {% block aside_bottom %}
+
+                    {% endblock %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

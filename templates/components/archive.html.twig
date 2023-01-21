@@ -1,0 +1,24 @@
+<div {{ attributes }}>
+    <h4 class="fst-italic">
+        {{ 'title.blog.archive'|trans({}, 'app') }}
+    </h4>
+    <ol class="list-unstyled mb-0">
+        {% for item in this.items %}
+            <li>
+                <a href="{{
+                    path(
+                        'app_blog_archive',
+                        {
+                            year: item.year,
+                            month: item.month
+                        }
+                    )
+                    }}">
+                    {{ item.label }}
+                </a> ({{ item.count }})
+            </li>
+        {% else %}
+            {{ 'blog.post.no_posts'|trans({}, 'app') }}
+        {% endfor %}
+    </ol>
+</div>

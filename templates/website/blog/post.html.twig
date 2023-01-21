@@ -1,0 +1,135 @@
+{% extends 'website/blog/_blog_layout.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ post.title }} - {{ parent() }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{
+        breadcrumbs.render(
+            [
+                {
+                    url: url('app_dashboard'),
+                    label: 'Home'|trans
+                },
+                {
+                    url: url('app_blog'),
+                    label: 'title.blog'|trans({}, 'app')
+                },
+                {
+                    label: post.title|trans({}, 'app')
+                }
+            ]
+        )
+    }}
+{% endblock %}
+
+{% block content %}
+    <article class="blog-post">
+        {% if is_granted('ROLE_ADMIN') %}
+            {% set url =
+                ea_url().setController(
+                    'App\\Controller\\Admin\\PostCrudController'
+                ).setAction(
+                    'edit'
+                ).setEntityId(
+                    post.id
+                )
+            %}
+            {% set url2 =
+                ea_url().setController(
+                    'App\\Controller\\Admin\\CommentCrudController'
+                ).setAction(
+                    'index'
+                ).set(
+                    'filters[post][value]',
+                    post.id
+                ).set(
+                    'filters[post][comparison]',
+                    '='
+                ).set(
+                    'filters[status][value]',
+                    'Submitted'
+                ).set(
+                    'filters[status][comparison]',
+                    '='
+                )
+            %}
+            <div class="float-end">
+                {% if (post.pendingComments|length) > 0 %}
+                    <a class="btn btn-outline-secondary" href="{{ url2 }}">
+                        <i class="bi bi-chat-text"></i>
+                        {{ post.pendingComments|length }}
+                    </a>
+                {% endif %}
+                <a class="btn btn-outline-primary" href="{{ url }}">
+                    <i class="bi bi-pencil-fill"></i>
+                </a>
+            </div>
+        {% endif %}
+        <h1 class="blog-post-title mb-3">
+            {{ post.title }}
+        </h1>
+        <p>
+            {{ post.content|raw }}
+        </p>
+
+        <turbo-frame id="blog-post-comments"
+            loading="lazy"
+            src="/blog/{{ post.id }}/comments"></turbo-frame>
+    </article>
+{% endblock %}
+
+{% block aside_top %}
+    <div class="p-4 mb-3 bg-light rounded">
+        <h4 class="fst-italic">
+            {{ 'blog.post.about'|trans({}, 'app') }}
+        </h4>
+        <p>
+            {{
+                'blog.posted_on'|trans(
+                    {
+                        date: post.publishedAt|date('d.m.Y, H:i')
+                    },
+                    'app'
+                )
+            }}, {{
+                'blog.posted_by'|trans(
+                    {
+                        user: post.createdBy
+                    },
+                    'app'
+                )
+            }}
+        </p>
+        <h6>
+            {{ 'blog.post.category'|trans({}, 'app') }}
+        </h6>
+        <p>
+            <a href="{{
+                path(
+                    'app_blog_category',
+                    {
+                        slug: post.category.slug
+                    }
+                )
+                }}">
+                {{ post.category }}
+            </a>
+        </p>
+        <h6>
+            {{ 'blog.post.tags'|trans({}, 'app') }}
+        </h6>
+        <p>
+            {% for tag in post.tags %}
+                <!-- prettier-ignore-start -->
+                <a href="{{ path('app_blog_tag', {slug: tag.slug}) }}">{{ tag.name }}</a>{% if not loop.last %}, {% endif %}
+                <!-- prettier-ignore-end -->
+            {% else %}
+                {{ 'blog.post.no_tags'|trans({}, 'app') }}
+            {% endfor %}
+        </p>
+    </div>
+{% endblock %}

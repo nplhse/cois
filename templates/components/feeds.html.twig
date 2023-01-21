@@ -1,0 +1,13 @@
+<div {{ attributes }}>
+    <h4 class="fst-italic">
+        {{ 'title.blog.feeds'|trans({}, 'app') }}
+    </h4>
+    <ol class="list-unstyled mb-0">
+        <li>
+            <i class="bi bi-rss-fill" style="color:#ee802f"></i>
+            <a href="{{ path('app_blog_feed_rss') }}">
+                {{ 'link.blog.rss_feed'|trans({}, 'app') }}
+            </a>
+        </li>
+    </ol>
+</div>

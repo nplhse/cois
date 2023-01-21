@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" target-language="de" datatype="plaintext" original="file.ext">
+  <file source-language="de" target-language="de" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -2545,6 +2545,22 @@
       <trans-unit id="4luesAk" resname="link.contact">
         <source>link.contact</source>
         <target>Kontakt</target>
+      </trans-unit>
+      <trans-unit id="NO2hNuQ" resname="label.posts">
+        <source>label.posts</source>
+        <target>Beiträge</target>
+      </trans-unit>
+      <trans-unit id="SQkaeL1" resname="label.categories">
+        <source>label.categories</source>
+        <target>Kategorien</target>
+      </trans-unit>
+      <trans-unit id="1233" resname="label.tags">
+        <source>label.tags</source>
+        <target>Schlagwörter</target>
+      </trans-unit>
+      <trans-unit id="1234" resname="label.comments">
+        <source>label.comments</source>
+        <target>Kommentare</target>
       </trans-unit>
     </body>
   </file>

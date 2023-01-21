@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+  <file source-language="de" target-language="en" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -197,6 +197,22 @@
       <trans-unit id="AHAfsQd" resname="notification.contact.request">
         <source>notification.contact.request</source>
         <target>A new contact request has been submitted by '%name%' (%email_address%) with the subject '%subject%'.</target>
+      </trans-unit>
+      <trans-unit id="32434" resname="notification.comment.submitted">
+        <source>notification.comment.submitted</source>
+        <target>The following comment was added by '%commentUsername%' ('%commentEmail%'):</target>
+      </trans-unit>
+      <trans-unit id="54545" resname="notification.comment.submitted.title">
+        <source>notification.comment.submitted.title</source>
+        <target>A new comment has been submitted</target>
+      </trans-unit>
+      <trans-unit id="524534." resname="notification.comment.submitted.btn.approve">
+        <source>notification.comment.submitted.btn.approve</source>
+        <target>Approve</target>
+      </trans-unit>
+      <trans-unit id="2543544" resname="notification.comment.submitted.btn.reject">
+        <source>notification.comment.submitted.btn.reject</source>
+        <target>Reject</target>
       </trans-unit>
     </body>
   </file>

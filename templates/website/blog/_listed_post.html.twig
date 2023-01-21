@@ -1,0 +1,84 @@
+{% block post %}
+    <article class="blog-post">
+        <h2 class="blog-post-title mb-1">
+            <a href="{{
+                path(
+                    'app_post',
+                    {
+                        slug: post.slug
+                    }
+                )
+                }}">
+                {{ post.title }}
+            </a>
+        </h2>
+        <p class="text-muted">
+            {{
+                'blog.posted_on'|trans(
+                    {
+                        date: post.publishedAt|date('d.m.Y, H:i')
+                    },
+                    'app'
+                )
+            }}, {{
+                'blog.posted_by'|trans(
+                    {
+                        user: post.createdBy
+                    },
+                    'app'
+                )
+            }}
+        </p>
+        <p>
+            {% if post.teaser %}
+                {{ post.teaser|raw }}
+            {% else %}
+                {% set paragraphs = post.content|split('</p>') %}
+                {% set teaser = paragraphs|first %}
+                {{ teaser|raw }}
+            {% endif %}
+            <a href="{{
+                path(
+                    'app_post',
+                    {
+                        slug: post.slug
+                    }
+                )
+                }}">
+                {{ 'blog.read_more'|trans({}, 'app') }}
+            </a>
+        </p>
+        <p class="text-muted">
+            {{ 'blog.posted_category'|trans({}, 'app') }}:
+            <!-- prettier-ignore-start -->
+            <a href="{{ path('app_blog_category', {slug: post.category.slug}) }}" target="_top"> {{ post.category }}</a>
+            <!-- prettier-ignore-end -->
+            |{% if post.tags is not empty %}
+                {{ 'blog.posted_tags'|trans({}, 'app') }}:
+            {% endif %}
+            {% for tag in post.tags %}
+                <!-- prettier-ignore-start --><a href="{{ path('app_blog_tag', {slug: tag.slug}) }}" target="_top">
+                    {{ tag.name }}</a>{% if not loop.last %}, {% endif %}
+                <!-- prettier-ignore-end -->
+            {% else %}
+                {{ 'blog.post.no_tags'|trans({}, 'app') }}
+            {% endfor %}| <a href="{{
+                path(
+                    'app_post',
+                    {
+                        slug: post.slug
+                    }
+                )
+                }}#comments">
+                {{
+                    'blog.posted_comments'|trans(
+                        {
+                            '%count%': post.approvedComments|length
+                        },
+                        'app'
+                    )
+                }}
+            </a>
+        </p>
+    </article>
+{% endblock %}

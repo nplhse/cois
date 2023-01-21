@@ -1,0 +1,23 @@
+<div {{ attributes }}>
+    <h4 class="fst-italic">
+        {{ 'title.blog.categories'|trans({}, 'app') }}
+    </h4>
+    <ol class="list-unstyled mb-0">
+        {% for category in this.categories %}
+            <li>
+                <a href="{{
+                    path(
+                        'app_blog_category',
+                        {
+                            slug: category.slug
+                        }
+                    )
+                    }}">
+                    {{ category.name }}
+                </a>
+            </li>
+        {% else %}
+            {{ 'blog.post.no_categories'|trans({}, 'app') }}
+        {% endfor %}
+    </ol>
+</div>
