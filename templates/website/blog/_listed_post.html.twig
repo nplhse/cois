@@ -16,7 +16,7 @@
             {{
                 'blog.posted_on'|trans(
                     {
-                        date: post.createdAt|date('d.m.Y, H:i')
+                        date: post.publishedAt|date('d.m.Y, H:i')
                     },
                     'app'
                 )

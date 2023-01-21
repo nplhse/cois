@@ -9,6 +9,7 @@ use App\Entity\Category;
 use App\Entity\Post;
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -51,6 +52,8 @@ class PostRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
+            ->andWhere('p.publishedAt <= :date')
+            ->setParameter('date', new \DateTimeImmutable(), Types::DATE_IMMUTABLE)
             ->orderBy('p.createdAt', 'DESC')
             ->setMaxResults($limit)
             ->getQuery()
@@ -63,6 +66,8 @@ class PostRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
+            ->andWhere('p.publishedAt <= :date')
+            ->setParameter('date', new \DateTimeImmutable(), Types::DATE_IMMUTABLE)
             ->andWhere('p.isSticky = :sticky')
             ->setParameter('sticky', true)
             ->orderBy('p.createdAt', 'DESC')
@@ -76,6 +81,8 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p')
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
+            ->andWhere('p.publishedAt <= :date')
+            ->setParameter('date', new \DateTimeImmutable(), Types::DATE_IMMUTABLE)
             ->andWhere('p.isSticky = :sticky')
             ->setParameter('sticky', false)
             ->orderBy('p.createdAt', 'DESC')
@@ -89,6 +96,8 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p')
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
+            ->andWhere('p.publishedAt <= :date')
+            ->setParameter('date', new \DateTimeImmutable(), Types::DATE_IMMUTABLE)
             ->orderBy('p.createdAt', 'DESC')
         ;
 
@@ -100,6 +109,8 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p')
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
+            ->andWhere('p.publishedAt <= :date')
+            ->setParameter('date', new \DateTimeImmutable(), Types::DATE_IMMUTABLE)
             ->andWhere('YEAR(p.createdAt) = :year')
             ->setParameter('year', $year)
             ->orderBy('p.createdAt', 'DESC')
@@ -118,6 +129,8 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p')
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
+            ->andWhere('p.publishedAt <= :date')
+            ->setParameter('date', new \DateTimeImmutable(), Types::DATE_IMMUTABLE)
             ->andWhere('p.category = :category')
             ->setParameter('category', $category->getId())
             ->orderBy('p.createdAt', 'DESC')
@@ -131,6 +144,8 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p')
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
+            ->andWhere('p.publishedAt <= :date')
+            ->setParameter('date', new \DateTimeImmutable(), Types::DATE_IMMUTABLE)
             ->innerJoin('p.tags', 't')
             ->andWhere('t.name = :tag')
             ->setParameter('tag', $tag->getName())

@@ -8,6 +8,7 @@ use App\Application\Contract\ResultCollectionInterface;
 use App\DataTransferObjects\ResultCollection;
 use App\Domain\Enum\PostStatus;
 use App\Entity\Post;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class BlogArchiveQuery
@@ -24,6 +25,8 @@ final class BlogArchiveQuery
             ->select('COUNT(p.id) AS count, MONTH(p.createdAt) as month, YEAR(p.createdAt) as year')
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
+            ->andWhere('p.publishedAt <= :date')
+            ->setParameter('date', new \DateTimeImmutable(), Types::DATE_IMMUTABLE)
             ->groupBy('year')
             ->addGroupBy('month')
             ->getQuery()

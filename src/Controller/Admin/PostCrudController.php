@@ -49,6 +49,9 @@ class PostCrudController extends AbstractCrudController
             AssociationField::new('createdBy'),
             DateTimeField::new('updatedAt')->hideOnForm(),
             AssociationField::new('updatedBy'),
+            DateTimeField::new('publishedAt')->hideOnIndex(),
+            BooleanField::new('isPublished')->onlyOnIndex()->renderAsSwitch(false),
+            BooleanField::new('isPublished')->onlyOnDetail()->renderAsSwitch(false),
         ];
     }
 

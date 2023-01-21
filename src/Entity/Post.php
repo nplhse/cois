@@ -54,6 +54,9 @@ class Post
     #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_IMMUTABLE, nullable: true)]
     protected ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $publishedAt = null;
+
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
     protected UserInterface $createdBy;
@@ -211,6 +214,31 @@ class Post
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    public function getPublishedAt(): ?\DateTimeImmutable
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(?\DateTimeImmutable $publishedAt): self
+    {
+        $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
+    public function isPublished(): bool
+    {
+        if (null === $this->publishedAt) {
+            return false;
+        }
+
+        if ($this->publishedAt >= new \DateTimeImmutable('now')) {
+            return false;
+        }
+
+        return true;
     }
 
     #[ORM\PreUpdate]

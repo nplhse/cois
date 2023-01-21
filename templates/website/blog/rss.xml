@@ -4,7 +4,7 @@
         <title>{{ rss.title }}</title>
         <description>{{ rss.description }}</description>
         <pubDate>{{ 'now'|date('r', timezone='GMT') }}</pubDate>
-        <lastBuildDate>{{ (paginator.results|last).createdAt|default('now')|date('r', timezone='GMT') }}</lastBuildDate>
+        <lastBuildDate>{{ (paginator.results|last).publishedAt|default('now')|date('r', timezone='GMT') }}</lastBuildDate>
         <link>{{ url('app_blog') }}</link>
         <language>{{ app.request.locale }}</language>
 
@@ -14,7 +14,7 @@
             <description>{{ post.teaser }}</description>
             <link>{{ url('app_post', {'slug': post.slug}) }}</link>
             <guid>{{ url('app_post', {'slug': post.slug}) }}</guid>
-            <pubDate>{{ post.createdAt|date(format='r', timezone='GMT') }}</pubDate>
+            <pubDate>{{ post.publishedAt|date(format='r', timezone='GMT') }}</pubDate>
             <author>{{ post.createdBy }}</author>
             {% for tag in post.tags %}
             <category>{{ tag.name }}</category>
