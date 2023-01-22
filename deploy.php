@@ -7,6 +7,7 @@ namespace Deployer;
 require 'recipe/symfony.php';
 require 'recipe/deploy/shared.php';
 require 'contrib/webpack_encore.php';
+require 'contrib/cachetool.php';
 
 // Base configuration
 set('repository', 'https://github.com/nplhse/cois.git');
@@ -43,6 +44,9 @@ add('writable_dirs', [
  */
 import('hosts.yaml');
 
+// Setup cachetool
+set('cachetool_args', '--web=SymfonyHttpClient --web-path=./{{public_path}} --web-url=https://{{hostname}}');
+
 /*
  * Because deployment might fail when installing the yarn dependencies and the
  * building all the webpack encore stuff we're using a customized task that is
@@ -63,6 +67,9 @@ task('build_locally', function (): void {
 
 // Attach custom tasks to default workflow
 after('deploy:vendors', 'build_locally');
+after('deploy:symlink', 'cachetool:clear:opcache');
 
 // Attach tasks from recipes& contrib to default workflow
 before('deploy:symlink', 'database:migrate');
+
+after('deploy:failed', 'deploy:unlock');
