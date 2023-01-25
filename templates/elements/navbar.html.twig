@@ -136,21 +136,24 @@
                                 {% endif %}
                             </li>
                         {% endif %}
-                        <li class="nav-item">
-                            {% if
-                                app.request.attributes.get('_route')
-                                    starts with 'app_about' %}
-                                <a class="nav-link active"
-                                    aria-current="page"
-                                    href="#">
-                                    {{ 'link.about'|trans }}
-                                </a>
-                            {% else %}
-                                <a class="nav-link" href="#">
-                                    {{ 'link.about'|trans }}
-                                </a>
-                            {% endif %}
-                        </li>
+                        {% if has_page('about') %}
+                            <li class="nav-item">
+                                {% if
+                                    app.request.attributes.get('_route')
+                                        starts with 'app_about' %}
+                                    <a class="nav-link active"
+                                        aria-current="page"
+                                        href="{{ path('app_page_about') }}">
+                                        {{ 'link.about'|trans }}
+                                    </a>
+                                {% else %}
+                                    <a class="nav-link"
+                                        href="{{ path('app_page_about') }}">
+                                        {{ 'link.about'|trans }}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endif %}
                         <li class="nav-item">
                             {% if
                                 app.request.attributes.get('_route')

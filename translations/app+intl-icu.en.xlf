@@ -137,6 +137,34 @@
         <source>link.blog.rss_feed</source>
         <target>Subscribe to RSS feed</target>
       </trans-unit>
+      <trans-unit id="E5JHdYu" resname="page.contact">
+        <source>page.contact</source>
+        <target>Contact us</target>
+      </trans-unit>
+      <trans-unit id="vCTPt1q" resname="text.contact_us">
+        <source>text.contact_us</source>
+        <target>Do you have any questions about this project or do you want to participate in our work? You can reach us via the e-mail address on this page or our contact form.</target>
+      </trans-unit>
+      <trans-unit id="MEDjvHw" resname="link.to.contact">
+        <source>link.to.contact</source>
+        <target>Go to contact form</target>
+      </trans-unit>
+      <trans-unit id="uWLoH72" resname="page.about">
+        <source>page.about</source>
+        <target>About us</target>
+      </trans-unit>
+      <trans-unit id="7fiCz84" resname="page.important_users">
+        <source>page.important_users</source>
+        <target>Important users</target>
+      </trans-unit>
+      <trans-unit id="THv4InC" resname="page.admin_users">
+        <source>page.admin_users</source>
+        <target>Administrators</target>
+      </trans-unit>
+      <trans-unit id="A7W5jIf" resname="page.member_users">
+        <source>page.member_users</source>
+        <target>Members of the Board</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -137,6 +137,34 @@
         <source>link.blog.rss_feed</source>
         <target>RSS-Feed abonnieren</target>
       </trans-unit>
+      <trans-unit id="E5JHdYu" resname="page.contact">
+        <source>page.contact</source>
+        <target>Kontakt</target>
+      </trans-unit>
+      <trans-unit id="vCTPt1q" resname="text.contact_us">
+        <source>text.contact_us</source>
+        <target>Haben Sie Fragen zum Projekt, möchten Sie sich aktiv daran beteiligen, oder haben Sie eine anderweitige Anfrage? Dann können Sie uns über die auf dieser Seite genannte E-Mail-Adresse und unser Kontaktformular erreichen.</target>
+      </trans-unit>
+      <trans-unit id="MEDjvHw" resname="link.to.contact">
+        <source>link.to.contact</source>
+        <target>Zum Kontaktformular</target>
+      </trans-unit>
+      <trans-unit id="uWLoH72" resname="page.about">
+        <source>page.about</source>
+        <target>Über uns</target>
+      </trans-unit>
+      <trans-unit id="7fiCz84" resname="page.important_users">
+        <source>page.important_users</source>
+        <target>Wichtige Benutzer</target>
+      </trans-unit>
+      <trans-unit id="THv4InC" resname="page.admin_users">
+        <source>page.admin_users</source>
+        <target>Administratoren</target>
+      </trans-unit>
+      <trans-unit id="A7W5jIf" resname="page.member_users">
+        <source>page.member_users</source>
+        <target>Mitglieder des Boards</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

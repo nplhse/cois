@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Domain\Enum\Page\PageTypeEnum;
+use App\Domain\Enum\PageType;
 use App\Repository\PageRepository;
 
 class PageService
@@ -16,24 +16,25 @@ class PageService
     ) {
     }
 
-    public function hasPage(string $slug): bool
+    public function hasPage(string $target): bool
     {
-        if (isset($this->pageStore[$slug])) {
+        if (isset($this->pageStore[$target])) {
             return true;
         }
 
-        $page = match ($slug) {
-            'imprint' => $this->pageRepository->findOneBy(['type' => PageTypeEnum::ImprintPage]),
-            'privacy' => $this->pageRepository->findOneBy(['type' => PageTypeEnum::PrivacyPage]),
-            'terms' => $this->pageRepository->findOneBy(['type' => PageTypeEnum::TermsPage]),
-            default => $this->pageRepository->findOneBy(['slug' => $slug]),
+        $page = match ($target) {
+            'imprint' => $this->pageRepository->findOneBy(['type' => PageType::IMPRINT]),
+            'privacy' => $this->pageRepository->findOneBy(['type' => PageType::PRIVACY]),
+            'terms' => $this->pageRepository->findOneBy(['type' => PageType::TERMS]),
+            'about' => $this->pageRepository->findOneBy(['type' => PageType::ABOUT]),
+            default => $this->pageRepository->findOneBy(['slug' => $target]),
         };
 
         if (null === $page) {
             return false;
         }
 
-        $this->pageStore[$slug] = $page;
+        $this->pageStore[$target] = $page;
 
         return true;
     }

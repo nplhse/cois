@@ -20,9 +20,14 @@
                     {{ 'footer.about'|trans }}
                 </h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2 text-decoration-line-through">
-                        {{ 'link.about'|trans }}
-                    </li>
+                    {% if has_page('about') %}
+                        <li class="nav-item mb-2">
+                            <a class="nav-link p-0 text-muted"
+                                href="{{ path('app_page_about') }}">
+                                {{ get_title('about') }}
+                            </a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item mb-2 text-decoration-line-through">
                         {{ 'link.features'|trans }}
                     </li>

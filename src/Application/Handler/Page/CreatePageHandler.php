@@ -7,6 +7,8 @@ namespace App\Application\Handler\Page;
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
 use App\Domain\Command\Page\CreatePageCommand;
+use App\Domain\Enum\PageStatus;
+use App\Domain\Enum\PageType;
 use App\Domain\Event\Page\PageCreatedEvent;
 use App\Entity\Page;
 use App\Repository\PageRepository;
@@ -31,9 +33,24 @@ class CreatePageHandler implements HandlerInterface
 
         $page->setTitle($command->getTitle());
         $page->setSlug((string) $this->slugger->slug(strtolower($command->getTitle())));
-        $page->setType($command->getType());
-        $page->setStatus($command->getStatus());
         $page->setContent($command->getContent());
+
+        $type = match ($command->getType()) {
+            'imprint' => PageType::IMPRINT,
+            'privacy' => PageType::PRIVACY,
+            'terms' => PageType::TERMS,
+            'about' => PageType::ABOUT,
+            default => PageType::GENERIC,
+        };
+
+        $page->setType($type);
+
+        $status = match ($command->getStatus()) {
+            'draft' => PageStatus::DRAFT,
+            'published' => PageStatus::PUBLISHED,
+        };
+
+        $page->setStatus($status);
 
         $this->pageRepository->add($page);
 

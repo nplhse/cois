@@ -1,0 +1,45 @@
+{% extends 'website/page/_page_layout.html.twig' %}
+
+{% block aside_body %}
+    <div class="position-sticky" style="top: 2rem;">
+        <div class="card">
+            <div class="card-header">
+                {{ 'page.important_users'|trans({}, 'app') }}
+            </div>
+            <div class="card-body">
+                <h5>
+                    {{ 'page.admin_users'|trans({}, 'app') }}
+                </h5>
+                <ul>
+                    {% for user in users %}
+                        {% if user.isAdmin %}
+                            <li>{{ user.username }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                <h5>
+                    {{ 'page.member_users'|trans({}, 'app') }}
+                </h5>
+                <ul>
+                    {% for user in users %}
+                        {% if user.isMember %}
+                            <li>{{ user.username }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="p-4 mb-3">
+            <p>
+                {{ 'text.contact_us'|trans({}, 'app') }}
+            </p>
+            <p>
+                <a class="text-decoration-none"
+                    href="{{ path('app_contact') }}">
+                    {{ 'link.to.contact'|trans({}, 'app') }}
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

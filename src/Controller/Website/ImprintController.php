@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Website;
 
+use App\Domain\Enum\PageType;
 use App\Repository\PageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +23,7 @@ class ImprintController extends AbstractController
     ], name: 'app_page_imprint')]
     public function index(): Response
     {
-        $page = $this->pageRepository->findOneBy(['slug' => 'imprint']);
+        $page = $this->pageRepository->findOneBy(['type' => PageType::IMPRINT]);
 
         if (null === $page) {
             throw $this->createNotFoundException('Page could not be found');

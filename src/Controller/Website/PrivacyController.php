@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Website;
 
+use App\Domain\Enum\PageType;
 use App\Form\CookieConsentType;
 use App\Repository\PageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,7 +24,7 @@ class PrivacyController extends AbstractController
     ], name: 'app_page_privacy')]
     public function index(): Response
     {
-        $page = $this->pageRepository->findOneBy(['slug' => 'privacy']);
+        $page = $this->pageRepository->findOneBy(['type' => PageType::PRIVACY]);
 
         $form = $this->createForm(CookieConsentType::class);
 

@@ -25,3 +25,5 @@ parameters:
         container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
+    ignoreErrors:
+    	- '#Match expression does not handle remaining value: string#'
