@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {% block breadcrumbs %}
+                    {{
+                        breadcrumbs.render(
+                            [
+                                {
+                                    url: url('app_dashboard'),
+                                    label: 'Home'|trans
+                                },
+                                {
+                                    label: page.title
+                                }
+                            ]
+                        )
+                    }}
+                {% endblock %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                {% block content %}
+                    {% if is_granted('edit', page) %}
+                        {% set url =
+                            ea_url().setController(
+                                'App\\Controller\\Admin\\PageCrudController'
+                            ).setAction(
+                                'edit'
+                            ).setEntityId(
+                                page.id
+                            )
+                        %}
+                        <div class="float-end">
+                            <a class="btn btn-outline-primary" href="{{ url }}">
+                                <i class="bi bi-pencil-fill"></i>
+                            </a>
+                        </div>
+                    {% endif %}
+                    <h1>
+                        {{ page.title }}
+                    </h1>
+
+                    {{ page.content|raw }}
+                {% endblock %}
+            </div>
+
+            <div class="col-md-4">
+                {% block aside %}
+                    {% block aside_top %}
+                        <div class="p-4 mb-3 bg-light rounded">
+                            <h4 class="fst-italic">
+                                {{ 'page.about'|trans({}, 'app') }}
+                            </h4>
+                            <p>
+                                {% if page.updatedAt %}
+                                    {{ 'Updated by'|trans }}: {{
+                                        page.updatedBy
+                                    }}. {{ 'Updated at'|trans }}: {{
+                                        page.updatedAt|date('d.m.Y H:i')
+                                    }}.
+                                {% else %}
+                                    {{ 'Created by'|trans }}: {{
+                                        page.createdBy
+                                    }}. {{ 'Created at'|trans }}: {{
+                                        page.createdAt|date('d.m.Y H:i')
+                                    }}.
+                                {% endif %}
+                            </p>
+                        </div>
+                    {% endblock %}
+                    {% block aside_body %}
+
+                    {% endblock %}
+                    {% block aside_bottom %}
+
+                    {% endblock %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

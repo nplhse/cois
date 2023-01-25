@@ -60,43 +60,7 @@
             </p>
 
             {% if app_cookie_consent and page.type == 'privacy' %}
-                <div class="float-md-end" style="width: 30rem;">
-                    <div class="card">
-                        <div class="card-header">
-                            {{ 'Cookie Consent'|trans }}
-                        </div>
-                        <div class="card-body">
-                            <p>
-                                {{
-                                    'This website is using cookies, you have to accept necessary cookies to proceed.'|trans
-                                }}
-                                {{
-                                    'You will find more information on this page.'|trans
-                                }}
-                            </p>
-
-                            {{ form_start(consentForm) }}
-
-                            <strong>{{ 'Options'|trans }}:</strong>
-                            {{ form_widget(consentForm.categories) }}
-
-                            {{
-                                form_widget(
-                                    consentForm.target,
-                                    {
-                                        value: app.request.pathInfo
-                                    }
-                                )
-                            }}
-
-                            <div class="mt-2 pt-2">
-                                {{ form_widget(consentForm.submit) }}
-                            </div>
-
-                            {{ form_end(consentForm) }}
-                        </div>
-                    </div>
-                </div>
+                <div class="float-md-end" style="width: 30rem;"></div>
             {% endif %}
 
             {{ page.content|raw }}

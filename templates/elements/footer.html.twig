@@ -76,21 +76,15 @@
                 </h5>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link p-0 text-muted">
+                        <a href="{{ path('app_contact') }}"
+                            class="nav-link p-0 text-muted">
                             {{ 'link.contact'|trans }}
                         </a>
                     </li>
                     {% if has_page('terms') %}
                         <li class="nav-item mb-2">
                             <a class="nav-link p-0 text-muted"
-                                href="{{
-                                path(
-                                    'app_page',
-                                    {
-                                        slug: get_slug('terms')
-                                    }
-                                )
-                                }}">
+                                href="{{ path('app_page_terms') }}">
                                 {{ get_title('terms') }}
                             </a>
                         </li>
@@ -98,14 +92,7 @@
                     {% if has_page('privacy') %}
                         <li class="nav-item mb-2">
                             <a class="nav-link p-0 text-muted"
-                                href="{{
-                                path(
-                                    'app_page',
-                                    {
-                                        slug: get_slug('privacy')
-                                    }
-                                )
-                                }}">
+                                href="{{ path('app_page_privacy') }}">
                                 {{ get_title('privacy') }}
                             </a>
                         </li>
@@ -113,14 +100,7 @@
                     {% if has_page('imprint') %}
                         <li class="nav-item mb-2">
                             <a class="nav-link p-0 text-muted"
-                                href="{{
-                                path(
-                                    'app_page',
-                                    {
-                                        slug: get_slug('imprint')
-                                    }
-                                )
-                                }}">
+                                href="{{ path('app_page_imprint') }}">
                                 {{ get_title('imprint') }}
                             </a>
                         </li>

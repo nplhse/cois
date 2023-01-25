@@ -1,0 +1,25 @@
+{% extends 'website/page/_page_layout.html.twig' %}
+
+{% block aside_body %}
+    <div class="position-sticky" style="top: 2rem;">
+        <div class="p-4 mb-3">
+            <h4 class="fst-italic">
+                {{ 'page.contact'|trans({}, 'app') }}
+            </h4>
+            <p>
+                {{ 'text.contact_us'|trans({}, 'app') }}
+                Haben Sie Fragen zum Projekt, möchten Sie sich aktiv daran beteiligen,
+                oder haben Sie eine anderweitige Anfrage? Dann können Sie uns über
+                die auf dieser Seite genannte E-Mail-Adresse und unser Kontaktformular
+                erreichen.
+            </p>
+            <p>
+                <a class="text-decoration-none"
+                    href="{{ path('app_contact') }}">
+                    {{ 'link.to.contact'|trans({}, 'app') }}
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </p>
+        </div>
+    </div>
+{% endblock %}
