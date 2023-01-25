@@ -198,19 +198,19 @@
         <source>notification.contact.request</source>
         <target>A new contact request has been submitted by '%name%' (%email_address%) with the subject '%subject%'.</target>
       </trans-unit>
-      <trans-unit id="32434" resname="notification.comment.submitted">
+      <trans-unit id="ycFrdCL" resname="notification.comment.submitted">
         <source>notification.comment.submitted</source>
         <target>The following comment was added by '%commentUsername%' ('%commentEmail%'):</target>
       </trans-unit>
-      <trans-unit id="54545" resname="notification.comment.submitted.title">
+      <trans-unit id="nfZY0bx" resname="notification.comment.submitted.title">
         <source>notification.comment.submitted.title</source>
         <target>A new comment has been submitted</target>
       </trans-unit>
-      <trans-unit id="524534." resname="notification.comment.submitted.btn.approve">
+      <trans-unit id=".HTffuU" resname="notification.comment.submitted.btn.approve">
         <source>notification.comment.submitted.btn.approve</source>
         <target>Approve</target>
       </trans-unit>
-      <trans-unit id="2543544" resname="notification.comment.submitted.btn.reject">
+      <trans-unit id="ufdgyAJ" resname="notification.comment.submitted.btn.reject">
         <source>notification.comment.submitted.btn.reject</source>
         <target>Reject</target>
       </trans-unit>

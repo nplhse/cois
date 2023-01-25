@@ -1,66 +1,132 @@
 {% block footer %}
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <div class="col-md-4 ps-2 d-flex align-items-center">
-            <small class="text-muted">
-                Powered by <a href="https://github.com/nplhse/cois">
-                    <i class="bi-github" role="img" aria-label="GitHub"></i>
-                    cois
-                </a>&nbsp;v0.1.0-alpha
-            </small>
-        </div>
+    <footer class="p-4 mt-auto border-top bg-light">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5">
+            <div class="col mb-3">
+                <p class="small">
+                    {{ 'welcome.text'|trans }}
+                </p>
+                <p style="font-size: 1.25em">
+                    {{ 'footer.social'|trans }}: <a href="https://github.com/nplhse/cois"
+                        class="text-black">
+                        <i class="bi-github" role="img" aria-label="GitHub"></i>
+                    </a>
+                </p>
+            </div>
 
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            {% if has_page('terms') %}
-                <li class="ms-2">
-                    <a class="nav-link px-2 text-muted"
-                        href="{{
-                        path(
-                            'app_page',
-                            {
-                                slug: get_slug('terms')
-                            }
-                        )
-                        }}">
-                        {{ get_title('terms') }}
-                    </a>
-                </li>
-            {% endif %}
-            {% if has_page('privacy') %}
-                <li class="ms-2">
-                    <a class="nav-link px-2 text-muted"
-                        href="{{
-                        path(
-                            'app_page',
-                            {
-                                slug: get_slug('privacy')
-                            }
-                        )
-                        }}">
-                        {{ get_title('privacy') }}
-                    </a>
-                </li>
-            {% endif %}
-            {% if has_page('imprint') %}
-                <li class="ms-2">
-                    <a class="nav-link px-2 text-muted"
-                        href="{{
-                        path(
-                            'app_page',
-                            {
-                                slug: get_slug('imprint')
-                            }
-                        )
-                        }}">
-                        {{ get_title('imprint') }}
-                    </a>
-                </li>
-            {% endif %}
-            <li class="ms-2">
-                <a class="nav-link px-2 text-muted"
-                    href="{{ path('app_contact') }}">
-                    {{ 'link.contact'|trans }}
-                </a>
-            </li>
-        </ul>
+            <div class="col mb-3"></div>
+
+            <div class="col mb-3">
+                <h5>
+                    {{ 'footer.about'|trans }}
+                </h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2 text-decoration-line-through">
+                        {{ 'link.about'|trans }}
+                    </li>
+                    <li class="nav-item mb-2 text-decoration-line-through">
+                        {{ 'link.features'|trans }}
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="{{ path('app_blog') }}"
+                            class="nav-link p-0 text-muted">
+                            {{ 'link.blog'|trans }}
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2 text-decoration-line-through">
+                        {{ 'link.faq'|trans }}
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col mb-3">
+                <h5>
+                    {{ 'footer.at_a_glance'|trans }}
+                </h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2">
+                        <a href="{{ path('app_dashboard') }}"
+                            class="nav-link p-0 text-muted">
+                            {{ 'link.dashboard'|trans }}
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="{{ path('app_import_index') }}"
+                            class="nav-link p-0 text-muted">
+                            {{ 'link.import'|trans }}
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="{{ path('app_export_index') }}"
+                            class="nav-link p-0 text-muted">
+                            {{ 'link.export'|trans }}
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="{{ path('app_statistics_index') }}"
+                            class="nav-link p-0 text-muted">
+                            {{ 'link.statistics'|trans }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col mb-3">
+                <h5>
+                    {{ 'footer.links'|trans }}
+                </h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0 text-muted">
+                            {{ 'link.contact'|trans }}
+                        </a>
+                    </li>
+                    {% if has_page('terms') %}
+                        <li class="nav-item mb-2">
+                            <a class="nav-link p-0 text-muted"
+                                href="{{
+                                path(
+                                    'app_page',
+                                    {
+                                        slug: get_slug('terms')
+                                    }
+                                )
+                                }}">
+                                {{ get_title('terms') }}
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if has_page('privacy') %}
+                        <li class="nav-item mb-2">
+                            <a class="nav-link p-0 text-muted"
+                                href="{{
+                                path(
+                                    'app_page',
+                                    {
+                                        slug: get_slug('privacy')
+                                    }
+                                )
+                                }}">
+                                {{ get_title('privacy') }}
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if has_page('imprint') %}
+                        <li class="nav-item mb-2">
+                            <a class="nav-link p-0 text-muted"
+                                href="{{
+                                path(
+                                    'app_page',
+                                    {
+                                        slug: get_slug('imprint')
+                                    }
+                                )
+                                }}">
+                                {{ get_title('imprint') }}
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
     </footer>
 {% endblock %}
