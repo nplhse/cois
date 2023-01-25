@@ -44,7 +44,7 @@ class UserCrudController extends AbstractCrudController
                 ->hideOnIndex()
                 ->hideOnDetail(),
             ChoiceField::new('roles')
-                ->setChoices(array_combine(['ROLE_USER', 'ROLE_ADMIN'], ['ROLE_USER', 'ROLE_ADMIN']))
+                ->setChoices(array_combine(['ROLE_USER', 'ROLE_ADMIN', 'ROLE_MEMBER'], ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_MEMBER']))
                 ->allowMultipleChoices()
                 ->renderAsBadges()
                 ->renderExpanded()

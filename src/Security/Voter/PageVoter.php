@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace App\Security\Voter;
 
 use App\Domain\Contracts\UserInterface;
-use App\Domain\Enum\Page\PageStatusEnum;
-use App\Domain\Enum\Page\PageTypeEnum;
+use App\Domain\Enum\PageStatus;
 use App\Entity\Page;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -81,23 +80,8 @@ class PageVoter extends Voter
             return true;
         }
 
-        if (PageStatusEnum::Published !== $page->getStatus()) {
-            return false;
-        }
-
-        switch ($page->getType()) {
-            case PageTypeEnum::Public:
-            case PageTypeEnum::PrivacyPage:
-            case PageTypeEnum::ImprintPage:
-            case PageTypeEnum::TermsPage:
-                return true;
-            case PageTypeEnum::Private:
-                if ($this->security->isGranted('ROLE_USER')) {
-                    return true;
-                }
-                // no break
-            default:
-                break;
+        if (PageStatus::PUBLISHED === $page->getStatus()) {
+            return true;
         }
 
         return false;

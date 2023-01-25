@@ -91,4 +91,14 @@ class User extends DomainUser implements UserInterface, PasswordAuthenticatedUse
         parent::__construct();
         $this->hospitals = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+    public function isAdmin(): bool
+    {
+        return in_array('ROLE_ADMIN', $this->roles, true);
+    }
+
+    public function isMember(): bool
+    {
+        return in_array('ROLE_MEMBER', $this->roles, true);
+    }
 }

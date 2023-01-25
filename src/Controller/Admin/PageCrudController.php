@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\Domain\Enum\Page\PageStatusEnum;
-use App\Domain\Enum\Page\PageTypeEnum;
+use App\Admin\Field\CKEditorField;
+use App\Domain\Enum\PageStatus;
+use App\Domain\Enum\PageType;
+use App\Domain\Enum\PageVisbility;
 use App\Entity\Page;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -15,8 +17,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 
 class PageCrudController extends AbstractCrudController
 {
@@ -31,14 +34,22 @@ class PageCrudController extends AbstractCrudController
             IdField::new('id')
                 ->hideOnForm(),
             TextField::new('title'),
-            TextField::new('slug')
+            SlugField::new('slug')->hideOnIndex()->setTargetFieldName('title'),
+            CKEditorField::new('content')
                 ->hideOnIndex(),
-            ChoiceField::new('type')
-                ->setChoices(PageTypeEnum::getChoices()),
-            ChoiceField::new('status')
-                ->setChoices(PageStatusEnum::getChoices()),
-            TextEditorField::new('content')
-                ->hideOnIndex(),
+            TextField::new('content')->onlyOnDetail(),
+            ChoiceField::new('type')->onlyOnForms()
+                ->setFormType(EnumType::class)
+                ->setFormTypeOption('class', PageType::class)
+                ->setChoices(PageType::cases()),
+            ChoiceField::new('status')->onlyOnForms()
+                ->setFormType(EnumType::class)
+                ->setFormTypeOption('class', PageStatus::class)
+                ->setChoices(PageStatus::cases()),
+            ChoiceField::new('visibility')->onlyOnForms()
+                ->setFormType(EnumType::class)
+                ->setFormTypeOption('class', PageVisbility::class)
+                ->setChoices(PageVisbility::cases()),
             DateField::new('createdAt')
                 ->hideOnForm(),
             AssociationField::new('createdBy'),
@@ -46,6 +57,15 @@ class PageCrudController extends AbstractCrudController
                 ->hideOnForm(),
             AssociationField::new('updatedBy'),
         ];
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setDefaultSort(['title' => 'ASC'])
+            ->showEntityActionsInlined()
+            ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
+        ;
     }
 
     public function configureActions(Actions $actions): Actions
@@ -60,6 +80,7 @@ class PageCrudController extends AbstractCrudController
 
         return parent::configureActions($actions)
             ->add(Crud::PAGE_DETAIL, $view)
-            ->add(Crud::PAGE_EDIT, $view);
+            ->add(Crud::PAGE_EDIT, $view)
+            ->remove(Crud::PAGE_INDEX, Action::DELETE);
     }
 }

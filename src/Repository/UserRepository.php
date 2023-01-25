@@ -150,4 +150,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         return $qb;
     }
+
+    public function findImportantUsers(): array
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->where('u.roles LIKE :adminRole')
+            ->setParameter('adminRole', '%ROLE_ADMIN%')
+            ->orWhere('u.roles LIKE :memberRole')
+            ->setParameter('memberRole', '%ROLE_MEMBER%')
+            ->orderBy('u.username', \Doctrine\Common\Collections\Criteria::ASC)
+            ->distinct()
+            ->getQuery()
+            ->execute();
+
+        return $qb;
+    }
 }
