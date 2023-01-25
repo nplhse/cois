@@ -23,8 +23,8 @@ class WelcomeControllerTest extends WebTestCase
     public function testWelcome(): void
     {
         $this->browser()
-            ->visit('/')
-            ->assertSeeIn('h1', 'Welcome to')
+            ->visit('/welcome')
+            ->assertSeeIn('h1', 'Collaborative science.')
         ;
     }
 

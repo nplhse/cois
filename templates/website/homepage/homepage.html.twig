@@ -1,0 +1,212 @@
+{% extends 'base.html.twig' %}
+
+{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+
+{% block title %}
+    {{ 'welcome.title'|trans }} {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    <header class="bg-dark py-5">
+        <div class="container px-5">
+            <div class="px-4 py-4 my-4 text-center">
+                <h1 class="display-5 fw-bold text-white">
+                    {{ 'welcome.title'|trans }}
+                </h1>
+                <div class="col-lg-6 mx-auto">
+                    <p class="lead text-white mb-3">
+                        {{ 'welcome.text'|trans }}
+                    </p>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        {% if not is_granted('ROLE_USER') %}
+                            <a class="btn btn-primary btn-lg px-4 gap-3"
+                                href="{{ path('app_login') }}"
+                                role="button">
+                                {{ 'link.login.action'|trans }}
+                            </a>
+                        {% else %}
+                            <a class="btn btn-primary btn-lg px-4 gap-3"
+                                href="{{ path('app_dashboard') }}"
+                                role="button">
+                                {{ 'link.dashboard.action'|trans }}
+                            </a>
+                        {% endif %}
+                        <a class="btn btn-outline-secondary disabled btn-lg px-4 gap-3"
+                            href="#"
+                            role="button">
+                            {{ 'link.learn_more'|trans }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-shrink-0">
+        <section class="py-5 border-bottom" id="features">
+            <div class="container px-5 my-5">
+                <div class="row">
+                    <div class="col-lg-3 mb-5 mb-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                            <i class="bi bi-patch-check"></i>
+                        </div>
+                        <h2 class="h4 fw-bolder">
+                            Unabhängig
+                        </h2>
+                        <p>
+                            Betrieben von einer unabhängigen Gruppe von
+                            Forschern und ohne kommerzielle Absichten.
+                        </p>
+                    </div>
+                    <div class="col-lg-3 mb-5 mb-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                            <i class="bi bi-building"></i>
+                        </div>
+                        <h2 class="h4 fw-bolder">
+                            Eigenständigkeit
+                        </h2>
+                        <p>
+                            Benutzer können selbstständig ihre Klinik verwalten
+                            neue Daten importieren und gefilterte Datensätze
+                            exportieren.
+                        </p>
+                    </div>
+                    <div class="col-lg-3 mb-5 mb-lg-0">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                            <i class="bi bi-search"></i>
+                        </div>
+                        <h2 class="h4 fw-bolder">
+                            Erkunden
+                        </h2>
+                        <p>
+                            Alle Datensätze können mithilfe der Plattform
+                            betrachtet und gezielt für eigene Analysen gefiltert
+                            werden.
+                        </p>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <h2 class="h4 fw-bolder">
+                            Statistiken
+                        </h2>
+                        <p>
+                            Wir erstellen automatisch vielfältige Statistiken
+                            und bieten Vergleiche gegenüber anonymisierten
+                            Clustern von Kliniken an.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-light py-3 border-bottom">
+            <div class="container px-3 my-3">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bolder">
+                        Überblick
+                    </h2>
+                    <p class="lead mb-0">
+                        Kleiner Einblick in unsere Datenbasis
+                    </p>
+                </div>
+                <div class="row gx-3 justify-content-center">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-3">
+                        <div class="col d-flex align-items-start">
+                            <i class="bi bi-person-fill flex-shrink-0 me-3"
+                                style="font-size: 1.75em">
+
+                            </i>
+                            <div>
+                                <h4 class="fw-bold mb-0">
+                                    {{ userCount|number_format(0, '', '.') }}
+                                    {{ 'Users'|trans }}
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="col d-flex align-items-start">
+                            <i class="bi bi-house-door-fill flex-shrink-0 me-3"
+                                style="font-size: 1.75em">
+
+                            </i>
+                            <div>
+                                <h4 class="fw-bold mb-0">
+                                    {{
+                                        hospitalCount|number_format(0, '', '.')
+                                    }}
+                                    {{ 'Hospitals'|trans }}
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="col d-flex align-items-start">
+                            <i class="bi bi-list-ul flex-shrink-0 me-3"
+                                style="font-size: 1.75em">
+
+                            </i>
+                            <div>
+                                <h4 class="fw-bold mb-0">
+                                    {{
+                                        allocationCount|number_format(
+                                            0,
+                                            '',
+                                            '.'
+                                        )
+                                    }}
+                                    {{ 'Allocations'|trans }}
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="col d-flex align-items-start">
+                            <i class="bi bi-file-earmark-arrow-up-fill flex-shrink-0 me-3"
+                                style="font-size: 1.75em">
+
+                            </i>
+                            <div>
+                                <h4 class="fw-bold mb-0">
+                                    {{ importCount|number_format(0, '', '.') }}
+                                    {{ 'Imports'|trans }}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-3">
+            <div class="container px-3 my-3 px-3">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bolder">
+                        Aktuelle Beiträge
+                    </h2>
+                    <p class="lead mb-0">
+                        Unser Blog hält Sie auf dem Laufenden
+                    </p>
+                </div>
+                <div class="row gx-3 justify-content-center">
+                    <div class="col-lg-8">
+                        {% for post in posts %}
+                            <div class="card mb-3">
+                                <div class="card-body p-4">
+                                    <div class="d-flex">
+                                        {% include 'website/blog/_listed_post_preview.html.twig' with {
+                                            post: post
+                                        } %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <p class="text-center">
+                            <a class="text-decoration-none"
+                                href="{{ path('app_blog') }}">
+                                Zum Blog gehen
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

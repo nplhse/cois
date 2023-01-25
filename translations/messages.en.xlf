@@ -808,11 +808,11 @@
       </trans-unit>
       <trans-unit id="i07781n" resname="welcome.title">
         <source>welcome.title</source>
-        <target>Welcome to</target>
+        <target>Collaborative science.</target>
       </trans-unit>
       <trans-unit id="gTwEl6a" resname="welcome.text">
         <source>welcome.text</source>
-        <target>We provide statistics about german emergency medicine with the help of IVENA, which is a tool that is used to dispatch patients to hospitals.</target>
+        <target>We create statistics about german emergency medicine with the help of IVENA, a tool that is used to dispatch patients to hospitals.</target>
       </trans-unit>
       <trans-unit id="iOSoddH" resname="link.faq">
         <source>link.faq</source>
@@ -2469,21 +2469,57 @@
         <source>link.contact</source>
         <target>Contact</target>
       </trans-unit>
-      <trans-unit id="NO2hNuQ" resname="label.posts">
+      <trans-unit id="KIlOwRu" resname="label.posts">
         <source>label.posts</source>
         <target>Posts</target>
       </trans-unit>
-      <trans-unit id="SQkaeL1" resname="label.categories">
+      <trans-unit id="eH8yxtn" resname="label.categories">
         <source>label.categories</source>
         <target>Categories</target>
       </trans-unit>
-      <trans-unit id="1233" resname="label.tags">
+      <trans-unit id="ijQyGRo" resname="label.tags">
         <source>label.tags</source>
         <target>Tags</target>
       </trans-unit>
-      <trans-unit id="1234" resname="label.comments">
+      <trans-unit id="5AhEI14" resname="label.comments">
         <source>label.comments</source>
         <target>Comments</target>
+      </trans-unit>
+      <trans-unit id="0kIeFKx" resname="link.learn_more">
+        <source>link.learn_more</source>
+        <target>Learn more</target>
+      </trans-unit>
+      <trans-unit id="w4dRgcp" resname="footer.social">
+        <source>footer.social</source>
+        <target>Follow us</target>
+      </trans-unit>
+      <trans-unit id="fFLOfW0" resname="footer.about">
+        <source>footer.about</source>
+        <target>Informations</target>
+      </trans-unit>
+      <trans-unit id="2N9a7UI" resname="link.about">
+        <source>link.about</source>
+        <target>About us</target>
+      </trans-unit>
+      <trans-unit id="2UjUpmN" resname="link.features">
+        <source>link.features</source>
+        <target>Features</target>
+      </trans-unit>
+      <trans-unit id="Ql5Hbsa" resname="link.blog">
+        <source>link.blog</source>
+        <target>Blog</target>
+      </trans-unit>
+      <trans-unit id="tM9jNXv" resname="footer.at_a_glance">
+        <source>footer.at_a_glance</source>
+        <target>At a glance</target>
+      </trans-unit>
+      <trans-unit id="ehFpdDM" resname="link.dashboard">
+        <source>link.dashboard</source>
+        <target>Dashboard</target>
+      </trans-unit>
+      <trans-unit id="QDQjknG" resname="footer.links">
+        <source>footer.links</source>
+        <target>Important links</target>
       </trans-unit>
     </body>
   </file>

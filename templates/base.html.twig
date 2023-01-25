@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,7 +21,7 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
+    <body class="d-flex flex-column h-100">
         {% block header %}
             {% include 'elements/navbar.html.twig' %}
         {% endblock %}
@@ -32,28 +32,30 @@
             {% endif %}
         {% endif %}
 
-        <main role="main" class="content p-3">
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="alert alert-{{
-                        label
-                        }} alert-dismissible fade show"
-                        role="alert">
-                        {{ message }}
-                        <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="alert"
-                            aria-label="Close">
+        {% block main %}
+            <main role="main" class="content p-3">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{
+                            label
+                            }} alert-dismissible fade show"
+                            role="alert">
+                            {{ message }}
+                            <button type="button"
+                                class="btn-close"
+                                data-bs-dismiss="alert"
+                                aria-label="Close">
 
-                        </button>
-                    </div>
+                            </button>
+                        </div>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
 
-            {% block body %}
+                {% block body %}
 
-            {% endblock %}
-        </main>
+                {% endblock %}
+            </main>
+        {% endblock %}
 
         {% include 'elements/footer.html.twig' %}
     </body>

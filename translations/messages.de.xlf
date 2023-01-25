@@ -807,11 +807,11 @@
       </trans-unit>
       <trans-unit id="i07781n" resname="welcome.title">
         <source>welcome.title</source>
-        <target>Willkommen bei </target>
+        <target>Gemeinsam Forschen.</target>
       </trans-unit>
       <trans-unit id="gTwEl6a" resname="welcome.text">
         <source>welcome.text</source>
-        <target>Dieses Projekt hat das Ziel Statistiken zur notfallmedizinischen Versorgungsforschung in Deutschland bereitzustellen. Grundlage hierfür sind Daten, welche auf Basis des IVENA-Systems zur Zuweisung von Patienten im Rettungsdienst genutzt werden.</target>
+        <target>Wir erstellen kollaborativ Statistiken zur notfallmedizinischen Versorgungsforschung in Deutschland. Grundlage dafür sind Daten aus dem IVENA-System zur Zuweisung von Patienten im Rettungsdienst.</target>
       </trans-unit>
       <trans-unit id="iOSoddH" resname="link.faq">
         <source>link.faq</source>
@@ -2546,21 +2546,57 @@
         <source>link.contact</source>
         <target>Kontakt</target>
       </trans-unit>
-      <trans-unit id="NO2hNuQ" resname="label.posts">
+      <trans-unit id="KIlOwRu" resname="label.posts">
         <source>label.posts</source>
         <target>Beiträge</target>
       </trans-unit>
-      <trans-unit id="SQkaeL1" resname="label.categories">
+      <trans-unit id="eH8yxtn" resname="label.categories">
         <source>label.categories</source>
         <target>Kategorien</target>
       </trans-unit>
-      <trans-unit id="1233" resname="label.tags">
+      <trans-unit id="ijQyGRo" resname="label.tags">
         <source>label.tags</source>
         <target>Schlagwörter</target>
       </trans-unit>
-      <trans-unit id="1234" resname="label.comments">
+      <trans-unit id="5AhEI14" resname="label.comments">
         <source>label.comments</source>
         <target>Kommentare</target>
+      </trans-unit>
+      <trans-unit id="0kIeFKx" resname="link.learn_more">
+        <source>link.learn_more</source>
+        <target>Mehr erfahren</target>
+      </trans-unit>
+      <trans-unit id="w4dRgcp" resname="footer.social">
+        <source>footer.social</source>
+        <target>Folgen Sie uns</target>
+      </trans-unit>
+      <trans-unit id="fFLOfW0" resname="footer.about">
+        <source>footer.about</source>
+        <target>Informationen</target>
+      </trans-unit>
+      <trans-unit id="2N9a7UI" resname="link.about">
+        <source>link.about</source>
+        <target>Über uns</target>
+      </trans-unit>
+      <trans-unit id="2UjUpmN" resname="link.features">
+        <source>link.features</source>
+        <target>Features</target>
+      </trans-unit>
+      <trans-unit id="Ql5Hbsa" resname="link.blog">
+        <source>link.blog</source>
+        <target>Blog</target>
+      </trans-unit>
+      <trans-unit id="tM9jNXv" resname="footer.at_a_glance">
+        <source>footer.at_a_glance</source>
+        <target>Überblick</target>
+      </trans-unit>
+      <trans-unit id="ehFpdDM" resname="link.dashboard">
+        <source>link.dashboard</source>
+        <target>Kontrollzentrum</target>
+      </trans-unit>
+      <trans-unit id="QDQjknG" resname="footer.links">
+        <source>footer.links</source>
+        <target>Wichtige Links</target>
       </trans-unit>
     </body>
   </file>

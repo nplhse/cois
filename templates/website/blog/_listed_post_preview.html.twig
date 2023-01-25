@@ -1,0 +1,53 @@
+{% block post %}
+    <article class="blog-post">
+        <h2 class="blog-post-title mb-1">
+            <a class="text-decoration-none"
+                href="{{
+                path(
+                    'app_post',
+                    {
+                        slug: post.slug
+                    }
+                )
+                }}">
+                {{ post.title }}
+            </a>
+        </h2>
+        <p>
+            {% if post.teaser %}
+                {{ post.teaser|raw }}
+            {% else %}
+                {% set paragraphs = post.content|split('</p>') %}
+                {% set teaser = paragraphs|first %}
+                {{ teaser|raw }}
+            {% endif %}
+            <a href="{{
+                path(
+                    'app_post',
+                    {
+                        slug: post.slug
+                    }
+                )
+                }}">
+                {{ 'blog.read_more'|trans({}, 'app') }}
+            </a>
+        </p>
+        <div class="small text-muted">
+            - {{
+                'blog.posted_on'|trans(
+                    {
+                        date: post.publishedAt|date('d.m.Y, H:i')
+                    },
+                    'app'
+                )
+            }}, {{
+                'blog.posted_by'|trans(
+                    {
+                        user: post.createdBy
+                    },
+                    'app'
+                )
+            }}
+        </div>
+    </article>
+{% endblock %}
