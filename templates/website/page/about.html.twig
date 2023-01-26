@@ -10,20 +10,26 @@
                 <h5>
                     {{ 'page.admin_users'|trans({}, 'app') }}
                 </h5>
-                <ul>
+                <ul class="list-unstyled">
                     {% for user in users %}
                         {% if user.isAdmin %}
-                            <li>{{ user.username }}</li>
+                            <li>
+                                <i class="bi bi-shield-exclamation"></i>
+                                {{ user.username }}
+                            </li>
                         {% endif %}
                     {% endfor %}
                 </ul>
                 <h5>
                     {{ 'page.member_users'|trans({}, 'app') }}
                 </h5>
-                <ul>
+                <ul class="list-unstyled">
                     {% for user in users %}
                         {% if user.isMember %}
-                            <li>{{ user.username }}</li>
+                            <li>
+                                <i class="bi bi-person-fill"></i>
+                                {{ user.username }}
+                            </li>
                         {% endif %}
                     {% endfor %}
                 </ul>

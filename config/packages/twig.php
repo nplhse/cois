@@ -14,10 +14,18 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'timezone' => 'Europe/Berlin',
         ],
         'globals' => [
-            'app_cookie_consent' => '%app.cookie_consent%',
-            'app_registration' => '%app.registration%',
-            'app_terms' => '%app.terms%',
             'app_title' => '%app.title%',
+            'app_enable_blog' => '%app.enable_blog%',
+            'app_enable_cookie_consent' => '%app.enable_cookie_consent%',
+            'app_enable_features' => '%app.enable_features%',
+            'app_enable_help' => '%app.enable_help%',
+            'app_enable_imprint' => '%app.enable_imprint%',
+            'app_enable_registration' => '%app.enable_registration%',
+            'app_enable_terms' => '%app.enable_terms%',
+            'app_social' => '%app.social.enabled%',
+            'app_social_github' => '%app.social.github%',
+            'app_social_mastodon' => '%app.social.mastodon%',
+            'app_social_twitter' => '%app.social.twitter%',
         ],
     ]);
 

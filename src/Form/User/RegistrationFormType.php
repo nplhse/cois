@@ -18,8 +18,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class RegistrationFormType extends AbstractType
 {
-    public function __construct(private bool $appTerms)
-    {
+    public function __construct(
+        private bool $appEnableTerms
+    ) {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -67,7 +68,7 @@ class RegistrationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'enable_terms' => $this->appTerms,
+            'enable_terms' => $this->appEnableTerms,
         ]);
     }
 }

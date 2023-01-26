@@ -154,37 +154,59 @@
                                 {% endif %}
                             </li>
                         {% endif %}
-                        <li class="nav-item">
-                            {% if
-                                app.request.attributes.get('_route')
-                                    starts with 'app_blog' %}
-                                <a class="nav-link active"
-                                    aria-current="page"
-                                    href="{{ path('app_blog') }}">
-                                    {{ 'link.blog'|trans }}
-                                </a>
-                            {% else %}
-                                <a class="nav-link"
-                                    href="{{ path('app_blog') }}">
-                                    {{ 'link.blog'|trans }}
-                                </a>
-                            {% endif %}
-                        </li>
-                        <li class="nav-item">
-                            {% if
-                                app.request.attributes.get('_route')
-                                    starts with 'app_help' %}
-                                <a class="nav-link active"
-                                    aria-current="page"
-                                    href="#">
-                                    {{ 'link.faq'|trans }}
-                                </a>
-                            {% else %}
-                                <a class="nav-link" href="#">
-                                    {{ 'link.faq'|trans }}
-                                </a>
-                            {% endif %}
-                        </li>
+                        {% if app_enable_features %}
+                            <li class="nav-item">
+                                {% if
+                                    app.request.attributes.get('_route')
+                                        starts with 'app_blog' %}
+                                    <a class="nav-link active"
+                                        aria-current="page"
+                                        href="{{ path('app_page_features') }}">
+                                        {{ 'link.features'|trans }}
+                                    </a>
+                                {% else %}
+                                    <a class="nav-link"
+                                        href="{{ path('app_page_features') }}">
+                                        {{ 'link.features'|trans }}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                        {% if app_enable_blog %}
+                            <li class="nav-item">
+                                {% if
+                                    app.request.attributes.get('_route')
+                                        starts with 'app_blog' %}
+                                    <a class="nav-link active"
+                                        aria-current="page"
+                                        href="{{ path('app_blog') }}">
+                                        {{ 'link.blog'|trans }}
+                                    </a>
+                                {% else %}
+                                    <a class="nav-link"
+                                        href="{{ path('app_blog') }}">
+                                        {{ 'link.blog'|trans }}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                        {% if app_enable_help %}
+                            <li class="nav-item">
+                                {% if
+                                    app.request.attributes.get('_route')
+                                        starts with 'app_help' %}
+                                    <a class="nav-link active"
+                                        aria-current="page"
+                                        href="#">
+                                        {{ 'link.faq'|trans }}
+                                    </a>
+                                {% else %}
+                                    <a class="nav-link" href="#">
+                                        {{ 'link.faq'|trans }}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endif %}
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
@@ -284,7 +306,7 @@
                                 </ul>
                             </li>
                         {% else %}
-                            {% if app_registration %}
+                            {% if app_enable_registration %}
                                 <li class="nav-item">
                                     <a class="nav-link"
                                         aria-current="page"

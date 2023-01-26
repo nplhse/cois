@@ -26,21 +26,21 @@ class RegistrationController extends AbstractController
     public function __construct(
         private MessageBusInterface $messageBus,
         private TranslatorInterface $translator,
-        private bool $appRegistration,
-        private bool $appTerms
+        private bool $appEnableRegistration,
+        private bool $appEnableTerms
     ) {
     }
 
     #[Route('/', name: 'app_register')]
     public function register(Request $request, UserRepositoryInterface $userRepository, UserPasswordHasherInterface $passwordEncoder, UserAuthenticatorInterface $userAuthenticator, LoginFormAuthenticator $authenticator): ?Response
     {
-        if (!$this->appRegistration) {
+        if (!$this->appEnableRegistration) {
             throw $this->createNotFoundException('Registration is currently not available.');
         }
 
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user, [
-            'enable_terms' => $this->appTerms,
+            'enable_terms' => $this->appEnableTerms,
         ]);
         $form->handleRequest($request);
 
