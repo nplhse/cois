@@ -2399,7 +2399,7 @@
       </trans-unit>
       <trans-unit id="LtlfR4W" resname="link.register.action">
         <source>link.register.action</source>
-        <target>Create a new Account</target>
+        <target>Click here to create a new Account</target>
       </trans-unit>
       <trans-unit id="2K6T9rI" resname="link.dashboard.action">
         <source>link.dashboard.action</source>
@@ -2520,6 +2520,14 @@
       <trans-unit id="QDQjknG" resname="footer.links">
         <source>footer.links</source>
         <target>Important links</target>
+      </trans-unit>
+      <trans-unit id="2x1kobZ" resname="title.features">
+        <source>title.features</source>
+        <target>Features</target>
+      </trans-unit>
+      <trans-unit id="qJaDbnp" resname="security.login.register">
+        <source>security.login.register</source>
+        <target>Haven't already registered an account?</target>
       </trans-unit>
     </body>
   </file>

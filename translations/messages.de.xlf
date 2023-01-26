@@ -2476,7 +2476,7 @@
       </trans-unit>
       <trans-unit id="LtlfR4W" resname="link.register.action">
         <source>link.register.action</source>
-        <target>Neues Benutzerkonto erstellen</target>
+        <target>Hier klicken, um ein neues Benutzerkonto zu erstellen</target>
       </trans-unit>
       <trans-unit id="2K6T9rI" resname="link.dashboard.action">
         <source>link.dashboard.action</source>
@@ -2597,6 +2597,14 @@
       <trans-unit id="QDQjknG" resname="footer.links">
         <source>footer.links</source>
         <target>Wichtige Links</target>
+      </trans-unit>
+      <trans-unit id="2x1kobZ" resname="title.features">
+        <source>title.features</source>
+        <target>Features</target>
+      </trans-unit>
+      <trans-unit id="qJaDbnp" resname="security.login.register">
+        <source>security.login.register</source>
+        <target>Haben Sie noch kein Benutzerkonto?</target>
       </trans-unit>
     </body>
   </file>

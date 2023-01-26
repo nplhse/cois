@@ -7,11 +7,16 @@
         <div class="row">
             <div class="col">
                 {% block breadcrumbs %}
+                    {% if is_granted('ROLE_USER') %}
+                        {% set baseUrl = 'app_dashboard' %}
+                    {% else %}
+                        {% set baseUrl = 'app_homepage' %}
+                    {% endif %}
                     {{
                         breadcrumbs.render(
                             [
                                 {
-                                    url: url('app_dashboard'),
+                                    url: url(baseUrl),
                                     label: 'Home'|trans
                                 },
                                 {

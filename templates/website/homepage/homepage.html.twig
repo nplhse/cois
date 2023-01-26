@@ -31,11 +31,13 @@
                                 {{ 'link.dashboard.action'|trans }}
                             </a>
                         {% endif %}
-                        <a class="btn btn-outline-secondary disabled btn-lg px-4 gap-3"
-                            href="#"
-                            role="button">
-                            {{ 'link.learn_more'|trans }}
-                        </a>
+                        {% if has_page('about') %}
+                            <a class="btn btn-outline-secondary btn-lg px-4 gap-3"
+                                href="{{ path('app_page_about') }}"
+                                role="button">
+                                {{ 'link.learn_more'|trans }}
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -43,72 +45,108 @@
     </header>
 
     <main class="flex-shrink-0">
-        <section class="py-5 border-bottom" id="features">
-            <div class="container px-5 my-5">
-                <div class="row">
-                    <div class="col-lg-3 mb-5 mb-lg-0">
-                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                            <i class="bi bi-patch-check"></i>
+        {% if app_enable_features %}
+            <section class="py-5 border-bottom" id="features">
+                <div class="container px-5 my-5">
+                    <div class="row">
+                        <div class="col-lg-3 mb-5 mb-lg-0">
+                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                                <i class="bi bi-patch-check"></i>
+                            </div>
+                            <h2 class="h4 fw-bolder">
+                                {{
+                                    'app.homepage.independency'|trans({}, 'app')
+                                }}
+                            </h2>
+                            <p>
+                                {{
+                                    'app.homepage.independency.text'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </p>
+                            {% if has_page('about') %}
+                                <a class="text-decoration-none"
+                                    href="{{ path('app_page_about') }}">
+                                    {{
+                                        'app.homepage.go_about'|trans({}, 'app')
+                                    }}
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            {% endif %}
                         </div>
-                        <h2 class="h4 fw-bolder">
-                            Unabhängig
-                        </h2>
-                        <p>
-                            Betrieben von einer unabhängigen Gruppe von
-                            Forschern und ohne kommerzielle Absichten.
-                        </p>
-                    </div>
-                    <div class="col-lg-3 mb-5 mb-lg-0">
-                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                            <i class="bi bi-building"></i>
+                        <div class="col-lg-3 mb-5 mb-lg-0">
+                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                                <i class="bi bi-building"></i>
+                            </div>
+                            <h2 class="h4 fw-bolder">
+                                {{ 'app.homepage.users'|trans({}, 'app') }}
+                            </h2>
+                            <p>
+                                {{ 'app.homepage.users.text'|trans({}, 'app') }}
+                            </p>
+                            <a class="text-decoration-none"
+                                href="{{
+                                path(
+                                    'app_page_features'
+                                )
+                                }}#hospitals">
+                                {{ 'app.homepage.go_users'|trans({}, 'app') }}
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
                         </div>
-                        <h2 class="h4 fw-bolder">
-                            Eigenständigkeit
-                        </h2>
-                        <p>
-                            Benutzer können selbstständig ihre Klinik verwalten
-                            neue Daten importieren und gefilterte Datensätze
-                            exportieren.
-                        </p>
-                    </div>
-                    <div class="col-lg-3 mb-5 mb-lg-0">
-                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                            <i class="bi bi-search"></i>
+                        <div class="col-lg-3 mb-5 mb-lg-0">
+                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <h2 class="h4 fw-bolder">
+                                {{ 'app.homepage.explore'|trans({}, 'app') }}
+                            </h2>
+                            <p>
+                                {{
+                                    'app.homepage.explore.text'|trans({}, 'app')
+                                }}
+                            </p>
+                            <a class="text-decoration-none"
+                                href="{{ path('app_page_features') }}#explore">
+                                {{ 'app.homepage.go_explore'|trans({}, 'app') }}
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
                         </div>
-                        <h2 class="h4 fw-bolder">
-                            Erkunden
-                        </h2>
-                        <p>
-                            Alle Datensätze können mithilfe der Plattform
-                            betrachtet und gezielt für eigene Analysen gefiltert
-                            werden.
-                        </p>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                            <i class="bi bi-graph-up"></i>
+                        <div class="col-lg-3">
+                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
+                                <i class="bi bi-graph-up"></i>
+                            </div>
+                            <h2 class="h4 fw-bolder">
+                                {{ 'app.homepage.stats'|trans({}, 'app') }}
+                            </h2>
+                            <p>
+                                {{ 'app.homepage.stats.text'|trans({}, 'app') }}
+                            </p>
+                            <a class="text-decoration-none"
+                                href="{{
+                                path(
+                                    'app_page_features'
+                                )
+                                }}#statistics">
+                                {{ 'app.homepage.go_stats'|trans({}, 'app') }}
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
                         </div>
-                        <h2 class="h4 fw-bolder">
-                            Statistiken
-                        </h2>
-                        <p>
-                            Wir erstellen automatisch vielfältige Statistiken
-                            und bieten Vergleiche gegenüber anonymisierten
-                            Clustern von Kliniken an.
-                        </p>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        {% endif %}
 
-        <section class="bg-light py-3 border-bottom">
+        <section class="bg-light py-3">
             <div class="container px-3 my-3">
                 <div class="text-center mb-4">
                     <h2 class="fw-bolder">
-                        Überblick
+                        {{ 'app.homepage.overview'|trans({}, 'app') }}
                     </h2>
                     <p class="lead mb-0">
-                        Kleiner Einblick in unsere Datenbasis
+                        {{ 'app.homepage.overview.teaser'|trans({}, 'app') }}
                     </p>
                 </div>
                 <div class="row gx-3 justify-content-center">
@@ -174,39 +212,46 @@
             </div>
         </section>
 
-        <section class="py-3">
-            <div class="container px-3 my-3 px-3">
-                <div class="text-center mb-4">
-                    <h2 class="fw-bolder">
-                        Aktuelle Beiträge
-                    </h2>
-                    <p class="lead mb-0">
-                        Unser Blog hält Sie auf dem Laufenden
-                    </p>
-                </div>
-                <div class="row gx-3 justify-content-center">
-                    <div class="col-lg-8">
-                        {% for post in posts %}
-                            <div class="card mb-3">
-                                <div class="card-body p-4">
-                                    <div class="d-flex">
-                                        {% include 'website/blog/_listed_post_preview.html.twig' with {
-                                            post: post
-                                        } %}
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                        <p class="text-center">
-                            <a class="text-decoration-none"
-                                href="{{ path('app_blog') }}">
-                                Zum Blog gehen
-                                <i class="bi bi-arrow-right"></i>
-                            </a>
+        {% if app_enable_blog %}
+            <section class="py-3 border-top">
+                <div class="container px-3 my-3 px-3">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bolder">
+                            {{ 'app.homepage.blog'|trans({}, 'app') }}
+                        </h2>
+                        <p class="lead mb-0">
+                            {{ 'app.homepage.blog.teaser'|trans({}, 'app') }}
                         </p>
                     </div>
+                    <div class="row gx-3 justify-content-center">
+                        <div class="col-lg-8">
+                            {% for post in posts %}
+                                <div class="card mb-3">
+                                    <div class="card-body p-4">
+                                        <div class="d-flex">
+                                            {% include 'website/blog/_listed_post_preview.html.twig' with {
+                                                post: post
+                                            } %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <p class="text-center">
+                                <a class="text-decoration-none"
+                                    href="{{ path('app_blog') }}">
+                                    {{
+                                        'app.homepage.go_to_blog'|trans(
+                                            {},
+                                            'app'
+                                        )
+                                    }}
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        {% endif %}
     </main>
 {% endblock %}

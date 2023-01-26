@@ -35,7 +35,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'custom_authenticator' => LoginFormAuthenticator::class,
                 'logout' => [
                     'path' => 'app_logout',
-                    'target' => 'app_welcome',
+                    'target' => 'app_homepage',
                 ],
                 'remember_me' => [
                     'secret' => '%kernel.secret%',

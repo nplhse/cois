@@ -165,6 +165,81 @@
         <source>page.member_users</source>
         <target>Mitglieder des Boards</target>
       </trans-unit>
+      <trans-unit id="mbGuTgA" resname="app.homepage.independency">
+        <source>app.homepage.independency</source>
+        <target>Unabhängig</target>
+      </trans-unit>
+      <trans-unit id="lbhoN8P" resname="app.homepage.independency.text">
+        <source>app.homepage.independency.text</source>
+        <target>Betrieben von einer unabhängigen Gruppe von
+          Forschern und ohne kommerzielle Absichten.</target>
+      </trans-unit>
+      <trans-unit id="R5yZ9LB" resname="app.homepage.go_about">
+        <source>app.homepage.go_about</source>
+        <target>Mehr über uns erfahren</target>
+      </trans-unit>
+      <trans-unit id="rgR_.tI" resname="app.homepage.users">
+        <source>app.homepage.users</source>
+        <target>Klinikzentriert</target>
+      </trans-unit>
+      <trans-unit id="CXdvTWC" resname="app.homepage.users.text">
+        <source>app.homepage.users.text</source>
+        <target>Benutzer können selbstständig ihre Klinik verwalten,
+          neue Daten importieren und gefilterte Datensätze
+          exportieren.</target>
+      </trans-unit>
+      <trans-unit id="Kbygw_k" resname="app.homepage.go_users">
+        <source>app.homepage.go_users</source>
+        <target>Mehr über Kliniken erfahren</target>
+      </trans-unit>
+      <trans-unit id="S4iL3bJ" resname="app.homepage.explore">
+        <source>app.homepage.explore</source>
+        <target>Erkunden</target>
+      </trans-unit>
+      <trans-unit id="xtd.BN2" resname="app.homepage.explore.text">
+        <source>app.homepage.explore.text</source>
+        <target>Alle Datensätze können mithilfe der Plattform
+          betrachtet und gezielt für eigene Analysen gefiltert
+          werden.</target>
+      </trans-unit>
+      <trans-unit id="rld2E2L" resname="app.homepage.go_explore">
+        <source>app.homepage.go_explore</source>
+        <target>Mehr über die Daten erfahren</target>
+      </trans-unit>
+      <trans-unit id="et8Spu7" resname="app.homepage.stats">
+        <source>app.homepage.stats</source>
+        <target>Auswerten</target>
+      </trans-unit>
+      <trans-unit id="yL8hdcY" resname="app.homepage.stats.text">
+        <source>app.homepage.stats.text</source>
+        <target>Wir erstellen automatisch vielfältige Statistiken
+          und bieten Vergleiche gegenüber anonymisierten
+          Clustern von Kliniken an.</target>
+      </trans-unit>
+      <trans-unit id="stFTT.U" resname="app.homepage.go_stats">
+        <source>app.homepage.go_stats</source>
+        <target>Mehr über Auswertungen erfahren</target>
+      </trans-unit>
+      <trans-unit id="SHE89Eh" resname="app.homepage.overview">
+        <source>app.homepage.overview</source>
+        <target>Überblick</target>
+      </trans-unit>
+      <trans-unit id="zHqeEFQ" resname="app.homepage.overview.teaser">
+        <source>app.homepage.overview.teaser</source>
+        <target>Kleiner Einblick in unsere Datenbasis</target>
+      </trans-unit>
+      <trans-unit id="V6jriRZ" resname="app.homepage.blog">
+        <source>app.homepage.blog</source>
+        <target>Aktuelle Beiträge</target>
+      </trans-unit>
+      <trans-unit id="ZGn5vUa" resname="app.homepage.blog.teaser">
+        <source>app.homepage.blog.teaser</source>
+        <target>Unser Blog hält Sie auf dem Laufenden</target>
+      </trans-unit>
+      <trans-unit id="AL8qHBp" resname="app.homepage.go_to_blog">
+        <source>app.homepage.go_to_blog</source>
+        <target>Zu unserem Blog gehen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

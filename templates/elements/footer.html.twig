@@ -5,12 +5,44 @@
                 <p class="small">
                     {{ 'welcome.text'|trans }}
                 </p>
-                <p style="font-size: 1.25em">
-                    {{ 'footer.social'|trans }}: <a href="https://github.com/nplhse/cois"
-                        class="text-black">
-                        <i class="bi-github" role="img" aria-label="GitHub"></i>
-                    </a>
-                </p>
+                {% if app_social %}
+                    <p style="font-size: 1.25em">
+                        {{ 'footer.social'|trans }}:{% if app_social_github %}
+                            <a href="https://github.com/{{ app_social_github }}"
+                                class="text-black">
+                                <i class="bi-github"
+                                    role="img"
+                                    aria-label="GitHub">
+
+                                </i>
+                            </a>
+                        {% endif %}
+                        {% if app_social_mastodon %}
+                            <a href="https://mastodon.social/@{{
+                                app_social_mastodon
+                                }}"
+                                class="text-black">
+                                <i class="bi-mastodon"
+                                    role="img"
+                                    aria-label="Mastodon">
+
+                                </i>
+                            </a>
+                        {% endif %}
+                        {% if app_social_twitter %}
+                            <a href="https://twitter.com/{{
+                                app_social_twitter
+                                }}"
+                                class="text-black">
+                                <i class="bi-twitter"
+                                    role="img"
+                                    aria-label="Twitter">
+
+                                </i>
+                            </a>
+                        {% endif %}
+                    </p>
+                {% endif %}
             </div>
 
             <div class="col mb-3"></div>
@@ -28,18 +60,27 @@
                             </a>
                         </li>
                     {% endif %}
-                    <li class="nav-item mb-2 text-decoration-line-through">
-                        {{ 'link.features'|trans }}
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a href="{{ path('app_blog') }}"
-                            class="nav-link p-0 text-muted">
-                            {{ 'link.blog'|trans }}
-                        </a>
-                    </li>
-                    <li class="nav-item mb-2 text-decoration-line-through">
-                        {{ 'link.faq'|trans }}
-                    </li>
+                    {% if app_enable_features %}
+                        <li class="nav-item mb-2">
+                            <a href="{{ path('app_page_features') }}"
+                                class="nav-link p-0 text-muted">
+                                {{ 'link.features'|trans }}
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if app_enable_blog %}
+                        <li class="nav-item mb-2">
+                            <a href="{{ path('app_blog') }}"
+                                class="nav-link p-0 text-muted">
+                                {{ 'link.blog'|trans }}
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if app_enable_help %}
+                        <li class="nav-item mb-2 text-decoration-line-through">
+                            {{ 'link.faq'|trans }}
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
 
@@ -86,7 +127,7 @@
                             {{ 'link.contact'|trans }}
                         </a>
                     </li>
-                    {% if has_page('terms') %}
+                    {% if app_enable_terms %}
                         <li class="nav-item mb-2">
                             <a class="nav-link p-0 text-muted"
                                 href="{{ path('app_page_terms') }}">
@@ -102,7 +143,7 @@
                             </a>
                         </li>
                     {% endif %}
-                    {% if has_page('imprint') %}
+                    {% if app_enable_imprint %}
                         <li class="nav-item mb-2">
                             <a class="nav-link p-0 text-muted"
                                 href="{{ path('app_page_imprint') }}">
