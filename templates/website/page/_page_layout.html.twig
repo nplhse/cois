@@ -45,6 +45,16 @@
                     {% endif %}
                     <h1>
                         {{ page.title }}
+                        {% if page.status.value == 'Draft' %}
+                            <small>
+                                <i class="bi bi-cone-striped text-warning"></i>
+                            </small>
+                        {% endif %}
+                        {% if page.visibility.value == 'Private' %}
+                            <small>
+                                <i class="bi bi-lock-fill text-muted"></i>
+                            </small>
+                        {% endif %}
                     </h1>
 
                     {{ page.content|raw }}

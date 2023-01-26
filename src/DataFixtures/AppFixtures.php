@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Domain\Enum\Page\PageStatusEnum;
-use App\Domain\Enum\Page\PageTypeEnum;
+use App\Domain\Enum\PageStatus;
+use App\Domain\Enum\PageType;
+use App\Domain\Enum\PageVisbility;
 use App\Factory\AllocationFactory;
 use App\Factory\CategoryFactory;
 use App\Factory\CommentFactory;
@@ -29,22 +30,25 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
         PageFactory::createOne([
             'title' => 'Imprint',
             'slug' => 'imprint',
-            'type' => PageTypeEnum::ImprintPage,
-            'status' => PageStatusEnum::Published,
+            'type' => PageType::IMPRINT,
+            'status' => PageStatus::PUBLISHED,
+            'visibility' => PageVisbility::PUBLIC,
             'createdBy' => UserFactory::random(),
         ]);
         PageFactory::createOne([
             'title' => 'Privacy',
             'slug' => 'privacy',
-            'type' => PageTypeEnum::PrivacyPage,
-            'status' => PageStatusEnum::Published,
+            'type' => PageType::PRIVACY,
+            'status' => PageStatus::PUBLISHED,
+            'visibility' => PageVisbility::PUBLIC,
             'createdBy' => UserFactory::random(),
         ]);
         PageFactory::createOne([
             'title' => 'Terms and conditions',
             'slug' => 'terms',
-            'type' => PageTypeEnum::TermsPage,
-            'status' => PageStatusEnum::Published,
+            'type' => PageType::TERMS,
+            'status' => PageStatus::PUBLISHED,
+            'visibility' => PageVisbility::PUBLIC,
             'createdBy' => UserFactory::random(),
         ]);
 

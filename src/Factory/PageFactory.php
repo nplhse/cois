@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
-use App\Domain\Enum\Page\PageStatusEnum;
-use App\Domain\Enum\Page\PageTypeEnum;
+use App\Domain\Enum\PageStatus;
+use App\Domain\Enum\PageType;
+use App\Domain\Enum\PageVisbility;
 use App\Entity\Page;
 use App\Repository\PageRepository;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
@@ -32,8 +34,9 @@ use Zenstruck\Foundry\RepositoryProxy;
  */
 final class PageFactory extends ModelFactory
 {
-    public function __construct()
-    {
+    public function __construct(
+        private readonly SluggerInterface $slugger
+    ) {
         parent::__construct();
 
         // TODO inject services if required (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services)
@@ -44,9 +47,10 @@ final class PageFactory extends ModelFactory
         return [
             'title' => self::faker()->sentence(4),
             'slug' => '',
-            'type' => self::faker()->randomElement(PageTypeEnum::getChoices()),
             'content' => self::faker()->text(),
-            'status' => self::faker()->randomElement(PageStatusEnum::getChoices()),
+            'status' => self::faker()->randomElement(PageStatus::cases()),
+            'type' => self::faker()->randomElement(PageType::cases()),
+            'visibility' => self::faker()->randomElement(PageVisbility::cases()),
             'createdAt' => self::faker()->dateTimeThisDecade(),
             'createdBy' => UserFactory::random()->getId(),
         ];
@@ -54,9 +58,11 @@ final class PageFactory extends ModelFactory
 
     protected function initialize(): self
     {
-        // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
-
-        return $this;
+        return $this
+            ->afterInstantiate(function (Page $page): void {
+                $page->setSlug($this->slugger->slug($page->getTitle())->lower()->toString());
+            })
+        ;
     }
 
     protected static function getClass(): string

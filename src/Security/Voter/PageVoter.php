@@ -6,6 +6,7 @@ namespace App\Security\Voter;
 
 use App\Domain\Contracts\UserInterface;
 use App\Domain\Enum\PageStatus;
+use App\Domain\Enum\PageVisbility;
 use App\Entity\Page;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -76,8 +77,12 @@ class PageVoter extends Voter
 
     private function canView(Page $page, ?UserInterface $user): bool
     {
-        if ($this->security->isGranted('ROLE_ADMIN')) {
+        if ($this->security->isGranted('ROLE_ADMIN', $user)) {
             return true;
+        }
+
+        if (PageVisbility::PRIVATE === $page->getVisibility() && !$this->security->isGranted('ROLE_USER', $user)) {
+            return false;
         }
 
         if (PageStatus::PUBLISHED === $page->getStatus()) {
