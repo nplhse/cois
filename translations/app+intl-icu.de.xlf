@@ -256,6 +256,161 @@
         <source>page.is_private</source>
         <target>Seite ist privat</target>
       </trans-unit>
+      <trans-unit id="2x1kobZ" resname="title.features">
+        <source>title.features</source>
+        <target>Features</target>
+      </trans-unit>
+      <trans-unit id=".0ttja_" resname="features.lead">
+        <source>features.lead</source>
+        <target>Hinter dieser Website steht eine Open-Source Software, basierend auf dem Symfony Framework und vielen
+          frei verfügbaren Komponenten. Die Entwicklung erfolgt über Github und steht allen interessierten
+          Personen offen.</target>
+      </trans-unit>
+      <trans-unit id="DPQFXub" resname="features.hospitals.heading">
+        <source>features.hospitals.heading</source>
+        <target>Kliniken</target>
+      </trans-unit>
+      <trans-unit id="NsKVqiD" resname="features.hospitals.subheading">
+        <source>features.hospitals.subheading</source>
+        <target>Kliniken im Zentrum</target>
+      </trans-unit>
+      <trans-unit id="REya4Gx" resname="features.hospitals.teaser">
+        <source>features.hospitals.teaser</source>
+        <target>Alle wesentlichen Aspekte dieser Plattform drehen sich um die einzelnen Kliniken. Diese können von
+          Benutzern erstellt und selbst verwaltet werden. Für die jeweiligen Kliniken können Datensätze in das System
+          importiert werden, außerdem können viele Aspekte wie z.B. die Statistiken und Reports aus der Sicht
+          individueller Kliniken betrachtet werden.</target>
+      </trans-unit>
+      <trans-unit id="eo2voXf" resname="features.hospitals.import.head">
+        <source>features.hospitals.import.head</source>
+        <target>Datenimport und -export</target>
+      </trans-unit>
+      <trans-unit id="aavfwh_" resname="features.hospitals.import.text">
+        <source>features.hospitals.import.text</source>
+        <target>Besitzer können Datensätze aus IVENA importieren und gefilterte Datensätze exportieren.</target>
+      </trans-unit>
+      <trans-unit id="UFIO390" resname="features.hospitals.assoc_users.head">
+        <source>features.hospitals.assoc_users.head</source>
+        <target>Zugeordnete Benutzer</target>
+      </trans-unit>
+      <trans-unit id="G9rcT4H" resname="features.hospitals.assoc_users.text">
+        <source>features.hospitals.assoc_users.text</source>
+        <target>Zusätzlich können Benutzer zugeordnet werden, welche nur die Statistiken und Auswertungen betrachten
+          können.</target>
+      </trans-unit>
+      <trans-unit id="Kkiz8.F" resname="features.hospitals.location.head">
+        <source>features.hospitals.location.head</source>
+        <target>Einteilung nach Lage</target>
+      </trans-unit>
+      <trans-unit id="rtk1o0r" resname="features.hospitals.location.text">
+        <source>features.hospitals.location.text</source>
+        <target>Kliniken werden nach Lage in städtisch und ländlich eingeteilt.</target>
+      </trans-unit>
+      <trans-unit id="upoE_qI" resname="features.hospitals.size.head">
+        <source>features.hospitals.size.head</source>
+        <target>Einteilung nach Größe</target>
+      </trans-unit>
+      <trans-unit id="Q_D63EU" resname="features.hospitals.size.text">
+        <source>features.hospitals.size.text</source>
+        <target>Kliniken werden nach Anzahl der Betten in groß (über 750), mittel und klein (unter 150) eingeteilt.</target>
+      </trans-unit>
+      <trans-unit id="0C._ao4" resname="features.explore.heading">
+        <source>features.explore.heading</source>
+        <target>Erkunden</target>
+      </trans-unit>
+      <trans-unit id="m7yxUiP" resname="features.explore.subheading">
+        <source>features.explore.subheading</source>
+        <target>Datenbasiert</target>
+      </trans-unit>
+      <trans-unit id="btHNVAQ" resname="features.explore.teaser">
+        <source>features.explore.teaser</source>
+        <target>Hauptbestandteil dieser Plattform ist der "Daten Explorer" welcher den Benutzern ermöglicht
+          alle Anteile der Datenbank zu betrachten und mithilfe von vielfältigen Filtern erkunden zu
+          können. Neben den Kliniken können alle Zuweisungen aus IVENA, sowie auch zahlreiche Datenpunkte
+          wie z.B. Zuweisungscodes, Fachabteilungen, oder Infektionskrankheiten analysieren.</target>
+      </trans-unit>
+      <trans-unit id="Qg8VQCv" resname="features.explore.interface.head">
+        <source>features.explore.interface.head</source>
+        <target>Einheitliches Interface</target>
+      </trans-unit>
+      <trans-unit id="XLBFQWe" resname="features.explore.interface.text">
+        <source>features.explore.interface.text</source>
+        <target>Unabhängig von den einzelnen Datenpunkten steht ein einheitliches Interface zur Verfügung.</target>
+      </trans-unit>
+      <trans-unit id="UQ6qHQw" resname="features.explore.filters.head">
+        <source>features.explore.filters.head</source>
+        <target>Zahlreiche Filter</target>
+      </trans-unit>
+      <trans-unit id="AJ6u7Qh" resname="features.explore.filters.text">
+        <source>features.explore.filters.text</source>
+        <target>Daten können nach Zeiträumen, Merkmalen der Kliniken und vielen weiteren Kriterien gefiltert
+          werden.</target>
+      </trans-unit>
+      <trans-unit id="LYiRhfk" resname="features.explore.hospitals.head">
+        <source>features.explore.hospitals.head</source>
+        <target>Filtern nach eigenen Kliniken</target>
+      </trans-unit>
+      <trans-unit id="8Oy..ab" resname="features.explore.hospitals.text">
+        <source>features.explore.hospitals.text</source>
+        <target>Alle Datensätze können auf Wunsch nur für die dem Benutzer zugeordneten Kliniken angezeigt
+          werden.</target>
+      </trans-unit>
+      <trans-unit id="tKsnC0p" resname="features.explore.filtersets.head">
+        <source>features.explore.filtersets.head</source>
+        <target>Filtersets speichern</target>
+      </trans-unit>
+      <trans-unit id="_Nw23Sc" resname="features.explore.filtersets.text">
+        <source>features.explore.filtersets.text</source>
+        <target>Bestimmte Kombinationen von Filtern können gespeichert und auf Wunsch angewendet werden.</target>
+      </trans-unit>
+      <trans-unit id="5zLUYgo" resname="features.statistics.heading">
+        <source>features.statistics.heading</source>
+        <target>Auswerten</target>
+      </trans-unit>
+      <trans-unit id="4RLlqgS" resname="features.statistics.subheading">
+        <source>features.statistics.subheading</source>
+        <target>Analysen und Berichte</target>
+      </trans-unit>
+      <trans-unit id="dkHCeXJ" resname="features.statistics.teaser">
+        <source>features.statistics.teaser</source>
+        <target>Aus den im System vorhanden Datensätzen werden automatisch zahlreiche Statistiken erstellt, welche
+          z.B. globale Daten, wie Einsatzaufkommen nach Zeiträumen erfassen. Darüber hinaus können für einzelne
+          Kliniken gezielte Auswertungen erfolgen. Viele dieser Statistiken sind frei verfügbar und können ohne
+          Benutzerkonto angesehen werden.</target>
+      </trans-unit>
+      <trans-unit id="QIvMkmN" resname="features.statistics.open_access.head">
+        <source>features.statistics.open_access.head</source>
+        <target>Open Access</target>
+      </trans-unit>
+      <trans-unit id="f2B4AZg" resname="features.statistics.open_access.text">
+        <source>features.statistics.open_access.text</source>
+        <target>Zahlreiche globale Statistiken sind ohne Benutzerkonto frei verfügbar.</target>
+      </trans-unit>
+      <trans-unit id="7C68LZJ" resname="features.statistics.filters.head">
+        <source>features.statistics.filters.head</source>
+        <target>Filtermöglichkeiten</target>
+      </trans-unit>
+      <trans-unit id="axBCku1" resname="features.statistics.filters.text">
+        <source>features.statistics.filters.text</source>
+        <target>Die den Statistiken zugrunde liegenden Daten können mit den bekannten Filtern gefiltert werden.</target>
+      </trans-unit>
+      <trans-unit id="3rdGEX_" resname="features.statistics.science.head">
+        <source>features.statistics.science.head</source>
+        <target>Wissenschaftliche Arbeit</target>
+      </trans-unit>
+      <trans-unit id="TQQARlN" resname="features.statistics.science.text">
+        <source>features.statistics.science.text</source>
+        <target>Für wissenschaftliche Arbeiten können per Antrag gezielte Auszüge aus den Daten bereitgestellt
+          werden.</target>
+      </trans-unit>
+      <trans-unit id="aOnxttZ" resname="features.statistics.database.head">
+        <source>features.statistics.database.head</source>
+        <target>Kein direkter Zugriff</target>
+      </trans-unit>
+      <trans-unit id="CrqbXMX" resname="features.statistics.database.text">
+        <source>features.statistics.database.text</source>
+        <target>Ein direkter Zugriff auf unsere Datenbank ist aus Sicherheitsgründen nicht möglich.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

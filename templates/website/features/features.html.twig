@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title.features'|trans }} - {{ parent() }}
+    {{ 'title.features'|trans({}, 'app') }} - {{ parent() }}
 {% endblock %}
 
 {% block main %}
@@ -28,8 +28,11 @@
 
             <div class="row">
                 <h1 class="mb-3">
-                    Features
+                    {{ 'title.features'|trans({}, 'app') }}
                 </h1>
+                <p class="lead">
+                    {{ 'features.lead'|trans({}, 'app') }}
+                </p>
             </div>
         </div>
 
@@ -37,78 +40,138 @@
             <a id="hospitals"></a>
             <div class="container">
                 <h2 class="display-3">
-                    Hospitals
+                    {{ 'features.hospitals.heading'|trans({}, 'app') }}
                 </h2>
 
                 <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5">
                     <div class="d-flex flex-column align-items-start gap-2">
                         <h3 class="fw-bold">
-                            Left-aligned title explaining these awesome features
+                            {{
+                                'features.hospitals.subheading'|trans({}, 'app')
+                            }}
                         </h3>
                         <p class="text-muted">
-                            Paragraph of text beneath the heading to explain the
-                            heading. We'll add onto it with another sentence and
-                            probably just keep going until we run out of words.
+                            {{ 'features.hospitals.teaser'|trans({}, 'app') }}
                         </p>
                     </div>
                     <div class="row row-cols-1 row-cols-sm-2 g-4">
                         <div class="d-flex flex-column gap-2">
                             <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                                <svg class="bi" width="1em" height="1em">
-                                    <use xlink:href="#collection"></use>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="1em"
+                                    height="1em"
+                                    fill="currentColor"
+                                    class="bi bi-cloud-upload-fill"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z" />
                                 </svg>
                             </div>
                             <h4 class="fw-semibold mb-0">
-                                Featured title
+                                {{
+                                    'features.hospitals.import.head'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </h4>
                             <p class="text-muted">
-                                Paragraph of text beneath the heading to explain
-                                the heading.
+                                {{
+                                    'features.hospitals.import.text'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </p>
                         </div>
 
                         <div class="d-flex flex-column gap-2">
                             <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                                <svg class="bi" width="1em" height="1em">
-                                    <use xlink:href="#gear-fill"></use>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="1em"
+                                    height="1em"
+                                    fill="currentColor"
+                                    class="bi bi-diagram-3-fill"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zm-6 8A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm6 0A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm6 0a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1z" />
                                 </svg>
                             </div>
                             <h4 class="fw-semibold mb-0">
-                                Featured title
+                                {{
+                                    'features.hospitals.assoc_users.head'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </h4>
                             <p class="text-muted">
-                                Paragraph of text beneath the heading to explain
-                                the heading.
+                                {{
+                                    'features.hospitals.assoc_users.text'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </p>
                         </div>
 
                         <div class="d-flex flex-column gap-2">
                             <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                                <svg class="bi" width="1em" height="1em">
-                                    <use xlink:href="#speedometer"></use>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="1em"
+                                    height="1em"
+                                    fill="currentColor"
+                                    class="bi bi-geo-fill"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.319 1.319 0 0 0-.37.265.301.301 0 0 0-.057.09V14l.002.008a.147.147 0 0 0 .016.033.617.617 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.619.619 0 0 0 .146-.15.148.148 0 0 0 .015-.033L12 14v-.004a.301.301 0 0 0-.057-.09 1.318 1.318 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465-1.281 0-2.462-.172-3.34-.465-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411z" />
                                 </svg>
                             </div>
                             <h4 class="fw-semibold mb-0">
-                                Featured title
+                                {{
+                                    'features.hospitals.location.head'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </h4>
                             <p class="text-muted">
-                                Paragraph of text beneath the heading to explain
-                                the heading.
+                                {{
+                                    'features.hospitals.location.text'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </p>
                         </div>
 
                         <div class="d-flex flex-column gap-2">
                             <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                                <svg class="bi" width="1em" height="1em">
-                                    <use xlink:href="#table"></use>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="1em"
+                                    height="1em"
+                                    fill="currentColor"
+                                    class="bi bi-hospital"
+                                    viewBox="0 0 16 16">
+                                    <path d="M8.5 5.034v1.1l.953-.55.5.867L9 7l.953.55-.5.866-.953-.55v1.1h-1v-1.1l-.953.55-.5-.866L7 7l-.953-.55.5-.866.953.55v-1.1h1ZM13.25 9a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25h-.5ZM13 11.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-.5Zm.25 1.75a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25h-.5Zm-11-4a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5A.25.25 0 0 0 3 9.75v-.5A.25.25 0 0 0 2.75 9h-.5Zm0 2a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25h-.5ZM2 13.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-.5Z" />
+                                    <path d="M5 1a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1a1 1 0 0 1 1 1v4h3a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h3V3a1 1 0 0 1 1-1V1Zm2 14h2v-3H7v3Zm3 0h1V3H5v12h1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3Zm0-14H6v1h4V1Zm2 7v7h3V8h-3Zm-8 7V8H1v7h3Z" />
                                 </svg>
                             </div>
                             <h4 class="fw-semibold mb-0">
-                                Featured title
+                                {{
+                                    'features.hospitals.size.head'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </h4>
                             <p class="text-muted">
-                                Paragraph of text beneath the heading to explain
-                                the heading.
+                                {{
+                                    'features.hospitals.size.text'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </p>
                         </div>
                     </div>
@@ -119,78 +182,135 @@
             <a id="explore"></a>
             <div class="container">
                 <h2 class="display-3">
-                    Explore
+                    {{ 'features.explore.heading'|trans({}, 'app') }}
                 </h2>
 
                 <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5">
                     <div class="d-flex flex-column align-items-start gap-2">
                         <h3 class="fw-bold">
-                            Left-aligned title explaining these awesome features
+                            {{ 'features.explore.subheading'|trans({}, 'app') }}
                         </h3>
                         <p class="text-muted">
-                            Paragraph of text beneath the heading to explain the
-                            heading. We'll add onto it with another sentence and
-                            probably just keep going until we run out of words.
+                            {{ 'features.explore.teaser'|trans({}, 'app') }}
                         </p>
                     </div>
                     <div class="row row-cols-1 row-cols-sm-2 g-4">
                         <div class="d-flex flex-column gap-2">
                             <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                                <svg class="bi" width="1em" height="1em">
-                                    <use xlink:href="#collection"></use>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="1em"
+                                    height="1em"
+                                    fill="currentColor"
+                                    class="bi bi-layout-text-window-reverse"
+                                    viewBox="0 0 16 16">
+                                    <path d="M13 6.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5zm0 3a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5zm-.5 2.5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1h5z" />
+                                    <path d="M14 0a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12zM2 1a1 1 0 0 0-1 1v1h14V2a1 1 0 0 0-1-1H2zM1 4v10a1 1 0 0 0 1 1h2V4H1zm4 0v11h9a1 1 0 0 0 1-1V4H5z" />
                                 </svg>
                             </div>
                             <h4 class="fw-semibold mb-0">
-                                Featured title
+                                {{
+                                    'features.explore.interface.head'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </h4>
                             <p class="text-muted">
-                                Paragraph of text beneath the heading to explain
-                                the heading.
+                                {{
+                                    'features.explore.interface.text'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </p>
                         </div>
 
                         <div class="d-flex flex-column gap-2">
                             <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                                <svg class="bi" width="1em" height="1em">
-                                    <use xlink:href="#gear-fill"></use>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="1em"
+                                    height="1em"
+                                    fill="currentColor"
+                                    class="bi bi-filter-circle"
+                                    viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                    <path d="M7 11.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5z" />
                                 </svg>
                             </div>
                             <h4 class="fw-semibold mb-0">
-                                Featured title
+                                {{
+                                    'features.explore.filters.head'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </h4>
                             <p class="text-muted">
-                                Paragraph of text beneath the heading to explain
-                                the heading.
+                                {{
+                                    'features.explore.filters.text'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </p>
                         </div>
 
                         <div class="d-flex flex-column gap-2">
                             <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                                <svg class="bi" width="1em" height="1em">
-                                    <use xlink:href="#speedometer"></use>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="1em"
+                                    height="1em"
+                                    fill="currentColor"
+                                    class="bi bi-collection-fill"
+                                    viewBox="0 0 16 16">
+                                    <path d="M0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zM2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1z" />
                                 </svg>
                             </div>
                             <h4 class="fw-semibold mb-0">
-                                Featured title
+                                {{
+                                    'features.explore.hospitals.head'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </h4>
                             <p class="text-muted">
-                                Paragraph of text beneath the heading to explain
-                                the heading.
+                                {{
+                                    'features.explore.hospitals.text'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </p>
                         </div>
 
                         <div class="d-flex flex-column gap-2">
                             <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                                <svg class="bi" width="1em" height="1em">
-                                    <use xlink:href="#table"></use>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="1em"
+                                    height="1em"
+                                    fill="currentColor"
+                                    class="bi bi-bookmark-check-fill"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
                                 </svg>
                             </div>
                             <h4 class="fw-semibold mb-0">
-                                Featured title
+                                {{
+                                    'features.explore.filtersets.head'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </h4>
                             <p class="text-muted">
-                                Paragraph of text beneath the heading to explain
-                                the heading.
+                                {{
+                                    'features.explore.filtersets.text'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </p>
                         </div>
                     </div>
@@ -201,78 +321,140 @@
             <a id="statistics"></a>
             <div class="container">
                 <h2 class="display-3">
-                    Statistics
+                    {{ 'features.statistics.heading'|trans({}, 'app') }}
                 </h2>
 
                 <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 mb-5">
                     <div class="d-flex flex-column align-items-start gap-2">
                         <h3 class="fw-bold">
-                            Left-aligned title explaining these awesome features
+                            {{
+                                'features.statistics.subheading'|trans(
+                                    {},
+                                    'app'
+                                )
+                            }}
                         </h3>
                         <p class="text-muted">
-                            Paragraph of text beneath the heading to explain the
-                            heading. We'll add onto it with another sentence and
-                            probably just keep going until we run out of words.
+                            {{ 'features.statistics.teaser'|trans({}, 'app') }}
                         </p>
                     </div>
                     <div class="row row-cols-1 row-cols-sm-2 g-4">
                         <div class="d-flex flex-column gap-2">
                             <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                                <svg class="bi" width="1em" height="1em">
-                                    <use xlink:href="#collection"></use>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="1em"
+                                    height="1em"
+                                    fill="currentColor"
+                                    class="bi bi-graph-up-arrow"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M0 0h1v15h15v1H0V0Zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5Z" />
                                 </svg>
                             </div>
                             <h4 class="fw-semibold mb-0">
-                                Featured title
+                                {{
+                                    'features.statistics.open_access.head'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </h4>
                             <p class="text-muted">
-                                Paragraph of text beneath the heading to explain
-                                the heading.
+                                {{
+                                    'features.statistics.open_access.text'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </p>
                         </div>
 
                         <div class="d-flex flex-column gap-2">
                             <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                                <svg class="bi" width="1em" height="1em">
-                                    <use xlink:href="#gear-fill"></use>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="1em"
+                                    height="1em"
+                                    fill="currentColor"
+                                    class="bi bi-funnel-fill"
+                                    viewBox="0 0 16 16">
+                                    <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z" />
                                 </svg>
                             </div>
                             <h4 class="fw-semibold mb-0">
-                                Featured title
+                                {{
+                                    'features.statistics.filters.head'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </h4>
                             <p class="text-muted">
-                                Paragraph of text beneath the heading to explain
-                                the heading.
+                                {{
+                                    'features.statistics.filters.text'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </p>
                         </div>
 
                         <div class="d-flex flex-column gap-2">
                             <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                                <svg class="bi" width="1em" height="1em">
-                                    <use xlink:href="#speedometer"></use>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="1em"
+                                    height="1em"
+                                    fill="currentColor"
+                                    class="bi bi-mortarboard-fill"
+                                    viewBox="0 0 16 16">
+                                    <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917l-7.5-3.5Z" />
+                                    <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466 4.176 9.032Z" />
                                 </svg>
                             </div>
                             <h4 class="fw-semibold mb-0">
-                                Featured title
+                                {{
+                                    'features.statistics.science.head'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </h4>
                             <p class="text-muted">
-                                Paragraph of text beneath the heading to explain
-                                the heading.
+                                {{
+                                    'features.statistics.science.text'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </p>
                         </div>
 
                         <div class="d-flex flex-column gap-2">
                             <div class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
-                                <svg class="bi" width="1em" height="1em">
-                                    <use xlink:href="#table"></use>
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="1em"
+                                    height="1em"
+                                    fill="currentColor"
+                                    class="bi bi-database-lock"
+                                    viewBox="0 0 16 16">
+                                    <path d="M13 5.698a4.92 4.92 0 0 1-.904.525C11.022 6.711 9.573 7 8 7s-3.022-.289-4.096-.777A4.92 4.92 0 0 1 3 5.698V7c0 .374.356.875 1.318 1.313C5.234 8.729 6.536 9 8 9c.666 0 1.298-.056 1.876-.156-.43.31-.804.693-1.102 1.132A12.31 12.31 0 0 1 8 10c-1.573 0-3.022-.289-4.096-.777A4.92 4.92 0 0 1 3 8.698V10c0 .374.356.875 1.318 1.313C5.234 11.729 6.536 12 8 12h.027a4.548 4.548 0 0 0-.017.8A1.9 1.9 0 0 0 8 13c-1.573 0-3.022-.289-4.096-.777A4.916 4.916 0 0 1 3 11.698V13c0 .374.356.875 1.318 1.313C5.234 14.729 6.536 15 8 15c0 .363.097.704.266.997C8.178 16 8.089 16 8 16c-1.573 0-3.022-.289-4.096-.777C2.875 14.755 2 14.007 2 13V4c0-1.007.875-1.755 1.904-2.223C4.978 1.289 6.427 1 8 1s3.022.289 4.096.777C13.125 2.245 14 2.993 14 4v4.256a4.493 4.493 0 0 0-1.753-.249C12.787 7.654 13 7.289 13 7V5.698Zm-8.682-3.01C3.356 3.124 3 3.625 3 4c0 .374.356.875 1.318 1.313C5.234 5.729 6.536 6 8 6s2.766-.27 3.682-.687C12.644 4.875 13 4.373 13 4c0-.374-.356-.875-1.318-1.313C10.766 2.271 9.464 2 8 2s-2.766.27-3.682.687Z" />
+                                    <path d="M9 13a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2Zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1Z" />
                                 </svg>
                             </div>
                             <h4 class="fw-semibold mb-0">
-                                Featured title
+                                {{
+                                    'features.statistics.database.head'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </h4>
                             <p class="text-muted">
-                                Paragraph of text beneath the heading to explain
-                                the heading.
+                                {{
+                                    'features.statistics.database.text'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
                             </p>
                         </div>
                     </div>
