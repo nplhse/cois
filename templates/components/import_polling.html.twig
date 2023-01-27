@@ -1,10 +1,4 @@
-<div {{ attributes }}
-        {% set import = this.import %}
-
-        {% if import.status == 'pending' %}
-            data-poll
-        {% endif %}
->
+<div {{ attributes }}>
     <div class="card mb-3">
         <div class="card-header">
             {{ 'Import details'|trans }}

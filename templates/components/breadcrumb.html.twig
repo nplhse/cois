@@ -1,0 +1,30 @@
+<div {{ attributes }}>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            {% for item in this.items %}
+                {% if loop.first %}
+                    {% if is_granted('ROLE_USER') %}
+                        {% set baseUrl = 'app_dashboard' %}
+                    {% else %}
+                        {% set baseUrl = 'app_homepage' %}
+                    {% endif %}
+                    <li class="breadcrumb-item" aria-current="page">
+                        <a href="{{ path(baseUrl) }}">
+                            {{ 'link.home'|trans({}, 'app') }}
+                        </a>
+                    </li>
+                {% elseif loop.last %}
+                    <li class="breadcrumb-item active" aria-current="page">
+                        {{ item.label }}
+                    </li>
+                {% elseif item.url is defined %}
+                    <li class="breadcrumb-item">
+                        <a href="{{ item.url }}">{{ item.label }}</a>
+                    </li>
+                {% else %}
+                    <li class="breadcrumb-item">{{ item.label }}</li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </nav>
+</div>

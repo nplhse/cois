@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
-
 {% block title %}
     {{ 'title.contact.form'|trans }} - {{ parent() }}
 {% endblock %}
@@ -10,22 +8,16 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                {% if is_granted('ROLE_USER') %}
-                    {% set baseUrl = 'app_dashboard' %}
-                {% else %}
-                    {% set baseUrl = 'app_homepage' %}
-                {% endif %}
                 {{
-                    breadcrumbs.render(
-                        [
-                            {
-                                url: url(baseUrl),
-                                label: 'home'|trans({}, 'breadcrumbs')
-                            },
-                            {
-                                label: 'contact.form'|trans({}, 'breadcrumbs')
-                            }
-                        ]
+                    component(
+                        'breadcrumb',
+                        {
+                            items: [
+                                {
+                                    label: 'link.contact'|trans
+                                }
+                            ]
+                        }
                     )
                 }}
             </div>

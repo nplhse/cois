@@ -233,6 +233,10 @@
         <source>app.homepage.go_to_blog</source>
         <target>Go to our blog</target>
       </trans-unit>
+      <trans-unit id="RqYBLhT" resname="link.home">
+        <source>link.home</source>
+        <target>Homepage</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

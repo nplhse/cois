@@ -1,28 +1,24 @@
-{% extends 'website/page/_page_layout.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+{% block title %}
+    {{ 'title.features'|trans }} - {{ parent() }}
+{% endblock %}
 
 {% block body %}
     <div class="container">
         <div class="row">
             <div class="col">
                 {% block breadcrumbs %}
-                    {% if is_granted('ROLE_USER') %}
-                        {% set baseUrl = 'app_dashboard' %}
-                    {% else %}
-                        {% set baseUrl = 'app_homepage' %}
-                    {% endif %}
                     {{
-                        breadcrumbs.render(
-                            [
-                                {
-                                    url: url(baseUrl),
-                                    label: 'Home'|trans
-                                },
-                                {
-                                    label: 'title.features'|trans
-                                }
-                            ]
+                        component(
+                            'breadcrumb',
+                            {
+                                items: [
+                                    {
+                                        label: 'link.features'|trans
+                                    }
+                                ]
+                            }
                         )
                     }}
                 {% endblock %}

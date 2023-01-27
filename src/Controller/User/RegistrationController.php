@@ -56,7 +56,7 @@ class RegistrationController extends AbstractController
             } catch (HandlerFailedException) {
                 $this->addFlash('danger', $this->translator->trans('flash.registration.failure'));
 
-                return $this->render('registration/register.html.twig', [
+                return $this->render('user/registration/register.html.twig', [
                     'registrationForm' => $form->createView(),
                 ]);
             }
@@ -73,7 +73,7 @@ class RegistrationController extends AbstractController
             );
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('user/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
