@@ -22,6 +22,6 @@ class FeatureController extends AbstractController
             throw $this->createNotFoundException('This page does not exist.');
         }
 
-        return $this->render('website/page/features.html.twig');
+        return $this->render('website/features/features.html.twig');
     }
 }

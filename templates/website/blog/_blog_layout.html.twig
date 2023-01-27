@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
-
 {% block title %}
     {{ 'title.blog'|trans({}, 'app') }} - {{ parent() }}
 {% endblock %}
@@ -11,22 +9,16 @@
         <div class="row">
             <div class="col">
                 {% block breadcrumbs %}
-                    {% if is_granted('ROLE_USER') %}
-                        {% set baseUrl = 'app_dashboard' %}
-                    {% else %}
-                        {% set baseUrl = 'app_homepage' %}
-                    {% endif %}
                     {{
-                        breadcrumbs.render(
-                            [
-                                {
-                                    url: url(baseUrl),
-                                    label: 'Home'|trans
-                                },
-                                {
-                                    label: 'title.blog'|trans({}, 'app')
-                                }
-                            ]
+                        component(
+                            'breadcrumb',
+                            {
+                                items: [
+                                    {
+                                        label: 'title.blog'|trans({}, 'app')
+                                    }
+                                ]
+                            }
                         )
                     }}
                 {% endblock %}

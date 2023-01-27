@@ -6,42 +6,26 @@
                     {{ 'welcome.text'|trans }}
                 </p>
                 {% if app_social %}
+                    <!-- prettier-ignore-start -->
                     <p style="font-size: 1.25em">
                         {{ 'footer.social'|trans }}:{% if app_social_github %}
                             <a href="https://github.com/{{ app_social_github }}"
-                                class="text-black">
-                                <i class="bi-github"
-                                    role="img"
-                                    aria-label="GitHub">
-
-                                </i>
-                            </a>
+                                class="text-black"><i class="bi-github" role="img" aria-label="GitHub"></i></a>
                         {% endif %}
                         {% if app_social_mastodon %}
                             <a href="https://mastodon.social/@{{
                                 app_social_mastodon
                                 }}"
-                                class="text-black">
-                                <i class="bi-mastodon"
-                                    role="img"
-                                    aria-label="Mastodon">
-
-                                </i>
-                            </a>
+                                class="text-black"><i class="bi-mastodon" role="img" aria-label="Mastodon"></i></a>
                         {% endif %}
                         {% if app_social_twitter %}
                             <a href="https://twitter.com/{{
                                 app_social_twitter
                                 }}"
-                                class="text-black">
-                                <i class="bi-twitter"
-                                    role="img"
-                                    aria-label="Twitter">
-
-                                </i>
-                            </a>
+                                class="text-black"><i class="bi-twitter" role="img" aria-label="Twitter"></i></a>
                         {% endif %}
                     </p>
+                    <!-- prettier-ignore-end -->
                 {% endif %}
             </div>
 

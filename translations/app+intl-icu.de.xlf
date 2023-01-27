@@ -240,6 +240,22 @@
         <source>app.homepage.go_to_blog</source>
         <target>Zu unserem Blog gehen</target>
       </trans-unit>
+      <trans-unit id="RqYBLhT" resname="link.home">
+        <source>link.home</source>
+        <target>Startseite</target>
+      </trans-unit>
+      <trans-unit id="q00.0Bx" resname="title.page.menu">
+        <source>title.page.menu</source>
+        <target>Seiten</target>
+      </trans-unit>
+      <trans-unit id="1qb59fX" resname="page.is_draft">
+        <source>page.is_draft</source>
+        <target>Seite ist noch ein Entwurf</target>
+      </trans-unit>
+      <trans-unit id="hQ8I5RL" resname="page.is_private">
+        <source>page.is_private</source>
+        <target>Seite ist privat</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

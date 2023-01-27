@@ -1,0 +1,42 @@
+<div {{ attributes }}>
+    {% if (this.pages|length) > 0 %}
+        <h4 class="fst-italic">
+            {{ 'title.page.menu'|trans({}, 'app') }}
+        </h4>
+        <ol class="list-unstyled mb-0">
+            {% for page in this.pages %}
+                <li>
+                    <!-- prettier-ignore-start -->
+                    <a href="{{
+                        path(
+                            'app_page',
+                            {
+                                slug: page.slug
+                            }
+                        )
+                        }}">{{ page.title }}</a>
+                    <!-- prettier-ignore-end -->
+                    {% if page.status.value == 'Draft' %}
+                        <small>
+                            <i class="bi bi-cone-striped text-warning"
+                                title="{{ 'page.is_draft'|trans({}, 'app') }}">
+
+                            </i>
+                        </small>
+                    {% endif %}
+                    {% if page.visibility.value == 'Private' %}
+                        <small>
+                            <i class="bi bi-unlock-fill text-muted"
+                                title="{{ 'page.is_private'|trans(
+                                    {},
+                                    'app'
+                                ) }}">
+
+                            </i>
+                        </small>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ol>
+    {% endif %}
+</div>

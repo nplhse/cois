@@ -233,6 +233,14 @@
         <source>app.homepage.go_to_blog</source>
         <target>Go to our blog</target>
       </trans-unit>
+      <trans-unit id="RqYBLhT" resname="link.home">
+        <source>link.home</source>
+        <target>Homepage</target>
+      </trans-unit>
+      <trans-unit id="q00.0Bx" resname="title.page.menu">
+        <source>title.page.menu</source>
+        <target>Pages</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

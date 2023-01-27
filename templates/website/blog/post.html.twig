@@ -7,26 +7,20 @@
 {% endblock %}
 
 {% block breadcrumbs %}
-    {% if is_granted('ROLE_USER') %}
-        {% set baseUrl = 'app_dashboard' %}
-    {% else %}
-        {% set baseUrl = 'app_homepage' %}
-    {% endif %}
     {{
-        breadcrumbs.render(
-            [
-                {
-                    url: url(baseUrl),
-                    label: 'Home'|trans
-                },
-                {
-                    url: url('app_blog'),
-                    label: 'title.blog'|trans({}, 'app')
-                },
-                {
-                    label: post.title|trans({}, 'app')
-                }
-            ]
+        component(
+            'breadcrumb',
+            {
+                items: [
+                    {
+                        url: url('app_blog'),
+                        label: 'title.blog'|trans({}, 'app')
+                    },
+                    {
+                        label: post.title|trans({}, 'app')
+                    }
+                ]
+            }
         )
     }}
 {% endblock %}

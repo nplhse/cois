@@ -1,10 +1,4 @@
-<div {{ attributes }}
-        {% set times = 10 %}
-        {% if this.status == 'pending' and times > 0 %}
-            {% set times = times - 1 %}
-            data-poll
-        {% endif %}
->
+<div {{ attributes }}>
     {% if this.status == 'success' %}
         <i class="bi bi-check-circle-fill text-success">
 

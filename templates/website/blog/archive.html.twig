@@ -7,28 +7,24 @@
 {% endblock %}
 
 {% block breadcrumbs %}
-    {% if is_granted('ROLE_USER') %}
-        {% set baseUrl = 'app_dashboard' %}
-    {% else %}
-        {% set baseUrl = 'app_homepage' %}
-    {% endif %}
-    {{
-        breadcrumbs.render(
-            [
+    {% block breadcrumbs %}
+        {{
+            component(
+                'breadcrumb',
                 {
-                    url: url(baseUrl),
-                    label: 'Home'|trans
-                },
-                {
-                    url: url('app_blog'),
-                    label: 'title.blog'|trans({}, 'app')
-                },
-                {
-                    label: 'title.blog.archive'|trans({}, 'app')
+                    items: [
+                        {
+                            url: url('app_blog'),
+                            label: 'title.blog'|trans({}, 'app')
+                        },
+                        {
+                            label: 'title.blog.archive'|trans({}, 'app')
+                        }
+                    ]
                 }
-            ]
-        )
-    }}
+            )
+        }}
+    {% endblock %}
 {% endblock %}
 
 {% block content %}

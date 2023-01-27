@@ -10,7 +10,7 @@
                 <!-- prettier-ignore-end -->
             </li>
         {% else %}
-            <li>Sorry, there are no posts!</li>
+            <li>{{ 'blog.post.no_posts'|trans({}, 'app') }}</li>
         {% endfor %}
     </ol>
 </div>
