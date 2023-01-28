@@ -36,7 +36,7 @@ class PageCrudController extends AbstractCrudController
             TextField::new('title'),
             SlugField::new('slug')->hideOnIndex()->setTargetFieldName('title'),
             CKEditorField::new('content')
-                ->hideOnIndex(),
+                ->onlyOnForms(),
             TextField::new('content')->onlyOnDetail(),
             ChoiceField::new('type')->onlyOnForms()
                 ->setFormType(EnumType::class)

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service\Mailers;
 
+use App\Entity\ContactRequest;
 use App\Repository\UserRepository;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Component\Mailer\MailerInterface;
@@ -22,7 +23,7 @@ class ContactFormNotificationService extends AbstractNotificationService
     ) {
     }
 
-    public function sendContactFormNotification(array $contactRequest): void
+    public function sendContactFormNotification(ContactRequest $contactRequest): void
     {
         foreach ($this->userRepository->findAdmins() as $admin) {
             /** @var NotificationEmail $email */
@@ -31,10 +32,10 @@ class ContactFormNotificationService extends AbstractNotificationService
                 'notification.contact.request.title',
                 'emails/notifications/contact_request.inky.twig',
                 [
-                    'name' => $contactRequest['name'],
-                    'email_address' => $contactRequest['email_address'],
-                    'subject' => $contactRequest['subject'],
-                    'message' => $contactRequest['message'],
+                    'name' => $contactRequest->getName(),
+                    'email_address' => $contactRequest->getEmail(),
+                    'subject' => $contactRequest->getSubject(),
+                    'message' => $contactRequest->getText(),
                 ],
             );
 

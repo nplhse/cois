@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Domain\Enum\CommentStatus;
+use App\Domain\Enum\ContactRequestStatus;
 use App\Entity\Category;
 use App\Entity\Comment;
+use App\Entity\ContactRequest;
 use App\Entity\CookieConsent;
 use App\Entity\DispatchArea;
 use App\Entity\Hospital;
@@ -19,6 +21,7 @@ use App\Entity\SupplyArea;
 use App\Entity\Tag;
 use App\Entity\User;
 use App\Repository\CommentRepository;
+use App\Repository\ContactRequestRepository;
 use App\Repository\SkippedRowRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -33,6 +36,7 @@ class DashboardController extends AbstractDashboardController
 {
     public function __construct(
         private CommentRepository $commentRepository,
+        private ContactRequestRepository $contactRequestRepository,
         private SkippedRowRepository $skippedRowRepository
     ) {
     }
@@ -67,6 +71,13 @@ class DashboardController extends AbstractDashboardController
                 ->select('count(c.id)')
                 ->where('c.status = :status')
                 ->setParameter('status', CommentStatus::SUBMITTED)
+                ->getQuery()
+                ->getSingleScalarResult());
+        yield MenuItem::linkToCrud('Contact Requests', 'fas fa-message', ContactRequest::class)
+            ->setBadge($this->contactRequestRepository->createQueryBuilder('c')
+                ->select('count(c.id)')
+                ->where('c.status = :status')
+                ->setParameter('status', ContactRequestStatus::OPEN)
                 ->getQuery()
                 ->getSingleScalarResult());
         yield MenuItem::section('Data');
