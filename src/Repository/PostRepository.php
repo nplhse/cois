@@ -52,9 +52,9 @@ class PostRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
-            ->andWhere('p.publishedAt >= :date')
+            ->andWhere('p.publishedAt <= :date')
             ->setParameter('date', new \DateTimeImmutable(), Types::DATE_IMMUTABLE)
-            ->orderBy('p.createdAt', 'DESC')
+            ->orderBy('p.publishedAt', 'DESC')
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
@@ -66,11 +66,11 @@ class PostRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
-            ->andWhere('p.publishedAt >= :date')
+            ->andWhere('p.publishedAt <= :date')
             ->setParameter('date', new \DateTimeImmutable(), Types::DATE_IMMUTABLE)
             ->andWhere('p.isSticky = :sticky')
             ->setParameter('sticky', true)
-            ->orderBy('p.createdAt', 'DESC')
+            ->orderBy('p.publishedAt', 'DESC')
             ->getQuery()
             ->getResult()
         ;
@@ -81,11 +81,11 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p')
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
-            ->andWhere('p.publishedAt >= :date')
+            ->andWhere('p.publishedAt <= :date')
             ->setParameter('date', new \DateTimeImmutable(), Types::DATE_IMMUTABLE)
             ->andWhere('p.isSticky = :sticky')
             ->setParameter('sticky', false)
-            ->orderBy('p.createdAt', 'DESC')
+            ->orderBy('p.publishedAt', 'DESC')
         ;
 
         return (new \App\Pagination\Paginator($qb, self::PER_PAGE))->paginate($page);
@@ -96,9 +96,9 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p')
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
-            ->andWhere('p.publishedAt >= :date')
+            ->andWhere('p.publishedAt <= :date')
             ->setParameter('date', new \DateTimeImmutable(), Types::DATE_IMMUTABLE)
-            ->orderBy('p.createdAt', 'DESC')
+            ->orderBy('p.publishedAt', 'DESC')
         ;
 
         return (new \App\Pagination\Paginator($qb, self::PER_PAGE))->paginate($page);
@@ -109,11 +109,11 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p')
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
-            ->andWhere('p.publishedAt >= :date')
+            ->andWhere('p.publishedAt <= :date')
             ->setParameter('date', new \DateTimeImmutable(), Types::DATE_IMMUTABLE)
             ->andWhere('YEAR(p.createdAt) = :year')
             ->setParameter('year', $year)
-            ->orderBy('p.createdAt', 'DESC')
+            ->orderBy('p.publishedAt', 'DESC')
         ;
 
         if ($month) {
@@ -129,11 +129,11 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p')
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
-            ->andWhere('p.publishedAt >= :date')
+            ->andWhere('p.publishedAt <= :date')
             ->setParameter('date', new \DateTimeImmutable(), Types::DATE_IMMUTABLE)
             ->andWhere('p.category = :category')
             ->setParameter('category', $category->getId())
-            ->orderBy('p.createdAt', 'DESC')
+            ->orderBy('p.publishedAt', 'DESC')
         ;
 
         return (new \App\Pagination\Paginator($qb, self::PER_PAGE))->paginate($page);
@@ -144,12 +144,12 @@ class PostRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('p')
             ->andWhere('p.status = :status')
             ->setParameter('status', PostStatus::Published)
-            ->andWhere('p.publishedAt >= :date')
+            ->andWhere('p.publishedAt <= :date')
             ->setParameter('date', new \DateTimeImmutable(), Types::DATE_IMMUTABLE)
             ->innerJoin('p.tags', 't')
             ->andWhere('t.name = :tag')
             ->setParameter('tag', $tag->getName())
-            ->orderBy('p.createdAt', 'DESC')
+            ->orderBy('p.publishedAt', 'DESC')
         ;
 
         return (new \App\Pagination\Paginator($qb, self::PER_PAGE))->paginate($page);
