@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Form;
 
 use App\Domain\Contracts\UserInterface;
+use App\Entity\ContactRequest;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -12,7 +14,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Security\Core\Security;
 
 class ContactType extends AbstractType
 {
@@ -32,7 +33,7 @@ class ContactType extends AbstractType
                 'required' => true,
                 'data' => (null !== $user ? $user->getUserIdentifier() : ''),
                 ])
-            ->add('email_address', EmailType::class, [
+            ->add('email', EmailType::class, [
                 'label' => 'label.email',
                 'required' => true,
                 'data' => (null !== $user ? $user->getEmail() : ''),
@@ -41,7 +42,7 @@ class ContactType extends AbstractType
                 'label' => 'label.subject',
                 'required' => true,
             ])
-            ->add('message', TextareaType::class, [
+            ->add('text', TextareaType::class, [
                 'label' => 'label.message',
                 'required' => true,
                 'attr' => [
@@ -57,6 +58,7 @@ class ContactType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'data_class' => ContactRequest::class,
             'translation_domain' => 'forms',
         ]);
     }
