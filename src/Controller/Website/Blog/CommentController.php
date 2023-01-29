@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Website;
+namespace App\Controller\Website\Blog;
 
 use App\Domain\Command\Comment\SubmitComment;
 use App\Entity\Comment;

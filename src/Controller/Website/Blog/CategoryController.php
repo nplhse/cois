@@ -2,33 +2,29 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Website;
+namespace App\Controller\Website\Blog;
 
+use App\Entity\Category;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class FeedController extends AbstractController
+class CategoryController extends AbstractController
 {
     public function __construct(
         private readonly PostRepository $postRepository,
     ) {
     }
 
-    #[Route('/blog/rss.xml', defaults: ['page' => '1', '_format' => 'xml'], methods: ['GET'], name: 'app_blog_feed_rss')]
-    public function __invoke(Request $request): Response
+    #[Route('/blog/category/{slug}', name: 'app_blog_category')]
+    public function index(Category $category, Request $request): Response
     {
-        $paginator = $this->postRepository->getFeedPaginator($this->getPage($request));
+        $paginator = $this->postRepository->getCategoryPaginator($this->getPage($request), $category);
 
-        $rss = [
-            'title' => $this->getParameter('app.title'),
-            'description' => 'The Blog of '.$this->getParameter('app.title'),
-        ];
-
-        return $this->render('website/blog/rss.xml', [
-            'rss' => $rss,
+        return $this->render('website/blog/category.html.twig', [
+            'category' => $category,
             'paginator' => $paginator,
         ]);
     }

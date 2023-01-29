@@ -2606,6 +2606,10 @@
         <source>security.login.register</source>
         <target>Haben Sie noch kein Benutzerkonto?</target>
       </trans-unit>
+      <trans-unit id="hJx4mTk" resname="link.get_started">
+        <source>link.get_started</source>
+        <target>Hier klicken zum loslegen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

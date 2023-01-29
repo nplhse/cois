@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Website;
+namespace App\Controller\Website\Pages;
 
 use App\Domain\Enum\PageStatus;
 use App\Domain\Enum\PageType;

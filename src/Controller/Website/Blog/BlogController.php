@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Website;
+namespace App\Controller\Website\Blog;
 
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,27 +10,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ArchiveController extends AbstractController
+class BlogController extends AbstractController
 {
     public function __construct(
         private readonly PostRepository $postRepository,
     ) {
     }
 
-    #[Route('/blog/archive/{year}/{month?}', name: 'app_blog_archive')]
-    public function index(Request $request, int $year, ?int $month = null): Response
+    #[Route('/blog/', name: 'app_blog')]
+    public function __invoke(Request $request): Response
     {
-        if ($month) {
-            $archiveDate = date('F Y', mktime(0, 0, 0, $month, 1, $year));
-        } else {
-            $archiveDate = $year;
-        }
+        $paginator = $this->postRepository->getPaginator($this->getPage($request));
 
-        $paginator = $this->postRepository->getArchivePaginator($this->getPage($request), $year, $month);
-
-        return $this->render('website/blog/archive.html.twig', [
-            'archive_date' => $archiveDate,
+        return $this->render('website/blog/index.html.twig', [
             'paginator' => $paginator,
+            'sticky_posts' => $this->postRepository->findStickyPosts(),
         ]);
     }
 
