@@ -1,0 +1,393 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title.get_started'|trans({}, 'app') }} - {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    <main class="flex-shrink-0">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    {% block breadcrumbs %}
+                        {{
+                            component(
+                                'breadcrumb',
+                                {
+                                    items: [
+                                        {
+                                            label: 'title.get_started'|trans(
+                                                {},
+                                                'app'
+                                            )
+                                        }
+                                    ]
+                                }
+                            )
+                        }}
+                    {% endblock %}
+                </div>
+            </div>
+
+            <div class="row">
+                <h1 class="mb-3">
+                    {{ 'title.get_started'|trans({}, 'app') }}
+                </h1>
+                <p class="lead">
+                    {{ 'get_started.lead'|trans({}, 'app') }}
+                </p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-2 mb-3 text-center">
+                <div class="col d-flex align-items-center">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">
+                                {{
+                                    'title.get_started.user.head'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">
+                                {{
+                                    'title.get_started.user.price'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>
+                                    <i class="bi bi-check"></i>
+                                    {{
+                                        'title.get_started.user.everybody'|trans(
+                                            {},
+                                            'app'
+                                        )
+                                    }}
+                                </li>
+                                <li>
+                                    <i class="bi bi-check"></i>
+                                    {{
+                                        'title.get_started.user.commenting'|trans(
+                                            {},
+                                            'app'
+                                        )
+                                    }}
+                                </li>
+                                <li>
+                                    <i class="bi bi-check"></i>
+                                    {{
+                                        'title.get_started.user.filtersets'|trans(
+                                            {},
+                                            'app'
+                                        )
+                                    }}
+                                </li>
+                            </ul>
+                            <a href="{{ path('app_register') }}"
+                                class="w-100 btn btn-lg btn-outline-primary">
+                                {{
+                                    'title.get_started.user.signup'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                        <div class="card-header py-3 text-bg-primary border-primary">
+                            <h4 class="my-0 fw-normal">
+                                {{
+                                    'title.get_started.participant.head'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">
+                                {{
+                                    'title.get_started.participant.price'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>
+                                    <i class="bi bi-check"></i>
+                                    {{
+                                        'title.get_started.participant.commenting'|trans(
+                                            {},
+                                            'app'
+                                        )
+                                    }}
+                                </li>
+                                <li>
+                                    <i class="bi bi-check"></i>
+                                    {{
+                                        'title.get_started.participant.filtersets'|trans(
+                                            {},
+                                            'app'
+                                        )
+                                    }}
+                                </li>
+                                <li>
+                                    <i class="bi bi-check"></i>
+                                    {{
+                                        'title.get_started.participant.hospitals'|trans(
+                                            {},
+                                            'app'
+                                        )
+                                    }}
+                                </li>
+                                <li>
+                                    <i class="bi bi-check"></i>
+                                    {{
+                                        'title.get_started.participant.import_export'|trans(
+                                            {},
+                                            'app'
+                                        )
+                                    }}
+                                </li>
+                            </ul>
+                            <p class="small text-muted">
+                                {{
+                                    'title.get_started.participant.restrictions'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </p>
+                            <a href="{{ path('app_register') }}"
+                                class="w-100 btn btn-lg btn-primary">
+                                {{
+                                    'title.get_started.participant.signup'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="display-6 text-center mb-4">
+                {{ 'title.get_started.user.comparison'|trans({}, 'app') }}
+            </h2>
+
+            <div class="table-responsive mb-5">
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                            <th style="width: 34%;"></th>
+                            <th style="width: 22%;">
+                                {{
+                                    'title.get_started.table.anonymous'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </th>
+                            <th style="width: 22%;">
+                                {{
+                                    'title.get_started.table.user'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </th>
+                            <th style="width: 22%;">
+                                {{
+                                    'title.get_started.table.participant'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" class="text-start">
+                                {{
+                                    'title.get_started.table.blog'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </th>
+                            <td>
+                                <i class="bi bi-check"
+                                    style="width: 24px; height:24px">
+
+                                </i>
+                            </td>
+                            <td>
+                                <i class="bi bi-check"
+                                    style="width: 24px; height:24px">
+
+                                </i>
+                            </td>
+                            <td>
+                                <i class="bi bi-check"
+                                    style="width: 24px; height:24px">
+
+                                </i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">
+                                {{
+                                    'title.get_started.table.comment'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </th>
+                            <td></td>
+                            <td>
+                                <i class="bi bi-check"
+                                    style="width: 24px; height:24px">
+
+                                </i>
+                            </td>
+                            <td>
+                                <i class="bi bi-check"
+                                    style="width: 24px; height:24px">
+
+                                </i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">
+                                {{
+                                    'title.get_started.table.public_stats'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </th>
+                            <td>
+                                <i class="bi bi-check"
+                                    style="width: 24px; height:24px">
+
+                                </i>
+                            </td>
+                            <td>
+                                <i class="bi bi-check"
+                                    style="width: 24px; height:24px">
+
+                                </i>
+                            </td>
+                            <td>
+                                <i class="bi bi-check"
+                                    style="width: 24px; height:24px">
+
+                                </i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">
+                                {{
+                                    'title.get_started.table.filtersets'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </th>
+                            <td></td>
+                            <td>
+                                <i class="bi bi-check"
+                                    style="width: 24px; height:24px">
+
+                                </i>
+                            </td>
+                            <td>
+                                <i class="bi bi-check"
+                                    style="width: 24px; height:24px">
+
+                                </i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">
+                                {{
+                                    'title.get_started.table.hospitals'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </th>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <i class="bi bi-check"
+                                    style="width: 24px; height:24px">
+
+                                </i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">
+                                {{
+                                    'title.get_started.table.import_export'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </th>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <i class="bi bi-check"
+                                    style="width: 24px; height:24px">
+
+                                </i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="text-start">
+                                {{
+                                    'title.get_started.table.hospital_stats'|trans(
+                                        {},
+                                        'app'
+                                    )
+                                }}
+                            </th>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <i class="bi bi-check"
+                                    style="width: 24px; height:24px">
+
+                                </i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    {{ 'title.get_started.table.questions'|trans({}, 'app') }}
+                    <a class="text-decoration-none"
+                        href="{{ path('app_contact') }}">
+                        {{ 'link.to.contact'|trans({}, 'app') }}
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </main>
+{% endblock %}

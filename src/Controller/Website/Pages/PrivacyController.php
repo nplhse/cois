@@ -2,16 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Website;
+namespace App\Controller\Website\Pages;
 
 use App\Domain\Enum\PageStatus;
 use App\Domain\Enum\PageType;
+use App\Form\CookieConsentType;
 use App\Repository\PageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class TermsController extends AbstractController
+class PrivacyController extends AbstractController
 {
     public function __construct(
         private PageRepository $pageRepository
@@ -19,12 +20,14 @@ class TermsController extends AbstractController
     }
 
     #[Route(path: [
-        'en' => '/terms',
-        'de' => '/nutzungsbedingungen',
-    ], name: 'app_page_terms')]
+        'en' => '/privacy',
+        'de' => '/privatsphaere',
+    ], name: 'app_page_privacy')]
     public function index(): Response
     {
-        $page = $this->pageRepository->findOneBy(['type' => PageType::TERMS]);
+        $page = $this->pageRepository->findOneBy(['type' => PageType::PRIVACY]);
+
+        $form = $this->createForm(CookieConsentType::class);
 
         if (null === $page) {
             throw $this->createNotFoundException('Page could not be found');
@@ -38,8 +41,9 @@ class TermsController extends AbstractController
             throw $this->createAccessDeniedException('You can not access this page.');
         }
 
-        return $this->render('website/page/terms.html.twig', [
+        return $this->render('website/page/privacy.html.twig', [
             'page' => $page,
+            'consentForm' => $form,
         ]);
     }
 }

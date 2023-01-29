@@ -2529,6 +2529,10 @@
         <source>security.login.register</source>
         <target>Haven't already registered an account?</target>
       </trans-unit>
+      <trans-unit id="hJx4mTk" resname="link.get_started">
+        <source>link.get_started</source>
+        <target>Get started</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Website;
+namespace App\Controller\Website\Pages;
 
 use App\Domain\Enum\PageStatus;
 use App\Domain\Enum\PageType;
@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ImprintController extends AbstractController
+class TermsController extends AbstractController
 {
     public function __construct(
         private PageRepository $pageRepository
@@ -19,12 +19,12 @@ class ImprintController extends AbstractController
     }
 
     #[Route(path: [
-        'en' => '/imprint',
-        'de' => '/impressum',
-    ], name: 'app_page_imprint')]
+        'en' => '/terms',
+        'de' => '/nutzungsbedingungen',
+    ], name: 'app_page_terms')]
     public function index(): Response
     {
-        $page = $this->pageRepository->findOneBy(['type' => PageType::IMPRINT]);
+        $page = $this->pageRepository->findOneBy(['type' => PageType::TERMS]);
 
         if (null === $page) {
             throw $this->createNotFoundException('Page could not be found');
@@ -38,7 +38,7 @@ class ImprintController extends AbstractController
             throw $this->createAccessDeniedException('You can not access this page.');
         }
 
-        return $this->render('website/page/imprint.html.twig', [
+        return $this->render('website/page/terms.html.twig', [
             'page' => $page,
         ]);
     }

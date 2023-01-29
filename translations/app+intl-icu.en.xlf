@@ -395,6 +395,128 @@
         <source>features.statistics.database.text</source>
         <target>Due to security reasons we cannot provide a direct access to our database.</target>
       </trans-unit>
+      <trans-unit id="UpiW7T0" resname="title.get_started">
+        <source>title.get_started</source>
+        <target>Get started</target>
+      </trans-unit>
+      <trans-unit id="kGEjc4T" resname="get_started.lead">
+        <source>get_started.lead</source>
+        <target>This platform is intended to be used by employees of acute care hospitals in Hesse, who are using the
+          IVENA-system. After successful registration an administrator can promote a User to become a participant, what
+          will open access to all features of the plattform.
+        </target>
+      </trans-unit>
+      <trans-unit id="pxSxvET" resname="title.get_started.user.head">
+        <source>title.get_started.user.head</source>
+        <target>User</target>
+      </trans-unit>
+      <trans-unit id="5ZwESMi" resname="title.get_started.user.price">
+        <source>title.get_started.user.price</source>
+        <target>Free of charge</target>
+      </trans-unit>
+      <trans-unit id="1SkN47c" resname="title.get_started.user.everybody">
+        <source>title.get_started.user.everybody</source>
+        <target>Everybody can register an account.</target>
+      </trans-unit>
+      <trans-unit id="zj1l4yQ" resname="title.get_started.user.commenting">
+        <source>title.get_started.user.commenting</source>
+        <target>Users can comment without moderation.</target>
+      </trans-unit>
+      <trans-unit id="9sknmKy" resname="title.get_started.user.filtersets">
+        <source>title.get_started.user.filtersets</source>
+        <target>Users can save their own sets of filters</target>
+      </trans-unit>
+      <trans-unit id=".4VF9R." resname="title.get_started.user.signup">
+        <source>title.get_started.user.signup</source>
+        <target>Signup for free</target>
+      </trans-unit>
+      <trans-unit id="5h84ISL" resname="title.get_started.participant.head">
+        <source>title.get_started.participant.head</source>
+        <target>Participant</target>
+      </trans-unit>
+      <trans-unit id="mQTjcDB" resname="title.get_started.participant.price">
+        <source>title.get_started.participant.price</source>
+        <target>Free of charge</target>
+      </trans-unit>
+      <trans-unit id="lymt0q_" resname="title.get_started.participant.commenting">
+        <source>title.get_started.participant.commenting</source>
+        <target>Everything that Users can do</target>
+      </trans-unit>
+      <trans-unit id="bLJMpfe" resname="title.get_started.participant.filtersets">
+        <source>title.get_started.participant.filtersets</source>
+        <target>Access public and private hospital related statistics</target>
+      </trans-unit>
+      <trans-unit id="c4pFHdN" resname="title.get_started.participant.hospitals">
+        <source>title.get_started.participant.hospitals</source>
+        <target>Create and manage your own hospitals</target>
+      </trans-unit>
+      <trans-unit id="Ea7K0TQ" resname="title.get_started.participant.import_export">
+        <source>title.get_started.participant.import_export</source>
+        <target>Import and export filtered Data from our database</target>
+      </trans-unit>
+      <trans-unit id="8nT0tvt" resname="title.get_started.participant.restrictions">
+        <source>title.get_started.participant.restrictions</source>
+        <target>
+          This platform is intended to be used by employees of acute care hospitals in Hesse, who are using the
+          IVENA-system. After successful registration an administrator can promote a User to become a participant, what
+          will open access to all features of the plattform. Furthermore, every new hospital needs to import the last
+          three years of data from IVENA to be able to participate.
+        </target>
+      </trans-unit>
+      <trans-unit id="Pqb3jag" resname="title.get_started.participant.signup">
+        <source>title.get_started.participant.signup</source>
+        <target>Signup for free</target>
+      </trans-unit>
+      <trans-unit id="Gno0K8Y" resname="title.get_started.user.comparison">
+        <source>title.get_started.user.comparison</source>
+        <target>Compare the possibilities</target>
+      </trans-unit>
+      <trans-unit id="0yAUVXX" resname="title.get_started.table.anonymous">
+        <source>title.get_started.table.anonymous</source>
+        <target>Without user account</target>
+      </trans-unit>
+      <trans-unit id="KwdinaR" resname="title.get_started.table.user">
+        <source>title.get_started.table.user</source>
+        <target>As User with account</target>
+      </trans-unit>
+      <trans-unit id="_IkVpHh" resname="title.get_started.table.participant">
+        <source>title.get_started.table.participant</source>
+        <target>As Participant</target>
+      </trans-unit>
+      <trans-unit id="StMM_76" resname="title.get_started.table.blog">
+        <source>title.get_started.table.blog</source>
+        <target>View the latest news in our blog</target>
+      </trans-unit>
+      <trans-unit id="XKx8oCV" resname="title.get_started.table.comment">
+        <source>title.get_started.table.comment</source>
+        <target>Comment without moderation</target>
+      </trans-unit>
+      <trans-unit id="IWA.IRe" resname="title.get_started.table.public_stats">
+        <source>title.get_started.table.public_stats</source>
+        <target>View global statistics</target>
+      </trans-unit>
+      <trans-unit id="FHymPBR" resname="title.get_started.table.filtersets">
+        <source>title.get_started.table.filtersets</source>
+        <target>Save custom filtersets</target>
+      </trans-unit>
+      <trans-unit id="uuTXfGv" resname="title.get_started.table.hospitals">
+        <source>title.get_started.table.hospitals</source>
+        <target>Create and manage hospitals</target>
+      </trans-unit>
+      <trans-unit id="ZPmjdO6" resname="title.get_started.table.import_export">
+        <source>title.get_started.table.import_export</source>
+        <target>Import and export data</target>
+      </trans-unit>
+      <trans-unit id="Ncrshdv" resname="title.get_started.table.hospital_stats">
+        <source>title.get_started.table.hospital_stats</source>
+        <target>View hospital related statistics</target>
+      </trans-unit>
+      <trans-unit id="_KpwIfM" resname="title.get_started.table.questions">
+        <source>title.get_started.table.questions</source>
+        <target>Do you have any further questions regarding user accounts or the possibilities of this platform? Please
+          do not hesitate to contact us via our contact form.
+        </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
