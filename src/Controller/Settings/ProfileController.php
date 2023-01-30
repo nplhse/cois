@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Settings;
 
-use App\Domain\Command\User\ChangeUsernameCommand;
+use App\Domain\Command\User\ChangeProfileCommand;
 use App\Entity\User;
 use App\Form\User\ProfileChangeType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -34,7 +34,14 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $command = new ChangeUsernameCommand($user->getId(), $form->get('username')->getData());
+            $command = new ChangeProfileCommand(
+                $user->getId(),
+                $form->get('username')->getData(),
+                $form->get('fullName')->getData(),
+                $form->get('biography')->getData(),
+                $form->get('location')->getData(),
+                $form->get('website')->getData(),
+            );
 
             try {
                 $this->messageBus->dispatch($command);

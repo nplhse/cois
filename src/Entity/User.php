@@ -63,6 +63,18 @@ class User extends DomainUser implements UserInterface, PasswordAuthenticatedUse
     #[ORM\Column(type: \Doctrine\DBAL\Types\Types::BOOLEAN)]
     protected bool $hasCredentialsExpired = false;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $fullName = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $location = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $biography = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $website = null;
+
     /**
      * @param array<string> $roles
      *
@@ -100,5 +112,62 @@ class User extends DomainUser implements UserInterface, PasswordAuthenticatedUse
     public function isMember(): bool
     {
         return in_array('ROLE_MEMBER', $this->roles, true);
+    }
+
+    public function getFullName(): ?string
+    {
+        return $this->fullName;
+    }
+
+    public function setFullName(?string $fullName): self
+    {
+        $this->fullName = $fullName;
+
+        return $this;
+    }
+
+    public function getName(): string
+    {
+        if ($this->fullName) {
+            return $this->fullName;
+        }
+
+        return $this->username;
+    }
+
+    public function getLocation(): ?string
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?string $location): self
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    public function getBiography(): ?string
+    {
+        return $this->biography;
+    }
+
+    public function setBiography(?string $biography): self
+    {
+        $this->biography = $biography;
+
+        return $this;
+    }
+
+    public function getWebsite(): ?string
+    {
+        return $this->website;
+    }
+
+    public function setWebsite(?string $website): self
+    {
+        $this->website = $website;
+
+        return $this;
     }
 }

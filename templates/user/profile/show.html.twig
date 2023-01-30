@@ -1,0 +1,202 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{
+        'title.user.profile'|trans(
+            {
+                username: user.name
+            },
+            'app'
+        )
+    }} - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {% block breadcrumbs %}
+                    {{
+                        component(
+                            'breadcrumb',
+                            {
+                                items: [
+                                    {
+                                        label: 'title.user.profile'|trans(
+                                            {
+                                                username: user.name
+                                            },
+                                            'app'
+                                        )
+                                    }
+                                ]
+                            }
+                        )
+                    }}
+                {% endblock %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="position-sticky">
+                    <div class="card">
+                        <svg class="bd-placeholder-img card-img-top"
+                            width="100%"
+                            height="180"
+                            xmlns="http://www.w3.org/2000/svg"
+                            role="img"
+                            aria-label="Placeholder: Image cap"
+                            preserveAspectRatio="xMidYMid slice"
+                            focusable="false">
+                            <title>
+                                Placeholder
+                            </title>
+                            <rect width="100%"
+                                height="100%"
+                                fill="#868e96"></rect>
+                        </svg>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                {{ user.name }}
+                            </h5>
+                            {% if user.biography %}
+                                <p class="card-text">
+                                    {{ user.biography }}
+                                </p>
+                            {% endif %}
+                            <p>
+                                {% if user.admin %}
+                                    <span class="badge rounded-pill text-bg-primary">
+                                        <i class="bi bi-shield-check"></i> Administrator
+                                    </span>
+                                {% endif %}
+                                {% if user.member %}
+                                    <span class="badge rounded-pill text-bg-primary">
+                                        <i class="bi bi-person-fill"></i> Member
+                                    </span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            {% if user.location %}
+                                <li class="list-group-item">
+                                    <i class="bi bi-geo-alt"></i>
+                                    {{ user.location }}
+                                </li>
+                            {% endif %}
+                            {% if user.website %}
+                                <li class="list-group-item">
+                                    <i class="bi bi-link"></i>
+                                    <a href="{{ user.website }}">
+                                        {{ user.website }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if is_granted('ROLE_USER') %}
+                                <li class="list-group-item">
+                                    <i class="bi bi-envelope-at"></i>
+                                    <a href="mailto:{{ user.email }}">
+                                        {{ user.email }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <h2 class="border-bottom mb-2">
+                    {{ 'hospitals.title'|trans }}
+                </h2>
+                {% for row in user.hospitals|batch(2, null) %}
+                    <div class="row">
+                        {% for hospital in row %}
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    {% if hospital.owner == app.user %}
+                                        <div class="card-header bg-primary bg-opacity-25"></div>
+                                    {% else %}
+                                        <div class="card-header"></div>
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <a href="{{
+                                                path(
+                                                    'app_hospital_show',
+                                                    {
+                                                        id: hospital.id
+                                                    }
+                                                )
+                                                }}">
+                                                {{ hospital.name }}
+                                            </a>
+                                        </h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">
+                                            {{ hospital.owner }}
+                                        </h6>
+
+                                        <p class="m-0">
+                                            <span class="badge bg-secondary">
+                                                <i class="bi bi-flag"></i>
+                                                <a class="link-light" href="#">
+                                                    {{ hospital.state.name }}
+                                                </a>
+                                            </span>
+
+                                            <span class="badge bg-secondary">
+                                                <i class="bi bi-geo-alt"></i>
+                                                <a class="link-light" href="#">
+                                                    {{
+                                                        hospital.dispatchArea.name
+                                                    }}
+                                                </a>
+                                            </span>
+
+                                            {% if hospital.supplyArea %}
+                                                <span class="badge bg-secondary">
+                                                    <i class="bi bi-geo"></i>
+                                                    <a class="link-light"
+                                                        href="#">
+                                                        {{
+                                                            hospital.supplyArea.name
+                                                        }}
+                                                    </a>
+                                                </span>
+                                            {% endif %}
+
+                                            <span class="badge bg-secondary">
+                                                <i class="bi bi-tag"></i>
+                                                <a class="link-light" href="#">
+                                                    {{ hospital.location }}
+                                                </a>
+                                            </span>
+
+                                            {% set size = (hospital.size|trans)
+                                                ~ ' ('
+                                                ~ hospital.beds
+                                                ~ ' '
+                                                ~ ('Beds'|trans)
+                                                ~ ')'
+                                            %}
+
+                                            <span class="badge bg-secondary">
+                                                <i class="bi bi-tag"></i>
+                                                <a class="link-light" href="#">
+                                                    {{ size }}
+                                                </a>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    No hospitals found.
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

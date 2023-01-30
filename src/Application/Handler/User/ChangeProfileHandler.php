@@ -6,12 +6,12 @@ namespace App\Application\Handler\User;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\User\ChangeUsernameCommand;
+use App\Domain\Command\User\ChangeProfileCommand;
 use App\Domain\Event\User\UserChangedUsernameEvent;
 use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
 
-class ChangeUsernameHandler implements HandlerInterface
+class ChangeProfileHandler implements HandlerInterface
 {
     use EventDispatcherTrait;
 
@@ -20,12 +20,16 @@ class ChangeUsernameHandler implements HandlerInterface
     ) {
     }
 
-    public function __invoke(ChangeUsernameCommand $command): void
+    public function __invoke(ChangeProfileCommand $command): void
     {
         /** @var User $user */
         $user = $this->userRepository->findOneById($command->getId());
 
         $user->setUsername($command->getUsername());
+        $user->setFullName($command->getFullName());
+        $user->setBiography($command->getBiography());
+        $user->setLocation($command->getLocation());
+        $user->setWebsite($command->getWebsite());
 
         $this->userRepository->save();
 
