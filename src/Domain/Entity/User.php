@@ -36,6 +36,14 @@ class User implements UserInterface, TimestampableInterface, \Stringable
 
     protected ?bool $acceptedTerms = false;
 
+    protected ?string $fullName = null;
+
+    protected ?string $location = null;
+
+    protected ?string $biography = null;
+
+    protected ?string $website = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('NOW');
@@ -221,6 +229,63 @@ class User implements UserInterface, TimestampableInterface, \Stringable
     public function expireCredentials(): self
     {
         $this->hasCredentialsExpired = true;
+
+        return $this;
+    }
+
+    public function getFullName(): ?string
+    {
+        return $this->fullName;
+    }
+
+    public function setFullName(?string $fullName): self
+    {
+        $this->fullName = $fullName;
+
+        return $this;
+    }
+
+    public function getName(): string
+    {
+        if ($this->fullName) {
+            return $this->fullName;
+        }
+
+        return $this->username;
+    }
+
+    public function getLocation(): ?string
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?string $location): self
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    public function getBiography(): ?string
+    {
+        return $this->biography;
+    }
+
+    public function setBiography(?string $biography): self
+    {
+        $this->biography = $biography;
+
+        return $this;
+    }
+
+    public function getWebsite(): ?string
+    {
+        return $this->website;
+    }
+
+    public function setWebsite(?string $website): self
+    {
+        $this->website = $website;
 
         return $this;
     }

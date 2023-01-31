@@ -55,4 +55,14 @@ interface UserInterface
     public function hasCredentialsExpired(): bool;
 
     public function expireCredentials(): self;
+
+    public function getFullname(): ?string;
+
+    public function getName(): string;
+
+    public function getLocation(): ?string;
+
+    public function getBiography(): ?string;
+
+    public function getWebsite(): ?string;
 }

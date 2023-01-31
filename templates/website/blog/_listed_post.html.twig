@@ -20,14 +20,23 @@
                     },
                     'app'
                 )
-            }}, {{
-                'blog.posted_by'|trans(
+            }}, <a href="{{
+                path(
+                    'app_user_profile',
                     {
-                        user: post.createdBy
-                    },
-                    'app'
+                        username: post.createdBy.username
+                    }
                 )
-            }}
+                }}">
+                {{
+                    'blog.posted_by'|trans(
+                        {
+                            user: post.createdBy.name
+                        },
+                        'app'
+                    )
+                }}
+            </a>
         </p>
         <p>
             {% if post.teaser %}
