@@ -517,6 +517,10 @@
           do not hesitate to contact us via our contact form.
         </target>
       </trans-unit>
+      <trans-unit id="0oZVns0" resname="title.user.profile">
+        <source>title.user.profile</source>
+        <target>Showing User profile: {username}</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

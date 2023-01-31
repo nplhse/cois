@@ -2533,6 +2533,10 @@
         <source>link.get_started</source>
         <target>Get started</target>
       </trans-unit>
+      <trans-unit id="hkC1C9x" resname="View your profile">
+        <source>View your profile</source>
+        <target>View your profile</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
