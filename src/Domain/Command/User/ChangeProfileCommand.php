@@ -8,7 +8,6 @@ class ChangeProfileCommand
 {
     public function __construct(
         private int $id,
-        private string $username,
         private ?string $fullName,
         private ?string $biography,
         private ?string $location,
@@ -19,11 +18,6 @@ class ChangeProfileCommand
     public function getId(): int
     {
         return $this->id;
-    }
-
-    public function getUsername(): string
-    {
-        return $this->username;
     }
 
     public function getFullName(): ?string

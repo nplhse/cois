@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[UniqueEntity(fields: ['username'], message: 'Please choose a different username')]
 #[UniqueEntity(fields: ['email'], message: 'Please choose a different email address')]
@@ -69,6 +70,9 @@ class User extends DomainUser implements UserInterface, PasswordAuthenticatedUse
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $location = null;
 
+    #[Assert\Length(
+        max: 255,
+    )]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $biography = null;
 

@@ -15,7 +15,16 @@
                         {% if user.isAdmin %}
                             <li>
                                 <i class="bi bi-shield-exclamation"></i>
-                                {{ user.username }}
+                                <a href="{{
+                                    path(
+                                        'app_user_profile',
+                                        {
+                                            username: user.username
+                                        }
+                                    )
+                                    }}">
+                                    {{ user.name }}
+                                </a>
                             </li>
                         {% endif %}
                     {% endfor %}
@@ -28,7 +37,16 @@
                         {% if user.isMember %}
                             <li>
                                 <i class="bi bi-person-fill"></i>
-                                {{ user.name }}
+                                <a href="{{
+                                    path(
+                                        'app_user_profile',
+                                        {
+                                            username: user.username
+                                        }
+                                    )
+                                    }}">
+                                    {{ user.name }}
+                                </a>
                             </li>
                         {% endif %}
                     {% endfor %}

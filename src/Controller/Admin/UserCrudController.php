@@ -57,6 +57,14 @@ class UserCrudController extends AbstractCrudController
             BooleanField::new('hasCredentialsExpired')
                 ->renderAsSwitch(false)
                 ->hideOnIndex(),
+            TextField::new('fullName')
+                ->hideOnIndex(),
+            TextField::new('biography')
+                ->hideOnIndex(),
+            TextField::new('location')
+                ->hideOnIndex(),
+            TextField::new('website')
+                ->hideOnIndex(),
             DateField::new('createdAt')
                 ->hideOnForm(),
             DateField::new('updatedAt')

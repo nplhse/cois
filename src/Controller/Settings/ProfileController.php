@@ -36,7 +36,6 @@ class ProfileController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $command = new ChangeProfileCommand(
                 $user->getId(),
-                $form->get('username')->getData(),
                 $form->get('fullName')->getData(),
                 $form->get('biography')->getData(),
                 $form->get('location')->getData(),

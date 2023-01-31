@@ -37,6 +37,18 @@
             </div>
         </div>
 
+        {% if app.user == user %}
+            {{
+                component(
+                    'alert',
+                    {
+                        type: 'info',
+                        message: 'Ihre E-Mail Adresse wird nur anderen Teilnehmern angezeigt.'
+                    }
+                )
+            }}
+        {% endif %}
+
         <div class="row">
             <div class="col-md-3">
                 <div class="position-sticky">
@@ -73,7 +85,7 @@
                                 {% endif %}
                                 {% if user.member %}
                                     <span class="badge rounded-pill text-bg-primary">
-                                        <i class="bi bi-person-fill"></i> Member
+                                        <i class="bi bi-person-fill"></i> Board-Member
                                     </span>
                                 {% endif %}
                             </p>

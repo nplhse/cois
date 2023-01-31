@@ -312,7 +312,7 @@
       </trans-unit>
       <trans-unit id="Q_D63EU" resname="features.hospitals.size.text">
         <source>features.hospitals.size.text</source>
-        <target>Kliniken werden nach Anzahl der Betten in groß (über 750), mittel und klein (unter 150) eingeteilt.</target>
+        <target>Kliniken werden nach Anzahl der Betten in groß (über 750), mittel und klein (unter 250) eingeteilt.</target>
       </trans-unit>
       <trans-unit id="0C._ao4" resname="features.explore.heading">
         <source>features.explore.heading</source>
@@ -529,6 +529,10 @@
         <source>title.get_started.table.questions</source>
         <target>Haben Sie noch weitere Fragen zu Benutzerkonten, oder den Möglichkeiten dieser Plattform? Kein Problem!
           Wir stehen Ihnen gerne über unser Kontaktformular mit weiteren Informationen zur Verfügung.</target>
+      </trans-unit>
+      <trans-unit id="0oZVns0" resname="title.user.profile">
+        <source>title.user.profile</source>
+        <target>Zeige Benutzerprofil: {username}</target>
       </trans-unit>
     </body>
   </file>
