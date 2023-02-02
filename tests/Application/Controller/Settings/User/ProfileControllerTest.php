@@ -18,7 +18,7 @@ class ProfileControllerTest extends WebTestCase
     {
         $this->markTestSkipped();
 
-        /**
+        /*
         $userRepository = static::getContainer()->get(UserRepository::class);
         $testUser = $userRepository->findOneBy(['username' => 'foo']);
 
