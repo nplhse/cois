@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
+use App\Domain\Enum\HospitalLocation;
+use App\Domain\Enum\HospitalTier;
 use App\Entity\Hospital;
 use App\Repository\HospitalRepository;
 use Zenstruck\Foundry\ModelFactory;
@@ -42,7 +44,8 @@ final class HospitalFactory extends ModelFactory
             'address' => self::faker()->address(),
             'createdAt' => self::faker()->dateTimeThisDecade(),
             'beds' => self::faker()->numberBetween(100, 1500),
-            'location' => self::faker()->randomElement([Hospital::LOCATION_URBAN, Hospital::LOCATION_RURAL]),
+            'location' => self::faker()->randomElement([HospitalLocation::RURAL, HospitalLocation::URBAN]),
+            'tier' => self::faker()->randomElement([HospitalTier::EXTENDED, HospitalTier::BASIC, HospitalTier::FULL]),
         ];
     }
 

@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
-use App\Domain\Enum\HospitalLocation;
+use App\Domain\Enum\HospitalTier;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\HttpFoundation\Request;
 
-class LocationFilter implements FilterInterface
+class TierFilter implements FilterInterface
 {
     use FilterTrait;
 
-    public const Param = 'location';
+    public const Param = 'tier';
 
     public function getValue(Request $request): mixed
     {
-        $location = $request->query->get('location');
+        $location = $request->query->get('tier');
 
         if (empty($location)) {
             $value = null;
@@ -27,7 +27,7 @@ class LocationFilter implements FilterInterface
             $value = urldecode($location);
         }
 
-        if (!in_array($value, HospitalLocation::getValues(), true)) {
+        if (!in_array($value, HospitalTier::getValues(), true)) {
             $value = null;
         }
 
@@ -42,8 +42,8 @@ class LocationFilter implements FilterInterface
             return $qb;
         }
 
-        $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'location = :location')
-                ->setParameter('location', $location)
+        $qb->andWhere($arguments[FilterService::ENTITY_ALIAS].'tier = :tier')
+                ->setParameter('tier', $location)
         ;
 
         return $qb;

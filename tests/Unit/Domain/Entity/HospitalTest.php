@@ -11,6 +11,7 @@ use App\Domain\Contracts\UserInterface;
 use App\Domain\Entity\Hospital;
 use App\Domain\Entity\Import;
 use App\Domain\Entity\User;
+use App\Domain\Enum\HospitalSize;
 use PHPUnit\Framework\TestCase;
 
 class HospitalTest extends TestCase
@@ -116,21 +117,6 @@ class HospitalTest extends TestCase
         $this->assertEquals($areaName, $hospital->getSupplyArea()->getName());
     }
 
-    public function testSize(): void
-    {
-        $validSize = Hospital::SIZE_MEDIUM;
-        $invalidSize = 'invalidSize';
-
-        $hospital = new Hospital();
-
-        $hospital->setSize($validSize);
-        $this->assertEquals($validSize, $hospital->getSize());
-
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Size invalidSize is not a valid option');
-        $hospital->setSize($invalidSize);
-    }
-
     public function testBeds(): void
     {
         $valid = Hospital::BEDS_SMALL_HOSPITAL;
@@ -142,19 +128,19 @@ class HospitalTest extends TestCase
         $this->assertEquals($valid, $hospital->getBeds());
 
         $hospital->setBeds(Hospital::BEDS_SMALL_HOSPITAL - 10);
-        $this->assertEquals(Hospital::SIZE_SMALL, $hospital->getSize());
+        $this->assertEquals(HospitalSize::SMALL, $hospital->getSize());
 
         $hospital->setBeds(Hospital::BEDS_SMALL_HOSPITAL);
-        $this->assertEquals(Hospital::SIZE_SMALL, $hospital->getSize());
+        $this->assertEquals(HospitalSize::SMALL, $hospital->getSize());
 
         $hospital->setBeds(Hospital::BEDS_SMALL_HOSPITAL + 10);
-        $this->assertEquals(Hospital::SIZE_MEDIUM, $hospital->getSize());
+        $this->assertEquals(HospitalSize::MEDIUM, $hospital->getSize());
 
         $hospital->setBeds(Hospital::BEDS_LARGE_HOSPITAL);
-        $this->assertEquals(Hospital::SIZE_LARGE, $hospital->getSize());
+        $this->assertEquals(HospitalSize::LARGE, $hospital->getSize());
 
         $hospital->setBeds(Hospital::BEDS_LARGE_HOSPITAL + 10);
-        $this->assertEquals(Hospital::SIZE_LARGE, $hospital->getSize());
+        $this->assertEquals(HospitalSize::LARGE, $hospital->getSize());
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Beds must be positive integer, not 0');
@@ -163,21 +149,6 @@ class HospitalTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Beds must be positive integer, not -10');
         $hospital->setBeds($invalid - 10);
-    }
-
-    public function testLocation(): void
-    {
-        $validLocation = Hospital::LOCATION_URBAN;
-        $invalidLocation = 'invalidLocation';
-
-        $hospital = new Hospital();
-
-        $hospital->setLocation($validLocation);
-        $this->assertEquals($validLocation, $hospital->getLocation());
-
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Location invalidLocation is not a valid option');
-        $hospital->setLocation($invalidLocation);
     }
 
     public function testId(): void

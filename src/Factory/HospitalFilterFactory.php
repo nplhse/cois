@@ -15,6 +15,7 @@ use App\Service\Filters\SearchFilter;
 use App\Service\Filters\SizeFilter;
 use App\Service\Filters\StateFilter;
 use App\Service\Filters\SupplyAreaFilter;
+use App\Service\Filters\TierFilter;
 
 class HospitalFilterFactory extends AbstractFilterFactory
 {
@@ -24,6 +25,7 @@ class HospitalFilterFactory extends AbstractFilterFactory
             LocationFilter::Param,
             SizeFilter::Param,
             StateFilter::Param,
+            TierFilter::Param,
             DispatchAreaFilter::Param,
             SupplyAreaFilter::Param,
             OwnHospitalFilter::Param,

@@ -7,9 +7,9 @@ namespace App\Form;
 use App\Entity\Hospital;
 use App\Form\Filters\DispatchAreaType;
 use App\Form\Filters\LocationType;
-use App\Form\Filters\SizeType;
 use App\Form\Filters\StateType;
 use App\Form\Filters\SupplyAreaType;
+use App\Form\Filters\TierType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,7 +28,7 @@ class HospitalType extends AbstractType
             ->add('dispatchArea', DispatchAreaType::class, [
                 'required' => true,
             ])
-            ->add('size', SizeType::class, [
+            ->add('tier', TierType::class, [
                 'required' => true,
             ])
             ->add('location', LocationType::class, [

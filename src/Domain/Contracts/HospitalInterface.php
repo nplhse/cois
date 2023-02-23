@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Domain\Contracts;
 
 use App\Domain\Adapter\ArrayCollection;
+use App\Domain\Enum\HospitalLocation;
+use App\Domain\Enum\HospitalSize;
 use Doctrine\Common\Collections\Collection;
 
 interface HospitalInterface
@@ -41,17 +43,17 @@ interface HospitalInterface
 
     public function getSupplyArea(): ?SupplyAreaInterface;
 
-    public function setSize(string $size): self;
+    public function setSize(HospitalSize $size): self;
 
-    public function getSize(): string;
+    public function getSize(): HospitalSize;
 
     public function setBeds(int $beds): self;
 
     public function getBeds(): int;
 
-    public function setLocation(string $location): self;
+    public function setLocation(HospitalLocation $location): self;
 
-    public function getLocation(): string;
+    public function getLocation(): HospitalLocation;
 
     public function addImport(ImportInterface $import): self;
 

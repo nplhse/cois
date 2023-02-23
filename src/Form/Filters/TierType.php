@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace App\Form\Filters;
 
-use App\Domain\Enum\HospitalSize;
+use App\Domain\Enum\HospitalTier;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SizeType extends AbstractType
+class TierType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'class' => HospitalSize::class,
+            'class' => HospitalTier::class,
             'required' => false,
-            'placeholder' => 'All sizes',
+            'placeholder' => 'All tiers',
             'choice_label' => fn ($choice) => match ($choice) {
-                HospitalSize::SMALL => HospitalSize::SMALL->value,
-                HospitalSize::MEDIUM => HospitalSize::MEDIUM->value,
-                HospitalSize::LARGE => HospitalSize::LARGE->value,
+                HospitalTier::BASIC => HospitalTier::BASIC->value,
+                HospitalTier::EXTENDED => HospitalTier::EXTENDED->value,
+                HospitalTier::FULL => HospitalTier::FULL->value,
                 default => '',
             },
-            'choices' => HospitalSize::cases(),
+            'choices' => HospitalTier::cases(),
         ]);
     }
 
