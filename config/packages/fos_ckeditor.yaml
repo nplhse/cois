@@ -8,6 +8,39 @@ fos_ck_editor:
     configs:
         my_config:
             toolbar: standard
+            stylesSet: "cois"
+
+    styles:
+        cois:
+            - { name: "Strikethrough", element: "del" }
+            - { name: "Insertion", element: "ins" }
+            - { name: "Highlight", element: "mark" }
+            - { name: "Lead", element: "p", attributes: { class: "lead" } }
+            - {
+                  name: "Blockquote",
+                  element: "blockquote",
+                  attributes: { class: "blockquote" },
+              }
+            - {
+                  name: "Callout Light",
+                  element: "div",
+                  attributes: { class: "callout callout-light" },
+              }
+            - {
+                  name: "Callout Info",
+                  element: "div",
+                  attributes: { class: "callout callout-info" },
+              }
+            - {
+                  name: "Callout Warning",
+                  element: "div",
+                  attributes: { class: "callout callout-warning" },
+              }
+            - {
+                  name: "Callout Danger",
+                  element: "div",
+                  attributes: { class: "callout callout-danger" },
+              }
 
 easy_admin:
     design:

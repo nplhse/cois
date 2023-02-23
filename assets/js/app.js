@@ -10,8 +10,7 @@ import "./bootstrap";
 
 // Import bootstrap and styles
 import "bootstrap";
-import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import "../../node_modules/bootstrap-icons/font/bootstrap-icons.css";
+//import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
-// Import custom styles
+// Import styles
 import "../styles/app.scss";

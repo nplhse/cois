@@ -1,0 +1,48 @@
+.callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    color: var(--bd-callout-color, inherit);
+    background-color: var(--bd-callout-bg, var(--bs-gray-100));
+    border-left: 0.25rem solid var(--bd-callout-border, var(--bs-gray-300));
+}
+
+.callout h4 {
+    margin-bottom: 0.25rem;
+}
+
+.callout > :last-child {
+    margin-bottom: 0;
+}
+
+.callout + .bd-callout {
+    margin-top: -0.25rem;
+}
+
+.callout .highlight {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.callout-info {
+    --callout-color: var(--bs-info-text);
+    --callout-bg: var(--bs-info-bg-subtle);
+    --callout-border: var(--bs-info-border-subtle);
+}
+
+.callout-light {
+    --callout-color: var(--bs-light-text);
+    --callout-bg: var(--bs-light-bg-subtle);
+    --callout-border: var(--bs-light-border-subtle);
+}
+
+.callout-warning {
+    --callout-color: var(--bs-warning-text);
+    --callout-bg: var(--bs-warning-bg-subtle);
+    --callout-border: var(--bs-warning-border-subtle);
+}
+
+.callout-danger {
+    --callout-color: var(--bs-danger-text);
+    --callout-bg: var(--bs-danger-bg-subtle);
+    --callout-cborder: var(--bs-danger-border-subtle);
+}
