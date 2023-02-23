@@ -45,7 +45,7 @@ add('writable_dirs', [
 import('hosts.yaml');
 
 // Setup cachetool
-set('cachetool_args', '--web=SymfonyHttpClient --web-path=./{{public_path}} --web-url=https://{{hostname}}');
+set('cachetool_args', '--web=SymfonyHttpClient --web-path=./public --web-url=https://{{hostname}}');
 
 /*
  * Because deployment might fail when installing the yarn dependencies and the
