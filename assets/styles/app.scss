@@ -1,104 +1,71 @@
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import "bootstrap/scss/functions";
+
+// 2. Include any default variable overrides here
+
+// 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+
+// 4. Include any default map overrides here
+
+// 5. Include remainder of required parts
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/root";
+
+// 6. Optionally include any other parts as needed
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/tables";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/dropdown";
+@import "bootstrap/scss/button-group";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/accordion";
+@import "bootstrap/scss/breadcrumb";
+@import "bootstrap/scss/pagination";
+@import "bootstrap/scss/badge";
+@import "bootstrap/scss/alert";
+// @import "bootstrap/scss/progress";
+@import "bootstrap/scss/list-group";
+@import "bootstrap/scss/close";
+// @import "bootstrap/scss/toasts";
+@import "bootstrap/scss/modal";
+// @import "bootstrap/scss/tooltip";
+@import "bootstrap/scss/popover";
+// @import "bootstrap/scss/carousel";
+// @import "bootstrap/scss/spinners";
+@import "bootstrap/scss/offcanvas";
+// @import "bootstrap/scss/placeholders";
+@import "bootstrap/scss/helpers";
+
+// 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
+@import "bootstrap/scss/utilities/api";
+
+// 8. Add additional custom imports here
+@import "bootstrap-icons";
+@import "sidebar.scss";
+@import "turbo-frames.scss";
+@import "forms.scss";
+@import "feature.scss";
+@import "callout.scss";
+@import "search.scss";
+
+// 8. Add additional custom code here
 body {
     transition: opacity 200ms;
 }
 
 main {
     padding-top: 1rem;
-}
-
-.feature {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 4rem;
-    width: 4rem;
-    font-size: 2rem;
-}
-
-.feature-icon-small {
-    width: 3rem;
-    height: 3rem;
-}
-
-/**
- * Forms
- */
-
-.form-group {
-    margin-bottom: 1rem;
-}
-
-.modal-body button {
-    display: none;
-}
-
-/*
- * Hide elements in search
- */
-
-.filter--notFound {
-    display: none;
-}
-
-/*
- * Turbo frames
- */
-turbo-frame[busy] {
-    opacity: 20%;
-    /* visibility: hidden; */
-}
-
-turbo-frame[busy] ~ .loading-ring {
-    display: inline-block;
-}
-
-.relative {
-    position: relative;
-}
-
-.hidden {
-    display: none;
-}
-
-.fixed-center-block {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: auto;
-    margin-bottom: auto;
-    position: absolute;
-    inset: 0px 0px 0px 0px;
-}
-
-.loading-ring {
-    width: 80px;
-    height: 80px;
-}
-.loading-ring div {
-    box-sizing: border-box;
-    display: block;
-    position: absolute;
-    width: 64px;
-    height: 64px;
-    margin: 8px;
-    border: 8px solid #333;
-    border-radius: 50%;
-    animation: loading-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #333 transparent transparent transparent;
-}
-.loading-ring div:nth-child(1) {
-    animation-delay: -0.45s;
-}
-.loading-ring div:nth-child(2) {
-    animation-delay: -0.3s;
-}
-.loading-ring div:nth-child(3) {
-    animation-delay: -0.15s;
-}
-@keyframes loading-ring {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
 }
