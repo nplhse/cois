@@ -2537,6 +2537,26 @@
         <source>View your profile</source>
         <target>View your profile</target>
       </trans-unit>
+      <trans-unit id="q2u3faS" resname="All tiers">
+        <source>All tiers</source>
+        <target>All tiers</target>
+      </trans-unit>
+      <trans-unit id="DjX26XQ" resname="Basic">
+        <source>Basic</source>
+        <target>Basic</target>
+      </trans-unit>
+      <trans-unit id="l7Fl8vT" resname="Extended">
+        <source>Extended</source>
+        <target>Extended</target>
+      </trans-unit>
+      <trans-unit id="AI2sttH" resname="Full">
+        <source>Full</source>
+        <target>Full</target>
+      </trans-unit>
+      <trans-unit id="y56GZO3" resname="Tier">
+        <source>Tier</source>
+        <target>Tier</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
