@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
-use App\Domain\Entity\Hospital;
+use App\Domain\Enum\HospitalSize;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
@@ -17,8 +17,6 @@ class SizeFilter implements FilterInterface
 
     public const Param = 'size';
 
-    public const Sizes = [Hospital::SIZE_SMALL, Hospital::SIZE_MEDIUM, Hospital::SIZE_LARGE];
-
     public function getValue(Request $request): mixed
     {
         $size = $request->query->get('size');
@@ -29,7 +27,7 @@ class SizeFilter implements FilterInterface
             $value = urldecode($size);
         }
 
-        if (!in_array($value, self::Sizes, true)) {
+        if (!in_array($value, HospitalSize::getValues(), true)) {
             $value = null;
         }
 

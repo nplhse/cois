@@ -28,6 +28,7 @@ class HospitalFilterSetType extends AbstractType
         $builder
             ->add('location', LocationType::class)
             ->add('size', SizeType::class)
+            ->add('tier', TierType::class)
             ->add('state', StateType::class)
             ->add('supplyArea', SupplyAreaType::class)
             ->add('dispatchArea', DispatchAreaType::class)

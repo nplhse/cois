@@ -117,7 +117,7 @@ class HospitalController extends AbstractController
                 $hospital->getSupplyArea(),
                 $hospital->getLocation(),
                 $hospital->getBeds(),
-                $hospital->getSize()
+                $hospital->getTier()
             );
 
             try {
@@ -127,7 +127,7 @@ class HospitalController extends AbstractController
             }
 
             /** @var ?HospitalInterface $hospital */
-            $hospital = $hospitalRepository->findOneByTriplet($command->getName(), $command->getLocation(), $command->getBeds());
+            $hospital = $hospitalRepository->findOneByTriplet($command->getName(), $command->getLocation()->value, $command->getBeds());
 
             if (null === $hospital) {
                 throw new \RuntimeException('Sorry, something went wrong. Please try again later.');
@@ -166,7 +166,7 @@ class HospitalController extends AbstractController
                 $hospital->getSupplyArea(),
                 $hospital->getLocation(),
                 $hospital->getBeds(),
-                $hospital->getSize()
+                $hospital->getTier()
             );
 
             try {

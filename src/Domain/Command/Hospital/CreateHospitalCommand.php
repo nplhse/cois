@@ -8,6 +8,8 @@ use App\Domain\Contracts\DispatchAreaInterface;
 use App\Domain\Contracts\StateInterface;
 use App\Domain\Contracts\SupplyAreaInterface;
 use App\Domain\Contracts\UserInterface;
+use App\Domain\Enum\HospitalLocation;
+use App\Domain\Enum\HospitalTier;
 
 class CreateHospitalCommand
 {
@@ -18,9 +20,9 @@ class CreateHospitalCommand
         private ?StateInterface $state,
         private ?DispatchAreaInterface $dispatchArea,
         private ?SupplyAreaInterface $supplyArea,
-        private string $location,
+        private HospitalLocation $location,
         private int $beds,
-        private string $size
+        private HospitalTier $tier
     ) {
     }
 
@@ -54,7 +56,7 @@ class CreateHospitalCommand
         return $this->supplyArea;
     }
 
-    public function getLocation(): string
+    public function getLocation(): HospitalLocation
     {
         return $this->location;
     }
@@ -64,8 +66,8 @@ class CreateHospitalCommand
         return $this->beds;
     }
 
-    public function getSize(): string
+    public function getTier(): HospitalTier
     {
-        return $this->size;
+        return $this->tier;
     }
 }

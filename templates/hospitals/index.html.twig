@@ -69,7 +69,16 @@
                                         </a>
                                     </h5>
                                     <h6 class="card-subtitle mb-2 text-muted">
-                                        {{ hospital.owner }}
+                                        <a href="{{
+                                            path(
+                                                'app_user_profile',
+                                                {
+                                                    username: hospital.owner.username
+                                                }
+                                            )
+                                            }}">
+                                            {{ hospital.owner.name }}
+                                        </a>
                                     </h6>
 
                                     <p class="m-0">
@@ -112,13 +121,23 @@
                                             active_filters.widget(
                                                 filters,
                                                 'location',
-                                                hospital.location|trans,
-                                                hospital.location,
+                                                hospital.location.value|trans,
+                                                hospital.location.value,
                                                 'app_hospital_index'
                                             )
                                         }}
 
-                                        {% set size = (hospital.size|trans)
+                                        {{
+                                            active_filters.widget(
+                                                filters,
+                                                'tier',
+                                                hospital.tier.value|trans,
+                                                hospital.tier.value,
+                                                'app_hospital_index'
+                                            )
+                                        }}
+
+                                        {% set size = (hospital.size.value|trans)
                                             ~ ' ('
                                             ~ hospital.beds
                                             ~ ' '
@@ -131,7 +150,7 @@
                                                 filters,
                                                 'size',
                                                 size,
-                                                hospital.size,
+                                                hospital.size.value,
                                                 'app_hospital_index'
                                             )
                                         }}
@@ -223,6 +242,15 @@
                     {{
                         form_row(
                             hospitalForm.size,
+                            {
+                                label: false
+                            }
+                        )
+                    }}
+
+                    {{
+                        form_row(
+                            hospitalForm.tier,
                             {
                                 label: false
                             }

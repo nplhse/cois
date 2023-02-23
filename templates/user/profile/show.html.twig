@@ -146,7 +146,7 @@
                                             </a>
                                         </h5>
                                         <h6 class="card-subtitle mb-2 text-muted">
-                                            {{ hospital.owner }}
+                                            {{ hospital.owner.name }}
                                         </h6>
 
                                         <p class="m-0">
@@ -181,11 +181,13 @@
                                             <span class="badge bg-secondary">
                                                 <i class="bi bi-tag"></i>
                                                 <a class="link-light" href="#">
-                                                    {{ hospital.location }}
+                                                    {{
+                                                        hospital.location.value
+                                                    }}
                                                 </a>
                                             </span>
 
-                                            {% set size = (hospital.size|trans)
+                                            {% set size = (hospital.size.value|trans)
                                                 ~ ' ('
                                                 ~ hospital.beds
                                                 ~ ' '

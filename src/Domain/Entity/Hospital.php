@@ -15,6 +15,9 @@ use App\Domain\Contracts\TimestampableInterface;
 use App\Domain\Contracts\UserInterface;
 use App\Domain\Entity\Traits\IdentifierTrait;
 use App\Domain\Entity\Traits\TimestampableTrait;
+use App\Domain\Enum\HospitalLocation;
+use App\Domain\Enum\HospitalSize;
+use App\Domain\Enum\HospitalTier;
 use Doctrine\Common\Collections\Collection;
 
 class Hospital implements HospitalInterface, IdentifierInterface, TimestampableInterface, \Stringable
@@ -26,15 +29,15 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
 
     public const BEDS_LARGE_HOSPITAL = 750;
 
-    public const SIZE_SMALL = 'small';
+    public const SIZE_SMALL = 'Small';
 
-    public const SIZE_MEDIUM = 'medium';
+    public const SIZE_MEDIUM = 'Medium';
 
-    public const SIZE_LARGE = 'large';
+    public const SIZE_LARGE = 'Large';
 
-    public const LOCATION_RURAL = 'rural';
+    public const LOCATION_RURAL = 'Rural';
 
-    public const LOCATION_URBAN = 'urban';
+    public const LOCATION_URBAN = 'Urban';
 
     protected string $name;
 
@@ -50,15 +53,13 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
 
     protected ?SupplyAreaInterface $supplyArea = null;
 
-    private array $sizes = [self::SIZE_SMALL, self::SIZE_MEDIUM, self::SIZE_LARGE];
-
-    protected string $size;
+    protected HospitalSize $size;
 
     protected int $beds;
 
-    private array $locations = [self::LOCATION_RURAL, self::LOCATION_URBAN];
+    protected HospitalLocation $location;
 
-    protected string $location;
+    protected HospitalTier $tier;
 
     protected Collection $imports;
 
@@ -168,18 +169,14 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
         return $this->supplyArea;
     }
 
-    public function setSize(string $size): self
+    public function setSize(HospitalSize $size): self
     {
-        if (in_array($size, $this->sizes, true)) {
-            $this->size = $size;
+        $this->size = $size;
 
-            return $this;
-        }
-
-        throw new \InvalidArgumentException(sprintf('Size %s is not a valid option', $size));
+        return $this;
     }
 
-    public function getSize(): string
+    public function getSize(): HospitalSize
     {
         return $this->size;
     }
@@ -193,11 +190,11 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
         $this->beds = $beds;
 
         if ($beds <= self::BEDS_SMALL_HOSPITAL) {
-            $this->size = self::SIZE_SMALL;
+            $this->size = HospitalSize::SMALL;
         } elseif ($beds < self::BEDS_LARGE_HOSPITAL) {
-            $this->size = self::SIZE_MEDIUM;
+            $this->size = HospitalSize::MEDIUM;
         } else {
-            $this->size = self::SIZE_LARGE;
+            $this->size = HospitalSize::LARGE;
         }
 
         return $this;
@@ -208,20 +205,26 @@ class Hospital implements HospitalInterface, IdentifierInterface, TimestampableI
         return $this->beds;
     }
 
-    public function setLocation(string $location): self
+    public function setLocation(HospitalLocation $location): self
     {
-        if (in_array($location, $this->locations, true)) {
-            $this->location = $location;
+        $this->location = $location;
 
-            return $this;
-        }
-
-        throw new \InvalidArgumentException(sprintf('Location %s is not a valid option', $location));
+        return $this;
     }
 
-    public function getLocation(): string
+    public function getLocation(): HospitalLocation
     {
         return $this->location;
+    }
+
+    public function getTier(): HospitalTier
+    {
+        return $this->tier;
+    }
+
+    public function setTier(HospitalTier $tier): void
+    {
+        $this->tier = $tier;
     }
 
     public function getImports(): Collection

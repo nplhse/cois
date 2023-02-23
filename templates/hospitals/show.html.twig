@@ -134,7 +134,7 @@
                             {{ 'Location'|trans }}
                         </h5>
                         <p>
-                            {% if hospital.location == 'rural' %}
+                            {% if hospital.location.value == 'Rural' %}
                                 <span class="badge bg-secondary">
                                     <i class="bi bi-collection"></i>
                                     <a class="link-light"
@@ -149,7 +149,7 @@
                                         {{ 'Rural'|trans }}
                                     </a>
                                 </span>
-                            {% elseif hospital.location == 'urban' %}
+                            {% elseif hospital.location.value == 'Urban' %}
                                 <span class="badge bg-secondary">
                                     <i class="bi bi-collection"></i>
                                     <a class="link-light"
@@ -179,7 +179,7 @@
                                     {{ 'Size'|trans }}
                                 </h5>
                                 <p>
-                                    {% if hospital.size == 'small' %}
+                                    {% if hospital.size.value == 'Small' %}
                                         <span class="badge bg-secondary">
                                             <i class="bi bi-collection"></i>
                                             <a class="link-light"
@@ -194,7 +194,7 @@
                                                 {{ 'Small'|trans }}
                                             </a>
                                         </span>
-                                    {% elseif hospital.size == 'medium' %}
+                                    {% elseif hospital.size.value == 'Medium' %}
                                         <span class="badge bg-secondary">
                                             <i class="bi bi-collection"></i>
                                             <a class="link-light"
@@ -209,7 +209,7 @@
                                                 {{ 'Medium'|trans }}
                                             </a>
                                         </span>
-                                    {% elseif hospital.size == 'large' %}
+                                    {% elseif hospital.size.value == 'Large' %}
                                         <span class="badge bg-secondary">
                                             <i class="bi bi-collection"></i>
                                             <a class="link-light"
@@ -235,6 +235,17 @@
                                     {{ hospital.beds }} {{ 'Beds'|trans }}
                                 </p>
                             </div>
+                            <div class="col-6">
+                                <h5 class="card-title">
+                                    {{ 'Tier'|trans }}
+                                </h5>
+                                <p>
+                                    <span class="badge bg-secondary">
+                                        <i class="bi bi-collection"></i>
+                                        {{ hospital.tier.value }}
+                                    </span>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -251,7 +262,18 @@
                         </h5>
                         <p>
                             <i class="bi bi-person-fill"></i>
-                            <strong>{{ hospital.owner }}</strong>
+                            <strong>
+                                <a href="{{
+                                    path(
+                                        'app_user_profile',
+                                        {
+                                            username: hospital.owner.username
+                                        }
+                                    )
+                                    }}">
+                                    {{ hospital.owner.name }}
+                                </a>
+                            </strong>
                         </p>
 
                         <h5 class="card-title">

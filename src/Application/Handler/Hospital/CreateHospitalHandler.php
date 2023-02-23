@@ -36,7 +36,7 @@ class CreateHospitalHandler implements HandlerInterface
         }
 
         $hospital->setLocation($command->getLocation());
-        $hospital->setSize($command->getSize());
+        $hospital->setTier($command->getTier());
         $hospital->setBeds($command->getBeds());
 
         $this->hospitalRepository->add($hospital);

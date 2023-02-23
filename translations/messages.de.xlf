@@ -2614,6 +2614,22 @@
         <source>View your profile</source>
         <target>Profil ansehen</target>
       </trans-unit>
+      <trans-unit id="122" resname="All tiers">
+        <source>All tiers</source>
+        <target>Alle Notfallversorgungsstufen</target>
+      </trans-unit>
+      <trans-unit id="123" resname="Basic">
+        <source>Basic</source>
+        <target>Basisnotfallversorgung</target>
+      </trans-unit>
+      <trans-unit id="124" resname="Extended">
+        <source>Extended</source>
+        <target>Erweiterte Notfallversorgung</target>
+      </trans-unit>
+      <trans-unit id="125" resname="Full">
+        <source>Full</source>
+        <target>Umfassende Notfallversorgung</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

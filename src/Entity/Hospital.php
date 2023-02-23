@@ -9,6 +9,9 @@ use App\Domain\Contracts\StateInterface;
 use App\Domain\Contracts\SupplyAreaInterface;
 use App\Domain\Contracts\UserInterface;
 use App\Domain\Entity\Hospital as DomainHospital;
+use App\Domain\Enum\HospitalLocation;
+use App\Domain\Enum\HospitalSize;
+use App\Domain\Enum\HospitalTier;
 use App\Repository\HospitalRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -54,14 +57,17 @@ class Hospital extends DomainHospital
     #[ORM\Column(type: \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE, nullable: true)]
     protected ?\DateTimeInterface $updatedAt;
 
-    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
-    protected string $size;
+    #[ORM\Column(enumType: HospitalSize::class)]
+    protected HospitalSize $size;
 
     #[ORM\Column(type: \Doctrine\DBAL\Types\Types::INTEGER)]
     protected int $beds;
 
-    #[ORM\Column(type: \Doctrine\DBAL\Types\Types::STRING, length: 255)]
-    protected string $location;
+    #[ORM\Column(enumType: HospitalLocation::class)]
+    protected HospitalLocation $location;
+
+    #[ORM\Column(enumType: HospitalTier::class)]
+    protected HospitalTier $tier;
 
     /**
      * @var \Doctrine\Common\Collections\Collection<int, \App\Entity\Import>|\App\Entity\Import[]
