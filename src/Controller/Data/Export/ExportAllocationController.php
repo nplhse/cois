@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Data\Export;
 
 use App\Factory\ExportFilterFactory;
 use App\Form\ExportType;
@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[IsGranted('ROLE_USER')]
-class ExportController extends AbstractController
+class ExportAllocationController extends AbstractController
 {
     public function __construct(
         private FilterService $filterService,
@@ -26,7 +26,7 @@ class ExportController extends AbstractController
     ) {
     }
 
-    #[Route('/export', name: 'app_export_index')]
+    #[Route('/export/allocation', name: 'app_export_allocation')]
     public function index(Request $request, ExportFilterFactory $exportFilterFactory): Response
     {
         $this->denyAccessUnlessGranted('export', $this->getUser());
@@ -45,14 +45,14 @@ class ExportController extends AbstractController
             $results = $this->exportQuery->count($this->filterService);
         }
 
-        return $this->renderForm('export/index.html.twig', [
+        return $this->renderForm('data/export/allocation.html.twig', [
             'exportForm' => $exportForm,
             'results' => $results,
             'filters' => $this->filterService->getFilterDto(),
         ]);
     }
 
-    #[Route('/export/fetch', name: 'app_export_fetch')]
+    #[Route('/export/allocation/fetch', name: 'app_export_allocation_fetch')]
     public function fetch(Request $request, ExportFilterFactory $exportFilterFactory): Response
     {
         $this->denyAccessUnlessGranted('export', $this->getUser());
