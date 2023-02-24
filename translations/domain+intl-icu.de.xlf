@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="de" target-language="de" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="l_liNmH" resname="Hospital">
+        <source>Hospital</source>
+        <target>Krankenhaus</target>
+      </trans-unit>
+      <trans-unit id="d1tb_WR" resname="Created at">
+        <source>Created at</source>
+        <target>Erstellung</target>
+      </trans-unit>
+      <trans-unit id="sYGB5zy" resname="Arrival at">
+        <source>Arrival at</source>
+        <target>Ankunft</target>
+      </trans-unit>
+      <trans-unit id="oEYw74v" resname="Gender">
+        <source>Gender</source>
+        <target>Geschlecht</target>
+      </trans-unit>
+      <trans-unit id="Obc3DzC" resname="Age">
+        <source>Age</source>
+        <target>Alter</target>
+      </trans-unit>
+      <trans-unit id="A9N_mlN" resname="Urgency">
+        <source>Urgency</source>
+        <target>Dringlichkeit</target>
+      </trans-unit>
+      <trans-unit id="9o4LHvE" resname="Occasion">
+        <source>Occasion</source>
+        <target>Anlass</target>
+      </trans-unit>
+      <trans-unit id="FTzarsV" resname="Assignment">
+        <source>Assignment</source>
+        <target>Zuweisung</target>
+      </trans-unit>
+      <trans-unit id="0eAiaxp" resname="Requires Resus">
+        <source>Requires Resus</source>
+        <target>Schockraum</target>
+      </trans-unit>
+      <trans-unit id="L9Q4LcT" resname="Requires Cathlab">
+        <source>Requires Cathlab</source>
+        <target>Herzkatheter</target>
+      </trans-unit>
+      <trans-unit id="LIilwYI" resname="Is CPR">
+        <source>Is CPR</source>
+        <target>Reanimation</target>
+      </trans-unit>
+      <trans-unit id="ipSWH7H" resname="Is ventilated">
+        <source>Is ventilated</source>
+        <target>Beatmet</target>
+      </trans-unit>
+      <trans-unit id="4gqp8LN" resname="Is shock">
+        <source>Is shock</source>
+        <target>Schock</target>
+      </trans-unit>
+      <trans-unit id="Zg_Vfgp" resname="Is infectious">
+        <source>Is infectious</source>
+        <target>Ansteckungsfähig</target>
+      </trans-unit>
+      <trans-unit id="ZvaQUln" resname="Is pregnant">
+        <source>Is pregnant</source>
+        <target>Schwangerschaft</target>
+      </trans-unit>
+      <trans-unit id="XUtzyoX" resname="Is work accident">
+        <source>Is work accident</source>
+        <target>Arbeitsunfall</target>
+      </trans-unit>
+      <trans-unit id="XZtZ3.O" resname="Is with physician">
+        <source>Is with physician</source>
+        <target>Notarztbegleitung</target>
+      </trans-unit>
+      <trans-unit id="FYJyCcn" resname="Mode of transport">
+        <source>Mode of transport</source>
+        <target>Transportart</target>
+      </trans-unit>
+      <trans-unit id="dxp9bkY" resname="Speciality">
+        <source>Speciality</source>
+        <target>Fachabteilung</target>
+      </trans-unit>
+      <trans-unit id="jR67qUo" resname="Speciality Detail">
+        <source>Speciality Detail</source>
+        <target>Fachgebiet</target>
+      </trans-unit>
+      <trans-unit id="xshpf7V" resname="Speciality was closed">
+        <source>Speciality was closed</source>
+        <target>Fachgebiet war abgemeldet</target>
+      </trans-unit>
+      <trans-unit id="4UUvuRG" resname="Indication code">
+        <source>Indication code</source>
+        <target>RMI</target>
+      </trans-unit>
+      <trans-unit id="dLTsgXa" resname="Indication">
+        <source>Indication</source>
+        <target>Indikation</target>
+      </trans-unit>
+      <trans-unit id="mmzYUHE" resname="Secondary indication code">
+        <source>Secondary indication code</source>
+        <target>Sekundäre RMI</target>
+      </trans-unit>
+      <trans-unit id="8lAwfjW" resname="Secondary indication">
+        <source>Secondary indication</source>
+        <target>Sekundäre Indikation</target>
+      </trans-unit>
+      <trans-unit id="5bKWDqF" resname="Secondary deployment">
+        <source>Secondary deployment</source>
+        <target>Sekundärverlegung</target>
+      </trans-unit>
+      <trans-unit id="PLyHx2g" resname="True">
+        <source>True</source>
+        <target>Wahr</target>
+      </trans-unit>
+      <trans-unit id="YKM_bPU" resname="False">
+        <source>False</source>
+        <target>Falsch</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

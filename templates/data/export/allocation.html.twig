@@ -1,216 +1,224 @@
-{% extends 'base.html.twig' %}
+{% extends 'data/_data_layout.html.twig' %}
 
-{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
-{% import '_elements/macro/active_filters.html.twig' as active_filters %}
+{% import 'elements/macro/export_filters.html.twig' as active_filters %}
 
 {% block title %}
-    {{ 'Export'|trans }} - {{ parent() }}
+    {{ 'title.export.allocation'|trans({}, 'app') }} - {{ parent() }}
 {% endblock %}
 
-{% block body %}
-    <div class="row">
-        <div class="col">
-            {{
-                breadcrumbs.render(
-                    [
-                        {
-                            url: url('app_dashboard'),
-                            label: 'Home'|trans
-                        },
-                        {
-                            label: 'Export'|trans
-                        }
-                    ]
-                )
-            }}
-        </div>
+{% block breadcrumbs %}
+    {{
+        component(
+            'breadcrumb',
+            {
+                items: [
+                    {
+                        url: url('app_export_index'),
+                        label: 'title.export'|trans({}, 'app')
+                    },
+                    {
+                        url: url('app_export_index'),
+                        label: 'title.export.allocation'|trans({}, 'app')
+                    }
+                ]
+            }
+        )
+    }}
+{% endblock %}
+
+{% block content %}
+    <div class="float-end">
+        <a href="{{ path('app_export_index') }}"
+            class="btn btn-outline-secondary">
+            {{ 'Back to list'|trans }}
+        </a>
     </div>
 
-    <div class="row">
-        <div class="col">
-            <h1>
-                {{ 'Exports'|trans }}
-            </h1>
+    <h1>
+        {{ 'title.export.allocation'|trans({}, 'app') }}
+    </h1>
 
-            {% if results %}
-                <div class="alert alert-success">
-                    {{ active_filters.render(filters, 'app_export_index') }}
-                    <a class="btn btn-primary"
-                        href="{{
-                        path(
-                            'app_export_fetch',
-                            app.request.query.all
-                        )
-                        }}">
-                        Download {{ results }} rows
-                    </a>
+    {% if results %}
+        <div class="card bg-success bg-opacity-50 mb-3">
+            <div class="card-header">
+                {{ 'Download your data'|trans }}
+            </div>
+            <div class="card-body">
+                {{ active_filters.render(filters, 'app_export_allocation') }}
+                <a class="btn btn-success"
+                    href="{{
+                    path(
+                        'app_export_allocation_fetch',
+                        app.request.query.all
+                    )
+                    }}">
+                    Download {{ results }} rows
+                </a>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="card">
+        <div class="card-header">
+            {{ 'Select your filters'|trans }}
+        </div>
+        <div class="card-body">
+            {{ form_start(exportForm) }}
+
+            {{ form_row(exportForm.hospital) }}
+
+            <h5>
+                {{ 'Filter by Dates'|trans }}
+            </h5>
+
+            <div class="input-group mb-3">
+                {{
+                    form_widget(
+                        exportForm.startDate,
+                        {
+                            label: false
+                        }
+                    )
+                }}
+
+                {{
+                    form_widget(
+                        exportForm.endDate,
+                        {
+                            label: false
+                        }
+                    )
+                }}
+            </div>
+
+            <h5>
+                {{ 'Filter by Properties'|trans }}
+            </h5>
+
+            {{
+                form_row(
+                    exportForm.indication,
+                    {
+                        label: false
+                    }
+                )
+            }}
+
+            {{
+                form_row(
+                    exportForm.speciality,
+                    {
+                        label: false
+                    }
+                )
+            }}
+
+            {{
+                form_row(
+                    exportForm.specialityDetail,
+                    {
+                        label: false
+                    }
+                )
+            }}
+
+            {{
+                form_row(
+                    exportForm.urgency,
+                    {
+                        label: false
+                    }
+                )
+            }}
+
+            {{
+                form_row(
+                    exportForm.infection,
+                    {
+                        label: false
+                    }
+                )
+            }}
+
+            <div class="row mb-3">
+                <div class="col-6">
+                    {{ form_widget(exportForm.requiresResus) }}
                 </div>
-            {% endif %}
-
-            <div class="card">
-                <div class="card-body">
-                    <h5>
-                        {{ 'Filter by Hospital'|trans }}
-                    </h5>
-
-                    {{ form_start(exportForm) }}
-
-                    {{ form_row(exportForm.hospital) }}
-
-                    <h5>
-                        {{ 'Filter by Dates'|trans }}
-                    </h5>
-
-                    <div class="input-group mb-3">
-                        {{
-                            form_widget(
-                                exportForm.startDate,
-                                {
-                                    label: false
-                                }
-                            )
-                        }}
-
-                        {{
-                            form_widget(
-                                exportForm.endDate,
-                                {
-                                    label: false
-                                }
-                            )
-                        }}
-                    </div>
-
-                    <h5>
-                        {{ 'Filter by Properties'|trans }}
-                    </h5>
-
-                    {{
-                        form_row(
-                            exportForm.indication,
-                            {
-                                label: false
-                            }
-                        )
-                    }}
-
-                    {{
-                        form_row(
-                            exportForm.speciality,
-                            {
-                                label: false
-                            }
-                        )
-                    }}
-
-                    {{
-                        form_row(
-                            exportForm.specialityDetail,
-                            {
-                                label: false
-                            }
-                        )
-                    }}
-
-                    {{
-                        form_row(
-                            exportForm.urgency,
-                            {
-                                label: false
-                            }
-                        )
-                    }}
-
-                    {{
-                        form_row(
-                            exportForm.infection,
-                            {
-                                label: false
-                            }
-                        )
-                    }}
-
-                    <div class="row mb-3">
-                        <div class="col-6">
-                            {{ form_widget(exportForm.requiresResus) }}
-                        </div>
-                        <div class="col-6">
-                            {{ form_widget(exportForm.requiresCathlab) }}
-                        </div>
-                        <div class="col-6">
-                            {{ form_widget(exportForm.isCPR) }}
-                        </div>
-                        <div class="col-6">
-                            {{ form_widget(exportForm.isVentilated) }}
-                        </div>
-                        <div class="col-6">
-                            {{ form_widget(exportForm.isShock) }}
-                        </div>
-                        <div class="col-6">
-                            {{ form_widget(exportForm.isWithPhysician) }}
-                        </div>
-                        <div class="col-6">
-                            {{ form_widget(exportForm.isPregnant) }}
-                        </div>
-                        <div class="col-6">
-                            {{ form_widget(exportForm.isWorkAccident) }}
-                        </div>
-                    </div>
-
-                    <h5>
-                        {{ 'Filter by Transport'|trans }}
-                    </h5>
-
-                    {{
-                        form_row(
-                            exportForm.assignment,
-                            {
-                                label: false
-                            }
-                        )
-                    }}
-
-                    {{
-                        form_row(
-                            exportForm.occasion,
-                            {
-                                label: false
-                            }
-                        )
-                    }}
-
-                    {{
-                        form_row(
-                            exportForm.modeOfTransport,
-                            {
-                                label: false
-                            }
-                        )
-                    }}
-
-                    {{
-                        form_row(
-                            exportForm.secondaryDeployment,
-                            {
-                                label: false
-                            }
-                        )
-                    }}
-
-                    <div class="row">
-                        <div class="col">
-                            {{ form_row(exportForm.submit) }}
-                        </div>
-                        <div class="col">
-                            <div class="float-end">
-                                {{ form_row(exportForm.reset) }}
-                            </div>
-                        </div>
-                    </div>
-
-                    {{ form_end(exportForm) }}
+                <div class="col-6">
+                    {{ form_widget(exportForm.requiresCathlab) }}
+                </div>
+                <div class="col-6">
+                    {{ form_widget(exportForm.isCPR) }}
+                </div>
+                <div class="col-6">
+                    {{ form_widget(exportForm.isVentilated) }}
+                </div>
+                <div class="col-6">
+                    {{ form_widget(exportForm.isShock) }}
+                </div>
+                <div class="col-6">
+                    {{ form_widget(exportForm.isWithPhysician) }}
+                </div>
+                <div class="col-6">
+                    {{ form_widget(exportForm.isPregnant) }}
+                </div>
+                <div class="col-6">
+                    {{ form_widget(exportForm.isWorkAccident) }}
                 </div>
             </div>
+
+            <h5>
+                {{ 'Filter by Transport'|trans }}
+            </h5>
+
+            {{
+                form_row(
+                    exportForm.assignment,
+                    {
+                        label: false
+                    }
+                )
+            }}
+
+            {{
+                form_row(
+                    exportForm.occasion,
+                    {
+                        label: false
+                    }
+                )
+            }}
+
+            {{
+                form_row(
+                    exportForm.modeOfTransport,
+                    {
+                        label: false
+                    }
+                )
+            }}
+
+            {{
+                form_row(
+                    exportForm.secondaryDeployment,
+                    {
+                        label: false
+                    }
+                )
+            }}
+
+            <div class="row">
+                <div class="col">
+                    {{ form_row(exportForm.submit) }}
+                </div>
+                <div class="col">
+                    <div class="float-end">
+                        {{ form_row(exportForm.reset) }}
+                    </div>
+                </div>
+            </div>
+
+            {{ form_end(exportForm) }}
         </div>
     </div>
 {% endblock %}

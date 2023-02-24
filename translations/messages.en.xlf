@@ -2557,6 +2557,14 @@
         <source>Tier</source>
         <target>Tier</target>
       </trans-unit>
+      <trans-unit id=".btLNcT" resname="Download your data">
+        <source>Download your data</source>
+        <target>Download data</target>
+      </trans-unit>
+      <trans-unit id="dG_bIeV" resname="Select your filters">
+        <source>Select your filters</source>
+        <target>Select filters</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

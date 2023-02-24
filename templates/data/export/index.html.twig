@@ -1,20 +1,41 @@
-{% extends 'base.html.twig' %}
+{% extends 'data/_data_layout.html.twig' %}
 
-{% block title %}Hello ExportController!{% endblock %}
+{% block title %}
+    {{ 'title.export'|trans({}, 'app') }} - {{ parent() }}
+{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block breadcrumbs %}
+    {{
+        component(
+            'breadcrumb',
+            {
+                items: [
+                    {
+                        url: url('app_export_index'),
+                        label: 'title.export'|trans({}, 'app')
+                    }
+                ]
+            }
+        )
+    }}
+{% endblock %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/nplhse/Projekte/cois/src/Controller/ExportController.php'|file_link(0) }}">src/Controller/ExportController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/nplhse/Projekte/cois/templates/export/index.html.twig'|file_link(0) }}">templates/export/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% block content %}
+    <div class="list-group">
+        <a href="{{ path('app_export_allocation') }}"
+            class="list-group-item list-group-item-action"
+            aria-current="true">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">
+                    {{ 'title.export.allocation'|trans({}, 'app') }}
+                </h5>
+                <small class="text-success">
+                    Verfügbar <i class="bi bi-unlock-fill"></i>
+                </small>
+            </div>
+            <p class="mb-1">
+                {{ 'desc.export.allocation'|trans({}, 'app') }}
+            </p>
+        </a>
+    </div>
 {% endblock %}

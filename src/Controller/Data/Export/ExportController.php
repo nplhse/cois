@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Data\Export;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
