@@ -521,6 +521,18 @@
         <source>title.user.profile</source>
         <target>Showing User profile: {username}</target>
       </trans-unit>
+      <trans-unit id="DpoBoU6" resname="title.export.allocation">
+        <source>title.export.allocation</source>
+        <target>Export allocations</target>
+      </trans-unit>
+      <trans-unit id="N0hb0m6" resname="title.export">
+        <source>title.export</source>
+        <target>Export</target>
+      </trans-unit>
+      <trans-unit id="moeGsXi" resname="desc.export.allocation">
+        <source>desc.export.allocation</source>
+        <target>This allows you to export all allocations related to your hospital from the system.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

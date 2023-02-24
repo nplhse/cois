@@ -1,0 +1,66 @@
+{% macro render(filters, targetPath) %}
+    {% if filters.active %}
+        <div class="alert alert-success" role="alert">
+            <p class="float-end">
+                <a href="{{ path(targetPath) }}" class="text-success">
+                    {{ 'Clear all filters'|trans }}
+                </a>
+            </p>
+            <span class="float-start fw-bold">
+                {{ 'Active Filters'|trans }}:&nbsp;
+            </span>
+
+            {% for key, filter in filters.getFilters %}
+                {% if filter.type == 'boolean' %}
+                    <span class="badge rounded-pill bg-success">
+                        <u>
+                            {% if filter.altValue %}
+                                {{ filter.altValue|trans }}
+                            {% else %}
+                                {{ filter.value }}
+                            {% endif %}
+                        </u>
+                    </span>
+                {% elseif filter.type == 'date' %}
+                    {% if filter.value.startDate is not empty %}
+                        <span class="badge rounded-pill bg-success">
+                            <u>
+                                {{ 'Start Date'|trans }}:
+                            </u>
+                            {{
+                                filter.value.startDate|date(
+                                    'd.m.Y',
+                                    'Europe/Berlin'
+                                )
+                            }}
+                        </span>
+                    {% endif %}
+                    {% if filter.value.endDate is not empty %}
+                        <span class="badge rounded-pill bg-success">
+                            <u>
+                                {{ 'End Date'|trans }}:
+                            </u>
+                            {{
+                                filter.value.endDate|date(
+                                    'd.m.Y',
+                                    'Europe/Berlin'
+                                )
+                            }}
+                        </span>
+                    {% endif %}
+                {% else %}
+                    <span class="badge rounded-pill bg-success">
+                        <u>
+                            {{ filter.key|trans }}:
+                        </u>
+                        {% if filter.altValue %}
+                            {{ filter.altValue }}
+                        {% else %}
+                            {{ filter.value|trans }}
+                        {% endif %}
+                    </span>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endmacro %}

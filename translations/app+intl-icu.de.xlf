@@ -534,6 +534,18 @@
         <source>title.user.profile</source>
         <target>Zeige Benutzerprofil: {username}</target>
       </trans-unit>
+      <trans-unit id="DpoBoU6" resname="title.export.allocation">
+        <source>title.export.allocation</source>
+        <target>Einsätze exportieren</target>
+      </trans-unit>
+      <trans-unit id="N0hb0m6" resname="title.export">
+        <source>title.export</source>
+        <target>Exportieren</target>
+      </trans-unit>
+      <trans-unit id="moeGsXi" resname="desc.export.allocation">
+        <source>desc.export.allocation</source>
+        <target>Hier können Sie die Einsätze der mit Ihnen verknüpften Kliniken aus dem System exportieren.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
