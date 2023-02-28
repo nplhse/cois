@@ -59,6 +59,22 @@
         <source>title.error</source>
         <target>An Error occured</target>
       </trans-unit>
+      <trans-unit id="2N9a7UI" resname="link.about">
+        <source>link.about</source>
+        <target>About us</target>
+      </trans-unit>
+      <trans-unit id="2UjUpmN" resname="link.features">
+        <source>link.features</source>
+        <target>Features</target>
+      </trans-unit>
+      <trans-unit id="Ql5Hbsa" resname="link.blog">
+        <source>link.blog</source>
+        <target>Blog</target>
+      </trans-unit>
+      <trans-unit id="iOSoddH" resname="link.faq">
+        <source>link.faq</source>
+        <target>Help/ FAQ</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
