@@ -3,78 +3,76 @@
 declare(strict_types=1);
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Config\MonologConfig;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->extension('monolog', [
-        'channels' => [
-            'deprecation',
-        ],
-    ]);
-
+return static function (MonologConfig $monolog, ContainerConfigurator $containerConfigurator): void {
     if ('dev' === $containerConfigurator->env()) {
-        $containerConfigurator->extension('monolog', [
-            'handlers' => [
-                'main' => [
-                    'type' => 'stream',
-                    'path' => '%kernel.logs_dir%/%kernel.environment%.log',
-                    'level' => 'debug',
-                    'channels' => ['!event'],
-                ],
-                'console' => [
-                    'type' => 'console',
-                    'process_psr_3_messages' => false,
-                    'channels' => ['!event', '!doctrine', '!console'],
-                ],
-            ],
-        ]);
+        $monolog->handler('main')
+            ->type('stream')
+            ->path('%kernel.logs_dir%/%kernel.environment%.log')
+            ->level('debug')
+            ->channels()->elements(['!event'])
+        ;
+
+        $monolog->handler('console')
+            ->type('console')
+            ->processPsr3Messages(false)
+            ->channels()->elements(['!event', '!doctrine', '!console'])
+        ;
     }
 
     if ('prod' === $containerConfigurator->env()) {
-        $containerConfigurator->extension('monolog', [
-            'handlers' => [
-                'main' => [
-                    'type' => 'fingers_crossed',
-                    'action_level' => 'error',
-                    'handler' => 'nested',
-                    'excluded_http_codes' => [404, 405],
-                    'buffer_size' => 50,
-                ],
-                'nested' => [
-                    'type' => 'stream',
-                    'path' => 'php://stderr',
-                    'level' => 'debug',
-                    'formatter' => 'monolog.formatter.json',
-                ],
-                'console' => [
-                    'type' => 'console',
-                    'process_psr_3_messages' => false,
-                    'channels' => ['!event', '!doctrine'],
-                ],
-                'deprecation' => [
-                    'type' => 'stream',
-                    'channels' => ['deprecation'],
-                    'path' => 'php://stderr',
-                ],
-            ],
-        ]);
+        $monolog->handler('main')
+            ->type('fingers_crossed')
+            ->actionLevel('critical')
+            ->handler('grouped')
+            ->channels()->elements(['!mailer'])
+        ;
+
+        $monolog->handler('grouped')
+            ->type('group')
+            ->members(['streamed', 'deduplicated'])
+        ;
+
+        $monolog->handler('deduplicated')
+            ->type('deduplication')
+            ->handler('symfony_mailer');
+
+        $monolog->handler('symfony_mailer')
+            ->type('symfony_mailer')
+            ->fromEmail('%app.mailer.from_address%')
+            ->toEmail(['%app.mailer.admin%'])
+            ->subject('[%app.mailer.from_sender%]: %%message%%')
+            ->level('debug')
+            ->formatter('monolog.formatter.html')
+            ->contentType('text/html')
+        ;
+
+        $monolog->handler('streamed')
+            ->type('stream')
+            ->path('%kernel.logs_dir%/%kernel.environment%.log')
+            ->level('critical')
+        ;
+
+        $monolog->handler('console')
+            ->type('console')
+            ->processPsr3Messages(false)
+            ->channels()->elements(['!event', '!doctrine', '!console'])
+        ;
     }
 
     if ('test' === $containerConfigurator->env()) {
-        $containerConfigurator->extension('monolog', [
-            'handlers' => [
-                'main' => [
-                    'type' => 'fingers_crossed',
-                    'action_level' => 'error',
-                    'handler' => 'nested',
-                    'excluded_http_codes' => [404, 405],
-                    'channels' => ['!event'],
-                ],
-                'nested' => [
-                    'type' => 'stream',
-                    'path' => '%kernel.logs_dir%/%kernel.environment%.log',
-                    'level' => 'debug',
-                ],
-            ],
-        ]);
+        $monolog->handler('main')
+            ->type('fingers_crossed')
+            ->actionLevel('error')
+            ->handler('nested')
+            ->channels()->elements(['!event'])
+        ;
+
+        $monolog->handler('nested')
+            ->type('stream')
+            ->path('%kernel.logs_dir%/%kernel.environment%.log')
+            ->level('debug')
+        ;
     }
 };

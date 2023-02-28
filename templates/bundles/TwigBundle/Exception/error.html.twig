@@ -11,8 +11,8 @@
         <!-- Fixed navbar -->
         <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ path('app_welcome') }}">
-                    {{ 'title'|trans([], 'messages') }}
+                <a class="navbar-brand" href="{{ path('app_homepage') }}">
+                    {{ app_title }}
                 </a>
                 <button class="navbar-toggler"
                     type="button"
@@ -26,87 +26,77 @@
                 <div class="collapse navbar-collapse"
                     id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            {% if
-                                app.request.attributes.get('_route')
-                                    starts with 'hospitals' %}
-                                <a class="nav-link active"
-                                    aria-current="page"
-                                    href="{{ path('app_hospital_index') }}">
-                                    {{ 'link.hospitals'|trans([], 'messages') }}
-                                </a>
-                            {% else %}
-                                <a class="nav-link"
-                                    aria-current="page"
-                                    href="{{ path('app_hospital_index') }}">
-                                    {{ 'link.hospitals'|trans([], 'messages') }}
-                                </a>
-                            {% endif %}
-                        </li>
-                        <li class="nav-item">
-                            {% if
-                                app.request.attributes.get('_route')
-                                    starts with 'allocation' %}
-                                <a class="nav-link active"
-                                    aria-current="page"
-                                    href="{{ path('app_allocation_index') }}">
-                                    {{
-                                        'link.allocations'|trans([], 'messages')
-                                    }}
-                                </a>
-                            {% else %}
-                                <a class="nav-link"
-                                    aria-current="page"
-                                    href="{{ path('app_allocation_index') }}">
-                                    {{
-                                        'link.allocations'|trans([], 'messages')
-                                    }}
-                                </a>
-                            {% endif %}
-                        </li>
-                        <li class="nav-item">
-                            {% if
-                                app.request.attributes.get('_route')
-                                    starts with 'statistics' %}
-                                <a class="nav-link active"
-                                    aria-current="page"
-                                    href="{{ path('app_statistics_index') }}">
-                                    {{
-                                        'link.statistics'|trans([], 'messages')
-                                    }}
-                                </a>
-                            {% else %}
-                                <a class="nav-link"
-                                    aria-current="page"
-                                    href="{{ path('app_statistics_index') }}">
-                                    {{
-                                        'link.statistics'|trans([], 'messages')
-                                    }}
-                                </a>
-                            {% endif %}
-                        </li>
-                        <li class="nav-item">
-                            {% if
-                                app.request.attributes.get('_route')
-                                    starts with 'import' %}
-                                <a class="nav-link active"
-                                    aria-current="page"
-                                    href="{{ path('app_import_index') }}">
-                                    {{ 'link.import'|trans([], 'messages') }}
-                                </a>
-                            {% else %}
-                                <a class="nav-link"
-                                    aria-current="page"
-                                    href="{{ path('app_import_index') }}">
-                                    {{ 'link.import'|trans([], 'messages') }}
-                                </a>
-                            {% endif %}
-                        </li>
-                        <li class="">
-                            <a class="nav-link disabled">
-                                {{ 'link.export'|trans([], 'messages') }}
-                            </a>
-                        </li>
+                        {% if has_page('about') %}
+                            <li class="nav-item">
+                                {% if
+                                    app.request.attributes.get('_route')
+                                        starts with 'app_about' %}
+                                    <a class="nav-link active"
+                                        aria-current="page"
+                                        href="{{ path('app_page_about') }}">
+                                        {{ 'link.about'|trans }}
+                                    </a>
+                                {% else %}
+                                    <a class="nav-link"
+                                        href="{{ path('app_page_about') }}">
+                                        {{ 'link.about'|trans }}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                        {% if app_enable_features %}
+                            <li class="nav-item">
+                                {% if
+                                    app.request.attributes.get('_route')
+                                        starts with 'app_blog' %}
+                                    <a class="nav-link active"
+                                        aria-current="page"
+                                        href="{{ path('app_page_features') }}">
+                                        {{ 'link.features'|trans }}
+                                    </a>
+                                {% else %}
+                                    <a class="nav-link"
+                                        href="{{ path('app_page_features') }}">
+                                        {{ 'link.features'|trans }}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                        {% if app_enable_blog %}
+                            <li class="nav-item">
+                                {% if
+                                    app.request.attributes.get('_route')
+                                        starts with 'app_blog' %}
+                                    <a class="nav-link active"
+                                        aria-current="page"
+                                        href="{{ path('app_blog') }}">
+                                        {{ 'link.blog'|trans }}
+                                    </a>
+                                {% else %}
+                                    <a class="nav-link"
+                                        href="{{ path('app_blog') }}">
+                                        {{ 'link.blog'|trans }}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endif %}
+                        {% if app_enable_help %}
+                            <li class="nav-item">
+                                {% if
+                                    app.request.attributes.get('_route')
+                                        starts with 'app_help' %}
+                                    <a class="nav-link active"
+                                        aria-current="page"
+                                        href="#">
+                                        {{ 'link.faq'|trans }}
+                                    </a>
+                                {% else %}
+                                    <a class="nav-link" href="#">
+                                        {{ 'link.faq'|trans }}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -135,7 +125,7 @@
                     </div>
                     <a href="javascript:history.back()">
                         {{ 'link.to.lastpage'|trans }}
-                    </a>, <a href="{{ path('app_welcome') }}" class="btn btn-link">{{
+                    </a>, <a href="{{ path('app_homepage') }}" class="btn btn-link">{{
                             'link.to.homepage'|trans
                         }}</a>
                 </div>
