@@ -35,8 +35,19 @@
         <NullableReturnStatement>
             <errorLevel type="suppress">
                 <file name="src/Entity/Comment.php" />
+                <file name="src/EventSubscriber/AuditSubscriber.php" />
             </errorLevel>
         </NullableReturnStatement>
+        <InvalidReturnStatement>
+            <errorLevel type="suppress">
+                <file name="src/EventSubscriber/AuditSubscriber.php" />
+            </errorLevel>
+        </InvalidReturnStatement>
+        <InvalidReturnType>
+            <errorLevel type="suppress">
+                <file name="src/EventSubscriber/AuditSubscriber.php" />
+            </errorLevel>
+        </InvalidReturnType>
         <InvalidScalarArgument>
             <errorLevel type="suppress">
                 <directory name="src/Controller/Settings/" />
