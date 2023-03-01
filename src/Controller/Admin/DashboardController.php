@@ -6,6 +6,7 @@ namespace App\Controller\Admin;
 
 use App\Domain\Enum\CommentStatus;
 use App\Domain\Enum\ContactRequestStatus;
+use App\Entity\AuditLog;
 use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\ContactRequest;
@@ -61,6 +62,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Users', 'fas fa-users', User::class);
         yield MenuItem::linkToCrud('Cookie Consent', 'fas fa-cookie-bite', CookieConsent::class);
+        yield MenuItem::linkToCrud('Audit log', 'fas fa-chart-simple', AuditLog::class);
         yield MenuItem::section('Website');
         yield MenuItem::linkToCrud('Pages', 'fas fa-sitemap', Page::class);
         yield MenuItem::linkToCrud('label.posts', 'fas fa-file', Post::class);

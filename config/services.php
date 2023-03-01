@@ -27,6 +27,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->defaults()
         ->autowire()
         ->autoconfigure()
+        ->bind('$kernelEnvironment', '%kernel.environment%')
         ->bind('$appTitle', '%app.title%')
         ->bind('$appEnableBlog', '%app.enable_blog')
         ->bind('$appEnableCookieConsent', '%app.enable_cookie_consent%')
