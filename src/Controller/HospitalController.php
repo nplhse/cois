@@ -174,7 +174,7 @@ class HospitalController extends AbstractController
             } catch (HandlerFailedException) {
                 $this->addFlash('danger', 'Sorry, something went wrong. Please try again later!');
 
-                return $this->renderForm('hospital/edit.html.twig', [
+                return $this->renderForm('hospitals/edit.html.twig', [
                     'hospital' => $hospital,
                     'form' => $form,
                 ]);
