@@ -1,0 +1,57 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{# @var field \EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto #}
+{# @var entity \EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto #}
+{% if field.value == 'Category' %}
+    {% set controllerClass = 'App\\Controller\\Admin\\CategoryCrudController' %}
+{% elseif field.value == 'Comment' %}
+    {% set controllerClass = 'App\\Controller\\Admin\\CommentCrudController' %}
+{% elseif field.value == 'Contact Request' %}
+    {% set controllerClass =
+        'App\\Controller\\Admin\\ContactRequestCrudController'
+    %}
+{% elseif field.value == 'Dispatch Area' %}
+    {% set controllerClass =
+        'App\\Controller\\Admin\\DispatchAreaCrudController'
+    %}
+{% elseif field.value == 'Hospital' %}
+    {% set controllerClass = 'App\\Controller\\Admin\\HospitalCrudController' %}
+{% elseif field.value == 'Import' %}
+    {% set controllerClass = 'App\\Controller\\Admin\\ImportCrudController' %}
+{% elseif field.value == 'Page' %}
+    {% set controllerClass = 'App\\Controller\\Admin\\PageCrudController' %}
+{% elseif field.value == 'Post' %}
+    {% set controllerClass = 'App\\Controller\\Admin\\PostCrudController' %}
+{% elseif field.value == 'Post Tag' %}
+    {% set controllerClass = 'App\\Controller\\Admin\\PostTagCrudController' %}
+{% elseif field.value == 'Skipped Row' %}
+    {% set controllerClass =
+        'App\\Controller\\Admin\\SkippedRowCrudController'
+    %}
+{% elseif field.value == 'State' %}
+    {% set controllerClass = 'App\\Controller\\Admin\\StateCrudController' %}
+{% elseif field.value == 'Supply Area' %}
+    {% set controllerClass =
+        'App\\Controller\\Admin\\SupplyAreaCrudController'
+    %}
+{% elseif field.value == 'Tag' %}
+    {% set controllerClass = 'App\\Controller\\Admin\\TagCrudController' %}
+{% elseif field.value == 'User' %}
+    {% set controllerClass = 'App\\Controller\\Admin\\UserCrudController' %}
+{% else %}
+    {% set controllerClass = null %}
+{% endif %}
+
+{% if controllerClass is not null %}
+    {% set url =
+        ea_url().setController(controllerClass).setAction('detail').setEntityId(
+            entity.instance.entityId
+        )
+    %}
+    <a href="{{ url }}">
+        {{ entity.instance.entityType }} ({{ entity.instance.entityId }})
+    </a>
+{% else %}
+    <span class="badge badge-secondary">
+        {{ entity.instance.entityType }} ({{ entity.instance.entityId }})
+    </span>
+{% endif %}
