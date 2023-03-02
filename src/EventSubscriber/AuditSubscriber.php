@@ -67,12 +67,7 @@ class AuditSubscriber implements EventSubscriberInterface
             return [];
         }
 
-        return [
-            'postPersist',
-            'postUpdate',
-            'preRemove',
-            'postRemove',
-        ];
+        return [];
     }
 
     public function postPersist(LifecycleEventArgs $args): void
