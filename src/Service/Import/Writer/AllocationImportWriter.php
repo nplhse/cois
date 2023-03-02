@@ -43,7 +43,7 @@ class AllocationImportWriter implements \App\Application\Contract\ImportWriterIn
             $unit->process($entity, $row, $import);
         }
 
-        $this->validateEntity($entity);
+        //$this->validateEntity($entity);
 
         return $entity;
     }
