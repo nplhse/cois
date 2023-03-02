@@ -142,9 +142,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function findHospitalOwners(): array
     {
         $qb = $this->createQueryBuilder('u')
-            ->leftJoin('u.hospitals', 'h')
-            ->orderBy('u.id', \Doctrine\Common\Collections\Criteria::ASC)
-            ->distinct()
+            ->where('SIZE(u.hospitals) > 0')
             ->getQuery()
             ->execute();
 
