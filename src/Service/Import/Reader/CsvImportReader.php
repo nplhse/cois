@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Service\Import\Reader;
 
 use App\Application\Contract\ImportReaderInterface;
-use ForceUTF8\Encoding;
+use League\Csv\Reader;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,8 +19,6 @@ class CsvImportReader implements ImportReaderInterface
     ];
 
     private array $options;
-
-    private array $keys;
 
     public function __construct(array $options = [])
     {
@@ -54,39 +52,74 @@ class CsvImportReader implements ImportReaderInterface
     {
         $filesystem = new Filesystem();
 
-        if ($filesystem->exists($path)) {
-            $file = fopen($path, 'r');
-        } else {
+        if (!$filesystem->exists($path)) {
             throw new FileNotFoundException($path);
         }
 
-        if ($this->options['hasFieldNames']) {
-            $this->keys = fgetcsv($file, 0, $this->options['delimiter'], $this->options['enclosure']);
-        } else {
-            $this->keys = [];
+        $csv = Reader::createFromString(file_get_contents($path));
+        $csv->setDelimiter($this->options['delimiter']);
+        $csv->setEnclosure($this->options['enclosure']);
+        $csv->setOutputBOM(Reader::BOM_UTF8);
+        $csv->addStreamFilter('convert.iconv.ISO-8859-1/UTF-8');
+
+        $grab = [];
+        $columns = $this->getSupportedColumns();
+
+        foreach ($csv->fetchOne() as $index => $column) {
+            if (in_array($column, $columns)) {
+                if (isset($grab[$column])) {
+                    $grab[$column.'2'] = $index;
+                    continue;
+                }
+                $grab[$column] = $index;
+            }
         }
 
-        $result = [];
-
-        while ($row = fgetcsv($file, 0, $this->options['delimiter'], $this->options['enclosure'])) {
-            $n = count($row);
-            $res = [];
-            for ($i = 0; $i < $n; ++$i) {
-                $idx = ($this->options['useFieldNames']) ? $this->keys[$i] : $i;
-                $id8 = Encoding::fixUTF8($idx);
-                $val = Encoding::fixUTF8($row[$i]);
-
-                // Fixing inconsistent naming of Schockraum in Marburg-Biedenkopf
-                if ('Schockraum' === $id8 && isset($res['Schockraum'])) {
-                    $id8 = 'Schockraum Art';
-                }
-
-                $res[$id8] = $val;
+        foreach ($csv->getRecords() as $i => $row) {
+            if (0 == $i) {
+                continue;
             }
 
-            yield $res;
-        }
+            $filteredRow = [];
+            foreach ($grab as $column => $index) {
+                $filteredRow[$column] = $row[$index];
+            }
 
-        fclose($file);
+            yield $filteredRow;
+        }
+    }
+
+    private function getSupportedColumns(): array
+    {
+        return [
+            'Datum (Eintreffzeit)',
+            'Uhrzeit (Eintreffzeit)',
+            'Schockraum',
+            'Herzkatheter',
+            'Anlass',
+            'Arbeits-/Wege-/Schulunfall',
+            'Geschlecht',
+            'Alter',
+            'Reanimation',
+            'Beatmet',
+            'Schock',
+            'Ansteckungsfähig',
+            'Schwanger',
+            'Arztbegleitet',
+            'Grund',
+            'Transportmittel',
+            'Arztbegleitung notwendig',
+            'Sekundäranlass',
+            'Fachgebiet',
+            'Fachbereich',
+            'Patienten-Übergabepunkt (PüP)',
+            'Fachbereich war abgemeldet?',
+            'PZC',
+            'PZC-Text',
+            'Neben-PZC',
+            'Neben-PZC-Text',
+            'Datum (Erstellungsdatum)',
+            'Uhrzeit (Erstellungsdatum)',
+        ];
     }
 }
