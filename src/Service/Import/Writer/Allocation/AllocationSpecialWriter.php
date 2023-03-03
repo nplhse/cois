@@ -26,18 +26,6 @@ class AllocationSpecialWriter implements \App\Application\Contract\AllocationImp
             $entity->setSecondaryDeployment($row['Sekundäranlass']);
         }
 
-        if (empty($row['PZC'])) {
-            $value = match ($row['Dringlichkeit']) {
-                'Ambulante Versorgung' => 3,
-                'Stationäre Versorgung' => 2,
-                'Station?re Versorgung' => 2,
-                'Notfallversorgung' => 1,
-                default => null,
-            };
-
-            $entity->setUrgency($value);
-        }
-
         return $entity;
     }
 }
