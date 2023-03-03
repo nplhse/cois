@@ -26,7 +26,6 @@ class AllocationPropertyImportWriter implements \App\Application\Contract\Alloca
         ['key' => 'Ansteckungsf?hig', 'target' => 'isInfectious'],
         ['key' => 'Grund', 'target' => 'Assignment'],
         ['key' => 'Anlass', 'target' => 'Occasion'],
-        ['key' => 'Freitext', 'target' => 'Comment'],
         ['key' => 'Fachgebiet', 'target' => 'Speciality'],
         ['key' => 'Fachbereich', 'target' => 'SpecialityDetail'],
         ['key' => 'PZC-Text', 'target' => 'Indication'],
