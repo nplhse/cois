@@ -1,0 +1,52 @@
+{% extends 'data/_data_layout.html.twig' %}
+
+{% block title %}
+    {{ 'title.export'|trans({}, 'app') }} - {{ parent() }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{
+        component(
+            'breadcrumb',
+            {
+                items: [
+                    {
+                        url: url('app_export_index'),
+                        label: 'title.export'|trans({}, 'app')
+                    },
+                    {
+                        label: 'title.export.dgina23'|trans({}, 'app')
+                    }
+                ]
+            }
+        )
+    }}
+{% endblock %}
+
+{% block content %}
+    <div class="float-end">
+        <a href="{{ path('app_export_index') }}"
+           class="btn btn-outline-secondary">
+            {{ 'Back to list'|trans }}
+        </a>
+    </div>
+
+    <h1>
+        {{ 'title.export.dgina23'|trans({}, 'app') }}
+    </h1>
+
+    <div class="card">
+        <div class="card-header">
+            {{ 'heading.export.dgina23.select'|trans }}
+        </div>
+        <div class="card-body">
+            {{ dump(data) }}
+
+            <div class="row">
+                <div class="col">
+                    <a href="#" class="btn btn-success">{{ 'btn.export.download'|trans({}, 'app') }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
