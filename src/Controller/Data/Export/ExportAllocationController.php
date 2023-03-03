@@ -8,11 +8,14 @@ use App\Factory\ExportFilterFactory;
 use App\Form\ExportType;
 use App\Query\AllocationExportQuery;
 use App\Service\FilterService;
+use League\Csv\Reader;
+use League\Csv\Writer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -53,16 +56,73 @@ class ExportAllocationController extends AbstractController
     }
 
     #[Route('/export/allocation/fetch', name: 'app_export_allocation_fetch')]
-    public function fetch(Request $request, ExportFilterFactory $exportFilterFactory): Response
+    public function fetch(Request $request, ExportFilterFactory $exportFilterFactory): void
     {
         $this->denyAccessUnlessGranted('export', $this->getUser());
 
         $this->filterService->setRequest($request);
         $this->filterService->configureFilters($exportFilterFactory->getFilters());
 
-        $results = $this->exportQuery->execute($this->filterService);
+        if (!ini_get('auto_detect_line_endings')) {
+            ini_set('auto_detect_line_endings', '1');
+        }
 
-        $header = [
+        $csv = Writer::createFromPath('php://temp', 'r+');
+        $csv->setDelimiter(';');
+        $csv->setOutputBOM(Reader::BOM_UTF8);
+
+        $fieldFormatter = function (array $row): array {
+            $true = $this->translator->trans('True', [], 'domain');
+            $false = $this->translator->trans('False', [], 'domain');
+
+            $row['urgency'] = 'SK'.$row['urgency'];
+            $row['requiresResus'] = (true == $row['requiresResus']) ? $true : $false;
+            $row['requiresCathlab'] = (true == $row['requiresCathlab']) ? $true : $false;
+            $row['isCPR'] = (true == $row['isCPR']) ? $true : $false;
+            $row['isVentilated'] = (true == $row['isVentilated']) ? $true : $false;
+            $row['isShock'] = (true == $row['isShock']) ? $true : $false;
+            $row['isPregnant'] = (true == $row['isPregnant']) ? $true : $false;
+            $row['isWorkAccident'] = (true == $row['isWorkAccident']) ? $true : $false;
+            $row['isWithPhysician'] = (true == $row['isWithPhysician']) ? $true : $false;
+            $row['specialityWasClosed'] = (true == $row['specialityWasClosed']) ? $true : $false;
+            $row['secondaryIndicationCode'] = (0 === $row['secondaryIndicationCode']) ? '' : $row['secondaryIndicationCode'];
+
+            return $row;
+        };
+
+        $csv->insertOne($this->getHeaders());
+        $csv->addFormatter($fieldFormatter);
+        $csv->insertAll($this->exportQuery->execute($this->filterService));
+
+        $flushThreshold = 500;
+        $contentCallback = function () use ($csv, $flushThreshold): void {
+            foreach ($csv->chunk(1024) as $offset => $chunk) {
+                echo $chunk;
+
+                if (0 === $offset % $flushThreshold) {
+                    flush();
+                }
+            }
+        };
+
+        $response = new StreamedResponse();
+        $response->headers->set('Content-Encoding', 'none');
+        $response->headers->set('Content-Type', 'text/csv; charset=UTF-8');
+
+        $disposition = $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            'ivena-allocation-export.csv'
+        );
+
+        $response->headers->set('Content-Disposition', $disposition);
+        $response->headers->set('Content-Description', 'File Transfer');
+        $response->setCallback($contentCallback);
+        $response->send();
+    }
+
+    public function getHeaders(): array
+    {
+        return [
             $this->translator->trans('Hospital', [], 'domain'),
             $this->translator->trans('Created at', [], 'domain'),
             $this->translator->trans('Arrival at', [], 'domain'),
@@ -90,43 +150,5 @@ class ExportAllocationController extends AbstractController
             $this->translator->trans('Secondary indication', [], 'domain'),
             $this->translator->trans('Secondary deployment', [], 'domain'),
         ];
-
-        $true = $this->translator->trans('True', [], 'domain');
-        $false = $this->translator->trans('False', [], 'domain');
-
-        $fp = fopen('php://temp', 'w');
-        fputcsv($fp, $header);
-        foreach ($results as $fields) {
-            $fields['urgency'] = 'SK'.$fields['urgency'];
-            $fields['requiresResus'] = (true == $fields['requiresResus']) ? $true : $false;
-            $fields['requiresCathlab'] = (true == $fields['requiresCathlab']) ? $true : $false;
-            $fields['isCPR'] = (true == $fields['isCPR']) ? $true : $false;
-            $fields['isVentilated'] = (true == $fields['isVentilated']) ? $true : $false;
-            $fields['isShock'] = (true == $fields['isShock']) ? $true : $false;
-            $fields['isPregnant'] = (true == $fields['isPregnant']) ? $true : $false;
-            $fields['isWorkAccident'] = (true == $fields['isWorkAccident']) ? $true : $false;
-            $fields['isWithPhysician'] = (true == $fields['isWithPhysician']) ? $true : $false;
-            $fields['specialityWasClosed'] = (true == $fields['specialityWasClosed']) ? $true : $false;
-            $fields['secondaryIndicationCode'] = (0 === $fields['secondaryIndicationCode']) ? '' : $fields['secondaryIndicationCode'];
-
-            fputcsv($fp, $fields);
-        }
-
-        rewind($fp);
-        $response = new Response(stream_get_contents($fp));
-        fclose($fp);
-
-        $response->headers->set('Content-Encoding', 'none');
-        $response->headers->set('Content-Type', 'text/csv; charset=UTF-8');
-
-        $disposition = $response->headers->makeDisposition(
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            'export.csv'
-        );
-
-        $response->headers->set('Content-Disposition', $disposition);
-        $response->headers->set('Content-Description', 'File Transfer');
-
-        return $response;
     }
 }
