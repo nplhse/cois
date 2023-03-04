@@ -1,6 +1,5 @@
 {# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
 {# @var field \EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto #}
 {# @var entity \EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto #}
-<pre>
-    {{ field.formattedValue|json_encode(constant('JSON_PRETTY_PRINT')) }}
-</pre>
+<!-- prettier-ignore -->
+<pre class="language-css hljs">{{ field.formattedValue|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
