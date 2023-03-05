@@ -25,9 +25,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'dql' => [
                 'datetime_functions' => [
                     'DATE_FORMAT' => DateFormat::class,
-                    'month' => DoctrineExtensions\Query\Mysql\Month::class,
                     'year' => DoctrineExtensions\Query\Mysql\Year::class,
                     'quarter' => DoctrineExtensions\Query\Mysql\Quarter::class,
+                    'month' => DoctrineExtensions\Query\Mysql\Month::class,
+                    'hour' => DoctrineExtensions\Query\Mysql\Hour::class,
                 ],
             ],
         ],

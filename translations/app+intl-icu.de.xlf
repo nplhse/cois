@@ -546,6 +546,116 @@
         <source>desc.export.allocation</source>
         <target>Hier können Sie die Einsätze der mit Ihnen verknüpften Kliniken aus dem System exportieren.</target>
       </trans-unit>
+      <trans-unit id="jUTKrrM" resname="info.export.available">
+        <source>info.export.available</source>
+        <target>Verfügbar</target>
+      </trans-unit>
+      <trans-unit id="9KLVHFM" resname="title.export.dgina23">
+        <source>title.export.dgina23</source>
+        <target>Exporte für #DGINA23</target>
+      </trans-unit>
+      <trans-unit id="DB.Wm6c" resname="desc.export.dgina23">
+        <source>desc.export.dgina23</source>
+        <target>Enthält alle für den DGINA23 Kongress vorbereiteten Datensätze</target>
+      </trans-unit>
+      <trans-unit id="f2hnUVV" resname="info.export.restricted">
+        <source>info.export.restricted</source>
+        <target>Eingeschränkt</target>
+      </trans-unit>
+      <trans-unit id="DzFqSxO" resname="heading.export.dgina23.select">
+        <source>heading.export.dgina23.select</source>
+        <target>Datensätze auswählen</target>
+      </trans-unit>
+      <trans-unit id="ZqiKvXh" resname="heading.export.dgina23.byUsage">
+        <source>heading.export.dgina23.byUsage</source>
+        <target>Einsätze nach Uhrzeiten</target>
+      </trans-unit>
+      <trans-unit id="LbHTPRq" resname="text.export.dgina23.byUsage">
+        <source>text.export.dgina23.byUsage</source>
+        <target>In der Datei finden sich die Summen aller Einsätze gruppiert nach Stunden und gefiltert nach bestimmten
+          Kriterien. Enthalten sind folgende Reihen:</target>
+      </trans-unit>
+      <trans-unit id="e4JfFHP" resname="table.export.name">
+        <source>table.export.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="m3h1W0A" resname="table.export.content">
+        <source>table.export.content</source>
+        <target>Inhalt</target>
+      </trans-unit>
+      <trans-unit id="KvPpprs" resname="table.export.dgina23.total_byUsage">
+        <source>table.export.dgina23.total_byUsage</source>
+        <target>Alle Einsätze einer Stunde</target>
+      </trans-unit>
+      <trans-unit id="LxM1VXg" resname="table.export.dgina23.int_byUsage">
+        <source>table.export.dgina23.int_byUsage</source>
+        <target>Alle internistischen Einsätze einer Stunde</target>
+      </trans-unit>
+      <trans-unit id="qZVjdDu" resname="table.export.dgina23.int_catlab_byUsage">
+        <source>table.export.dgina23.int_catlab_byUsage</source>
+        <target>Alle internistischen Einsätze mit Herzkatheter einer Stunde</target>
+      </trans-unit>
+      <trans-unit id="LfoUg_D" resname="table.export.dgina23.trauma_byUsage">
+        <source>table.export.dgina23.trauma_byUsage</source>
+        <target>Alle unfallchirurgischen Einsätze einer Stunde</target>
+      </trans-unit>
+      <trans-unit id="eNh6wId" resname="table.export.dgina23.trauma_resus_byUsage">
+        <source>table.export.dgina23.trauma_resus_byUsage</source>
+        <target>Alle unfallchirurgischen Einsätze mit Schockraum einer Stunde</target>
+      </trans-unit>
+      <trans-unit id="SW9jwcd" resname="table.export.dgina23.neuro_byUsage">
+        <source>table.export.dgina23.neuro_byUsage</source>
+        <target>Alle neurologischen Einsätze einer Stunde</target>
+      </trans-unit>
+      <trans-unit id="aYNTjo1" resname="table.export.dgina23.neuro_resus_byUsage">
+        <source>table.export.dgina23.neuro_resus_byUsage</source>
+        <target>Alle neurologischen Einsätze mit Schockraum einer Stunde</target>
+      </trans-unit>
+      <trans-unit id="G09WPc8" resname="table.export.dgina23.peds_byUsage">
+        <source>table.export.dgina23.peds_byUsage</source>
+        <target>Alle pädiatrischen Einsätze einer Stunde</target>
+      </trans-unit>
+      <trans-unit id="eQuccKP" resname="table.export.dgina23.urology_byUsage">
+        <source>table.export.dgina23.urology_byUsage</source>
+        <target>Alle urologischen Einsätze einer Stunde</target>
+      </trans-unit>
+      <trans-unit id="hnJt83B" resname="btn.export.download">
+        <source>btn.export.download</source>
+        <target>Herunterladen</target>
+      </trans-unit>
+      <trans-unit id="j4n9U4w" resname="heading.export.dgina23.byTracers">
+        <source>heading.export.dgina23.byTracers</source>
+        <target>Einsätze nach Tracerdiagnosen und Quartal</target>
+      </trans-unit>
+      <trans-unit id="gcIC5r." resname="text.export.dgina23.byTracers">
+        <source>text.export.dgina23.byTracers</source>
+        <target>Enthält die Summen aller Einsätze gruppiert nach Tracer-Diagnosen, sowie Quartal von 2019 und 2022.
+          Enthalten sind folgende Reihen:</target>
+      </trans-unit>
+      <trans-unit id="yWoYixZ" resname="table.export.dgina23.total_byTracers">
+        <source>table.export.dgina23.total_byTracers</source>
+        <target>Alle Einsätze eines Quartals</target>
+      </trans-unit>
+      <trans-unit id="ir9fRVy" resname="table.export.dgina23.cpr_byTracers">
+        <source>table.export.dgina23.cpr_byTracers</source>
+        <target>Alle Einsätze mit laufender oder erfolgreicher Reanimation eines Quartals</target>
+      </trans-unit>
+      <trans-unit id="p1YIZeI" resname="table.export.dgina23.pulmonary_embolism_byTracers">
+        <source>table.export.dgina23.pulmonary_embolism_byTracers</source>
+        <target>Alle Einsätze mit Lungenembolie eines Quartals</target>
+      </trans-unit>
+      <trans-unit id="MzT3UKk" resname="table.export.dgina23.acs_stemi_byTracers">
+        <source>table.export.dgina23.acs_stemi_byTracers</source>
+        <target>Alle Einsätze mit ACS oder STEMI/NSTEMI eines Quartals</target>
+      </trans-unit>
+      <trans-unit id="cobToeA" resname="table.export.dgina23.pneumonia_copd_byTracers">
+        <source>table.export.dgina23.pneumonia_copd_byTracers</source>
+        <target>Alle Einsätze mit Pneumonie oder COPD eines Quartals</target>
+      </trans-unit>
+      <trans-unit id="EGX57pE" resname="table.export.dgina23.stroke_byTracers">
+        <source>table.export.dgina23.stroke_byTracers</source>
+        <target>Alle Einsätze mit Schlaganfällen eines Quartals</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
