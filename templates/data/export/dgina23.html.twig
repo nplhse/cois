@@ -26,7 +26,7 @@
 {% block content %}
     <div class="float-end">
         <a href="{{ path('app_export_index') }}"
-           class="btn btn-outline-secondary">
+            class="btn btn-outline-secondary">
             {{ 'Back to list'|trans }}
         </a>
     </div>
@@ -37,16 +37,310 @@
 
     <div class="card">
         <div class="card-header">
-            {{ 'heading.export.dgina23.select'|trans }}
+            {{ 'heading.export.dgina23.select'|trans({}, 'app') }}
         </div>
         <div class="card-body">
-            {{ dump(data) }}
+            <h4>
+                {{ 'heading.export.dgina23.byUsage'|trans({}, 'app') }}
+            </h4>
+            <p>
+                {{ 'text.export.dgina23.byUsage'|trans({}, 'app') }}
+            </p>
 
-            <div class="row">
-                <div class="col">
-                    <a href="#" class="btn btn-success">{{ 'btn.export.download'|trans({}, 'app') }}</a>
-                </div>
-            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            #
+                        </th>
+                        <th scope="col">
+                            {{ 'table.export.name'|trans({}, 'app') }}
+                        </th>
+                        <th scope="col">
+                            {{ 'table.export.content'|trans({}, 'app') }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            1
+                        </th>
+                        <td>
+                            total
+                        </td>
+                        <td>
+                            {{
+                                'table.export.dgina23.total_byUsage'|trans(
+                                    {},
+                                    'app'
+                                )
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            2
+                        </th>
+                        <td>
+                            int
+                        </td>
+                        <td>
+                            {{
+                                'table.export.dgina23.int_byUsage'|trans(
+                                    {},
+                                    'app'
+                                )
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            3
+                        </th>
+                        <td>
+                            int_catlab
+                        </td>
+                        <td>
+                            {{
+                                'table.export.dgina23.int_catlab_byUsage'|trans(
+                                    {},
+                                    'app'
+                                )
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            4
+                        </th>
+                        <td>
+                            trauma
+                        </td>
+                        <td>
+                            {{
+                                'table.export.dgina23.trauma_byUsage'|trans(
+                                    {},
+                                    'app'
+                                )
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            5
+                        </th>
+                        <td>
+                            trauma_resus
+                        </td>
+                        <td>
+                            {{
+                                'table.export.dgina23.trauma_resus_byUsage'|trans(
+                                    {},
+                                    'app'
+                                )
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            6
+                        </th>
+                        <td>
+                            neuro
+                        </td>
+                        <td>
+                            {{
+                                'table.export.dgina23.neuro_byUsage'|trans(
+                                    {},
+                                    'app'
+                                )
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            7
+                        </th>
+                        <td>
+                            neuro_resus
+                        </td>
+                        <td>
+                            {{
+                                'table.export.dgina23.neuro_resus_byUsage'|trans(
+                                    {},
+                                    'app'
+                                )
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            6
+                        </th>
+                        <td>
+                            peds
+                        </td>
+                        <td>
+                            {{
+                                'table.export.dgina23.peds_byUsage'|trans(
+                                    {},
+                                    'app'
+                                )
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            7
+                        </th>
+                        <td>
+                            urology
+                        </td>
+                        <td>
+                            {{
+                                'table.export.dgina23.urology_byUsage'|trans(
+                                    {},
+                                    'app'
+                                )
+                            }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <a href="{{ path('app_export_dgina23_times') }}"
+                class="btn btn-success">
+                {{ 'btn.export.download'|trans({}, 'app') }}
+            </a>
+
+            <hr />
+
+            <h4>
+                {{ 'heading.export.dgina23.byTracers'|trans({}, 'app') }}
+            </h4>
+            <p>
+                {{ 'text.export.dgina23.byTracers'|trans({}, 'app') }}
+            </p>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            #
+                        </th>
+                        <th scope="col">
+                            {{ 'table.export.name'|trans({}, 'app') }}
+                        </th>
+                        <th scope="col">
+                            {{ 'table.export.content'|trans({}, 'app') }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            1
+                        </th>
+                        <td>
+                            total
+                        </td>
+                        <td>
+                            {{
+                                'table.export.dgina23.total_byTracers'|trans(
+                                    {},
+                                    'app'
+                                )
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            2
+                        </th>
+                        <td>
+                            cpr
+                        </td>
+                        <td>
+                            {{
+                                'table.export.dgina23.cpr_byTracers'|trans(
+                                    {},
+                                    'app'
+                                )
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            3
+                        </th>
+                        <td>
+                            pulmonary_embolism
+                        </td>
+                        <td>
+                            {{
+                                'table.export.dgina23.pulmonary_embolism_byTracers'|trans(
+                                    {},
+                                    'app'
+                                )
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            4
+                        </th>
+                        <td>
+                            acs_stemi
+                        </td>
+                        <td>
+                            {{
+                                'table.export.dgina23.acs_stemi_byTracers'|trans(
+                                    {},
+                                    'app'
+                                )
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            5
+                        </th>
+                        <td>
+                            pneumonia_copd
+                        </td>
+                        <td>
+                            {{
+                                'table.export.dgina23.pneumonia_copd_byTracers'|trans(
+                                    {},
+                                    'app'
+                                )
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            6
+                        </th>
+                        <td>
+                            stroke
+                        </td>
+                        <td>
+                            {{
+                                'table.export.dgina23.stroke_byTracers'|trans(
+                                    {},
+                                    'app'
+                                )
+                            }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <a href="{{ path('app_export_dgina23_tracer') }}"
+                class="btn btn-success">
+                {{ 'btn.export.download'|trans({}, 'app') }}
+            </a>
         </div>
     </div>
 {% endblock %}

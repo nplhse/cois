@@ -30,7 +30,8 @@
                     {{ 'title.export.allocation'|trans({}, 'app') }}
                 </h5>
                 <small class="text-success">
-                    {{ 'info.export.available'|trans({}, 'app') }} <i class="bi bi-unlock-fill"></i>
+                    {{ 'info.export.available'|trans({}, 'app') }}
+                    <i class="bi bi-unlock-fill"></i>
                 </small>
             </div>
             <p class="mb-1">
@@ -39,14 +40,15 @@
         </a>
         {% if app.user.member %}
             <a href="{{ path('app_export_dgina23') }}"
-               class="list-group-item list-group-item-action"
-               aria-current="true">
+                class="list-group-item list-group-item-action"
+                aria-current="true">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">
                         {{ 'title.export.dgina23'|trans({}, 'app') }}
                     </h5>
                     <small class="text-success">
-                        {{ 'info.export.available'|trans({}, 'app') }} <i class="bi bi-unlock-fill"></i>
+                        {{ 'info.export.available'|trans({}, 'app') }}
+                        <i class="bi bi-unlock-fill"></i>
                     </small>
                 </div>
                 <p class="mb-1">
@@ -54,21 +56,21 @@
                 </p>
             </a>
         {% else %}
-                <a
-                   class="list-group-item list-group-item-action"
-                   aria-current="true">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">
-                            {{ 'title.export.dgina23'|trans({}, 'app') }}
-                        </h5>
-                        <small class="text-danger">
-                            {{ 'info.export.restricted'|trans({}, 'app') }} <i class="bi bi-lock-fill"></i>
-                        </small>
-                    </div>
-                    <p class="mb-1">
-                        {{ 'desc.export.dgina23'|trans({}, 'app') }}
-                    </p>
-                </a>
+            <a class="list-group-item list-group-item-action"
+                aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">
+                        {{ 'title.export.dgina23'|trans({}, 'app') }}
+                    </h5>
+                    <small class="text-danger">
+                        {{ 'info.export.restricted'|trans({}, 'app') }}
+                        <i class="bi bi-lock-fill"></i>
+                    </small>
+                </div>
+                <p class="mb-1">
+                    {{ 'desc.export.dgina23'|trans({}, 'app') }}
+                </p>
+            </a>
         {% endif %}
     </div>
 {% endblock %}

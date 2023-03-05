@@ -9,7 +9,7 @@ use App\Entity\Hospital;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 
-final class DGINA23ExportQuery
+final class AllocationBySizeQuery
 {
     private ?QueryBuilder $query = null;
 
@@ -31,41 +31,34 @@ final class DGINA23ExportQuery
         return $this->query->getQuery()->getResult();
     }
 
-    public function findAllocationsByHour(): self
-    {
-        $this->query
-            ->select('COUNT(a.id) as value, HOUR(a.createdAt) as hour')
-            ->groupBy('hour')
-            ->orderBy('hour', 'ASC');
-
-        return $this;
-    }
-
-    public function findAllocationsByQuarter(): self
-    {
-        $from = new \DateTime('2019-01-01 00:00:00');
-        $to = new \DateTime('2022-12-31 23:59:59');
-
-        $this->query
-            ->select('COUNT(a.id) as value, YEAR(a.createdAt) as year, QUARTER(a.createdAt) as quarter')
-            ->andWhere('a.createdAt BETWEEN :from AND :to')
-            ->setParameter('from', $from)
-            ->setParameter('to', $to)
-            ->groupBy('year')
-            ->addGroupBy('quarter')
-            ->orderBy('year', 'ASC')
-            ->addOrderBy('quarter', 'ASC');
-
-        return $this;
-    }
-
     public function findAllocationsBySize(): self
     {
         $this->query
-            ->select('COUNT(a.id) as value, h.size, HOUR(a.createdAt) as hour, a.age, a.urgency, a.isWithPhysician')
+            ->select('COUNT(a.id) as value, h.size')
             ->innerJoin(Hospital::class, 'h')
             ->groupBy('h.size')
             ->orderBy('h.size', 'ASC');
+
+        return $this;
+    }
+
+    public function findAllocationsByTier(): self
+    {
+        $this->query
+            ->select('COUNT(a.id) as value, h.tier, HOUR(a.createdAt) as hour, a.age, a.urgency, a.isWithPhysician')
+            ->innerJoin(Hospital::class, 'h')
+            ->groupBy('h.tier')
+            ->orderBy('h.tier', 'ASC');
+
+        return $this;
+    }
+
+    public function findByLocation(): self
+    {
+        $this->query
+            ->addSelect('h.location')
+            ->addGroupBy('h.location')
+            ->orderBy('h.location', 'ASC');
 
         return $this;
     }

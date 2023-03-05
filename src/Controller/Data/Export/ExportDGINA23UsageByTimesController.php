@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Data\Export;
 
-use App\Query\Export\DGINA23ExportQuery;
+use App\Query\Export\AllocationByHourQuery;
 use League\Csv\Writer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ExportDGINA23UsageByTimesController extends AbstractController
 {
     public function __construct(
-        private DGINA23ExportQuery $query
+        private AllocationByHourQuery $query
     ) {
     }
 
@@ -23,15 +23,52 @@ class ExportDGINA23UsageByTimesController extends AbstractController
     {
         $data = [];
 
-        $data['total'] = $this->query->findAllocationsByHour()->getResults();
-        $data['int'] = $this->query->findAllocationsByHour()->filterBySpeciality('Innere Medizin')->getResults();
-        $data['int_cathlab'] = $this->query->findAllocationsByHour()->filterBySpeciality('Innere Medizin')->filterByProperty('cathlab')->getResults();
-        $data['trauma'] = $this->query->findAllocationsByHour()->filterBySpeciality('Unfallchirurgie')->getResults();
-        $data['trauma_resus'] = $this->query->findAllocationsByHour()->filterBySpeciality('Unfallchirurgie')->filterByProperty('resus')->getResults();
-        $data['neuro'] = $this->query->findAllocationsByHour()->filterBySpeciality('Neurologie')->getResults();
-        $data['neuro_resus'] = $this->query->findAllocationsByHour()->filterBySpeciality('Neurologie')->filterByProperty('resus')->getResults();
-        $data['peds'] = $this->query->findAllocationsByHour()->filterBySpeciality('Kinder- und Jugendmedizin')->getResults();
-        $data['urology'] = $this->query->findAllocationsByHour()->filterBySpeciality('Urologie')->getResults();
+        $data['total'] = $this->query->new()
+            ->findAllocationsByHour()
+            ->getResults();
+
+        $data['int'] = $this->query->new()
+            ->findAllocationsByHour()
+            ->filterBySpeciality('Innere Medizin')
+            ->getResults();
+
+        $data['int_cathlab'] = $this->query->new()
+            ->findAllocationsByHour()
+            ->filterBySpeciality('Innere Medizin')
+            ->filterByProperty('cathlab')
+            ->getResults();
+
+        $data['trauma'] = $this->query->new()
+            ->findAllocationsByHour()
+            ->filterBySpecialityDetail('Unfallchirurgie')
+            ->getResults();
+
+        $data['trauma_resus'] = $this->query->new()
+            ->findAllocationsByHour()
+            ->filterBySpecialityDetail('Unfallchirurgie')
+            ->filterByProperty('resus')
+            ->getResults();
+
+        $data['neuro'] = $this->query->new()
+            ->findAllocationsByHour()
+            ->filterBySpeciality('Neurologie')
+            ->getResults();
+
+        $data['neuro_resus'] = $this->query->new()
+            ->findAllocationsByHour()
+            ->filterBySpeciality('Neurologie')
+            ->filterByProperty('resus')
+            ->getResults();
+
+        $data['peds'] = $this->query->new()
+            ->findAllocationsByHour()
+            ->filterBySpeciality('Kinder- und Jugendmedizin')
+            ->getResults();
+
+        $data['urology'] = $this->query->new()
+            ->findAllocationsByHour()
+            ->filterBySpeciality('Urologie')
+            ->getResults();
 
         foreach ($data as $key => $row) {
             $tmp = [];

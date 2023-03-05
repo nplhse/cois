@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Data\Export;
 
-use App\Query\Export\DGINA23ExportQuery;
+use App\Query\Export\AllocationByQuarterQuery;
 use League\Csv\Writer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ExportDGINA23TracersByQuarterController extends AbstractController
 {
     public function __construct(
-        private DGINA23ExportQuery $query
+        private AllocationByQuarterQuery $query
     ) {
     }
 
@@ -23,12 +23,34 @@ class ExportDGINA23TracersByQuarterController extends AbstractController
     {
         $data = [];
 
-        $data['total'] = $this->query->new()->findAllocationsByQuarter()->getResults();
-        $data['stroke'] = $this->query->new()->findAllocationsByQuarter()->filterByTracer('stroke')->getResults();
-        $data['pulmonary_embolism'] = $this->query->new()->findAllocationsByQuarter()->filterByTracer('pulmonary_embolism')->getResults();
-        $data['acs_stemi'] = $this->query->new()->findAllocationsByQuarter()->filterByTracer('acs_stemi')->getResults();
-        $data['pneumonia_copd'] = $this->query->new()->findAllocationsByQuarter()->filterByTracer('pneumonia_copd')->getResults();
-        $data['cpr'] = $this->query->new()->findAllocationsByQuarter()->filterByTracer('cpr')->getResults();
+        $data['total'] = $this->query->new()
+            ->findAllocationsByQuarter()
+            ->getResults();
+
+        $data['cpr'] = $this->query->new()
+            ->findAllocationsByQuarter()
+            ->filterByTracer('cpr')
+            ->getResults();
+
+        $data['pulmonary_embolism'] = $this->query->new()
+            ->findAllocationsByQuarter()
+            ->filterByTracer('pulmonary_embolism')
+            ->getResults();
+
+        $data['acs_stemi'] = $this->query->new()
+            ->findAllocationsByQuarter()
+            ->filterByTracer('acs_stemi')
+            ->getResults();
+
+        $data['pneumonia_copd'] = $this->query->new()
+            ->findAllocationsByQuarter()
+            ->filterByTracer('pneumonia_copd')
+            ->getResults();
+
+        $data['stroke'] = $this->query->new()
+            ->findAllocationsByQuarter()
+            ->filterByTracer('stroke')
+            ->getResults();
 
         foreach ($data as $key => $row) {
             $tmp = [];

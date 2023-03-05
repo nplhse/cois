@@ -533,6 +533,116 @@
         <source>desc.export.allocation</source>
         <target>This allows you to export all allocations related to your hospital from the system.</target>
       </trans-unit>
+      <trans-unit id="jUTKrrM" resname="info.export.available">
+        <source>info.export.available</source>
+        <target>Available</target>
+      </trans-unit>
+      <trans-unit id="9KLVHFM" resname="title.export.dgina23">
+        <source>title.export.dgina23</source>
+        <target>Exports for #DGINA23</target>
+      </trans-unit>
+      <trans-unit id="DB.Wm6c" resname="desc.export.dgina23">
+        <source>desc.export.dgina23</source>
+        <target>This includes all the data that is included in the three papers for the DGINA23 congress.</target>
+      </trans-unit>
+      <trans-unit id="f2hnUVV" resname="info.export.restricted">
+        <source>info.export.restricted</source>
+        <target>Restricted</target>
+      </trans-unit>
+      <trans-unit id="DzFqSxO" resname="heading.export.dgina23.select">
+        <source>heading.export.dgina23.select</source>
+        <target>Please select what you want to export</target>
+      </trans-unit>
+      <trans-unit id="ZqiKvXh" resname="heading.export.dgina23.byUsage">
+        <source>heading.export.dgina23.byUsage</source>
+        <target>Export Allocations by Usage</target>
+      </trans-unit>
+      <trans-unit id="LbHTPRq" resname="text.export.dgina23.byUsage">
+        <source>text.export.dgina23.byUsage</source>
+        <target>This creates a file that includes the counts of allocations grouped by hours and filtered by several
+          criteria. The following data is included:e</target>
+      </trans-unit>
+      <trans-unit id="e4JfFHP" resname="table.export.name">
+        <source>table.export.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="m3h1W0A" resname="table.export.content">
+        <source>table.export.content</source>
+        <target>Content</target>
+      </trans-unit>
+      <trans-unit id="KvPpprs" resname="table.export.dgina23.total_byUsage">
+        <source>table.export.dgina23.total_byUsage</source>
+        <target>All Allocations from that hour column</target>
+      </trans-unit>
+      <trans-unit id="LxM1VXg" resname="table.export.dgina23.int_byUsage">
+        <source>table.export.dgina23.int_byUsage</source>
+        <target>All internal medicine Allocations from that hour column</target>
+      </trans-unit>
+      <trans-unit id="qZVjdDu" resname="table.export.dgina23.int_catlab_byUsage">
+        <source>table.export.dgina23.int_catlab_byUsage</source>
+        <target>All internal medicine Allocations that require cathlab</target>
+      </trans-unit>
+      <trans-unit id="LfoUg_D" resname="table.export.dgina23.trauma_byUsage">
+        <source>table.export.dgina23.trauma_byUsage</source>
+        <target>All trauma Allocations from that hour column</target>
+      </trans-unit>
+      <trans-unit id="eNh6wId" resname="table.export.dgina23.trauma_resus_byUsage">
+        <source>table.export.dgina23.trauma_resus_byUsage</source>
+        <target>All trauma Allocations that require resus</target>
+      </trans-unit>
+      <trans-unit id="SW9jwcd" resname="table.export.dgina23.neuro_byUsage">
+        <source>table.export.dgina23.neuro_byUsage</source>
+        <target>All neurology Allocations from that hour column</target>
+      </trans-unit>
+      <trans-unit id="aYNTjo1" resname="table.export.dgina23.neuro_resus_byUsage">
+        <source>table.export.dgina23.neuro_resus_byUsage</source>
+        <target>All neurology Allocations that require resus</target>
+      </trans-unit>
+      <trans-unit id="G09WPc8" resname="table.export.dgina23.peds_byUsage">
+        <source>table.export.dgina23.peds_byUsage</source>
+        <target>All pediatric Allocations from that hour column</target>
+      </trans-unit>
+      <trans-unit id="eQuccKP" resname="table.export.dgina23.urology_byUsage">
+        <source>table.export.dgina23.urology_byUsage</source>
+        <target>All urology Allocations from that hour columne</target>
+      </trans-unit>
+      <trans-unit id="hnJt83B" resname="btn.export.download">
+        <source>btn.export.download</source>
+        <target>Download</target>
+      </trans-unit>
+      <trans-unit id="j4n9U4w" resname="heading.export.dgina23.byTracers">
+        <source>heading.export.dgina23.byTracers</source>
+        <target>Export Allocations by tracer diagnosis</target>
+      </trans-unit>
+      <trans-unit id="gcIC5r." resname="text.export.dgina23.byTracers">
+        <source>text.export.dgina23.byTracers</source>
+        <target>This creates a file that includes the counts of allocations grouped by quarters between the years 2019
+          to 2022 and filtered by the following tracer diagnosis. The following data is included:</target>
+      </trans-unit>
+      <trans-unit id="yWoYixZ" resname="table.export.dgina23.total_byTracers">
+        <source>table.export.dgina23.total_byTracers</source>
+        <target>All Allocations from that quarter column</target>
+      </trans-unit>
+      <trans-unit id="ir9fRVy" resname="table.export.dgina23.cpr_byTracers">
+        <source>table.export.dgina23.cpr_byTracers</source>
+        <target>All Allocations with CPR from that quarter column</target>
+      </trans-unit>
+      <trans-unit id="p1YIZeI" resname="table.export.dgina23.pulmonary_embolism_byTracers">
+        <source>table.export.dgina23.pulmonary_embolism_byTracers</source>
+        <target>All Allocations with pulmonary embolism from that quarter column</target>
+      </trans-unit>
+      <trans-unit id="MzT3UKk" resname="table.export.dgina23.acs_stemi_byTracers">
+        <source>table.export.dgina23.acs_stemi_byTracers</source>
+        <target>All Allocations with acute coronary syndrome or STEMI from that quarter column</target>
+      </trans-unit>
+      <trans-unit id="cobToeA" resname="table.export.dgina23.pneumonia_copd_byTracers">
+        <source>table.export.dgina23.pneumonia_copd_byTracers</source>
+        <target>All Allocations with pneumonia or COPD from that quarter column</target>
+      </trans-unit>
+      <trans-unit id="EGX57pE" resname="table.export.dgina23.stroke_byTracers">
+        <source>table.export.dgina23.stroke_byTracers</source>
+        <target>All stroke related Allocations from from that quarter column</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
