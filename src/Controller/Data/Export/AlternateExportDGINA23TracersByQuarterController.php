@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Data\Export;
 
 use App\Query\Export\AllocationByQuarterQuery;
+use App\Query\Export\AlternateQuery;
 use League\Csv\Writer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -14,11 +15,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class AlternateExportDGINA23TracersByQuarterController extends AbstractController
 {
     public function __construct(
-        private AllocationByQuarterQuery $query
+        private AlternateQuery $query
     ) {
     }
 
-    #[Route('/export/dgina23/tracerByQuarter_alt', name: 'app_export_dgina23_tracer')]
+    #[Route('/export/dgina23/tracerByQuarter_alt', name: 'app_export_dgina23_tracer_alt')]
     public function __invoke(): void
     {
         $data = [];
@@ -29,6 +30,19 @@ class AlternateExportDGINA23TracersByQuarterController extends AbstractControlle
         $data['acs_stemi'] = $this->query->sumAllocationsByQuarter('acs_stemi');
         $data['pneumonia_copd'] = $this->query->sumAllocationsByQuarter('pneumonia_copd');
         $data['stroke'] = $this->query->sumAllocationsByQuarter('stroke');
+        
+        foreach ($data as $key => $row) {
+            $tmp = [];
+
+            for ($i = 0, $iMax = count($row); $i < $iMax; ++$i) {
+                $tmp[$row[$i]['year'].'-'.$row[$i]['quarter']] = $row[$i]['value'];
+            }
+
+            $arr = array_reverse($tmp, true);
+            $arr['caption'] = $key;
+
+            $data[$key] = array_reverse($arr, true);
+        }
 
         if (!ini_get('auto_detect_line_endings')) {
             ini_set('auto_detect_line_endings', '1');
