@@ -12,9 +12,18 @@ use App\Domain\Contracts\SupplyAreaInterface;
 use App\Domain\Entity\Allocation as DomainAllocation;
 use App\Repository\AllocationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AllocationRepository::class)]
+#[Index(name: 'occasion_idx', columns: ['occasion'])]
+#[Index(name: 'assignment_idx', columns: ['assignment'])]
+#[Index(name: 'is_infectious_idx', columns: ['is_infectious'])]
+#[Index(name: 'indication_idx', columns: ['indication'])]
+#[Index(name: 'secondary_indication_idx', columns: ['secondary_indication'])]
+#[Index(name: 'secondary_deployment_idx', columns: ['secondary_deployment'])]
+#[Index(name: 'speciality_idx', columns: ['speciality'])]
+#[Index(name: 'speciality_detail_idx', columns: ['speciality_detail'])]
 class Allocation extends DomainAllocation
 {
     #[ORM\Id]
