@@ -70,7 +70,7 @@
         </ImplementedParamTypeMismatch>
         <UndefinedMagicMethod>
             <errorLevel type="suppress">
-                <file name="src/Controller/ApiController.php" />
+                <file name="src/Controller/Api/ApiController.php" />
                 <file name="src/Controller/StatisticsController.php" />
             </errorLevel>
         </UndefinedMagicMethod>
