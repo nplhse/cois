@@ -23,14 +23,8 @@ jobs:
               with:
                   php-version: ${{ matrix.php-versions }}
 
-            - name: Cache Composer packages
-              id: composer-cache
-              uses: actions/cache@v2
-              with:
-                  path: vendor
-                  key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-                  restore-keys: |
-                      ${{ runner.os }}-php-
+            - name: Composer Dependencies
+              uses: "ramsey/composer-install@v2"
 
             - name: Install Dependencies
               run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
@@ -39,6 +33,6 @@ jobs:
               run: vendor/bin/psalm --report=results.sarif
 
             - name: Upload Security Analysis results to GitHub
-              uses: github/codeql-action/upload-sarif@v1
+              uses: github/codeql-action/upload-sarif@v2
               with:
                   sarif_file: results.sarif
