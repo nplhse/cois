@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller\Data\Export;
 
-use App\Query\Export\AllocationByQuarterQuery;
 use App\Query\Export\AlternateQuery;
 use League\Csv\Writer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,7 +29,7 @@ class AlternateExportDGINA23TracersByQuarterController extends AbstractControlle
         $data['acs_stemi'] = $this->query->sumAllocationsByQuarter('acs_stemi');
         $data['pneumonia_copd'] = $this->query->sumAllocationsByQuarter('pneumonia_copd');
         $data['stroke'] = $this->query->sumAllocationsByQuarter('stroke');
-        
+
         foreach ($data as $key => $row) {
             $tmp = [];
 

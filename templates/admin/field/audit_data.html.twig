@@ -1,5 +1,16 @@
 {# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
 {# @var field \EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto #}
 {# @var entity \EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto #}
-<!-- prettier-ignore -->
-<pre class="language-css hljs">{{ field.formattedValue|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
+{% for key, value in field.formattedValue %}
+    {% if value.from is defined and value.to is defined %}
+        <!-- prettier-ignore-start -->
+        <strong>{{ key }}:</strong>
+        <pre><code class="language-diff hljs">{{ get_diff(value.from, value.to) }}</code></pre>
+        <!-- prettier-ignore-end -->
+    {% else %}
+        <!-- prettier-ignore-start -->
+        <strong>{{ key }}:</strong>
+        <pre><code class="language-css hljs">{{ value|json_encode(constant('JSON_PRETTY_PRINT')) }}</code></pre>
+        <!-- prettier-ignore-end -->
+    {% endif %}
+{% endfor %}
