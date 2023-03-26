@@ -74,7 +74,7 @@ final class AlternateQuery
         $stmt->bindValue('from', '2019-01-01 00:00:00');
         $stmt->bindValue('to', '2022-12-31 23:59:59');
 
-        /**
+        /*
          * @psalm-suppress UndefinedInterfaceMethod
          */
         return $stmt->executeQuery()->fetchAllAssociative();
