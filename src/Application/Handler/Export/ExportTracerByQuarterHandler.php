@@ -18,9 +18,6 @@ class ExportTracerByQuarterHandler
 
     private array $data = [];
 
-    public const EXPORT_DIR = '/var/storage/export/';
-    public const EXPORT_FILE = 'dgina23-tracer-by-quarter.csv';
-
     public function __construct(
         private AllocationByQuarterQuery $query,
         private string $projectDir
@@ -72,7 +69,7 @@ class ExportTracerByQuarterHandler
             }
 
             $arr = array_reverse($tmp, true);
-            $arr['caption'] = $key;
+            $arr['quarter'] = $key;
 
             $this->data[$key] = array_reverse($arr, true);
         }

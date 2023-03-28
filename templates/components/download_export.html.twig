@@ -1,3 +1,33 @@
-<div{{ attributes }}>
-    <!-- component html -->
+<div {{ attributes.add(stimulus_controller('download_controller')) }}>
+    {% if this.status == 'available' %}
+        <a href="{{
+            path(
+                'app_file_export',
+                {
+                    target: this.targetName
+                }
+            )
+            }}"
+            class="btn btn-success">
+            {{ 'btn.export.download'|trans({}, 'app') }}
+        </a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <button class="btn btn-primary"
+                data-action="live#action"
+                data-action-name="createFile">
+                {{ 'btn.export.create'|trans({}, 'app') }}
+            </button>
+        {% endif %}
+    {% elseif this.status == 'rendering' %}
+        <a href="{{ path('app_export_dgina23_tracer') }}"
+            class="btn btn-primary disabled">
+            {{ 'btn.export.creating'|trans({}, 'app') }}
+        </a>
+    {% elseif this.status == 'unavailable' %}
+        <button class="btn btn-primary"
+            data-action="live#action"
+            data-action-name="createFile">
+            {{ 'btn.export.create'|trans({}, 'app') }}
+        </button>
+    {% endif %}
 </div>

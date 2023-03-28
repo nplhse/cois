@@ -1,0 +1,46 @@
+{% extends 'data/_data_layout.html.twig' %}
+
+{% block title %}
+    {{ 'title.export.creating'|trans({}, 'app') }} - {{ parent() }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{
+        component(
+            'breadcrumb',
+            {
+                items: [
+                    {
+                        url: url('app_export_index'),
+                        label: 'title.export'|trans({}, 'app')
+                    }
+                ]
+            }
+        )
+    }}
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body" style="height: 300px">
+            <div class="text-center p-2">
+                <div class="spinner-border"
+                    style="width: 3rem; height: 3rem;"
+                    role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="p-2">
+                    {{ 'msg.export.creating'|trans }}
+                </p>
+                <p>
+                    <a href="javascript:history.back()">
+                        {{ 'link.to.lastpage'|trans }}
+                    </a>, <a href="{{ path('app_export_index') }}"
+                        class="btn btn-link">
+                        {{ 'link.to.exports'|trans }}
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

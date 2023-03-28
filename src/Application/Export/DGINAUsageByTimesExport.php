@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Application\Export;
 
-use App\Domain\Command\Export\ExportTracerByQuarterCommand;
+use App\Domain\Command\Export\ExportUsageByTimesCommand;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 #[AutoconfigureTag('app.export')]
-class DGINATracerByQuarterExport extends AbstractExport
+class DGINAUsageByTimesExport extends AbstractExport
 {
-    private string $name = 'dgina_tracer_by_quarter';
+    private string $name = 'dgina_usage_by_times';
 
     public function __construct(
         private readonly string $projectDir
@@ -29,6 +29,6 @@ class DGINATracerByQuarterExport extends AbstractExport
 
     public function getCommand(): string
     {
-        return ExportTracerByQuarterCommand::class;
+        return ExportUsageByTimesCommand::class;
     }
 }

@@ -10,7 +10,11 @@ abstract class AbstractExport
 {
     public const EXPORT_DIR = '/var/storage/export/';
 
-    private array $data = [];
+    abstract public function getName(): string;
+
+    abstract public function getProjectDir(): string;
+
+    abstract public function getCommand(): string;
 
     public function buildPath(?string $exportName = null): string
     {
@@ -31,8 +35,4 @@ abstract class AbstractExport
 
         return false;
     }
-
-    abstract public function getName(): string;
-
-    abstract public function getProjectDir(): string;
 }

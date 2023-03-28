@@ -2642,6 +2642,18 @@
         <source>Select your filters</source>
         <target>Filter auswählen</target>
       </trans-unit>
+      <trans-unit id="bRzdfDT" resname="msg.export.creating">
+        <source>msg.export.creating</source>
+        <target>Der Export wirkt aktuell für Sie erstellt, bitte haben Sie etwas Geduld. Aktualisieren Sie in diese Seite in einigen Sekunden.</target>
+      </trans-unit>
+      <trans-unit id="VHSF3BW" resname="link.to.lastpage">
+        <source>link.to.lastpage</source>
+        <target>Zurück zur letzten Seite</target>
+      </trans-unit>
+      <trans-unit id="UfeyT5A" resname="link.to.exports">
+        <source>link.to.exports</source>
+        <target>Zurück zur Übersicht</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
