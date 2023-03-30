@@ -28,22 +28,11 @@ jobs:
             - name: Validate main `composer.json` and `composer.lock` files
               run: composer validate --no-check-version
 
-            - name: Cache Composer packages
-              id: composer-cache
-              uses: actions/cache@v2
-              with:
-                  path: vendor
-                  key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-                  restore-keys: |
-                      ${{ runner.os }}-php-
-
-            - name: Install Dependencies& warmup cache
-              run: |
-                  composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-                  php bin/console cache:warmup
+            - name: Composer Dependencies
+              uses: "ramsey/composer-install@v2"
 
             - name: Cache node_modules
-              uses: actions/cache@v1
+              uses: actions/cache@v3
               id: yarn-cache-node-modules
               with:
                   path: node_modules
@@ -95,17 +84,8 @@ jobs:
               with:
                   php-version: ${{ matrix.php-versions }}
 
-            - name: Cache Composer packages
-              id: composer-cache
-              uses: actions/cache@v2
-              with:
-                  path: vendor
-                  key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-                  restore-keys: |
-                      ${{ runner.os }}-php-
-
-            - name: Install Dependencies
-              run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+            - name: Composer Dependencies
+              uses: "ramsey/composer-install@v2"
 
             - name: Run Migration
               run: php bin/console doctrine:schema:create || echo "No schema found or schema failed"
@@ -113,7 +93,7 @@ jobs:
                   DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
 
             - name: Cache node_modules
-              uses: actions/cache@v1
+              uses: actions/cache@v3
               id: yarn-cache-node-modules
               with:
                   path: node_modules
@@ -135,7 +115,7 @@ jobs:
 
             - name: Upload coverage to Codeclimate
               if: ${{ github.actor != 'dependabot[bot]' }}
-              uses: paambaati/codeclimate-action@v3.0.0
+              uses: paambaati/codeclimate-action@v3.2.0
               env:
                   CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_REPORTER_ID }}
               with:

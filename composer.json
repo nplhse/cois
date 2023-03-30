@@ -35,6 +35,7 @@
         "neitanod/forceutf8": "^2.0",
         "nesbot/carbon": "^2.53",
         "phpdocumentor/reflection-docblock": "^5.2",
+        "sebastian/diff": "^4.0",
         "sensio/framework-extra-bundle": "^6.0",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "6.2.*",
