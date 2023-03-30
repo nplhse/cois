@@ -656,6 +656,18 @@
         <source>table.export.dgina23.stroke_byTracers</source>
         <target>Alle Einsätze mit Schlaganfällen eines Quartals</target>
       </trans-unit>
+      <trans-unit id="N1xk9MF" resname="btn.export.create">
+        <source>btn.export.create</source>
+        <target>Export erstellen</target>
+      </trans-unit>
+      <trans-unit id="TWM2My4" resname="btn.export.creating">
+        <source>btn.export.creating</source>
+        <target>Export wird erstellt</target>
+      </trans-unit>
+      <trans-unit id="VDtNm6I" resname="title.export.creating">
+        <source>title.export.creating</source>
+        <target>Export wird erstellt</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

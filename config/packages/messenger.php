@@ -2,31 +2,22 @@
 
 declare(strict_types=1);
 
-use App\Application\Handler\Import\ImportDataHandler;
+use App\Domain\Command\Export\ExportTracerByQuarterCommand;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Config\FrameworkConfig;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->extension('framework', [
-        'messenger' => [
-            'failure_transport' => 'failed',
-            'transports' => [
-                'async' => '%env(MESSENGER_TRANSPORT_DSN)%',
-                'failed' => 'doctrine://default?queue_name=failed',
-                'sync' => 'sync://',
-            ],
-            'routing' => [
-                ImportDataHandler::class => 'async',
-            ],
-        ],
-    ]);
+return static function (FrameworkConfig $framework, ContainerConfigurator $containerConfigurator): void {
+    $messenger = $framework->messenger();
+
+    $messenger->transport('async')->dsn('%env(MESSENGER_TRANSPORT_DSN)%');
+    $messenger->transport('sync')->dsn('sync://');
+
+    $messenger->transport('failed')->dsn('doctrine://default?queue_name=failed');
+    $messenger->failureTransport('failed');
+
+    $framework->messenger()->routing(ExportTracerByQuarterCommand::class)->senders(['async']);
 
     if ('test' === $containerConfigurator->env()) {
-        $containerConfigurator->extension('framework', [
-            'messenger' => [
-                'transports' => [
-                    'async' => 'in-memory://',
-                ],
-            ],
-        ]);
+        $messenger->transport('async')->dsn('in-memory://');
     }
 };

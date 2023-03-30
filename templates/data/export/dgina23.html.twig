@@ -209,8 +209,15 @@
                 </tbody>
             </table>
 
-            <a href="{{ path('app_export_dgina23_times') }}"
-                class="btn btn-success">
+            <a href="{{
+                path(
+                    'app_file_export',
+                    {
+                        target: 'dgina_usage_by_times'
+                    }
+                )
+                }}"
+                class="btn btn-primary">
                 {{ 'btn.export.download'|trans({}, 'app') }}
             </a>
 
@@ -337,8 +344,15 @@
                 </tbody>
             </table>
 
-            <a href="{{ path('app_export_dgina23_tracer') }}"
-                class="btn btn-success">
+            <a href="{{
+                path(
+                    'app_file_export',
+                    {
+                        target: 'dgina_tracer_by_quarter'
+                    }
+                )
+                }}"
+                class="btn btn-primary">
                 {{ 'btn.export.download'|trans({}, 'app') }}
             </a>
         </div>

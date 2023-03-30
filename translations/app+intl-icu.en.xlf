@@ -641,7 +641,19 @@
       </trans-unit>
       <trans-unit id="EGX57pE" resname="table.export.dgina23.stroke_byTracers">
         <source>table.export.dgina23.stroke_byTracers</source>
-        <target>All stroke related Allocations from from that quarter column</target>
+        <target>All stroke related Allocations from that quarter column</target>
+      </trans-unit>
+      <trans-unit id="N1xk9MF" resname="btn.export.create">
+        <source>btn.export.create</source>
+        <target>Create Export</target>
+      </trans-unit>
+      <trans-unit id="TWM2My4" resname="btn.export.creating">
+        <source>btn.export.creating</source>
+        <target>Creating Export</target>
+      </trans-unit>
+      <trans-unit id="VDtNm6I" resname="title.export.creating">
+        <source>title.export.creating</source>
+        <target>Creating Export</target>
       </trans-unit>
     </body>
   </file>

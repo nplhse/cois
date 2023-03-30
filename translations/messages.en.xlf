@@ -2565,6 +2565,18 @@
         <source>Select your filters</source>
         <target>Select filters</target>
       </trans-unit>
+      <trans-unit id="bRzdfDT" resname="msg.export.creating">
+        <source>msg.export.creating</source>
+        <target>Please wait while the export is being created for you. Refresh this page in a few seconds.</target>
+      </trans-unit>
+      <trans-unit id="VHSF3BW" resname="link.to.lastpage">
+        <source>link.to.lastpage</source>
+        <target>Back to last Page</target>
+      </trans-unit>
+      <trans-unit id="UfeyT5A" resname="link.to.exports">
+        <source>link.to.exports</source>
+        <target>Back to Exports</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
