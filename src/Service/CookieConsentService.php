@@ -9,6 +9,7 @@ use App\Form\CookieConsentType;
 use App\Repository\CookieConsentRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\IpUtils;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -92,8 +93,6 @@ class CookieConsentService
             return 'Unknown';
         }
 
-        $lastDot = strrpos($ip, '.') + 1;
-
-        return substr($ip, 0, $lastDot).str_repeat('x', strlen($ip) - $lastDot);
+        return IpUtils::anonymize($ip);
     }
 }
