@@ -56,37 +56,64 @@ class CsvImportReader implements ImportReaderInterface
             throw new FileNotFoundException($path);
         }
 
-        $csv = Reader::createFromString(file_get_contents($path));
-        $csv->setDelimiter($this->options['delimiter']);
-        $csv->setEnclosure($this->options['enclosure']);
-        $csv->setOutputBOM(Reader::BOM_UTF8);
-        $csv->addStreamFilter('convert.iconv.ISO-8859-1/UTF-8');
-
-        $grab = [];
-        $columns = $this->getSupportedColumns();
-
-        foreach ($csv->fetchOne() as $index => $column) {
-            if (in_array($column, $columns)) {
-                if (isset($grab[$column])) {
-                    $grab[$column.'2'] = $index;
-                    continue;
-                }
-                $grab[$column] = $index;
-            }
+        // Ensure detecting of line endings on Mac OS X
+        if (!ini_get('auto_detect_line_endings')) {
+            ini_set('auto_detect_line_endings', '1');
         }
 
+        $content = file_get_contents($path);
+
+        // Enforce correct encoding if content already is UTF-8
+        if (mb_detect_encoding($content, 'UTF-8', true)) {
+            $content = utf8_decode($content);
+        }
+
+        $csv = Reader::createFromString($content);
+        $csv->setDelimiter($this->options['delimiter']);
+        $csv->setEnclosure($this->options['enclosure']);
+
+        // Add StreamFilter to enforce correct encoding for files created on Microsoft Windows
+        if (mb_detect_encoding($content, 'ISO-8859-1', true)) {
+            $csv->setOutputBOM(Reader::BOM_UTF8);
+            $csv->addStreamFilter('convert.iconv.ISO-8859-1/UTF-8');
+        }
+
+        // Filter columns from CSV header (aka first row)
+        $filteredColumns = $this->getFilteredColumns($csv->fetchOne());
+
+        // Filter rows before adding content to the iterator
         foreach ($csv->getRecords() as $i => $row) {
-            if (0 == $i) {
+            // Ignore CSV header (aka first row)
+            if (0 === $i) {
                 continue;
             }
 
             $filteredRow = [];
-            foreach ($grab as $column => $index) {
+            foreach ($filteredColumns as $column => $index) {
                 $filteredRow[$column] = $row[$index];
             }
 
             yield $filteredRow;
         }
+    }
+
+    public function getFilteredColumns(array $firstRow): array
+    {
+        $filteredColumns = [];
+        $supportedColumns = $this->getSupportedColumns();
+
+        // If column is already set, add a number to it
+        foreach ($firstRow as $index => $column) {
+            if (in_array($column, $supportedColumns, true)) {
+                if (isset($filteredColumns[$column])) {
+                    $filteredColumns[$column.'2'] = $index;
+                    continue;
+                }
+                $filteredColumns[$column] = $index;
+            }
+        }
+
+        return $filteredColumns;
     }
 
     private function getSupportedColumns(): array
