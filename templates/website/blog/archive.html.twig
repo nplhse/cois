@@ -7,24 +7,22 @@
 {% endblock %}
 
 {% block breadcrumbs %}
-    {% block breadcrumbs %}
-        {{
-            component(
-                'breadcrumb',
-                {
-                    items: [
-                        {
-                            url: url('app_blog'),
-                            label: 'title.blog'|trans({}, 'app')
-                        },
-                        {
-                            label: 'title.blog.archive'|trans({}, 'app')
-                        }
-                    ]
-                }
-            )
-        }}
-    {% endblock %}
+    {{
+        component(
+            'breadcrumb',
+            {
+                items: [
+                    {
+                        url: url('app_blog'),
+                        label: 'title.blog'|trans({}, 'app')
+                    },
+                    {
+                        label: 'title.blog.archive'|trans({}, 'app')
+                    }
+                ]
+            }
+        )
+    }}
 {% endblock %}
 
 {% block content %}
