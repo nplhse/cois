@@ -154,7 +154,7 @@
                                 {% endif %}
                             </li>
                         {% endif %}
-                        {% if app_enable_features %}
+                        {% if app_enable_features and not is_granted('ROLE_USER') %}
                             <li class="nav-item">
                                 {% if
                                     app.request.attributes.get('_route')
