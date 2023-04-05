@@ -21,6 +21,10 @@
 {% endblock %}
 
 {% block content %}
+    <h1>
+        {{ 'title.exports'|trans({}, 'app') }}
+    </h1>
+
     <div class="list-group">
         <a href="{{ path('app_export_allocation') }}"
             class="list-group-item list-group-item-action"

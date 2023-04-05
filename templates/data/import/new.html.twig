@@ -1,0 +1,69 @@
+{% extends 'data/_data_layout.html.twig' %}
+
+{% block title %}
+    {{ 'Create new Import'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{
+        component(
+            'breadcrumb',
+            {
+                items: [
+                    {
+                        url: url('app_import_index'),
+                        label: 'Import'|trans
+                    },
+                    {
+                        label: 'Create new Import'|trans
+                    }
+                ]
+            }
+        )
+    }}
+{% endblock %}
+
+{% block content %}
+    <h1>
+        {{ 'Create new Import'|trans }}
+    </h1>
+
+    <div class="alert alert-warning" role="alert">
+        <strong>{{ 'Please notice'|trans }}:</strong>
+        {{ 'Import infotext'|trans }}
+    </div>
+
+    <turbo-frame id="form">
+        <div class="card">
+            <div class="card-body">
+                {{ form_start(form) }}
+
+                {{ form_widget(form) }}
+
+                <div class="float-end">
+                    <button class="btn btn-primary">
+                        <i class="bi bi-folder-plus"></i>
+                        {{ 'Import new Data'|trans({}, 'forms') }}
+                    </button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </turbo-frame>
+    <div class="loading-ring fixed-center-block hidden">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <div class="d-flex justify-content-end mt-3">
+        <p>
+            <a class="btn btn-outline-secondary"
+                href="{{ path('app_import_index') }}"
+                role="button">
+                {{ 'Back to imports'|trans({}, 'forms') }}
+            </a>
+        </p>
+    </div>
+{% endblock %}

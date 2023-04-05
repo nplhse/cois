@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Import;
+namespace App\Controller\Data\Import;
 
 use App\Entity\Import;
 use App\Service\Import\UploadService;
@@ -23,9 +23,9 @@ class ImportFileController extends AbstractController
         $path = $import->getFilePath();
 
         $response = new StreamedResponse(function () use ($path, $fileUploader): void {
-            $outputStream = fopen('php://output', 'wb');
+            $outputStream = \fopen('php://output', 'wb');
             $fileStream = $fileUploader->streamFile($path);
-            stream_copy_to_stream($fileStream, $outputStream);
+            \stream_copy_to_stream($fileStream, $outputStream);
         });
 
         $disposition = HeaderUtils::makeDisposition(

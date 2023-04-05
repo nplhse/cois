@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Import;
+namespace App\Controller\Data\Import;
 
 use App\Domain\Command\Import\CreateImportCommand;
 use App\Domain\Command\Import\ImportDataCommand;
@@ -66,7 +66,7 @@ class CreateImportController extends AbstractController
                 $eventDispatcher->dispatch(new ImportFailedEvent($import, $e), ImportFailedEvent::NAME);
                 $this->addFlash('danger', 'Your import failed. We have send a notification to the admin to handle this issue.');
 
-                return $this->render('import/new.html.twig', [
+                return $this->render('data/import/new.html.twig', [
                     'form' => $form,
                 ]);
             }
@@ -79,7 +79,7 @@ class CreateImportController extends AbstractController
             return $this->redirectToRoute('app_import_show', ['id' => $import->getId()]);
         }
 
-        return $this->render('import/new.html.twig', [
+        return $this->render('data/import/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }

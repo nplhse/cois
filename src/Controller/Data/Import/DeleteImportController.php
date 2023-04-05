@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Import;
+namespace App\Controller\Data\Import;
 
 use App\Domain\Command\Import\DeleteImportCommand;
 use App\Entity\Import;
@@ -27,7 +27,7 @@ class DeleteImportController extends AbstractController
     {
         $this->denyAccessUnlessGranted('delete', $import);
 
-        return $this->render('import/_delete_form.html.twig', [
+        return $this->render('data/import/_delete_form.html.twig', [
             'import' => $import,
         ]);
     }

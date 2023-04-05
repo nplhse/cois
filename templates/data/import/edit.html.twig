@@ -1,0 +1,113 @@
+{% extends 'data/_data_layout.html.twig' %}
+
+{% block title %}
+    {{ 'Edit Import'|trans }}: {{ import.name }} (#{{ import.id }}) - {{
+        parent()
+    }}
+{% endblock %}
+
+{% block breadcrumbs %}
+    {{
+        component(
+            'breadcrumb',
+            {
+                items: [
+                    {
+                        url: url('app_import_index'),
+                        label: 'Import'|trans
+                    },
+                    {
+                        label: 'Edit Import'|trans
+                    }
+                ]
+            }
+        )
+    }}
+{% endblock %}
+
+{% block content %}
+    <div class="float-end">
+        <div {{
+            stimulus_controller(
+                'modal',
+                {
+                    formUrl: path(
+                        'app_import_delete_form',
+                        {
+                            id: import.id
+                        }
+                    ),
+                    targetUrl: path('app_import_index')
+                }
+            )
+            }}>
+            {% if is_granted('delete', import) %}
+                <a href="#"
+                    class="btn btn-outline-danger"
+                    data-action="modal#openModal">
+                    <i class="bi bi-trash-fill"></i>
+                    {{ 'Delete'|trans({}, 'forms') }}
+                </a>
+            {% endif %}
+
+            {{
+                include(
+                    'elements/modal.html.twig',
+                    {
+                        modalTitle: 'Delete Import?'|trans({}, 'forms'),
+                        modalSubmit: 'Delete Import'|trans({}, 'forms')
+                    }
+                )
+            }}
+        </div>
+    </div>
+
+    <h1>
+        {{ 'Edit Import'|trans }}
+        <small class="text-muted">(<i>#{{ import.id }}</i>)</small>
+    </h1>
+
+    <div class="alert alert-warning" role="alert">
+        <strong>{{ 'Please notice'|trans }}:</strong>
+        {{ 'Import edit infotext'|trans }}
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            {{ form_start(form) }}
+
+            {{ form_widget(form) }}
+
+            <div class="float-end">
+                <button class="btn btn-success">
+                    <i class="bi bi-check-circle"></i>
+                    {{ 'Save Import'|trans({}, 'forms') }}
+                </button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end mt-3">
+        <p>
+            <a class="btn btn-outline-primary"
+                href="{{
+                path(
+                    'app_import_show',
+                    {
+                        id: import.id
+                    }
+                )
+                }}"
+                role="button">
+                <i class="bi bi-search"></i>
+                {{ 'View Import'|trans }}
+            </a>
+            <a class="btn btn-outline-secondary"
+                href="{{ path('app_import_index') }}"
+                role="button">
+                {{ 'Back to imports'|trans({}, 'forms') }}
+            </a>
+        </p>
+    </div>
+{% endblock %}

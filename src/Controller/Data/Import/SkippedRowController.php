@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Import;
+namespace App\Controller\Data\Import;
 
 use App\Entity\Import;
 use App\Repository\SkippedRowRepository;
@@ -21,7 +21,7 @@ class SkippedRowController extends AbstractController
 
         $results = $skippedRowRepository->findBy(['import' => $import]);
 
-        return $this->render('import/skipped_rows/show.html.twig', [
+        return $this->render('data/import/skipped_rows.html.twig', [
             'import' => $import,
             'results' => $results,
         ]);

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Import;
+namespace App\Controller\Data\Import;
 
 use App\Domain\Command\Import\EditImportCommand;
 use App\Entity\Import;
@@ -43,7 +43,7 @@ class EditImportController extends AbstractController
             } catch (HandlerFailedException) {
                 $this->addFlash('danger', 'Editing your import failed. Please try again later.');
 
-                return $this->render('import/edit.html.twig', [
+                return $this->render('data/import/edit.html.twig', [
                     'import' => $import,
                     'form' => $form,
                 ]);
@@ -54,7 +54,7 @@ class EditImportController extends AbstractController
             return $this->redirectToRoute('app_import_show', ['id' => $import->getId()]);
         }
 
-        return $this->render('import/edit.html.twig', [
+        return $this->render('data/import/edit.html.twig', [
             'import' => $import,
             'form' => $form->createView(),
         ]);
