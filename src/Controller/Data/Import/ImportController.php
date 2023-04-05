@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Import;
+namespace App\Controller\Data\Import;
 
 use App\Entity\Import;
 use App\Factory\ImportFilterFactory;
@@ -24,6 +24,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use function App\Controller\Import\count;
 
 #[IsGranted('ROLE_USER')]
 class ImportController extends AbstractController
@@ -67,21 +68,13 @@ class ImportController extends AbstractController
         $searchForm = $searchFilterFactory->setAction($this->generateUrl('app_import_index'))->getForm();
         $searchForm->handleRequest($request);
 
-        return $this->renderForm('import/index.html.twig', [
+        return $this->renderForm('data/import/index.html.twig', [
             'filters' => $this->filterService->getFilterDto(),
             'sortForm' => $sortForm,
             'searchForm' => $searchForm,
             'importForm' => $importForm,
             'imports' => $paginator,
-            'pages' => PaginationFactory::create($this->filterService->getValue(PageFilter::Param), count($paginator), ImportRepository::PER_PAGE),
-        ]);
-    }
-
-    #[Route(path: '/import/{id}', name: 'app_import_show', methods: ['GET'])]
-    public function show(Import $import): Response
-    {
-        return $this->render('import/show.html.twig', [
-            'import' => $import,
+            'pages' => PaginationFactory::create($this->filterService->getValue(PageFilter::Param), \count($paginator), ImportRepository::PER_PAGE),
         ]);
     }
 }

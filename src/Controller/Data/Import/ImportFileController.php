@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Import;
+namespace App\Controller\Data\Import;
 
 use App\Entity\Import;
 use App\Service\Import\UploadService;
@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use function App\Controller\Import\fopen;
+use function App\Controller\Import\stream_copy_to_stream;
 
 #[IsGranted('ROLE_ADMIN')]
 class ImportFileController extends AbstractController
