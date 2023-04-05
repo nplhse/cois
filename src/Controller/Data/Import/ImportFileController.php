@@ -13,8 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\AsciiSlugger;
-use function App\Controller\Import\fopen;
-use function App\Controller\Import\stream_copy_to_stream;
 
 #[IsGranted('ROLE_ADMIN')]
 class ImportFileController extends AbstractController
@@ -25,9 +23,9 @@ class ImportFileController extends AbstractController
         $path = $import->getFilePath();
 
         $response = new StreamedResponse(function () use ($path, $fileUploader): void {
-            $outputStream = fopen('php://output', 'wb');
+            $outputStream = \fopen('php://output', 'wb');
             $fileStream = $fileUploader->streamFile($path);
-            stream_copy_to_stream($fileStream, $outputStream);
+            \stream_copy_to_stream($fileStream, $outputStream);
         });
 
         $disposition = HeaderUtils::makeDisposition(

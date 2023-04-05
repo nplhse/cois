@@ -1,6 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% import '_elements/macro/breadcrumb.html.twig' as breadcrumbs %}
+{% extends 'data/_data_layout.html.twig' %}
 
 {% block title %}
     {{ 'View Import'|trans }}: {{ import.name }} (#{{ import.id }}) - {{
@@ -8,34 +6,75 @@
     }}
 {% endblock %}
 
-{% block body %}
-    <div class="row">
-        <div class="col">
-            {{
-                breadcrumbs.render(
-                    [
+{% block breadcrumbs %}
+    {{
+        component(
+            'breadcrumb',
+            {
+                items: [
+                    {
+                        url: url('app_import_index'),
+                        label: 'Import'|trans
+                    },
+                    {
+                        label: 'Edit Import'|trans
+                    }
+                ]
+            }
+        )
+    }}
+{% endblock %}
+
+{% block content %}
+    <div class="float-end">
+        <div {{
+            stimulus_controller(
+                'modal',
+                {
+                    formUrl: path(
+                        'app_import_delete_form',
                         {
-                            url: url('app_dashboard'),
-                            label: 'Home'|trans
-                        },
-                        {
-                            url: url('app_import_index'),
-                            label: 'Import'|trans
-                        },
-                        {
-                            label: 'View Import'|trans
+                            id: import.id
                         }
-                    ]
+                    ),
+                    targetUrl: path('app_import_index')
+                }
+            )
+            }}>
+            {% if is_granted('delete', import) %}
+                <a href="#"
+                    class="btn btn-outline-danger"
+                    data-action="modal#openModal">
+                    <i class="bi bi-trash-fill"></i>
+                    {{ 'Delete'|trans({}, 'forms') }}
+                </a>
+            {% endif %}
+            {% if is_granted('edit', import) %}
+                <a class="btn btn-outline-primary"
+                    href="{{
+                    path(
+                        'app_import_edit',
+                        {
+                            id: import.id
+                        }
+                    )
+                    }}">
+                    <i class="bi bi-pencil-fill"></i>
+                    {{ 'Edit Import'|trans }}
+                </a>
+            {% endif %}
+
+            {{
+                include(
+                    'elements/modal.html.twig',
+                    {
+                        modalTitle: 'Delete Import?'|trans({}, 'forms'),
+                        modalSubmit: 'Delete Import'|trans({}, 'forms')
+                    }
                 )
             }}
         </div>
     </div>
-
-    {% if is_granted('delete', import) %}
-        <div class="float-end">
-            {{ include('import/_delete.html.twig') }}
-        </div>
-    {% endif %}
 
     <h1>
         {{ 'View Import'|trans }}
@@ -66,47 +105,6 @@
 
     <div class="row">
         <div class="col">
-            <div class="card mb-3">
-                <div class="card-header">
-                    {{ 'Basic information'|trans }}
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-4">
-                            <h5 class="card-title">
-                                {{ 'Caption'|trans }}
-                            </h5>
-                            <p>
-                                {{ import.name }}
-                            </p>
-                        </div>
-                        <div class="col-4">
-                            <h5 class="card-title">
-                                {{ 'Content'|trans }}
-                            </h5>
-                            <p>
-                                {{ import.type }}
-                            </p>
-                        </div>
-                        <div class="col-4">
-                            <h5 class="card-title">
-                                {{ 'Status'|trans }}
-                            </h5>
-                            <p>
-                                {{
-                                    component(
-                                        'status_polling',
-                                        {
-                                            importId: import.id
-                                        }
-                                    )
-                                }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             {% for result in results %}
                 <div class="card mb-3">
                     <div class="card-header">
@@ -175,26 +173,10 @@
     </div>
 
     <div class="d-flex justify-content-end mb-2">
-        <p>
-            <a class="btn btn-outline-secondary"
-                href="{{ path('app_import_index') }}"
-                role="button">
-                {{ 'Back to imports'|trans({}, 'forms') }}
-            </a>
-            {% if is_granted('delete', import) %}
-                <a class="btn btn-primary"
-                    href="{{
-                    path(
-                        'app_import_edit',
-                        {
-                            id: import.id
-                        }
-                    )
-                    }}">
-                    <i class="bi bi-pencil-fill"></i>
-                    {{ 'Edit Import'|trans }}
-                </a>
-            {% endif %}
-        </p>
+        <a class="btn btn-outline-secondary"
+            href="{{ path('app_import_index') }}"
+            role="button">
+            {{ 'Back to imports'|trans({}, 'forms') }}
+        </a>
     </div>
 {% endblock %}

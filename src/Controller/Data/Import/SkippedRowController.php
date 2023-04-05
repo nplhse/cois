@@ -21,7 +21,7 @@ class SkippedRowController extends AbstractController
 
         $results = $skippedRowRepository->findBy(['import' => $import]);
 
-        return $this->render('data/import/skipped_rows/show.html.twig', [
+        return $this->render('data/import/skipped_rows.html.twig', [
             'import' => $import,
             'results' => $results,
         ]);
