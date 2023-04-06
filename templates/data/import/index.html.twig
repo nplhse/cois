@@ -133,14 +133,32 @@
                         {% endif %}
                     </td>
                     <td>
-                        {{
-                            component(
-                                'status_polling',
-                                {
-                                    importId: import.id
-                                }
-                            )
-                        }}
+                        {% if import.status == 'success' %}
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                            {{ import.status|trans }}
+                        {% elseif import.status == 'pending' %}
+                            <div class="spinner-border text-secondary spinner-border-sm"
+                                role="status">
+                                <span class="visually-hidden">
+                                    {{ 'import.field.loading'|trans }}
+                                </span>
+                            </div> {{ import.status|trans }}
+                        {% elseif import.status == 'incomplete' %}
+                            <i class="bi bi-exclamation-triangle-fill text-warning">
+
+                            </i>
+                            {{ import.status|trans }}
+                        {% elseif import.status == 'failure' %}
+                            <i class="bi bi-exclamation-circle-fill text-danger">
+
+                            </i>
+                            {{ import.status|trans }}
+                        {% elseif import.status == 'empty' %}
+                            <i class="bi bi-exclamation-circle-fill text-danger">
+
+                            </i>
+                            {{ import.status|trans }}
+                        {% endif %}
                     </td>
                 </tr>
             {% else %}

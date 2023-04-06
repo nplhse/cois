@@ -2654,6 +2654,10 @@
         <source>link.to.exports</source>
         <target>Zurück zur Übersicht</target>
       </trans-unit>
+        <trans-unit id="0">
+            <source>msg.import.processing</source>
+            <target>Bitte haben Sie einen Moment Geduld, während die Daten verarbeitet werden.</target>
+        </trans-unit>
     </body>
   </file>
 </xliff>
