@@ -2577,6 +2577,10 @@
         <source>link.to.exports</source>
         <target>Back to Exports</target>
       </trans-unit>
+        <trans-unit id="0">
+            <source>msg.import.processing</source>
+            <target>Please wait, while your data is being processed.</target>
+        </trans-unit>
     </body>
   </file>
 </xliff>

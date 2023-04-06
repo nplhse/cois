@@ -1,26 +1,26 @@
-<div {{ attributes }}>
+<div {{ attributes }}
+        data-poll="delay(2000)|$render"
+>
     {% if this.status == 'success' %}
-        <i class="bi bi-check-circle-fill text-success">
+            <a class="btn btn-outline-primary" href="{{ path('app_import_show', {id: this.id}) }}" role="button"><i class="bi bi-check-circle text-success">
 
-        </i>
+                </i>{{ 'View Import'|trans() }}</a>
     {% elseif this.status == 'pending' %}
-        <div class="spinner-border text-secondary spinner-border-sm"
-             role="status">
-            <span class="visually-hidden">
-                {{ 'import.field.loading'|trans }}
-            </span>
-        </div>
+        <a class="btn btn-primary disabled" href="#">
+            <span class="spinner-border spinner-border-sm" role="status"></span>
+                {{ 'View Import'|trans() }}
+        </a>
     {% elseif this.status == 'incomplete' %}
-        <i class="bi bi-exclamation-triangle-fill text-warning">
+            <a class="btn btn-outline-primary" href="{{ path('app_import_show', {id: this.id}) }}" role="button"><i class="bi bi-exclamation-triangle text-warning">
 
-        </i>
+                </i>{{ 'View Import'|trans() }}</a>
     {% elseif this.status == 'failure' %}
-        <i class="bi bi-exclamation-circle-fill text-danger">
+            <a class="btn btn-outline-primary" href="{{ path('app_import_show', {id: this.id}) }}" role="button"><i class="bi bi-exclamation-circle text-danger">
 
-        </i>
+                </i>{{ 'View Import'|trans() }}</a>
     {% elseif this.status == 'empty' %}
-        <i class="bi bi-exclamation-circle-fill text-danger">
+            <a class="btn btn-outline-primary" href="{{ path('app_import_show', {id: this.id}) }}" role="button"><i class="bi bi-exclamation-circle text-danger">
 
-        </i>
-    {% endif %} {{ this.status|trans }}
+                </i>{{ 'View Import'|trans() }}</a>
+    {% endif %}
 </div>

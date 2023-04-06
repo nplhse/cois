@@ -76,7 +76,7 @@ class CreateImportController extends AbstractController
 
             $this->messageBus->dispatch(new ImportDataCommand($import->getId()));
 
-            return $this->redirectToRoute('app_import_show', ['id' => $import->getId()]);
+            return $this->redirectToRoute('app_import_status', ['id' => $import->getId()]);
         }
 
         return $this->render('data/import/new.html.twig', [

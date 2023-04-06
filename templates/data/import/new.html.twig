@@ -33,28 +33,20 @@
         {{ 'Import infotext'|trans }}
     </div>
 
-    <turbo-frame id="form">
-        <div class="card">
-            <div class="card-body">
-                {{ form_start(form) }}
+    <div class="card">
+        <div class="card-body">
+            {{ form_start(form) }}
 
-                {{ form_widget(form) }}
+            {{ form_widget(form) }}
 
-                <div class="float-end">
-                    <button class="btn btn-primary">
-                        <i class="bi bi-folder-plus"></i>
-                        {{ 'Import new Data'|trans({}, 'forms') }}
-                    </button>
-                </div>
-                {{ form_end(form) }}
+            <div class="float-end">
+                <button class="btn btn-primary">
+                    <i class="bi bi-folder-plus"></i>
+                    {{ 'Import new Data'|trans({}, 'forms') }}
+                </button>
             </div>
+            {{ form_end(form) }}
         </div>
-    </turbo-frame>
-    <div class="loading-ring fixed-center-block hidden">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
     </div>
 
     <div class="d-flex justify-content-end mt-3">
