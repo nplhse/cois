@@ -69,6 +69,9 @@ tests: phpunit ## Run test pipeline
 eslint:
 	@$(YARN) run eslint assets
 
+messenger:
+	@$(SYMFONY) messenger:consume async -vvv
+
 phpcsfixer:
 	vendor/bin/php-cs-fixer fix
 
