@@ -7,6 +7,7 @@ namespace App\Repository;
 use App\Domain\Contracts\HospitalInterface;
 use App\Domain\Contracts\ImportInterface;
 use App\Domain\Contracts\UserInterface;
+use App\Domain\Enum\PostStatus;
 use App\Domain\Repository\ImportRepositoryInterface;
 use App\Entity\Import;
 use App\Entity\User;
@@ -15,6 +16,7 @@ use App\Service\Filters\PageFilter;
 use App\Service\Filters\SearchFilter;
 use App\Service\FilterService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -129,5 +131,14 @@ class ImportRepository extends ServiceEntityRepository implements ImportReposito
         $qb = $filterService->processQuery($qb, $arguments);
 
         return new Paginator($qb->getQuery());
+    }
+
+    public function getPaginator(int $page, string $sortBy, string $orderBy): \App\Pagination\Paginator
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->orderBy('i.createdAt', 'DESC')
+        ;
+
+        return (new \App\Pagination\Paginator($qb, self::PER_PAGE))->paginate($page);
     }
 }

@@ -1,0 +1,119 @@
+{% macro navbar(total, current, previous, next, nearbyPagesLimit = 3) %}
+    <nav aria-label="Page navigation">
+        {% if total > 1 %}
+            <ul class="pagination justify-content-center">
+                {% if previous %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="{{ (app.request.pathInfo ~ '?' ~ (app.request.query.all|merge({'page': previous})|url_encode))|e }}">
+                            <i class="bi bi-arrow-left"></i>
+                            {{ 'Previous'|trans }}
+                        </a>
+                    </li>
+                {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link"
+                               href="#"
+                               tabindex="-1"
+                               aria-disabled="true">
+                                <i class="bi bi-arrow-left"></i>
+                                {{ 'Previous'|trans }}
+                            </a>
+                        </li>
+                {% endif %}
+                {% for i in 1..total %}
+                    {% if 0 == (current - nearbyPagesLimit) - loop.index %}
+                        <li class="page-item"><a href="{{ (app.request.pathInfo ~ '?' ~ (app.request.query.all|merge({'page': 1})|url_encode))|e }}" class="page-link">1</a></li>
+                        {% if 1 != loop.index %}
+                            <li class="page-item">
+                                <a href="#" class="page-link">...</a>
+                            </li>
+                        {% endif %}
+                    {% elseif 0 == (current + nearbyPagesLimit) - loop.index  and (current + nearbyPagesLimit) < total %}
+                        <li class="page-item">
+                            <a href="#" class="page-link">...</a>
+                        </li>
+                    {% elseif 0 < (current - nearbyPagesLimit) - loop.index %}
+                    {% elseif 0 > (current + nearbyPagesLimit) - loop.index %}
+                    {% else %}
+                        <li class="page-item{{ current == loop.index ? ' active' }}">
+                            <a href="{{ (app.request.pathInfo ~ '?' ~ (app.request.query.all|merge({'page': loop.index})|url_encode))|e }}" class="page-link">{{ loop.index }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% if current != total  and (current + nearbyPagesLimit) < total %}
+                    <li class="page-item"><a href="{{ (app.request.pathInfo ~ '?' ~ (app.request.query.all|merge({'page': total})|url_encode))|e }}" class="page-link">{{ total }}</a></li>
+                {% endif %}
+                {% if next %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="{{ (app.request.pathInfo ~ '?' ~ (app.request.query.all|merge({'page': next})|url_encode))|e }}">
+                            {{ 'Next'|trans }}
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link"
+                           href="#"
+                           tabindex="-1"
+                           aria-disabled="true">
+                            {{ 'Next'|trans }}
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        {% elseif total == 1 %}
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link"
+                       href="#"
+                       tabindex="-1"
+                       aria-disabled="true">
+                        <i class="bi bi-arrow-left"></i>
+                        {{ 'Previous'|trans }}
+                    </a>
+                </li>
+                        <li class="page-item active">
+                            <a href="{{ (app.request.pathInfo ~ '?' ~ (app.request.query.all|merge({'page': 1})|url_encode))|e }}" class="page-link">1</a>
+                        </li>
+                <li class="page-item disabled">
+                    <a class="page-link"
+                       href="#"
+                       tabindex="-1"
+                       aria-disabled="true">
+                        {{ 'Next'|trans }}
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </li>
+            </ul>
+        {% endif %}
+    </nav>
+{% endmacro %}
+
+{% macro goTo() %}
+    <form action="{{ path(app.request.attributes.get('_route')) }}" method="get">
+        <div class="input-group mb-3">
+            <input type="text"
+                   name="page"
+                   class="form-control"
+                   placeholder="{{ 'Go to Page'|trans }}"
+                   aria-label="{{ 'Go to Page'|trans }}" />
+
+            <button type="submit"
+                    class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-right-circle"></i>
+            </button>
+
+            {% for key, value in app.request.query.all %}
+                {% if key != 'page' %}
+                    <input type="hidden"
+                           id="{{ key }}"
+                           name="{{ key }}"
+                           value="{{ value }}" />
+                {% endif %}
+            {% endfor %}
+        </div>
+    </form>
+{% endmacro %}

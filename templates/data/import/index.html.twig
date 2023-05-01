@@ -39,16 +39,16 @@
         {{ 'Your Imports'|trans }}
     </h1>
 
+    {{ component('import_table') }}
+
     <p>
         {{
             'Showing count Imports'|trans({
-                '%perPage%': pages.perPage,
-                '%count%': imports.count
+                '%perPage%': imports.pageSize,
+                '%count%': imports.numResults
             })
         }}
     </p>
-
-    {{ active_filters.render(filters, 'app_import_index') }}
 
     <table class="table table-striped table-hover">
         <thead>
@@ -66,16 +66,7 @@
                     {{ 'Hospital'|trans({}, 'forms') }}
                 </th>
                 <th>
-                    {% if
-                        filters.getFilter('order').value.sortBy == 'rowCount' %}
-                        {{ 'RowCount'|trans }}
-                    {% elseif
-                        filters.getFilter('order').value.sortBy
-                            == 'skippedRows' %}
-                        {{ 'SkippedRows'|trans }}
-                    {% else %}
                         {{ 'Created at'|trans({}, 'forms') }}
-                    {% endif %}
                 </th>
                 <th>
                     {{ 'Status'|trans({}, 'forms') }}
@@ -83,7 +74,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for import in imports %}
+            {% for import in imports.results %}
                 <tr>
                     <td>
                         {{ import.id }}
@@ -120,17 +111,7 @@
                         {% endif %}
                     </td>
                     <td>
-                        {% if
-                            filters.getFilter('order').value.sortBy
-                                == 'rowCount' %}
-                            {{ import.rowCount }}
-                        {% elseif
-                            filters.getFilter('order').value.sortBy
-                                == 'skippedRows' %}
-                            {{ import.skippedRows }}
-                        {% else %}
-                            {{ import.createdAt|date('d.m.Y H:i') }}
-                        {% endif %}
+                        {{ import.createdAt|date('d.m.Y H:i') }}
                     </td>
                     <td>
                         {% if import.status == 'success' %}
@@ -176,8 +157,8 @@
             <p class="text-muted">
                 {{
                     'Showing Page page of pages'|trans({
-                        '%page%': pages.page,
-                        '%pages%': pages.last
+                        '%page%': imports.currentPage,
+                        '%pages%': imports.lastPage
                     })
                 }}
             </p>
@@ -185,9 +166,9 @@
         <div class="col-8">
             {{
                 component(
-                    'pagination',
+                    'paginate',
                     {
-                        dto: pages
+                        paginator: imports
                     }
                 )
             }}

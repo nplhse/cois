@@ -11,6 +11,7 @@ use App\Factory\SearchFilterFactory;
 use App\Repository\ImportRepository;
 use App\Service\Filters\PageFilter;
 use App\Service\FilterService;
+use App\Service\ImportParameters;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,22 +22,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class ImportController extends AbstractController
 {
     public function __construct(
-        private FilterService $filterService,
+        private ImportRepository $importRepository,
     ) {
     }
 
     #[Route(path: '/import/', name: 'app_import_index')]
-    public function index(Request $request, ImportRepository $importRepository, ImportFilterFactory $importFilterFactory, OrderFilterFactory $orderFilterFactory, SearchFilterFactory $searchFilterFactory): Response
+    public function index(Request $request): Response
     {
-        $this->filterService->setRequest($request);
-        $this->filterService->configureFilters($importFilterFactory->getFilters());
-
-        $paginator = $importRepository->getImportPaginator($this->filterService);
+        $parameters = ImportParameters::createFromRequest($request);
 
         return $this->render('data/import/index.html.twig', [
-            'filters' => $this->filterService->getFilterDto(),
-            'imports' => $paginator,
-            'pages' => PaginationFactory::create($this->filterService->getValue(PageFilter::Param), \count($paginator), ImportRepository::PER_PAGE),
+            'imports' => $this->importRepository->getPaginator($parameters->getPage(), 'createdBy', 'desc'),
         ]);
     }
 }

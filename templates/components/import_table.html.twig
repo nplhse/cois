@@ -1,0 +1,140 @@
+{% import '_macro/pagination.html.twig' as pagination %}
+
+<div{{ attributes }}>
+    <p>
+        {{
+        'Showing count Imports'|trans({
+            '%perPage%': 20,
+            '%count%': this.paginator.numResults
+        })
+        }}
+    </p>
+
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>
+                {{ 'Id'|trans({}, 'forms') }}
+            </th>
+            <th>
+                {{ 'Caption'|trans({}, 'forms') }}
+            </th>
+            <th>
+                {{ 'User'|trans({}, 'forms') }}
+            </th>
+            <th>
+                {{ 'Hospital'|trans({}, 'forms') }}
+            </th>
+            <th>
+                {{ 'Created at'|trans({}, 'forms') }}
+            </th>
+            <th>
+                {{ 'Status'|trans({}, 'forms') }}
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for import in this.imports %}
+            <tr>
+                <td>
+                    {{ import.id }}
+                </td>
+                <td>
+                    <a href="{{
+                    path(
+                        'app_import_show',
+                        {
+                            id: import.id
+                        }
+                    )
+                    }}">
+                        {{ import.name }}
+                    </a>
+                </td>
+                <td>
+                    {{ import.user.username }}
+                </td>
+                <td>
+                    {% if import.hospital %}
+                        <a href="{{
+                        path(
+                            'app_hospital_show',
+                            {
+                                id: import.hospital.id
+                            }
+                        )
+                        }}">
+                            {{ import.hospital }}
+                        </a>
+                    {% else %}
+                        {{ 'Import has no Hospital'|trans }}
+                    {% endif %}
+                </td>
+                <td>
+                    {{ import.createdAt|date('d.m.Y H:i') }}
+                </td>
+                <td>
+                    {% if import.status == 'success' %}
+                        <i class="bi bi-check-circle-fill text-success"></i>
+                        {{ import.status|trans }}
+                    {% elseif import.status == 'pending' %}
+                        <div class="spinner-border text-secondary spinner-border-sm"
+                             role="status">
+                                <span class="visually-hidden">
+                                    {{ 'import.field.loading'|trans }}
+                                </span>
+                        </div> {{ import.status|trans }}
+                    {% elseif import.status == 'incomplete' %}
+                        <i class="bi bi-exclamation-triangle-fill text-warning">
+
+                        </i>
+                        {{ import.status|trans }}
+                    {% elseif import.status == 'failure' %}
+                        <i class="bi bi-exclamation-circle-fill text-danger">
+
+                        </i>
+                        {{ import.status|trans }}
+                    {% elseif import.status == 'empty' %}
+                        <i class="bi bi-exclamation-circle-fill text-danger">
+
+                        </i>
+                        {{ import.status|trans }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6" class="text-muted">
+                    {{ 'import.noUploads'|trans }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col-2">
+            <p class="text-muted">
+                {{
+                'Showing Page page of pages'|trans({
+                    '%page%': this.paginator.currentPage,
+                    '%pages%': this.paginator.lastPage
+                })
+                }}
+            </p>
+        </div>
+        <div class="col-8">
+            {{
+            component(
+                'paginate',
+                {
+                    paginator: this.paginator
+                }
+            )
+            }}
+        </div>
+        <div class="col-2">
+            {{ pagination.goTo('app_import_index') }}
+        </div>
+    </div>
+</div>
