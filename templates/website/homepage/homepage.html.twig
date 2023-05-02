@@ -24,11 +24,13 @@
                                 role="button">
                                 {{ 'link.login.action'|trans }}
                             </a>
-                            <a class="btn btn-secondary btn-lg px-4 gap-3"
-                                href="{{ path('app_get_started') }}"
-                                role="button">
-                                {{ 'link.get_started'|trans }}
-                            </a>
+                            {% if app_enable_registration %}
+                                <a class="btn btn-secondary btn-lg px-4 gap-3"
+                                    href="{{ path('app_get_started') }}"
+                                    role="button">
+                                    {{ 'link.get_started'|trans }}
+                                </a>
+                            {% endif %}
                         {% else %}
                             <a class="btn btn-primary btn-lg px-4 gap-3"
                                 href="{{ path('app_dashboard') }}"
