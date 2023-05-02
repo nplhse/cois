@@ -14,7 +14,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'enable_features' => true,
             'enable_help' => false,
             'enable_imprint' => true,
-            'enable_registration' => true,
+            'enable_registration' => false,
             'enable_terms' => true,
         ],
         'mailer' => [
