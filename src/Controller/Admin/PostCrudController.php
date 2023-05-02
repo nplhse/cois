@@ -42,7 +42,9 @@ class PostCrudController extends AbstractCrudController
             ChoiceField::new('status')->onlyOnForms()
                 ->setFormType(EnumType::class)
                 ->setFormTypeOption('class', PostStatus::class)
-                ->setChoices(PostStatus::cases()),
+                ->setChoices([
+                    'Status' => PostStatus::cases()
+                ]),
             BooleanField::new('isSticky')->hideOnIndex(),
             BooleanField::new('allowComments')->hideOnIndex(),
             DateTimeField::new('createdAt')->hideOnForm(),
