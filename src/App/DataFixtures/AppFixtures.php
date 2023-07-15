@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Domain\Enum\PageStatus;
-use App\Domain\Enum\PageType;
-use App\Domain\Enum\PageVisbility;
 use App\Factory\AllocationFactory;
 use App\Factory\CategoryFactory;
 use App\Factory\CommentFactory;
@@ -22,6 +19,9 @@ use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Domain\Enum\PageStatus;
+use Domain\Enum\PageType;
+use Domain\Enum\PageVisbility;
 
 class AppFixtures extends Fixture implements DependentFixtureInterface
 {

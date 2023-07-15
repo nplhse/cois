@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Domain\Contracts\HospitalInterface;
-use App\Domain\Contracts\UserInterface;
-use App\Domain\Entity\Import as DomainImport;
 use App\Repository\ImportRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Domain\Contracts\HospitalInterface;
+use Domain\Contracts\UserInterface;
+use Domain\Entity\Import as DomainImport;
 use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: ImportRepository::class)]

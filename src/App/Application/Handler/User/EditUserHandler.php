@@ -6,10 +6,10 @@ namespace App\Application\Handler\User;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\User\EditUserCommand;
-use App\Domain\Event\User\UserEditedEvent;
-use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
+use Domain\Command\User\EditUserCommand;
+use Domain\Event\User\UserEditedEvent;
+use Domain\Repository\UserRepositoryInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class EditUserHandler implements HandlerInterface

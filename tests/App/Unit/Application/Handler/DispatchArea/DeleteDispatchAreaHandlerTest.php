@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Application\Handler\DispatchArea;
 
 use App\Application\Handler\DispatchArea\DeleteDispatchAreaHandler;
-use App\Domain\Command\DispatchArea\DeleteDispatchAreaCommand;
-use App\Domain\Contracts\DispatchAreaInterface;
-use App\Domain\Contracts\StateInterface;
-use App\Domain\Event\DispatchArea\DispatchAreaDeletedEvent;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\StateRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Domain\Command\DispatchArea\DeleteDispatchAreaCommand;
+use Domain\Contracts\DispatchAreaInterface;
+use Domain\Contracts\StateInterface;
+use Domain\Event\DispatchArea\DispatchAreaDeletedEvent;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

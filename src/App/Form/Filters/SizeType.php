@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form\Filters;
 
-use App\Domain\Enum\HospitalSize;
+use Domain\Enum\HospitalSize;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\OptionsResolver\OptionsResolver;

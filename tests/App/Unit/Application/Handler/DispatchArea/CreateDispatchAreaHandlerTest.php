@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Application\Handler\DispatchArea;
 
 use App\Application\Handler\DispatchArea\CreateDispatchAreaHandler;
-use App\Domain\Command\DispatchArea\CreateDispatchAreaCommand;
-use App\Domain\Contracts\DispatchAreaInterface;
-use App\Domain\Contracts\StateInterface;
-use App\Domain\Event\DispatchArea\DispatchAreaCreatedEvent;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\StateRepository;
+use Domain\Command\DispatchArea\CreateDispatchAreaCommand;
+use Domain\Contracts\DispatchAreaInterface;
+use Domain\Contracts\StateInterface;
+use Domain\Event\DispatchArea\DispatchAreaCreatedEvent;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

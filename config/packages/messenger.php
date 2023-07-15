@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Domain\Command\Export\ExportTracerByQuarterCommand;
-use App\Domain\Command\Import\ImportDataCommand;
+use Domain\Command\Export\ExportTracerByQuarterCommand;
+use Domain\Command\Import\ImportDataCommand;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Config\FrameworkConfig;
 

@@ -6,10 +6,10 @@ namespace App\Application\Handler\User;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\User\ChangeProfileCommand;
-use App\Domain\Event\User\UserChangedProfileEvent;
-use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
+use Domain\Command\User\ChangeProfileCommand;
+use Domain\Event\User\UserChangedProfileEvent;
+use Domain\Repository\UserRepositoryInterface;
 
 class ChangeProfileHandler implements HandlerInterface
 {

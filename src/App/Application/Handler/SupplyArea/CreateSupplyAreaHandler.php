@@ -6,11 +6,11 @@ namespace App\Application\Handler\SupplyArea;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\SupplyArea\CreateSupplyAreaCommand;
-use App\Domain\Event\SupplyArea\SupplyAreaCreatedEvent;
 use App\Entity\SupplyArea;
 use App\Repository\StateRepository;
 use App\Repository\SupplyAreaRepository;
+use Domain\Command\SupplyArea\CreateSupplyAreaCommand;
+use Domain\Event\SupplyArea\SupplyAreaCreatedEvent;
 
 class CreateSupplyAreaHandler implements HandlerInterface
 {

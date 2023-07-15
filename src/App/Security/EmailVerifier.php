@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Security;
 
-use App\Domain\Contracts\UserInterface;
-use App\Domain\Repository\UserRepositoryInterface;
+use Domain\Contracts\UserInterface;
+use Domain\Repository\UserRepositoryInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;

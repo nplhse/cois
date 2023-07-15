@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
-use App\Domain\Enum\HospitalLocation;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
+use Domain\Enum\HospitalLocation;
 use Symfony\Component\HttpFoundation\Request;
 
 class LocationFilter implements FilterInterface

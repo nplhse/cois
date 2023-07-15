@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Controller\Admin\Actions;
 
 use App\Controller\Admin\CommentCrudController;
-use App\Domain\Command\Comment\RejectComment;
 use App\Entity\Comment;
+use Domain\Command\Comment\RejectComment;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

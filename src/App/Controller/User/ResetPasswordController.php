@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller\User;
 
-use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
 use App\Form\User\ChangePasswordFormType;
 use App\Form\User\ResetPasswordRequestFormType;
 use App\Service\Mailers\UserPasswordResetMailerService;
+use Domain\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

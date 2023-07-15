@@ -6,10 +6,10 @@ namespace App\Application\Handler\Import;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\Import\CreateImportCommand;
-use App\Domain\Event\Import\ImportCreatedEvent;
-use App\Domain\Repository\ImportRepositoryInterface;
 use App\Entity\Import;
+use Domain\Command\Import\CreateImportCommand;
+use Domain\Event\Import\ImportCreatedEvent;
+use Domain\Repository\ImportRepositoryInterface;
 
 class CreateImportHandler implements HandlerInterface
 {

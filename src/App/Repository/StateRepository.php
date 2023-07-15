@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Domain\Contracts\StateInterface;
-use App\Domain\Repository\StateRepositoryInterface;
 use App\Entity\State;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Domain\Contracts\StateInterface;
+use Domain\Repository\StateRepositoryInterface;
+use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 
 /**
  * @method State|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,6 +17,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method State[]    findAll()
  * @method State[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+#[AsAlias(id: StateRepositoryInterface::class, public: true)]
 class StateRepository extends ServiceEntityRepository implements StateRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)

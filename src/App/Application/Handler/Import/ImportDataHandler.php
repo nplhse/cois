@@ -7,10 +7,10 @@ namespace App\Application\Handler\Import;
 use App\Application\Contract\HandlerInterface;
 use App\Application\Exception\ImportNotFoundException;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\Import\ImportDataCommand;
-use App\Domain\Event\Import\ImportSuccessEvent;
-use App\Domain\Repository\ImportRepositoryInterface;
 use App\Service\Import\ImportService;
+use Domain\Command\Import\ImportDataCommand;
+use Domain\Event\Import\ImportSuccessEvent;
+use Domain\Repository\ImportRepositoryInterface;
 
 class ImportDataHandler implements HandlerInterface
 {

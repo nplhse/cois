@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Domain\Enum\PageType;
 use App\Repository\PageRepository;
+use Domain\Enum\PageType;
 
 class PageService
 {

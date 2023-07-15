@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Form;
 
-use App\Domain\Enum\Page\PageStatusEnum;
-use App\Domain\Enum\Page\PageTypeEnum;
 use App\Entity\Page;
+use Domain\Enum\Page\PageStatusEnum;
+use Domain\Enum\Page\PageTypeEnum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;

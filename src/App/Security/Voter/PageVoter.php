@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Security\Voter;
 
-use App\Domain\Contracts\UserInterface;
-use App\Domain\Enum\PageStatus;
-use App\Domain\Enum\PageVisbility;
 use App\Entity\Page;
+use Domain\Contracts\UserInterface;
+use Domain\Enum\PageStatus;
+use Domain\Enum\PageVisbility;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Security;

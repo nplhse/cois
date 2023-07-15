@@ -7,11 +7,11 @@ namespace App\Application\Handler\DispatchArea;
 use App\Application\Contract\HandlerInterface;
 use App\Application\Exception\DispatchAreaNotEmptyException;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\DispatchArea\DeleteDispatchAreaCommand;
-use App\Domain\Entity\DispatchArea;
-use App\Domain\Event\DispatchArea\DispatchAreaDeletedEvent;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\StateRepository;
+use Domain\Command\DispatchArea\DeleteDispatchAreaCommand;
+use Domain\Entity\DispatchArea;
+use Domain\Event\DispatchArea\DispatchAreaDeletedEvent;
 
 class DeleteDispatchAreaHandler implements HandlerInterface
 {

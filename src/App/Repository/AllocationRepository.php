@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Domain\Contracts\HospitalInterface;
-use App\Domain\Contracts\UserInterface;
 use App\Entity\Allocation;
 use App\Entity\Hospital;
 use App\Entity\Import;
@@ -18,6 +16,11 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+use Domain\Contracts\AllocationInterface;
+use Domain\Contracts\HospitalInterface;
+use Domain\Contracts\UserInterface;
+use Domain\Repository\AllocationRepositoryInterface;
+use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 
 /**
  * @method Allocation|null find($id, $lockMode = null, $lockVersion = null)
@@ -25,7 +28,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Allocation[]    findAll()
  * @method Allocation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AllocationRepository extends ServiceEntityRepository
+#[AsAlias(id: AllocationRepositoryInterface::class, public: true)]
+class AllocationRepository extends ServiceEntityRepository implements AllocationRepositoryInterface
 {
     public const PER_PAGE = 10;
 
@@ -42,6 +46,23 @@ class AllocationRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Allocation::class);
+    }
+
+    public function add(AllocationInterface $allocation): void
+    {
+        $this->_em->persist($allocation);
+        $this->_em->flush();
+    }
+
+    public function save(): void
+    {
+        $this->_em->flush();
+    }
+
+    public function delete(AllocationInterface $allocation): void
+    {
+        $this->_em->remove($allocation);
+        $this->_em->flush();
     }
 
     public function countAllocations(Hospital|null $entity = null): int

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber\EasyAdmin;
 
-use App\Domain\Command\Import\DeleteImportCommand;
 use App\Entity\Import;
+use Domain\Command\Import\DeleteImportCommand;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityDeletedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;

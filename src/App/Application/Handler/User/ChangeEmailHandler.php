@@ -6,10 +6,10 @@ namespace App\Application\Handler\User;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\User\ChangeEmailCommand;
-use App\Domain\Event\User\UserChangedEmailEvent;
-use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
+use Domain\Command\User\ChangeEmailCommand;
+use Domain\Event\User\UserChangedEmailEvent;
+use Domain\Repository\UserRepositoryInterface;
 
 class ChangeEmailHandler implements HandlerInterface
 {

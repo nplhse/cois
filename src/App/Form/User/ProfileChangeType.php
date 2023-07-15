@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form\User;
 
-use App\Domain\Contracts\UserInterface;
+use Domain\Contracts\UserInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

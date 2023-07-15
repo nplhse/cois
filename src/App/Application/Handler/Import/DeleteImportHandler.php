@@ -7,11 +7,11 @@ namespace App\Application\Handler\Import;
 use App\Application\Contract\HandlerInterface;
 use App\Application\Exception\ImportNotFoundException;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\Import\DeleteImportCommand;
-use App\Domain\Event\Import\ImportDeletedEvent;
-use App\Domain\Repository\ImportRepositoryInterface;
 use App\Repository\AllocationRepository;
 use App\Repository\SkippedRowRepository;
+use Domain\Command\Import\DeleteImportCommand;
+use Domain\Event\Import\ImportDeletedEvent;
+use Domain\Repository\ImportRepositoryInterface;
 
 class DeleteImportHandler implements HandlerInterface
 {

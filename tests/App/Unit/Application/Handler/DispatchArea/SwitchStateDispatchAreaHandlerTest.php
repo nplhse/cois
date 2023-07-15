@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Application\Handler\DispatchArea;
 
 use App\Application\Handler\DispatchArea\SwitchStateDispatchAreaHandler;
-use App\Domain\Command\DispatchArea\SwitchStateDispatchAreaCommand;
-use App\Domain\Contracts\DispatchAreaInterface;
-use App\Domain\Contracts\StateInterface;
-use App\Domain\Event\DispatchArea\DispatchAreaSwitchedStateEvent;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\StateRepository;
+use Domain\Command\DispatchArea\SwitchStateDispatchAreaCommand;
+use Domain\Contracts\DispatchAreaInterface;
+use Domain\Contracts\StateInterface;
+use Domain\Event\DispatchArea\DispatchAreaSwitchedStateEvent;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

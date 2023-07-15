@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Domain\Entity\State as DomainState;
 use App\Repository\StateRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Domain\Entity\State as DomainState;
 
 #[ORM\Entity(repositoryClass: StateRepository::class)]
 #[ORM\HasLifecycleCallbacks]

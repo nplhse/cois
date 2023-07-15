@@ -6,11 +6,11 @@ namespace App\Application\Handler\Page;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\Page\EditPageCommand;
-use App\Domain\Enum\PageStatus;
-use App\Domain\Enum\PageType;
-use App\Domain\Event\Page\PageEditedEvent;
 use App\Repository\PageRepository;
+use Domain\Command\Page\EditPageCommand;
+use Domain\Enum\PageStatus;
+use Domain\Enum\PageType;
+use Domain\Event\Page\PageEditedEvent;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class EditPageHandler implements HandlerInterface

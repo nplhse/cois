@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Traits;
 
-use App\Domain\Contracts\DomainEventInterface;
+use Domain\Contracts\DomainEventInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Service\Attribute\Required;
 

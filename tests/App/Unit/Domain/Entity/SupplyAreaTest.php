@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Domain\Entity;
 
-use App\Domain\Contracts\StateInterface;
-use App\Domain\Entity\Hospital;
-use App\Domain\Entity\SupplyArea;
+use Domain\Contracts\StateInterface;
+use Domain\Entity\Hospital;
+use Domain\Entity\SupplyArea;
 use PHPUnit\Framework\TestCase;
 
 class SupplyAreaTest extends TestCase

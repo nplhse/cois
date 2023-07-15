@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Admin\Field\CKEditorField;
-use App\Domain\Enum\PageStatus;
-use App\Domain\Enum\PageType;
-use App\Domain\Enum\PageVisbility;
 use App\Entity\Page;
+use Domain\Enum\PageStatus;
+use Domain\Enum\PageType;
+use Domain\Enum\PageVisbility;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;

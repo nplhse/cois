@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Twig\Components;
 
-use App\Domain\Enum\PageStatus;
-use App\Domain\Enum\PageType;
-use App\Domain\Enum\PageVisbility;
 use App\Repository\PageRepository;
+use Domain\Enum\PageStatus;
+use Domain\Enum\PageType;
+use Domain\Enum\PageVisbility;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 

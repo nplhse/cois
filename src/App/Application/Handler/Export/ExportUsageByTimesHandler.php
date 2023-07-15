@@ -6,8 +6,8 @@ namespace App\Application\Handler\Export;
 
 use App\Application\Export\DGINAUsageByTimesExport;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\Export\ExportUsageByTimesCommand;
 use App\Query\Export\AllocationByHourQuery;
+use Domain\Command\Export\ExportUsageByTimesCommand;
 use League\Csv\Writer;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 

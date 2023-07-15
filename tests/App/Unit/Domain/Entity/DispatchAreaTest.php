@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Domain\Entity;
 
-use App\Domain\Contracts\StateInterface;
-use App\Domain\Entity\DispatchArea;
-use App\Domain\Entity\Hospital;
+use Domain\Contracts\StateInterface;
+use Domain\Entity\DispatchArea;
+use Domain\Entity\Hospital;
 use PHPUnit\Framework\TestCase;
 
 class DispatchAreaTest extends TestCase

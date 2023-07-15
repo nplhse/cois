@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Application\Handler\State;
 
 use App\Application\Handler\State\DeleteStateHandler;
-use App\Domain\Command\State\DeleteStateCommand;
-use App\Domain\Contracts\StateInterface;
-use App\Domain\Entity\State;
-use App\Domain\Event\State\StateDeletedEvent;
 use App\Repository\StateRepository;
+use Domain\Command\State\DeleteStateCommand;
+use Domain\Contracts\StateInterface;
+use Domain\Entity\State;
+use Domain\Event\State\StateDeletedEvent;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

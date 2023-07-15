@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber\Notifications;
 
-use App\Domain\Event\User\UserRegisteredEvent;
+use Domain\Event\User\UserRegisteredEvent;
 
 class UserCreatedNotification extends AbstractAdminNotification
 {

@@ -6,10 +6,10 @@ namespace App\Application\Handler\State;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\State\CreateStateCommand;
-use App\Domain\Event\State\StateCreatedEvent;
-use App\Domain\Repository\StateRepositoryInterface;
 use App\Entity\State;
+use Domain\Command\State\CreateStateCommand;
+use Domain\Event\State\StateCreatedEvent;
+use Domain\Repository\StateRepositoryInterface;
 
 class CreateStateHandler implements HandlerInterface
 {

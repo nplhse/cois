@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Application\Handler\SupplyArea;
 
 use App\Application\Handler\SupplyArea\SwitchStateSupplyAreaHandler;
-use App\Domain\Command\SupplyArea\SwitchStateSupplyAreaCommand;
-use App\Domain\Contracts\StateInterface;
-use App\Domain\Contracts\SupplyAreaInterface;
-use App\Domain\Event\SupplyArea\SupplyAreaSwitchedStateEvent;
 use App\Repository\StateRepository;
 use App\Repository\SupplyAreaRepository;
+use Domain\Command\SupplyArea\SwitchStateSupplyAreaCommand;
+use Domain\Contracts\StateInterface;
+use Domain\Contracts\SupplyAreaInterface;
+use Domain\Event\SupplyArea\SupplyAreaSwitchedStateEvent;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

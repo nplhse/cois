@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\User;
 
-use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
 use App\Service\Mailers\UserVerificationMailerService;
+use Domain\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

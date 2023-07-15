@@ -6,10 +6,10 @@ namespace App\Query;
 
 use App\Application\Contract\ResultCollectionInterface;
 use App\DataTransferObjects\ResultCollection;
-use App\Domain\Enum\PostStatus;
 use App\Entity\Post;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
+use Domain\Enum\PostStatus;
 
 final class BlogArchiveQuery
 {

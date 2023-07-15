@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Domain\Contracts\UserInterface;
-use App\Domain\Enum\ContactRequestStatus;
 use App\Repository\ContactRequestRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Domain\Contracts\UserInterface;
+use Domain\Enum\ContactRequestStatus;
 
 #[ORM\Entity(repositoryClass: ContactRequestRepository::class)]
 class ContactRequest

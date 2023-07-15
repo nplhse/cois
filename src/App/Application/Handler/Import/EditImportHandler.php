@@ -7,9 +7,9 @@ namespace App\Application\Handler\Import;
 use App\Application\Contract\HandlerInterface;
 use App\Application\Exception\ImportNotFoundException;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\Import\EditImportCommand;
-use App\Domain\Event\Import\ImportCreatedEvent;
-use App\Domain\Repository\ImportRepositoryInterface;
+use Domain\Command\Import\EditImportCommand;
+use Domain\Event\Import\ImportCreatedEvent;
+use Domain\Repository\ImportRepositoryInterface;
 
 class EditImportHandler implements HandlerInterface
 {

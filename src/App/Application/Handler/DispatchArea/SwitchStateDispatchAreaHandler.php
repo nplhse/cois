@@ -6,10 +6,10 @@ namespace App\Application\Handler\DispatchArea;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\DispatchArea\SwitchStateDispatchAreaCommand;
-use App\Domain\Event\DispatchArea\DispatchAreaSwitchedStateEvent;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\StateRepository;
+use Domain\Command\DispatchArea\SwitchStateDispatchAreaCommand;
+use Domain\Event\DispatchArea\DispatchAreaSwitchedStateEvent;
 
 class SwitchStateDispatchAreaHandler implements HandlerInterface
 {

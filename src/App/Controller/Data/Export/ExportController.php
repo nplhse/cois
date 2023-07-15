@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Data\Export;
 
-use App\Domain\Command\Export\ExportTracerByQuarterCommand;
+use Domain\Command\Export\ExportTracerByQuarterCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;

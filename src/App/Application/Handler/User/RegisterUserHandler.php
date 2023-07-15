@@ -6,10 +6,10 @@ namespace App\Application\Handler\User;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\User\RegisterUserCommand;
-use App\Domain\Event\User\UserRegisteredEvent;
-use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
+use Domain\Command\User\RegisterUserCommand;
+use Domain\Event\User\UserRegisteredEvent;
+use Domain\Repository\UserRepositoryInterface;
 
 class RegisterUserHandler implements HandlerInterface
 {

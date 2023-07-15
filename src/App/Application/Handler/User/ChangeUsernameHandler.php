@@ -6,10 +6,10 @@ namespace App\Application\Handler\User;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\User\ChangeUsernameCommand;
-use App\Domain\Event\User\UserChangedUsernameEvent;
-use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
+use Domain\Command\User\ChangeUsernameCommand;
+use Domain\Event\User\UserChangedUsernameEvent;
+use Domain\Repository\UserRepositoryInterface;
 
 class ChangeUsernameHandler implements HandlerInterface
 {

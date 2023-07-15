@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Contract;
 
-use App\Domain\Contracts\ImportInterface;
+use Domain\Contracts\ImportInterface;
 
 interface AllocationImportWriterInterface
 {

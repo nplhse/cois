@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Application\Handler\State;
 
 use App\Application\Handler\State\UpdateStateHandler;
-use App\Domain\Command\State\UpdateStateCommand;
-use App\Domain\Contracts\StateInterface;
-use App\Domain\Event\State\StateUpdatedEvent;
 use App\Repository\StateRepository;
+use Domain\Command\State\UpdateStateCommand;
+use Domain\Contracts\StateInterface;
+use Domain\Event\State\StateUpdatedEvent;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

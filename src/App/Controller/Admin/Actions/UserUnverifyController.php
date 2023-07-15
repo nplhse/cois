@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Controller\Admin\Actions;
 
 use App\Controller\Admin\UserCrudController;
-use App\Domain\Command\User\PromoteUserCommand;
 use App\Entity\User;
+use Domain\Command\User\PromoteUserCommand;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

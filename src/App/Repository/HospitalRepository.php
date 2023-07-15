@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Domain\Contracts\HospitalInterface;
-use App\Domain\Contracts\UserInterface;
-use App\Domain\Repository\HospitalRepositoryInterface;
 use App\Entity\Hospital;
 use App\Entity\User;
 use App\Service\Filters\OrderFilter;
@@ -16,6 +13,10 @@ use App\Service\FilterService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+use Domain\Contracts\HospitalInterface;
+use Domain\Contracts\UserInterface;
+use Domain\Repository\HospitalRepositoryInterface;
+use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 
 /**
  * @method Hospital|null find($id, $lockMode = null, $lockVersion = null)
@@ -23,6 +24,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Hospital[]    findAll()
  * @method Hospital[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+#[AsAlias(id: HospitalRepositoryInterface::class, public: true)]
 class HospitalRepository extends ServiceEntityRepository implements HospitalRepositoryInterface
 {
     public const PER_PAGE = 10;

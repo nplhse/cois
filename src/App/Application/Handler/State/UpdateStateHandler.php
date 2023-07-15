@@ -6,9 +6,9 @@ namespace App\Application\Handler\State;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\State\UpdateStateCommand;
-use App\Domain\Event\State\StateUpdatedEvent;
-use App\Domain\Repository\StateRepositoryInterface;
+use Domain\Command\State\UpdateStateCommand;
+use Domain\Event\State\StateUpdatedEvent;
+use Domain\Repository\StateRepositoryInterface;
 
 class UpdateStateHandler implements HandlerInterface
 {

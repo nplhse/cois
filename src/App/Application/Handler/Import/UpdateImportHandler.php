@@ -6,10 +6,10 @@ namespace App\Application\Handler\Import;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\Import\UpdateImportCommand;
-use App\Domain\Event\Import\ImportUpdatedEvent;
-use App\Domain\Repository\ImportRepositoryInterface;
 use App\Entity\Import;
+use Domain\Command\Import\UpdateImportCommand;
+use Domain\Event\Import\ImportUpdatedEvent;
+use Domain\Repository\ImportRepositoryInterface;
 
 class UpdateImportHandler implements HandlerInterface
 {

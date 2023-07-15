@@ -6,10 +6,10 @@ namespace App\Application\Handler\Comment;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\Comment\ApproveComment;
-use App\Domain\Enum\CommentStatus;
-use App\Domain\Event\Comment\CommentApprovedEvent;
 use App\Repository\CommentRepository;
+use Domain\Command\Comment\ApproveComment;
+use Domain\Enum\CommentStatus;
+use Domain\Event\Comment\CommentApprovedEvent;
 
 class ApproveCommentHandler implements HandlerInterface
 {

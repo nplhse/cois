@@ -6,10 +6,10 @@ namespace App\Application\Handler\User;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\User\ChangePasswordCommand;
-use App\Domain\Event\User\UserChangedPasswordEvent;
-use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
+use Domain\Command\User\ChangePasswordCommand;
+use Domain\Event\User\UserChangedPasswordEvent;
+use Domain\Repository\UserRepositoryInterface;
 
 class ChangePasswordHandler implements HandlerInterface
 {

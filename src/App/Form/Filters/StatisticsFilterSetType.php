@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form\Filters;
 
-use App\Domain\Entity\User;
+use Domain\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;

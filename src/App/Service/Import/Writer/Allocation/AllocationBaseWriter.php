@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Service\Import\Writer\Allocation;
 
 use App\Application\Exception\ImportWriteException;
-use App\Domain\Contracts\ImportInterface;
 use App\Entity\Allocation;
+use Domain\Contracts\ImportInterface;
 
 class AllocationBaseWriter implements \App\Application\Contract\AllocationImportWriterInterface
 {

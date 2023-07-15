@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Export;
 
-use App\Domain\Command\Export\ExportUsageByTimesCommand;
+use Domain\Command\Export\ExportUsageByTimesCommand;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
 #[AutoconfigureTag('app.export')]

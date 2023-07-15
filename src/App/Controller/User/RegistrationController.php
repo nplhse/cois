@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller\User;
 
-use App\Domain\Command\User\RegisterUserCommand;
-use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
 use App\Form\User\RegistrationFormType;
 use App\Security\LoginFormAuthenticator;
+use Domain\Command\User\RegisterUserCommand;
+use Domain\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

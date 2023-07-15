@@ -6,9 +6,9 @@ namespace App\Application\Handler\Hospital;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\Hospital\DeleteHospitalCommand;
-use App\Domain\Event\Hospital\HospitalDeletedEvent;
-use App\Domain\Repository\HospitalRepositoryInterface;
+use Domain\Command\Hospital\DeleteHospitalCommand;
+use Domain\Event\Hospital\HospitalDeletedEvent;
+use Domain\Repository\HospitalRepositoryInterface;
 
 class DeleteHospitalHandler implements HandlerInterface
 {

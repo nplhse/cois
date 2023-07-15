@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Domain\Contracts\DispatchAreaInterface;
-use App\Domain\Repository\DispatchAreaRepositoryInterface;
 use App\Entity\DispatchArea;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Domain\Contracts\DispatchAreaInterface;
+use Domain\Repository\DispatchAreaRepositoryInterface;
+use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 
 /**
  * @method DispatchArea|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,6 +17,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method DispatchArea[]    findAll()
  * @method DispatchArea[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+#[AsAlias(id: DispatchAreaInterface::class, public: true)]
 class DispatchAreaRepository extends ServiceEntityRepository implements DispatchAreaRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)

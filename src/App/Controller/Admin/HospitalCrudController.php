@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use App\Domain\Enum\HospitalLocation;
-use App\Domain\Enum\HospitalSize;
-use App\Domain\Enum\HospitalTier;
 use App\Entity\Hospital;
+use Domain\Enum\HospitalLocation;
+use Domain\Enum\HospitalSize;
+use Domain\Enum\HospitalTier;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
