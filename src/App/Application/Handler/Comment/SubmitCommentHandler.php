@@ -6,11 +6,11 @@ namespace App\Application\Handler\Comment;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\Comment\SubmitComment;
-use App\Domain\Enum\CommentStatus;
-use App\Domain\Event\Comment\CommentSubmittedEvent;
 use App\Entity\Comment;
 use App\Repository\CommentRepository;
+use Domain\Command\Comment\SubmitComment;
+use Domain\Enum\CommentStatus;
+use Domain\Event\Comment\CommentSubmittedEvent;
 
 class SubmitCommentHandler implements HandlerInterface
 {

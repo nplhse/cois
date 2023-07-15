@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
-use App\Domain\Enum\HospitalTier;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
+use Domain\Enum\HospitalTier;
 use Symfony\Component\HttpFoundation\Request;
 
 class TierFilter implements FilterInterface

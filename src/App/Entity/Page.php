@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Domain\Contracts\UserInterface;
-use App\Domain\Entity\Traits\BlamableTrait;
-use App\Domain\Entity\Traits\TimestampableTrait;
-use App\Domain\Enum\PageStatus;
-use App\Domain\Enum\PageType;
-use App\Domain\Enum\PageVisbility;
 use App\Repository\PageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Domain\Contracts\UserInterface;
+use Domain\Entity\Traits\BlamableTrait;
+use Domain\Entity\Traits\TimestampableTrait;
+use Domain\Enum\PageStatus;
+use Domain\Enum\PageType;
+use Domain\Enum\PageVisbility;
 
 #[ORM\Entity(repositoryClass: PageRepository::class)]
 #[ORM\HasLifecycleCallbacks]

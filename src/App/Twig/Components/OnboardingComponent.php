@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Twig\Components;
 
-use App\Domain\Contracts\UserInterface;
 use App\Repository\ImportRepository;
+use Domain\Contracts\UserInterface;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent('onboarding')]

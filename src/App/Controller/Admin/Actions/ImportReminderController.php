@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Controller\Admin\Actions;
 
 use App\Controller\Admin\UserCrudController;
-use App\Domain\Command\Task\ImportReminderCommand;
-use App\Domain\Event\Task\TaskFailedEvent;
 use App\Repository\UserRepository;
+use Domain\Command\Task\ImportReminderCommand;
+use Domain\Event\Task\TaskFailedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

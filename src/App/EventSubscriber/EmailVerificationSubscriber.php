@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use App\Domain\Event\User\UserChangedEmailEvent;
-use App\Domain\Event\User\UserRegisteredEvent;
 use App\Security\EmailVerifier;
+use Domain\Event\User\UserChangedEmailEvent;
+use Domain\Event\User\UserRegisteredEvent;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mime\Address;

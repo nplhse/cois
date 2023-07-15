@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Domain\Entity\Traits\TimestampableTrait;
 use App\Repository\CookieConsentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Domain\Entity\Traits\TimestampableTrait;
 
 #[ORM\Entity(repositoryClass: CookieConsentRepository::class)]
 #[ORM\HasLifecycleCallbacks]

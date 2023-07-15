@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber\Notifications;
 
-use App\Domain\Event\Import\ImportFailedEvent;
+use Domain\Event\Import\ImportFailedEvent;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
 
 class ImportFailedNotification extends AbstractAdminNotification

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber\EasyAdmin;
 
-use App\Domain\Contracts\UserInterface;
 use App\Entity\Category;
+use Domain\Contracts\UserInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use Symfony\Bundle\SecurityBundle\Security;

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Domain\Entity;
 
-use App\Domain\Contracts\HospitalInterface;
-use App\Domain\Contracts\UserInterface;
-use App\Domain\Entity\Import;
+use Domain\Contracts\HospitalInterface;
+use Domain\Contracts\UserInterface;
+use Domain\Entity\Import;
 use PHPUnit\Framework\TestCase;
 
 class ImportTest extends TestCase

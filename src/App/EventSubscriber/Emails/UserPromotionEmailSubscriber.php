@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber\Emails;
 
-use App\Domain\Event\User\UserPromotedEvent;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Service\Mailers\UserPromotedMailerService;
+use Domain\Event\User\UserPromotedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class UserPromotionEmailSubscriber implements EventSubscriberInterface

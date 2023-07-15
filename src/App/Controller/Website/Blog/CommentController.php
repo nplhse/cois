@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller\Website\Blog;
 
-use App\Domain\Command\Comment\SubmitComment;
 use App\Entity\Comment;
 use App\Entity\Post;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
+use Domain\Command\Comment\SubmitComment;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

@@ -6,12 +6,12 @@ namespace App\Application\Handler\Page;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\Page\CreatePageCommand;
-use App\Domain\Enum\PageStatus;
-use App\Domain\Enum\PageType;
-use App\Domain\Event\Page\PageCreatedEvent;
 use App\Entity\Page;
 use App\Repository\PageRepository;
+use Domain\Command\Page\CreatePageCommand;
+use Domain\Enum\PageStatus;
+use Domain\Enum\PageType;
+use Domain\Event\Page\PageCreatedEvent;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class CreatePageHandler implements HandlerInterface

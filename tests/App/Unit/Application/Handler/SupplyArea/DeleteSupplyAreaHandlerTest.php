@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Application\Handler\SupplyArea;
 
 use App\Application\Handler\SupplyArea\DeleteSupplyAreaHandler;
-use App\Domain\Command\SupplyArea\DeleteSupplyAreaCommand;
-use App\Domain\Contracts\StateInterface;
-use App\Domain\Contracts\SupplyAreaInterface;
-use App\Domain\Event\SupplyArea\SupplyAreaDeletedEvent;
 use App\Repository\StateRepository;
 use App\Repository\SupplyAreaRepository;
+use Domain\Command\SupplyArea\DeleteSupplyAreaCommand;
+use Domain\Contracts\StateInterface;
+use Domain\Contracts\SupplyAreaInterface;
+use Domain\Event\SupplyArea\SupplyAreaDeletedEvent;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

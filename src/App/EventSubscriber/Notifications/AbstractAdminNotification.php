@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber\Notifications;
 
-use App\Domain\Contracts\UserInterface;
-use App\Domain\Repository\UserRepositoryInterface;
+use Domain\Contracts\UserInterface;
+use Domain\Repository\UserRepositoryInterface;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;

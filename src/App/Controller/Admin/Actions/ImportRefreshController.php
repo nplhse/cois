@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Controller\Admin\Actions;
 
 use App\Controller\Admin\ImportCrudController;
-use App\Domain\Command\Import\ImportDataCommand;
 use App\Entity\Import;
 use App\Repository\AllocationRepository;
 use App\Repository\SkippedRowRepository;
+use Domain\Command\Import\ImportDataCommand;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

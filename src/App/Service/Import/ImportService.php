@@ -9,13 +9,13 @@ use App\Application\Contract\ImportWriterInterface;
 use App\Application\Exception\ImportReaderNotFoundException;
 use App\Application\Exception\ImportWriteException;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Event\Import\ImportFailedEvent;
 use App\Entity\Allocation;
 use App\Entity\Import;
 use App\Entity\SkippedRow;
 use App\Helper\StatisticsHelper;
 use App\Repository\AllocationRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Domain\Event\Import\ImportFailedEvent;
 use Symfony\Component\Stopwatch\Stopwatch;
 
 class ImportService
@@ -125,7 +125,7 @@ class ImportService
         $this->em->flush();
     }
 
-    private function getActiveImportWriters(array $importWriter, \App\Domain\Entity\Import $import): array
+    private function getActiveImportWriters(array $importWriter, \Domain\Entity\Import $import): array
     {
         $activeWriters = [];
 

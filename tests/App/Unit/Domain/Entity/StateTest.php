@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Domain\Entity;
 
-use App\Domain\Contracts\DispatchAreaInterface;
-use App\Domain\Contracts\SupplyAreaInterface;
-use App\Domain\Entity\Hospital;
-use App\Domain\Entity\State;
+use Domain\Contracts\DispatchAreaInterface;
+use Domain\Contracts\SupplyAreaInterface;
+use Domain\Entity\Hospital;
+use Domain\Entity\State;
 use PHPUnit\Framework\TestCase;
 
 class StateTest extends TestCase

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber\Notifications;
 
-use App\Domain\Event\Hospital\HospitalCreatedEvent;
+use Domain\Event\Hospital\HospitalCreatedEvent;
 
 class HospitalCreatedNotification extends AbstractAdminNotification
 {

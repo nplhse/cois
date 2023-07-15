@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Domain\Entity;
 
-use App\Domain\Contracts\DispatchAreaInterface;
-use App\Domain\Contracts\StateInterface;
-use App\Domain\Contracts\SupplyAreaInterface;
-use App\Domain\Contracts\UserInterface;
-use App\Domain\Entity\Hospital;
-use App\Domain\Entity\Import;
-use App\Domain\Entity\User;
-use App\Domain\Enum\HospitalSize;
+use Domain\Contracts\DispatchAreaInterface;
+use Domain\Contracts\StateInterface;
+use Domain\Contracts\SupplyAreaInterface;
+use Domain\Contracts\UserInterface;
+use Domain\Entity\Hospital;
+use Domain\Entity\Import;
+use Domain\Entity\User;
+use Domain\Enum\HospitalSize;
 use PHPUnit\Framework\TestCase;
 
 class HospitalTest extends TestCase

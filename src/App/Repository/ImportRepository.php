@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Domain\Contracts\HospitalInterface;
-use App\Domain\Contracts\ImportInterface;
-use App\Domain\Contracts\UserInterface;
-use App\Domain\Repository\ImportRepositoryInterface;
 use App\Entity\Import;
 use App\Entity\User;
 use App\Service\Filters\OrderFilter;
@@ -17,6 +13,11 @@ use App\Service\FilterService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+use Domain\Contracts\HospitalInterface;
+use Domain\Contracts\ImportInterface;
+use Domain\Contracts\UserInterface;
+use Domain\Repository\ImportRepositoryInterface;
+use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 
 /**
  * @method Import|null find($id, $lockMode = null, $lockVersion = null)
@@ -24,6 +25,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Import[]    findAll()
  * @method Import[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+#[AsAlias(id: ImportRepositoryInterface::class, public: true)]
 class ImportRepository extends ServiceEntityRepository implements ImportRepositoryInterface
 {
     public const PER_PAGE = 20;

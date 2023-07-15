@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Data\Import;
 
-use App\Domain\Command\Import\EditImportCommand;
 use App\Entity\Import;
 use App\Form\ImportType;
 use App\Repository\ImportRepository;
+use Domain\Command\Import\EditImportCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

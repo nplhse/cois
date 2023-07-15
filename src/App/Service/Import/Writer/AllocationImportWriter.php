@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Service\Import\Writer;
 
 use App\Application\Exception\ImportValidationException;
-use App\Domain\Contracts\ImportInterface;
 use App\Entity\Allocation;
+use Domain\Contracts\ImportInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AllocationImportWriter implements \App\Application\Contract\ImportWriterInterface

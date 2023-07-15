@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Domain\Contracts\UserInterface;
-use App\Domain\Repository\UserRepositoryInterface;
 use App\Entity\User;
 use App\Service\Filters\OrderFilter;
 use App\Service\Filters\PageFilter;
@@ -14,6 +12,9 @@ use App\Service\FilterService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+use Domain\Contracts\UserInterface;
+use Domain\Repository\UserRepositoryInterface;
+use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -24,6 +25,7 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+#[AsAlias(id: UserRepositoryInterface::class, public: true)]
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface, UserRepositoryInterface
 {
     public const PER_PAGE = 10;

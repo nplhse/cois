@@ -6,10 +6,10 @@ namespace App\Application\Handler\Hospital;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\Hospital\CreateHospitalCommand;
-use App\Domain\Event\Hospital\HospitalCreatedEvent;
 use App\Entity\Hospital;
 use App\Repository\HospitalRepository;
+use Domain\Command\Hospital\CreateHospitalCommand;
+use Domain\Event\Hospital\HospitalCreatedEvent;
 
 class CreateHospitalHandler implements HandlerInterface
 {

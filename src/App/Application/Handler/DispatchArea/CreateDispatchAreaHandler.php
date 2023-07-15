@@ -6,11 +6,11 @@ namespace App\Application\Handler\DispatchArea;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\DispatchArea\CreateDispatchAreaCommand;
-use App\Domain\Event\DispatchArea\DispatchAreaCreatedEvent;
 use App\Entity\DispatchArea;
 use App\Repository\DispatchAreaRepository;
 use App\Repository\StateRepository;
+use Domain\Command\DispatchArea\CreateDispatchAreaCommand;
+use Domain\Event\DispatchArea\DispatchAreaCreatedEvent;
 
 class CreateDispatchAreaHandler implements HandlerInterface
 {

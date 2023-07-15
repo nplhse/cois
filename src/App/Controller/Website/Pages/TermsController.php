@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Website\Pages;
 
-use App\Domain\Enum\PageStatus;
-use App\Domain\Enum\PageType;
 use App\Repository\PageRepository;
+use Domain\Enum\PageStatus;
+use Domain\Enum\PageType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

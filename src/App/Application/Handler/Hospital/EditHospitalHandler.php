@@ -6,9 +6,9 @@ namespace App\Application\Handler\Hospital;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\Hospital\EditHospitalCommand;
-use App\Domain\Event\Hospital\HospitalEditedEvent;
 use App\Repository\HospitalRepository;
+use Domain\Command\Hospital\EditHospitalCommand;
+use Domain\Event\Hospital\HospitalEditedEvent;
 
 class EditHospitalHandler implements HandlerInterface
 {

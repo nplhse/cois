@@ -6,9 +6,9 @@ namespace App\Application\Handler\Page;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\Page\DeletePageCommand;
-use App\Domain\Event\Page\PageDeletedEvent;
 use App\Repository\PageRepository;
+use Domain\Command\Page\DeletePageCommand;
+use Domain\Event\Page\PageDeletedEvent;
 
 class DeletePageHandler implements HandlerInterface
 {

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
-use App\Domain\Enum\PageStatus;
-use App\Domain\Enum\PageType;
-use App\Domain\Enum\PageVisbility;
 use App\Entity\Page;
 use App\Repository\PageRepository;
+use Domain\Enum\PageStatus;
+use Domain\Enum\PageType;
+use Domain\Enum\PageVisbility;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;

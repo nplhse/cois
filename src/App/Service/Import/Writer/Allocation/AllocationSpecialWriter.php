@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Service\Import\Writer\Allocation;
 
-use App\Domain\Contracts\ImportInterface;
 use App\Entity\Allocation;
+use Domain\Contracts\ImportInterface;
 
 class AllocationSpecialWriter implements \App\Application\Contract\AllocationImportWriterInterface
 {

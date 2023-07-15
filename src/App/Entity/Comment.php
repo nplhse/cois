@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Domain\Enum\CommentStatus;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Domain\Enum\CommentStatus;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment

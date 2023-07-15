@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Domain\Contracts\StateInterface;
-use App\Domain\Entity\DispatchArea as DomainDispatchArea;
 use App\Repository\DispatchAreaRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Domain\Contracts\StateInterface;
+use Domain\Entity\DispatchArea as DomainDispatchArea;
 
 #[ORM\Entity(repositoryClass: DispatchAreaRepository::class)]
 #[ORM\HasLifecycleCallbacks]

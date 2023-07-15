@@ -6,8 +6,8 @@ namespace App\Application\Handler\Task;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\Task\ImportReminderCommand;
 use App\Service\Mailers\ImportReminderMailerService;
+use Domain\Command\Task\ImportReminderCommand;
 
 class ImportReminderTaskHandler implements HandlerInterface
 {

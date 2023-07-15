@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
-use App\Domain\Enum\CommentStatus;
 use App\Entity\Comment;
 use App\Repository\CommentRepository;
+use Domain\Enum\CommentStatus;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;

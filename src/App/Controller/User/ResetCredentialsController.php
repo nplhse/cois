@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\User;
 
-use App\Domain\Command\User\ChangePasswordCommand;
-use App\Domain\Contracts\UserInterface;
 use App\Form\User\ChangePasswordFormType;
+use Domain\Command\User\ChangePasswordCommand;
+use Domain\Contracts\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

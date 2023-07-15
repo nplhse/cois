@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller\Website;
 
-use App\Domain\Enum\ContactRequestStatus;
 use App\Entity\ContactRequest;
 use App\Form\ContactType;
 use App\Repository\ContactRequestRepository;
 use App\Service\Mailers\ContactFormNotificationService;
+use Domain\Enum\ContactRequestStatus;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

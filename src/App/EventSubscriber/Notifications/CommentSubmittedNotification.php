@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber\Notifications;
 
-use App\Domain\Enum\CommentStatus;
-use App\Domain\Event\Comment\CommentSubmittedEvent;
+use Domain\Enum\CommentStatus;
+use Domain\Event\Comment\CommentSubmittedEvent;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
 
 class CommentSubmittedNotification extends AbstractAdminNotification

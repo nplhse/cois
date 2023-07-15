@@ -7,9 +7,9 @@ namespace App\Application\Handler\State;
 use App\Application\Contract\HandlerInterface;
 use App\Application\Exception\StateNotEmptyException;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\State\DeleteStateCommand;
-use App\Domain\Event\State\StateDeletedEvent;
-use App\Domain\Repository\StateRepositoryInterface;
+use Domain\Command\State\DeleteStateCommand;
+use Domain\Event\State\StateDeletedEvent;
+use Domain\Repository\StateRepositoryInterface;
 
 class DeleteStateHandler implements HandlerInterface
 {

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Form\Filters;
 
-use App\Domain\Entity\User;
 use App\Entity\Hospital;
 use Doctrine\ORM\EntityRepository;
+use Domain\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;

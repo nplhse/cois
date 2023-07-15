@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Admin\Field\CKEditorField;
-use App\Domain\Enum\PostStatus;
 use App\Entity\Post;
+use Domain\Enum\PostStatus;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;

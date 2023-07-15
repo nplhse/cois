@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Doctrine\UserPasswordListener;
-use App\Domain\Entity\User as DomainUser;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Domain\Entity\User as DomainUser;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;

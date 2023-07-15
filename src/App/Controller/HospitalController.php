@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Domain\Command\Hospital\CreateHospitalCommand;
-use App\Domain\Command\Hospital\EditHospitalCommand;
-use App\Domain\Contracts\HospitalInterface;
-use App\Domain\Contracts\UserInterface;
 use App\Entity\Hospital;
 use App\Factory\HospitalFilterFactory;
 use App\Factory\OrderFilterFactory;
@@ -26,6 +22,10 @@ use App\Service\Filters\SizeFilter;
 use App\Service\Filters\StateFilter;
 use App\Service\Filters\SupplyAreaFilter;
 use App\Service\FilterService;
+use Domain\Command\Hospital\CreateHospitalCommand;
+use Domain\Command\Hospital\EditHospitalCommand;
+use Domain\Contracts\HospitalInterface;
+use Domain\Contracts\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

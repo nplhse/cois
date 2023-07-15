@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Domain\Contracts\DispatchAreaInterface;
-use App\Domain\Contracts\HospitalInterface;
-use App\Domain\Contracts\ImportInterface;
-use App\Domain\Contracts\StateInterface;
-use App\Domain\Contracts\SupplyAreaInterface;
-use App\Domain\Entity\Allocation as DomainAllocation;
 use App\Repository\AllocationRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
+use Domain\Contracts\DispatchAreaInterface;
+use Domain\Contracts\HospitalInterface;
+use Domain\Contracts\ImportInterface;
+use Domain\Contracts\StateInterface;
+use Domain\Contracts\SupplyAreaInterface;
+use Domain\Entity\Allocation as DomainAllocation;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AllocationRepository::class)]

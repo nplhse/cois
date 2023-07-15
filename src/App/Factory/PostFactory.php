@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
-use App\Domain\Enum\PostStatus;
 use App\Entity\Post;
 use App\Repository\PostRepository;
+use Domain\Enum\PostStatus;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;

@@ -6,8 +6,8 @@ namespace App\Application\Handler\Export;
 
 use App\Application\Export\DGINATracerByQuarterExport;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\Export\ExportTracerByQuarterCommand;
 use App\Query\Export\AllocationByQuarterQuery;
+use Domain\Command\Export\ExportTracerByQuarterCommand;
 use League\Csv\Writer;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 

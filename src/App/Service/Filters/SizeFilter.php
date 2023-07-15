@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
-use App\Domain\Enum\HospitalSize;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;
+use Domain\Enum\HospitalSize;
 use Symfony\Component\HttpFoundation\Request;
 
 class SizeFilter implements FilterInterface

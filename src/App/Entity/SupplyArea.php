@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Domain\Contracts\StateInterface;
-use App\Domain\Entity\SupplyArea as DomainSupplyArea;
 use App\Repository\SupplyAreaRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Domain\Contracts\StateInterface;
+use Domain\Entity\SupplyArea as DomainSupplyArea;
 
 #[ORM\Entity(repositoryClass: SupplyAreaRepository::class)]
 #[ORM\HasLifecycleCallbacks]

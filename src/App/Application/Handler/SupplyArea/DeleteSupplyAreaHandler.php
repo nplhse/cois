@@ -6,10 +6,10 @@ namespace App\Application\Handler\SupplyArea;
 
 use App\Application\Contract\HandlerInterface;
 use App\Application\Traits\EventDispatcherTrait;
-use App\Domain\Command\SupplyArea\DeleteSupplyAreaCommand;
-use App\Domain\Event\SupplyArea\SupplyAreaDeletedEvent;
 use App\Repository\StateRepository;
 use App\Repository\SupplyAreaRepository;
+use Domain\Command\SupplyArea\DeleteSupplyAreaCommand;
+use Domain\Event\SupplyArea\SupplyAreaDeletedEvent;
 
 class DeleteSupplyAreaHandler implements HandlerInterface
 {

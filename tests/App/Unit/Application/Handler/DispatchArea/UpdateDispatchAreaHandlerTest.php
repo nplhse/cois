@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Application\Handler\DispatchArea;
 
 use App\Application\Handler\DispatchArea\UpdateDispatchAreaHandler;
-use App\Domain\Command\DispatchArea\UpdateDispatchAreaCommand;
-use App\Domain\Contracts\DispatchAreaInterface;
-use App\Domain\Event\DispatchArea\DispatchAreaUpdatedEvent;
 use App\Repository\DispatchAreaRepository;
+use Domain\Command\DispatchArea\UpdateDispatchAreaCommand;
+use Domain\Contracts\DispatchAreaInterface;
+use Domain\Event\DispatchArea\DispatchAreaUpdatedEvent;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

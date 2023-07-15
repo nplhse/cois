@@ -4,21 +4,21 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use App\Domain\Event\DispatchArea\DispatchAreaCreatedEvent;
-use App\Domain\Event\DispatchArea\DispatchAreaDeletedEvent;
-use App\Domain\Event\DispatchArea\DispatchAreaUpdatedEvent;
-use App\Domain\Event\Hospital\HospitalCreatedEvent;
-use App\Domain\Event\Hospital\HospitalDeletedEvent;
-use App\Domain\Event\Hospital\HospitalEditedEvent;
-use App\Domain\Event\State\StateCreatedEvent;
-use App\Domain\Event\State\StateDeletedEvent;
-use App\Domain\Event\State\StateUpdatedEvent;
-use App\Domain\Event\SupplyArea\SupplyAreaCreatedEvent;
-use App\Domain\Event\SupplyArea\SupplyAreaDeletedEvent;
-use App\Domain\Event\SupplyArea\SupplyAreaUpdatedEvent;
-use App\Domain\Event\User\UserChangedUsernameEvent;
-use App\Domain\Event\User\UserCreatedEvent;
-use App\Domain\Event\User\UserRegisteredEvent;
+use Domain\Event\DispatchArea\DispatchAreaCreatedEvent;
+use Domain\Event\DispatchArea\DispatchAreaDeletedEvent;
+use Domain\Event\DispatchArea\DispatchAreaUpdatedEvent;
+use Domain\Event\Hospital\HospitalCreatedEvent;
+use Domain\Event\Hospital\HospitalDeletedEvent;
+use Domain\Event\Hospital\HospitalEditedEvent;
+use Domain\Event\State\StateCreatedEvent;
+use Domain\Event\State\StateDeletedEvent;
+use Domain\Event\State\StateUpdatedEvent;
+use Domain\Event\SupplyArea\SupplyAreaCreatedEvent;
+use Domain\Event\SupplyArea\SupplyAreaDeletedEvent;
+use Domain\Event\SupplyArea\SupplyAreaUpdatedEvent;
+use Domain\Event\User\UserChangedUsernameEvent;
+use Domain\Event\User\UserCreatedEvent;
+use Domain\Event\User\UserRegisteredEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Contracts\Cache\TagAwareCacheInterface;
 

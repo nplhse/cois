@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Domain\Contracts\UserInterface;
-use App\Domain\Enum\CommentStatus;
-use App\Domain\Enum\PostStatus;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Domain\Contracts\UserInterface;
+use Domain\Enum\CommentStatus;
+use Domain\Enum\PostStatus;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]

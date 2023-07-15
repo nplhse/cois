@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Domain\Contracts\SupplyAreaInterface;
-use App\Domain\Repository\SupplyAreaRepositoryInterface;
 use App\Entity\SupplyArea;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Domain\Contracts\SupplyAreaInterface;
+use Domain\Repository\SupplyAreaRepositoryInterface;
+use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 
 /**
  * @method SupplyArea|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,6 +17,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method SupplyArea[]    findAll()
  * @method SupplyArea[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+#[AsAlias(id: SupplyAreaRepositoryInterface::class, public: true)]
 class SupplyAreaRepository extends ServiceEntityRepository implements SupplyAreaRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)

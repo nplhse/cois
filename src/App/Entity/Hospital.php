@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Domain\Contracts\DispatchAreaInterface;
-use App\Domain\Contracts\StateInterface;
-use App\Domain\Contracts\SupplyAreaInterface;
-use App\Domain\Contracts\UserInterface;
-use App\Domain\Entity\Hospital as DomainHospital;
-use App\Domain\Enum\HospitalLocation;
-use App\Domain\Enum\HospitalSize;
-use App\Domain\Enum\HospitalTier;
 use App\Repository\HospitalRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Domain\Contracts\DispatchAreaInterface;
+use Domain\Contracts\StateInterface;
+use Domain\Contracts\SupplyAreaInterface;
+use Domain\Contracts\UserInterface;
+use Domain\Entity\Hospital as DomainHospital;
+use Domain\Enum\HospitalLocation;
+use Domain\Enum\HospitalSize;
+use Domain\Enum\HospitalTier;
 
 #[ORM\Entity(repositoryClass: HospitalRepository::class)]
 #[ORM\HasLifecycleCallbacks]

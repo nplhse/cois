@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
-use App\Domain\Enum\HospitalLocation;
-use App\Domain\Enum\HospitalTier;
 use App\Entity\Hospital;
 use App\Repository\HospitalRepository;
+use Domain\Enum\HospitalLocation;
+use Domain\Enum\HospitalTier;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;

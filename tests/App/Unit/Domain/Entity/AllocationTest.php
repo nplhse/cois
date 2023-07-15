@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Domain\Entity;
 
-use App\Domain\Contracts\DispatchAreaInterface;
-use App\Domain\Contracts\HospitalInterface;
-use App\Domain\Contracts\ImportInterface;
-use App\Domain\Contracts\StateInterface;
-use App\Domain\Contracts\SupplyAreaInterface;
-use App\Domain\Entity\Allocation;
+use Domain\Contracts\DispatchAreaInterface;
+use Domain\Contracts\HospitalInterface;
+use Domain\Contracts\ImportInterface;
+use Domain\Contracts\StateInterface;
+use Domain\Contracts\SupplyAreaInterface;
+use Domain\Entity\Allocation;
 use PHPUnit\Framework\TestCase;
 
 class AllocationTest extends TestCase

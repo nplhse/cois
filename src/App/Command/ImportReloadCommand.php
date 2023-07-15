@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Domain\Command\Import\ImportDataCommand;
 use App\Repository\AllocationRepository;
 use App\Repository\ImportRepository;
 use App\Repository\SkippedRowRepository;
+use Domain\Command\Import\ImportDataCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

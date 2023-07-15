@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Controller\Data\Import;
 
-use App\Domain\Command\Import\CreateImportCommand;
-use App\Domain\Command\Import\ImportDataCommand;
-use App\Domain\Contracts\UserInterface;
-use App\Domain\Event\Import\ImportFailedEvent;
 use App\Entity\Import;
 use App\Form\ImportType;
 use App\Repository\ImportRepository;
 use App\Service\Import\UploadService;
+use Domain\Command\Import\CreateImportCommand;
+use Domain\Command\Import\ImportDataCommand;
+use Domain\Contracts\UserInterface;
+use Domain\Event\Import\ImportFailedEvent;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
