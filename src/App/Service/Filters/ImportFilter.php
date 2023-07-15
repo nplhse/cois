@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Service\Filters;
 
 use App\Application\Contract\FilterInterface;
-use App\Entity\User;
 use App\Service\Filters\Traits\FilterTrait;
 use App\Service\FilterService;
 use Doctrine\ORM\QueryBuilder;

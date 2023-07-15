@@ -23,60 +23,60 @@
     <issueHandlers>
         <LessSpecificImplementedReturnType>
             <errorLevel type="suppress">
-                <directory name="src/EventSubscriber" />
-                <directory name="src/Repository" />
+                <directory name="src/App/EventSubscriber" />
+                <directory name="src/App/Repository" />
             </errorLevel>
         </LessSpecificImplementedReturnType>
         <MethodSignatureMismatch>
             <errorLevel type="suppress">
-                <directory name="src/Repository" />
+                <directory name="src/App/Repository" />
             </errorLevel>
         </MethodSignatureMismatch>
         <NullableReturnStatement>
             <errorLevel type="suppress">
-                <file name="src/Entity/Comment.php" />
-                <file name="src/EventSubscriber/AuditSubscriber.php" />
+                <file name="src/App/Entity/Comment.php" />
+                <file name="src/App/EventSubscriber/AuditSubscriber.php" />
             </errorLevel>
         </NullableReturnStatement>
         <InvalidReturnStatement>
             <errorLevel type="suppress">
-                <file name="src/EventSubscriber/AuditSubscriber.php" />
+                <file name="src/App/EventSubscriber/AuditSubscriber.php" />
             </errorLevel>
         </InvalidReturnStatement>
         <InvalidReturnType>
             <errorLevel type="suppress">
-                <file name="src/EventSubscriber/AuditSubscriber.php" />
+                <file name="src/App/EventSubscriber/AuditSubscriber.php" />
             </errorLevel>
         </InvalidReturnType>
         <InvalidScalarArgument>
             <errorLevel type="suppress">
-                <directory name="src/Controller/Settings/" />
+                <directory name="src/App/Controller/Settings/" />
             </errorLevel>
         </InvalidScalarArgument>
         <InvalidNullableReturnType>
             <errorLevel type="suppress">
-                <file name="src/Entity/Comment.php" />
+                <file name="src/App/Entity/Comment.php" />
             </errorLevel>
         </InvalidNullableReturnType>
         <ImplementedReturnTypeMismatch>
             <errorLevel type="suppress">
-                <directory name="src/Factory/" />
+                <directory name="src/App/Factory/" />
             </errorLevel>
         </ImplementedReturnTypeMismatch>
         <ImplementedParamTypeMismatch>
             <errorLevel type="suppress">
-                <directory name="src/Factory/" />
+                <directory name="src/App/Factory/" />
             </errorLevel>
         </ImplementedParamTypeMismatch>
         <UndefinedMagicMethod>
             <errorLevel type="suppress">
-                <file name="src/Controller/Api/ApiController.php" />
-                <file name="src/Controller/StatisticsController.php" />
+                <file name="src/App/Controller/Api/ApiController.php" />
+                <file name="src/App/Controller/StatisticsController.php" />
             </errorLevel>
         </UndefinedMagicMethod>
         <UndefinedInterfaceMethod>
             <errorLevel type="suppress">
-                <file name="src/Query/Export/AlternateQuery.php" />
+                <file name="src/App/Query/Export/AlternateQuery.php" />
             </errorLevel>
         </UndefinedInterfaceMethod>
     </issueHandlers>

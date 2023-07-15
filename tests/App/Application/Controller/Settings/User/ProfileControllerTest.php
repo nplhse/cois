@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Application\Controller\Settings\User;
 
-use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Zenstruck\Browser\Test\HasBrowser;
 use Zenstruck\Foundry\Test\ResetDatabase;

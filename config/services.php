@@ -57,13 +57,18 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->instanceof(ImportReaderInterface::class)
         ->tag('app.import_reader');
 
-    $services->load('App\\', __DIR__.'/../src/')
-        ->exclude([__DIR__.'/../src/DependencyInjection/', __DIR__.'/../src/Entity/', __DIR__.'/../src/Kernel.php', __DIR__.'/../src/Tests/']);
+    $services->load('App\\', __DIR__.'/../src/App/')
+        ->exclude([
+            __DIR__.'/../src/App/DependencyInjection/',
+            __DIR__.'/../src/App/Entity/',
+            __DIR__.'/../src/App/Kernel.php',
+            __DIR__.'/../src/App/Tests/',
+        ]);
 
-    $services->load('App\Controller\\', __DIR__.'/../src/Controller/')
+    $services->load('App\Controller\\', __DIR__.'/../src/App/Controller/')
         ->tag('controller.service_arguments');
 
-    $services->load('App\Doctrine\\', __DIR__.'/../src/Doctrine/')
+    $services->load('App\Doctrine\\', __DIR__.'/../src/App/Doctrine/')
         ->tag('doctrine.orm.entity_listener');
 
     $services->set(DoctrineTokenProvider::class);
