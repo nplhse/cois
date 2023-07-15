@@ -52,10 +52,10 @@ class AllocationPropertyImportWriter implements \App\Application\Contract\Alloca
 
     public function setTimes(Allocation $allocation, array $row): Allocation
     {
-        $format = "d.m.Y H:i:s";
+        $format = 'd.m.Y H:i:s';
 
-        if (strlen($row['Datum (Erstellungsdatum)']) === 8) {
-            $format = "d.m.y H:i:s";
+        if (8 === strlen($row['Datum (Erstellungsdatum)'])) {
+            $format = 'd.m.y H:i:s';
         }
 
         $allocation->setCreatedAt(\DateTime::createFromFormat($format, $row['Datum (Erstellungsdatum)'].' '.$row['Uhrzeit (Erstellungsdatum)'], new \DateTimeZone('Europe/Berlin')));

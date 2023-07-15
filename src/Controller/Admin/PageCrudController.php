@@ -42,19 +42,19 @@ class PageCrudController extends AbstractCrudController
                 ->setFormType(EnumType::class)
                 ->setFormTypeOption('class', PageType::class)
                 ->setChoices([
-                    'Type' => PageType::cases()
+                    'Type' => PageType::cases(),
                 ]),
             ChoiceField::new('status')->onlyOnForms()
                 ->setFormType(EnumType::class)
                 ->setFormTypeOption('class', PageStatus::class)
                 ->setChoices([
-                    'Status' => PageStatus::cases()
+                    'Status' => PageStatus::cases(),
                 ]),
             ChoiceField::new('visibility')->onlyOnForms()
                 ->setFormType(EnumType::class)
                 ->setFormTypeOption('class', PageVisbility::class)
                 ->setChoices([
-                    'Visibility' => PageVisbility::cases()
+                    'Visibility' => PageVisbility::cases(),
                 ]),
             DateField::new('createdAt')
                 ->hideOnForm(),
