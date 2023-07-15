@@ -52,8 +52,14 @@ class AllocationPropertyImportWriter implements \App\Application\Contract\Alloca
 
     public function setTimes(Allocation $allocation, array $row): Allocation
     {
-        $allocation->setCreatedAt(new \DateTime($row['Datum (Erstellungsdatum)'].' '.$row['Uhrzeit (Erstellungsdatum)']));
-        $allocation->setArrivalAt(new \DateTime($row['Datum (Eintreffzeit)'].' '.$row['Uhrzeit (Eintreffzeit)']));
+        $format = "d.m.Y H:i:s";
+
+        if (strlen($row['Datum (Erstellungsdatum)']) === 8) {
+            $format = "d.m.y H:i:s";
+        }
+
+        $allocation->setCreatedAt(\DateTime::createFromFormat($format, $row['Datum (Erstellungsdatum)'].' '.$row['Uhrzeit (Erstellungsdatum)'], new \DateTimeZone('Europe/Berlin')));
+        $allocation->setArrivalAt(\DateTime::createFromFormat($format, $row['Datum (Eintreffzeit)'].' '.$row['Uhrzeit (Eintreffzeit)'], new \DateTimeZone('Europe/Berlin')));
 
         return $allocation;
     }
