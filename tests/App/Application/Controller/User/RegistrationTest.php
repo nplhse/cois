@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Application\Controller\User;
 
-use App\Domain\Enum\Page\PageStatusEnum;
-use App\Domain\Enum\Page\PageTypeEnum;
-use App\Factory\PageFactory;
-use App\Factory\UserFactory;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Zenstruck\Browser\Test\HasBrowser;
 use Zenstruck\Foundry\Test\Factories;

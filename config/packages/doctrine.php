@@ -17,7 +17,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'mappings' => [
                 'App' => [
                     'is_bundle' => false,
-                    'dir' => '%kernel.project_dir%/src/Entity',
+                    'dir' => '%kernel.project_dir%/src/App/Entity',
                     'prefix' => 'App\Entity',
                     'alias' => 'App',
                 ],

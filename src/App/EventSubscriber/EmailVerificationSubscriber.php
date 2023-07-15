@@ -6,7 +6,6 @@ namespace App\EventSubscriber;
 
 use App\Domain\Event\User\UserChangedEmailEvent;
 use App\Domain\Event\User\UserRegisteredEvent;
-use App\Entity\User;
 use App\Security\EmailVerifier;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

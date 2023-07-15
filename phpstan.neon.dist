@@ -15,12 +15,12 @@ parameters:
         - assets
         - build
         - node_modules
-        - src/Domain/Repository/EntityRepositoryInterface.php
-        - src/Twig/Components/PaginationComponent.php
+        - src/App/Domain/Repository/EntityRepositoryInterface.php
+        - src/App/Twig/Components/PaginationComponent.php
         - vendor
         - templates
     bootstrapFiles:
-        - tests/bootstrap.php
+        - tests/App/bootstrap.php
     symfony:
         container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml
     checkGenericClassInNonGenericObjectType: false
