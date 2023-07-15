@@ -15,7 +15,7 @@ parameters:
         - assets
         - build
         - node_modules
-        - src/App/Domain/Repository/EntityRepositoryInterface.php
+        - src/Domain/Repository/EntityRepositoryInterface.php
         - src/App/Twig/Components/PaginationComponent.php
         - vendor
         - templates
