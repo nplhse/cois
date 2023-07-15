@@ -73,7 +73,7 @@ messenger:
 	@$(SYMFONY) messenger:consume async -vvv
 
 phpcsfixer:
-	vendor/bin/php-cs-fixer fix
+	PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix
 
 phpmd:
 	vendor/bin/phpmd src/ html phpmd.xml --report-file var/build/phpmd.html --ignore-violations-on-exit
