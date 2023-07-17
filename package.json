@@ -5,7 +5,7 @@
         "@babel/preset-env": "^7.21.5",
         "@hotwired/stimulus": "^3.0.0",
         "@hotwired/turbo": "^7.0.1",
-        "@popperjs/core": "^2.11.7",
+        "@popperjs/core": "^2.11.8",
         "@symfony/stimulus-bridge": "^3.2.2",
         "@symfony/stimulus-bundle": "file:vendor/symfony/stimulus-bundle/assets",
         "@symfony/ux-dropzone": "file:vendor/symfony/ux-dropzone/assets",
