@@ -155,7 +155,8 @@
     "extra": {
         "symfony": {
             "allow-contrib": true,
-            "require": "^6.0"
+            "require": "^6.0",
+            "docker": true
         }
     }
 }
