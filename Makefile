@@ -1,5 +1,5 @@
 # == Executables =====
-DOCKER_COMP = docker-compose
+DOCKER_COMP = docker compose
 PHP         = php
 COMPOSER    = composer
 SYMFONY     = symfony console
