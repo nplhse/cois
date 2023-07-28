@@ -90,5 +90,8 @@ prettier:
 psalm:
 	vendor/bin/psalm
 
+twigcsfixer:
+	vendor/bin/twigcs templates
+
 validate:
 	@$(COMPOSER) validate
