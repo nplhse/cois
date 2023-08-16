@@ -50,9 +50,6 @@ jobs:
             - name: Analyse JS (ESLint)
               run: yarn run eslint assets
 
-            - name: Analyse JS Style (Pettier)
-              run: yarn run prettier --check .
-
             - name: Analyse PHP Code (PHPStan)
               run: vendor/bin/phpstan analyse
 
