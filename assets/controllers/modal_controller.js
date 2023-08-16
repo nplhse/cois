@@ -1,35 +1,36 @@
 /* eslint-disable no-unused-vars */
-import { Controller } from "@hotwired/stimulus";
-import { Modal } from "bootstrap";
-import $ from "jquery";
+import { Controller } from '@hotwired/stimulus';
+import { Modal } from 'bootstrap';
+import $ from 'jquery';
 
 export default class extends Controller {
-    static targets = ["modal", "modalBody"];
-    static values = {
-        formUrl: String,
-        targetUrl: String,
-    };
+  static targets = ['modal', 'modalBody'];
 
-    async openModal(event) {
-        const modal = new Modal(this.modalTarget);
-        const response = await fetch(this.formUrlValue);
+  static values = {
+    formUrl: String,
+    targetUrl: String,
+  };
 
-        this.modalBodyTarget.innerHTML = await response.text();
+  async openModal(event) {
+    const modal = new Modal(this.modalTarget);
+    const response = await fetch(this.formUrlValue);
 
-        modal.show();
-    }
+    this.modalBodyTarget.innerHTML = await response.text();
 
-    async submitForm(event) {
-        event.preventDefault();
+    modal.show();
+  }
 
-        const $form = $(this.modalBodyTarget).find("form");
+  async submitForm(event) {
+    event.preventDefault();
 
-        this.modalBodyTarget.innerHTML = await $.ajax({
-            url: this.formUrlValue,
-            method: $form.prop("method"),
-            data: $form.serialize(),
-        });
+    const $form = $(this.modalBodyTarget).find('form');
 
-        window.location = this.targetUrlValue;
-    }
+    this.modalBodyTarget.innerHTML = await $.ajax({
+      url: this.formUrlValue,
+      method: $form.prop('method'),
+      data: $form.serialize(),
+    });
+
+    window.location = this.targetUrlValue;
+  }
 }

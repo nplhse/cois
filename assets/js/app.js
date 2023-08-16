@@ -6,11 +6,11 @@
  */
 
 // Start the Stimulus application
-import "./bootstrap";
+import './bootstrap';
 
 // Import bootstrap and styles
-import "bootstrap";
-//import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap';
+// import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 // Import styles
-import "../styles/app.scss";
+import '../styles/app.scss';
