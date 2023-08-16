@@ -57,7 +57,7 @@ logs: ## Show live logs
 	@$(DOCKER_COMP) logs --tail=0 --follow
 
 # == Project pipelines =====
-checks: validate phpcsfixer phpstan psalm prettier eslint ## Run static checks pipeline
+checks: validate phpcsfixer phpstan psalm eslint ## Run static checks pipeline
 
 ci: checks tests ## Run CI pipeline
 
@@ -83,9 +83,6 @@ phpunit:
 
 phpstan:
 	vendor/bin/phpstan analyse
-
-prettier:
-	@$(YARN) run prettier --check .
 
 psalm:
 	vendor/bin/psalm
