@@ -41,7 +41,7 @@
         "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets",
         "@symfony/ux-turbo": "file:vendor/symfony/ux-turbo/assets",
         "bootstrap": "^5.3.1",
-        "bootstrap-icons": "^1.10.5",
+        "bootstrap-icons": "^1.11.1",
         "d3": "^7.8.5",
         "d3-scale": "^4.0.1",
         "d3-shape": "^3.2.0",
